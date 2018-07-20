@@ -12,7 +12,7 @@ from pdfwatermarker import set_destination
 
 
 def register_font():
-    folder = os.path.dirname(reportlab.__file__) + os.sep + 'fonts'
+    folder = os.path.dirname(__file__) + os.sep + 'libs'
     ttfFile = os.path.join(folder, 'Vera.ttf')
     pdfmetrics.registerFont(TTFont("Vera", ttfFile))
 

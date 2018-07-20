@@ -47,11 +47,3 @@ class WatermarkGUI:
         print("{0:15}--> {1}".format('State', state))
         wm = Watermark(pdf, project, address, town, state)
         print("{0:15}--> {1}".format('Watermarked PDF', wm))
-
-
-def main():
-    WatermarkGUI()
-
-
-if __name__ == '__main__':
-    main()
