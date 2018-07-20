@@ -5,8 +5,8 @@ from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 
 
-def remove_temp():
-    temp = os.path.join(os.path.dirname(__file__), 'lib' + os.sep + 'temp')
+def remove_temp(pdf):
+    temp = os.path.join(os.path.dirname(pdf), 'temp')
     shutil.rmtree(temp)
 
 
@@ -26,9 +26,9 @@ class Watermark:
                 'txt': '© copyright ' + str(datetime.now().year),
             }
         }
-        watermark = str(WatermarkDraw(project, text))
+        watermark = str(WatermarkDraw(project, text, pdf))
         self.pdf = WatermarkAdd(pdf, watermark)
-        remove_temp()
+        remove_temp(pdf)
 
     def __str__(self):
         return str(self.pdf)

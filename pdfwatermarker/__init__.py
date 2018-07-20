@@ -6,7 +6,7 @@ from pathlib import Path
 
 def set_destination(source, suffix):
     # Create new pdf filename
-    directory = os.path.join(os.path.dirname(__file__), 'watermark' + os.sep + 'lib' + os.sep + 'temp')  # directory
+    directory = os.path.join(os.path.dirname(source), 'temp')  # directory
     if not os.path.isdir(directory):
         os.mkdir(directory)
     src_file_name = Path(source).stem  # file name

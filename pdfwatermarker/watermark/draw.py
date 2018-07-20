@@ -30,7 +30,7 @@ default_template = os.path.dirname(__file__) + os.sep + 'lib' + os.sep + 'waterm
 
 
 class WatermarkDraw:
-    def __init__(self, project, text, template=default_template, font='Vera', opacity=0.1):
+    def __init__(self, project, text, pdf, template=default_template, font='Vera', opacity=0.1):
         self.text = text
         self.template = template
         self.font = font
@@ -39,7 +39,7 @@ class WatermarkDraw:
         # create a new PDF with Reportlab
         self.packet = self._set_packet()
         self.can = self._set_canvas(self.packet)
-        self.dst = set_destination(template, project)
+        self.dst = set_destination(pdf, project)
         self.draw()
 
     def __str__(self):
