@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pdfwatermarker',
-    version='0.1.3',
+    version='0.1.4',
     packages=find_packages(),
     install_requires=[
         'pdfrw',
@@ -11,6 +11,7 @@ setup(
         'PySimpleGUI',
         'reportlab',
     ],
+    include_package_data=True,
     url='https://github.com/mrstephenneal/pdfwatermarker',
     license='',
     author='Stephen Neal',
