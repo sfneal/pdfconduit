@@ -1,3 +1,3 @@
-__all__ = ["Watermark"]
+__all__ = ["Watermark", "WatermarkGUI"]
 
-from pdfwatermarker.watermark.watermark import Watermark
+from pdfwatermarker.watermark.watermark import Watermark, WatermarkGUI

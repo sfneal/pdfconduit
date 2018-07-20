@@ -34,18 +34,23 @@ class Watermark:
         return str(self.pdf)
 
 
+class WatermarkGUI:
+    def __init__(self):
+        from pdfwatermarker.watermark.gui import GUI
+        pdf, address, town, state = GUI().settings
+        project = os.path.basename(pdf)[:8]
+        print("PDF Watermarker Parameters")
+        print("{0:15}--> {1}".format('PDF', pdf))
+        print("{0:15}--> {1}".format('Project', project))
+        print("{0:15}--> {1}".format('Address', address))
+        print("{0:15}--> {1}".format('Town', town))
+        print("{0:15}--> {1}".format('State', state))
+        wm = Watermark(pdf, project, address, town, state)
+        print("{0:15}--> {1}".format('Watermarked PDF', wm))
+
+
 def main():
-    from pdfwatermarker.watermark.gui import WatermarkGUI
-    pdf, address, town, state = WatermarkGUI().settings
-    project = os.path.basename(pdf)[:8]
-    print("PDF Watermarker Parameters")
-    print("{0:15}--> {1}".format('PDF', pdf))
-    print("{0:15}--> {1}".format('Project', project))
-    print("{0:15}--> {1}".format('Address', address))
-    print("{0:15}--> {1}".format('Town', town))
-    print("{0:15}--> {1}".format('State', state))
-    wm = Watermark(pdf, project, address, town, state)
-    print("{0:15}--> {1}".format('Watermarked PDF', wm))
+    WatermarkGUI()
 
 
 if __name__ == '__main__':

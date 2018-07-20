@@ -5,7 +5,7 @@ def _line(char='_', width=100, size=(70, 1)):
     return gui.Text(char * width, size=size)
 
 
-class WatermarkGUI:
+class GUI:
     def __init__(self):
         """GUI window for inputing Watermark parameters"""
         self.title = 'PDF Watermarker'

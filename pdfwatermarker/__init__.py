@@ -1,4 +1,4 @@
-__all__ = ["set_destination", "upscale", "rotate", "Watermark"]
+__all__ = ["set_destination", "upscale", "rotate", "Watermark", "WatermarkGUI"]
 
 import os
 from pathlib import Path
@@ -17,4 +17,4 @@ def set_destination(source, suffix):
 
 from pdfwatermarker.upscale import upscale
 from pdfwatermarker.rotate import rotate
-from pdfwatermarker.watermark import Watermark
+from pdfwatermarker.watermark import Watermark, WatermarkGUI
