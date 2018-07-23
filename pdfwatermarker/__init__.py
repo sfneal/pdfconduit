@@ -1,7 +1,8 @@
-__all__ = ["set_destination", "upscale", "rotate", "Watermark", "WatermarkGUI"]
+__all__ = ["set_destination", "resource_path", "upscale", "rotate", "Watermark", "WatermarkGUI"]
 
 import os
 from pathlib import Path
+import sys
 
 
 def set_destination(source, suffix):
@@ -13,6 +14,12 @@ def set_destination(source, suffix):
     src_file_ext = Path(source).suffix  # file extension
     dst_path = src_file_name + '_' + suffix + src_file_ext  # new concatenated file name
     return os.path.join(directory, dst_path)  # new full path
+
+
+def resource_path(relative):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative)
+    return os.path.join(relative)
 
 
 from pdfwatermarker.upscale import upscale
