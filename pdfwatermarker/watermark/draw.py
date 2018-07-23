@@ -7,12 +7,12 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from pdfwatermarker import set_destination
+from pdfwatermarker import set_destination, resource_path
 
 
 def register_font():
     folder = os.path.dirname(__file__) + os.sep + 'lib'
-    ttfFile = os.path.join(folder, 'Vera.ttf')
+    ttfFile = resource_path(os.path.join(folder, 'Vera.ttf'))
     pdfmetrics.registerFont(TTFont("Vera", ttfFile))
 
 
