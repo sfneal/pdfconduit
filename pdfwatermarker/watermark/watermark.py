@@ -41,7 +41,7 @@ class Watermark:
 
 class WatermarkGUI:
     def __init__(self):
-        from pdfwatermarker.watermark.gui import GUI
+        from pdfwatermarker.watermark.lib import GUI
         pdf, address, town, state = GUI().settings
         project = os.path.basename(pdf)[:8]
         print("PDF Watermarker")
