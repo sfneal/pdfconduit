@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pdfwatermarker',
-    version='0.1.7',
+    version='0.1.8',
     packages=find_packages(),
     install_requires=[
         'pdfrw',
@@ -16,6 +16,6 @@ setup(
     license='',
     author='Stephen Neal',
     author_email='stephen@hpadesign.com',
-    description='Moved fonts into the lib folder.',
+    description='Implemented resource_path function to find relative paths.',
     long_description='PDF watermark tool for internal use (HPA Design).'
 )
