@@ -4,6 +4,7 @@ from datetime import datetime
 from time import sleep
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
+import warnings
 
 
 def remove_temp(pdf):
@@ -27,7 +28,9 @@ class Watermark:
                 'txt': '© copyright ' + str(datetime.now().year),
             }
         }
-        watermark = str(WatermarkDraw(project, text, pdf))
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            watermark = str(WatermarkDraw(project, text, pdf))
         self.pdf = WatermarkAdd(pdf, watermark)
         remove_temp(pdf)
 
@@ -40,14 +43,14 @@ class WatermarkGUI:
         from pdfwatermarker.watermark.gui import GUI
         pdf, address, town, state = GUI().settings
         project = os.path.basename(pdf)[:8]
-        print("PDF Watermarker Parameters")
-        print("{0:15}--> {1}".format('PDF', pdf))
-        print("{0:15}--> {1}".format('Project', project))
-        print("{0:15}--> {1}".format('Address', address))
-        print("{0:15}--> {1}".format('Town', town))
-        print("{0:15}--> {1}".format('State', state))
+        print("PDF Watermarker")
+        print("{0:20}--> {1}".format('PDF', pdf))
+        print("{0:20}--> {1}".format('Project', project))
+        print("{0:20}--> {1}".format('Address', address))
+        print("{0:20}--> {1}".format('Town', town))
+        print("{0:20}--> {1}".format('State', state))
         wm = Watermark(pdf, project, address, town, state)
-        print("{0:15}--> {1}".format('Watermarked PDF', wm))
-        print('Success!')
-        print('~~process terminating in 3 seconds~~')
-        sleep(3)
+        print("{0:20}--> {1}".format('Watermarked PDF', wm))
+        print('\nSuccess!')
+        print('~~process terminating in 5 seconds~~')
+        sleep(5)
