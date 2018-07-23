@@ -8,10 +8,18 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from pdfwatermarker import set_destination, resource_path
+import sys
 
 
 def register_font():
-    folder = os.path.dirname(__file__) + os.sep + 'lib'
+    if getattr(sys, 'frozen', False):
+        # we are running in a bundle
+        bundle_dir = sys._MEIPASS
+    else:
+        # we are running in a normal Python environment
+        bundle_dir = os.path.dirname(os.path.abspath(__file__))
+
+    folder = bundle_dir + os.sep + 'lib'
     ttfFile = resource_path(os.path.join(folder, 'Vera.ttf'))
     pdfmetrics.registerFont(TTFont("Vera", ttfFile))
 
