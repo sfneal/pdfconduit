@@ -2,7 +2,6 @@
 import io
 import os
 from PyPDF2 import PdfFileWriter, PdfFileReader
-import reportlab
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
@@ -12,7 +11,7 @@ from pdfwatermarker import set_destination
 
 
 def register_font():
-    folder = os.path.dirname(__file__) + os.sep + 'libs'
+    folder = os.path.dirname(__file__) + os.sep + 'lib'
     ttfFile = os.path.join(folder, 'Vera.ttf')
     pdfmetrics.registerFont(TTFont("Vera", ttfFile))
 
