@@ -11,29 +11,31 @@ from pdfwatermarker import set_destination, resource_path
 import sys
 
 
-def register_font():
+def bundle_dir():
     if getattr(sys, 'frozen', False):
         # we are running in a bundle
         bundle_dir = sys._MEIPASS
     else:
         # we are running in a normal Python environment
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
+    return bundle_dir
 
+
+def register_font():
     folder = bundle_dir + os.sep + 'lib'
     ttfFile = resource_path(os.path.join(folder, 'Vera.ttf'))
     pdfmetrics.registerFont(TTFont("Vera", ttfFile))
 
 
+bundle_dir = bundle_dir()
 register_font()
+default_template = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.pdf')
 
 
 def center_str(txt, font, size, offset=120):
     page_width = letter[1]
     text_width = stringWidth(txt, fontName=font, fontSize=size)
     return ((page_width - text_width) / 2.0) + offset
-
-
-default_template = resource_path(os.path.dirname(__file__) + os.sep + 'lib' + os.sep + 'watermark.pdf')
 
 
 class WatermarkDraw:
@@ -46,7 +48,7 @@ class WatermarkDraw:
         # create a new PDF with Reportlab
         self.packet = self._set_packet()
         self.can = self._set_canvas(self.packet)
-        self.dst = set_destination(pdf, project)
+        self.dst = resource_path(set_destination(pdf, project))
         self.draw()
 
     def __str__(self):
