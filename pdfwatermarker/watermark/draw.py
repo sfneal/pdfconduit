@@ -25,7 +25,7 @@ def center_str(txt, font, size, offset=120):
     return ((page_width - text_width) / 2.0) + offset
 
 
-default_template = os.path.dirname(__file__) + os.sep + 'lib' + os.sep + 'watermark.pdf'
+default_template = resource_path(os.path.dirname(__file__) + os.sep + 'lib' + os.sep + 'watermark.pdf')
 
 
 class WatermarkDraw:
