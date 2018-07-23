@@ -1,6 +1,7 @@
 import os
 import shutil
 from datetime import datetime
+from time import sleep
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 
@@ -47,3 +48,6 @@ class WatermarkGUI:
         print("{0:15}--> {1}".format('State', state))
         wm = Watermark(pdf, project, address, town, state)
         print("{0:15}--> {1}".format('Watermarked PDF', wm))
+        print('Success!')
+        print('~~process terminating in 3 seconds~~')
+        sleep(3)
