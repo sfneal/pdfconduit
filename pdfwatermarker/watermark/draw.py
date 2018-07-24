@@ -1,7 +1,6 @@
 # Add dynamic text to a watermark PDF template file
 import io
 import os
-from PyPDF2 import PdfFileWriter, PdfFileReader
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
@@ -51,32 +50,11 @@ class WatermarkDraw:
         self.dst = resource_path(set_destination(pdf, project))
         self.draw()
 
-        # Save new pdf file
-        self._write_pdf()
+        self.packet.seek(0)  # move to the beginning of the StringIO buffer
+        write_pdf(self.packet, self.template, self.dst)  # Save new pdf file
 
     def __str__(self):
         return str(self.dst)
-
-    def _merge_objects(self):
-        """Merge original and new pdf documents"""
-        self.packet.seek(0)  # move to the beginning of the StringIO buffer
-        new_pdf = PdfFileReader(self.packet)  # Create new PDF object
-        template = PdfFileReader(open(self.template, "rb"))  # read your existing PDF
-
-        # add the "watermark" (which is the new pdf) on the existing page
-        page = template.getPage(0)
-        page.mergePage(new_pdf.getPage(0))
-        output = PdfFileWriter()  # Create new PDF file
-        output.addPage(page)
-        return output
-
-    def _write_pdf(self):
-        output = self._merge_objects()  # Merge template and canvas
-
-        # finally, write "output" to a real file
-        with open(self.dst, "wb") as outputStream:
-            output.write(outputStream)
-        outputStream.close()
 
     def _draw_address(self):
         # Address
