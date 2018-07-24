@@ -46,21 +46,16 @@ class WatermarkDraw:
         self.opacity = opacity
 
         # create a new PDF with Reportlab
-        self.packet = self._set_packet()
-        self.can = self._set_canvas(self.packet)
+        self.packet = io.BytesIO()
+        self.can = Canvas(self.packet, pagesize=letter)  # Initialize canvas
         self.dst = resource_path(set_destination(pdf, project))
         self.draw()
 
+        # Save new pdf file
+        self._write_pdf()
+
     def __str__(self):
         return str(self.dst)
-
-    @staticmethod
-    def _set_packet():
-        return io.BytesIO()
-
-    @staticmethod
-    def _set_canvas(packet):
-        return Canvas(packet, pagesize=letter)  # Initialize canvas
 
     def _merge_objects(self):
         """Merge original and new pdf documents"""
@@ -75,10 +70,11 @@ class WatermarkDraw:
         output.addPage(page)
         return output
 
-    @staticmethod
-    def _write_pdf(output, dst):
+    def _write_pdf(self):
+        output = self._merge_objects()  # Merge template and canvas
+
         # finally, write "output" to a real file
-        with open(dst, "wb") as outputStream:
+        with open(self.dst, "wb") as outputStream:
             output.write(outputStream)
         outputStream.close()
 
@@ -113,7 +109,3 @@ class WatermarkDraw:
         self._draw_town_state()
         self._draw_copyright()
         self.can.save()  # Save canvas
-
-        # Save new pdf file
-        output = self._merge_objects()  # Merge template and canvas
-        self._write_pdf(output, self.dst)
