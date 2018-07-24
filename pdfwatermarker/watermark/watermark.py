@@ -1,3 +1,4 @@
+# Apply a watermark to a PDF file
 import os
 import shutil
 from datetime import datetime
