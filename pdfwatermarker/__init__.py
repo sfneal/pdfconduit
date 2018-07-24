@@ -1,8 +1,10 @@
-__all__ = ["set_destination", "resource_path", "upscale", "rotate", "Watermark", "WatermarkGUI"]
+__all__ = ["set_destination", "resource_path", "write_pdf", "upscale", "rotate", "Watermark", "WatermarkGUI"]
 
 import os
 from pathlib import Path
 import sys
+
+from .write import write_pdf
 
 
 def set_destination(source, suffix):
@@ -22,6 +24,6 @@ def resource_path(relative):
     return os.path.join(relative)
 
 
-from pdfwatermarker.upscale import upscale
-from pdfwatermarker.rotate import rotate
-from pdfwatermarker.watermark import Watermark, WatermarkGUI
+from .upscale import upscale
+from .rotate import rotate
+from .watermark import Watermark, WatermarkGUI
