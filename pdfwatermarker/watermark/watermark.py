@@ -58,5 +58,8 @@ class WatermarkGUI:
             call(["open", "-R", str(Path(str(wm)))])
         except FileNotFoundError:
             Popen(r'explorer /select,' + str(Path(str(wm))))
-        input('~~Press Any Key To Exit~~')
-        quit()
+        try:
+            input('~~Press Any Key To Exit~~')
+            quit()
+        except KeyboardInterrupt:
+            quit()
