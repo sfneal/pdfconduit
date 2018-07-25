@@ -36,6 +36,13 @@ class GUI:
                 [gui.Text('Town', size=(15, 1), auto_size_text=False), gui.InputText()],
                 [gui.Text('State', size=(15, 1), auto_size_text=False), gui.InputText()],
 
+                [_line()],
+
+                # Encryption
+                [gui.Checkbox('Encrypt', default=True)],
+                [gui.Text('User Password', size=(15, 1), auto_size_text=False), gui.InputText()],
+                [gui.Text('Owner Password', size=(15, 1), auto_size_text=False), gui.InputText()],
+
                 [gui.Text('Click Submit to watermark PDF')],
 
                 [gui.Submit(), gui.Cancel()]]
@@ -47,9 +54,24 @@ class GUI:
             'address': values[1],
             'town': values[2],
             'state': values[3],
+            'encrypt': values[4],
+            'user_pw': values[5],
+            'owner_pw': values[6],
         }
         pdf = values[0]
         address = values[1]
         town = values[2]
         state = values[3]
-        return pdf, address, town, state
+        encrypt = values[4]
+
+        if len(values[5]) > 0:
+            user_pw = values[5]
+        else:
+            user_pw = None
+
+        if len(values[6]) > 0:
+            owner_pw = values[6]
+        else:
+            owner_pw = None
+
+        return pdf, address, town, state, encrypt, user_pw, owner_pw
