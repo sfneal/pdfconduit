@@ -5,7 +5,10 @@ import os
 
 
 def protect(pdf, user_pw, owner_pw=None):
-    """Password protect PDF file and allow all other permissions"""
+    """
+    Password protect PDF file and allow all other permissions.
+    Utilizes PyPDF2 reader and writer classes.
+    """
     pdf_writer = PdfFileWriter()
     with open(pdf, 'rb') as pdf_file:
         pdf_reader = PdfFileReader(pdf_file)
@@ -21,7 +24,10 @@ def protect(pdf, user_pw, owner_pw=None):
 
 
 def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk='/usr/local/bin/pdftk'):
-    """Execute pdftk command line operation to encrypt a PDF file and restrict permissions to print only"""
+    """
+    Encrypt a PDF file and restrict permissions to print only.
+    Utilizes pdftk command line tool.
+    """
     out = add_suffix(pdf, 'secured')
     command = pdftk + ' ' + pdf + ' output ' + out + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
     if allow_printing:
