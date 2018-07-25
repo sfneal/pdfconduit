@@ -42,24 +42,36 @@ class Watermark:
 
 class WatermarkGUI:
     def __init__(self):
+        # Import GUI and timeout libraries
         from pdfwatermarker.watermark.lib import GUI
+        from interruptingcow import timeout
         pdf, address, town, state = GUI().settings
         project = os.path.basename(pdf)[:8]
+
+        # Print GUI selections to console
         print("PDF Watermarker")
         print("{0:20}--> {1}".format('PDF', pdf))
         print("{0:20}--> {1}".format('Project', project))
         print("{0:20}--> {1}".format('Address', address))
         print("{0:20}--> {1}".format('Town', town))
         print("{0:20}--> {1}".format('State', state))
+
+        # Execute Watermark class
         wm = Watermark(pdf, project, address, town, state)
         print("{0:20}--> {1}".format('Watermarked PDF', wm))
         print('\nSuccess!')
+
+        # Open watermarked PDF in finder or explorer window
         try:
             call(["open", "-R", str(Path(str(wm)))])
         except FileNotFoundError:
             Popen(r'explorer /select,' + str(Path(str(wm))))
+
+        # Timeout process after 10 seconds or exit on keyboard press
         try:
-            input('~~Press Any Key To Exit~~')
-            quit()
-        except KeyboardInterrupt:
+            with timeout(10, exception=RuntimeError):
+                print('~~Process terminating in 10 seconds~~')
+                input('~~Press Any Key To Exit~~')
+                quit()
+        except RuntimeError:
             quit()
