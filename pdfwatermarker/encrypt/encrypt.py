@@ -30,6 +30,7 @@ def protect(pdf, user_pw, owner_pw=None, output=None):
         with open(output, 'wb') as output_pdf:
             pdf_writer.write(output_pdf)
         print('PDF Protecting Done!')
+        return output
 
 
 def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk='/usr/local/bin/pdftk', output=None):
@@ -51,3 +52,4 @@ def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk='/usr/local/bin/pd
     # Execute command
     os.system(command)
     print('PDF Securing Done!')
+    return output
