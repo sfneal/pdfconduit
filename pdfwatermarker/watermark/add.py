@@ -81,4 +81,5 @@ class WatermarkAdd:
             PageMerge(page).add(wmark, prepend=underneath).render()
 
         PdfWriter(outfn, trailer=trailer).write()
-        return outfn
+        self.output = outfn
+        return self.output
