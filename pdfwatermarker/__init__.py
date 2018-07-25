@@ -1,6 +1,5 @@
 __all__ = ["set_destination", "resource_path", "write_pdf", "add_suffix", "open_window", "upscale", "rotate",
-           "Watermark",
-           "WatermarkGUI"]
+           "protect", "secure", "Watermark", "WatermarkGUI"]
 
 import os
 import sys
@@ -45,4 +44,5 @@ def open_window(path):
 
 from pdfwatermarker.upscale import upscale
 from pdfwatermarker.rotate import rotate
+from pdfwatermarker.encrypt import protect, secure
 from pdfwatermarker.watermark import Watermark, WatermarkGUI
