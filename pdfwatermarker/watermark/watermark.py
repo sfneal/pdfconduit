@@ -35,10 +35,6 @@ class Watermark:
         self.pdf = WatermarkAdd(pdf, watermark)
 
         if encrypt:
-            print(str(self.pdf))
-            print(encrypt.user_pw)
-            print(encrypt.owner_pw)
-            print(encrypt.output)
             self.pdf = secure(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
 
         # Open watermarked PDF in finder or explorer window
