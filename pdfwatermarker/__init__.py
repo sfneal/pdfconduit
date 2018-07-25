@@ -1,10 +1,11 @@
-__all__ = ["set_destination", "resource_path", "write_pdf", "add_suffix", "upscale", "rotate", "Watermark",
+__all__ = ["set_destination", "resource_path", "write_pdf", "add_suffix", "open_window", "upscale", "rotate",
+           "Watermark",
            "WatermarkGUI"]
 
 import os
-from pathlib import Path
 import sys
-
+from pathlib import Path
+from subprocess import call, Popen
 from pdfwatermarker.write import write_pdf
 
 
@@ -32,6 +33,15 @@ def add_suffix(file_path, suffix):
     name = split[0]
     out = name + '_' + suffix + '.' + ext
     return os.path.join(os.path.dirname(file_path), out)
+
+
+def open_window(path):
+    """Open path in finder or explorer window"""
+    try:
+        call(["open", "-R", str(Path(str(path)))])
+    except FileNotFoundError:
+        Popen(r'explorer /select,' + str(Path(str(path))))
+
 
 from pdfwatermarker.upscale import upscale
 from pdfwatermarker.rotate import rotate

@@ -4,9 +4,8 @@ import shutil
 from datetime import datetime
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
+from pdfwatermarker import open_window
 import warnings
-from subprocess import call, Popen
-from pathlib import Path
 
 
 def remove_temp(pdf):
@@ -34,6 +33,8 @@ class Watermark:
             warnings.simplefilter("ignore")
             watermark = str(WatermarkDraw(project, text, pdf))
         self.pdf = WatermarkAdd(pdf, watermark)
+        # Open watermarked PDF in finder or explorer window
+        open_window(self.pdf)
         remove_temp(pdf)
 
     def __str__(self):
@@ -60,12 +61,6 @@ class WatermarkGUI:
         wm = Watermark(pdf, project, address, town, state)
         print("{0:20}--> {1}".format('Watermarked PDF', wm))
         print('\nSuccess!')
-
-        # Open watermarked PDF in finder or explorer window
-        try:
-            call(["open", "-R", str(Path(str(wm)))])
-        except FileNotFoundError:
-            Popen(r'explorer /select,' + str(Path(str(wm))))
 
         # Timeout process after 10 seconds or exit on keyboard press
         try:
