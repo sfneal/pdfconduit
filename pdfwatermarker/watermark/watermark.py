@@ -4,7 +4,7 @@ import shutil
 from datetime import datetime
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
-from pdfwatermarker import open_window
+from pdfwatermarker import add_suffix, open_window, secure
 import warnings
 
 
@@ -14,7 +14,7 @@ def remove_temp(pdf):
 
 
 class Watermark:
-    def __init__(self, pdf, project, address, town, state):
+    def __init__(self, pdf, project, address, town, state, encrypt=None):
         text = {
             'address': {
                 'font': 40,
@@ -33,6 +33,14 @@ class Watermark:
             warnings.simplefilter("ignore")
             watermark = str(WatermarkDraw(project, text, pdf))
         self.pdf = WatermarkAdd(pdf, watermark)
+
+        if encrypt:
+            print(str(self.pdf))
+            print(encrypt.user_pw)
+            print(encrypt.owner_pw)
+            print(encrypt.output)
+            self.pdf = secure(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
+
         # Open watermarked PDF in finder or explorer window
         open_window(self.pdf)
         remove_temp(pdf)

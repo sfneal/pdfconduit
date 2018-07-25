@@ -4,6 +4,17 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 import os
 
 
+class EncryptParams:
+    def __init__(self, user_pw, owner_pw=None, allow_printing=True, output=None):
+        self.user_pw = user_pw
+        self.owner_pw = owner_pw
+        self.allow_printing = allow_printing
+        self.output = output
+
+    def __str__(self):
+        return str(self.__dict__)
+
+
 def protect(pdf, user_pw, owner_pw=None, output=None):
     """
     Password protect PDF file and allow all other permissions.
@@ -41,6 +52,10 @@ def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk='/usr/local/bin/pd
     # Create output filename if not already set
     if not output:
         output = add_suffix(pdf, 'secured')
+
+    # Replace spaces within paths with backslashes followed by a space
+    pdf = pdf.replace(' ', '\ ')
+    output = output.replace(' ', '\ ')
 
     # Concatenate bash command
     command = pdftk + ' ' + pdf + ' output ' + output + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
