@@ -10,7 +10,7 @@ setup(
         'PyPDF2',
         'PySimpleGUI',
         'reportlab',
-        'looptools'
+        'interruptingcow'
     ],
     include_package_data=True,
     url='https://github.com/mrstephenneal/pdfwatermarker',
