@@ -3,7 +3,7 @@ import os
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from PyPDF2 import PdfFileReader
 from reportlab.lib.pagesizes import letter
-from pdfwatermarker import upscale, rotate
+from pdfwatermarker import upscale, rotate, add_suffix
 
 
 def get_pdf_size(file_name):
@@ -72,9 +72,7 @@ class WatermarkAdd:
 
     def add(self, filename, watermark, underneath=False):
         """Add watermark to PDF by merging original PDF and watermark file."""
-        ext = os.path.basename(self.pdf_file['path']).rsplit('.', 1)[1]
-        name = os.path.basename(self.pdf_file['path']).rsplit('.', 1)[0]
-        out = name + '_watermarked.' + ext
+        outfn = add_suffix(self.pdf_file['path'], '_watermarked')
 
         wmark = PageMerge().add(PdfReader(watermark).pages[0])[0]
 
@@ -82,6 +80,5 @@ class WatermarkAdd:
         for page in trailer.pages:
             PageMerge(page).add(wmark, prepend=underneath).render()
 
-        outfn = os.path.join(os.path.dirname(self.pdf_file['path']), out)
         PdfWriter(outfn, trailer=trailer).write()
         return outfn
