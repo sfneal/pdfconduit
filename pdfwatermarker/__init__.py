@@ -26,6 +26,7 @@ def resource_path(relative):
 
 
 def add_suffix(file_path, suffix):
+    """Adds suffix to a file name seperated by an underscore and returns file path."""
     split = os.path.basename(file_path).rsplit('.', 1)
     ext = split[1]
     name = split[0]
