@@ -35,7 +35,9 @@ class Watermark:
         self.pdf = WatermarkAdd(pdf, watermark)
 
         if encrypt:
-            self.pdf = secure(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
+            secure_pdf = secure(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
+            os.remove(str(self.pdf))
+            self.pdf = secure_pdf
 
         # Open watermarked PDF in finder or explorer window
         open_window(self.pdf)
@@ -50,7 +52,7 @@ class WatermarkGUI:
         # Import GUI and timeout libraries
         from pdfwatermarker.watermark.lib import GUI
         from interruptingcow import timeout
-        pdf, address, town, state = GUI().settings
+        pdf, address, town, state, encrypt, user_pw, owner_pw = GUI().settings
         project = os.path.basename(pdf)[:8]
 
         # Print GUI selections to console
@@ -64,10 +66,16 @@ class WatermarkGUI:
         # Execute Watermark class
         wm = Watermark(pdf, project, address, town, state)
         print("{0:20}--> {1}".format('Watermarked PDF', wm))
-        print('\nSuccess!')
+
+        if encrypt:
+            output = add_suffix(pdf, 'secured')
+            self.pdf = secure(str(wm), user_pw, owner_pw, output=output)
+            print("{0:20}--> {1}".format('Secured PDF', self.pdf))
+            os.remove(str(wm))
 
         # Timeout process after 10 seconds or exit on keyboard press
         try:
+            print('\nSuccess!')
             with timeout(10, exception=RuntimeError):
                 print('~~Process terminating in 10 seconds~~')
                 input('~~Press Any Key To Exit~~')

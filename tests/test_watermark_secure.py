@@ -4,9 +4,9 @@ import os
 
 def main():
     print('Testing Watermark class and secure function reliability')
-    watermark = '/Volumes/Storage/HPA Design/Marketing Library/Floor Plan PDFs/20160054_FP.1_watermarked.pdf'
-    if os.path.exists(watermark):
-        os.remove(watermark)
+    secure = '/Volumes/Storage/HPA Design/Marketing Library/Floor Plan PDFs/20160054_FP.1_secured.pdf'
+    if os.path.exists(secure):
+        os.remove(secure)
 
     pdf = '/Volumes/Storage/HPA Design/Marketing Library/Floor Plan PDFs/20160054_FP.1.pdf'
     project = '20160054'
@@ -18,7 +18,7 @@ def main():
 
     Watermark(pdf, project, address, town, state, encrypt=enc)
 
-    if os.path.exists(watermark):
+    if os.path.exists(secure):
         print('Success!')
     else:
         print('Failed!')
