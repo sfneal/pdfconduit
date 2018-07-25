@@ -72,7 +72,7 @@ class WatermarkAdd:
 
     def add(self, filename, watermark, underneath=False):
         """Add watermark to PDF by merging original PDF and watermark file."""
-        outfn = add_suffix(self.pdf_file['path'], '_watermarked')
+        outfn = add_suffix(self.pdf_file['path'], 'watermarked')
 
         wmark = PageMerge().add(PdfReader(watermark).pages[0])[0]
 
