@@ -8,6 +8,14 @@ from pathlib import Path
 PDFTK_PATH = '/usr/local/bin/pdftk'
 
 
+def get_pdftk_path():
+    if os.path.exists(PDFTK_PATH):
+        print('pdftk path', PDFTK_PATH)
+        return PDFTK_PATH
+    else:
+        raise FileNotFoundError
+
+
 class EncryptParams:
     def __init__(self, user_pw, owner_pw=None, allow_printing=True, output=None):
         self.user_pw = user_pw
@@ -47,7 +55,7 @@ def protect(pdf, user_pw, owner_pw=None, output=None):
         return Path(output)
 
 
-def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=PDFTK_PATH, output=None):
+def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=get_pdftk_path(), output=None):
     """
     Encrypt a PDF file and restrict permissions to print only.
     Utilizes pdftk command line tool.
