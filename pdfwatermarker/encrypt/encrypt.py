@@ -2,6 +2,7 @@
 from pdfwatermarker import add_suffix
 from PyPDF2 import PdfFileReader, PdfFileWriter
 import os
+from pathlib import Path
 
 
 PDFTK_PATH = '/usr/local/bin/pdftk'
@@ -43,7 +44,7 @@ def protect(pdf, user_pw, owner_pw=None, output=None):
         # Write encrypted PDF to file
         with open(output, 'wb') as output_pdf:
             pdf_writer.write(output_pdf)
-        return output
+        return Path(output)
 
 
 def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=PDFTK_PATH, output=None):
@@ -56,11 +57,11 @@ def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=PDFTK_PATH, output
         output = add_suffix(pdf, 'secured')
 
     # Replace spaces within paths with backslashes followed by a space
-    pdf = pdf.replace(' ', '\ ')
-    output = output.replace(' ', '\ ')
+    pdf_en = pdf.replace(' ', '\ ')  # Encoded for bash commands
+    output_en = output.replace(' ', '\ ')  # Encoded for bash commands
 
     # Concatenate bash command
-    command = pdftk + ' ' + pdf + ' output ' + output + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
+    command = pdftk + ' ' + pdf_en + ' output ' + output_en + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
 
     # Append string to command if printing is allowed
     if allow_printing:
@@ -68,4 +69,4 @@ def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=PDFTK_PATH, output
 
     # Execute command
     os.system(command)
-    return output
+    return Path(output)

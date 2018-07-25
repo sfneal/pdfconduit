@@ -2,6 +2,7 @@
 import os
 import shutil
 from datetime import datetime
+from pathlib import Path
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker import add_suffix, open_window, secure
@@ -44,7 +45,7 @@ class Watermark:
         remove_temp(pdf)
 
     def __str__(self):
-        return str(self.pdf)
+        return str(Path(str(self.pdf)))
 
 
 class WatermarkGUI:
@@ -76,9 +77,9 @@ class WatermarkGUI:
         # Timeout process after 10 seconds or exit on keyboard press
         try:
             print('\nSuccess!')
-            with timeout(10, exception=RuntimeError):
+            with timeout(10, exception=AttributeError):
                 print('~~Process terminating in 10 seconds~~')
                 input('~~Press Any Key To Exit~~')
                 quit()
-        except RuntimeError:
+        except AttributeError:
             quit()
