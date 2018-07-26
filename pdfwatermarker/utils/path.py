@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 
-def set_destination(source, suffix):
+def set_destination(source, suffix, filename=False):
     """Create new pdf filename for temp files"""
     source_dirname = os.path.dirname(source)
 
@@ -19,7 +19,10 @@ def set_destination(source, suffix):
         os.mkdir(directory)
 
     # Parse source filename
-    src_file_name = Path(source).stem  # file name
+    if filename:
+        src_file_name = filename
+    else:
+        src_file_name = Path(source).stem  # file name
     src_file_ext = Path(source).suffix  # file extension
 
     # Concatenate new filename
