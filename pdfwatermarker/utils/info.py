@@ -1,0 +1,34 @@
+# Retrieve information about a PDF document
+from PyPDF2 import PdfFileReader
+
+
+def number_of_pages(path):
+    """Retrieve PDF number of pages"""
+    return PdfFileReader(path).getNumPages()
+
+
+def metadata(path):
+    """Retrieve PDF metadata"""
+    return PdfFileReader(path).getDocumentInfo()
+
+
+def resources(path):
+    """Retrieve contents of each page of PDF"""
+    pdf = PdfFileReader(path)
+    return [pdf.getPage(i) for i in range(pdf.getNumPages)]
+
+
+def text_extractor(path):
+    """Extract text from a PDF file"""
+    pdf = PdfFileReader(path)
+    return [pdf.getPage(i).extractText() for i in range(PdfFileReader(path).getNumPages)]
+
+
+def security_objects(path):
+    """Print security object information for a pdf document"""
+    pdf = PdfFileReader(path)
+    pdf.decrypt('baz')
+    for k in pdf.resolvedObjects.items():
+        print(k[0])
+        for i, v in k[1].items():
+            print(i, '-->', v)
