@@ -59,16 +59,23 @@ def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=get_pdftk_path(), 
     Encrypt a PDF file and restrict permissions to print only.
     Utilizes pdftk command line tool.
     """
+    # Check that PDF file is encrypted
+    with open(pdf, 'rb') as f:
+        reader = PdfFileReader(f)
+        if reader.isEncrypted:
+            print('PDF is already encrypted')
+            return pdf
+
     # Create output filename if not already set
     if not output:
         output = add_suffix(pdf, 'secured')
 
     # Replace spaces within paths with backslashes followed by a space
-    pdf = pdf.replace(' ', '\ ')
-    output = output.replace(' ', '\ ')
+    pdf_en = pdf.replace(' ', '\ ')
+    output_en = output.replace(' ', '\ ')
 
     # Concatenate bash command
-    command = pdftk + ' ' + pdf + ' output ' + output + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
+    command = pdftk + ' ' + pdf_en + ' output ' + output_en + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
 
     # Append string to command if printing is allowed
     if allow_printing:
