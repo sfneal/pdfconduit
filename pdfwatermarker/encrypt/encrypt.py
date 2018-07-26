@@ -1,19 +1,8 @@
 # Encrypt a PDF file with password protection
 from pdfwatermarker import add_suffix
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfFileReader
 from .override import PdfFileWriter2
 import os
-
-
-PDFTK_PATH = '/usr/local/bin/pdftk'
-
-
-def get_pdftk_path():
-    if os.path.exists(PDFTK_PATH):
-        print('pdftk path', PDFTK_PATH)
-        return PDFTK_PATH
-    else:
-        raise FileNotFoundError
 
 
 class EncryptParams:
@@ -53,6 +42,17 @@ def protect(pdf, user_pw, owner_pw=None, output=None, restrict_permission=True):
         with open(output, 'wb') as output_pdf:
             pdf_writer.write(output_pdf)
         return output
+
+
+PDFTK_PATH = '/usr/local/bin/pdftk'
+
+
+def get_pdftk_path():
+    if os.path.exists(PDFTK_PATH):
+        print('pdftk path', PDFTK_PATH)
+        return PDFTK_PATH
+    else:
+        raise FileNotFoundError
 
 
 def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=get_pdftk_path(), output=None):
