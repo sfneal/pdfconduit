@@ -1,5 +1,6 @@
-from pdfwatermarker import Watermark, EncryptParams, add_suffix
 import os
+from PyPDF2 import PdfFileReader
+from pdfwatermarker import Watermark, EncryptParams, add_suffix, open_window
 
 
 def main():
@@ -18,8 +19,14 @@ def main():
 
     Watermark(pdf, project, address, town, state, encrypt=enc)
 
+    with open(secure, 'rb') as f:
+        reader = PdfFileReader(f)
+        if reader.isEncrypted:
+            print('Encrypted:', os.path.basename(secure))
+
     if os.path.exists(secure):
         print('Success!')
+        open_window(secure)
     else:
         print('Failed!')
 

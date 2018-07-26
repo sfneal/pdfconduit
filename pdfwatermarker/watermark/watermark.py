@@ -1,12 +1,12 @@
 # Apply a watermark to a PDF file
 import os
 import shutil
+import warnings
 from datetime import datetime
 from pathlib import Path
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
-from pdfwatermarker import add_suffix, open_window, secure
-import warnings
+from pdfwatermarker import add_suffix, open_window, protect
 
 
 def remove_temp(pdf):
@@ -15,7 +15,7 @@ def remove_temp(pdf):
 
 
 class Watermark:
-    def __init__(self, pdf, project, address, town, state, encrypt=None):
+    def __init__(self, pdf, project, address, town, state, encrypt=None, remove_temps=True):
         text = {
             'address': {
                 'font': 40,
@@ -36,13 +36,14 @@ class Watermark:
         self.pdf = WatermarkAdd(pdf, watermark)
 
         if encrypt:
-            secure_pdf = secure(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
-            os.remove(str(self.pdf))
+            secure_pdf = protect(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
             self.pdf = secure_pdf
+
+        if remove_temps:
+            remove_temp(pdf)
 
         # Open watermarked PDF in finder or explorer window
         open_window(self.pdf)
-        remove_temp(pdf)
 
     def __str__(self):
         return str(Path(str(self.pdf)))
@@ -70,9 +71,8 @@ class WatermarkGUI:
 
         if encrypt:
             output = add_suffix(pdf, 'secured')
-            self.pdf = secure(str(wm), user_pw, owner_pw, output=output)
+            self.pdf = protect(str(wm), user_pw, owner_pw, output=output)
             print("{0:20}--> {1}".format('Secured PDF', self.pdf))
-            os.remove(str(wm))
 
         # Timeout process after 10 seconds or exit on keyboard press
         try:
