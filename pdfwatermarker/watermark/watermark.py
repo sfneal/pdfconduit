@@ -36,7 +36,6 @@ class Watermark:
 
         if encrypt:
             secure_pdf = protect(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
-            os.remove(str(self.pdf))
             self.pdf = secure_pdf
 
         if remove_temps:
@@ -73,7 +72,6 @@ class WatermarkGUI:
             output = add_suffix(pdf, 'secured')
             self.pdf = protect(str(wm), user_pw, owner_pw, output=output)
             print("{0:20}--> {1}".format('Secured PDF', self.pdf))
-            os.remove(str(wm))
 
         # Timeout process after 10 seconds or exit on keyboard press
         try:
