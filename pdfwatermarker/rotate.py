@@ -1,23 +1,45 @@
 # Rotate a pdf file
+from PyPDF2 import PdfFileReader, PdfFileWriter
 from pdfrw import PdfReader, PdfWriter
 from pdfwatermarker import set_destination
 
 
-def rotate(file_name, rotate):
+def rotate(file_name, rotate, method='pypdf2'):
     """Rotate PDF by increments of 90 degrees."""
     outfn = set_destination(file_name, 'rotate')
-    trailer = PdfReader(file_name)
-    pages = trailer.pages
 
-    ranges = [[1, len(pages)]]
+    def pypdf2():
+        pdf_in = open(file_name, 'rb')
+        pdf_reader = PdfFileReader(pdf_in)
+        pdf_writer = PdfFileWriter()
+        for pagenum in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(pagenum)
+            page.rotateClockwise(rotate)
+            pdf_writer.addPage(page)
+        pdf_out = open(outfn, 'wb')
+        pdf_writer.write(pdf_out)
+        pdf_out.close()
+        pdf_in.close()
+        return outfn
 
-    for onerange in ranges:
-        onerange = (onerange + onerange[-1:])[:2]
-        for pagenum in range(onerange[0] - 1, onerange[1]):
-            pages[pagenum].Rotate = (int(pages[pagenum].inheritable.Rotate or
-                                         0) + rotate) % 360
+    def pdfrw():
+        trailer = PdfReader(file_name)
+        pages = trailer.pages
 
-    outdata = PdfWriter(outfn)
-    outdata.trailer = trailer
-    outdata.write()
-    return outfn
+        ranges = [[1, len(pages)]]
+
+        for onerange in ranges:
+            onerange = (onerange + onerange[-1:])[:2]
+            for pagenum in range(onerange[0] - 1, onerange[1]):
+                pages[pagenum].Rotate = (int(pages[pagenum].inheritable.Rotate or
+                                             0) + rotate) % 360
+
+        outdata = PdfWriter(outfn)
+        outdata.trailer = trailer
+        outdata.write()
+        return outfn
+
+    if method is 'pypdf2':
+        return pypdf2()
+    else:
+        return pdfrw()
