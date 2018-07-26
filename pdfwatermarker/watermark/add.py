@@ -18,7 +18,7 @@ def get_pdf_size(file_name):
 class WatermarkAdd:
     def __init__(self, pdf, watermark, underneath=False):
         self.pdf_file = self._get_pdf_info(pdf)
-        self.watermark_file = self._get_watermark_info(watermark)
+        self.watermark_file = self._get_watermark_info(self.pdf_file, watermark)
         pdf_fname, wtrmrk_fname = self._set_filenames
         self.output = self.add(pdf_fname, wtrmrk_fname, underneath)
 
@@ -46,12 +46,13 @@ class WatermarkAdd:
             pdf_file['upscaled'] = upscale(pdf_file['path'], scale=scale)
         return pdf_file
 
-    def _get_watermark_info(self, watermark):
+    @staticmethod
+    def _get_watermark_info(pdf_file, watermark):
         watermark_file = {'path': watermark}
         watermark_file.update(get_pdf_size(watermark))
 
         # Check if watermark file needs to be rotated
-        if watermark_file['w'] > watermark_file['h'] and self.pdf_file['orientation'] is 'vertical':
+        if watermark_file['w'] > watermark_file['h'] and pdf_file['orientation'] is 'vertical':
             watermark_file['rotated'] = rotate(watermark, 90)
         return watermark_file
 
@@ -77,6 +78,7 @@ class WatermarkAdd:
         wmark = PageMerge().add(PdfReader(watermark).pages[0])[0]
 
         trailer = PdfReader(filename)
+
         for page in trailer.pages:
             PageMerge(page).add(wmark, prepend=underneath).render()
 
