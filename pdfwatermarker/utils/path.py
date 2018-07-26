@@ -24,7 +24,20 @@ def set_destination(source, suffix):
 
     # Concatenate new filename
     dst_path = src_file_name + '_' + suffix + src_file_ext
-    return os.path.join(directory, dst_path)  # new full path
+    full_path = os.path.join(directory, dst_path)  # new full path
+
+    if not os.path.exists(full_path):
+        return full_path
+    else:
+        # If file exists, increment number until filename is unique
+        number = 1
+        while True:
+            dst_path = src_file_name + '_' + suffix + '_' + str(number) + src_file_ext
+            if not os.path.exists(dst_path):
+                break
+            number = number + 1
+        full_path = os.path.join(directory, dst_path)  # new full path
+        return full_path
 
 
 def resource_path(relative):
