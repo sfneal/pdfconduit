@@ -1,11 +1,11 @@
 # Apply a watermark to a PDF file
 import os
 import shutil
+import warnings
 from datetime import datetime
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker import add_suffix, open_window, secure
-import warnings
 
 
 def remove_temp(pdf):
