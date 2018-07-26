@@ -47,7 +47,7 @@ class WatermarkDraw:
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
         self.can = Canvas(self.packet, pagesize=letter)  # Initialize canvas
-        self.dst = resource_path(set_destination(pdf, project))
+        self.dst = resource_path(set_destination(pdf, project, 'watermark'))
         self.draw()
 
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
