@@ -1,6 +1,7 @@
 # Encrypt a PDF file with password protection
 from pdfwatermarker import add_suffix
 from PyPDF2 import PdfFileReader, PdfFileWriter
+from .override import PdfFileWriter2
 import os
 
 
@@ -26,13 +27,13 @@ class EncryptParams:
         return str(self.__dict__)
 
 
-def protect(pdf, user_pw, owner_pw=None, output=None):
+def protect(pdf, user_pw, owner_pw=None, output=None, restrict_permission=True):
     """
     Password protect PDF file and allow all other permissions.
     Utilizes PyPDF2 reader and writer classes.
     """
     # Create PDF writer object
-    pdf_writer = PdfFileWriter()
+    pdf_writer = PdfFileWriter2()
     with open(pdf, 'rb') as pdf_file:
         # Read opened PDF file
         pdf_reader = PdfFileReader(pdf_file)
@@ -42,7 +43,7 @@ def protect(pdf, user_pw, owner_pw=None, output=None):
             pdf_writer.addPage(pdf_reader.getPage(page_num))
 
         # Apply encryption to writer object
-        pdf_writer.encrypt(user_pw, owner_pw)
+        pdf_writer.encrypt(user_pw, owner_pw, restrict_permission=restrict_permission)
 
         # Create output filename if not already set
         if not output:
