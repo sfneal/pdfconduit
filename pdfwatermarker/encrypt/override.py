@@ -1,3 +1,4 @@
+# Override methods to improve functionality
 from PyPDF2 import PdfFileWriter
 from PyPDF2.pdf import md5, ByteStringObject, ArrayObject, NameObject, DictionaryObject, NumberObject, b_, str_, \
     _encryption_padding, _alg32, ord_, _alg33_1
