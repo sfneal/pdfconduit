@@ -49,7 +49,6 @@ PDFTK_PATH = '/usr/local/bin/pdftk'
 
 def get_pdftk_path():
     if os.path.exists(PDFTK_PATH):
-        print('pdftk path', PDFTK_PATH)
         return PDFTK_PATH
     else:
         raise FileNotFoundError
