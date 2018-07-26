@@ -4,15 +4,7 @@ from pdfrw import PdfReader, PdfWriter, PageMerge
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
 from pdfwatermarker import upscale, rotate, add_suffix
-
-
-def get_pdf_size(file_name):
-    """Get width and height of a PDF"""
-    try:
-        size = PdfFileReader(file_name).getPage(0).mediaBox
-    except AttributeError:
-        size = file_name.getPage(0).mediaBox
-    return {'w': size[2], 'h': size[3]}
+from pdfwatermarker.utils import get_pdf_size
 
 
 class WatermarkAdd:
@@ -82,7 +74,7 @@ class WatermarkAdd:
             watermark = self.watermark_file['path']
         return pdf, watermark
 
-    def add(self, document, watermark, underneath=False, method='pypdf2'):
+    def add(self, document, watermark, underneath=False, method='pdfrw'):
         """Add watermark to PDF by merging original PDF and watermark file."""
         output_filename = add_suffix(self.document['path'], 'watermarked')
 

@@ -32,3 +32,12 @@ def security_objects(path):
         print(k[0])
         for i, v in k[1].items():
             print(i, '-->', v)
+
+
+def get_pdf_size(file_name):
+    """Get width and height of a PDF"""
+    try:
+        size = PdfFileReader(file_name).getPage(0).mediaBox
+    except AttributeError:
+        size = file_name.getPage(0).mediaBox
+    return {'w': size[2], 'h': size[3]}
