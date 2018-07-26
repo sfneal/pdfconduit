@@ -9,13 +9,25 @@ from pdfwatermarker.write import write_pdf
 
 
 def set_destination(source, suffix):
-    # Create new pdf filename
-    directory = os.path.join(os.path.dirname(source), 'temp')  # directory
+    """Create new pdf filename for temp files"""
+    source_dirname = os.path.dirname(source)
+
+    # Do not create nested temp folders (/temp/temp)
+    if not source_dirname.endswith('temp'):
+        directory = os.path.join(source_dirname, 'temp')  # directory
+    else:
+        directory = source_dirname
+
+    # Create temp dir if it does not exist
     if not os.path.isdir(directory):
         os.mkdir(directory)
+
+    # Parse source filename
     src_file_name = Path(source).stem  # file name
     src_file_ext = Path(source).suffix  # file extension
-    dst_path = src_file_name + '_' + suffix + src_file_ext  # new concatenated file name
+
+    # Concatenate new filename
+    dst_path = src_file_name + '_' + suffix + src_file_ext
     return os.path.join(directory, dst_path)  # new full path
 
 
