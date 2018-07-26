@@ -5,7 +5,7 @@ import warnings
 from datetime import datetime
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
-from pdfwatermarker import add_suffix, open_window, secure
+from pdfwatermarker import add_suffix, open_window, protect
 
 
 def remove_temp(pdf):
@@ -35,7 +35,7 @@ class Watermark:
         self.pdf = WatermarkAdd(pdf, watermark)
 
         if encrypt:
-            secure_pdf = secure(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
+            secure_pdf = protect(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
             os.remove(str(self.pdf))
             self.pdf = secure_pdf
 
@@ -71,7 +71,7 @@ class WatermarkGUI:
 
         if encrypt:
             output = add_suffix(pdf, 'secured')
-            self.pdf = secure(str(wm), user_pw, owner_pw, output=output)
+            self.pdf = protect(str(wm), user_pw, owner_pw, output=output)
             print("{0:20}--> {1}".format('Secured PDF', self.pdf))
             os.remove(str(wm))
 
