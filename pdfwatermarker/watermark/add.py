@@ -1,5 +1,4 @@
 # Add a watermark PDF file to another PDF file
-import os
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
