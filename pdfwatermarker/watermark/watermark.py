@@ -53,7 +53,6 @@ class WatermarkGUI:
     def __init__(self):
         # Import GUI and timeout libraries
         from pdfwatermarker.watermark.lib import GUI
-        from interruptingcow import timeout
         pdf, address, town, state, encrypt, user_pw, owner_pw = GUI().settings
         project = os.path.basename(pdf)[:8]
 
@@ -77,9 +76,9 @@ class WatermarkGUI:
         # Timeout process after 10 seconds or exit on keyboard press
         try:
             print('\nSuccess!')
-            with timeout(10, exception=RuntimeError):
-                print('~~Process terminating in 10 seconds~~')
-                input('~~Press Any Key To Exit~~')
-                quit()
+            input('~~Press Any Key To Exit~~')
+            # with timeout(10, exception=RuntimeError):
+            #     print('~~Process terminating in 10 seconds~~')
+            #     quit()
         except RuntimeError:
             quit()
