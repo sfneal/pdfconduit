@@ -33,6 +33,7 @@ class Watermark:
             warnings.simplefilter("ignore")
             watermark = str(WatermarkDraw(project, text, pdf))
         self.pdf = WatermarkAdd(pdf, watermark)
+        open_window(self.pdf)
 
         if encrypt:
             secure_pdf = protect(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)

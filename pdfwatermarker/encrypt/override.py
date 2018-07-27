@@ -12,7 +12,7 @@ def set_permissions(status):
 
 
 class PdfFileWriter2(PdfFileWriter):
-    def encrypt(self, user_pwd, owner_pwd=None, use_128bit=False, restrict_permission=False):
+    def encrypt(self, user_pwd, owner_pwd=None, use_128bit=True, restrict_permission=False):
         """This is an override method of PdfFileWriter built to control permissions parameter (P)"""
         import time, random
         if owner_pwd == None:
