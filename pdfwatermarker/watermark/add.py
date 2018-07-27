@@ -1,6 +1,6 @@
 # Add a watermark PDF file to another PDF file
 from pdfrw import PdfReader, PdfWriter, PageMerge
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
 from pdfwatermarker import upscale, rotate, add_suffix
 from pdfwatermarker.utils import get_pdf_size

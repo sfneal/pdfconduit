@@ -1,5 +1,5 @@
 import os
-from PyPDF2 import PdfFileReader
+from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 from pdfwatermarker import Watermark, EncryptParams, add_suffix, open_window
 
 

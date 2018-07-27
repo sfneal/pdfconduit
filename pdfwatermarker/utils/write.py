@@ -1,5 +1,5 @@
 # Write two (2) PDFs to a destination file
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from pdfwatermarker.thirdparty.PyPDF2 import PdfFileWriter, PdfFileReader
 
 
 def write_pdf(top_pdf, bottom_pdf, destination):
