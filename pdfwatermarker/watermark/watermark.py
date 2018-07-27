@@ -3,7 +3,6 @@ import os
 import shutil
 import warnings
 from datetime import datetime
-from pathlib import Path
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker import add_suffix, open_window, protect
@@ -34,6 +33,7 @@ class Watermark:
             warnings.simplefilter("ignore")
             watermark = str(WatermarkDraw(project, text, pdf))
         self.pdf = WatermarkAdd(pdf, watermark)
+        open_window(self.pdf)
 
         if encrypt:
             secure_pdf = protect(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output)
@@ -46,14 +46,13 @@ class Watermark:
         open_window(self.pdf)
 
     def __str__(self):
-        return str(Path(str(self.pdf)))
+        return str(self.pdf)
 
 
 class WatermarkGUI:
     def __init__(self):
         # Import GUI and timeout libraries
         from pdfwatermarker.watermark.lib import GUI
-        from interruptingcow import timeout
         pdf, address, town, state, encrypt, user_pw, owner_pw = GUI().settings
         project = os.path.basename(pdf)[:8]
 
@@ -77,9 +76,9 @@ class WatermarkGUI:
         # Timeout process after 10 seconds or exit on keyboard press
         try:
             print('\nSuccess!')
-            with timeout(10, exception=AttributeError):
-                print('~~Process terminating in 10 seconds~~')
-                input('~~Press Any Key To Exit~~')
-                quit()
-        except AttributeError:
+            input('~~Press Any Key To Exit~~')
+            # with timeout(10, exception=RuntimeError):
+            #     print('~~Process terminating in 10 seconds~~')
+            #     quit()
+        except RuntimeError:
             quit()

@@ -1,5 +1,5 @@
 # Retrieve information about a PDF document
-from PyPDF2 import PdfFileReader
+from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 
 
 def number_of_pages(path):

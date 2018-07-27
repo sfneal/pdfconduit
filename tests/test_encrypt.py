@@ -21,6 +21,5 @@ def main():
     else:
         print('Failed!')
 
-
 if __name__ == '__main__':
     main()

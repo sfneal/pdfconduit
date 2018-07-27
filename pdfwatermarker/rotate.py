@@ -1,5 +1,5 @@
 # Rotate a pdf file
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 from pdfrw import PdfReader, PdfWriter
 from pdfwatermarker import set_destination
 

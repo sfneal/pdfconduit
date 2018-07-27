@@ -1,5 +1,5 @@
 # importing required modules
-from PyPDF2 import PdfFileMerger
+from pdfwatermarker.thirdparty.PyPDF2 import PdfFileMerger
 import os
 
 

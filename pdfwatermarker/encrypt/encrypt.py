@@ -1,6 +1,6 @@
 # Encrypt a PDF file with password protection
 from pdfwatermarker import add_suffix
-from PyPDF2 import PdfFileReader
+from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 from .override import PdfFileWriter2
 import os
 

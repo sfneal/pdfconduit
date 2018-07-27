@@ -7,7 +7,7 @@ setup(
     install_requires=[
         'pdfrw',
         'Pillow',
-        'PyPDF2',
+        'PyPDF2==1.26.0',
         'PySimpleGUI',
         'reportlab',
         'interruptingcow'
