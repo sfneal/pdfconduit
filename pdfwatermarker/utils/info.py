@@ -40,4 +40,4 @@ def get_pdf_size(file_name):
         size = PdfFileReader(file_name).getPage(0).mediaBox
     except AttributeError:
         size = file_name.getPage(0).mediaBox
-    return {'w': size[2], 'h': size[3]}
+    return {'w': float(size[2]), 'h': float(size[3])}

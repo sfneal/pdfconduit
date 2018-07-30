@@ -68,7 +68,6 @@ class WatermarkDraw:
         self.can = Canvas(self.packet, pagesize=letter)  # Initialize canvas
         self.dst = resource_path(set_destination(pdf, project, 'watermark'))
         self.img_dst = resource_path(set_destination(pdf, project, 'watermark_img', '.png'))
-        print(self.img_dst)
         self.draw()
 
         self.packet.seek(0)  # move to the beginning of the StringIO buffer

@@ -86,6 +86,7 @@ class WatermarkAdd:
             wtrmrk = watermark_file['rotated']
         except KeyError:
             wtrmrk = watermark_file['path']
+        print(wtrmrk)
 
         # 3c. Check if watermark file needs to be upscaled
         if watermark_file['w'] <= document['w'] or watermark_file['h'] <= document['h']:
