@@ -1,13 +1,15 @@
 # Add dynamic text to a watermark PDF template file
 import io
 import os
+import sys
+import img2pdf
+from PIL import Image, ImageEnhance
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from pdfwatermarker import set_destination, resource_path, write_pdf
-import sys
 
 
 def bundle_dir():
@@ -28,13 +30,30 @@ def register_font():
 
 bundle_dir = bundle_dir()
 register_font()
-default_template = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.pdf')
+default_template = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark2.pdf')
+default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
 
 
 def center_str(txt, font, size, offset=120):
     page_width = letter[1]
     text_width = stringWidth(txt, fontName=font, fontSize=size)
     return ((page_width - text_width) / 2.0) + offset
+
+
+def img_opacity(im, opacity):
+    """
+    Returns an image with reduced opacity.
+    Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
+    """
+    assert opacity >= 0 and opacity <= 1
+    if im.mode != 'RGBA':
+        im = im.convert('RGBA')
+    else:
+        im = im.copy()
+    alpha = im.split()[3]
+    alpha = ImageEnhance.Brightness(alpha).enhance(opacity)
+    im.putalpha(alpha)
+    return im
 
 
 class WatermarkDraw:
@@ -48,6 +67,8 @@ class WatermarkDraw:
         self.packet = io.BytesIO()
         self.can = Canvas(self.packet, pagesize=letter)  # Initialize canvas
         self.dst = resource_path(set_destination(pdf, project, 'watermark'))
+        self.img_dst = resource_path(set_destination(pdf, project, 'watermark_img', '.png'))
+        print(self.img_dst)
         self.draw()
 
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
@@ -55,6 +76,13 @@ class WatermarkDraw:
 
     def __str__(self):
         return str(self.dst)
+
+    def _draw_image(self):
+        img = Image.open(default_image)
+        img = img_opacity(img, self.opacity)
+        img.save(self.img_dst)
+        self.can.drawImage(self.img_dst, x=100, y=-100, width=letter[0], height=letter[1], mask='auto',
+                           preserveAspectRatio=True)
 
     def _draw_address(self):
         # Address
@@ -83,6 +111,7 @@ class WatermarkDraw:
 
     def draw(self):
         # Draw watermark elements
+        self._draw_image()
         self._draw_address()
         self._draw_town_state()
         self._draw_copyright()
