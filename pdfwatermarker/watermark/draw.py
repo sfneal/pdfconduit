@@ -30,7 +30,7 @@ def register_font():
 
 bundle_dir = bundle_dir()
 register_font()
-default_template = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark2.pdf')
+default_template = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.pdf')
 default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
 
 
