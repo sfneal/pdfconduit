@@ -10,7 +10,7 @@ def write_pdf(top_pdf, bottom_pdf, destination):
     :param destination: Desintation path
     """
     drawing = PdfFileReader(top_pdf)  # Create new PDF object
-    template = PdfFileReader(open(bottom_pdf, "rb"))  # read your existing PDF
+    template = PdfFileReader(bottom_pdf)  # read your existing PDF
 
     # add the "watermark" (which is the new pdf) on the existing page
     page = template.getPage(0)
