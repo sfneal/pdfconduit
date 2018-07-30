@@ -75,6 +75,14 @@ class WatermarkDraw:
     def __str__(self):
         return str(self.dst)
 
+    def draw(self):
+        # Draw watermark elements
+        self._draw_image()
+        self._draw_address()
+        self._draw_town_state()
+        self._draw_copyright()
+        self.can.save()  # Save canvas
+
     def _draw_image(self):
         """Draw HPA Logo to canvas (Layer 1)"""
         img = Image.open(default_image)
@@ -110,11 +118,3 @@ class WatermarkDraw:
         self.can.drawString(x=center_str(address, self.font, self.text['address']['font']),
                             y=self.text['address']['y'],
                             text=address)
-
-    def draw(self):
-        # Draw watermark elements
-        self._draw_image()
-        self._draw_address()
-        self._draw_town_state()
-        self._draw_copyright()
-        self.can.save()  # Save canvas
