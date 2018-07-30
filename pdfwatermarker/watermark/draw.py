@@ -2,7 +2,6 @@
 import io
 import os
 import sys
-import img2pdf
 from PIL import Image, ImageEnhance
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import letter
