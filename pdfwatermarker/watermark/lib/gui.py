@@ -38,6 +38,10 @@ class GUI:
 
                 [_line()],
 
+                [gui.Text('Watermark Opacity', size=(15, 1), auto_size_text=False),
+                 gui.Slider(range=(1, 20), orientation='h', size=(34, 30), default_value=8)],
+                [_line()],
+
                 # Encryption
                 [gui.Checkbox('Encrypt', default=True)],
                 [gui.Text('User Password', size=(15, 1), auto_size_text=False), gui.InputText()],
@@ -54,24 +58,26 @@ class GUI:
             'address': values[1],
             'town': values[2],
             'state': values[3],
-            'encrypt': values[4],
-            'user_pw': values[5],
-            'owner_pw': values[6],
+            'opacity': values[4],
+            'encrypt': values[5],
+            'user_pw': values[6],
+            'owner_pw': values[7],
         }
         pdf = values[0]
         address = values[1]
         town = values[2]
         state = values[3]
-        encrypt = values[4]
+        opacity = float(values[4] * .01)
+        encrypt = values[5]
 
-        if len(values[5]) > 0:
-            user_pw = values[5]
+        if len(values[6]) > 0:
+            user_pw = values[6]
         else:
             user_pw = None
 
-        if len(values[6]) > 0:
-            owner_pw = values[6]
+        if len(values[7]) > 0:
+            owner_pw = values[7]
         else:
             owner_pw = None
 
-        return pdf, address, town, state, encrypt, user_pw, owner_pw
+        return pdf, address, town, state, encrypt, opacity, user_pw, owner_pw

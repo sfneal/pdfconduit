@@ -14,7 +14,7 @@ def remove_temp(pdf):
 
 
 class Watermark:
-    def __init__(self, pdf, project, address, town, state, encrypt=None, remove_temps=True):
+    def __init__(self, pdf, project, address, town, state, opacity=0.1, encrypt=None, remove_temps=True):
         text = {
             'address': {
                 'font': 40,
@@ -31,7 +31,7 @@ class Watermark:
         }
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            watermark = str(WatermarkDraw(project, text, pdf))
+            watermark = str(WatermarkDraw(project, text, pdf, opacity=opacity))
         self.pdf = WatermarkAdd(pdf, watermark)
         open_window(self.pdf)
 
@@ -53,7 +53,7 @@ class WatermarkGUI:
     def __init__(self):
         # Import GUI and timeout libraries
         from pdfwatermarker.watermark.lib import GUI
-        pdf, address, town, state, encrypt, user_pw, owner_pw = GUI().settings
+        pdf, address, town, state, encrypt, opacity, user_pw, owner_pw = GUI().settings
         project = os.path.basename(pdf)[:8]
 
         # Print GUI selections to console
@@ -63,9 +63,10 @@ class WatermarkGUI:
         print("{0:20}--> {1}".format('Address', address))
         print("{0:20}--> {1}".format('Town', town))
         print("{0:20}--> {1}".format('State', state))
+        print("{0:20}--> {1}".format('WM Opacity', opacity))
 
         # Execute Watermark class
-        wm = Watermark(pdf, project, address, town, state)
+        wm = Watermark(pdf, project, address, town, state, opacity)
         print("{0:20}--> {1}".format('Watermarked PDF', wm))
 
         if encrypt:
