@@ -14,9 +14,7 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
         def adjust(page):
             info = PageMerge().add(page)
             x1, y1, x2, y2 = info.xobj_box
-            print(info.xobj_box)
             viewrect = (margin, margin, x2 - x1 - 2 * margin, y2 - y1 - 2 * margin)
-            print(viewrect)
             page = PageMerge().add(page, viewrect=viewrect)
             page[0].scale(scale)
             return page.render()
@@ -54,5 +52,4 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
         pypdf2()
     else:
         pdfrw()
-    print(get_pdf_size(output))
     return output
