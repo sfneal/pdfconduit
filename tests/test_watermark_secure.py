@@ -5,11 +5,12 @@ from pdfwatermarker import Watermark, EncryptParams, add_suffix, open_window
 
 def main():
     print('Testing Watermark class and secure function reliability')
-    secure = '/Volumes/Storage/HPA Design/Marketing Library/Floor Plan PDFs/20160054_FP.1_secured.pdf'
+    directory = '/Users/Stephen/Desktop'
+    secure = os.path.join(directory, '20100141_Floor Plans.pdf_secured.pdf')
     if os.path.exists(secure):
         os.remove(secure)
 
-    pdf = '/Volumes/Storage/HPA Design/Marketing Library/Floor Plan PDFs/20160054_FP.1.pdf'
+    pdf = os.path.join(directory, '20100141_Floor Plans.pdf')
     project = '20160054'
     address = '43 Indian Lane'
     town = 'Franklin'
@@ -17,7 +18,7 @@ def main():
 
     enc = EncryptParams('baz', 'foo', output=add_suffix(pdf, 'secured'))
 
-    Watermark(pdf, project, address, town, state, encrypt=enc)
+    Watermark(pdf, project, address, town, state, encrypt=enc, encrypt_128=True)
 
     with open(secure, 'rb') as f:
         reader = PdfFileReader(f)
