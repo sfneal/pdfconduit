@@ -17,6 +17,8 @@ def main():
     state = 'MA'
     
     Watermark(pdf, project, address, town, state, opacity=0.08, remove_temps=False)
+    pdf = '/Users/Stephen/Desktop/20180053 (20110061) CDs.pdf'
+    Watermark(pdf, project, address, town, state, opacity=0.08, remove_temps=False)
 
     if os.path.exists(watermark):
         print('Success!')

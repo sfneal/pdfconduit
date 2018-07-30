@@ -84,13 +84,15 @@ class WatermarkAdd:
         # Set watermark file to be used for upscaling
         try:
             wtrmrk = watermark_file['rotated']
+            watermark_file.update(get_pdf_size(watermark_file['rotated']))
         except KeyError:
             wtrmrk = watermark_file['path']
-        print(wtrmrk)
 
         # 3c. Check if watermark file needs to be upscaled
-        if watermark_file['w'] <= document['w'] or watermark_file['h'] <= document['h']:
+        scale = 0
+        if watermark_file['w'] <= document['w']:
             scale = float(document['w'] / watermark_file['w'])
+
             if watermark_file['h'] * scale > document['h']:
                 scale = float(document['h'] / watermark_file['h'])
 
@@ -141,7 +143,7 @@ class WatermarkAdd:
             for page_number in range(page_count):
                 # Merge the watermark with the page
                 input_page = document_reader.getPage(page_number)
-                input_page.mergeRotatedTranslatedPage(wtrmrk_page, self.rotate, self.scale, wtrmrk_width,
+                input_page.mergeRotatedTranslatedPage(wtrmrk_page, 0, 0, wtrmrk_width,
                                                             wtrmrk_height)
 
                 # Add page from input file to output document
