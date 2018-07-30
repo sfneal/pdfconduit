@@ -29,12 +29,9 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
     def pypdf2():
         reader = PdfFileReader(file_name)
         writer = PdfFileWriter()
-        print(file_name)
         dims = get_pdf_size(file_name)
         target_w = dims['w'] * scale
         target_h = dims['h'] * scale
-        print(target_w)
-        print(target_h)
 
         # Number of pages in input document
         page_count = reader.getNumPages()
