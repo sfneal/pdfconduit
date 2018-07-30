@@ -1,12 +1,13 @@
 import os
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 from pdfwatermarker import Watermark, EncryptParams, add_suffix, open_window
+from looptools import ActiveTimer
 
 
 def main():
     print('Testing Watermark class and secure function reliability')
     directory = '/Users/Stephen/Desktop'
-    secure = os.path.join(directory, '20100141_Floor Plans.pdf_secured.pdf')
+    secure = os.path.join(directory, '20100141_Floor Plans_secured.pdf')
     if os.path.exists(secure):
         os.remove(secure)
 
@@ -18,7 +19,8 @@ def main():
 
     enc = EncryptParams('baz', 'foo', output=add_suffix(pdf, 'secured'))
 
-    Watermark(pdf, project, address, town, state, encrypt=enc, encrypt_128=True)
+    with ActiveTimer(Watermark):
+        Watermark(pdf, project, address, town, state, encrypt=enc, encrypt_128=False)
 
     with open(secure, 'rb') as f:
         reader = PdfFileReader(f)

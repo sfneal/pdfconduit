@@ -37,8 +37,8 @@ class Watermark:
         open_window(self.pdf)
 
         if encrypt:
-            secure_pdf = protect(str(self.pdf), encrypt.user_pw, encrypt.owner_pw, output=encrypt.output,
-                                 encrypt_128=True)
+            secure_pdf = protect(str(self.pdf), encrypt.user_pw, owner_pw=encrypt.owner_pw, output=encrypt.output,
+                                 encrypt_128=encrypt_128)
             self.pdf = secure_pdf
 
         if remove_temps:
