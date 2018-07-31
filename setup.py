@@ -9,7 +9,8 @@ setup(
         'Pillow',
         'PyPDF2==1.26.0',
         'PySimpleGUI',
-        'reportlab'
+        'reportlab',
+        'looptools'
     ],
     include_package_data=True,
     url='https://github.com/mrstephenneal/pdfwatermarker',
