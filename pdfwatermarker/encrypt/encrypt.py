@@ -3,7 +3,6 @@ import os
 from pdfwatermarker import add_suffix
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 from .override import PdfFileWriter2
-from tqdm import tqdm
 
 
 class EncryptParams:
