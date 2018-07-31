@@ -16,6 +16,6 @@ setup(
     license='',
     author='Stephen Neal',
     author_email='stephen@hpadesign.com',
-    description='Implemented resource_path function to find relative paths.',
+    description='PDF tool for watermarking, security and other utilities.',
     long_description='PDF watermark tool for internal use (HPA Design).'
 )

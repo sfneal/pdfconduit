@@ -39,9 +39,19 @@ def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict
         # Apply encryption to writer object
         pdf_writer.encrypt(user_pw, owner_pw, use_128bit=encrypt_128, restrict_permission=restrict_permission)
 
+        pdf_writer.addMetadata({
+            '/Producer': 'pdfwatermarker',
+            '/Creator': 'HPA Design',
+            '/Author': 'HPA Design'
+        })
+
         # Write encrypted PDF to file
         with open(output, 'wb') as output_pdf:
             pdf_writer.write(output_pdf)
+
+        read = PdfFileReader(output)
+        read.decrypt('baz')
+        print(read.getDocumentInfo())
         return output
 
 
