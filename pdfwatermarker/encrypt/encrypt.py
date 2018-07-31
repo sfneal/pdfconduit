@@ -51,8 +51,6 @@ PDFTK_PATH = '/opt/pdflabs/pdftk/bin/pdftk'
 def get_pdftk_path():
     if os.path.exists(PDFTK_PATH):
         return PDFTK_PATH
-    else:
-        print("Unable to find pdftk binary")
 
 
 def secure(pdf, user_pw, owner_pw, restrict_permission=True, pdftk=get_pdftk_path(), output=None):
