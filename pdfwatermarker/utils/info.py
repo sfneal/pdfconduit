@@ -24,10 +24,10 @@ def text_extractor(path):
     return [pdf.getPage(i).extractText() for i in range(PdfFileReader(path).getNumPages)]
 
 
-def security_objects(path):
+def security_objects(path, password='baz'):
     """Print security object information for a pdf document"""
     pdf = PdfFileReader(path)
-    pdf.decrypt('baz')
+    pdf.decrypt(password)
     for k in pdf.resolvedObjects.items():
         print(k[0])
         for i, v in k[1].items():
