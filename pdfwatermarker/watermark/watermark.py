@@ -15,7 +15,7 @@ def remove_temp(pdf):
 
 class Watermark:
     def __init__(self, pdf, project, address, town, state, opacity=0.1, encrypt=None, encrypt_128=True,
-        remove_temps=True):
+                 remove_temps=True):
         text = {
             'address': {
                 'font': 40,
