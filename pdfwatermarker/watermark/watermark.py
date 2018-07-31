@@ -66,7 +66,8 @@ class WatermarkGUI:
         project = os.path.basename(pdf)[:8]
 
         # Print GUI selections to console
-        self.receipt_add('PDF', pdf)
+        self.receipt_add('Directory', os.path.dirname(pdf))
+        self.receipt_add('PDF', os.path.basename(pdf))
         self.receipt_add('Project', project)
         self.receipt_add('Address', address)
         self.receipt_add('Town', town)
@@ -77,12 +78,12 @@ class WatermarkGUI:
 
         # Execute Watermark class
         wm = Watermark(pdf, project, address, town, state, opacity)
-        self.receipt_add('Watermarked PDF', wm)
+        self.receipt_add('Watermarked PDF', os.path.basename(str(wm)))
 
         if encrypt:
             output = add_suffix(pdf, 'secured')
             self.pdf = protect(str(wm), user_pw, owner_pw, output=output)
-            print("{0:20}--> {1}".format('Secured PDF', self.pdf))
+            print("{0:20}--> {1}".format('Secured PDF', os.path.basename(self.pdf)))
 
         runtime = time.end
         self.receipt_add('~run time~', runtime)
