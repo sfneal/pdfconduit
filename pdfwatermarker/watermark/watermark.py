@@ -59,13 +59,13 @@ class WatermarkGUI:
         import datetime
         time = Timer()
         now = datetime.datetime.now()
+        self.receipt = []
+        self.receipt_add('PDF Watermarker', now.strftime("%Y-%m-%d %H:%M"))
 
         pdf, address, town, state, encrypt, opacity, user_pw, owner_pw = GUI().settings
         project = os.path.basename(pdf)[:8]
-        self.receipt = []
 
         # Print GUI selections to console
-        self.receipt_add('PDF Watermarker', now.strftime("%Y-%m-%d %H:%M"))
         self.receipt_add('PDF', pdf)
         self.receipt_add('Project', project)
         self.receipt_add('Address', address)
