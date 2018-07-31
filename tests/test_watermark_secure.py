@@ -7,11 +7,9 @@ from looptools import ActiveTimer
 def main():
     print('Testing Watermark class and secure function reliability')
     directory = '/Users/Stephen/Desktop'
-    secure = os.path.join(directory, '20100141_Floor Plans_secured.pdf')
-    if os.path.exists(secure):
-        os.remove(secure)
+    secure = os.path.join(directory, '20100141_Floor Plans.pdf')
 
-    pdf = os.path.join(directory, '20100141_Floor Plans_compressed.pdf')
+    pdf = os.path.join(directory, '20100141_Floor Plans_secured.pdf')
     project = '20160054'
     address = '43 Indian Lane'
     town = 'Franklin'

@@ -32,13 +32,9 @@ def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict
         # Read opened PDF file
         pdf_reader = PdfFileReader(pdf_file)
 
-        # Write each page of PDF to writer object
-        for page_num in tqdm(range(pdf_reader.numPages),
-                             desc='Compressing Pages',
-                             total=len(range(pdf_reader.numPages)),
-                             unit='pages'):
+        # Standard Loop
+        for page_num in range(pdf_reader.numPages):
             page = pdf_reader.getPage(page_num)
-            page.compressContentStreams()
             pdf_writer.addPage(page)
 
         # Apply encryption to writer object
