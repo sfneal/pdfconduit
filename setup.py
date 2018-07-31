@@ -2,14 +2,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='pdfwatermarker',
-    version='0.2.0',
+    version='0.2.1',
     packages=find_packages(),
     install_requires=[
         'pdfrw',
         'Pillow',
         'PyPDF2==1.26.0',
         'PySimpleGUI',
-        'reportlab'
+        'reportlab',
+        'looptools'
     ],
     include_package_data=True,
     url='https://github.com/mrstephenneal/pdfwatermarker',
