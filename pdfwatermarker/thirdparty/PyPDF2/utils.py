@@ -161,24 +161,21 @@ class ConvertFunctionsToVirtualList(object):
         return self.getFunction(index)
 
 
-from tqdm import tqdm
-import inspect
 def RC4_encrypt(key, plaintext):
-    print(inspect.stack()[1][1], inspect.stack()[1][2], '\n')
     S = [i for i in range(256)]
     j = 0
     for i in range(256):
         j = (j + S[i] + ord_(key[i % len(key)])) % 256
         S[i], S[j] = S[j], S[i]
     i, j = 0, 0
-    retval = b_("")
-    for x in tqdm(range(len(plaintext)), desc='Encrypting plaintext', total=len(plaintext), unit='characters'):
+    retval = []
+    for x in range(len(plaintext)):
         i = (i + 1) % 256
         j = (j + S[i]) % 256
         S[i], S[j] = S[j], S[i]
         t = S[(S[i] + S[j]) % 256]
-        retval += b_(chr(ord_(plaintext[x]) ^ t))
-    return retval
+        retval.append(b_(chr(ord_(plaintext[x]) ^ t)))
+    return b_("").join(retval)
 
 
 def matrixMultiply(a, b):
@@ -292,3 +289,17 @@ def hexStr(num):
 
 
 WHITESPACES = [b_(x) for x in [' ', '\n', '\r', '\t', '\x00']]
+
+
+def paethPredictor(left, up, up_left):
+    p = left + up - up_left
+    dist_left = abs(p - left)
+    dist_up = abs(p - up)
+    dist_up_left = abs(p - up_left)
+
+    if dist_left <= dist_up and dist_left <= dist_up_left:
+        return left
+    elif dist_up <= dist_up_left:
+        return up
+    else:
+        return up_left
