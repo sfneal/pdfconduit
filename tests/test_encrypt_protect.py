@@ -1,13 +1,14 @@
 # Test encrypt module reliability
 import os
-from pdfwatermarker import protect
+from pdfwatermarker import protect, secure
 from pdfwatermarker.utils import security_objects
 from looptools import ActiveTimer
 
 
 def main():
     print('Testing encrypt module reliability...')
-    pdf = '/Volumes/Storage/HPA Design/Marketing Library/Floor Plan PDFs/20160054_FP.1.pdf'
+    directory = '/Users/Stephen/Desktop'
+    pdf = os.path.join(directory, '20100141_Floor Plans.pdf')
 
     if os.path.exists(pdf):
         owner_pw = 'foo'

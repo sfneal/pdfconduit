@@ -11,7 +11,7 @@ def main():
     if os.path.exists(secure):
         os.remove(secure)
 
-    pdf = os.path.join(directory, '20100141_Floor Plans.pdf')
+    pdf = os.path.join(directory, '20100141_Floor Plans_compressed.pdf')
     project = '20160054'
     address = '43 Indian Lane'
     town = 'Franklin'
@@ -20,7 +20,7 @@ def main():
     enc = EncryptParams('baz', 'foo', output=add_suffix(pdf, 'secured'))
 
     with ActiveTimer(Watermark):
-        Watermark(pdf, project, address, town, state, encrypt=enc, encrypt_128=False)
+        Watermark(pdf, project, address, town, state, encrypt=enc, encrypt_128=True)
 
     with open(secure, 'rb') as f:
         reader = PdfFileReader(f)
