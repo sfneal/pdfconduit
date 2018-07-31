@@ -9,8 +9,7 @@ setup(
         'Pillow',
         'PyPDF2==1.26.0',
         'PySimpleGUI',
-        'reportlab',
-        'interruptingcow'
+        'reportlab'
     ],
     include_package_data=True,
     url='https://github.com/mrstephenneal/pdfwatermarker',

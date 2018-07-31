@@ -1,8 +1,8 @@
 # Encrypt a PDF file with password protection
+import os
 from pdfwatermarker import add_suffix
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 from .override import PdfFileWriter2
-import os
 
 
 class EncryptParams:
@@ -21,22 +21,23 @@ def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict
     Password protect PDF file and allow all other permissions.
     Utilizes PyPDF2 reader and writer classes.
     """
+    # Create output filename if not already set
+    if not output:
+        output = add_suffix(pdf, 'protected')
+
     # Create PDF writer object
     pdf_writer = PdfFileWriter2()
     with open(pdf, 'rb') as pdf_file:
         # Read opened PDF file
         pdf_reader = PdfFileReader(pdf_file)
 
-        # Write each page of PDF to writer object
+        # Standard Loop
         for page_num in range(pdf_reader.numPages):
-            pdf_writer.addPage(pdf_reader.getPage(page_num))
+            page = pdf_reader.getPage(page_num)
+            pdf_writer.addPage(page)
 
         # Apply encryption to writer object
         pdf_writer.encrypt(user_pw, owner_pw, use_128bit=encrypt_128, restrict_permission=restrict_permission)
-
-        # Create output filename if not already set
-        if not output:
-            output = add_suffix(pdf, 'protected')
 
         # Write encrypted PDF to file
         with open(output, 'wb') as output_pdf:
@@ -44,15 +45,17 @@ def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict
         return output
 
 
-PDFTK_PATH = '/usr/local/bin/pdftk'
+PDFTK_PATH = '/opt/pdflabs/pdftk/bin/pdftk'
 
 
 def get_pdftk_path():
     if os.path.exists(PDFTK_PATH):
         return PDFTK_PATH
+    else:
+        print("Unable to find pdftk binary")
 
 
-def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=get_pdftk_path(), output=None):
+def secure(pdf, user_pw, owner_pw, restrict_permission=True, pdftk=get_pdftk_path(), output=None):
     """
     Encrypt a PDF file and restrict permissions to print only.
     Utilizes pdftk command line tool.
@@ -77,7 +80,7 @@ def secure(pdf, user_pw, owner_pw, allow_printing=True, pdftk=get_pdftk_path(), 
         command = pdftk + ' ' + pdf_en + ' output ' + output_en + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
 
         # Append string to command if printing is allowed
-        if allow_printing:
+        if restrict_permission:
             command += ' allow printing'
 
         # Execute command

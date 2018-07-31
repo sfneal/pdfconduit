@@ -6,6 +6,7 @@ from datetime import datetime
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker import add_suffix, open_window, protect
+from looptools import Timer
 
 
 def remove_temp(pdf):
@@ -15,7 +16,7 @@ def remove_temp(pdf):
 
 class Watermark:
     def __init__(self, pdf, project, address, town, state, opacity=0.1, encrypt=None, encrypt_128=True,
-        remove_temps=True):
+                 remove_temps=True):
         text = {
             'address': {
                 'font': 40,
@@ -55,33 +56,55 @@ class WatermarkGUI:
     def __init__(self):
         # Import GUI and timeout libraries
         from pdfwatermarker.watermark.lib import GUI
+        import datetime
+        time = Timer()
+        now = datetime.datetime.now()
+
         pdf, address, town, state, encrypt, opacity, user_pw, owner_pw = GUI().settings
         project = os.path.basename(pdf)[:8]
+        self.receipt = []
 
         # Print GUI selections to console
-        print("PDF Watermarker")
-        print("{0:20}--> {1}".format('PDF', pdf))
-        print("{0:20}--> {1}".format('Project', project))
-        print("{0:20}--> {1}".format('Address', address))
-        print("{0:20}--> {1}".format('Town', town))
-        print("{0:20}--> {1}".format('State', state))
-        print("{0:20}--> {1}".format('WM Opacity', opacity))
+        self.receipt_add('PDF Watermarker', now.strftime("%Y-%m-%d %H:%M"))
+        self.receipt_add('PDF', pdf)
+        self.receipt_add('Project', project)
+        self.receipt_add('Address', address)
+        self.receipt_add('Town', town)
+        self.receipt_add('State', state)
+        self.receipt_add('WM Opacity', str(int(opacity * 100)) + '%')
+        self.receipt_add('User pw', user_pw)
+        self.receipt_add('Owner pw', owner_pw)
 
         # Execute Watermark class
         wm = Watermark(pdf, project, address, town, state, opacity)
-        print("{0:20}--> {1}".format('Watermarked PDF', wm))
+        self.receipt_add('Watermarked PDF', wm)
 
         if encrypt:
             output = add_suffix(pdf, 'secured')
             self.pdf = protect(str(wm), user_pw, owner_pw, output=output)
             print("{0:20}--> {1}".format('Secured PDF', self.pdf))
 
-        # Timeout process after 10 seconds or exit on keyboard press
+        runtime = time.end
+        self.receipt_add('~run time~', runtime)
+
         try:
+            self.receipt_dump()
             print('\nSuccess!')
             input('~~Press Any Key To Exit~~')
-            # with timeout(10, exception=RuntimeError):
-            #     print('~~Process terminating in 10 seconds~~')
-            #     quit()
         except RuntimeError:
             quit()
+
+    def receipt_add(self, key, value):
+        message = str("{0:20}--> {1}".format(key, value))
+        print(message)
+        self.receipt.append(message)
+
+    def receipt_dump(self):
+        file_name = os.path.join(os.path.dirname(self.pdf), 'watermark receipt.txt')
+        exists = os.path.isfile(file_name)
+        with open(file_name, 'a') as f:
+            if exists:
+                f.write('*******************************************************************\n')
+
+            for item in self.receipt:
+                f.write(item + '\n')
