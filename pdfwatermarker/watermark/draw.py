@@ -75,14 +75,41 @@ class WatermarkDraw:
     def __str__(self):
         return str(self.dst)
 
+    def draw(self):
+        # Draw watermark elements
+        self._draw_image()
+        self._draw_address()
+        self._draw_town_state()
+        self._draw_copyright()
+        self.can.save()  # Save canvas
+
     def _draw_image(self):
+        """Draw HPA Logo to canvas (Layer 1)"""
         img = Image.open(default_image)
         img = img_opacity(img, self.opacity)
         img.save(self.img_dst)
         self.can.drawImage(self.img_dst, x=100, y=-100, width=letter[0], height=letter[1], mask='auto',
                            preserveAspectRatio=True)
 
+    def _draw_copyright(self):
+        """Draw copyright text (Layer 2)"""
+        # Copyright
+        self.can.setFont(self.font, self.text['copyright']['font'])  # Smaller font for copyright
+        cright = self.text['copyright']['txt']
+        self.can.drawString(x=center_str(cright, self.font, self.text['copyright']['font']),
+                            y=self.text['copyright']['y'],
+                            text=cright)
+
+    def _draw_town_state(self):
+        """Draw town and state text (Layer 3)"""
+        # Town and State
+        town_state = self.text['address']['txt']['town'] + ', ' + self.text['address']['txt']['state']
+        self.can.drawString(x=center_str(town_state, self.font, self.text['address']['font']),
+                            y=self.text['address']['y'] + 50,
+                            text=town_state)
+
     def _draw_address(self):
+        """Draw address text to canvas (Layer 4)"""
         # Address
         self.can.setFont(self.font, self.text['address']['font'])  # Large font for address
         self.can.setFillColor('black', self.opacity)
@@ -91,26 +118,3 @@ class WatermarkDraw:
         self.can.drawString(x=center_str(address, self.font, self.text['address']['font']),
                             y=self.text['address']['y'],
                             text=address)
-
-    def _draw_town_state(self):
-        # Town and State
-        town_state = self.text['address']['txt']['town'] + ', ' + self.text['address']['txt']['state']
-        self.can.drawString(x=center_str(town_state, self.font, self.text['address']['font']),
-                            y=self.text['address']['y'] + 50,
-                            text=town_state)
-
-    def _draw_copyright(self):
-        # Copyright
-        self.can.setFont(self.font, self.text['copyright']['font'])  # Smaller font for copyright
-        cright = self.text['copyright']['txt']
-        self.can.drawString(x=center_str(cright, self.font, self.text['copyright']['font']),
-                            y=self.text['copyright']['y'],
-                            text=cright)
-
-    def draw(self):
-        # Draw watermark elements
-        self._draw_image()
-        self._draw_address()
-        self._draw_town_state()
-        self._draw_copyright()
-        self.can.save()  # Save canvas
