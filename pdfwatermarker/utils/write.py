@@ -2,9 +2,9 @@
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileWriter, PdfFileReader
 
 
-def write_pdf(top_pdf, bottom_pdf, destination):
+def overlay_pdfs(top_pdf, bottom_pdf, destination):
     """
-    Write PDF objects to files
+    Overlay PDF objects to files
     :param top_pdf: PDF object to be placed on top
     :param bottom_pdf: PDF file to be placed underneath
     :param destination: Desintation path
@@ -21,4 +21,24 @@ def write_pdf(top_pdf, bottom_pdf, destination):
     # finally, write "output" to a real file
     with open(destination, "wb") as outputStream:
         output.write(outputStream)
-    outputStream.close()
+
+
+def write_pdf(pdf_obj, destination):
+    """
+    Write PDF object to file
+    :param pdf: PDF object to be written to file
+    :param destination: Desintation path
+    """
+    reader = PdfFileReader(pdf_obj)  # Create new PDF object
+    writer = PdfFileWriter()
+
+    page_count = reader.getNumPages()
+
+    # add the "watermark" (which is the new pdf) on the existing page
+    for page_number in range(page_count):
+        page = reader.getPage(page_number)
+        writer.addPage(page)
+
+    # finally, write "output" to a real file
+    with open(destination, "wb") as outputStream:
+        writer.write(outputStream)
