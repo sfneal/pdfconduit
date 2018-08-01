@@ -48,10 +48,6 @@ def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict
         # Write encrypted PDF to file
         with open(output, 'wb') as output_pdf:
             pdf_writer.write(output_pdf)
-
-        read = PdfFileReader(output)
-        read.decrypt('baz')
-        print(read.getDocumentInfo())
         return output
 
 
