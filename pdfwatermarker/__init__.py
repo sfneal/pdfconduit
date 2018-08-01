@@ -1,6 +1,6 @@
 __all__ = ["set_destination", "resource_path", "overlay_pdfs", "add_suffix", "open_window", "upscale", "rotate",
            "protect", "secure", "EncryptParams", "merge", "Watermark", "WatermarkGUI"]
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __author__ = 'Stephen Neal'
 
 
