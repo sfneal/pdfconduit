@@ -1,4 +1,5 @@
 import PySimpleGUI as gui
+from pdfwatermarker import __version__
 
 
 def _line(char='_', width=100, size=(70, 1)):
@@ -22,16 +23,21 @@ class GUI:
         """Parameters for parsing directory trees"""
         with gui.FlexForm(self.title, auto_size_text=True, default_element_size=(40, 1)) as form:
             layout = [
-                [gui.Text('HPA Design PDF Watermark utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+                [gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+                [gui.Text('PDF Watermark utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+                [gui.Text('version: ' + __version__, size=(30, 1), font=("Helvetica", 16), text_color='blue')],
+
+                [_line()],
+
                 # Source
-                [gui.Text('Select a source PDF and input project address information')],
+                [gui.Text('Select a source PDF and input project address information', font=("Helvetica", 12))],
                 [gui.Text('Source pdf', size=(15, 1), auto_size_text=False), gui.InputText('Source'),
                  gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
 
                 [_line()],
 
                 # Files and non-empty-folders
-                [gui.Text('Project address')],
+                [gui.Text('Project address', font=("Helvetica", 12))],
                 [gui.Text('Address', size=(15, 1), auto_size_text=False), gui.InputText()],
                 [gui.Text('Town', size=(15, 1), auto_size_text=False), gui.InputText()],
                 [gui.Text('State', size=(15, 1), auto_size_text=False), gui.InputText()],
