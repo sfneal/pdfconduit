@@ -57,13 +57,12 @@ class WatermarkGUI:
         # Import GUI and timeout libraries
         from pdfwatermarker.watermark.lib import GUI
         import datetime
-        time = Timer()
-        now = datetime.datetime.now()
         self.receipt = []
-        self.receipt_add('PDF Watermarker', now.strftime("%Y-%m-%d %H:%M"))
+        self.receipt_add('PDF Watermarker', datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
 
         pdf, address, town, state, encrypt, opacity, user_pw, owner_pw = GUI().settings
         project = os.path.basename(pdf)[:8]
+        time = Timer()
 
         # Print GUI selections to console
         self.receipt_add('Directory', os.path.dirname(pdf))
@@ -83,7 +82,7 @@ class WatermarkGUI:
         if encrypt:
             output = add_suffix(pdf, 'secured')
             self.pdf = protect(str(wm), user_pw, owner_pw, output=output)
-            print("{0:20}--> {1}".format('Secured PDF', os.path.basename(self.pdf)))
+            self.receipt_add('Secured PDF', os.path.basename(self.pdf))
 
         runtime = time.end
         self.receipt_add('~run time~', runtime)
