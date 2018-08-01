@@ -1,7 +1,7 @@
 # Test encrypt module reliability
 import os
 from pdfwatermarker import protect, secure
-from pdfwatermarker.utils import security_objects
+from pdfwatermarker.utils import info
 from looptools import ActiveTimer
 
 
@@ -15,7 +15,7 @@ def main():
         user_pw = 'baz'
         with ActiveTimer(protect):
             p = protect(pdf, user_pw, owner_pw)
-            s = security_objects(p, user_pw)
+            s = info.security(p, user_pw)
             for k, v in s:
                 print("{0:20} ---> {1}".format(k, v))
         print('Success!')

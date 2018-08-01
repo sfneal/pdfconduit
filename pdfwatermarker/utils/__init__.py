@@ -1,4 +1,4 @@
-__all__ = ['set_destination', 'resource_path', 'add_suffix', 'open_window', 'write_pdf']
+__all__ = ['set_destination', 'resource_path', 'add_suffix', 'open_window', 'write_pdf', 'info']
 
 
 from pdfwatermarker.utils.path import set_destination, resource_path, add_suffix

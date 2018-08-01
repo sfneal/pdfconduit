@@ -1,5 +1,5 @@
 import os
-from pdfwatermarker import security_objects, metadata
+from pdfwatermarker import info
 
 
 def main():
@@ -7,7 +7,7 @@ def main():
     directory = '/Users/Stephen/Desktop/pdfs'
     for i in os.listdir(directory):
         print(i)
-        s = security_objects(os.path.join(directory, i), password)
+        s = info.security_objects(os.path.join(directory, i), password)
         print(s)
         for k, v in s:
             print("{0:20} ---> {1}".format(k, v))
