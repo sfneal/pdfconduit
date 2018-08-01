@@ -15,10 +15,9 @@ def main():
         user_pw = 'baz'
         with ActiveTimer(protect):
             p = protect(pdf, user_pw, owner_pw)
-        print(p)
-        s = security_objects(p, user_pw)
-        for k, v in s:
-            print("{0:20} ---> {1}".format(k, v))
+            s = security_objects(p, user_pw)
+            for k, v in s:
+                print("{0:20} ---> {1}".format(k, v))
         print('Success!')
     else:
         print('Failed!')

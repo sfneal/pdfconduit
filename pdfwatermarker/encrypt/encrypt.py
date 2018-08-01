@@ -15,6 +15,8 @@ class EncryptParams:
     def __str__(self):
         return str(self.__dict__)
 
+from looptools import ActiveTimer
+
 
 def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
     """
@@ -31,7 +33,7 @@ def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict
         # Read opened PDF file
         pdf_reader = PdfFileReader(pdf_file)
 
-        # Standard Loop
+        # Add each page from source PDF
         for page_num in range(pdf_reader.numPages):
             page = pdf_reader.getPage(page_num)
             pdf_writer.addPage(page)
