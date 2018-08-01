@@ -2,11 +2,13 @@
 import os
 import shutil
 import warnings
+import datetime
 from datetime import datetime
+from looptools import Timer
+from pdfwatermarker.watermark.lib import GUI
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker import add_suffix, open_window, protect
-from looptools import Timer
 
 
 def remove_temp(pdf):
@@ -55,8 +57,6 @@ class Watermark:
 class WatermarkGUI:
     def __init__(self):
         # Import GUI and timeout libraries
-        from pdfwatermarker.watermark.lib import GUI
-        import datetime
         self.receipt = []
         self.receipt_add('PDF Watermarker', datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
 
