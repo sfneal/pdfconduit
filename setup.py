@@ -1,8 +1,9 @@
 from setuptools import setup, find_packages
+from pdfwatermarker import __version__, __author__
 
 setup(
     name='pdfwatermarker',
-    version='0.2.1',
+    version=__version__,
     packages=find_packages(),
     install_requires=[
         'pdfrw',
@@ -14,7 +15,7 @@ setup(
     include_package_data=True,
     url='https://github.com/mrstephenneal/pdfwatermarker',
     license='',
-    author='Stephen Neal',
+    author=__author__,
     author_email='stephen@hpadesign.com',
     description='PDF tool for watermarking, security and other utilities.',
     long_description='PDF watermark tool for internal use (HPA Design).'
