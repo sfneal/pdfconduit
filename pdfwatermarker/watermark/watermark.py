@@ -37,7 +37,6 @@ class Watermark:
             warnings.simplefilter("ignore")
             watermark = str(WatermarkDraw(project, text, pdf, opacity=opacity))
         self.pdf = WatermarkAdd(pdf, watermark)
-        open_window(self.pdf)
 
         if encrypt:
             secure_pdf = protect(str(self.pdf), encrypt.user_pw, owner_pw=encrypt.owner_pw, output=encrypt.output,
@@ -49,6 +48,7 @@ class Watermark:
 
         # Open watermarked PDF in finder or explorer window
         if open_file:
+            print('Opening')
             open_window(self.pdf)
 
     def __str__(self):
