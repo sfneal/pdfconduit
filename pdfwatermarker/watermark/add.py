@@ -113,9 +113,10 @@ class WatermarkAdd:
 
         # 4b. If rotated watermark file does not exists use input watermark path
         try:
-            watermark = self.watermark_file['upscaled']
-        except KeyError:
-            watermark = self.watermark_file['rotated']
+            try:
+                watermark = self.watermark_file['upscaled']
+            except KeyError:
+                watermark = self.watermark_file['rotated']
         except KeyError:
             watermark = self.watermark_file['path']
         return pdf, watermark
