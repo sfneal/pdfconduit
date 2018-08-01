@@ -2,6 +2,7 @@
 import io
 import os
 import sys
+import shutil
 from PIL import Image, ImageEnhance
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import letter
@@ -10,6 +11,11 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from pdfwatermarker import set_destination, resource_path, overlay_pdfs, write_pdf
 from pdfwatermarker.watermark.add import WatermarkAdd
+
+
+def remove_temp(pdf):
+    temp = os.path.join(os.path.dirname(pdf), 'temp')
+    shutil.rmtree(temp)
 
 
 def bundle_dir():
@@ -34,6 +40,7 @@ bundle_dir = bundle_dir()
 register_font()
 default_template = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.pdf')
 default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
+LETTER = letter[1], letter[0]
 
 
 def center_str(txt, font, size, offset=120):
@@ -68,7 +75,7 @@ class Draw:
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
-        self.can = Canvas(self.packet, pagesize=letter)  # Initialize canvas
+        self.can = Canvas(self.packet, pagesize=LETTER)  # Initialize canvas
 
     def __str__(self):
         return str(self.dst)
@@ -88,13 +95,14 @@ class TextDraw(Draw):
         self.draw()
         self.write()
         w = WatermarkAdd(file_name, self.dst, overwrite=output_overwrite, suffix='text')
+        remove_temp(file_name)
 
     def draw(self):
         """Draw text to canvas"""
         # Address
         self.can.setFont(self.font, self.font_size)  # Large font for address
         self.can.setFillColor(self.font_color, self.opacity)
-        self.can.drawString(x=10, y=20, text=self.text)
+        self.can.drawString(x=30, y=20, text=self.text)
         self.can.save()  # Save canvas
 
 
@@ -138,7 +146,7 @@ class WatermarkDraw(Draw):
         # Town and State
         town_state = self.text['address']['txt']['town'] + ', ' + self.text['address']['txt']['state']
         self.can.drawString(x=center_str(town_state, self.font, self.text['address']['font']),
-                            y=self.text['address']['y'] + 50,
+                            y=self.text['address']['y'],
                             text=town_state)
 
     def _draw_address(self):
@@ -149,5 +157,5 @@ class WatermarkDraw(Draw):
         self.can.rotate(30)
         address = self.text['address']['txt']['address']
         self.can.drawString(x=center_str(address, self.font, self.text['address']['font']),
-                            y=self.text['address']['y'],
+                            y=self.text['address']['y'] + 50,
                             text=address)
