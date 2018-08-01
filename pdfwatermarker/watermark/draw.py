@@ -1,4 +1,4 @@
-# Add dynamic text to a watermark PDF template file
+# Dynamically generate watermark pdf file
 import io
 import os
 import sys
@@ -12,6 +12,7 @@ from pdfwatermarker import set_destination, resource_path, write_pdf
 
 
 def bundle_dir():
+    """Handle resource management within an executable file."""
     if getattr(sys, 'frozen', False):
         # we are running in a bundle
         bundle_dir = sys._MEIPASS
@@ -22,6 +23,7 @@ def bundle_dir():
 
 
 def register_font():
+    """Register fonts for report labs canvas."""
     folder = bundle_dir + os.sep + 'lib'
     ttfFile = resource_path(os.path.join(folder, 'Vera.ttf'))
     pdfmetrics.registerFont(TTFont("Vera", ttfFile))
