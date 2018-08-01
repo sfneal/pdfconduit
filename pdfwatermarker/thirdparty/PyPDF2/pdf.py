@@ -449,6 +449,7 @@ class PdfFileWriter(object):
         :param stream: An object to write the file to.  The object must support
             the write method and the tell method, similar to a file object.
         """
+        from tqdm import tqdm
         if hasattr(stream, 'mode') and 'b' not in stream.mode:
             warnings.warn("File <%s> to write to is not in binary mode. It may not be written to correctly." % stream.name)
         debug = False
@@ -486,7 +487,7 @@ class PdfFileWriter(object):
         object_positions = []
         stream.write(self._header + b_("\n"))
         stream.write(b_("%\xE2\xE3\xCF\xD3\n"))
-        for i in range(len(self._objects)):
+        for i in tqdm(range(len(self._objects)), desc='Writing PDF', total=len(self._objects)):
             idnum = (i + 1)
             obj = self._objects[i]
             object_positions.append(stream.tell())
@@ -514,10 +515,10 @@ class PdfFileWriter(object):
         stream.write(b_("trailer\n"))
         trailer = DictionaryObject()
         trailer.update({
-                NameObject("/Size"): NumberObject(len(self._objects) + 1),
-                NameObject("/Root"): self._root,
-                NameObject("/Info"): self._info,
-                })
+            NameObject("/Size"): NumberObject(len(self._objects) + 1),
+            NameObject("/Root"): self._root,
+            NameObject("/Info"): self._info,
+        })
         if hasattr(self, "_ID"):
             trailer[NameObject("/ID")] = self._ID
         if hasattr(self, "_encrypt"):
