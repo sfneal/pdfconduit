@@ -47,20 +47,3 @@ class PdfFileWriter2(PdfFileWriter):
         encrypt[NameObject("/P")] = NumberObject(P)
         self._encrypt = self._addObject(encrypt)
         self._encrypt_key = key
-
-
-def RC4_encrypt(key, plaintext):
-    S = [i for i in range(256)]
-    j = 0
-    for i in range(256):
-        j = (j + S[i] + ord_(key[i % len(key)])) % 256
-        S[i], S[j] = S[j], S[i]
-    i, j = 0, 0
-    retval = b_("")
-    for x in range(len(plaintext)):
-        i = (i + 1) % 256
-        j = (j + S[i]) % 256
-        S[i], S[j] = S[j], S[i]
-        t = S[(S[i] + S[j]) % 256]
-        retval += b_(chr(ord_(plaintext[x]) ^ t))
-    return retval

@@ -42,7 +42,7 @@ def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict
         pdf_writer.addMetadata({
             '/Producer': 'pdfwatermarker',
             '/Creator': 'HPA Design',
-            '/Author': 'HPA Design'
+            '/Author': 'HPA Design',
         })
 
         # Write encrypted PDF to file
