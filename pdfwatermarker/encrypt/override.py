@@ -4,15 +4,18 @@ from pdfwatermarker.thirdparty.PyPDF2.pdf import md5, ByteStringObject, ArrayObj
 from pdfwatermarker.thirdparty.PyPDF2.utils import b_, ord_
 
 
-def set_permissions(status):
-    if status:
-        return -1852
+def set_permissions(restrict_permission):
+    if type(restrict_permission) is int:
+        return restrict_permission
     else:
-        return -1
+        if restrict_permission:
+            return -1852
+        else:
+            return -1
 
 
 class PdfFileWriter2(PdfFileWriter):
-    def encrypt(self, user_pwd, owner_pwd=None, use_128bit=True, restrict_permission=False):
+    def encrypt(self, user_pwd, owner_pwd=None, use_128bit=True, restrict_permission=True):
         """This is an override method of PdfFileWriter built to control permissions parameter (P)"""
         import time, random
         if owner_pwd == None:

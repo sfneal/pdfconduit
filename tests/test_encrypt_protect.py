@@ -8,15 +8,17 @@ from looptools import ActiveTimer
 def main():
     print('Testing encrypt module reliability...')
     directory = '/Users/Stephen/Desktop'
-    pdf = os.path.join(directory, '20100141_Floor Plans.pdf')
+    pdf = os.path.join(directory, '20150094_Market Model.pdf')
 
     if os.path.exists(pdf):
         owner_pw = 'foo'
         user_pw = 'baz'
         with ActiveTimer(protect):
-            p = protect(pdf, user_pw, owner_pw, restrict_permission=True)
+            p = protect(pdf, user_pw, owner_pw)
         print(p)
-        print(security_objects(p))
+        s = security_objects(p, user_pw)
+        for k, v in s:
+            print("{0:20} ---> {1}".format(k, v))
         print('Success!')
     else:
         print('Failed!')
