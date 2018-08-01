@@ -34,13 +34,7 @@ def resources(path, password=None):
     return [pdf.getPage(i) for i in range(pdf.getNumPages)]
 
 
-def text_extractor(path, password=None):
-    """Extract text from a PDF file"""
-    pdf = _reader(path, password)
-    return [pdf.getPage(i).extractText() for i in range(PdfFileReader(path).getNumPages)]
-
-
-def security_objects(path, password=None):
+def security(path, password=None):
     """Print security object information for a pdf document"""
     pdf = _reader(path, password)
     return [(k, v) for i in pdf.resolvedObjects.items() for k, v in i[1].items()]

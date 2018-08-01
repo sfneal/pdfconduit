@@ -1,8 +1,9 @@
 # Extract images from a PDF
 from PIL import Image
+from pdfwatermarker.utils.info import _reader
 
 
-def extract_img(page):
+def img_extract(page):
     xobj = page['/Resources']['/XObject'].getObject()
     for obj in xobj:
         if xobj[obj]['/Subtype'] == '/Image':
@@ -25,3 +26,9 @@ def extract_img(page):
                 img = open(obj[1:] + ".jp2", "wb")
                 img.write(data)
                 img.close()
+
+
+def text_extract(path, password=None):
+    """Extract text from a PDF file"""
+    pdf = _reader(path, password)
+    return [pdf.getPage(i).extractText() for i in range(pdf.getNumPages)]
