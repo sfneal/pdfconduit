@@ -18,7 +18,7 @@ def remove_temp(pdf):
 
 class Watermark:
     def __init__(self, pdf, project, address, town, state, opacity=0.1, encrypt=None, encrypt_128=True,
-                 remove_temps=True):
+                 remove_temps=True, open_file=True):
         text = {
             'address': {
                 'font': 40,
@@ -48,7 +48,8 @@ class Watermark:
             remove_temp(pdf)
 
         # Open watermarked PDF in finder or explorer window
-        open_window(self.pdf)
+        if open_file:
+            open_window(self.pdf)
 
     def __str__(self):
         return str(self.pdf)
