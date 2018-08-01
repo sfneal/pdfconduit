@@ -1,5 +1,6 @@
 from pdfwatermarker import Watermark
 import os
+from tqdm import tqdm
 
 
 def main():
@@ -11,11 +12,11 @@ def main():
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
-    
-    wm = str(Watermark(pdf, project, address, town, state, opacity=0.08, remove_temps=False))
 
-    if os.path.exists(wm):
-        print('Success!')
+    for i in tqdm(range(1, 21)):
+        o = i * .01
+        wm = str(Watermark(pdf, project, address, town, state, opacity=o, remove_temps=False, open_file=False))
+        os.rename(wm, os.path.join(directory, 'opacity', str(o) + '.pdf'))
 
 
 if __name__ == '__main__':

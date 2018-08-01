@@ -1,5 +1,5 @@
 import os
-from pdfwatermarker import Watermark, EncryptParams, add_suffix, open_window, security_objects, metadata, number_of_pages
+from pdfwatermarker import Watermark, EncryptParams, add_suffix, info
 from looptools import ActiveTimer
 
 
@@ -22,8 +22,8 @@ def main():
     with ActiveTimer(Watermark):
         secured = Watermark(pdf, project, address, town, state, encrypt=enc, encrypt_128=True)
 
-    print(metadata(str(secured), user_pw))
-    print(security_objects(str(secured), user_pw))
+    print(info.metadata(str(secured), user_pw))
+    print(info.security(str(secured), user_pw))
     print('Success!')
 
 

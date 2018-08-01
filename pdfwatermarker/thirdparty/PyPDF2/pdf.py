@@ -487,7 +487,11 @@ class PdfFileWriter(object):
         object_positions = []
         stream.write(self._header + b_("\n"))
         stream.write(b_("%\xE2\xE3\xCF\xD3\n"))
-        for i in tqdm(range(len(self._objects)), desc='Writing PDF', total=len(self._objects)):
+        if hasattr(self, "_encrypt"):
+            loop = tqdm(range(len(self._objects)), desc='Writing PDF', total=len(self._objects))
+        else:
+            loop = range(len(self._objects))
+        for i in loop:
             idnum = (i + 1)
             obj = self._objects[i]
             object_positions.append(stream.tell())
