@@ -1,5 +1,6 @@
 from pdfwatermarker import Watermark
 import os
+import shutil
 from tqdm import tqdm
 
 
@@ -12,6 +13,10 @@ def main():
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
+
+    if os.path.isdir(os.path.join(directory, 'opacity')):
+        shutil.rmtree(os.path.join(directory, 'opacity'))
+    os.mkdir(os.path.join(directory, 'opacity'))
 
     for i in tqdm(range(1, 21)):
         o = i * .01

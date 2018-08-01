@@ -8,7 +8,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from pdfwatermarker import set_destination, resource_path, write_pdf
+from pdfwatermarker import set_destination, resource_path, overlay_pdfs, write_pdf
+from pdfwatermarker.watermark.add import WatermarkAdd
 
 
 def bundle_dir():
@@ -46,7 +47,7 @@ def img_opacity(im, opacity):
     Returns an image with reduced opacity.
     Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
     """
-    assert opacity >= 0 and opacity <= 1
+    assert 0 <= opacity <= 1
     if im.mode != 'RGBA':
         im = im.convert('RGBA')
     else:
@@ -57,25 +58,55 @@ def img_opacity(im, opacity):
     return im
 
 
-class WatermarkDraw:
-    def __init__(self, project, text, pdf, template=default_template, font='Vera', opacity=0.1):
-        self.text = text
-        self.template = template
+class Draw:
+    def __init__(self, dst, font, opacity, font_size=16, font_color='black'):
+        self.dst = dst
         self.font = font
         self.opacity = opacity
+        self.font_size = font_size
+        self.font_color = font_color
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
         self.can = Canvas(self.packet, pagesize=letter)  # Initialize canvas
-        self.dst = resource_path(set_destination(pdf, project, 'watermark'))
-        self.img_dst = resource_path(set_destination(pdf, project, 'watermark_img', '.png'))
-        self.draw()
-
-        self.packet.seek(0)  # move to the beginning of the StringIO buffer
-        write_pdf(self.packet, self.template, self.dst)  # Save new pdf file
 
     def __str__(self):
         return str(self.dst)
+
+    def write(self):
+        self.packet.seek(0)  # move to the beginning of the StringIO buffer
+        write_pdf(self.packet, self.dst)  # Save new pdf file
+
+
+class TextDraw(Draw):
+    def __init__(self, file_name, text, font='Vera', opacity=1, font_size=16, font_color='black',
+                 output_overwrite=False):
+        dst = resource_path(set_destination(file_name, 'text'))
+        super(TextDraw, self).__init__(dst, font, opacity, font_size, font_color)
+
+        self.text = text
+        self.draw()
+        self.write()
+        w = WatermarkAdd(file_name, self.dst, overwrite=output_overwrite, suffix='text')
+
+    def draw(self):
+        """Draw text to canvas"""
+        # Address
+        self.can.setFont(self.font, self.font_size)  # Large font for address
+        self.can.setFillColor(self.font_color, self.opacity)
+        self.can.drawString(x=10, y=20, text=self.text)
+        self.can.save()  # Save canvas
+
+
+class WatermarkDraw(Draw):
+    def __init__(self, project, text, pdf, font='Vera', opacity=0.1):
+        dst = resource_path(set_destination(pdf, project, 'watermark'))
+        super(WatermarkDraw, self).__init__(dst, font, opacity)
+
+        self.text = text
+        self.img_dst = resource_path(set_destination(pdf, project, 'watermark_img', '.png'))
+        self.draw()
+        self.write()
 
     def draw(self):
         # Draw watermark elements
@@ -114,7 +145,7 @@ class WatermarkDraw:
         """Draw address text to canvas (Layer 4)"""
         # Address
         self.can.setFont(self.font, self.text['address']['font'])  # Large font for address
-        self.can.setFillColor('black', self.opacity)
+        self.can.setFillColor(self.font_color, self.opacity)
         self.can.rotate(30)
         address = self.text['address']['txt']['address']
         self.can.drawString(x=center_str(address, self.font, self.text['address']['font']),

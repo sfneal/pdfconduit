@@ -7,7 +7,8 @@ from pdfwatermarker.utils.info import get_pdf_size
 
 
 class WatermarkAdd:
-    def __init__(self, document, watermark, underneath=False, decrypt=False):
+    def __init__(self, document, watermark, overwrite=False, output=None, suffix='watermarked', underneath=False,
+                 decrypt=False):
         """
         Add a watermark to an existing PDF document
 
@@ -35,10 +36,18 @@ class WatermarkAdd:
         self.document = self._get_document_info(document)
         self.watermark_file = self._get_watermark_info(self.document, watermark)
         pdf_fname, wtrmrk_fname = self._set_filenames
-        self.output = self.add(pdf_fname, wtrmrk_fname, underneath)
+
+        if overwrite:
+            self.output_filename = document
+        elif output:
+            self.output_filename = output
+        else:
+            self.output_filename = add_suffix(document, suffix)
+
+        self.add(pdf_fname, wtrmrk_fname, underneath)
 
     def __str__(self):
-        return str(self.output)
+        return str(self.output_filename)
 
     @staticmethod
     def _document_reader(document, decrypt=False):
@@ -124,7 +133,7 @@ class WatermarkAdd:
     def add(self, document, watermark, underneath=False, method='pdfrw'):
         """Add watermark to PDF by merging original PDF and watermark file."""
         # 5a. Create output PDF file name
-        output_filename = add_suffix(self.document['path'], 'watermarked')
+        output_filename = self.output_filename
 
         def pypdf2():
             # 5b. Get our files ready
