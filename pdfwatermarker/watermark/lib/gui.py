@@ -73,7 +73,7 @@ class GUI:
         if len(values[6]) > 0:
             user_pw = values[6]
         else:
-            user_pw = None
+            user_pw = ''
 
         if len(values[7]) > 0:
             owner_pw = values[7]
