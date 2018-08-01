@@ -3,7 +3,7 @@ from pdfrw import PdfReader, PdfWriter, PageMerge
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
 from pdfwatermarker import upscale, rotate, add_suffix
-from pdfwatermarker.utils import get_pdf_size
+from pdfwatermarker.utils.info import get_pdf_size
 
 
 class WatermarkAdd:
