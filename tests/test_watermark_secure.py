@@ -1,30 +1,24 @@
+from pdfwatermarker import Watermark, info
 import os
-from pdfwatermarker import Watermark, EncryptParams, add_suffix, info
-from looptools import ActiveTimer
 
 
 def main():
-    print('Testing Watermark class and secure function reliability')
+    print('Testing Watermark class reliability')
+    directory = '/Users/Stephen/Desktop/'
 
-    directory = '/Users/Stephen/Desktop'
-    filename = '20150094_Market Model.pdf'
-
-    pdf = os.path.join(directory, filename)
-    project = '20160054'
+    pdf = os.path.join(directory, '20110055_FP.1.pdf')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
 
-    user_pw = 'baz'
-    owner_pw = 'foo'
+    w = Watermark(pdf, remove_temps=True)
+    w.draw(address, town, state, opacity=0.08)
+    w.add()
+    w.secure('', 'foo')
+    wm = w.save()
 
-    enc = EncryptParams(user_pw, owner_pw, output=add_suffix(pdf, 'secured'))
-    with ActiveTimer(Watermark):
-        secured = Watermark(pdf, project, address, town, state, encrypt=enc, encrypt_128=True)
-
-    print(info.metadata(str(secured), user_pw))
-    print(info.security(str(secured), user_pw))
-    print('Success!')
+    if os.path.exists(wm):
+        print('Success!')
 
 
 if __name__ == '__main__':

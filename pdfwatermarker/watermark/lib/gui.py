@@ -86,4 +86,4 @@ class GUI:
         else:
             owner_pw = None
 
-        return pdf, address, town, state, encrypt, opacity, user_pw, owner_pw
+        return pdf, address, town, state, opacity, encrypt, user_pw, owner_pw

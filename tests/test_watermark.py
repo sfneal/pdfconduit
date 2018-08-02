@@ -7,12 +7,14 @@ def main():
     directory = '/Users/Stephen/Desktop/'
 
     pdf = os.path.join(directory, '20110055_FP.1.pdf')
-    project = '20160054'
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
     
-    wm = str(Watermark(pdf, address, town, state, opacity=0.08, remove_temps=True))
+    w = Watermark(pdf, remove_temps=True)
+    w.draw(address, town, state, opacity=0.08)
+    w.add()
+    wm = w.save()
 
     if os.path.exists(wm):
         print('Success!')

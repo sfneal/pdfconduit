@@ -3,7 +3,7 @@ import os
 import shutil
 from datetime import datetime
 from looptools import Timer
-from tempfile import TemporaryDirectory, mkdtemp
+from tempfile import mkdtemp
 from pdfwatermarker.watermark.lib import GUI
 from pdfwatermarker.watermark.draw import WatermarkDraw, resource_path, bundle_dir
 from pdfwatermarker.watermark.add import WatermarkAdd
@@ -11,88 +11,127 @@ from pdfwatermarker import add_suffix, open_window, protect
 from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
 
 default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
-TEMPDIR = mkdtemp()
-print(TEMPDIR)
 
 
-def remove_temp(pdf):
-    temp = os.path.join(os.path.dirname(pdf), 'temp')
-    shutil.rmtree(temp)
+class Receipt:
+    def __init__(self):
+        self.dst = None
+        self.items = []
+        self.add('PDF Watermarker', datetime.now().strftime("%Y-%m-%d %H:%M"))
+
+    def set_dst(self, doc, file_name='watermark receipt.txt'):
+        self.dst = os.path.join(os.path.dirname(doc), file_name)
+        self.add('Directory', os.path.dirname(doc))
+        self.add('PDF', os.path.basename(doc))
+        return self
+
+    def add(self, key, value):
+        message = str("{0:20}--> {1}".format(key, value))
+        print(message)
+        self.items.append(message)
+
+    def dump(self):
+        exists = os.path.isfile(self.dst)
+        with open(self.dst, 'a') as f:
+            if exists:
+                f.write('*******************************************************************\n')
+
+            for item in self.items:
+                f.write(item + '\n')
 
 
 class Watermark:
-    def __init__(self, pdf, address, town, state, opacity=0.1, remove_temps=True, open_file=True):
+    def __init__(self, document, watermark=None, remove_temps=True, open_file=True, tempdir=mkdtemp(), receipt=None):
+        self.time = Timer()
+        self.document_og = document
+        self.document = self.document_og
+        self.watermark = watermark
+        self.remove_temps = remove_temps
+        self.open_file = open_file
+        self.tempdir = tempdir
+
+        if isinstance(receipt, Receipt):
+            self.receipt = receipt
+        else:
+            self.receipt = Receipt().set_dst(document)
+
+    def __str__(self):
+        return str(self.document)
+
+    def save(self):
+        runtime = self.time.end
+        self.receipt.add('~run time~', runtime)
+        self.receipt.dump()
+        if self.remove_temps:
+            shutil.rmtree(self.tempdir)
+        return self.document
+
+    def draw(self, address, town, state, image=default_image, opacity=0.1, add=False):
+        # Add to receipt
+        self.receipt.add('Address', address)
+        self.receipt.add('Town', town)
+        self.receipt.add('State', state)
+        self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
+
+        # Initialize CanvasObjects collector class and add objects
         objects = CanvasObjects()
-        objects.add(CanvasImg(default_image, opacity=opacity, x=200, y=-200))
+        objects.add(CanvasImg(image, opacity=opacity, x=200, y=-200))
         objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
         objects.add(CanvasStr(address, opacity=opacity, y=-140))
         objects.add(CanvasStr(str(town + ', ' + state), opacity=opacity, y=-90))
 
-        watermark = WatermarkDraw(objects, rotate=30, tempdir=TEMPDIR).write()
-        self.pdf = WatermarkAdd(pdf, watermark, tempdir=TEMPDIR)
+        # Draw watermark to file
+        self.watermark = WatermarkDraw(objects, rotate=30, tempdir=self.tempdir).write()
 
-        # Open watermarked PDF in finder or explorer window
-        if open_file:
-            open_window(self.pdf)
+        if not add:
+            return self.watermark
+        else:
+            self.add()
+            return self.save()
 
-        if remove_temps:
-            shutil.rmtree(TEMPDIR)
+    def add(self, watermark=None):
+        if not watermark:
+            watermark = self.watermark
+        self.document = str(WatermarkAdd(self.document, watermark, tempdir=self.tempdir))
+        self.receipt.add('Watermarked PDF', os.path.basename(self.document))
+        if self.open_file:
+            open_window(self.document)
+        return self.document
 
-    def __str__(self):
-        return str(self.pdf)
+    def secure(self, user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True):
+        self.receipt.add('User pw', user_pw)
+        self.receipt.add('Owner pw', owner_pw)
+        if encrypt_128:
+            self.receipt.add('Encryption key size', '128')
+        else:
+            self.receipt.add('Encryption key size', '40')
+        if restrict_permission:
+            self.receipt.add('Permissions', 'Allow printing')
+        else:
+            self.receipt.add('Permissions', 'Allow ALL')
+        p = protect(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
+                    encrypt_128=encrypt_128, restrict_permission=restrict_permission)
+        self.receipt.add('Secured PDF', os.path.basename(p))
+        return p
 
 
 class WatermarkGUI:
     def __init__(self):
-        # Import GUI and timeout libraries
-        self.receipt = []
-        self.receipt_add('PDF Watermarker', datetime.now().strftime("%Y-%m-%d %H:%M"))
-
-        pdf, address, town, state, encrypt, opacity, user_pw, owner_pw = GUI().settings
-        project = os.path.basename(pdf)[:8]
-        time = Timer()
-
-        # Print GUI selections to console
-        self.receipt_add('Directory', os.path.dirname(pdf))
-        self.receipt_add('PDF', os.path.basename(pdf))
-        self.receipt_add('Project', project)
-        self.receipt_add('Address', address)
-        self.receipt_add('Town', town)
-        self.receipt_add('State', state)
-        self.receipt_add('WM Opacity', str(int(opacity * 100)) + '%')
-        self.receipt_add('User pw', user_pw)
-        self.receipt_add('Owner pw', owner_pw)
+        self.receipt = Receipt()
+        pdf, address, town, state, opacity, encrypt, user_pw, owner_pw = GUI().settings
+        self.receipt.set_dst(pdf)
 
         # Execute Watermark class
-        wm = Watermark(pdf, address, town, state, opacity)
-        self.receipt_add('Watermarked PDF', os.path.basename(str(wm)))
+        wm = Watermark(pdf)
+        wm.draw(address, town, state, opacity=opacity)
+        wm.add()
 
         if encrypt:
-            output = add_suffix(pdf, 'secured')
-            self.pdf = protect(str(wm), user_pw, owner_pw, output=output)
-            self.receipt_add('Secured PDF', os.path.basename(self.pdf))
-
-        runtime = time.end
-        self.receipt_add('~run time~', runtime)
+            wm.secure(user_pw, owner_pw)
+        wm.save()
 
         try:
-            self.receipt_dump()
             print('\nSuccess!')
             input('~~Press Any Key To Exit~~')
         except RuntimeError:
             quit()
-
-    def receipt_add(self, key, value):
-        message = str("{0:20}--> {1}".format(key, value))
-        print(message)
-        self.receipt.append(message)
-
-    def receipt_dump(self):
-        file_name = os.path.join(os.path.dirname(self.pdf), 'watermark receipt.txt')
-        exists = os.path.isfile(file_name)
-        with open(file_name, 'a') as f:
-            if exists:
-                f.write('*******************************************************************\n')
-
-            for item in self.receipt:
-                f.write(item + '\n')
