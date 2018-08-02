@@ -10,8 +10,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from pdfwatermarker import set_destination, resource_path, overlay_pdfs, write_pdf
-from pdfwatermarker.watermark.add import WatermarkAdd
+from pdfwatermarker import resource_path, write_pdf
 
 
 def remove_temp(pdf):
@@ -55,7 +54,7 @@ def img_opacity(image, opacity, tempdir=None):
     Returns an image with reduced opacity.
     Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
     """
-    dst = NamedTemporaryFile(suffix='.png', dir=tempdir)
+    dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
     assert 0 <= opacity <= 1
     im = Image.open(image)
     if im.mode != 'RGBA':
@@ -108,7 +107,7 @@ class CanvasObjects:
 
 class Draw:
     def __init__(self, tempdir=None):
-        tmppdf = NamedTemporaryFile(suffix='.pdf', dir=tempdir)
+        tmppdf = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
         self.dst = resource_path(tmppdf.name)
         if tempdir:
             self.dir = tempdir
