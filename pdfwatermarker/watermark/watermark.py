@@ -1,7 +1,6 @@
 # Apply a watermark to a PDF file
 import os
 import shutil
-import warnings
 from datetime import datetime
 from looptools import Timer
 from tempfile import TemporaryDirectory, mkdtemp
@@ -22,8 +21,7 @@ def remove_temp(pdf):
 
 
 class Watermark:
-    def __init__(self, pdf, project, address, town, state, opacity=0.1, encrypt=None, encrypt_128=True,
-                 remove_temps=True, open_file=True):
+    def __init__(self, pdf, address, town, state, opacity=0.1, remove_temps=True, open_file=True):
         objects = CanvasObjects()
         objects.add(CanvasImg(default_image, opacity=opacity, x=200, y=-200))
         objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
@@ -32,22 +30,13 @@ class Watermark:
 
         watermark = WatermarkDraw(objects, rotate=30, tempdir=TEMPDIR).write()
         self.pdf = WatermarkAdd(pdf, watermark, tempdir=TEMPDIR)
-        os.remove(watermark)
-
-        if encrypt:
-            secure_pdf = protect(str(self.pdf), encrypt.user_pw, owner_pw=encrypt.owner_pw, output=encrypt.output,
-                                 encrypt_128=encrypt_128)
-            self.pdf = secure_pdf
-
-        if remove_temps:
-            remove_temp(pdf)
 
         # Open watermarked PDF in finder or explorer window
         if open_file:
             open_window(self.pdf)
-        open_window(TEMPDIR)
 
-        shutil.rmtree(TEMPDIR)
+        if remove_temps:
+            shutil.rmtree(TEMPDIR)
 
     def __str__(self):
         return str(self.pdf)
@@ -75,7 +64,7 @@ class WatermarkGUI:
         self.receipt_add('Owner pw', owner_pw)
 
         # Execute Watermark class
-        wm = Watermark(pdf, project, address, town, state, opacity)
+        wm = Watermark(pdf, address, town, state, opacity)
         self.receipt_add('Watermarked PDF', os.path.basename(str(wm)))
 
         if encrypt:

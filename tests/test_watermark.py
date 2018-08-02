@@ -12,7 +12,7 @@ def main():
     town = 'Franklin'
     state = 'MA'
     
-    wm = str(Watermark(pdf, project, address, town, state, opacity=0.08, remove_temps=False))
+    wm = str(Watermark(pdf, address, town, state, opacity=0.08, remove_temps=True))
 
     if os.path.exists(wm):
         print('Success!')
