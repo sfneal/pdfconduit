@@ -154,8 +154,7 @@ class WatermarkAdd:
             for page_number in range(page_count):
                 # Merge the watermark with the page
                 input_page = document_reader.getPage(page_number)
-                input_page.mergeRotatedTranslatedPage(wtrmrk_page, 0, 0, wtrmrk_width,
-                                                            wtrmrk_height)
+                input_page.mergeRotatedTranslatedPage(wtrmrk_page, 0, 0, wtrmrk_width, wtrmrk_height)
 
                 # Add page from input file to output document
                 output_file.addPage(input_page)
