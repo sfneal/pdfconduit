@@ -18,7 +18,7 @@ def _reader(path, password):
     return pdf
 
 
-def number_of_pages(path, password=None):
+def pages_count(path, password=None):
     """Retrieve PDF number of pages"""
     return _reader(path, password).getNumPages()
 
@@ -31,7 +31,8 @@ def metadata(path, password=None):
 def resources(path, password=None):
     """Retrieve contents of each page of PDF"""
     pdf = _reader(path, password)
-    return [pdf.getPage(i) for i in range(pdf.getNumPages)]
+    pages = pages_count(path, password)
+    return [pdf.getPage(i) for i in range(pages)]
 
 
 def security(path, password=None):
@@ -40,7 +41,7 @@ def security(path, password=None):
     return [(k, v) for i in pdf.resolvedObjects.items() for k, v in i[1].items()]
 
 
-def get_pdf_size(file_name, password=None):
+def dimensions(file_name, password=None):
     """Get width and height of a PDF"""
     try:
         size = _reader(file_name, password).getPage(0).mediaBox
