@@ -8,7 +8,7 @@ from pdfwatermarker.utils.info import dimensions
 
 class WatermarkAdd:
     def __init__(self, document, watermark, overwrite=False, output=None, suffix='watermarked', underneath=False,
-                 decrypt=False):
+                 decrypt=False, tempdir=None):
         """
         Add a watermark to an existing PDF document
 
@@ -32,6 +32,7 @@ class WatermarkAdd:
         """
         self.rotate = 0
         self.scale = 0
+        self.tempdir = tempdir
         self.document_reader = self._document_reader(document, decrypt)
         self.document = self._get_document_info(document)
         self.watermark_file = self._get_watermark_info(self.document, watermark)
@@ -67,16 +68,16 @@ class WatermarkAdd:
 
         # 2b. Get PDF file orientation
         if pdf_file['h'] > pdf_file['w']:
-            pdf_file['orientation'] = 'vertical'
+            pdf_file['orientation'] = 'portrait'
             letter_size = {'w': int(letter[0]), 'h': int(letter[1])}
         else:
-            pdf_file['orientation'] = 'horizontal'
+            pdf_file['orientation'] = 'landscape'
             letter_size = {'h': int(letter[0]), 'w': int(letter[1])}
 
         # 2c. Upscale PDF if it is smaller than a letter
         if pdf_file['w'] <= letter_size['w'] or pdf_file['h'] <= letter_size['h']:
             scale = float(letter_size['w'] / pdf_file['w'])
-            pdf_file['upscaled'] = upscale(pdf_file['path'], scale=scale)
+            pdf_file['upscaled'] = upscale(pdf_file['path'], scale=scale, tempdir=self.tempdir)
             self.document_reader = self._document_reader(pdf_file['upscaled'])
         return pdf_file
 
@@ -88,7 +89,7 @@ class WatermarkAdd:
         # 3b. Check if watermark file needs to be rotated
         if watermark_file['w'] > watermark_file['h'] and document['orientation'] is 'vertical':
             self.rotate = 90
-            watermark_file['rotated'] = rotate(watermark, 90)
+            watermark_file['rotated'] = rotate(watermark, 90, tempdir=self.tempdir)
 
         # Set watermark file to be used for upscaling
         try:
