@@ -5,9 +5,12 @@ import warnings
 from datetime import datetime
 from looptools import Timer
 from pdfwatermarker.watermark.lib import GUI
-from pdfwatermarker.watermark.draw import WatermarkDraw
+from pdfwatermarker.watermark.draw import WatermarkDraw, resource_path, bundle_dir
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker import add_suffix, open_window, protect
+from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
+
+default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
 
 
 def remove_temp(pdf):
@@ -18,23 +21,13 @@ def remove_temp(pdf):
 class Watermark:
     def __init__(self, pdf, project, address, town, state, opacity=0.1, encrypt=None, encrypt_128=True,
                  remove_temps=True, open_file=True):
-        text = {
-            'address': {
-                'font': 40,
-                'y': -140,
-                'txt': {'address': address,
-                        'town': town,
-                        'state': state}
-            },
-            'copyright': {
-                'font': 16,
-                'y': 10,
-                'txt': '© copyright ' + str(datetime.now().year),
-            }
-        }
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            watermark = str(WatermarkDraw(project, text, pdf, opacity=opacity))
+        objects = CanvasObjects()
+        objects.add(CanvasImg(default_image, opacity=opacity, x=200, y=-200))
+        objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
+        objects.add(CanvasStr(address, opacity=opacity, y=-140, rotate=30))
+        objects.add(CanvasStr(str(town + ', ' + state), opacity=opacity, y=-90, rotate=30))
+
+        watermark = str(WatermarkDraw(project, pdf, objects, rotate=30))
         self.pdf = WatermarkAdd(pdf, watermark)
 
         if encrypt:
@@ -47,7 +40,6 @@ class Watermark:
 
         # Open watermarked PDF in finder or explorer window
         if open_file:
-            print('Opening')
             open_window(self.pdf)
 
     def __str__(self):

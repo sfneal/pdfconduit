@@ -49,12 +49,13 @@ def center_str(txt, font, size, offset=120):
     return ((page_width - text_width) / 2.0) + offset
 
 
-def img_opacity(im, opacity):
+def img_opacity(image, opacity):
     """
     Returns an image with reduced opacity.
     Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
     """
     assert 0 <= opacity <= 1
+    im = Image.open(image)
     if im.mode != 'RGBA':
         im = im.convert('RGBA')
     else:
@@ -65,13 +66,52 @@ def img_opacity(im, opacity):
     return im
 
 
-class Draw:
-    def __init__(self, dst, font, opacity, font_size=16, font_color='black'):
-        self.dst = dst
+class CanvasStr:
+    def __init__(self, string, font='Vera', color='black', size=40, opacity=0.1, rotate=0, x=None, y=None,
+                 x_centered=True):
+        self.string = string
         self.font = font
+        self.color = color
+        self.size = size
         self.opacity = opacity
-        self.font_size = font_size
-        self.font_color = font_color
+        self.x = x
+        self.y = y
+        self.x_centered = x_centered
+
+
+class CanvasImg:
+    def __init__(self, image, opacity=0.1, x=0, y=0, w=letter[0], h=letter[1], mask='auto',
+                 preserve_aspect_ratio=True):
+        self.image = image
+        self.opacity = opacity
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.mask = mask
+        self.preserve_aspect_ratio = preserve_aspect_ratio
+
+
+class CanvasObjects:
+    def __init__(self):
+        self.objects = []
+
+    def __str__(self):
+        return str(self.objects)
+
+    def __iter__(self):
+        return iter(self.objects)
+
+    def add(self, canvas_object):
+        self.objects.append(canvas_object)
+
+    def get(self):
+        return self.objects
+
+
+class Draw:
+    def __init__(self, dst):
+        self.dst = dst
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
@@ -107,55 +147,42 @@ class TextDraw(Draw):
 
 
 class WatermarkDraw(Draw):
-    def __init__(self, project, text, pdf, font='Vera', opacity=0.1):
+    def __init__(self, project, pdf, canvas_objects, rotate=0):
         dst = resource_path(set_destination(pdf, project, 'watermark'))
-        super(WatermarkDraw, self).__init__(dst, font, opacity)
+        super(WatermarkDraw, self).__init__(dst)
 
-        self.text = text
+        self.canvas_objects = canvas_objects
+
+        self.rotate = rotate
         self.img_dst = resource_path(set_destination(pdf, project, 'watermark_img', '.png'))
         self.draw()
         self.write()
 
     def draw(self):
         # Draw watermark elements
-        self._draw_image()
-        self._draw_address()
-        self._draw_town_state()
-        self._draw_copyright()
+        self.can.rotate(self.rotate)
+        for obj in self.canvas_objects:
+            if isinstance(obj, CanvasStr):
+                self._draw_string(obj)
+            elif isinstance(obj, CanvasImg):
+                self._draw_image(obj)
         self.can.save()  # Save canvas
 
-    def _draw_image(self):
+    def _draw_image(self, canvas_image):
         """Draw HPA Logo to canvas (Layer 1)"""
-        img = Image.open(default_image)
-        img = img_opacity(img, self.opacity)
-        img.save(self.img_dst)
-        self.can.drawImage(self.img_dst, x=100, y=-100, width=letter[0], height=letter[1], mask='auto',
-                           preserveAspectRatio=True)
+        if canvas_image:
+            img = img_opacity(canvas_image.image, canvas_image.opacity)
+            img.save(self.img_dst)
+            self.can.drawImage(self.img_dst, x=canvas_image.x, y=canvas_image.y, width=canvas_image.w,
+                               height=canvas_image.h, mask=canvas_image.mask,
+                               preserveAspectRatio=canvas_image.preserve_aspect_ratio)
 
-    def _draw_copyright(self):
-        """Draw copyright text (Layer 2)"""
-        # Copyright
-        self.can.setFont(self.font, self.text['copyright']['font'])  # Smaller font for copyright
-        cright = self.text['copyright']['txt']
-        self.can.drawString(x=center_str(cright, self.font, self.text['copyright']['font']),
-                            y=self.text['copyright']['y'],
-                            text=cright)
-
-    def _draw_town_state(self):
-        """Draw town and state text (Layer 3)"""
-        # Town and State
-        town_state = self.text['address']['txt']['town'] + ', ' + self.text['address']['txt']['state']
-        self.can.drawString(x=center_str(town_state, self.font, self.text['address']['font']),
-                            y=self.text['address']['y'],
-                            text=town_state)
-
-    def _draw_address(self):
-        """Draw address text to canvas (Layer 4)"""
-        # Address
-        self.can.setFont(self.font, self.text['address']['font'])  # Large font for address
-        self.can.setFillColor(self.font_color, self.opacity)
-        self.can.rotate(30)
-        address = self.text['address']['txt']['address']
-        self.can.drawString(x=center_str(address, self.font, self.text['address']['font']),
-                            y=self.text['address']['y'] + 50,
-                            text=address)
+    def _draw_string(self, canvas_string):
+        if canvas_string:
+            self.can.setFont(canvas_string.font, canvas_string.size)
+            self.can.setFillColor(canvas_string.color, canvas_string.opacity)
+            if canvas_string.x_centered:
+                x = center_str(canvas_string.string, canvas_string.font, canvas_string.size)
+            else:
+                x = canvas_string.x
+            self.can.drawString(x=x, y=canvas_string.y, text=canvas_string.string)
