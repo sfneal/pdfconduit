@@ -6,7 +6,7 @@ from pdfrw import PdfReader, PdfWriter
 
 def rotate(file_name, rotate, method='pypdf2', tempdir=None):
     """Rotate PDF by increments of 90 degrees."""
-    outfn = NamedTemporaryFile(suffix='.pdf', dir=tempdir)
+    outfn = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
 
     def pypdf2():
         pdf_in = open(file_name, 'rb')
