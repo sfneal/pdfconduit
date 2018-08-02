@@ -15,8 +15,6 @@ class EncryptParams:
     def __str__(self):
         return str(self.__dict__)
 
-from looptools import ActiveTimer
-
 
 def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
     """
