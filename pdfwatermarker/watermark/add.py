@@ -3,12 +3,12 @@ from pdfrw import PdfReader, PdfWriter, PageMerge
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
 from pdfwatermarker import upscale, rotate, add_suffix
-from pdfwatermarker.utils.info import get_pdf_size
+from pdfwatermarker.utils.info import dimensions
 
 
 class WatermarkAdd:
     def __init__(self, document, watermark, overwrite=False, output=None, suffix='watermarked', underneath=False,
-                 decrypt=False):
+                 decrypt=False, tempdir=None):
         """
         Add a watermark to an existing PDF document
 
@@ -32,6 +32,7 @@ class WatermarkAdd:
         """
         self.rotate = 0
         self.scale = 0
+        self.tempdir = tempdir
         self.document_reader = self._document_reader(document, decrypt)
         self.document = self._get_document_info(document)
         self.watermark_file = self._get_watermark_info(self.document, watermark)
@@ -63,37 +64,37 @@ class WatermarkAdd:
         pdf_file = {'path': filename}
 
         # 2a. Get PDF width and height
-        pdf_file.update(get_pdf_size(self.document_reader))
+        pdf_file.update(dimensions(self.document_reader))
 
         # 2b. Get PDF file orientation
         if pdf_file['h'] > pdf_file['w']:
-            pdf_file['orientation'] = 'vertical'
+            pdf_file['orientation'] = 'portrait'
             letter_size = {'w': int(letter[0]), 'h': int(letter[1])}
         else:
-            pdf_file['orientation'] = 'horizontal'
+            pdf_file['orientation'] = 'landscape'
             letter_size = {'h': int(letter[0]), 'w': int(letter[1])}
 
         # 2c. Upscale PDF if it is smaller than a letter
         if pdf_file['w'] <= letter_size['w'] or pdf_file['h'] <= letter_size['h']:
             scale = float(letter_size['w'] / pdf_file['w'])
-            pdf_file['upscaled'] = upscale(pdf_file['path'], scale=scale)
+            pdf_file['upscaled'] = upscale(pdf_file['path'], scale=scale, tempdir=self.tempdir)
             self.document_reader = self._document_reader(pdf_file['upscaled'])
         return pdf_file
 
     def _get_watermark_info(self, document, watermark, margin_x=0, margin_y=0):
         # 3a. Get watermark path and dimensions
         watermark_file = {'path': watermark}
-        watermark_file.update(get_pdf_size(watermark))
+        watermark_file.update(dimensions(watermark))
 
         # 3b. Check if watermark file needs to be rotated
         if watermark_file['w'] > watermark_file['h'] and document['orientation'] is 'vertical':
             self.rotate = 90
-            watermark_file['rotated'] = rotate(watermark, 90)
+            watermark_file['rotated'] = rotate(watermark, 90, tempdir=self.tempdir)
 
         # Set watermark file to be used for upscaling
         try:
             wtrmrk = watermark_file['rotated']
-            watermark_file.update(get_pdf_size(watermark_file['rotated']))
+            watermark_file.update(dimensions(watermark_file['rotated']))
         except KeyError:
             wtrmrk = watermark_file['path']
 
@@ -153,8 +154,7 @@ class WatermarkAdd:
             for page_number in range(page_count):
                 # Merge the watermark with the page
                 input_page = document_reader.getPage(page_number)
-                input_page.mergeRotatedTranslatedPage(wtrmrk_page, 0, 0, wtrmrk_width,
-                                                            wtrmrk_height)
+                input_page.mergeRotatedTranslatedPage(wtrmrk_page, 0, 0, wtrmrk_width, wtrmrk_height)
 
                 # Add page from input file to output document
                 output_file.addPage(input_page)

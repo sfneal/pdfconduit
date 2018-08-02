@@ -1,14 +1,15 @@
 # Upscale a PDF file
+from tempfile import NamedTemporaryFile
 from pdfrw import PdfReader, PdfWriter, PageMerge, IndirectPdfDict
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 from pdfwatermarker.thirdparty.PyPDF2.pdf import PageObject
 from pdfwatermarker import set_destination, info
 
 
-def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypdf2'):
+def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypdf2', tempdir=None):
     """Upscale a PDF to a large size."""
     # Output file name
-    output = set_destination(file_name, 'upscaled')
+    output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
 
     def pdfrw():
         def adjust(page):
@@ -29,7 +30,7 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
     def pypdf2():
         reader = PdfFileReader(file_name)
         writer = PdfFileWriter()
-        dims = info.get_pdf_size(file_name)
+        dims = info.dimensions(file_name)
         target_w = dims['w'] * scale
         target_h = dims['h'] * scale
 
@@ -43,12 +44,11 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
             page.mergeScaledTranslatedPage(wtrmrk, scale, margin_x, margin_y)
             writer.addPage(page)
 
-        with open(output, "wb") as outputStream:
+        with open(output.name, "wb") as outputStream:
             writer.write(outputStream)
-        return output
 
     if method is 'pypdf2':
         pypdf2()
     else:
         pdfrw()
-    return output
+    return output.name

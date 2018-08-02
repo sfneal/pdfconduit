@@ -1,6 +1,6 @@
 # Test opacity outputs
 from pdfwatermarker import Watermark, merge
-from pdfwatermarker.watermark.draw import TextDraw
+from pdfwatermarker.watermark.draw import TextDraw, WatermarkDraw
 import os
 import shutil
 from tqdm import tqdm
@@ -27,6 +27,7 @@ def main():
         new_name = os.path.join(directory, 'opacity', str(str(i).zfill(2) + '%') + '.pdf')
         os.rename(wm, new_name)
         TextDraw(new_name, str(str(i) + '%'), output_overwrite=True, font_size=24)
+    wm = str(Watermark(pdf, project, address, town, state, opacity=1, remove_temps=False, open_file=True))
 
     opac_dir = os.path.join(directory, 'opacity')
     pdf_samples = sorted([os.path.join(opac_dir, i) for i in os.listdir(opac_dir)

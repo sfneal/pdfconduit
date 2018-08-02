@@ -1,12 +1,12 @@
 # Rotate a pdf file
+from tempfile import NamedTemporaryFile
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 from pdfrw import PdfReader, PdfWriter
-from pdfwatermarker import set_destination
 
 
-def rotate(file_name, rotate, method='pypdf2'):
+def rotate(file_name, rotate, method='pypdf2', tempdir=None):
     """Rotate PDF by increments of 90 degrees."""
-    outfn = set_destination(file_name, 'rotate')
+    outfn = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
 
     def pypdf2():
         pdf_in = open(file_name, 'rb')
