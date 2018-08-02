@@ -2,7 +2,6 @@
 import io
 import os
 import sys
-import shutil
 from tempfile import NamedTemporaryFile, mkdtemp
 from PIL import Image, ImageEnhance
 from reportlab.pdfgen.canvas import Canvas
@@ -11,11 +10,6 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from pdfwatermarker import resource_path, write_pdf
-
-
-def remove_temp(pdf):
-    temp = os.path.join(os.path.dirname(pdf), 'temp')
-    shutil.rmtree(temp)
 
 
 def bundle_dir():
@@ -38,8 +32,6 @@ def register_font():
 
 bundle_dir = bundle_dir()
 register_font()
-default_template = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.pdf')
-default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
 LETTER = letter[1], letter[0]
 
 
@@ -69,6 +61,7 @@ def img_opacity(image, opacity, tempdir=None):
 
 
 class CanvasStr:
+    """Canvas string data object used for storing canvas.drawString parameters."""
     def __init__(self, string, font='Vera', color='black', size=40, opacity=0.1, x=None, y=None,
                  x_centered=True):
         self.string = string
@@ -82,6 +75,7 @@ class CanvasStr:
 
 
 class CanvasImg:
+    """Canvas image data object used for storing canvas.drawImage parameters."""
     def __init__(self, image, opacity=0.1, x=0, y=0, w=letter[0], h=letter[1], mask='auto',
                  preserve_aspect_ratio=True):
         self.image = image
@@ -95,6 +89,7 @@ class CanvasImg:
 
 
 class CanvasObjects:
+    """Canvas object collector to store list of canvas objects."""
     def __init__(self):
         self.objects = []
 

@@ -41,11 +41,11 @@ class Receipt:
 
 
 class Watermark:
-    def __init__(self, document, watermark=None, remove_temps=True, open_file=True, tempdir=mkdtemp(), receipt=None):
+    def __init__(self, document, remove_temps=True, open_file=True, tempdir=mkdtemp(), receipt=None):
         self.time = Timer()
         self.document_og = document
         self.document = self.document_og
-        self.watermark = watermark
+        self.watermark = None
         self.remove_temps = remove_temps
         self.open_file = open_file
         self.tempdir = tempdir
@@ -66,19 +66,19 @@ class Watermark:
             shutil.rmtree(self.tempdir)
         return self.document
 
-    def draw(self, address, town, state, image=default_image, opacity=0.1, add=False):
+    def draw(self, text1, text2, copyright=True, image=default_image, opacity=0.1, add=False):
         # Add to receipt
-        self.receipt.add('Address', address)
-        self.receipt.add('Town', town)
-        self.receipt.add('State', state)
+        self.receipt.add('Text1', text1)
+        self.receipt.add('Text2', text2)
         self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
 
         # Initialize CanvasObjects collector class and add objects
         objects = CanvasObjects()
         objects.add(CanvasImg(image, opacity=opacity, x=200, y=-200))
-        objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
-        objects.add(CanvasStr(address, opacity=opacity, y=-140))
-        objects.add(CanvasStr(str(town + ', ' + state), opacity=opacity, y=-90))
+        if copyright:
+            objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
+        objects.add(CanvasStr(text1, opacity=opacity, y=-140))
+        objects.add(CanvasStr(text2, opacity=opacity, y=-90))
 
         # Draw watermark to file
         self.watermark = WatermarkDraw(objects, rotate=30, tempdir=self.tempdir).write()
@@ -122,8 +122,8 @@ class WatermarkGUI:
         self.receipt.set_dst(pdf)
 
         # Execute Watermark class
-        wm = Watermark(pdf)
-        wm.draw(address, town, state, opacity=opacity)
+        wm = Watermark(pdf, receipt=self.receipt)
+        wm.draw(address, str(town + ', ' + state), opacity=opacity)
         wm.add()
 
         if encrypt:
