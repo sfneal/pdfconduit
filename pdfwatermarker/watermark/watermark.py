@@ -4,6 +4,7 @@ import shutil
 import warnings
 from datetime import datetime
 from looptools import Timer
+from tempfile import TemporaryDirectory, mkdtemp
 from pdfwatermarker.watermark.lib import GUI
 from pdfwatermarker.watermark.draw import WatermarkDraw, resource_path, bundle_dir
 from pdfwatermarker.watermark.add import WatermarkAdd
@@ -11,6 +12,8 @@ from pdfwatermarker import add_suffix, open_window, protect
 from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
 
 default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
+TEMPDIR = mkdtemp()
+print(TEMPDIR)
 
 
 def remove_temp(pdf):
@@ -24,11 +27,12 @@ class Watermark:
         objects = CanvasObjects()
         objects.add(CanvasImg(default_image, opacity=opacity, x=200, y=-200))
         objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
-        objects.add(CanvasStr(address, opacity=opacity, y=-140, rotate=30))
-        objects.add(CanvasStr(str(town + ', ' + state), opacity=opacity, y=-90, rotate=30))
+        objects.add(CanvasStr(address, opacity=opacity, y=-140))
+        objects.add(CanvasStr(str(town + ', ' + state), opacity=opacity, y=-90))
 
-        watermark = str(WatermarkDraw(project, pdf, objects, rotate=30))
-        self.pdf = WatermarkAdd(pdf, watermark)
+        watermark = WatermarkDraw(objects, rotate=30, tempdir=TEMPDIR).write()
+        self.pdf = WatermarkAdd(pdf, watermark, tempdir=TEMPDIR)
+        os.remove(watermark)
 
         if encrypt:
             secure_pdf = protect(str(self.pdf), encrypt.user_pw, owner_pw=encrypt.owner_pw, output=encrypt.output,
@@ -41,6 +45,9 @@ class Watermark:
         # Open watermarked PDF in finder or explorer window
         if open_file:
             open_window(self.pdf)
+        open_window(TEMPDIR)
+
+        shutil.rmtree(TEMPDIR)
 
     def __str__(self):
         return str(self.pdf)
