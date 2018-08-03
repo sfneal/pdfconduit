@@ -2,7 +2,7 @@
 import os
 from pdfwatermarker import add_suffix
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
-from .override import PdfFileWriter2
+from pdfwatermarker.utils.override import PdfFileWriter2
 
 
 class EncryptParams:
