@@ -33,6 +33,13 @@ def register_font():
 bundle_dir = bundle_dir()
 register_font()
 LETTER = letter[1], letter[0]
+image_directory = str(bundle_dir + os.sep + 'lib' + os.sep + 'img')
+
+
+def available_images():
+    imgs = sorted([i for i in os.listdir(image_directory) if not i.startswith('.')],
+                  reverse=True)
+    return imgs
 
 
 def center_str(txt, font, size, offset=120):
@@ -142,7 +149,7 @@ class WatermarkDraw(Draw):
                 self._draw_image(obj)
 
         # Save canvas
-        self.can.showPage()
+        # self.can.showPage()
         self.can.save()
 
     def _draw_image(self, canvas_image):
