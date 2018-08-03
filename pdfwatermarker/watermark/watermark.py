@@ -72,7 +72,8 @@ class Watermark:
             open_window(self.tempdir)
         return self.document
 
-    def draw(self, text1, text2=None, copyright=True, image=default_image, opacity=0.08, compress=0, add=False):
+    def draw(self, text1, text2=None, copyright=True, image=default_image, rotate=30, opacity=0.08, compress=0,
+             add=False):
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
@@ -92,7 +93,7 @@ class Watermark:
             objects.add(CanvasStr(text1, opacity=opacity, y=-115))
 
         # Draw watermark to file
-        self.watermark = WatermarkDraw(objects, rotate=30, tempdir=self.tempdir, compress=compress).write()
+        self.watermark = WatermarkDraw(objects, rotate=rotate, compress=compress, tempdir=self.tempdir).write()
 
         if not add:
             return self.watermark
