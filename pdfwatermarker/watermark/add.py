@@ -1,8 +1,9 @@
 # Add a watermark PDF file to another PDF file
+from tempfile import NamedTemporaryFile
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
-from pdfwatermarker import upscale, rotate, add_suffix
+from pdfwatermarker import upscale, rotate, add_suffix, resource_path
 from pdfwatermarker.utils.info import dimensions
 
 
@@ -41,7 +42,11 @@ class WatermarkAdd:
         if overwrite:
             self.output_filename = document
         elif output:
-            self.output_filename = output
+            if output == 'temp':
+                tmpf = NamedTemporaryFile(suffix='.pdf', dir=self.tempdir, delete=False)
+                self.output_filename = resource_path(tmpf.name)
+            else:
+                self.output_filename = output
         else:
             self.output_filename = add_suffix(document, suffix)
 
