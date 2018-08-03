@@ -50,6 +50,7 @@ def placement(source):
 def main():
     src = get_file()
     dst = os.path.dirname(src)
+    src =
     wm, m = watermarks(dst)
     wm, m = opacity(src)
     wm, m = placement(src)
