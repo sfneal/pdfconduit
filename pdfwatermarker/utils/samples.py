@@ -19,6 +19,7 @@ def watermarks(destination, images=available_images()):
 
 
 def opacity(source):
+    _source = source
     samples = []
     _range = range(4, 25)[::3]
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=False)
@@ -35,11 +36,12 @@ def opacity(source):
 
         wtrmrk_with_label = wm.add(watermarked, label, output='temp')
         samples.append(wtrmrk_with_label)
-    m = merge(samples, 'Opacity comparison samples', os.path.dirname(source))
+    m = merge(samples, 'Opacity comparison samples', os.path.dirname(_source))
     return wm, m
 
 
 def placement(source):
+    _source = source
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=True)
     if info.pages_count(source) > 2:
         source = slicer(source, 1, 1, wm.tempdir)
@@ -47,7 +49,7 @@ def placement(source):
                      text2='Wrentham, MA')
     over = wm.add(document=source, watermark=wtrmrk, output='temp', underneath=False)
     under = wm.add(document=source, watermark=wtrmrk, output='temp', underneath=True)
-    m = merge([over, under], 'Watermark Placement samples', os.path.dirname(source))
+    m = merge([over, under], 'Watermark Placement samples', os.path.dirname(_source))
     return wm, m
 
 
