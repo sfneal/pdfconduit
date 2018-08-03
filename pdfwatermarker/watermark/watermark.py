@@ -11,7 +11,7 @@ from pdfwatermarker import add_suffix, open_window, protect, merge
 from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
 
 default_image_dir = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'img')
-default_image = resource_path('wide.png')
+default_image = resource_path('Wide.png')
 
 
 class Receipt:
