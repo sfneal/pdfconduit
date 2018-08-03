@@ -2,7 +2,7 @@ import PySimpleGUI as gui
 from pdfwatermarker import __version__
 
 
-def _line(char='_', width=100, size=(70, 1)):
+def _line(char='_', width=105, size=(75, 1)):
     return gui.Text(char * width, size=size)
 
 
@@ -21,6 +21,7 @@ class GUI:
     @property
     def settings(self):
         """Parameters for parsing directory trees"""
+        label_w = 20
         with gui.FlexForm(self.title, auto_size_text=True, default_element_size=(40, 1)) as form:
             layout = [
                 [gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
@@ -30,28 +31,44 @@ class GUI:
                 [_line()],
 
                 # Source
-                [gui.Text('Select a source PDF and input project address information', font=("Helvetica", 12))],
-                [gui.Text('Source pdf', size=(15, 1), auto_size_text=False), gui.InputText('Source'),
+                [gui.Text('Source', font=('Helvetica', 15), justification='left')],
+                [gui.Text('Source PDF file', size=(label_w, 1), auto_size_text=False), gui.InputText('Source'),
                  gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
 
                 [_line()],
 
                 # Files and non-empty-folders
-                [gui.Text('Project address', font=("Helvetica", 12))],
-                [gui.Text('Address', size=(15, 1), auto_size_text=False), gui.InputText()],
-                [gui.Text('Town', size=(15, 1), auto_size_text=False), gui.InputText()],
-                [gui.Text('State', size=(15, 1), auto_size_text=False), gui.InputText()],
+                [gui.Text('Project address', font=('Helvetica', 15), justification='left')],
+                [gui.Text('Address', size=(label_w, 1), auto_size_text=False), gui.InputText()],
+                [gui.Text('Town', size=(label_w, 1), auto_size_text=False), gui.InputText()],
+                [gui.Text('State', size=(label_w, 1), auto_size_text=False), gui.InputText()],
 
                 [_line()],
 
-                [gui.Text('Watermark Opacity', size=(15, 1), auto_size_text=False),
+                [gui.Text('Watermark Settings', font=('Helvetica', 15), justification='left')],
+                [
+                    gui.Text('Logo Image', size=(label_w, 1), auto_size_text=False),
+                    gui.Listbox(values=('Listbox 1', 'Listbox 2', 'Listbox 3', 'Listbox 4'), size=(30, 4))
+                ],
+
+                [
+                    gui.Text('Page Compression', size=(label_w, 1), auto_size_text=False),
+                    gui.Radio('Uncompressed', "RADIO1", default=True), gui.Radio('Compressed', "RADIO1")
+                ],
+                [
+                    gui.Text('Watermark Placement', size=(label_w, 1), auto_size_text=False),
+                    gui.Radio('Overlay', "RADIO2", default=True), gui.Radio('Underneath', "RADIO2")
+                ],
+                [gui.Text('Opacity', size=(label_w, 1), auto_size_text=False),
                  gui.Slider(range=(1, 20), orientation='h', size=(34, 30), default_value=8)],
+
                 [_line()],
 
                 # Encryption
+                [gui.Text('Encryption Settings', font=('Helvetica', 15), justification='left')],
                 [gui.Checkbox('Encrypt', default=True)],
-                [gui.Text('User Password', size=(15, 1), auto_size_text=False), gui.InputText()],
-                [gui.Text('Owner Password', size=(15, 1), auto_size_text=False), gui.InputText()],
+                [gui.Text('User Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
+                [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
 
                 [gui.Text('Click Submit to watermark PDF')],
 

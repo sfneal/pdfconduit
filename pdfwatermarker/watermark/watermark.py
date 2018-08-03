@@ -73,7 +73,9 @@ class Watermark:
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
+        self.receipt.add('Image', image)
         self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
+        self.receipt.add('WM Compression', compress)
 
         # Initialize CanvasObjects collector class and add objects
         objects = CanvasObjects()
@@ -84,7 +86,7 @@ class Watermark:
         objects.add(CanvasStr(text2, opacity=opacity, y=-90))
 
         # Draw watermark to file
-        self.watermark = WatermarkDraw(objects, rotate=30, tempdir=self.tempdir, compress=0).write()
+        self.watermark = WatermarkDraw(objects, rotate=30, tempdir=self.tempdir, compress=compress).write()
 
         if not add:
             return self.watermark
@@ -93,6 +95,7 @@ class Watermark:
             return self.save()
 
     def add(self, watermark=None, underneath=False):
+        self.receipt.add('WM Placement', 'Overlay' if underneath else 'Underneath')
         if not watermark:
             watermark = self.watermark
         self.document = str(WatermarkAdd(self.document, watermark, underneath=underneath, tempdir=self.tempdir))
