@@ -10,7 +10,8 @@ from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker import add_suffix, open_window, protect
 from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
 
-default_image = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'watermark.png')
+default_image_dir = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'img')
+default_image = resource_path('wide.png')
 
 
 class Receipt:
@@ -64,6 +65,8 @@ class Watermark:
         self.receipt.dump()
         if self.remove_temps:
             shutil.rmtree(self.tempdir)
+        else:
+            open_window(self.tempdir)
         return self.document
 
     def draw(self, text1, text2, copyright=True, image=default_image, opacity=0.1, add=False):
@@ -74,7 +77,7 @@ class Watermark:
 
         # Initialize CanvasObjects collector class and add objects
         objects = CanvasObjects()
-        objects.add(CanvasImg(image, opacity=opacity, x=200, y=-200))
+        objects.add(CanvasImg(os.path.join(default_image_dir, image), opacity=opacity, x=200, y=-200))
         if copyright:
             objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
         objects.add(CanvasStr(text1, opacity=opacity, y=-140))

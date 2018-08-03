@@ -102,16 +102,16 @@ class CanvasObjects:
 
 class Draw:
     def __init__(self, tempdir=None):
-        tmppdf = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
-        self.dst = resource_path(tmppdf.name)
         if tempdir:
             self.dir = tempdir
         else:
             self.dir = mkdtemp()
+        tmppdf = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
+        self.dst = resource_path(tmppdf.name)
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
-        self.can = Canvas(self.packet, pagesize=LETTER, pageCompression=1)  # Initialize canvas
+        self.can = Canvas(self.packet, pagesize=LETTER, pageCompression=0)  # Initialize canvas
 
     def __str__(self):
         return str(self.dst)
