@@ -12,7 +12,7 @@ def main():
     state = 'MA'
     
     w = Watermark(pdf, remove_temps=True)
-    w.draw(address, town, state, opacity=0.08)
+    w.draw(address, str(town + ', ' + state), opacity=0.08)
     w.add()
     wm = w.save()
 

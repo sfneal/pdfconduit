@@ -159,8 +159,11 @@ class WatermarkDraw(Draw):
             self.can.setFont(canvas_string.font, canvas_string.size)
         elif self.can._fontsize != canvas_string.size:
             self.can.setFontSize(canvas_string.size)
+        assert self.can._fontname == canvas_string.font
+        assert self.can._fontsize == canvas_string.size
 
         self.can.setFillColor(canvas_string.color, canvas_string.opacity)
+
         if canvas_string.x_centered:
             x = center_str(canvas_string.string, canvas_string.font, canvas_string.size)
         else:
