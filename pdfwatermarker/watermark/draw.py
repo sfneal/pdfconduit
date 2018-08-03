@@ -25,7 +25,7 @@ def bundle_dir():
 
 def register_font():
     """Register fonts for report labs canvas."""
-    folder = bundle_dir + os.sep + 'lib'
+    folder = bundle_dir + os.sep + 'lib' + os.sep + 'font'
     ttfFile = resource_path(os.path.join(folder, 'Vera.ttf'))
     pdfmetrics.registerFont(TTFont("Vera", ttfFile))
 
