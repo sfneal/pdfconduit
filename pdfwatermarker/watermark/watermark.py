@@ -69,7 +69,7 @@ class Watermark:
             open_window(self.tempdir)
         return self.document
 
-    def draw(self, text1, text2, copyright=True, image=default_image, opacity=0.1, add=False):
+    def draw(self, text1, text2, copyright=True, image=default_image, opacity=0.1, compress=0, add=False):
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
@@ -84,7 +84,7 @@ class Watermark:
         objects.add(CanvasStr(text2, opacity=opacity, y=-90))
 
         # Draw watermark to file
-        self.watermark = WatermarkDraw(objects, rotate=30, tempdir=self.tempdir).write()
+        self.watermark = WatermarkDraw(objects, rotate=30, tempdir=self.tempdir, compress=0).write()
 
         if not add:
             return self.watermark
@@ -92,10 +92,10 @@ class Watermark:
             self.add()
             return self.save()
 
-    def add(self, watermark=None):
+    def add(self, watermark=None, underneath=False):
         if not watermark:
             watermark = self.watermark
-        self.document = str(WatermarkAdd(self.document, watermark, tempdir=self.tempdir))
+        self.document = str(WatermarkAdd(self.document, watermark, underneath=underneath, tempdir=self.tempdir))
         self.receipt.add('Watermarked PDF', os.path.basename(self.document))
         if self.open_file:
             open_window(self.document)

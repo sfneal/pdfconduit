@@ -101,7 +101,7 @@ class CanvasObjects:
 
 
 class Draw:
-    def __init__(self, tempdir=None):
+    def __init__(self, tempdir=None, compress=0):
         if tempdir:
             self.dir = tempdir
         else:
@@ -111,7 +111,7 @@ class Draw:
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
-        self.can = Canvas(self.packet, pagesize=LETTER, pageCompression=0)  # Initialize canvas
+        self.can = Canvas(self.packet, pagesize=LETTER, pageCompression=compress)  # Initialize canvas
 
     def __str__(self):
         return str(self.dst)
@@ -123,8 +123,8 @@ class Draw:
 
 
 class WatermarkDraw(Draw):
-    def __init__(self, canvas_objects, rotate=0, tempdir=None):
-        super(WatermarkDraw, self).__init__(tempdir)
+    def __init__(self, canvas_objects, rotate=0, compress=0, tempdir=None):
+        super(WatermarkDraw, self).__init__(tempdir, compress)
         self.canvas_objects = canvas_objects
         self.rotate = rotate
 

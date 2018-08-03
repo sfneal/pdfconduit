@@ -7,7 +7,7 @@ from pdfwatermarker.utils.info import dimensions
 
 
 class WatermarkAdd:
-    def __init__(self, document, watermark, overwrite=False, output=None, suffix='watermarked', underneath=False,
+    def __init__(self, document, watermark, underneath=False, overwrite=False, output=None, suffix='watermarked',
                  decrypt=False, tempdir=None):
         """
         Add a watermark to an existing PDF document
