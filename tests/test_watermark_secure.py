@@ -15,7 +15,7 @@ def main():
     w.draw(address, str(town + ', ' + state), opacity=0.08)
     w.add()
     w.secure('', 'foo')
-    wm = w.save()
+    wm = w.cleanup()
 
     if os.path.exists(wm):
         print('Success!')

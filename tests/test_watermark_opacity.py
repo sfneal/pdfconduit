@@ -1,6 +1,6 @@
 # Test opacity outputs
 from pdfwatermarker import Watermark, merge
-from pdfwatermarker.watermark.draw import TextDraw, WatermarkDraw
+from pdfwatermarker.watermark.draw import WatermarkDraw
 import os
 import shutil
 from tqdm import tqdm

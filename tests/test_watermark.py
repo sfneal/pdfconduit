@@ -15,7 +15,7 @@ def main():
     w = Watermark(pdf, remove_temps=True)
     w.draw(address, str(town + ', ' + state), opacity=0.08, image='wide_noblocks.png', compress=1)
     w.add(underneath=True)
-    wm = w.save()
+    wm = w.cleanup()
 
     if os.path.exists(wm):
         print('Success!')
