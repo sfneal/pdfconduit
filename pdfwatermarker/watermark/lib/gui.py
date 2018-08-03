@@ -1,5 +1,6 @@
 import PySimpleGUI as gui
 from pdfwatermarker import __version__
+from pdfwatermarker.watermark.draw import available_images
 
 
 def _line(char='_', width=105, size=(75, 1)):
@@ -48,7 +49,7 @@ class GUI:
                 [gui.Text('Watermark Settings', font=('Helvetica', 15), justification='left')],
                 [
                     gui.Text('Logo Image', size=(label_w, 1), auto_size_text=False),
-                    gui.Listbox(values=('Listbox 1', 'Listbox 2', 'Listbox 3', 'Listbox 4'), size=(30, 4))
+                    gui.InputCombo(values=(available_images()), size=(30, 4))
                 ],
 
                 [
@@ -72,35 +73,54 @@ class GUI:
 
                 [gui.Text('Click Submit to watermark PDF')],
 
-                [gui.Submit(), gui.Cancel()]]
+                [gui.Submit(), gui.Cancel()]
+            ]
 
             (button, (values)) = form.LayoutAndShow(layout)
 
+        opacity = float(values[9] * .01)
+        user_pw = values[11] if len(values[11]) > 0 else ''
+        owner_pw = values[12] if len(values[12]) > 0 else ''
         self.params = {
             'pdf': values[0],
             'address': values[1],
             'town': values[2],
             'state': values[3],
-            'opacity': values[4],
-            'encrypt': values[5],
-            'user_pw': values[6],
-            'owner_pw': values[7],
+            'image': values[4],
+            'compression': {
+                'uncompressed': values[5],
+                'compressed': values[6]
+            },
+            'placement': {
+                'overlay': values[7],
+                'underneath': values[8]
+            },
+            'opacity': opacity,
+            'encrypt': values[10],
+            'user_pw': user_pw,
+            'owner_pw': owner_pw,
         }
-        pdf = values[0]
-        address = values[1]
-        town = values[2]
-        state = values[3]
-        opacity = float(values[4] * .01)
-        encrypt = values[5]
+        return self.params
 
-        if len(values[6]) > 0:
-            user_pw = values[6]
-        else:
-            user_pw = ''
 
-        if len(values[7]) > 0:
-            owner_pw = values[7]
-        else:
-            owner_pw = None
+def get_directory():
+    with gui.FlexForm('Source Directory') as form:
+        form_rows = [
+            [gui.Text('Enter the Source folders')],
+            [gui.Text('Destination Folder', size=(15, 1), justification='right'), gui.InputText('Dest'), gui.FolderBrowse()],
+            [gui.Submit(), gui.Cancel()]]
 
-        return pdf, address, town, state, opacity, encrypt, user_pw, owner_pw
+        button, (source) = form.LayoutAndRead(form_rows)
+        return source[0]
+
+
+def get_file():
+    with gui.FlexForm('Source File') as form:
+        form_rows = [
+            [gui.Text('Enter the Source file')],
+            [gui.Text('Source File', size=(15, 1), justification='right'), gui.InputText('Src'),
+             gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
+            [gui.Submit(), gui.Cancel()]]
+
+        button, (source) = form.LayoutAndRead(form_rows)
+        return source[0]
