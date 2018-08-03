@@ -1,6 +1,6 @@
 # Generate sample PDF documents
 import os
-from pdfwatermarker import Watermark, open_window, merge
+from pdfwatermarker import Watermark, open_window, merge, slicer, info
 from pdfwatermarker.watermark.draw import available_images, CanvasObjects, CanvasStr, WatermarkDraw
 from pdfwatermarker.watermark.lib.gui import get_directory, get_file
 from tqdm import tqdm
@@ -15,13 +15,15 @@ def watermarks(destination, images=available_images()):
                     copyright=False)
         watermarks.append(wm)
     m = merge(watermarks, 'Watermarks samples', destination)
-    return wm, m
+    return w, m
 
 
 def opacity(source):
     samples = []
     _range = range(4, 25)[::3]
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=False)
+    if info.pages_count(source) > 2:
+        source = slicer(source, 1, 1, wm.tempdir)
     for i in tqdm(_range):
         o = i * .01
         wtrmrk = wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', opacity=o)
@@ -39,6 +41,8 @@ def opacity(source):
 
 def placement(source):
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=True)
+    if info.pages_count(source) > 2:
+        source = slicer(source, 1, 1, wm.tempdir)
     wtrmrk = wm.draw(text1='200 Stonewall Blvd',
                      text2='Wrentham, MA')
     over = wm.add(document=source, watermark=wtrmrk, output='temp', underneath=False)
@@ -50,7 +54,6 @@ def placement(source):
 def main():
     src = get_file()
     dst = os.path.dirname(src)
-    src =
     wm, m = watermarks(dst)
     wm, m = opacity(src)
     wm, m = placement(src)

@@ -13,7 +13,6 @@ def slicer(document, first_page=None, last_page=None, tempdir=None):
     writer = PdfFileWriter()
 
     pages = list(range(pdf.getNumPages()))[first_page:last_page]
-    print(pages)
     for page in pages:
         writer.addPage(pdf.getPage(page))
 
