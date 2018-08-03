@@ -111,7 +111,7 @@ class Draw:
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
-        self.can = Canvas(self.packet, pagesize=LETTER)  # Initialize canvas
+        self.can = Canvas(self.packet, pagesize=LETTER, pageCompression=1)  # Initialize canvas
 
     def __str__(self):
         return str(self.dst)
@@ -142,6 +142,7 @@ class WatermarkDraw(Draw):
                 self._draw_image(obj)
 
         # Save canvas
+        self.can.showPage()
         self.can.save()
 
     def _draw_image(self, canvas_image):
@@ -153,7 +154,12 @@ class WatermarkDraw(Draw):
 
     def _draw_string(self, canvas_string):
         """Draw string to canvas"""
-        self.can.setFont(canvas_string.font, canvas_string.size)
+        # Set font names and font sizes if different from current object params
+        if self.can._fontname != canvas_string.font:
+            self.can.setFont(canvas_string.font, canvas_string.size)
+        elif self.can._fontsize != canvas_string.size:
+            self.can.setFontSize(canvas_string.size)
+
         self.can.setFillColor(canvas_string.color, canvas_string.opacity)
         if canvas_string.x_centered:
             x = center_str(canvas_string.string, canvas_string.font, canvas_string.size)
