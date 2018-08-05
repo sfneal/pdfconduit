@@ -1,4 +1,4 @@
-from pdfwatermarker import merge
+from pdfwatermarker import Merge
 import os
 import shutil
 
@@ -24,7 +24,7 @@ def main():
     output = 'combined_example.pdf'
 
     # calling pdf merge function
-    merge(pdfs=pdf_paths, output_name=output)
+    Merge(pdfs=pdf_paths, output_name=output)
     print('Done!')
 
 
