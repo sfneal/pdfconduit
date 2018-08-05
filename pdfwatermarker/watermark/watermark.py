@@ -4,10 +4,12 @@ import shutil
 from datetime import datetime
 from looptools import Timer
 from tempfile import mkdtemp
-from pdfwatermarker.watermark.lib import GUI
 from pdfwatermarker.watermark.draw import WatermarkDraw, resource_path, bundle_dir, image_directory, available_images
 from pdfwatermarker.watermark.add import WatermarkAdd
-from pdfwatermarker import add_suffix, open_window, protect, Merge
+from pdfwatermarker.utils.path import add_suffix
+from pdfwatermarker.utils.view import open_window
+from pdfwatermarker.encrypt import protect
+from pdfwatermarker.merge import Merge
 from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
 
 default_image_dir = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'img')
@@ -133,6 +135,7 @@ class Watermark:
 
 class WatermarkGUI:
     def __init__(self):
+        from pdfwatermarker.utils.gui import GUI
         self.receipt = Receipt()
         self.params = GUI().settings
         self.execute()

@@ -1,7 +1,6 @@
 # Merge PDF documents
 import os
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileMerger
-from pdfwatermarker.utils import get_directory
 
 
 class Merge:
@@ -47,6 +46,7 @@ class Merge:
 
 
 def main():
+    from pdfwatermarker.utils.gui import get_directory
     d = get_directory()
     m = Merge(d)
     print(m.output)

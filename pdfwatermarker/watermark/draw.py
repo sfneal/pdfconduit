@@ -9,7 +9,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from pdfwatermarker import resource_path, write_pdf
+from pdfwatermarker.utils import resource_path, write_pdf
 
 
 def bundle_dir():
