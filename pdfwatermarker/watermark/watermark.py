@@ -7,7 +7,7 @@ from tempfile import mkdtemp
 from pdfwatermarker.watermark.lib import GUI
 from pdfwatermarker.watermark.draw import WatermarkDraw, resource_path, bundle_dir, image_directory, available_images
 from pdfwatermarker.watermark.add import WatermarkAdd
-from pdfwatermarker import add_suffix, open_window, protect, merge
+from pdfwatermarker import add_suffix, open_window, protect, Merge
 from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
 
 default_image_dir = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'img')

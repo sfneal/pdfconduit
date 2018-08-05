@@ -1,8 +1,8 @@
 # Generate sample PDF documents
 import os
-from pdfwatermarker import Watermark, open_window, merge, slicer, info
+from pdfwatermarker import Watermark, open_window, Merge, slicer, info
 from pdfwatermarker.watermark.draw import available_images, CanvasObjects, CanvasStr, WatermarkDraw
-from pdfwatermarker.watermark.lib.gui import get_directory, get_file
+from pdfwatermarker.utils.gui import get_file
 from tqdm import tqdm
 
 
@@ -14,7 +14,7 @@ def watermarks(destination, images=available_images()):
                     image=i,
                     copyright=False)
         watermarks.append(wm)
-    m = merge(watermarks, 'Watermarks samples', destination)
+    m = Merge(watermarks, 'Watermarks samples', destination)
     return w, m
 
 
@@ -36,7 +36,7 @@ def opacity(source):
 
         wtrmrk_with_label = wm.add(watermarked, label, output='temp')
         samples.append(wtrmrk_with_label)
-    m = merge(samples, 'Opacity comparison samples', os.path.dirname(_source))
+    m = Merge(samples, 'Opacity comparison samples', os.path.dirname(_source))
     return wm, m
 
 
@@ -58,7 +58,7 @@ def placement(source):
     objects.add(CanvasStr('Underneath', size=14, opacity=1, x=15, y=30, x_centered=False))
     label = WatermarkDraw(objects, tempdir=wm.tempdir).write()
     under_with_label = wm.add(under, label, output='temp')
-    m = merge([over_with_label, under_with_label], 'Watermark Placement samples', os.path.dirname(_source))
+    m = Merge([over_with_label, under_with_label], 'Watermark Placement samples', os.path.dirname(_source))
     return wm, m
 
 
