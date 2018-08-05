@@ -48,8 +48,17 @@ def placement(source):
     wtrmrk = wm.draw(text1='200 Stonewall Blvd',
                      text2='Wrentham, MA')
     over = wm.add(document=source, watermark=wtrmrk, output='temp', underneath=False)
+    objects = CanvasObjects()
+    objects.add(CanvasStr('Overlayed', size=14, opacity=1, x=15, y=30, x_centered=False))
+    label = WatermarkDraw(objects, tempdir=wm.tempdir).write()
+    over_with_label = wm.add(over, label, output='temp')
+
     under = wm.add(document=source, watermark=wtrmrk, output='temp', underneath=True)
-    m = merge([over, under], 'Watermark Placement samples', os.path.dirname(_source))
+    objects = CanvasObjects()
+    objects.add(CanvasStr('Underneath', size=14, opacity=1, x=15, y=30, x_centered=False))
+    label = WatermarkDraw(objects, tempdir=wm.tempdir).write()
+    under_with_label = wm.add(under, label, output='temp')
+    m = merge([over_with_label, under_with_label], 'Watermark Placement samples', os.path.dirname(_source))
     return wm, m
 
 
