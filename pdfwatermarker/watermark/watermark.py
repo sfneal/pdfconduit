@@ -2,8 +2,8 @@
 import os
 import shutil
 from datetime import datetime
-from looptools import Timer
 from tempfile import mkdtemp
+from looptools import Timer
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker.watermark.utils import resource_path, bundle_dir
@@ -180,5 +180,6 @@ class WatermarkGUI:
         try:
             print('\nSuccess!')
             input('~~Press Any Key To Exit~~')
+            quit()
         except RuntimeError:
             quit()
