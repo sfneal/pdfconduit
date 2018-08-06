@@ -1,13 +1,10 @@
 from pdfwatermarker import Watermark, info
 import os
+from . import directory, pdf
 
 
 def main():
     print('Testing Watermark class reliability')
-    directory = '/Users/Stephen/Desktop/'
-
-    pdf = os.path.join(directory, '20110055_FP.1.pdf')
-    # pdf = os.path.join(directory, '20180053 CDs.pdf')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
