@@ -6,8 +6,12 @@ from pdfwatermarker.watermark.watermark import Label
 from tests import pdf
 
 
+def _title(title='PDF Samples'):
+    return Label(pdf, title, title_page=True).watermark
+
+
 def watermarks(destination, images=available_images()):
-    watermarks = []
+    watermarks = [_title('Watermark Images')]
     w = Watermark(destination, use_receipt=False, open_file=False, remove_temps=True)
     for i in images:
         wm = w.draw(text1=i,
@@ -19,7 +23,7 @@ def watermarks(destination, images=available_images()):
 
 
 def opacity(source, dst):
-    samples = []
+    samples = [_title('Opacity Comparisons')]
     _range = range(4, 25)[::3]
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=True)
     if info.pages_count(source) > 2:
@@ -42,12 +46,12 @@ def placement(source, dst):
     wtrmrk = wm.draw(text1='200 Stonewall Blvd',
                      text2='Wrentham, MA')
     over = wm.add(document=source, watermark=wtrmrk, output='temp', underneath=False)
-    over_with_label = Label(over, 'Overlay', tempdir=wm.tempdir).write()
+    over_with_label = Label(over, 'Overlayed watermark', tempdir=wm.tempdir).write()
 
     under = wm.add(document=source, watermark=wtrmrk, output='temp', underneath=True)
-    under_with_label = Label(under, 'Underneath', tempdir=wm.tempdir).write()
+    under_with_label = Label(under, 'Underneath watermarked', tempdir=wm.tempdir).write()
 
-    m = Merge([over_with_label, under_with_label], 'Watermark Placement samples', dst)
+    m = Merge([_title('Watermark Placement'), over_with_label, under_with_label], 'Watermark Placement samples', dst)
     return m.file, wm
 
 
@@ -58,12 +62,15 @@ def layering(source, dst):
     flat = wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', flatten=True)
     layered = wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', flatten=False)
 
-    wtrmrked_flat = Label(wm.add(document=source, watermark=flat, output='temp'), 'Flat', tempdir=wm.tempdir).write()
-    wtrmrked_layer = Label(wm.add(document=source, watermark=layered, output='temp'), 'Layered', tempdir=wm.tempdir).write()
+    wtrmrked_flat = Label(wm.add(document=source, watermark=flat, output='temp'), 'Flat watermark',
+                          tempdir=wm.tempdir).write()
+    wtrmrked_layer = Label(wm.add(document=source, watermark=layered, output='temp'), 'Layered watermark',
+                           tempdir=wm.tempdir).write()
 
-    watermark_flat = Label(flat, 'Flat', tempdir=wm.tempdir).write()
-    watermark_layer = Label(layered, 'Layered', tempdir=wm.tempdir).write()
-    m = Merge([wtrmrked_flat, watermark_flat, wtrmrked_layer, watermark_layer], 'Layering samples', dst)
+    watermark_flat = Label(flat, 'Flat watermark', tempdir=wm.tempdir).write()
+    watermark_layer = Label(layered, 'Layered watermark', tempdir=wm.tempdir).write()
+    m = Merge([_title('Watermark Layering'), wtrmrked_flat, watermark_flat, wtrmrked_layer, watermark_layer],
+              'Layering samples', dst)
     return m, wm
 
 
