@@ -14,8 +14,8 @@ def main():
     w = Watermark(pdf, remove_temps=True, use_receipt=False)
     flat = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=True)
     layered = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=False)
-    shutil.move(flat, os.path.join(directory, 'flat.pdf'))
-    shutil.move(layered, os.path.join(directory, 'layered.pdf'))
+    shutil.move(flat, os.path.join(directory, 'wm flat.pdf'))
+    shutil.move(layered, os.path.join(directory, 'wm layered.pdf'))
     wm = w.cleanup()
 
     if os.path.exists(wm):
