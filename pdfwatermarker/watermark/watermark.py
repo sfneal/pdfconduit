@@ -110,6 +110,7 @@ class Watermark:
         self.receipt.add('Image', image)
         self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
         self.receipt.add('WM Compression', compress)
+        self.receipt.add('WM Flattening', flatten)
 
         objects = get_objects()
 
