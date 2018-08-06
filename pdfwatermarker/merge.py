@@ -1,5 +1,6 @@
 # Merge PDF documents
 import os
+from tqdm import tqdm
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileMerger
 
 
@@ -36,7 +37,11 @@ class Merge:
         pdf_merger = PdfFileMerger()
 
         # Appending pdfs one by one
-        for pdf in pdf_files:
+        if len(pdf_files) > 5:
+            loop = tqdm(pdf_files, desc='Merging PDFs', total=len(pdf_files))
+        else:
+            loop = pdf_files
+        for pdf in loop:
             pdf_merger.append(pdf)
 
         # writing combined pdf to output pdf file
