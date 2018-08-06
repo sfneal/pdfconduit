@@ -10,9 +10,9 @@ from pdfwatermarker.watermark.utils import resource_path, bundle_dir
 from pdfwatermarker.utils.path import add_suffix
 from pdfwatermarker.utils.view import open_window
 from pdfwatermarker.encrypt import protect
-from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
+from pdfwatermarker.watermark.canvas import CanvasObjects, CanvasStr, CanvasImg, DrawPIL
 
-default_image_dir = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'img')
+default_image_dir = resource_path(bundle_dir() + os.sep + 'lib' + os.sep + 'img')
 default_image = resource_path('Wide.png')
 
 
@@ -55,6 +55,7 @@ class Watermark:
         self.open_file = open_file
         self.tempdir = tempdir
 
+        self.use_receipt = use_receipt
         if isinstance(receipt, Receipt):
             self.receipt = receipt
         else:
@@ -63,10 +64,10 @@ class Watermark:
     def __str__(self):
         return str(self.document)
 
-    def cleanup(self, receipt=True):
+    def cleanup(self):
         runtime = self.time.end
         self.receipt.add('~run time~', runtime)
-        if receipt:
+        if self.use_receipt:
             self.receipt.dump()
         if self.remove_temps:
             shutil.rmtree(self.tempdir)
@@ -75,7 +76,34 @@ class Watermark:
         return self.document
 
     def draw(self, text1, text2=None, copyright=True, image=default_image, rotate=30, opacity=0.08, compress=0,
-             add=False):
+             add=False, flatten=False):
+
+        def get_objects():
+            # Initialize CanvasObjects collector class and add objects
+            obj = CanvasObjects()
+            obj.add(CanvasImg(os.path.join(default_image_dir, image), opacity=opacity, x=200, y=-200))
+
+            if not flatten:
+                if copyright:
+                    obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10, opacity=opacity))
+                if text2:
+                    obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-140))
+                    obj.add(CanvasStr(text2, opacity=opacity, size=40, y=-90))
+                else:
+                    obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-115))
+            else:
+                img = DrawPIL()
+                if copyright:
+                    img.draw_text('© copyright ' + str(datetime.now().year), size=16, y=0)
+                if text2:
+                    img.draw_text(text1, size=40, y=140, opacity=opacity)
+                    img.draw_text(text2, size=40, y=90, opacity=opacity)
+                else:
+                    img.draw_text(text2, size=40, y=115, opacity=opacity)
+                i = img.save(tempdir=self.tempdir)
+                obj.add(CanvasImg(i, opacity=1, x=200, y=-630))
+            return obj
+
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
@@ -83,16 +111,7 @@ class Watermark:
         self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
         self.receipt.add('WM Compression', compress)
 
-        # Initialize CanvasObjects collector class and add objects
-        objects = CanvasObjects()
-        objects.add(CanvasImg(os.path.join(default_image_dir, image), opacity=opacity, x=200, y=-200))
-        if copyright:
-            objects.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=10))
-        if text2:
-            objects.add(CanvasStr(text1, opacity=opacity, y=-140))
-            objects.add(CanvasStr(text2, opacity=opacity, y=-90))
-        else:
-            objects.add(CanvasStr(text1, opacity=opacity, y=-115))
+        objects = get_objects()
 
         # Draw watermark to file
         self.watermark = WatermarkDraw(objects, rotate=rotate, compress=compress, tempdir=self.tempdir).write()
