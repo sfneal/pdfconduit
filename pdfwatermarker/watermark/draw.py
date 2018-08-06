@@ -38,10 +38,13 @@ class Draw:
     def __str__(self):
         return str(self.dst)
 
-    def write(self):
+    def _write(self):
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
         write_pdf(self.packet, self.dst)  # Save new pdf file
         return self.dst
+
+    def write(self):
+        return self._write()
 
 
 class WatermarkDraw(Draw):
@@ -91,6 +94,3 @@ class WatermarkDraw(Draw):
         else:
             x = canvas_string.x
         self.can.drawString(x=x, y=canvas_string.y, text=canvas_string.string)
-
-    # def _draw_string_2img(self, canvas_string):
-

@@ -5,9 +5,10 @@ from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
 
 def slicer(document, first_page=None, last_page=None, tempdir=None):
     """Slice a PDF document to remove pages."""
+    output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
+
     # Reindex page selections for simple user input
     first_page = first_page - 1 if not None else None
-    output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
 
     pdf = PdfFileReader(document)
     writer = PdfFileWriter()

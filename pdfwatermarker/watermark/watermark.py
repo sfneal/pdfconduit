@@ -123,14 +123,14 @@ class Watermark:
             self.add()
             return self.cleanup()
 
-    def add(self, document=None, watermark=None, underneath=False, output=None):
+    def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked'):
         self.receipt.add('WM Placement', 'Overlay' if underneath else 'Underneath')
         if not watermark:
             watermark = self.watermark
         if not document:
             document = self.document
         self.document = str(WatermarkAdd(document, watermark, underneath=underneath, output=output,
-                                         tempdir=self.tempdir))
+                                         tempdir=self.tempdir, suffix=suffix))
         self.receipt.add('Watermarked PDF', os.path.basename(self.document))
         if self.open_file:
             open_window(self.document)
@@ -151,6 +151,34 @@ class Watermark:
                     encrypt_128=encrypt_128, restrict_permission=restrict_permission)
         self.receipt.add('Secured PDF', os.path.basename(p))
         return p
+
+
+class Label(WatermarkDraw):
+    def __init__(self, document, label, suffix=None, output=None, tempdir=None):
+        super(Label, self).__init__(self._create_canvas_objects(label), tempdir=tempdir)
+        self.document = document
+        self.watermark = self._write()
+
+        if suffix:
+            suffix = label if not suffix else suffix
+            self.output = add_suffix(self.document, suffix)
+        elif output:
+            self.output = output
+        else:
+            self.output = self.dst
+
+    @staticmethod
+    def _create_canvas_objects(label):
+        objects = CanvasObjects()
+        objects.add(CanvasStr(label, size=14, opacity=1, x=15, y=25, x_centered=False))
+        return objects
+
+    def write(self, cleanup=False):
+        wm = Watermark(self.document, tempdir=self.dir, use_receipt=False, open_file=False, remove_temps=True)
+        labeled = wm.add(watermark=self.watermark, output=self.output)
+        if cleanup:
+            wm.cleanup()
+        return labeled
 
 
 class WatermarkGUI:
