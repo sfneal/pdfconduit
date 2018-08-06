@@ -65,9 +65,6 @@ class WatermarkDraw(Draw):
                 self._draw_string(obj)
             elif isinstance(obj, CanvasImg):
                 self._draw_image(obj)
-
-        # Save canvas
-        # self.can.showPage()
         self.can.save()
 
     def _draw_image(self, canvas_image):
