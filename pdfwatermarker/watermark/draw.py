@@ -6,7 +6,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from pdfwatermarker.utils import resource_path, write_pdf
-from pdfwatermarker.watermark.canvas import CanvasImg, CanvasObjects, CanvasStr, img_opacity
+from pdfwatermarker.watermark.canvas import CanvasImg, CanvasStr, img_opacity
 from pdfwatermarker.watermark.utils import image_directory, LETTER
 
 
@@ -69,7 +69,7 @@ class WatermarkDraw(Draw):
 
     def _draw_image(self, canvas_image):
         """Draw Image to canvas"""
-        img = img_opacity(canvas_image.image, canvas_image.opacity, self.dir)
+        img = img_opacity(canvas_image.image, canvas_image.opacity, tempdir=self.dir)
         self.can.drawImage(img.name, x=canvas_image.x, y=canvas_image.y, width=canvas_image.w,
                            height=canvas_image.h, mask=canvas_image.mask,
                            preserveAspectRatio=canvas_image.preserve_aspect_ratio)
