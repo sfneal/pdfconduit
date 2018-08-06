@@ -169,7 +169,8 @@ class WatermarkGUI:
                 text2=str(self.params['town'] + ', ' + self.params['state']),
                 image=self.params['image'],
                 opacity=self.params['opacity'],
-                compress=self.params['compression']['compressed'])
+                compress=self.params['compression']['compressed'],
+                flatten=self.params['flattening']['flattened'])
         wm.add(underneath=self.params['placement']['underneath'])
 
         if self.params['encrypt']:

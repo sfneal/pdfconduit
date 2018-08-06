@@ -53,8 +53,12 @@ class GUI:
                 ],
 
                 [
-                    gui.Text('Page Compression', size=(label_w, 1), auto_size_text=False),
+                    gui.Text('File Compression', size=(label_w, 1), auto_size_text=False),
                     gui.Radio('Uncompressed', "RADIO1", default=True), gui.Radio('Compressed', "RADIO1")
+                ],
+                [
+                    gui.Text('Watermark Flattening', size=(label_w, 1), auto_size_text=False),
+                    gui.Radio('Layered', "RADIO3", default=True), gui.Radio('Flattened', "RADIO3")
                 ],
                 [
                     gui.Text('Watermark Placement', size=(label_w, 1), auto_size_text=False),
@@ -78,9 +82,9 @@ class GUI:
 
             (button, (values)) = form.LayoutAndShow(layout)
 
-        opacity = float(values[9] * .01)
-        user_pw = values[11] if len(values[11]) > 0 else ''
-        owner_pw = values[12] if len(values[12]) > 0 else ''
+        opacity = float(values[11] * .01)
+        user_pw = values[13] if len(values[13]) > 0 else ''
+        owner_pw = values[14] if len(values[14]) > 0 else ''
         self.params = {
             'pdf': values[0],
             'address': values[1],
@@ -91,15 +95,20 @@ class GUI:
                 'uncompressed': values[5],
                 'compressed': values[6]
             },
+            'flattening': {
+                'layered': values[7],
+                'flattened': values[8],
+            },
             'placement': {
-                'overlay': values[7],
-                'underneath': values[8]
+                'overlay': values[9],
+                'underneath': values[10]
             },
             'opacity': opacity,
-            'encrypt': values[10],
+            'encrypt': values[12],
             'user_pw': user_pw,
             'owner_pw': owner_pw,
         }
+        print(self.params)
         return self.params
 
 
