@@ -8,7 +8,6 @@ missing module named multiprocessing.get_start_method - imported by multiprocess
 missing module named resource - imported by posix, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named posix - imported by os, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named _posixsubprocess - imported by subprocess, multiprocessing.util, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named org - imported by pickle, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named readline - imported by cmd, code, pdb, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 excluded module named _frozen_importlib - imported by importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
@@ -19,9 +18,10 @@ missing module named 'java.lang' - imported by platform, xml.sax._exceptions, C:
 missing module named vms_lib - imported by platform, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named termios - imported by tty, getpass, tqdm._utils, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named grp - imported by shutil, tarfile, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named _dummy_threading - imported by dummy_threading, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named org - imported by copy, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named 'org.python' - imported by pickle, xml.sax, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named cStringIO - imported by pdfwatermarker.thirdparty.PyPDF2.pdf, pdfwatermarker.thirdparty.PyPDF2.filters, pdfwatermarker.thirdparty.PyPDF2.merger, cPickle
 missing module named copy_reg - imported by cStringIO, cPickle
 missing module named 'IPython.display' - imported by tqdm._tqdm_notebook
@@ -52,9 +52,9 @@ missing module named rl_config - imported by reportlab.lib.utils
 missing module named urllib2 - imported by reportlab.lib.utils
 missing module named 'reportlab.lib.pyHnj' - imported by reportlab.lib.utils
 missing module named Image - imported by reportlab.lib.utils
-missing module named UserDict - imported by PIL.PdfParser
-missing module named olefile - imported by PIL.FpxImagePlugin, PIL.MicImagePlugin
 missing module named Tkinter - imported by PIL.ImageTk
+missing module named olefile - imported by PIL.FpxImagePlugin, PIL.MicImagePlugin
+missing module named UserDict - imported by PIL.PdfParser
 missing module named 'PySide.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt4.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt5.QtCore' - imported by PIL.ImageQt
