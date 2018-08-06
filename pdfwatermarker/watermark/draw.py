@@ -1,40 +1,13 @@
 # Dynamically generate watermark pdf file
 import io
 import os
-import sys
 from tempfile import NamedTemporaryFile, mkdtemp
-from PIL import Image, ImageEnhance
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
 from pdfwatermarker.utils import resource_path, write_pdf
-from pdfwatermarker.watermark.canvas import CanvasImg, CanvasObjects, CanvasStr
-
-
-def bundle_dir():
-    """Handle resource management within an executable file."""
-    if getattr(sys, 'frozen', False):
-        # we are running in a bundle
-        bundle_dir = sys._MEIPASS
-    else:
-        # we are running in a normal Python environment
-        bundle_dir = os.path.dirname(os.path.abspath(__file__))
-    return bundle_dir
-
-
-def register_font():
-    """Register fonts for report labs canvas."""
-    folder = bundle_dir + os.sep + 'lib' + os.sep + 'font'
-    ttfFile = resource_path(os.path.join(folder, 'Vera.ttf'))
-    pdfmetrics.registerFont(TTFont("Vera", ttfFile))
-
-
-bundle_dir = bundle_dir()
-register_font()
-LETTER = letter[1], letter[0]
-image_directory = str(bundle_dir + os.sep + 'lib' + os.sep + 'img')
+from pdfwatermarker.watermark.canvas import CanvasImg, CanvasObjects, CanvasStr, img_opacity
+from pdfwatermarker.watermark.utils import image_directory, LETTER
 
 
 def available_images():
@@ -47,25 +20,6 @@ def center_str(txt, font, size, offset=120):
     page_width = letter[1]
     text_width = stringWidth(txt, fontName=font, fontSize=size)
     return ((page_width - text_width) / 2.0) + offset
-
-
-def img_opacity(image, opacity, tempdir=None):
-    """
-    Returns an image with reduced opacity.
-    Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
-    """
-    dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
-    assert 0 <= opacity <= 1
-    im = Image.open(image)
-    if im.mode != 'RGBA':
-        im = im.convert('RGBA')
-    else:
-        im = im.copy()
-    alpha = im.split()[3]
-    alpha = ImageEnhance.Brightness(alpha).enhance(opacity)
-    im.putalpha(alpha)
-    im.save(dst)
-    return dst
 
 
 class Draw:
@@ -137,3 +91,6 @@ class WatermarkDraw(Draw):
         else:
             x = canvas_string.x
         self.can.drawString(x=x, y=canvas_string.y, text=canvas_string.string)
+
+    # def _draw_string_2img(self, canvas_string):
+

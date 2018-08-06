@@ -4,12 +4,12 @@ import shutil
 from datetime import datetime
 from looptools import Timer
 from tempfile import mkdtemp
-from pdfwatermarker.watermark.draw import WatermarkDraw, resource_path, bundle_dir, image_directory, available_images
+from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
+from pdfwatermarker.watermark.utils import resource_path, bundle_dir
 from pdfwatermarker.utils.path import add_suffix
 from pdfwatermarker.utils.view import open_window
 from pdfwatermarker.encrypt import protect
-from pdfwatermarker.merge import Merge
 from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr, CanvasImg
 
 default_image_dir = resource_path(bundle_dir + os.sep + 'lib' + os.sep + 'img')
