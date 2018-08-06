@@ -154,8 +154,8 @@ class Watermark:
 
 
 class Label(WatermarkDraw):
-    def __init__(self, document, label, suffix=None, output=None, tempdir=None):
-        super(Label, self).__init__(self._create_canvas_objects(label), tempdir=tempdir)
+    def __init__(self, document, label, title_page=False, suffix=None, output=None, tempdir=None):
+        super(Label, self).__init__(self._create_canvas_objects(label, title_page), tempdir=tempdir)
         self.document = document
         self.watermark = self._write()
 
@@ -168,9 +168,12 @@ class Label(WatermarkDraw):
             self.output = self.dst
 
     @staticmethod
-    def _create_canvas_objects(label):
+    def _create_canvas_objects(label, title_page):
         objects = CanvasObjects()
-        objects.add(CanvasStr(label, size=14, opacity=1, x=15, y=25, x_centered=False))
+        if not title_page:
+            objects.add(CanvasStr(label, size=14, opacity=1, x=15, y=25, x_centered=False))
+        else:
+            objects.add(CanvasStr(label, size=60, opacity=1, y_centered=True))
         return objects
 
     def write(self, cleanup=False):
