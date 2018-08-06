@@ -638,11 +638,15 @@ imports:
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageEnhance">PIL.ImageEnhance</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -657,6 +661,8 @@ imports:
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#PIL.TiffTags">PIL.TiffTags</a>
  &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
+ &#8226;   <a href="#PIL._imagingagg">PIL._imagingagg</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
  &#8226;   <a href="#PIL._imagingtk">PIL._imagingtk</a>
  &#8226;   <a href="#PIL._version">PIL._version</a>
  &#8226;   <a href="#PIL._webp">PIL._webp</a>
@@ -688,11 +694,15 @@ imported by:
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageEnhance">PIL.ImageEnhance</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -732,11 +742,12 @@ imported by:
  &#8226;   <a href="#PIL.XpmImagePlugin">PIL.XpmImagePlugin</a>
  &#8226;   <a href="#PIL._binary">PIL._binary</a>
  &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
  &#8226;   <a href="#PIL._imagingtk">PIL._imagingtk</a>
  &#8226;   <a href="#PIL._util">PIL._util</a>
  &#8226;   <a href="#PIL._version">PIL._version</a>
  &#8226;   <a href="#PIL._webp">PIL._webp</a>
- &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
  &#8226;   <a href="#reportlab.lib.utils">reportlab.lib.utils</a>
 
   </div>
@@ -1270,10 +1281,14 @@ imported by:
  &#8226;   <a href="#PIL.ImImagePlugin">PIL.ImImagePlugin</a>
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageEnhance">PIL.ImageEnhance</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
@@ -1304,7 +1319,7 @@ imported by:
  &#8226;   <a href="#PIL.XVThumbImagePlugin">PIL.XVThumbImagePlugin</a>
  &#8226;   <a href="#PIL.XbmImagePlugin">PIL.XbmImagePlugin</a>
  &#8226;   <a href="#PIL.XpmImagePlugin">PIL.XpmImagePlugin</a>
- &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
  &#8226;   <a href="#reportlab.lib.utils">reportlab.lib.utils</a>
 
   </div>
@@ -1344,7 +1359,56 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL.ImageDraw"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/venv/python36/lib/site-packages/PIL/ImageDraw.py" type="text/plain"><tt>PIL.ImageDraw</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
+ &#8226;   <a href="#PIL._imagingagg">PIL._imagingagg</a>
+ &#8226;   <a href="#PIL._util">PIL._util</a>
+ &#8226;   <a href="#numbers">numbers</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL.ImageDraw2"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/venv/python36/lib/site-packages/PIL/ImageDraw2.py" type="text/plain"><tt>PIL.ImageDraw2</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
+ &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
 
   </div>
 
@@ -1364,7 +1428,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#PIL">PIL</a>
- &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
 
   </div>
 
@@ -1457,6 +1521,32 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="PIL.ImageFont"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/venv/python36/lib/site-packages/PIL/ImageFont.py" type="text/plain"><tt>PIL.ImageFont</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
+ &#8226;   <a href="#PIL._util">PIL._util</a>
+ &#8226;   <a href="#base64">base64</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="PIL.ImageMode"></a>
   <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/venv/python36/lib/site-packages/PIL/ImageMode.py" type="text/plain"><tt>PIL.ImageMode</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -1504,6 +1594,24 @@ imported by:
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#PIL.XVThumbImagePlugin">PIL.XVThumbImagePlugin</a>
  &#8226;   <a href="#PIL.XpmImagePlugin">PIL.XpmImagePlugin</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL.ImagePath"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/venv/python36/lib/site-packages/PIL/ImagePath.py" type="text/plain"><tt>PIL.ImagePath</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
 
   </div>
 
@@ -2371,6 +2479,34 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="PIL._imagingagg"></a>
+  <a target="code" href="" type="text/plain"><tt>PIL._imagingagg</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="PIL._imagingft"></a>
+  <tt>PIL._imagingft</tt> <span class="moduletype"><tt>C:\Users\Stephen\Scripts\pdfwatermarker\venv\python36\lib\site-packages\PIL\_imagingft.cp36-win_amd64.pyd</tt></span>  <div class="import">
+imports:
+    <a href="#PIL">PIL</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="PIL._imagingtk"></a>
   <tt>PIL._imagingtk</tt> <span class="moduletype"><tt>C:\Users\Stephen\Scripts\pdfwatermarker\venv\python36\lib\site-packages\PIL\_imagingtk.cp36-win_amd64.pyd</tt></span>  <div class="import">
 imports:
@@ -2400,7 +2536,9 @@ imports:
 imported by:
     <a href="#PIL.EpsImagePlugin">PIL.EpsImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
  &#8226;   <a href="#PIL.PdfParser">PIL.PdfParser</a>
@@ -2457,7 +2595,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#PySimpleGUI.PySimpleGUI">PySimpleGUI.PySimpleGUI</a>
- &#8226;   <a href="#pdfwatermarker.watermark.lib.gui">pdfwatermarker.watermark.lib.gui</a>
+ &#8226;   <a href="#pdfwatermarker.utils.gui">pdfwatermarker.utils.gui</a>
 
   </div>
 
@@ -3583,7 +3721,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#email._encoded_words">email._encoded_words</a>
+    <a href="#PIL.ImageFont">PIL.ImageFont</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
  &#8226;   <a href="#email.base64mime">email.base64mime</a>
  &#8226;   <a href="#email.encoders">email.encoders</a>
  &#8226;   <a href="#encodings.base64_codec">encodings.base64_codec</a>
@@ -8624,6 +8763,7 @@ imported by:
  &#8226;   <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
  &#8226;   <a href="#PIL.IptcImagePlugin">PIL.IptcImagePlugin</a>
@@ -10005,6 +10145,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#_pydecimal">_pydecimal</a>
  &#8226;   <a href="#fractions">fractions</a>
@@ -10151,6 +10292,7 @@ imported by:
  &#8226;   <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
  &#8226;   <a href="#PIL.IptcImagePlugin">PIL.IptcImagePlugin</a>
  &#8226;   <a href="#PIL.Jpeg2KImagePlugin">PIL.Jpeg2KImagePlugin</a>
@@ -10215,7 +10357,9 @@ imported by:
  &#8226;   <a href="#pdfwatermarker.encrypt.encrypt">pdfwatermarker.encrypt.encrypt</a>
  &#8226;   <a href="#pdfwatermarker.merge">pdfwatermarker.merge</a>
  &#8226;   <a href="#pdfwatermarker.utils.path">pdfwatermarker.utils.path</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
  &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
  &#8226;   <a href="#pipes">pipes</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
@@ -10253,6 +10397,7 @@ imported by:
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tempfile">tempfile</a>
+ &#8226;   <a href="#tests">tests</a>
  &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tkinter.filedialog">tkinter.filedialog</a>
  &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
@@ -10795,18 +10940,14 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfwatermarker.encrypt">pdfwatermarker.encrypt</a>
- &#8226;   <a href="#pdfwatermarker.encrypt.encrypt">pdfwatermarker.encrypt.encrypt</a>
  &#8226;   <a href="#pdfwatermarker.merge">pdfwatermarker.merge</a>
  &#8226;   <a href="#pdfwatermarker.rotate">pdfwatermarker.rotate</a>
  &#8226;   <a href="#pdfwatermarker.slice">pdfwatermarker.slice</a>
  &#8226;   <a href="#pdfwatermarker.thirdparty">pdfwatermarker.thirdparty</a>
  &#8226;   <a href="#pdfwatermarker.upscale">pdfwatermarker.upscale</a>
  &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.utils.gui">pdfwatermarker.utils.gui</a>
  &#8226;   <a href="#pdfwatermarker.watermark">pdfwatermarker.watermark</a>
- &#8226;   <a href="#pdfwatermarker.watermark.add">pdfwatermarker.watermark.add</a>
- &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
- &#8226;   <a href="#pdfwatermarker.watermark.lib.gui">pdfwatermarker.watermark.lib.gui</a>
- &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
  &#8226;   <a href="#watermarker.py">watermarker.py</a>
 
   </div>
@@ -10826,6 +10967,7 @@ imports:
 imported by:
     <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.encrypt.encrypt">pdfwatermarker.encrypt.encrypt</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
 
@@ -10837,9 +10979,9 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#os">os</a>
- &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.encrypt">pdfwatermarker.encrypt</a>
  &#8226;   <a href="#pdfwatermarker.thirdparty.PyPDF2">pdfwatermarker.thirdparty.PyPDF2</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
  &#8226;   <a href="#pdfwatermarker.utils.override">pdfwatermarker.utils.override</a>
 
   </div>
@@ -10859,12 +11001,12 @@ imports:
     <a href="#os">os</a>
  &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.thirdparty.PyPDF2">pdfwatermarker.thirdparty.PyPDF2</a>
+ &#8226;   <a href="#pdfwatermarker.utils.gui">pdfwatermarker.utils.gui</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#pdfwatermarker">pdfwatermarker</a>
- &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
 
@@ -11171,6 +11313,8 @@ imports:
  &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.thirdparty.PyPDF2">pdfwatermarker.thirdparty.PyPDF2</a>
  &#8226;   <a href="#pdfwatermarker.thirdparty.PyPDF2.pdf">pdfwatermarker.thirdparty.PyPDF2.pdf</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.utils.info">pdfwatermarker.utils.info</a>
  &#8226;   <a href="#tempfile">tempfile</a>
 
   </div>
@@ -11190,6 +11334,7 @@ imported by:
 imports:
     <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.utils.gui">pdfwatermarker.utils.gui</a>
  &#8226;   <a href="#pdfwatermarker.utils.info">pdfwatermarker.utils.info</a>
  &#8226;   <a href="#pdfwatermarker.utils.path">pdfwatermarker.utils.path</a>
  &#8226;   <a href="#pdfwatermarker.utils.view">pdfwatermarker.utils.view</a>
@@ -11199,12 +11344,39 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfwatermarker">pdfwatermarker</a>
+ &#8226;   <a href="#pdfwatermarker.encrypt.encrypt">pdfwatermarker.encrypt.encrypt</a>
+ &#8226;   <a href="#pdfwatermarker.upscale">pdfwatermarker.upscale</a>
  &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.utils.gui">pdfwatermarker.utils.gui</a>
  &#8226;   <a href="#pdfwatermarker.utils.info">pdfwatermarker.utils.info</a>
  &#8226;   <a href="#pdfwatermarker.utils.override">pdfwatermarker.utils.override</a>
  &#8226;   <a href="#pdfwatermarker.utils.path">pdfwatermarker.utils.path</a>
  &#8226;   <a href="#pdfwatermarker.utils.view">pdfwatermarker.utils.view</a>
  &#8226;   <a href="#pdfwatermarker.utils.write">pdfwatermarker.utils.write</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.add">pdfwatermarker.watermark.add</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdfwatermarker.utils.gui"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/pdfwatermarker/utils/gui.py" type="text/plain"><tt>pdfwatermarker.utils.gui</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PySimpleGUI">PySimpleGUI</a>
+ &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdfwatermarker.merge">pdfwatermarker.merge</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
 
@@ -11221,7 +11393,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+    <a href="#pdfwatermarker.upscale">pdfwatermarker.upscale</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
  &#8226;   <a href="#pdfwatermarker.watermark.add">pdfwatermarker.watermark.add</a>
 
   </div>
@@ -11263,6 +11436,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
 
@@ -11281,6 +11455,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
 
@@ -11316,8 +11491,9 @@ imports:
 imported by:
     <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.watermark.add">pdfwatermarker.watermark.add</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
  &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
- &#8226;   <a href="#pdfwatermarker.watermark.lib">pdfwatermarker.watermark.lib</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
@@ -11330,10 +11506,10 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#pdfrw">pdfrw</a>
- &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.rotate">pdfwatermarker.rotate</a>
  &#8226;   <a href="#pdfwatermarker.thirdparty.PyPDF2">pdfwatermarker.thirdparty.PyPDF2</a>
  &#8226;   <a href="#pdfwatermarker.upscale">pdfwatermarker.upscale</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
  &#8226;   <a href="#pdfwatermarker.utils.info">pdfwatermarker.utils.info</a>
  &#8226;   <a href="#pdfwatermarker.watermark">pdfwatermarker.watermark</a>
  &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
@@ -11349,29 +11525,25 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="pdfwatermarker.watermark.draw"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/pdfwatermarker/watermark/draw.py" type="text/plain"><tt>pdfwatermarker.watermark.draw</tt></a>
+  <a name="pdfwatermarker.watermark.canvas"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/pdfwatermarker/watermark/canvas.py" type="text/plain"><tt>pdfwatermarker.watermark.canvas</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
+ &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.ImageEnhance">PIL.ImageEnhance</a>
- &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
  &#8226;   <a href="#pdfwatermarker.watermark">pdfwatermarker.watermark</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
- &#8226;   <a href="#reportlab.pdfbase">reportlab.pdfbase</a>
- &#8226;   <a href="#reportlab.pdfbase.pdfmetrics">reportlab.pdfbase.pdfmetrics</a>
- &#8226;   <a href="#reportlab.pdfbase.ttfonts">reportlab.pdfbase.ttfonts</a>
- &#8226;   <a href="#reportlab.pdfgen.canvas">reportlab.pdfgen.canvas</a>
- &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#tempfile">tempfile</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfwatermarker.watermark.lib.gui">pdfwatermarker.watermark.lib.gui</a>
+    <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
  &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
@@ -11379,37 +11551,51 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="pdfwatermarker.watermark.lib"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/pdfwatermarker/watermark/lib/__init__.py" type="text/plain"><tt>pdfwatermarker.watermark.lib</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#pdfwatermarker.watermark">pdfwatermarker.watermark</a>
- &#8226;   <a href="#pdfwatermarker.watermark.lib.gui">pdfwatermarker.watermark.lib.gui</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pdfwatermarker.watermark.lib.gui">pdfwatermarker.watermark.lib.gui</a>
- &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pdfwatermarker.watermark.lib.gui"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/pdfwatermarker/watermark/lib/gui.py" type="text/plain"><tt>pdfwatermarker.watermark.lib.gui</tt></a>
+  <a name="pdfwatermarker.watermark.draw"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/pdfwatermarker/watermark/draw.py" type="text/plain"><tt>pdfwatermarker.watermark.draw</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#PySimpleGUI">PySimpleGUI</a>
- &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
- &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
- &#8226;   <a href="#pdfwatermarker.watermark.lib">pdfwatermarker.watermark.lib</a>
+    <a href="#io">io</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.watermark">pdfwatermarker.watermark</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
+ &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
+ &#8226;   <a href="#reportlab.pdfbase.pdfmetrics">reportlab.pdfbase.pdfmetrics</a>
+ &#8226;   <a href="#reportlab.pdfgen.canvas">reportlab.pdfgen.canvas</a>
+ &#8226;   <a href="#tempfile">tempfile</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfwatermarker.watermark.lib">pdfwatermarker.watermark.lib</a>
+    <a href="#pdfwatermarker.utils.gui">pdfwatermarker.utils.gui</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdfwatermarker.watermark.utils"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfwatermarker/pdfwatermarker/watermark/utils.py" type="text/plain"><tt>pdfwatermarker.watermark.utils</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#os">os</a>
+ &#8226;   <a href="#pdfwatermarker.utils">pdfwatermarker.utils</a>
+ &#8226;   <a href="#pdfwatermarker.watermark">pdfwatermarker.watermark</a>
+ &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
+ &#8226;   <a href="#reportlab.pdfbase">reportlab.pdfbase</a>
+ &#8226;   <a href="#reportlab.pdfbase.pdfmetrics">reportlab.pdfbase.pdfmetrics</a>
+ &#8226;   <a href="#reportlab.pdfbase.ttfonts">reportlab.pdfbase.ttfonts</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
 
   </div>
 
@@ -11423,12 +11609,15 @@ imports:
     <a href="#datetime">datetime</a>
  &#8226;   <a href="#looptools">looptools</a>
  &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#pdfwatermarker">pdfwatermarker</a>
- &#8226;   <a href="#pdfwatermarker.merge">pdfwatermarker.merge</a>
+ &#8226;   <a href="#pdfwatermarker.encrypt">pdfwatermarker.encrypt</a>
+ &#8226;   <a href="#pdfwatermarker.utils.gui">pdfwatermarker.utils.gui</a>
+ &#8226;   <a href="#pdfwatermarker.utils.path">pdfwatermarker.utils.path</a>
+ &#8226;   <a href="#pdfwatermarker.utils.view">pdfwatermarker.utils.view</a>
  &#8226;   <a href="#pdfwatermarker.watermark">pdfwatermarker.watermark</a>
  &#8226;   <a href="#pdfwatermarker.watermark.add">pdfwatermarker.watermark.add</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
  &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
- &#8226;   <a href="#pdfwatermarker.watermark.lib">pdfwatermarker.watermark.lib</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#shutil">shutil</a>
  &#8226;   <a href="#tempfile">tempfile</a>
 
@@ -12296,7 +12485,9 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfwatermarker.watermark.add">pdfwatermarker.watermark.add</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
  &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#reportlab.lib">reportlab.lib</a>
  &#8226;   <a href="#reportlab.rl_config">reportlab.rl_config</a>
 
@@ -12599,7 +12790,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+    <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#reportlab.lib.pdfencrypt">reportlab.lib.pdfencrypt</a>
  &#8226;   <a href="#reportlab.pdfbase._fontdata">reportlab.pdfbase._fontdata</a>
  &#8226;   <a href="#reportlab.pdfbase._fontdata_enc_macexpert">reportlab.pdfbase._fontdata_enc_macexpert</a>
@@ -13126,6 +13317,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#reportlab.lib.textsplit">reportlab.lib.textsplit</a>
  &#8226;   <a href="#reportlab.lib.utils">reportlab.lib.utils</a>
  &#8226;   <a href="#reportlab.pdfbase">reportlab.pdfbase</a>
@@ -13219,7 +13411,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+    <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
 
   </div>
 
@@ -14278,6 +14470,7 @@ imported by:
  &#8226;   <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
+ &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
@@ -14365,7 +14558,7 @@ imported by:
  &#8226;   <a href="#pdfwatermarker.thirdparty.PyPDF2.pdf">pdfwatermarker.thirdparty.PyPDF2.pdf</a>
  &#8226;   <a href="#pdfwatermarker.thirdparty.PyPDF2.utils">pdfwatermarker.thirdparty.PyPDF2.utils</a>
  &#8226;   <a href="#pdfwatermarker.utils.path">pdfwatermarker.utils.path</a>
- &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.utils">pdfwatermarker.watermark.utils</a>
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#platform">platform</a>
@@ -14512,6 +14705,7 @@ imported by:
  &#8226;   <a href="#pdfwatermarker.slice">pdfwatermarker.slice</a>
  &#8226;   <a href="#pdfwatermarker.upscale">pdfwatermarker.upscale</a>
  &#8226;   <a href="#pdfwatermarker.watermark.add">pdfwatermarker.watermark.add</a>
+ &#8226;   <a href="#pdfwatermarker.watermark.canvas">pdfwatermarker.watermark.canvas</a>
  &#8226;   <a href="#pdfwatermarker.watermark.draw">pdfwatermarker.watermark.draw</a>
  &#8226;   <a href="#pdfwatermarker.watermark.watermark">pdfwatermarker.watermark.watermark</a>
  &#8226;   <a href="#pipes">pipes</a>

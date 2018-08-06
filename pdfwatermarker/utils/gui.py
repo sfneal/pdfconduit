@@ -108,7 +108,6 @@ class GUI:
             'user_pw': user_pw,
             'owner_pw': owner_pw,
         }
-        print(self.params)
         return self.params
 
 
