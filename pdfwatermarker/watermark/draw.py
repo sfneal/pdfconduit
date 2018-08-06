@@ -17,7 +17,7 @@ def available_images():
 
 
 def center_str(txt, font, size, offset=120):
-    page_width = letter[1]
+    page_width = LETTER[0]
     text_width = stringWidth(txt, fontName=font, fontSize=size)
     return ((page_width - text_width) / 2.0) + offset
 
@@ -87,7 +87,12 @@ class WatermarkDraw(Draw):
         self.can.setFillColor(canvas_string.color, canvas_string.opacity)
 
         if canvas_string.x_centered:
-            x = center_str(canvas_string.string, canvas_string.font, canvas_string.size)
+            x = center_str(canvas_string.string, canvas_string.font, canvas_string.size, offset=20)
         else:
             x = canvas_string.x
-        self.can.drawString(x=x, y=canvas_string.y, text=canvas_string.string)
+
+        if canvas_string.y_centered:
+            y = ((LETTER[1]) / 2)
+        else:
+            y = canvas_string.y
+        self.can.drawString(x=x, y=y, text=canvas_string.string)

@@ -8,7 +8,7 @@ from pdfwatermarker.watermark.utils import FONT, resource_path, bundle_dir
 class CanvasStr:
     """Canvas string data object used for storing canvas.drawString parameters."""
     def __init__(self, string, font='Vera', color='black', size=40, opacity=0.1, x=None, y=None,
-                 x_centered=True):
+                 x_centered=True, y_centered=False):
         self.string = string
         self.font = font
         self.color = color
@@ -17,6 +17,7 @@ class CanvasStr:
         self.x = x
         self.y = y
         self.x_centered = x_centered
+        self.y_centered = y_centered
 
 
 class CanvasImg:
@@ -64,12 +65,6 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
         im.convert('L')
     im.save(dst)
     return dst
-
-
-def centered_text(text, page_width, drawing, font):
-    text_width = drawing.textsize(text, font=font)
-    s = (page_width[0] - text_width[0]) / 2
-    return s
 
 
 class DrawPIL:
