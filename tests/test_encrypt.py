@@ -1,6 +1,5 @@
 # Test encrypt module reliability
-from pdfwatermarker import Encrypt
-from pdfwatermarker.utils import info
+from pdfwatermarker import Encrypt, info
 from tests import pdf
 
 

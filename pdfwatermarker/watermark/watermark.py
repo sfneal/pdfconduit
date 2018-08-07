@@ -199,7 +199,7 @@ class Watermark:
             self.receipt.add('Permissions', 'Allow printing')
         else:
             self.receipt.add('Permissions', 'Allow ALL')
-        p = Encrypt(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
-                    encrypt_128=encrypt_128, restrict_permission=restrict_permission)
+        p = str(Encrypt(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
+                        encrypt_128=encrypt_128, restrict_permission=restrict_permission))
         self.receipt.add('Secured PDF', os.path.basename(p))
         return p
