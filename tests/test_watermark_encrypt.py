@@ -1,6 +1,6 @@
 from pdfwatermarker import Watermark, info
 import os
-from . import directory, pdf
+from tests import directory, pdf
 
 
 def main():

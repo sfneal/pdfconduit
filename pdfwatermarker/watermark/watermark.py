@@ -8,7 +8,7 @@ from pdfwatermarker.watermark.lib.gui import gui_watermark
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker.watermark.lib import Receipt, bundle_dir
 from pdfwatermarker.utils import add_suffix, resource_path, open_window
-from pdfwatermarker.encrypt import encrypt
+from pdfwatermarker.encrypt import Encrypt
 from pdfwatermarker.watermark.draw import WatermarkDraw, CanvasObjects, CanvasStr, CanvasImg, DrawPIL
 
 default_image_dir = resource_path(bundle_dir() + os.sep + 'img')
@@ -200,7 +200,7 @@ class Watermark:
             self.receipt.add('Permissions', 'Allow printing')
         else:
             self.receipt.add('Permissions', 'Allow ALL')
-        p = encrypt(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
+        p = Encrypt(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
                     encrypt_128=encrypt_128, restrict_permission=restrict_permission)
         self.receipt.add('Secured PDF', os.path.basename(p))
         return p

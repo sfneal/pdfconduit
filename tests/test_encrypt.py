@@ -1,7 +1,7 @@
 # Test encrypt module reliability
-from pdfwatermarker import encrypt
+from pdfwatermarker import Encrypt
 import os
-from . import directory, pdf
+from tests import directory, pdf
 
 
 def main():
@@ -10,7 +10,7 @@ def main():
     if os.path.exists(pdf):
         user_pw = 'baz'
         owner_pw = 'foo'
-        encrypt(pdf, user_pw, owner_pw)
+        Encrypt(pdf, user_pw, owner_pw)
         print('Success!')
     else:
         print('Failed!')
