@@ -5,7 +5,7 @@ from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr
 
 
 class Label(WatermarkDraw):
-    def __init__(self, document, label, title_page=False, suffix=None, output=None, tempdir=None):
+    def __init__(self, document, label, title_page=False, suffix='labeled', output=None, tempdir=None):
         super(Label, self).__init__(self._create_canvas_objects(label, title_page), tempdir=tempdir)
         self.document = document
         self.watermark = self._write()
