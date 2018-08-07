@@ -17,6 +17,25 @@ default_image = resource_path('Wide.png')
 
 class Watermark:
     def __init__(self, document, remove_temps=True, open_file=True, tempdir=mkdtemp(), receipt=None, use_receipt=True):
+        """
+        Watermark and encrypt a PDF document.
+
+        Manage watermarking processes from single class initialization.  This class utilizes the draw,
+        add and encrypt modules.
+
+        :param document: str
+            PDF document full path
+        :param remove_temps: bool
+            Remove temporary files after completion
+        :param open_file: bool
+            Open file after completion
+        :param tempdir: function or str
+            Temporary directory for file writing
+        :param receipt: cls
+            Use existing Receipt object if already initiated
+        :param use_receipt: bool
+            Print receipt information to console and write to file
+        """
         self.time = Timer()
         self.document_og = document
         self.document = self.document_og
@@ -46,7 +65,33 @@ class Watermark:
         return self.document
 
     def draw(self, text1, text2=None, copyright=True, image=default_image, rotate=30, opacity=0.08, compress=0,
-             add=False, flatten=False):
+             flatten=False, add=False):
+        """
+        Draw watermark PDF file.
+
+        Create watermark using either a reportlabs canvas or a PIL image.
+
+        :param text1: str
+            Text line 1
+        :param text2: str
+            Text line 2
+        :param copyright: bool
+            Draw copyright and year to canvas
+        :param image: str
+            Logo image to be used as base watermark
+        :param rotate: int
+            Degrees to rotate canvas by
+        :param opacity: float
+            Watermark opacity
+        :param compress: bool
+            Compress watermark contents  (not entire PDF)
+        :param flatten: bool
+            Draw watermark with multiple layers or a single flattened layer
+        :param add: bool
+            Add watermark to original document
+        :return: str
+            Watermark PDF file full path
+        """
 
         def get_objects():
             # Initialize CanvasObjects collector class and add objects
@@ -94,6 +139,25 @@ class Watermark:
             return self.cleanup()
 
     def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked'):
+        """
+        Add a watermark file to an existing PDF document.
+
+        Rotate and upscale watermark file as needed to fit existing PDF document.  Watermark can be overlayed or
+        placed underneath.
+
+        :param document: str
+            PDF document full path
+        :param watermark: str
+            Watermark PDF full path
+        :param underneath: bool
+            Place watermark either under or over existing PDF document
+        :param output: str
+            Output file path
+        :param suffix: str
+            Suffix to append to existing PDF document file name
+        :return: str
+            Watermarked PDF Document full path
+        """
         self.receipt.add('WM Placement', 'Overlay' if underneath else 'Underneath')
         if not watermark:
             watermark = self.watermark
@@ -107,6 +171,25 @@ class Watermark:
         return self.document
 
     def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True):
+        """
+        Encrypt a PDF document to add passwords and restrict permissions.
+
+        Add a user password that must be entered to view document and a owner password that must be entered to alter
+        permissions and security settings.  Encryption keys are 128 bit when encrypt_128 is True and 40 bit when
+        False.  By default permissions are restricted to print only, when set to false all permissions are allowed.
+        TODO: Add additional permission parameters
+
+        :param user_pw: str
+            User password required to open and view PDF document
+        :param owner_pw: str
+            Owner password required to alter security settings and permissions
+        :param encrypt_128: bool
+            Encrypt PDF document using 128 bit keys
+        :param restrict_permission: bool
+            Restrict permissions to print only
+        :return: str
+            Encrypted PDF full path
+        """
         self.receipt.add('User pw', user_pw)
         self.receipt.add('Owner pw', owner_pw)
         if encrypt_128:

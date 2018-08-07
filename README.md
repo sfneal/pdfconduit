@@ -133,7 +133,8 @@ Outlined below are basic uses of the main classes and functions of the PDF water
 * Merge() - Concatenate multiple PDF documents into one PDF
 * slicer() - Save range of pages in PDF document to a new PDF file
 
-## Usage - Generate watermark, add watermark to file and encrypt file
+## Usage - Watermark
+Generate watermark, add watermark to file and encrypt file
 #### Using module imports.
 
 ```python
@@ -229,19 +230,162 @@ Watermark.add(underneath=True)  # Underneath
 Watermark.draw(opacity=0.09)  # Set opacity to 9%
 ```
 
-## Usage - Encrypt PDF file
+## Usage - Encrypt
+Encrypt a PDF file to add passwords and restrict permissions.
 #### Using module imports.
 ```python
 from pdfwatermarker import protect
 
-# Set parameters
-pdf = mypdfdoc.pdf
-user_pw = 'baz'
-owner_pw = 'foo'
+# Required parameters
+pdf = 'mypdfdoc.pdf'
+user_pw = 'baz'  # Password to open and view PDF
+owner_pw = 'foo'  # Password to change security settings
 
-# Encrypt 
+# Optional parameters
+encrypt_128 = True  # Encrypt using 128 bits (40 bits when False)
+restrict_permission = True  # Restrict permissions to print only (all allowed when false)
+
+# Encrypt PDF document
+encrypted = encrypt(pdf, user_pw, owner_pw, encrypt_128, restrict_permission)
+>>> mypdfdoc_secured.pdf
 ```
 
+## Usage - Merge
+Merge multiple PDF files into one concatenated PDF file.
+#### Using module imports.
+```python
+from pdfwatermarker import Merge
+
+# List of PDF paths
+pdfs = ['doc1.pdf', 'doc2.pdf', 'doc3.pdf']
+
+# Merge PDF files
+merged = Merge(pdfs)
+>>> merged.pdf
+```
+or
+
+```python
+from pdfwatermarker import Merge
+
+# List of PDF paths
+pdfs = ['doc1.pdf', 'doc2.pdf', 'doc3.pdf']
+
+# Specify output file name
+output = 'combined doc'
+
+# Merge PDF files
+merged = Merge(pdfs, output_name=output)
+>>> combined doc.pdf
+```
+
+## Usage - Rotate
+Rotate a PDF document by increments of 90 degrees.
+#### Using module imports.
+```python
+from pdfwatermarker import rotate
+
+pdf = 'mypdfdoc.pdf'  # PDF to-be rotated
+rotate = 90  # Degress of rotation (clockwise)
+
+# Rotate PDF file
+rotated = rotate(pdf, rotate)
+>>> mypdfdoc_rotated.pdf
+```
+
+## Usage - Slice
+Slice a PDF document to extract a range of page.
+#### Using module imports.
+```python
+from pdfwatermarker import slicer
+
+# Parameters
+pdf = 'mypdfdoc.pdf'
+first_page = 4
+last_page = 17
+
+# Slice PDF file
+sliced = slicer(pdf, first_page, last_page)
+>>> mypdfdoc_sliced.pdf
+```
+
+## Usage - Label
+Add a text label to the bottom left corner of each page of PDF file.
+#### Using module imports.
+```python
+from pdfwatermarker import Label
+
+# Parameters
+pdf = 'mypdfdoc.pdf'
+label = 'Document updated 7/10/18'
+
+# Label PDF file
+labeled = Label(pdf, label)
+>>> mypdfdoc_labeled.pdf
+```
+[Original](https://i.imgur.com/4plXGHN.png)
+
+[Labeled](https://i.imgur.com/UvEMNxy.png)
+
+## Functionality
+### Watermark()
+```python
+Watermark(document, remove_temps=True, open_file=True, tempdir=mkdtemp(), receipt=None, use_receipt=True)
+```
+Parameters | Type | Description
+--- | --- | ---
+document | `str ` | PDF document full path
+remove_temps | `bool` | Remove temporary files after completion
+open_file | `bool` | Open file after completion
+tempdir | `str or function` | Temporary directory for file writing
+receipt | `cls` | Use existing Receipt object if already initiated
+use_receipt | `bool` | Print receipt information to console and write to file
+
+### Watermark().draw()
+```python
+Watermark().draw(self, text1, text2=None, copyright=True, image=default_image,
+	 rotate=30, opacity=0.08, compress=0, add=False, flatten=False)
+```
+Parameters | Type | Description
+--- | --- | ---
+text1 | `str ` | Text line 1
+text2 | `str ` | Text line 2
+copyright | `bool` | Draw copyright and year to canvas
+image | `str` | Logo image to be used as base watermark
+rotate | `int` | Degrees to rotate canvas by
+opacity | `float` | Watermark opacity
+compress | `bool` | Compress watermark contents (not entire PDF)
+flatten | `bool` | Draw watermark with multiple layers or a single flattened layer
+add | `bool` | Add watermark to original document
+
+**Return**: Watermark file full path
+
+### Watermark().add()
+```python
+Watermark().add(document=None, watermark=None, underneath=False, output=None, suffix='watermarked')
+```
+Parameters | Type | Description
+--- | --- | ---
+document | `str ` | PDF document full path
+watermark | `str ` | Watermark PDF full path
+underneath | `bool` | Place watermark either under or over existing PDF document
+output | `str` | Output file path
+suffix | `str ` | Suffix to append to existing PDF document file name
+
+**Return**: Watermarked PDF document full path
+
+### Watermark().encrypt()
+```python
+Watermark().encrypt(user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True)
+```
+Parameters | Type | Description
+--- | --- | ---
+user_pw | `str ` | User password required to open and view PDF document
+owner_pw | `str ` | Owner password required to alter security settings and permissions
+encrypt_128 | `bool` | Encrypt PDF document using 128 bit keys
+restrict_permission | `str` | Restrict permissions to print only
+
+**Return**: Encrypted PDF document full path
 
 ## Challenges
 
