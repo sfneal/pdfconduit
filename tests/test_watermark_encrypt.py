@@ -4,7 +4,7 @@ from tests import pdf
 
 
 def main():
-    print('Testing Watermark class reliability')
+    print('Testing Watermark draw, add and encrypt functionality')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
