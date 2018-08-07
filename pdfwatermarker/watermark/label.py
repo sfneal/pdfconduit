@@ -27,7 +27,7 @@ class Label(WatermarkDraw):
             objects.add(CanvasStr(label, size=60, opacity=1, y_centered=True))
         return objects
 
-    def write(self, cleanup=False):
+    def write(self, cleanup=True):
         wm = Watermark(self.document, tempdir=self.dir, use_receipt=False, open_file=False, remove_temps=True)
         labeled = wm.add(watermark=self.watermark, output=self.output)
         if cleanup:
