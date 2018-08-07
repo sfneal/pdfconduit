@@ -16,39 +16,46 @@ class EncryptParams:
         return str(self.__dict__)
 
 
-def encrypt(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
-    """
-    Password protect PDF file and allow all other permissions.
-    Utilizes PyPDF2 reader and writer classes.
-    """
-    # Create output filename if not already set
-    if not output:
-        output = add_suffix(pdf, 'secured')
+class Encrypt:
+    def __init__(self, pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
+        """Password protect PDF file and allow all other permissions."""
+        self.pdf = pdf
+        self.user_pw = user_pw
+        self.owner_pw = owner_pw
+        self.output = add_suffix(pdf, 'secured') if not output else output
+        self.encrypt_128 = encrypt_128
+        self.restrict_permission = restrict_permission
+        self.encrypt()
 
-    # Create PDF writer object
-    pdf_writer = PdfFileWriter2()
-    with open(pdf, 'rb') as pdf_file:
-        # Read opened PDF file
-        pdf_reader = PdfFileReader(pdf_file)
+    def __str__(self):
+        return str(self.output)
 
-        # Add each page from source PDF
-        for page_num in range(pdf_reader.numPages):
-            page = pdf_reader.getPage(page_num)
-            pdf_writer.addPage(page)
+    def encrypt(self):
+        # Create PDF writer object
+        pdf_writer = PdfFileWriter2()
+        with open(self.pdf, 'rb') as pdf_file:
+            # Read opened PDF file
+            pdf_reader = PdfFileReader(pdf_file)
 
-        # Apply encryption to writer object
-        pdf_writer.encrypt(user_pw, owner_pw, use_128bit=encrypt_128, restrict_permission=restrict_permission)
+            # Add each page from source PDF
+            for page_num in range(pdf_reader.numPages):
+                page = pdf_reader.getPage(page_num)
+                pdf_writer.addPage(page)
 
-        pdf_writer.addMetadata({
-            '/Producer': 'pdfwatermarker',
-            '/Creator': 'HPA Design',
-            '/Author': 'HPA Design',
-        })
+            # Apply encryption to writer object
+            pdf_writer.encrypt(self.user_pw, self.owner_pw, use_128bit=self.encrypt_128,
+                               restrict_permission=self.restrict_permission)
 
-        # Write encrypted PDF to file
-        with open(output, 'wb') as output_pdf:
-            pdf_writer.write(output_pdf)
-        return output
+            pdf_writer.addMetadata({
+                '/Producer': 'pdfwatermarker',
+                '/Creator': 'HPA Design',
+                '/Author': 'HPA Design',
+            })
+
+            # Write encrypted PDF to file
+            with open(self.output, 'wb') as output_pdf:
+                pdf_writer.write(output_pdf)
+            return self.output
 
 
 PDFTK_PATH = '/opt/pdflabs/pdftk/bin/pdftk'
