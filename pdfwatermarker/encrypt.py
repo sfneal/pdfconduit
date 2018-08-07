@@ -16,14 +16,14 @@ class EncryptParams:
         return str(self.__dict__)
 
 
-def protect(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
+def encrypt(pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
     """
     Password protect PDF file and allow all other permissions.
     Utilizes PyPDF2 reader and writer classes.
     """
     # Create output filename if not already set
     if not output:
-        output = add_suffix(pdf, 'protected')
+        output = add_suffix(pdf, 'secured')
 
     # Create PDF writer object
     pdf_writer = PdfFileWriter2()

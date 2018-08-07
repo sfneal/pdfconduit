@@ -12,7 +12,7 @@ def main():
     w = Watermark(pdf, remove_temps=True)
     w.draw(address, str(town + ', ' + state), opacity=0.08)
     w.add()
-    w.secure('', 'foo')
+    w.encrypt('', 'foo')
     wm = w.cleanup()
 
     if os.path.exists(wm):

@@ -28,4 +28,4 @@ def register_font(font='Vera.ttf'):
 
 FONT = register_font()
 LETTER = letter[1], letter[0]
-image_directory = str(bundle_dir() + os.sep + 'lib' + os.sep + 'img')
+image_directory = str(bundle_dir() + os.sep + 'img')
