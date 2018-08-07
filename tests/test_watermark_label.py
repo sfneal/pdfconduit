@@ -1,4 +1,3 @@
-import shutil
 from pdfwatermarker.watermark.label import Label
 
 

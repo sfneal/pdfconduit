@@ -190,21 +190,13 @@ Watermark.draw(compress=1)  # Compressed
 ``` 
 
 ###### Watermark Flattening
-* Set to layered by default
-* Method in which a watermark file is created
-* Layered
-	* Creates a CanvasStr object for each text layer of the watermark stored in CanvasObjects
-	* Create CanvasImg object for watermark logo image file
-	* Iterate CanvasObjects and draw each to canvas
-	* Save canvas with text objects to layered PDF document
-* Flattened
-	* Draw each text layer to PIL image file instead of a canvas
-	* Store one CanvasImg containing logo image file and text layers in CanvasObjects
-	* Draw CanvasImg to canvas
-	* Save canvas with single image layer
-* Layered vs. Flattened
-	* Layered allows for finer parameter tuning with more options
-	* Flattened makes watermark harder to remove by merging layers
+| | Layered | Flattened
+| --- | --- | --- |
+| | *Finer parameter tuning with more options* | *Watermark harder to remove by merging img layers* |
+| **Construction** | * Creates a CanvasStr object for each text layer <br> * Create CanvasImg object for watermark logo image file | * Draw each text layer to PIL image file <br> * Draw PIL image with text to PIL image with logo to create one image file |
+| **CanvasObjects** | Initiate CanvasObjects() and use CanvasObjects().add() to add each string and image | Initiate CanvasObjects() and use CanvasObjects().add() to one CanvasImg instance |
+| **Draw** | Iterate CanvasObjects and draw each to canvas | Draw CanvasImg to canvas |
+| **Save** | Save canvas with text objects to layered PDF document | Save canvas with single image layer |
 
 ```python
 Watermark.draw(flatten=False)  # Layered
