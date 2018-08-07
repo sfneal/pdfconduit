@@ -2,7 +2,7 @@
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 
 
-def _reader(path, password):
+def _reader(path, password=None, prompt=True):
     """Read PDF and decrypt if encrypted."""
     pdf = PdfFileReader(path)
     # Check that PDF is encrypted
@@ -11,11 +11,18 @@ def _reader(path, password):
         if not password:
             pdf.decrypt('')
             # Try and decrypt PDF using no password, prompt for password
-            if pdf.isEncrypted:
+            if pdf.isEncrypted and prompt:
                 print('No password has been given for encrypted PDF ', path)
                 password = input('Enter Password: ')
+            else:
+                return False
         pdf.decrypt(password)
     return pdf
+
+
+def encrypted(path):
+    """Check weather a PDF is encrypted"""
+    return True if not _reader(path, prompt=False) else False
 
 
 def pages_count(path, password=None):

@@ -14,6 +14,7 @@ def main():
     security = info.security(p.output, user_pw)
 
     try:
+        assert info.encrypted(p.output) is True
         assert security['/Length'] == 128
         assert security['/P'] == -1852
         print('Success!')
