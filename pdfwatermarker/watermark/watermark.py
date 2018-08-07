@@ -11,7 +11,7 @@ from pdfwatermarker.utils import add_suffix, resource_path, open_window
 from pdfwatermarker.encrypt import encrypt
 from pdfwatermarker.watermark.draw import WatermarkDraw, CanvasObjects, CanvasStr, CanvasImg, DrawPIL
 
-default_image_dir = resource_path(bundle_dir() + os.sep + 'lib' + os.sep + 'img')
+default_image_dir = resource_path(bundle_dir() + os.sep + 'img')
 default_image = resource_path('Wide.png')
 
 
