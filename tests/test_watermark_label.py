@@ -1,12 +1,20 @@
-from pdfwatermarker.watermark.label import Label
+import os
+from pdfwatermarker.watermark import Label
 
 
 def main():
-    print('Testing Watermark class reliability')
+    print('Testing Label reliability')
     pdf = 'data/charts.pdf'
     label = 'Last updated 7/10/18'
     l = Label(pdf, label).write()
-    print(l)
+
+    try:
+        # File checks
+        assert os.path.exists(l) is True
+        os.remove(l)
+        print('Success!')
+    except AssertionError:
+        print('Failed!')
 
 
 if __name__ == '__main__':
