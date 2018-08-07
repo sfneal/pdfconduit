@@ -23,8 +23,8 @@ def main():
     # output pdf file name
     output = 'combined_example.pdf'
 
-    # calling pdf merge function
-    Merge(pdfs=pdf_paths, output_name=output)
+    # Merge PDF files
+    Merge(pdf_paths, output_name=output)
     print('Done!')
 
 

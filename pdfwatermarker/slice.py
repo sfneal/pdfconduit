@@ -1,11 +1,19 @@
 # Slice PDF to remove unwanted pages
+import os
 from tempfile import NamedTemporaryFile
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
+from pdfwatermarker.utils import add_suffix
 
 
-def slicer(document, first_page=None, last_page=None, tempdir=None):
+def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=None):
     """Slice a PDF document to remove pages."""
-    output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
+    # Set output file name
+    if tempdir:
+        output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
+    elif suffix:
+        output = os.path.join(os.path.dirname(document), add_suffix(document, suffix))
+    else:
+        output = NamedTemporaryFile(suffix='.pdf')
 
     # Reindex page selections for simple user input
     first_page = first_page - 1 if not None else None
