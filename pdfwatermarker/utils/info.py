@@ -25,7 +25,7 @@ def encrypted(path):
     return True if not _reader(path, prompt=False) else False
 
 
-def pages_count(path, password=None):
+def pages(path, password=None):
     """Retrieve PDF number of pages"""
     return _reader(path, password).getNumPages()
 
@@ -38,8 +38,7 @@ def metadata(path, password=None):
 def resources(path, password=None):
     """Retrieve contents of each page of PDF"""
     pdf = _reader(path, password)
-    pages = pages_count(path, password)
-    return [pdf.getPage(i) for i in range(pages)]
+    return [pdf.getPage(i) for i in range(pages(path, password))]
 
 
 def security(path, password=None):
