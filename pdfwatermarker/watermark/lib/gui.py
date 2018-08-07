@@ -1,6 +1,6 @@
 import PySimpleGUI as gui
 from pdfwatermarker import __version__
-from pdfwatermarker.watermark.draw import available_images
+from pdfwatermarker.watermark.draw.canvas import available_images
 
 
 def _line(char='_', width=105, size=(75, 1)):

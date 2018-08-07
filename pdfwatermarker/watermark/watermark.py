@@ -106,7 +106,7 @@ class Watermark:
             open_window(self.document)
         return self.document
 
-    def secure(self, user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True):
+    def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True):
         self.receipt.add('User pw', user_pw)
         self.receipt.add('Owner pw', owner_pw)
         if encrypt_128:
@@ -143,7 +143,7 @@ class WatermarkGUI:
         wm.add(underneath=self.params['placement']['underneath'])
 
         if self.params['encrypt']:
-            wm.secure(self.params['user_pw'], self.params['owner_pw'])
+            wm.encrypt(self.params['user_pw'], self.params['owner_pw'])
         wm.cleanup()
 
         try:
