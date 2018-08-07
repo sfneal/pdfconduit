@@ -335,8 +335,8 @@ use_receipt | `bool` | Print receipt information to console and write to file
 
 ### Watermark().draw()
 ```python
-Watermark().draw(self, text1, text2=None, copyright=True, image=default_image,
-	 rotate=30, opacity=0.08, compress=0, add=False, flatten=False)
+def draw(self, text1, text2=None, copyright=True, image=default_image, rotate=30,
+		 opacity=0.08, compress=0, flatten=False, add=False):
 ```
 Parameters | Type | Description
 --- | --- | ---
@@ -345,16 +345,16 @@ text2 | `str ` | Text line 2
 copyright | `bool` | Draw copyright and year to canvas
 image | `str` | Logo image to be used as base watermark
 rotate | `int` | Degrees to rotate canvas by
-opacity | `float` | Watermark opacity
+opacity | `float` | Watermark opacity``
 compress | `bool` | Compress watermark contents (not entire PDF)
 flatten | `bool` | Draw watermark with multiple layers or a single flattened layer
-add | `bool` | Add watermark to original document
+add | `bool` | Add watermark to original document``
 
 **Return**: Watermark file full path
 
 ### Watermark().add()
 ```python
-Watermark().add(document=None, watermark=None, underneath=False, output=None, suffix='watermarked')
+def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked'):
 ```
 Parameters | Type | Description
 --- | --- | ---
@@ -368,7 +368,7 @@ suffix | `str ` | Suffix to append to existing PDF document file name
 
 ### Watermark().encrypt()
 ```python
-Watermark().encrypt(user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True)
+def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True):
 ```
 Parameters | Type | Description
 --- | --- | ---
