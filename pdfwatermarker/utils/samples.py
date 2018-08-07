@@ -27,7 +27,7 @@ def opacity(source, dst):
     samples = [_title('Opacity Comparisons')]
     _range = range(4, 25)[::3]
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=True)
-    if info.pages_count(source) > 2:
+    if info.pages(source) > 2:
         source = slicer(source, 1, 1, wm.tempdir)
     for i in _range:
         o = i * .01
@@ -42,7 +42,7 @@ def opacity(source, dst):
 
 def placement(source, dst):
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=True)
-    if info.pages_count(source) > 2:
+    if info.pages(source) > 2:
         source = slicer(source, 1, 1, wm.tempdir)
     wtrmrk = wm.draw(text1='200 Stonewall Blvd',
                      text2='Wrentham, MA')
@@ -58,7 +58,7 @@ def placement(source, dst):
 
 def layering(source, dst):
     wm = Watermark(source, use_receipt=False, open_file=False, remove_temps=True)
-    if info.pages_count(source) > 2:
+    if info.pages(source) > 2:
         source = slicer(source, 1, 1, wm.tempdir)
     flat = wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', flatten=True)
     layered = wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', flatten=False)
