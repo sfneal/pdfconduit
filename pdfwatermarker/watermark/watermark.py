@@ -4,6 +4,7 @@ import shutil
 from datetime import datetime
 from tempfile import mkdtemp
 from looptools import Timer
+from pdfwatermarker.watermark.lib.gui import GUI
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker.watermark.lib import Receipt, bundle_dir
 from pdfwatermarker.utils import add_suffix, resource_path, open_window
@@ -124,7 +125,6 @@ class Watermark:
 
 class WatermarkGUI:
     def __init__(self):
-        from pdfwatermarker.utils.gui import GUI
         self.receipt = Receipt()
         self.params = GUI().settings
         self.execute()
