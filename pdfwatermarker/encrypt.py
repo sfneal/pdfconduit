@@ -86,3 +86,12 @@ def secure(pdf, user_pw, owner_pw, restrict_permission=True, pdftk=get_pdftk_pat
         # Execute command
         os.system(command)
         return output
+
+
+def main():
+    from pdfwatermarker.utils.gui import GUI
+    GUI.encrypt()
+
+
+if __name__ == '__main__':
+    main()
