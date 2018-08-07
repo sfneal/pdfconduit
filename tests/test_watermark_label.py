@@ -1,14 +1,13 @@
 import shutil
 from pdfwatermarker.watermark.label import Label
-from tests import pdf, directory
 
 
 def main():
     print('Testing Watermark class reliability')
-    label = 'test'
+    pdf = 'data/charts.pdf'
+    label = 'Last updated 7/10/18'
     l = Label(pdf, label).write()
     print(l)
-    shutil.move(l, directory)
 
 
 if __name__ == '__main__':
