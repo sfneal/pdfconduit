@@ -31,9 +31,6 @@ def _line(char='_', width=105, size=(75, 1)):
 
 
 class GUI:
-    def __init__(self):
-        pass
-
     @staticmethod
     def encrypt():
         from pdfwatermarker.encrypt import Encrypt

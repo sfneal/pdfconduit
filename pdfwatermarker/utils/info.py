@@ -38,7 +38,7 @@ def resources(path, password=None):
 def security(path, password=None):
     """Print security object information for a pdf document"""
     pdf = _reader(path, password)
-    return [(k, v) for i in pdf.resolvedObjects.items() for k, v in i[1].items()]
+    return {k: v for i in pdf.resolvedObjects.items() for k, v in i[1].items()}
 
 
 def dimensions(file_name, password=None):

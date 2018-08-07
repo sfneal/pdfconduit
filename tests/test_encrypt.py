@@ -1,18 +1,23 @@
 # Test encrypt module reliability
 from pdfwatermarker import Encrypt
-import os
-from tests import directory, pdf
+from pdfwatermarker.utils import info
+from tests import pdf
 
 
 def main():
-    print('Testing encrypt module reliability')
+    print('Testing encrypt module reliability...')
+    owner_pw = 'foo'
+    user_pw = 'baz'
 
-    if os.path.exists(pdf):
-        user_pw = 'baz'
-        owner_pw = 'foo'
-        Encrypt(pdf, user_pw, owner_pw)
+    p = Encrypt(pdf, user_pw, owner_pw)
+
+    security = info.security(p.output, user_pw)
+
+    try:
+        assert security['/Length'] == 128
+        assert security['/P'] == -1852
         print('Success!')
-    else:
+    except AssertionError:
         print('Failed!')
 
 
