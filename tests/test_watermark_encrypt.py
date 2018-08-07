@@ -12,7 +12,7 @@ def main():
     owner_pw = 'foo'
     user_pw = 'baz'
 
-    w = Watermark(pdf, remove_temps=True)
+    w = Watermark(pdf, remove_temps=True, use_receipt=False)
     wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08)
     added = w.add()
     encrypted = w.encrypt(user_pw, owner_pw)
@@ -23,7 +23,7 @@ def main():
     try:
         # File checks
         assert os.path.exists(wtrmrk) is False
-        assert os.path.exists(added) is False
+        assert os.path.exists(added) is True
         assert os.path.exists(encrypted) is True
 
         # Encryption checks
