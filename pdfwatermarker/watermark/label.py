@@ -1,7 +1,7 @@
 from pdfwatermarker.watermark.watermark import Watermark
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.utils.path import add_suffix
-from pdfwatermarker.watermark.draw.image import CanvasObjects, CanvasStr
+from pdfwatermarker.watermark.draw import CanvasObjects, CanvasStr
 
 
 class Label(WatermarkDraw):
