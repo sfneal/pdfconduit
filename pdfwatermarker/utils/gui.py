@@ -37,6 +37,7 @@ class GUI:
     @staticmethod
     def encrypt():
         from pdfwatermarker.encrypt import Encrypt
+
         def form():
             title = 'PDF Encryptor'
             label_w = 20

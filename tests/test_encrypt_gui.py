@@ -2,8 +2,7 @@ from pdfwatermarker import GUI
 
 
 def main():
-    e = GUI.encrypt()
-    print(e)
+    print(GUI.encrypt())
 
 
 if __name__ == '__main__':
