@@ -4,7 +4,6 @@ import shutil
 from datetime import datetime
 from tempfile import mkdtemp
 from looptools import Timer
-from pdfwatermarker.utils.gui import gui_watermark
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker.watermark.lib import Receipt, bundle_dir
 from pdfwatermarker.utils import add_suffix, resource_path, open_window
@@ -204,34 +203,3 @@ class Watermark:
                     encrypt_128=encrypt_128, restrict_permission=restrict_permission)
         self.receipt.add('Secured PDF', os.path.basename(p))
         return p
-
-
-class WatermarkGUI:
-    def __init__(self):
-        self.receipt = Receipt()
-        self.params = gui_watermark().settings
-        self.execute()
-
-    def execute(self):
-        self.receipt.set_dst(self.params['pdf'])
-
-        # Execute Watermark class
-        wm = Watermark(self.params['pdf'], receipt=self.receipt)
-        wm.draw(text1=self.params['address'],
-                text2=str(self.params['town'] + ', ' + self.params['state']),
-                image=self.params['image'],
-                opacity=self.params['opacity'],
-                compress=self.params['compression']['compressed'],
-                flatten=self.params['flattening']['flattened'])
-        wm.add(underneath=self.params['placement']['underneath'])
-
-        if self.params['encrypt']:
-            wm.encrypt(self.params['user_pw'], self.params['owner_pw'])
-        wm.cleanup()
-
-        try:
-            print('\nSuccess!')
-            input('~~Press Any Key To Exit~~')
-            quit()
-        except RuntimeError:
-            quit()
