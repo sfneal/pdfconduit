@@ -4,7 +4,7 @@ from tests import pdf
 
 
 def main():
-    print('Testing encrypt module reliability...')
+    print('Testing Encrypt reliability')
     owner_pw = 'foo'
     user_pw = 'baz'
 
