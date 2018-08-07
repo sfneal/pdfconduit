@@ -5,7 +5,7 @@ from tempfile import NamedTemporaryFile, mkdtemp
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from pdfwatermarker.utils import resource_path, write_pdf
-from pdfwatermarker.watermark.canvas import CanvasImg, CanvasStr, img_opacity
+from pdfwatermarker.watermark.draw.image import CanvasImg, CanvasStr, img_opacity
 from pdfwatermarker.watermark.utils import image_directory, LETTER
 
 
