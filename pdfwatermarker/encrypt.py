@@ -5,17 +5,6 @@ from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 from pdfwatermarker.utils.override import PdfFileWriter2
 
 
-class EncryptParams:
-    def __init__(self, user_pw, owner_pw=None, allow_printing=True, output=None):
-        self.user_pw = user_pw
-        self.owner_pw = owner_pw
-        self.allow_printing = allow_printing
-        self.output = output
-
-    def __str__(self):
-        return str(self.__dict__)
-
-
 class Encrypt:
     def __init__(self, pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
         """Password protect PDF file and allow all other permissions."""
