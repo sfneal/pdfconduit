@@ -1,11 +1,9 @@
-from pdfwatermarker import Watermark, info
-import os
-from tests import pdf
-from
+from pdfwatermarker import GUI
 
 
 def main():
-
+    e = GUI.encrypt()
+    print(e)
 
 
 if __name__ == '__main__':

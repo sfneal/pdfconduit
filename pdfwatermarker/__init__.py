@@ -1,4 +1,5 @@
-__all__ = ["upscale", "rotate", "Encrypt", "Merge", "Watermark", "WatermarkGUI", "Label", "WatermarkAdd", "slicer"]
+__all__ = ["upscale", "rotate", "Encrypt", "Merge", "Watermark", "WatermarkGUI", "Label", "WatermarkAdd", "slicer",
+           "GUI"]
 __version__ = '1.0.4'
 __author__ = 'Stephen Neal'
 
@@ -10,3 +11,4 @@ from pdfwatermarker.rotate import rotate
 from pdfwatermarker.encrypt import Encrypt
 from pdfwatermarker.merge import Merge
 from pdfwatermarker.slice import slicer
+from pdfwatermarker.utils.gui import GUI
