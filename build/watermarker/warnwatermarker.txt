@@ -8,6 +8,7 @@ missing module named multiprocessing.get_start_method - imported by multiprocess
 missing module named resource - imported by posix, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named posix - imported by os, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named _posixsubprocess - imported by subprocess, multiprocessing.util, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named 'org.python' - imported by pickle, xml.sax, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named readline - imported by cmd, code, pdb, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 excluded module named _frozen_importlib - imported by importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
@@ -18,10 +19,9 @@ missing module named 'java.lang' - imported by platform, xml.sax._exceptions, C:
 missing module named vms_lib - imported by platform, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named termios - imported by tty, getpass, tqdm._utils, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named grp - imported by shutil, tarfile, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named _dummy_threading - imported by dummy_threading, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named org - imported by copy, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named 'org.python' - imported by pickle, xml.sax, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named cStringIO - imported by pdfwatermarker.thirdparty.PyPDF2.pdf, pdfwatermarker.thirdparty.PyPDF2.filters, pdfwatermarker.thirdparty.PyPDF2.merger, cPickle
 missing module named copy_reg - imported by cStringIO, cPickle
 missing module named 'IPython.display' - imported by tqdm._tqdm_notebook
@@ -43,18 +43,15 @@ missing module named pyphen - imported by reportlab.platypus.paragraph
 missing module named htmlentitydefs - imported by reportlab.platypus.paraparser
 missing module named HTMLParser - imported by reportlab.platypus.paraparser
 missing module named 'tests.test_platypus_tables' - imported by reportlab.platypus.tables
-missing module named reportlab_mods - imported by reportlab
-missing module named 'reportlab.local_rl_mods' - imported by reportlab
-missing module named future_builtins - imported by reportlab
 missing module named jarray - imported by reportlab.lib.utils
 missing module named 'javax.imageio' - imported by reportlab.lib.utils
 missing module named rl_config - imported by reportlab.lib.utils
 missing module named urllib2 - imported by reportlab.lib.utils
 missing module named 'reportlab.lib.pyHnj' - imported by reportlab.lib.utils
 missing module named Image - imported by reportlab.lib.utils
-missing module named Tkinter - imported by PIL.ImageTk
-missing module named olefile - imported by PIL.FpxImagePlugin, PIL.MicImagePlugin
+missing module named olefile - imported by PIL.MicImagePlugin, PIL.FpxImagePlugin
 missing module named UserDict - imported by PIL.PdfParser
+missing module named Tkinter - imported by PIL.ImageTk
 missing module named 'PySide.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt4.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt5.QtCore' - imported by PIL.ImageQt
@@ -69,5 +66,8 @@ missing module named macfs - imported by reportlab.lib.utils
 missing module named __builtin__ - imported by reportlab.lib.utils, PIL.Image
 missing module named StringIO - imported by reportlab.lib.utils
 missing module named cPickle - imported by reportlab.lib.utils
+missing module named reportlab_mods - imported by reportlab
+missing module named 'reportlab.local_rl_mods' - imported by reportlab
+missing module named future_builtins - imported by reportlab
 missing module named pyfribidi2 - imported by reportlab.pdfgen.textobject
 missing module named Crypto - imported by pdfrw.crypt
