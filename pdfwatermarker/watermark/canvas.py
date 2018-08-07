@@ -51,7 +51,6 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
     Returns an image with reduced opacity.
     Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
     """
-    dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
     assert 0 <= opacity <= 1
     im = Image.open(image)
     if im.mode != 'RGBA':
@@ -63,6 +62,7 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
     im.putalpha(alpha)
     if bw:
         im.convert('L')
+    dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
     im.save(dst)
     return dst
 

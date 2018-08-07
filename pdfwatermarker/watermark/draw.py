@@ -3,7 +3,6 @@ import io
 import os
 from tempfile import NamedTemporaryFile, mkdtemp
 from reportlab.pdfgen.canvas import Canvas
-from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from pdfwatermarker.utils import resource_path, write_pdf
 from pdfwatermarker.watermark.canvas import CanvasImg, CanvasStr, img_opacity
@@ -11,9 +10,7 @@ from pdfwatermarker.watermark.utils import image_directory, LETTER
 
 
 def available_images():
-    imgs = sorted([i for i in os.listdir(image_directory) if not i.startswith('.')],
-                  reverse=True)
-    return imgs
+    return sorted([i for i in os.listdir(image_directory) if not i.startswith('.')], reverse=True)
 
 
 def center_str(txt, font, size, offset=120):
@@ -87,7 +84,7 @@ class WatermarkDraw(Draw):
         self.can.setFillColor(canvas_string.color, canvas_string.opacity)
 
         if canvas_string.x_centered:
-            x = center_str(canvas_string.string, canvas_string.font, canvas_string.size, offset=20)
+            x = center_str(canvas_string.string, canvas_string.font, canvas_string.size)
         else:
             x = canvas_string.x
 
