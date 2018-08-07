@@ -4,7 +4,7 @@ import shutil
 from datetime import datetime
 from tempfile import mkdtemp
 from looptools import Timer
-from pdfwatermarker.watermark.lib.gui import gui_watermark
+from pdfwatermarker.utils.gui import gui_watermark
 from pdfwatermarker.watermark.add import WatermarkAdd
 from pdfwatermarker.watermark.lib import Receipt, bundle_dir
 from pdfwatermarker.utils import add_suffix, resource_path, open_window

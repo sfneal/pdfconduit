@@ -51,7 +51,7 @@ class Merge:
 
 
 def main():
-    from pdfwatermarker.watermark.lib.gui import get_directory
+    from pdfwatermarker.utils.gui import get_directory
     d = get_directory()
     m = Merge(d)
     print(m.output)

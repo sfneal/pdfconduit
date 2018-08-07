@@ -113,3 +113,46 @@ def gui_watermark(title='PDF Watermarker'):
         'owner_pw': owner_pw,
     }
     return params
+
+
+def encrypt_gui(title='PDF Encryptor'):
+    label_w = 20
+    with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+        layout = [
+            [gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+            [gui.Text('PDF Encrypt utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+            [gui.Text('version: ' + __version__, size=(30, 1), font=("Helvetica", 16), text_color='blue')],
+
+            [_line()],
+
+            # Source
+            [gui.Text('Source', font=('Helvetica', 15), justification='left')],
+            [gui.Text('Source PDF file', size=(label_w, 1), auto_size_text=False), gui.InputText('Source'),
+             gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
+
+            [_line()],
+
+            # Encryption
+            [gui.Text('Encryption Settings', font=('Helvetica', 15), justification='left')],
+            [gui.Text('User Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
+            [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
+            [gui.Checkbox('128 bit encryption', default=True)],
+            [gui.Checkbox('Print only', default=True)],
+
+            [gui.Text('Click Submit to watermark PDF')],
+
+            [gui.Submit(), gui.Cancel()]
+        ]
+
+        (button, (values)) = form.LayoutAndShow(layout)
+
+    user_pw = values[1] if len(values[1]) > 0 else ''
+    owner_pw = values[2] if len(values[2]) > 0 else ''
+    params = {
+        'pdf': values[0],
+        'user_pw': user_pw,
+        'owner_pw': owner_pw,
+        '128bit': values[3],
+        'print_only': values[4],
+    }
+    return params
