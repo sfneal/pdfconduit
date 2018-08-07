@@ -1,8 +1,9 @@
 # Generate sample PDF documents
 import os
-from pdfwatermarker import Watermark, open_window, Merge, slicer, info
-from pdfwatermarker.watermark.draw import available_images
-from pdfwatermarker.watermark.watermark import Label
+from pdfwatermarker import Merge, slicer, info
+from pdfwatermarker.utils import open_window
+from pdfwatermarker.watermark.draw.canvas import available_images
+from pdfwatermarker.watermark import Label, Watermark
 from tests import pdf
 
 
