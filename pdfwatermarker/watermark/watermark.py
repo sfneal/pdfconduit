@@ -6,6 +6,7 @@ from tempfile import mkdtemp
 from looptools import Timer
 from pdfwatermarker.watermark.draw import WatermarkDraw
 from pdfwatermarker.watermark.add import WatermarkAdd
+from pdfwatermarker.watermark.receipt import Receipt
 from pdfwatermarker.watermark.utils import resource_path, bundle_dir
 from pdfwatermarker.utils.path import add_suffix
 from pdfwatermarker.utils.view import open_window
@@ -14,35 +15,6 @@ from pdfwatermarker.watermark.canvas import CanvasObjects, CanvasStr, CanvasImg,
 
 default_image_dir = resource_path(bundle_dir() + os.sep + 'lib' + os.sep + 'img')
 default_image = resource_path('Wide.png')
-
-
-class Receipt:
-    def __init__(self, use=True):
-        self.dst = None
-        self.use = use
-        self.items = []
-        self.add('PDF Watermarker', datetime.now().strftime("%Y-%m-%d %H:%M"))
-
-    def set_dst(self, doc, file_name='watermark receipt.txt'):
-        self.dst = os.path.join(os.path.dirname(doc), file_name)
-        self.add('Directory', os.path.dirname(doc))
-        self.add('PDF', os.path.basename(doc))
-        return self
-
-    def add(self, key, value):
-        message = str("{0:20}--> {1}".format(key, value))
-        if self.use:
-            print(message)
-        self.items.append(message)
-
-    def dump(self):
-        exists = os.path.isfile(self.dst)
-        with open(self.dst, 'a') as f:
-            if exists:
-                f.write('*******************************************************************\n')
-
-            for item in self.items:
-                f.write(item + '\n')
 
 
 class Watermark:
