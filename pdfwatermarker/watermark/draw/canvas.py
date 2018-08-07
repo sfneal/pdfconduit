@@ -84,13 +84,17 @@ class WatermarkDraw(Draw):
 
         self.can.setFillColor(canvas_string.color, canvas_string.opacity)
 
-        if canvas_string.x_centered:
+        if canvas_string.y_centered and canvas_string.x_centered:
+            x = center_str(canvas_string.string, canvas_string.font, canvas_string.size, offset=0)
+            y = ((LETTER[1]) / 2)
+        elif canvas_string.y_centered and not canvas_string.x_centered:
+            x = canvas_string.x
+            y = ((LETTER[1]) / 2)
+        elif canvas_string.x_centered and not canvas_string.y_centered:
             x = center_str(canvas_string.string, canvas_string.font, canvas_string.size)
+            y = canvas_string.y
         else:
             x = canvas_string.x
-
-        if canvas_string.y_centered:
-            y = ((LETTER[1]) / 2)
-        else:
             y = canvas_string.y
+
         self.can.drawString(x=x, y=y, text=canvas_string.string)
