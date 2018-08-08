@@ -14,17 +14,29 @@ def bundle_dir():
     else:
         # we are running in a normal Python environment
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
-    return bundle_dir
+    if os.path.exists(bundle_dir):
+        return bundle_dir
 
 
 def register_font(font='Vera.ttf'):
     """Register fonts for report labs canvas."""
-    folder = bundle_dir() + os.sep + 'font'
-    ttfFile = resource_path(os.path.join(folder, font))
-    pdfmetrics.registerFont(TTFont("Vera", ttfFile))
-    return ttfFile
+    directory = os.path.join(bundle_dir(), 'font')
+    ttfFile = resource_path(os.path.join(directory, font))
+    if os.path.exists(ttfFile):
+        pdfmetrics.registerFont(TTFont("Vera", ttfFile))
+        return ttfFile
+    else:
+        print(ttfFile, 'can not be found')
+
+
+def _image_directory():
+    directory = os.path.join(bundle_dir(), 'img')
+    if os.path.exists(directory):
+        return directory
+    else:
+        print(directory, 'can not be found')
 
 
 FONT = register_font()
 LETTER = letter[1], letter[0]
-image_directory = str(bundle_dir() + os.sep + 'img')
+image_directory = _image_directory()
