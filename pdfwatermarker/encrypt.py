@@ -1,5 +1,4 @@
 # Encrypt a PDF file with password protection
-import os
 from pdfwatermarker.utils import add_suffix
 from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
 from pdfwatermarker.utils.override import PdfFileWriter2
@@ -45,47 +44,6 @@ class Encrypt:
             with open(self.output, 'wb') as output_pdf:
                 pdf_writer.write(output_pdf)
             return self.output
-
-
-PDFTK_PATH = '/opt/pdflabs/pdftk/bin/pdftk'
-
-
-def get_pdftk_path():
-    if os.path.exists(PDFTK_PATH):
-        return PDFTK_PATH
-
-
-def secure(pdf, user_pw, owner_pw, restrict_permission=True, pdftk=get_pdftk_path(), output=None):
-    """
-    Encrypt a PDF file and restrict permissions to print only.
-    Utilizes pdftk command line tool.
-    """
-    if pdftk:
-        # Check that PDF file is encrypted
-        with open(pdf, 'rb') as f:
-            reader = PdfFileReader(f)
-            if reader.isEncrypted:
-                print('PDF is already encrypted')
-                return pdf
-
-        # Create output filename if not already set
-        if not output:
-            output = add_suffix(pdf, 'secured')
-
-        # Replace spaces within paths with backslashes followed by a space
-        pdf_en = pdf.replace(' ', '\ ')
-        output_en = output.replace(' ', '\ ')
-
-        # Concatenate bash command
-        command = pdftk + ' ' + pdf_en + ' output ' + output_en + ' owner_pw ' + owner_pw + ' user_pw ' + user_pw
-
-        # Append string to command if printing is allowed
-        if restrict_permission:
-            command += ' allow printing'
-
-        # Execute command
-        os.system(command)
-        return output
 
 
 def main():

@@ -18,8 +18,8 @@ def get_directory():
 def get_file():
     with gui.FlexForm('Source File') as form:
         form_rows = [
-            [gui.Text('Enter the Source file')],
-            [gui.Text('Source File', size=(15, 1), justification='right'), gui.InputText('Src'),
+            [gui.Text('Select a source file')],
+            [gui.Text('Source File', size=(15, 1), justification='right'), gui.InputText(),
              gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
             [gui.Submit(), gui.Cancel()]]
 
