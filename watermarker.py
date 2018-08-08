@@ -1,8 +1,8 @@
-from pdfwatermarker import WatermarkGUI
+from pdfwatermarker import GUI
 
 
 def main():
-    WatermarkGUI()
+    GUI.watermark()
 
 
 if __name__ == '__main__':
