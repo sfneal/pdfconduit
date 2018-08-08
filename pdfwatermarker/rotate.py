@@ -24,11 +24,11 @@ def rotate(file_name, rotate, suffix='rotated', method='pypdf2', tempdir=None):
             page = pdf_reader.getPage(pagenum)
             page.rotateClockwise(rotate)
             pdf_writer.addPage(page)
-        pdf_out = open(outfn, 'wb')
+        pdf_out = open(outfn.name, 'wb')
         pdf_writer.write(pdf_out)
         pdf_out.close()
         pdf_in.close()
-        return outfn
+        return outfn.name
 
     def pdfrw():
         trailer = PdfReader(file_name)
@@ -45,7 +45,7 @@ def rotate(file_name, rotate, suffix='rotated', method='pypdf2', tempdir=None):
         outdata = PdfWriter(outfn)
         outdata.trailer = trailer
         outdata.write()
-        return outfn
+        return outfn.name
 
     if method is 'pypdf2':
         return pypdf2()
