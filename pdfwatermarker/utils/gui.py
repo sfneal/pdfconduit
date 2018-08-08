@@ -36,21 +36,47 @@ class GUI:
     def encrypt():
         from pdfwatermarker.encrypt import Encrypt
 
-        def form():
-            title = 'PDF Encryptor'
-            label_w = 20
-            with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
-                layout = [
-                    [gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+        title = 'PDF Encryptor'
+        label_w = 20
+
+        def header():
+            return [[gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
                     [gui.Text('PDF Encrypt utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
                     [gui.Text('version: ' + __version__, size=(30, 1), font=("Helvetica", 16), text_color='blue')],
+                    [_line()]]
 
-                    [_line()],
+        def footer(message='Click Submit to encrypt PDF'):
+            return [[gui.Text(message)], [gui.Submit(), gui.Cancel()]]
 
+        def folder(params):
+            with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+                inputs = [
                     # Source
                     [gui.Text('Source', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('Source PDF file', size=(label_w, 1), auto_size_text=False), gui.InputText('Source'),
-                     gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
+                    [gui.Text('Source folder', size=(label_w, 1), auto_size_text=False),
+                     gui.InputText(params['pdf'], size=(30, 1)),
+                     gui.FolderBrowse(button_text='Folder')],
+
+                    [_line()],
+                ]
+                layout = []
+                layout.extend(header())
+                layout.extend(inputs)
+                layout.extend(footer())
+
+                (button, (values)) = form.LayoutAndShow(layout)
+
+            params['pdf'] = values[0]
+            return params
+
+        def settings(p):
+            with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+                inputs = [
+                    # Source
+                    [gui.Text('Source', font=('Helvetica', 15), justification='left')],
+                    [gui.Text('Source PDF file', size=(label_w, 1), auto_size_text=False), gui.InputText(p['pdf']),
+                     gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),)),
+                     gui.SimpleButton('Folder')],
 
                     [_line()],
 
@@ -60,11 +86,11 @@ class GUI:
                     [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
                     [gui.Checkbox('128 bit encryption', default=True)],
                     [gui.Checkbox('Print only', default=True)],
-
-                    [gui.Text('Click Submit to watermark PDF')],
-
-                    [gui.Submit(), gui.Cancel()]
                 ]
+                layout = []
+                layout.extend(header())
+                layout.extend(inputs)
+                layout.extend(footer())
 
                 (button, (values)) = form.LayoutAndShow(layout)
 
@@ -77,10 +103,29 @@ class GUI:
                 '128bit': values[3],
                 'print_only': values[4],
             }
+            if button == 'Folder':
+                params = folder(params)
+                params = settings(params)
             return params
 
-        p = form()
-        e = Encrypt(p['pdf'], p['user_pw'], p['owner_pw'], encrypt_128=p['128bit'], restrict_permission=p['print_only'])
+        p = {
+            'pdf': '',
+            'user_pw': '',
+            'owner_pw': '',
+            '128bit': True,
+            'print_only': True,
+        }
+
+        p = settings(p)
+
+        if os.path.isfile(p['pdf']):
+            p['pdf'] = [p['pdf']]
+        elif os.path.isdir(p['pdf']):
+            src_dir = p['pdf']
+            p['pdf'] = [os.path.join(src_dir, pdf) for pdf in os.listdir(src_dir) if pdf.endswith('.pdf')]
+
+        for pdf in p['pdf']:
+            e = Encrypt(pdf, p['user_pw'], p['owner_pw'], encrypt_128=p['128bit'], restrict_permission=p['print_only'])
         return str(e)
 
     @staticmethod
@@ -137,7 +182,6 @@ class GUI:
                      gui.InputText(params['pdf'], size=(30, 1)),
                      gui.FileBrowse(button_text='File', file_types=(("PDF Files", "*.pdf"),)),
                      gui.SimpleButton('Folder')],
-                    # [gui.Text('Select file to watermark one PDF.  Select folder to batch watermark multiple PDFs.')],
 
                     [_line()],
 

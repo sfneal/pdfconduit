@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['watermarker.py'],
-             pathex=['/Users/Stephen/Dropbox/scripts/pdfwatermarker'],
+             pathex=['C:\\Users\\Stephen\\Scripts\\pdfwatermarker'],
              binaries=[],
              datas=[('pdfwatermarker/watermark/lib', 'lib')],
              hiddenimports=[],
