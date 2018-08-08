@@ -94,9 +94,9 @@ class WatermarkAdd:
         watermark_file.update(dimensions(watermark))
 
         # 3b. Check if watermark file needs to be rotated
-        if watermark_file['w'] > watermark_file['h'] and document['orientation'] is 'vertical':
+        if watermark_file['w'] > watermark_file['h'] and document['orientation'] is 'portrait':
             self.rotate = 90
-            watermark_file['rotated'] = rotate(watermark, 90, tempdir=self.tempdir)
+            watermark_file['rotated'] = rotate(watermark, self.rotate, tempdir=self.tempdir)
 
         # Set watermark file to be used for upscaling
         try:
