@@ -1,7 +1,7 @@
-from pdfwatermarker.thirdparty.PyPDF2 import PdfFileWriter
-from pdfwatermarker.thirdparty.PyPDF2.pdf import md5, ByteStringObject, ArrayObject, _alg33, _alg34, _alg35, NameObject, DictionaryObject, \
+from PyPDF3 import PdfFileWriter
+from PyPDF3.pdf import md5, ByteStringObject, ArrayObject, _alg33, _alg34, _alg35, NameObject, DictionaryObject, \
     NumberObject, b_
-from pdfwatermarker.thirdparty.PyPDF2.utils import b_, ord_
+from PyPDF3.utils import b_, ord_
 
 
 def set_permissions(restrict_permission):

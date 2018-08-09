@@ -1,5 +1,5 @@
 # Write two (2) PDFs to a destination file
-from pdfwatermarker.thirdparty.PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF3 import PdfFileWriter, PdfFileReader
 
 
 def overlay_pdfs(top_pdf, bottom_pdf, destination):

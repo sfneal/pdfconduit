@@ -1,5 +1,5 @@
 # Retrieve information about a PDF document
-from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader
+from PyPDF3 import PdfFileReader
 
 
 def _reader(path, password=None, prompt=True):
