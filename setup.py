@@ -17,7 +17,7 @@ setup(
     url='https://github.com/mrstephenneal/pdfwatermarker',
     license='',
     author=__author__,
-    author_email='stephen@hpadesign.com',
+    author_email='stephen@stephenneal.net',
     description='PDF tool for watermarking, security and other utilities.',
     long_description='PDF watermark tool for internal use (HPA Design).'
 )
