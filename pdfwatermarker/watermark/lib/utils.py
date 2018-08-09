@@ -37,6 +37,11 @@ def _image_directory():
         print(directory, 'can not be found')
 
 
+def available_images():
+    return sorted([i for i in os.listdir(image_directory) if not i.startswith('.')], reverse=True)
+
+
 FONT = register_font()
 LETTER = letter[1], letter[0]
 image_directory = _image_directory()
+image_default = resource_path('Wide.png')
