@@ -1,6 +1,7 @@
 # Set directory paths and file names
 import os
 import sys
+from inspect import stack
 from pathlib import Path
 
 
@@ -11,9 +12,31 @@ def bundle_dir():
         bundle_dir = sys._MEIPASS
     else:
         # we are running in a normal Python environment
-        bundle_dir = os.path.dirname(os.path.abspath(__file__))
+        bundle_dir = os.path.dirname(os.path.abspath(stack()[1][1]))
     if os.path.exists(bundle_dir):
         return bundle_dir
+
+def resource_path(relative):
+    """Adjust path for executable use in executable file"""
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative)
+    return os.path.join(relative)
+
+
+if 'pathlib' in sys.modules:
+    def _add_suffix(file_path, suffix, sep):
+        p = Path(file_path)
+        out = p.stem + sep + suffix + '.' + p.suffix  # p.suffix is file extension
+        return os.path.join(os.path.dirname(file_path), out)
+else:
+    def _add_suffix(file_path, suffix, sep):
+        split = os.path.basename(file_path).rsplit('.', 1)
+        return os.path.join(os.path.dirname(file_path), split[0] + sep + suffix + '.' + split[1])
+
+
+def add_suffix(file_path, suffix='modified', sep='_'):
+    """Adds suffix to a file name seperated by an underscore and returns file path."""
+    return _add_suffix(file_path, suffix, sep)
 
 
 def set_destination(source, suffix, filename=False, ext=None):
@@ -56,19 +79,3 @@ def set_destination(source, suffix, filename=False, ext=None):
             number = number + 1
         full_path = os.path.join(directory, dst_path)  # new full path
         return full_path
-
-
-def resource_path(relative):
-    """Adjust path for executable use in executable file"""
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, relative)
-    return os.path.join(relative)
-
-
-def add_suffix(file_path, suffix):
-    """Adds suffix to a file name seperated by an underscore and returns file path."""
-    split = os.path.basename(file_path).rsplit('.', 1)
-    ext = split[1]
-    name = split[0]
-    out = name + '_' + suffix + '.' + ext
-    return os.path.join(os.path.dirname(file_path), out)
