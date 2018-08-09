@@ -2,7 +2,7 @@
 import os
 from pdfwatermarker import Merge, slicer, info
 from pdfwatermarker.utils import open_window
-from pdfwatermarker.watermark.draw.canvas import available_images
+from pdfwatermarker.watermark.lib import available_images
 from pdfwatermarker.watermark import Label, Watermark
 from tests import pdf
 
