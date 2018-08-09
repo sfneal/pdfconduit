@@ -1,27 +1,27 @@
-missing module named 'multiprocessing.forking' - imported by C:\Users\Stephen\Scripts\pdfwatermarker\venv\python36\lib\site-packages\PyInstaller\loader\rthooks\pyi_rth_multiprocessing.py
+missing module named 'multiprocessing.forking' - imported by C:\Users\Stephen\Scripts\pdfconduit\venv\python36\lib\site-packages\PyInstaller\loader\rthooks\pyi_rth_multiprocessing.py
 missing module named multiprocessing.get_context - imported by multiprocessing, multiprocessing.pool, multiprocessing.managers, multiprocessing.sharedctypes
 missing module named multiprocessing.TimeoutError - imported by multiprocessing, multiprocessing.pool
 missing module named multiprocessing.BufferTooShort - imported by multiprocessing, multiprocessing.connection
 missing module named multiprocessing.AuthenticationError - imported by multiprocessing, multiprocessing.connection
 missing module named multiprocessing.set_start_method - imported by multiprocessing, multiprocessing.spawn
 missing module named multiprocessing.get_start_method - imported by multiprocessing, multiprocessing.spawn
-missing module named resource - imported by posix, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named posix - imported by os, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named _posixsubprocess - imported by subprocess, multiprocessing.util, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named org - imported by pickle, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named readline - imported by cmd, code, pdb, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-excluded module named _frozen_importlib - imported by importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named _winreg - imported by platform, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named resource - imported by posix, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named posix - imported by os, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named _posixsubprocess - imported by subprocess, multiprocessing.util, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named org - imported by pickle, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named readline - imported by cmd, code, pdb, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+excluded module named _frozen_importlib - imported by importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named _winreg - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named _scproxy - imported by urllib.request
-missing module named java - imported by platform, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named 'java.lang' - imported by platform, xml.sax._exceptions, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named vms_lib - imported by platform, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named termios - imported by tty, getpass, tqdm._utils, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named grp - imported by shutil, tarfile, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named _dummy_threading - imported by dummy_threading, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named java - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named 'java.lang' - imported by platform, xml.sax._exceptions, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named vms_lib - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named termios - imported by tty, getpass, tqdm._utils, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named grp - imported by shutil, tarfile, pathlib, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named _dummy_threading - imported by dummy_threading, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named rlextra - imported by reportlab.lib.pdfencrypt
 missing module named pyphen - imported by reportlab.platypus.paragraph
 missing module named htmlentitydefs - imported by reportlab.platypus.paraparser
@@ -71,4 +71,4 @@ missing module named matplotlib - imported by tqdm._tqdm_gui
 missing module named 'pandas.core' - imported by tqdm._tqdm
 missing module named pandas - imported by tqdm._tqdm
 missing module named Crypto - imported by pdfrw.crypt
-missing module named pdfwatermarker.info - imported by pdfwatermarker, tests.test_encrypt, tests.test_merge, tests.test_watermark_encrypt
+missing module named pdfconduit.info - imported by pdfconduit, tests.test_encrypt, tests.test_merge, tests.test_watermark_encrypt
