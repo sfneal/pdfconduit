@@ -19,8 +19,8 @@ missing module named 'java.lang' - imported by platform, xml.sax._exceptions, C:
 missing module named vms_lib - imported by platform, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named termios - imported by tty, getpass, tqdm._utils, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named grp - imported by shutil, tarfile, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
-missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
+missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named _dummy_threading - imported by dummy_threading, C:\Users\Stephen\Scripts\pdfwatermarker\watermarker.py
 missing module named rlextra - imported by reportlab.lib.pdfencrypt
 missing module named pyphen - imported by reportlab.platypus.paragraph
@@ -35,8 +35,8 @@ missing module named rl_config - imported by reportlab.lib.utils
 missing module named urllib2 - imported by reportlab.lib.utils
 missing module named 'reportlab.lib.pyHnj' - imported by reportlab.lib.utils
 missing module named Image - imported by reportlab.lib.utils
-missing module named olefile - imported by PIL.FpxImagePlugin, PIL.MicImagePlugin
 missing module named UserDict - imported by PIL.PdfParser
+missing module named olefile - imported by PIL.MicImagePlugin, PIL.FpxImagePlugin
 missing module named Tkinter - imported by PIL.ImageTk
 missing module named 'PySide.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt4.QtCore' - imported by PIL.ImageQt
