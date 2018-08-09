@@ -1,17 +1,12 @@
 # Dynamically generate watermark pdf file
 import io
-import os
 from tempfile import NamedTemporaryFile, mkdtemp
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from pdfwatermarker.utils import resource_path, write_pdf
-from pdfwatermarker.watermark.lib import image_directory, LETTER
+from pdfwatermarker.watermark.lib import LETTER
 from pdfwatermarker.watermark.draw._objects import CanvasImg, CanvasStr
 from pdfwatermarker.watermark.draw.image import img_opacity
-
-
-def available_images():
-    return sorted([i for i in os.listdir(image_directory) if not i.startswith('.')], reverse=True)
 
 
 def center_str(txt, font, size, offset=120):
