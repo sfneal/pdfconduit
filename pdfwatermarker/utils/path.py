@@ -16,6 +16,7 @@ def bundle_dir():
     if os.path.exists(bundle_dir):
         return bundle_dir
 
+
 def resource_path(relative):
     """Adjust path for executable use in executable file"""
     if hasattr(sys, "_MEIPASS"):
