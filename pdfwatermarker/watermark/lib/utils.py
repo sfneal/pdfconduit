@@ -38,10 +38,10 @@ def _image_directory():
 
 
 def available_images():
-    return sorted([i for i in os.listdir(image_directory) if not i.startswith('.')], reverse=True)
+    return sorted([i for i in os.listdir(IMAGE_DIRECTORY) if not i.startswith('.')], reverse=True)
 
 
 FONT = register_font()
 LETTER = letter[1], letter[0]
-image_directory = _image_directory()
-image_default = resource_path('Wide.png')
+IMAGE_DIRECTORY = _image_directory()
+IMAGE_DEFAULT = resource_path('Wide.png')
