@@ -7,20 +7,34 @@ from pdfwatermarker.utils import resource_path, bundle_dir
 
 def img_opacity(image, opacity, tempdir=None, bw=True):
     """
-    Returns an image with reduced opacity.
-    Taken from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
+    Reduce the opacity of a PNG image.
+
+    Inspiration: http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
+
+    :param image: PNG image file
+    :param opacity: float representing opacity percentage
+    :param tempdir: Temporary directory
+    :param bw: Set image to black and white
+    :return: Path to modified PNG
     """
-    assert 0 <= opacity <= 1
+    # Validate parameters
+    assert 0 <= opacity <= 1, 'Opacity must be a float between 0 and 1'
+    assert os.path.isfile(image), 'Image is not a file'
+
+    # Open image in RGBA mode if not already in RGBA
     im = Image.open(image)
     if im.mode != 'RGBA':
         im = im.convert('RGBA')
     else:
         im = im.copy()
+
+    # Adjust opacity
     alpha = im.split()[3]
     alpha = ImageEnhance.Brightness(alpha).enhance(opacity)
-    im.putalpha(alpha)
     if bw:
         im.convert('L')
+
+    # Save modified image file
     dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
     im.save(dst)
     return dst
