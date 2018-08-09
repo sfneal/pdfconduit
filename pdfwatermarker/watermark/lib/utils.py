@@ -1,21 +1,8 @@
 import os
-import sys
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.pagesizes import letter
-from pdfwatermarker.utils import resource_path
-
-
-def bundle_dir():
-    """Handle resource management within an executable file."""
-    if getattr(sys, 'frozen', False):
-        # we are running in a bundle
-        bundle_dir = sys._MEIPASS
-    else:
-        # we are running in a normal Python environment
-        bundle_dir = os.path.dirname(os.path.abspath(__file__))
-    if os.path.exists(bundle_dir):
-        return bundle_dir
+from pdfwatermarker.utils import resource_path, bundle_dir
 
 
 def register_font(font='Vera.ttf'):
