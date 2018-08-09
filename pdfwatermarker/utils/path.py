@@ -27,7 +27,7 @@ def resource_path(relative):
 if 'pathlib' in sys.modules:
     def _add_suffix(file_path, suffix, sep):
         p = Path(file_path)
-        out = p.stem + sep + suffix + '.' + p.suffix  # p.suffix is file extension
+        out = p.stem + sep + suffix + p.suffix  # p.suffix is file extension
         return os.path.join(os.path.dirname(file_path), out)
 else:
     def _add_suffix(file_path, suffix, sep):
