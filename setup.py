@@ -25,7 +25,7 @@ A Pure-Python library built as a PDF toolkit.  It was developed to prepare docum
 """
 
 setup(
-    name='pdfconduit',
+    name='pdfwatermarker',
     version=__version__,
     packages=find_packages(),
     install_requires=[
