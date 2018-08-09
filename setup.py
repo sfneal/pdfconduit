@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from pdfwatermarker import __version__, __author__
+from pdfconduit import __version__, __author__
 
 long_description = """
 A Pure-Python library built as a PDF toolkit.  It was developed to prepare documents for distribution.
@@ -34,7 +34,8 @@ setup(
         'Pillow',
         'PySimpleGUI',
         'reportlab',
-        'looptools'
+        'looptools',
+        'tqdm'
     ],
     include_package_data=True,
     url='https://github.com/mrstephenneal/pdfconduit',

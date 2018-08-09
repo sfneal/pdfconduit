@@ -1,5 +1,5 @@
 import os
-from pdfwatermarker import Merge, info
+from pdfconduit import Merge, info
 from tests import directory
 
 

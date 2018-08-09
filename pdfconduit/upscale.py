@@ -3,7 +3,7 @@ from tempfile import NamedTemporaryFile
 from pdfrw import PdfReader, PdfWriter, PageMerge, IndirectPdfDict
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.pdf import PageObject
-from pdfwatermarker.utils import set_destination, info
+from pdfconduit.utils import set_destination, info
 
 
 def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypdf3', tempdir=None):

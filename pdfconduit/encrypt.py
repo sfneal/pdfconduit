@@ -1,7 +1,7 @@
 # Encrypt a PDF file with password protection
-from pdfwatermarker.utils import add_suffix
+from pdfconduit.utils import add_suffix
 from PyPDF3 import PdfFileReader
-from pdfwatermarker.utils.override import PdfFileWriter2
+from pdfconduit.utils.override import PdfFileWriter2
 
 
 class Encrypt:
@@ -35,7 +35,7 @@ class Encrypt:
                                restrict_permission=self.restrict_permission)
 
             pdf_writer.addMetadata({
-                '/Producer': 'pdfwatermarker',
+                '/Producer': 'pdfconduit',
                 '/Creator': 'HPA Design',
                 '/Author': 'HPA Design',
             })
@@ -47,7 +47,7 @@ class Encrypt:
 
 
 def main():
-    from pdfwatermarker.utils.gui import GUI
+    from pdfconduit.utils.gui import GUI
     GUI.encrypt()
 
 

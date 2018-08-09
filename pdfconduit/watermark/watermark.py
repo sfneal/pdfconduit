@@ -4,11 +4,11 @@ import shutil
 from datetime import datetime
 from tempfile import mkdtemp
 from looptools import Timer
-from pdfwatermarker.watermark.add import WatermarkAdd
-from pdfwatermarker.watermark.lib import Receipt, IMAGE_DIRECTORY, IMAGE_DEFAULT
-from pdfwatermarker.utils import add_suffix, open_window
-from pdfwatermarker.encrypt import Encrypt
-from pdfwatermarker.watermark.draw import WatermarkDraw, CanvasObjects, CanvasStr, CanvasImg, DrawPIL
+from pdfconduit.watermark.add import WatermarkAdd
+from pdfconduit.watermark.lib import Receipt, IMAGE_DIRECTORY, IMAGE_DEFAULT
+from pdfconduit.utils import add_suffix, open_window
+from pdfconduit.encrypt import Encrypt
+from pdfconduit.watermark.draw import WatermarkDraw, CanvasObjects, CanvasStr, CanvasImg, DrawPIL
 
 
 class Watermark:

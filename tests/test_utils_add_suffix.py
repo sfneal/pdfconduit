@@ -1,5 +1,5 @@
 import os
-from pdfwatermarker.utils.path import add_suffix
+from pdfconduit.utils.path import add_suffix
 from tests import pdf
 
 

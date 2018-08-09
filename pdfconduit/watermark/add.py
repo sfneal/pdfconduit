@@ -3,10 +3,10 @@ from tempfile import NamedTemporaryFile
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
-from pdfwatermarker.upscale import upscale
-from pdfwatermarker.rotate import rotate
-from pdfwatermarker.utils import add_suffix, resource_path
-from pdfwatermarker.utils.info import dimensions
+from pdfconduit.upscale import upscale
+from pdfconduit.rotate import rotate
+from pdfconduit.utils import add_suffix, resource_path
+from pdfconduit.utils.info import dimensions
 
 
 class WatermarkAdd:

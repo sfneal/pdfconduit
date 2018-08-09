@@ -1,5 +1,5 @@
 # Test encrypt module reliability
-from pdfwatermarker import Encrypt, info
+from pdfconduit import Encrypt, info
 from tests import pdf
 
 

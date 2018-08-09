@@ -1,8 +1,8 @@
 import os
 from tempfile import NamedTemporaryFile
 from PIL import Image, ImageEnhance, ImageDraw, ImageFont
-from pdfwatermarker.watermark.lib import FONT
-from pdfwatermarker.utils import resource_path, bundle_dir
+from pdfconduit.watermark.lib import FONT
+from pdfconduit.utils import resource_path, bundle_dir
 
 
 def img_opacity(image, opacity, tempdir=None, bw=True):

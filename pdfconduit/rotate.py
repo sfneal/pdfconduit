@@ -2,7 +2,7 @@
 import os
 from tempfile import NamedTemporaryFile
 from PyPDF3 import PdfFileReader, PdfFileWriter
-from pdfwatermarker.utils import add_suffix
+from pdfconduit.utils import add_suffix
 from pdfrw import PdfReader, PdfWriter
 
 

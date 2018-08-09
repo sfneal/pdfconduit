@@ -1,5 +1,5 @@
 import os
-from pdfwatermarker.watermark import Label
+from pdfconduit.watermark import Label
 
 
 def main():

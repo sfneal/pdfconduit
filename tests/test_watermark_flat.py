@@ -1,5 +1,5 @@
 import os
-from pdfwatermarker import Watermark
+from pdfconduit import Watermark
 from tests import pdf
 import filecmp
 

@@ -2,7 +2,7 @@
 import os
 from tempfile import NamedTemporaryFile
 from PyPDF3 import PdfFileReader, PdfFileWriter
-from pdfwatermarker.utils import add_suffix
+from pdfconduit.utils import add_suffix
 
 
 def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=None):

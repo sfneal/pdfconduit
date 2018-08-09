@@ -1,4 +1,4 @@
-from pdfwatermarker import Watermark
+from pdfconduit import Watermark
 import os
 from tests import pdf
 

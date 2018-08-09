@@ -1,6 +1,6 @@
 # Extract images from a PDF
 from PIL import Image
-from pdfwatermarker.utils.info import _reader
+from pdfconduit.utils.info import _reader
 
 
 def img_extract(page):

@@ -1,4 +1,4 @@
-from pdfwatermarker import GUI
+from pdfconduit import GUI
 
 
 def main():

@@ -1,7 +1,7 @@
 import os
 import PySimpleGUI as gui
-from pdfwatermarker import __version__
-from pdfwatermarker.watermark.lib import available_images
+from pdfconduit import __version__
+from pdfconduit.watermark.lib import available_images
 
 
 def get_directory():
@@ -34,7 +34,7 @@ def _line(char='_', width=105, size=(75, 1)):
 class GUI:
     @staticmethod
     def encrypt():
-        from pdfwatermarker.encrypt import Encrypt
+        from pdfconduit.encrypt import Encrypt
 
         title = 'PDF Encryptor'
         label_w = 20
@@ -130,8 +130,8 @@ class GUI:
 
     @staticmethod
     def watermark():
-        from pdfwatermarker.watermark.lib import Receipt
-        from pdfwatermarker.watermark import Watermark
+        from pdfconduit.watermark.lib import Receipt
+        from pdfconduit.watermark import Watermark
         receipt = Receipt()
 
         label_w = 20
