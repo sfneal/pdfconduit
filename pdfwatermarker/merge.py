@@ -1,7 +1,7 @@
 # Merge PDF documents
 import os
 from tqdm import tqdm
-from pdfwatermarker.thirdparty.PyPDF2 import PdfFileMerger
+from PyPDF3 import PdfFileMerger
 
 
 class Merge:

@@ -1,7 +1,7 @@
 # Slice PDF to remove unwanted pages
 import os
 from tempfile import NamedTemporaryFile
-from pdfwatermarker.thirdparty.PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF3 import PdfFileReader, PdfFileWriter
 from pdfwatermarker.utils import add_suffix
 
 
