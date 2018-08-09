@@ -129,10 +129,9 @@ Outlined below are basic uses of the main classes and functions of the PDF water
 	* Merges source PDF file and watermark file to create new PDF object
 * rotate() - Rotate PDF by increments of 90 degrees
 * upscale() - Upscales PDF to fit letter size
-* protect() - Encrypt a PDF document to add passwords and permissions
+* Encrypt() - Encrypt a PDF document to add passwords and permissions
 * Merge() - Concatenate multiple PDF documents into one PDF
 * slicer() - Save range of pages in PDF document to a new PDF file
-* Encrypt() - Encrypt and password protect a PDF file
 
 ## Usage - Watermark
 Generate watermark, add watermark to file and encrypt file
