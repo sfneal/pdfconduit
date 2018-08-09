@@ -25,7 +25,7 @@ A Pure-Python library built as a PDF toolkit.  It was developed to prepare docum
 """
 
 setup(
-    name='pdfwatermarker',
+    name='pdfconduit',
     version=__version__,
     packages=find_packages(),
     install_requires=[
@@ -37,7 +37,7 @@ setup(
         'looptools'
     ],
     include_package_data=True,
-    url='https://github.com/mrstephenneal/pdfwatermarker',
+    url='https://github.com/mrstephenneal/pdfconduit',
     license='',
     author=__author__,
     author_email='stephen@stephenneal.net',
