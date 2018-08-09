@@ -5,13 +5,10 @@ from datetime import datetime
 from tempfile import mkdtemp
 from looptools import Timer
 from pdfwatermarker.watermark.add import WatermarkAdd
-from pdfwatermarker.watermark.lib import Receipt, bundle_dir
-from pdfwatermarker.utils import add_suffix, resource_path, open_window
+from pdfwatermarker.watermark.lib import Receipt, image_directory, image_default
+from pdfwatermarker.utils import add_suffix, open_window
 from pdfwatermarker.encrypt import Encrypt
 from pdfwatermarker.watermark.draw import WatermarkDraw, CanvasObjects, CanvasStr, CanvasImg, DrawPIL
-
-default_image_dir = resource_path(bundle_dir() + os.sep + 'img')
-default_image = resource_path('Wide.png')
 
 
 class Watermark:
@@ -63,7 +60,7 @@ class Watermark:
             open_window(self.tempdir)
         return self.document
 
-    def draw(self, text1, text2=None, copyright=True, image=default_image, rotate=30, opacity=0.08, compress=0,
+    def draw(self, text1, text2=None, copyright=True, image=image_default, rotate=30, opacity=0.08, compress=0,
              flatten=False, add=False):
         """
         Draw watermark PDF file.
@@ -95,7 +92,7 @@ class Watermark:
         def get_objects():
             # Initialize CanvasObjects collector class and add objects
             obj = CanvasObjects()
-            obj.add(CanvasImg(os.path.join(default_image_dir, image), opacity=opacity, x=200, y=-200))
+            obj.add(CanvasImg(os.path.join(image_directory, image), opacity=opacity, x=200, y=-200))
 
             if not flatten:
                 if copyright:
