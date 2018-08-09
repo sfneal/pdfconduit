@@ -176,12 +176,12 @@ w.cleanup()
 
 #### Using GUI.
 ```python
-from pdfconduit import WatermarkGUI
-WatermarkGUI()
+from pdfconduit import GUI
+GUI.watermark()
 ```
 ![GUI Screenshot](https://i.imgur.com/9pMvzJj.png)
 
-#### Optional Parameters * Watermark Settings
+#### Optional Parameters - Watermark Settings
 ###### Logo Images
 * References the logo images within the pdfconduit/watermark/lib/img directory
 * Can be replaced with any png 
@@ -201,7 +201,7 @@ Watermark.draw(compress=1)  # Compressed
 
 ###### Watermark Flattening
 | | Layered | Flattened
-| --* | --* | --* |
+| --- | --- | --- |
 | | *Finer parameter tuning with more options* | *Watermark harder to remove by merging img layers* |
 | **Construction** | * Creates a CanvasStr object for each text layer <br> * Create CanvasImg object for watermark logo image file | * Draw each text layer to PIL image file <br> * Draw PIL image with text to PIL image with logo to create one image file |
 | **CanvasObjects** | Initiate CanvasObjects() and use CanvasObjects().add() to add each string and image | Initiate CanvasObjects() and use CanvasObjects().add() to one CanvasImg instance |
@@ -232,7 +232,7 @@ Watermark.add(underneath=True)  # Underneath
 Watermark.draw(opacity=0.09)  # Set opacity to 9%
 ```
 
-## Usage * Encrypt
+## Usage - Encrypt
 Encrypt a PDF file to add passwords and restrict permissions.
 #### Using module imports.
 ```python
@@ -252,7 +252,7 @@ encrypted = encrypt(pdf, user_pw, owner_pw, encrypt_128, restrict_permission)
 >>> mypdfdoc_secured.pdf
 ```
 
-## Usage * Merge
+## Usage - Merge
 Merge multiple PDF files into one concatenated PDF file.
 #### Using module imports.
 ```python
@@ -281,7 +281,7 @@ merged = Merge(pdfs, output_name=output)
 >>> combined doc.pdf
 ```
 
-## Usage * Rotate
+## Usage - Rotate
 Rotate a PDF document by increments of 90 degrees.
 #### Using module imports.
 ```python
@@ -295,7 +295,7 @@ rotated = rotate(pdf, rotate)
 >>> mypdfdoc_rotated.pdf
 ```
 
-## Usage * Slice
+## Usage - Slice
 Slice a PDF document to extract a range of page.
 #### Using module imports.
 ```python
@@ -311,7 +311,7 @@ sliced = slicer(pdf, first_page, last_page)
 >>> mypdfdoc_sliced.pdf
 ```
 
-## Usage * Label
+## Usage - Label
 Add a text label to the bottom left corner of each page of PDF file.
 #### Using module imports.
 ```python
@@ -335,7 +335,7 @@ labeled = Label(pdf, label)
 Watermark(document, remove_temps=True, open_file=True, tempdir=mkdtemp(), receipt=None, use_receipt=True)
 ```
 Parameters | Type | Description
---* | --* | ---
+--- | --- | ---
 document | `str ` | PDF document full path
 remove_temps | `bool` | Remove temporary files after completion
 open_file | `bool` | Open file after completion
@@ -349,7 +349,7 @@ def draw(self, text1, text2=None, copyright=True, image=default_image, rotate=30
 		 opacity=0.08, compress=0, flatten=False, add=False):
 ```
 Parameters | Type | Description
---* | --* | ---
+--- | --- | ---
 text1 | `str ` | Text line 1
 text2 | `str ` | Text line 2
 copyright | `bool` | Draw copyright and year to canvas
@@ -367,7 +367,7 @@ add | `bool` | Add watermark to original document``
 def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked'):
 ```
 Parameters | Type | Description
---* | --* | ---
+--- | --- | ---
 document | `str ` | PDF document full path
 watermark | `str ` | Watermark PDF full path
 underneath | `bool` | Place watermark either under or over existing PDF document
@@ -381,7 +381,7 @@ suffix | `str ` | Suffix to append to existing PDF document file name
 def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True):
 ```
 Parameters | Type | Description
---* | --* | ---
+--- | --- | ---
 user_pw | `str ` | User password required to open and view PDF document
 owner_pw | `str ` | Owner password required to alter security settings and permissions
 encrypt_128 | `bool` | Encrypt PDF document using 128 bit keys
@@ -397,21 +397,20 @@ restrict_permission | `str` | Restrict permissions to print only
 
 ## Built With
 
-* [pdfrw](https://github.com/pmaupin/pdfrw) * pdfrw is a pure Python library that reads and writes PDFs.
-* [Pillow](https://python-pillow.org/) * The friendly PIL fork (Python Imaging Library) 
-* [PyPDF2](https://github.com/mstamy2/PyPDF2) * A utility to read and write PDFs with Python
-* [PySimpleGUI](https://github.com/MikeTheWatchGuy/PySimpleGUI) * A simple yet powerful GUI built on top of tkinter.
-* [reportlab](https://bitbucket.org/rptlab/reportlab) * Allows rapid creation of rich PDF documents, and also creation of charts in a variety of bitmap and vector formats.
+* [pdfrw](https://github.com/pmaupin/pdfrw) - pdfrw is a pure Python library that reads and writes PDFs.
+* [Pillow](https://python-pillow.org/) - The friendly PIL fork (Python Imaging Library) 
+* [PyPDF3](https://github.com/mrstephenneal/PyPDF3) - A utility to read and write PDFs with Python forked from [PyPDF2](https://github.com/mstamy2/PyPDF2)
+* [PySimpleGUI](https://github.com/MikeTheWatchGuy/PySimpleGUI) - A simple yet powerful GUI built on top of tkinter.
+* [reportlab](https://bitbucket.org/rptlab/reportlab) - Allows rapid creation of rich PDF documents, and also creation of charts in a variety of bitmap and vector formats.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/mrstephenneal/pdfwatermarker/contributing.md) for details on our code of
- conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/mrstephenneal/pdfconduit/contributing.md) for details on our code conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/mrstephenneal/pdfwatermarker).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/mrstephenneal/pdfconduit).
 
 ## Authors
 
-* **Stephen Neal** * *Initial work* * [pdfconduit](https://github.com/mrstephenneal/pdfconduit)
+* **Stephen Neal** **Initial work* * [pdfconduit](https://github.com/mrstephenneal/pdfconduit)
