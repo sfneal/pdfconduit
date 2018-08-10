@@ -1,6 +1,7 @@
 import os
+import shutil
 from pdfconduit import Watermark
-from tests import pdf
+from tests import pdf, directory
 import filecmp
 
 
@@ -19,6 +20,8 @@ def main():
         assert os.path.exists(flat) is True
         assert os.path.exists(layered) is True
         assert filecmp.cmp(flat, layered) is False
+        shutil.move(flat, os.path.join(directory, 'flat.pdf'))
+        shutil.move(layered, os.path.join(directory, 'layered.pdf'))
         w.cleanup()
         print('Success!')
     except AssertionError:

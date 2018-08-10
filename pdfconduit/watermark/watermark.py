@@ -104,9 +104,8 @@ class Watermark:
                 if copyright:
                     obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=-10, opacity=opacity))
                 if text2:
-
-                    obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-160))
-                    obj.add(CanvasStr(text2, opacity=opacity, size=40, y=-110))
+                    obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-110))
+                    obj.add(CanvasStr(text2, opacity=opacity, size=40, y=-160))
                 else:
                     obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-125))
             else:
