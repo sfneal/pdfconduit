@@ -132,7 +132,7 @@ class GUI:
     def watermark():
         from pdfconduit.watermark.lib import Receipt
         from pdfconduit.watermark import Watermark
-        receipt = Receipt()
+        receipt = Receipt(gui=True)
 
         label_w = 20
         title = 'PDF Watermarker'
@@ -295,9 +295,5 @@ class GUI:
                 wm.encrypt(params['user_pw'], params['owner_pw'])
         wm.cleanup()
 
-        try:
-            print('\nSuccess!')
-            input('~~Press Any Key To Exit~~')
-            quit()
-        except RuntimeError:
-            quit()
+        print('\nSuccess!')
+
