@@ -10,7 +10,7 @@ from pdfconduit.watermark.draw.image import img_opacity
 
 class CanvasStr:
     """Canvas string data object used for storing canvas.drawString parameters."""
-    def __init__(self, string, font='Vera', color='black', size=40, opacity=0.1, x=None, y=None,
+    def __init__(self, string, font='Vera', color='black', size=40, opacity=0.1, x=0, y=0,
                  x_centered=True, y_centered=False):
         self.string = string
         self.font = font
@@ -50,10 +50,9 @@ class CanvasObjects:
         self.objects.append(canvas_object)
 
 
-def center_str(txt, font, size, offset=120):
-    page_width = LETTER[0]
+def center_str(txt, font, size, offset=0):
     text_width = stringWidth(txt, fontName=font, fontSize=size)
-    return ((page_width - text_width) / 2.0) + offset
+    return -(text_width / 2.0) + offset
 
 
 class Draw:
@@ -98,6 +97,9 @@ class WatermarkDraw(Draw):
 
         # Iterate canvas objects and determine if string or image
         for obj in self.canvas_objects:
+            # Adjust x and y based on rotation
+            obj.x += int(self.rotate * 1.5)
+            obj.y += -int(self.rotate * 3)
             if isinstance(obj, CanvasStr):
                 self._draw_string(obj)
             elif isinstance(obj, CanvasImg):
@@ -118,8 +120,6 @@ class WatermarkDraw(Draw):
             self.can.setFont(canvas_string.font, canvas_string.size)
         elif self.can._fontsize != canvas_string.size:
             self.can.setFontSize(canvas_string.size)
-        assert self.can._fontname == canvas_string.font
-        assert self.can._fontsize == canvas_string.size
 
         self.can.setFillColor(canvas_string.color, canvas_string.opacity)
 
@@ -135,5 +135,4 @@ class WatermarkDraw(Draw):
         else:
             x = canvas_string.x
             y = canvas_string.y
-
         self.can.drawString(x=x, y=y, text=canvas_string.string)
