@@ -1,7 +1,6 @@
 # Encrypt a PDF file with password protection
 from pdfconduit.utils import add_suffix
-from PyPDF3 import PdfFileReader
-from pdfconduit.utils.override import PdfFileWriter2
+from PyPDF3 import PdfFileReader, PdfFileWriter
 
 
 class Encrypt:
@@ -20,7 +19,7 @@ class Encrypt:
 
     def encrypt(self):
         # Create PDF writer object
-        pdf_writer = PdfFileWriter2()
+        pdf_writer = PdfFileWriter()
         with open(self.pdf, 'rb') as pdf_file:
             # Read opened PDF file
             pdf_reader = PdfFileReader(pdf_file)
