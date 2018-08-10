@@ -60,12 +60,19 @@ class DrawPIL:
         y = (page_height - size) / 2
         return y
 
-    def _scale(self, img):
+    def _scale(self, img, func='min'):
         im = img if isinstance(img, Image.Image) else Image.open(img)
 
-        scale = min(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
+        # print(im.size)
+        if func is 'min':
+            scale = min(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
+        else:
+            scale = max(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
+        # print(scale)
 
         im.thumbnail((int(im.size[0] * scale), int(im.size[1] * scale)))
+        # print(im.size)
+        # print('\n')
 
         return im if isinstance(img, Image.Image) else self.save(img=im)
 
@@ -100,19 +107,20 @@ class DrawPIL:
         mask = Image.new('L', self.img.size, 255)
 
         # Rotate image and then scale image to fit self.img
-        front = self._scale(self.img.rotate(rotate, expand=True))
+        front = self.img.rotate(rotate, expand=True)
 
         # Rotate mask
-        self._scale(mask.rotate(rotate, expand=True))
+        mask.rotate(rotate, expand=True)
 
         # Determine difference in size between mask and front
         x_margin = int((mask.size[0] - front.size[0]) / 2)
+        y_margin = int((mask.size[1] - front.size[1]) / 3)
 
         # Create another new image
         rotated = Image.new('RGBA', self.img.size, color=(255, 255, 255, 0))
 
         # Paste front into new image and set x offset equal to half the difference of front and mask size
-        rotated.paste(front, (x_margin, 0))
+        rotated.paste(front, (0, y_margin))
         self.img = rotated
 
     def save(self, destination=None, file_name='pil', img=None):
