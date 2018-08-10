@@ -1,16 +1,16 @@
 from pdfconduit import Watermark
 import os
-from tests import pdf
+from tests import pdf, directory
 
 
 def main():
-    print('Testing Watermark draw, add and encrypt functionality')
+    print('Testing Watermark draw and add functionality')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
 
-    w = Watermark(pdf, remove_temps=True, use_receipt=False)
-    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08)
+    w = Watermark(pdf, use_receipt=False, move_temps=directory)
+    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=False, rotate=30)
     added = w.add()
     w.cleanup()
 
