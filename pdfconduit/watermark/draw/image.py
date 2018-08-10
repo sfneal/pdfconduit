@@ -17,7 +17,6 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
     :param bw: Set image to black and white
     :return: Path to modified PNG
     """
-    print(opacity)
     # Validate parameters
     assert 0 <= opacity <= 1, 'Opacity must be a float between 0 and 1'
     assert os.path.isfile(image), 'Image is not a file'
