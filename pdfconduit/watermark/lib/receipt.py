@@ -10,7 +10,6 @@ class Receipt:
         self.gui = gui
         self.items = []
         self._print = self._gui_print if self.gui else print
-        print(self._print)
         self.add('PDF Watermarker', datetime.now().strftime("%Y-%m-%d %H:%M"))
 
     @staticmethod
