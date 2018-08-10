@@ -132,7 +132,6 @@ class GUI:
     def watermark():
         from pdfconduit.watermark.lib import Receipt
         from pdfconduit.watermark import Watermark
-        receipt = Receipt(gui=True)
 
         label_w = 20
         title = 'PDF Watermarker'
@@ -279,6 +278,7 @@ class GUI:
             src_dir = params['pdf']
             params['pdf'] = [os.path.join(src_dir, pdf) for pdf in os.listdir(src_dir) if pdf.endswith('.pdf')]
 
+        receipt = Receipt(gui=True)
         receipt.set_dst(params['pdf'][0])
 
         for pdf in params['pdf']:
