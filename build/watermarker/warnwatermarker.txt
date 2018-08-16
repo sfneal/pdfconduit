@@ -35,9 +35,9 @@ missing module named rl_config - imported by reportlab.lib.utils
 missing module named urllib2 - imported by reportlab.lib.utils
 missing module named 'reportlab.lib.pyHnj' - imported by reportlab.lib.utils
 missing module named Image - imported by reportlab.lib.utils
-missing module named olefile - imported by PIL.MicImagePlugin, PIL.FpxImagePlugin
 missing module named Tkinter - imported by PIL.ImageTk
 missing module named UserDict - imported by PIL.PdfParser
+missing module named olefile - imported by PIL.MicImagePlugin, PIL.FpxImagePlugin
 missing module named 'PySide.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt4.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt5.QtCore' - imported by PIL.ImageQt
