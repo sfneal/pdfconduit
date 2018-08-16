@@ -214,7 +214,9 @@ class GUI:
 
                     # Encryption
                     [gui.Text('Encryption Settings', font=('Helvetica', 15), justification='left')],
-                    [gui.Checkbox('Encrypt', default=params['encrypt'])],
+                    [gui.Checkbox('Encrypt', default=params['encrypt']),
+                     gui.Checkbox('Allow Printing', default=params['allow_printing']),
+                     gui.Checkbox('Allow Commenting', default=params['allow_commenting'])],
                     [gui.Text('User Password', size=(label_w, 1), auto_size_text=False), gui.InputText(params['user_pw'])],
                     [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText(params['owner_pw'])],
                 ]
@@ -238,8 +240,10 @@ class GUI:
             params['placement']['underneath'] = values[10]
             params['opacity'] = float(values[11] * .01)
             params['encrypt'] = values[12]
-            params['user_pw'] = values[13] if len(values[13]) > 0 else ''
-            params['owner_pw'] = values[14] if len(values[14]) > 0 else ''
+            params['allow_printing'] = values[13]
+            params['allow_commenting'] = values[14]
+            params['user_pw'] = values[15] if len(values[15]) > 0 else ''
+            params['owner_pw'] = values[16] if len(values[16]) > 0 else ''
             if button == 'Folder':
                 params = folder(params)
                 params = settings(params)
@@ -266,6 +270,8 @@ class GUI:
             },
             'opacity': 8,
             'encrypt': True,
+            'allow_printing': True,
+            'allow_commenting': False,
             'user_pw': '',
             'owner_pw': '',
         }
