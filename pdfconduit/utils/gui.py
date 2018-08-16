@@ -125,7 +125,7 @@ class GUI:
             p['pdf'] = [os.path.join(src_dir, pdf) for pdf in os.listdir(src_dir) if pdf.endswith('.pdf')]
 
         for pdf in p['pdf']:
-            e = Encrypt(pdf, p['user_pw'], p['owner_pw'], bit128=p['128bit'], restrict_permission=p['print_only'])
+            e = Encrypt(pdf, p['user_pw'], p['owner_pw'], bit128=p['128bit'], allow_printing=p['print_only'])
         return str(e)
 
     @staticmethod
