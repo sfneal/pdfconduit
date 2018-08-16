@@ -4,13 +4,13 @@ from PyPDF3 import PdfFileReader, PdfFileWriter
 
 
 class Encrypt:
-    def __init__(self, pdf, user_pw, owner_pw=None, output=None, encrypt_128=True, restrict_permission=True):
+    def __init__(self, pdf, user_pw, owner_pw=None, output=None, bit128=True, restrict_permission=True):
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
         self.user_pw = user_pw
         self.owner_pw = owner_pw
         self.output = add_suffix(pdf, 'secured') if not output else output
-        self.encrypt_128 = encrypt_128
+        self.encrypt_128 = bit128
         self.restrict_permission = restrict_permission
         self.encrypt()
 

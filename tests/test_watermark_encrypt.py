@@ -29,8 +29,10 @@ def main():
         # Encryption checks
         assert info.encrypted(encrypted) is True
         assert security['/Length'] == 128
-        assert security['/P'] == -1852
+        # assert security['/P'] == -1852
         print('Success!')
+        print('\n', security['/P'])
+        print(info.metadata(encrypted, user_pw))
     except AssertionError:
         print('Failed!')
 
