@@ -11,6 +11,53 @@ from pdfconduit.encrypt import Encrypt
 from pdfconduit.watermark.draw import WatermarkDraw, CanvasObjects, CanvasStr, CanvasImg, DrawPIL
 
 
+class CanvasConstructor:
+    def __init__(self, text1=None, text2=None, copyright=None, image=None, rotate=0, opacity=0.08, tempdir=None):
+        self.text1 = text1
+        self.text2 = text2
+        self.copyright = copyright
+        self.image = image
+        self.rotate = rotate
+        self.opacity = opacity
+        self.tempdir = tempdir
+
+        # Initialize CanvasObjects collector class and add objects
+        self.obj = CanvasObjects()
+
+    @property
+    def objects(self):
+        return self.obj, self.rotate
+
+    def canvas(self):
+        self.obj.add(CanvasImg(os.path.join(IMAGE_DIRECTORY, self.image), opacity=self.opacity, x=0, y=153))
+        if copyright:
+            self.obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=-10, opacity=self.opacity))
+        if self.text2:
+            self.obj.add(CanvasStr(self.text1, opacity=self.opacity, size=40, y=-110))
+            self.obj.add(CanvasStr(self.text2, opacity=self.opacity, size=40, y=-160))
+        else:
+            self.obj.add(CanvasStr(self.text1, opacity=self.opacity, size=40, y=-125))
+        return self.objects
+
+    def img(self):
+        img = DrawPIL(tempdir=self.tempdir)
+
+        img.draw_img(os.path.join(IMAGE_DIRECTORY, self.image), x=0, y=153, opacity=self.opacity)
+        if self.copyright:
+            img.draw_text('© copyright ' + str(datetime.now().year), size=16, y='center')
+        if self.text2:
+            img.draw_text(self.text1, size=40, y=416, opacity=self.opacity)
+            img.draw_text(self.text2, size=40, y=466, opacity=self.opacity)
+        else:
+            img.draw_text(self.text2, size=40, y=427, opacity=self.opacity)
+
+        img.rotate(self.rotate)
+        self.rotate = 0
+        i = img.save()
+        self.obj.add(CanvasImg(i, opacity=1, centered=True))
+        return self.objects
+
+
 class Watermark:
     def __init__(self, document, remove_temps=True, move_temps=None, open_file=True, tempdir=mkdtemp(), receipt=None,
                  use_receipt=True):
@@ -66,7 +113,7 @@ class Watermark:
             open_window(self.tempdir)
         return self.document
 
-    def draw(self, text1, text2=None, copyright=True, image=IMAGE_DEFAULT, rotate=30, opacity=0.08, compress=0,
+    def draw(self, text1=None, text2=None, copyright=True, image=IMAGE_DEFAULT, rotate=30, opacity=0.08, compress=0,
              flatten=False, add=False):
         """
         Draw watermark PDF file.
@@ -94,39 +141,6 @@ class Watermark:
         :return: str
             Watermark PDF file full path
         """
-
-        def get_objects(rotate):
-            # Initialize CanvasObjects collector class and add objects
-            obj = CanvasObjects()
-
-            # Canvas
-            if not flatten:
-                obj.add(CanvasImg(os.path.join(IMAGE_DIRECTORY, image), opacity=opacity, x=0, y=153))
-                if copyright:
-                    obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=-10, opacity=opacity))
-                if text2:
-                    obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-110))
-                    obj.add(CanvasStr(text2, opacity=opacity, size=40, y=-160))
-                else:
-                    obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-125))
-
-            # Image
-            else:
-                img = DrawPIL(tempdir=self.tempdir)
-                img.draw_img(os.path.join(IMAGE_DIRECTORY, image), x=0, y=153, opacity=opacity)
-                if copyright:
-                    img.draw_text('© copyright ' + str(datetime.now().year), size=16, y='center')
-                if text2:
-                    img.draw_text(text1, size=40, y=416, opacity=opacity)
-                    img.draw_text(text2, size=40, y=466, opacity=opacity)
-                else:
-                    img.draw_text(text2, size=40, y=427, opacity=opacity)
-                img.rotate(rotate)
-                rotate = 0
-                i = img.save()
-                obj.add(CanvasImg(i, opacity=1, centered=True))
-            return obj, rotate
-
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
@@ -135,7 +149,8 @@ class Watermark:
         self.receipt.add('WM Compression', compress)
         self.receipt.add('WM Flattening', flatten)
 
-        objects, rotate = get_objects(rotate)
+        co = CanvasConstructor(text1, text2, None, None, rotate, opacity, tempdir=self.tempdir)
+        objects, rotate = co.img() if flatten else co.canvas()  # Run img constructor method if flatten is True
 
         # Draw watermark to file
         self.watermark = WatermarkDraw(objects, rotate=rotate, compress=compress, tempdir=self.tempdir).write()

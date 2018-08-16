@@ -24,5 +24,5 @@ def main(move_temps, flatten, rotate):
 
 
 if __name__ == '__main__':
-    main(directory, False, 0)
-    # main(directory, True, 0)
+    # main(directory, False, 30)
+    main(directory, True, 30)
