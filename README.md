@@ -15,7 +15,6 @@ A Pure-Python library built as a PDF toolkit.
 * **Slice**: Extract page ranges from documents
 * Extract Text and Images
 * Retrieve document metadata and information
-"""
 
 ## Getting Started
 
