@@ -9,7 +9,7 @@ def main():
     town = 'Franklin'
     state = 'MA'
 
-    w = Watermark(pdf, use_receipt=False, move_temps=directory)
+    w = Watermark(pdf, use_receipt=False, move_temps=False)
     wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=False, rotate=30)
     added = w.add()
     w.cleanup()

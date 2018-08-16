@@ -100,6 +100,8 @@ class WatermarkDraw(Draw):
             # Adjust x and y based on rotation
             obj.x += int(self.rotate * 1.5)
             obj.y += -int(self.rotate * 3)
+
+            # Check if CanvasObject is a string or image
             if isinstance(obj, CanvasStr):
                 self._draw_string(obj)
             elif isinstance(obj, CanvasImg):
@@ -113,26 +115,45 @@ class WatermarkDraw(Draw):
                            height=canvas_image.h, mask=canvas_image.mask,
                            preserveAspectRatio=canvas_image.preserve_aspect_ratio, anchorAtXY=True)
 
-    def _draw_string(self, canvas_string):
-        """Draw string to canvas"""
-        # Set font names and font sizes if different from current object params
-        if self.can._fontname != canvas_string.font:
-            self.can.setFont(canvas_string.font, canvas_string.size)
-        elif self.can._fontsize != canvas_string.size:
-            self.can.setFontSize(canvas_string.size)
+    def _draw_string(self, cs):
+        """
+        Draw string object to reportlabs canvas.
 
-        self.can.setFillColor(canvas_string.color, canvas_string.opacity)
+        Canvas Parameter changes (applied if set values differ from string object values
+        1. Font name
+        2. Font size
+        3. Font fill color & opacity
+        4. X and Y position
 
-        if canvas_string.y_centered and canvas_string.x_centered:
-            x = center_str(canvas_string.string, canvas_string.font, canvas_string.size, offset=0)
+        :param cs: CanvasString Object
+        """
+        # 1. Font name
+        if self.can._fontname != cs.font:
+            self.can.setFont(cs.font, cs.size)
+
+        # 2. Font size
+        elif self.can._fontsize != cs.size:
+            self.can.setFontSize(cs.size)
+
+        # 3. Font file color
+        self.can.setFillColor(cs.color, cs.opacity)
+
+        # 4. X and Y positions
+        # X and Y are both centered
+        if cs.y_centered and cs.x_centered:
+            x = center_str(cs.string, cs.font, cs.size, offset=0)
             y = ((LETTER[1]) / 2)
-        elif canvas_string.y_centered and not canvas_string.x_centered:
-            x = canvas_string.x
+
+        # Y is centered and X is not
+        elif cs.y_centered and not cs.x_centered:
+            x = cs.x
             y = ((LETTER[1]) / 2)
-        elif canvas_string.x_centered and not canvas_string.y_centered:
-            x = center_str(canvas_string.string, canvas_string.font, canvas_string.size)
-            y = canvas_string.y
+
+        # X is centered and Y is not
+        elif cs.x_centered and not cs.y_centered:
+            x = center_str(cs.string, cs.font, cs.size)
+            y = cs.y
         else:
-            x = canvas_string.x
-            y = canvas_string.y
-        self.can.drawString(x=x, y=y, text=canvas_string.string)
+            x = cs.x
+            y = cs.y
+        self.can.drawString(x=x, y=y, text=cs.string)
