@@ -15,7 +15,7 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
     :param opacity: float representing opacity percentage
     :param tempdir: Temporary directory
     :param bw: Set image to black and white
-    :return: Path to modified PNG
+    :return:  Path to modified PNG
     """
     # Validate parameters
     assert 0 <= opacity <= 1, 'Opacity must be a float between 0 and 1'
@@ -63,16 +63,12 @@ class DrawPIL:
     def _scale(self, img, func='min'):
         im = img if isinstance(img, Image.Image) else Image.open(img)
 
-        # print(im.size)
         if func is 'min':
             scale = min(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
         else:
             scale = max(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
-        # print(scale)
 
         im.thumbnail((int(im.size[0] * scale), int(im.size[1] * scale)))
-        # print(im.size)
-        # print('\n')
 
         return im if isinstance(img, Image.Image) else self.save(img=im)
 
@@ -81,7 +77,7 @@ class DrawPIL:
         d = ImageDraw.Draw(self.img)
 
         # Set a font
-        fnt = ImageFont.truetype(font, int(size * 1.25))
+        fnt = ImageFont.truetype(font, int(size * 1.00))  # multiply size of font if needed
 
         # Check if x is set to 'center'
         if 'center' in str(x).lower():
