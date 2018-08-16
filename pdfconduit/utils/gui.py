@@ -41,7 +41,7 @@ class GUI:
 
         def header():
             return [[gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
-                    [gui.Text('PDF Encrypt utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+                    [gui.Text('PDF Encryption utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
                     [gui.Text('version: ' + __version__, size=(30, 1), font=("Helvetica", 16), text_color='blue')],
                     [_line()]]
 
@@ -75,7 +75,7 @@ class GUI:
                     # Source
                     [gui.Text('Source', font=('Helvetica', 15), justification='left')],
                     [gui.Text('Source PDF file', size=(label_w, 1), auto_size_text=False), gui.InputText(p['pdf']),
-                     gui.FileBrowse(file_types=(("PDF Files", "*.pdf"),)),
+                     gui.FileBrowse(button_text='File', file_types=(("PDF Files", "*.pdf"),)),
                      gui.SimpleButton('Folder')],
 
                     [_line()],
@@ -85,7 +85,7 @@ class GUI:
                     [gui.Text('User Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
                     [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
                     [gui.Checkbox('128 bit encryption', default=True)],
-                    [gui.Checkbox('Print only', default=True)],
+                    [gui.Checkbox('Allow Printing', default=True), gui.Checkbox('Allow Commenting', default=False)],
                 ]
                 layout = []
                 layout.extend(header())
@@ -101,7 +101,8 @@ class GUI:
                 'user_pw': user_pw,
                 'owner_pw': owner_pw,
                 '128bit': values[3],
-                'print_only': values[4],
+                'allow_printing': values[4],
+                'allow_commenting': values[5],
             }
             if button == 'Folder':
                 params = folder(params)
@@ -113,7 +114,8 @@ class GUI:
             'user_pw': '',
             'owner_pw': '',
             '128bit': True,
-            'print_only': True,
+            'allow_printing': True,
+            'allow_commenting': False,
         }
 
         p = settings(p)
@@ -125,7 +127,8 @@ class GUI:
             p['pdf'] = [os.path.join(src_dir, pdf) for pdf in os.listdir(src_dir) if pdf.endswith('.pdf')]
 
         for pdf in p['pdf']:
-            e = Encrypt(pdf, p['user_pw'], p['owner_pw'], bit128=p['128bit'], allow_printing=p['print_only'])
+            e = Encrypt(pdf, p['user_pw'], p['owner_pw'], bit128=p['128bit'], allow_printing=p['allow_printing'],
+                        allow_commenting=p['allow_commenting'])
         return str(e)
 
     @staticmethod

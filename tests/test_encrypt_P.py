@@ -10,8 +10,7 @@ def main():
     owner_pw = 'foo'
     user_pw = 'baz'
 
-    # _range = [-(x + 50) for x in range(0, 1852)[::100]]
-    _range = [-1852]
+    _range = [-(x + 50) for x in range(0, 1852)[::100]]
     print(_range)
     for i in _range:
         with ActiveTimer(i):
