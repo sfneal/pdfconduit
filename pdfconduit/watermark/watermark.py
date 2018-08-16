@@ -149,7 +149,7 @@ class Watermark:
         self.receipt.add('WM Compression', compress)
         self.receipt.add('WM Flattening', flatten)
 
-        co = CanvasConstructor(text1, text2, None, None, rotate, opacity, tempdir=self.tempdir)
+        co = CanvasConstructor(text1, text2, copyright, image, rotate, opacity, tempdir=self.tempdir)
         objects, rotate = co.img() if flatten else co.canvas()  # Run img constructor method if flatten is True
 
         # Draw watermark to file
