@@ -12,6 +12,8 @@ class Encrypt:
         self.owner_pw = owner_pw
         self.output = add_suffix(pdf, 'secured') if not output else output
         self.encrypt_128 = bit128
+        self.allow_printing = allow_printing
+        self.allow_commenting = allow_commenting
         self.permissions = self._set_permissions(allow_printing, allow_commenting)
         self.encrypt()
 
