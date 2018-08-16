@@ -108,24 +108,27 @@ class WatermarkDraw(Draw):
                 self._draw_image(obj)
         self.can.save()
 
-    def _draw_image(self, canvas_image):
-        """Draw Image to canvas"""
-        img = img_opacity(canvas_image.image, canvas_image.opacity, tempdir=self.dir)
-        self.can.drawImage(img, x=canvas_image.x, y=canvas_image.y, width=canvas_image.w,
-                           height=canvas_image.h, mask=canvas_image.mask,
-                           preserveAspectRatio=canvas_image.preserve_aspect_ratio, anchorAtXY=True)
+    def _draw_image(self, ci):
+        """
+        Draw image object to reportlabs canvas.
+
+        :param ci: CanvasImage object
+        """
+        img = img_opacity(ci.image, ci.opacity, tempdir=self.dir)
+        self.can.drawImage(img, x=ci.x, y=ci.y, width=ci.w, height=ci.h, mask=ci.mask,
+                           preserveAspectRatio=ci.preserve_aspect_ratio, anchorAtXY=True)
 
     def _draw_string(self, cs):
         """
         Draw string object to reportlabs canvas.
 
-        Canvas Parameter changes (applied if set values differ from string object values
+        Canvas Parameter changes (applied if set values differ from string object values)
         1. Font name
         2. Font size
         3. Font fill color & opacity
         4. X and Y position
 
-        :param cs: CanvasString Object
+        :param cs: CanvasString object
         """
         # 1. Font name
         if self.can._fontname != cs.font:
