@@ -26,7 +26,7 @@ In order to use this application you will need to have a Python 3 interpreter in
 
 Upgrade to the latest version of pip.
 
-```
+```bash
 pip install --upgrade pip
 ```
 
@@ -36,12 +36,12 @@ Install the latest version from the PyPi distribution.  Run pip install pdfcondu
 
 PyPi install
 
-```
+```bash
 pip install pdfconduit
 ```
 PyPi update (no cache dir to force install of newest version)
 
-```
+```bash
 pip install --no-cache-dir --upgrade pdfconduit
 ```
 
