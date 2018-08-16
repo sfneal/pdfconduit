@@ -99,8 +99,9 @@ class Watermark:
             # Initialize CanvasObjects collector class and add objects
             obj = CanvasObjects()
 
+            # Canvas
             if not flatten:
-                obj.add(CanvasImg(os.path.join(IMAGE_DIRECTORY, image), opacity=opacity, x=0, y=140))
+                obj.add(CanvasImg(os.path.join(IMAGE_DIRECTORY, image), opacity=opacity, x=0, y=153))
                 if copyright:
                     obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=-10, opacity=opacity))
                 if text2:
@@ -108,14 +109,16 @@ class Watermark:
                     obj.add(CanvasStr(text2, opacity=opacity, size=40, y=-160))
                 else:
                     obj.add(CanvasStr(text1, opacity=opacity, size=40, y=-125))
+
+            # Image
             else:
                 img = DrawPIL(tempdir=self.tempdir)
-                img.draw_img(os.path.join(IMAGE_DIRECTORY, image), x=0, y=50, opacity=opacity)
+                img.draw_img(os.path.join(IMAGE_DIRECTORY, image), x=0, y=153, opacity=opacity)
                 if copyright:
                     img.draw_text('© copyright ' + str(datetime.now().year), size=16, y='center')
                 if text2:
-                    img.draw_text(text1, size=40, y=402, opacity=opacity)
-                    img.draw_text(text2, size=40, y=452, opacity=opacity)
+                    img.draw_text(text1, size=40, y=416, opacity=opacity)
+                    img.draw_text(text2, size=40, y=466, opacity=opacity)
                 else:
                     img.draw_text(text2, size=40, y=427, opacity=opacity)
                 img.rotate(rotate)

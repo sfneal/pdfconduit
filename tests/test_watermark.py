@@ -3,14 +3,14 @@ import os
 from tests import pdf, directory
 
 
-def main():
+def main(move_temps, flatten, rotate):
     print('Testing Watermark draw and add functionality')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
 
-    w = Watermark(pdf, use_receipt=False, move_temps=False)
-    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=False, rotate=30)
+    w = Watermark(pdf, use_receipt=False, move_temps=move_temps)
+    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=flatten, rotate=rotate)
     added = w.add()
     w.cleanup()
 
@@ -24,4 +24,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(directory, False, 0)
+    # main(directory, True, 0)
