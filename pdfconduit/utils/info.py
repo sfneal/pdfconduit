@@ -60,6 +60,12 @@ class Info:
         return {'w': float(size[2]), 'h': float(size[3])}
 
     @property
+    def size(self):
+        """Get width and height of a PDF"""
+        size = self.pdf.getPage(0).mediaBox
+        return float(size[2]), float(size[3])
+
+    @property
     def rotate(self):
         """Retrieve rotation info."""
         return self._resolved_objects(self.pdf, '/Rotate')
