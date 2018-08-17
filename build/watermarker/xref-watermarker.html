@@ -2831,7 +2831,7 @@ imports:
 imported by:
     <a href="#PySimpleGUI.PySimpleGUI">PySimpleGUI.PySimpleGUI</a>
  &#8226;   <a href="#pdfconduit.utils.gui">pdfconduit.utils.gui</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.receipt">pdfconduit.watermark.lib.receipt</a>
+ &#8226;   <a href="#pdfconduit.utils.receipt">pdfconduit.utils.receipt</a>
 
   </div>
 
@@ -4779,8 +4779,8 @@ imported by:
  &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#looptools.log">looptools.log</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.receipt">pdfconduit.watermark.lib.receipt</a>
- &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
+ &#8226;   <a href="#pdfconduit.utils.receipt">pdfconduit.utils.receipt</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.constructor">pdfconduit.watermark.canvas.constructor</a>
  &#8226;   <a href="#plistlib">plistlib</a>
  &#8226;   <a href="#reportlab.lib.utils">reportlab.lib.utils</a>
  &#8226;   <a href="#watermarker.py">watermarker.py</a>
@@ -9041,7 +9041,7 @@ imported by:
  &#8226;   <a href="#multiprocessing.reduction">multiprocessing.reduction</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pathlib">pathlib</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#plistlib">plistlib</a>
  &#8226;   <a href="#pprint">pprint</a>
@@ -10597,11 +10597,13 @@ imported by:
  &#8226;   <a href="#pdfconduit.merge">pdfconduit.merge</a>
  &#8226;   <a href="#pdfconduit.rotate">pdfconduit.rotate</a>
  &#8226;   <a href="#pdfconduit.slice">pdfconduit.slice</a>
+ &#8226;   <a href="#pdfconduit.upscale">pdfconduit.upscale</a>
  &#8226;   <a href="#pdfconduit.utils.gui">pdfconduit.utils.gui</a>
+ &#8226;   <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
  &#8226;   <a href="#pdfconduit.utils.path">pdfconduit.utils.path</a>
+ &#8226;   <a href="#pdfconduit.utils.receipt">pdfconduit.utils.receipt</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.constructor">pdfconduit.watermark.canvas.constructor</a>
  &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.receipt">pdfconduit.watermark.lib.receipt</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
  &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
  &#8226;   <a href="#pipes">pipes</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
@@ -10762,8 +10764,8 @@ imported by:
   <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/__init__.py" type="text/plain"><tt>pdfconduit</tt></a>
 <span class="moduletype">Package</span>  <div class="import">
 imports:
-    <a href="#pdfconduit.encrypt">pdfconduit.encrypt</a>
- &#8226;   <a href="#pdfconduit.info">pdfconduit.info</a>
+    <a href="#pdfconduit.Info">pdfconduit.Info</a>
+ &#8226;   <a href="#pdfconduit.encrypt">pdfconduit.encrypt</a>
  &#8226;   <a href="#pdfconduit.merge">pdfconduit.merge</a>
  &#8226;   <a href="#pdfconduit.rotate">pdfconduit.rotate</a>
  &#8226;   <a href="#pdfconduit.slice">pdfconduit.slice</a>
@@ -10797,6 +10799,20 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="pdfconduit.Info"></a>
+  <a target="code" href="" type="text/plain"><tt>pdfconduit.Info</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#pdfconduit">pdfconduit</a>
+ &#8226;   <a href="#tests.test_encrypt">tests.test_encrypt</a>
+ &#8226;   <a href="#tests.test_merge">tests.test_merge</a>
+ &#8226;   <a href="#tests.test_watermark_encrypt">tests.test_watermark_encrypt</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="pdfconduit.encrypt"></a>
   <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/encrypt.py" type="text/plain"><tt>pdfconduit.encrypt</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -10812,20 +10828,6 @@ imported by:
     <a href="#pdfconduit">pdfconduit</a>
  &#8226;   <a href="#pdfconduit.utils.gui">pdfconduit.utils.gui</a>
  &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pdfconduit.info"></a>
-  <a target="code" href="" type="text/plain"><tt>pdfconduit.info</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#pdfconduit">pdfconduit</a>
- &#8226;   <a href="#tests.test_encrypt">tests.test_encrypt</a>
- &#8226;   <a href="#tests.test_merge">tests.test_merge</a>
- &#8226;   <a href="#tests.test_watermark_encrypt">tests.test_watermark_encrypt</a>
 
   </div>
 
@@ -10900,9 +10902,9 @@ imported by:
 imports:
     <a href="#PyPDF3">PyPDF3</a>
  &#8226;   <a href="#PyPDF3.pdf">PyPDF3.pdf</a>
+ &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pdfconduit">pdfconduit</a>
  &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
- &#8226;   <a href="#pdfconduit.utils.info">pdfconduit.utils.info</a>
  &#8226;   <a href="#pdfrw">pdfrw</a>
  &#8226;   <a href="#tempfile">tempfile</a>
 
@@ -10922,10 +10924,11 @@ imported by:
 <span class="moduletype">Package</span>  <div class="import">
 imports:
     <a href="#pdfconduit">pdfconduit</a>
- &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
  &#8226;   <a href="#pdfconduit.utils.gui">pdfconduit.utils.gui</a>
  &#8226;   <a href="#pdfconduit.utils.info">pdfconduit.utils.info</a>
+ &#8226;   <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
  &#8226;   <a href="#pdfconduit.utils.path">pdfconduit.utils.path</a>
+ &#8226;   <a href="#pdfconduit.utils.receipt">pdfconduit.utils.receipt</a>
  &#8226;   <a href="#pdfconduit.utils.view">pdfconduit.utils.view</a>
  &#8226;   <a href="#pdfconduit.utils.write">pdfconduit.utils.write</a>
 
@@ -10937,16 +10940,18 @@ imported by:
  &#8226;   <a href="#pdfconduit.rotate">pdfconduit.rotate</a>
  &#8226;   <a href="#pdfconduit.slice">pdfconduit.slice</a>
  &#8226;   <a href="#pdfconduit.upscale">pdfconduit.upscale</a>
- &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
  &#8226;   <a href="#pdfconduit.utils.gui">pdfconduit.utils.gui</a>
  &#8226;   <a href="#pdfconduit.utils.info">pdfconduit.utils.info</a>
+ &#8226;   <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
  &#8226;   <a href="#pdfconduit.utils.path">pdfconduit.utils.path</a>
+ &#8226;   <a href="#pdfconduit.utils.receipt">pdfconduit.utils.receipt</a>
  &#8226;   <a href="#pdfconduit.utils.view">pdfconduit.utils.view</a>
  &#8226;   <a href="#pdfconduit.utils.write">pdfconduit.utils.write</a>
  &#8226;   <a href="#pdfconduit.watermark.add">pdfconduit.watermark.add</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.constructor">pdfconduit.watermark.canvas.constructor</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.objects">pdfconduit.watermark.canvas.objects</a>
  &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
  &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
 
   </div>
@@ -10964,7 +10969,6 @@ imports:
  &#8226;   <a href="#pdfconduit.encrypt">pdfconduit.encrypt</a>
  &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
  &#8226;   <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
- &#8226;   <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
 
   </div>
   <div class="import">
@@ -10989,9 +10993,29 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.upscale">pdfconduit.upscale</a>
+    <a href="#pdfconduit.utils">pdfconduit.utils</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdfconduit.utils.lib"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/utils/lib.py" type="text/plain"><tt>pdfconduit.utils.lib</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#os">os</a>
  &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
- &#8226;   <a href="#pdfconduit.watermark.add">pdfconduit.watermark.add</a>
+ &#8226;   <a href="#pdfconduit.utils.path">pdfconduit.utils.path</a>
+ &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
+ &#8226;   <a href="#reportlab.pdfbase">reportlab.pdfbase</a>
+ &#8226;   <a href="#reportlab.pdfbase.pdfmetrics">reportlab.pdfbase.pdfmetrics</a>
+ &#8226;   <a href="#reportlab.pdfbase.ttfonts">reportlab.pdfbase.ttfonts</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdfconduit.utils">pdfconduit.utils</a>
 
   </div>
 
@@ -11012,7 +11036,27 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfconduit.utils">pdfconduit.utils</a>
+ &#8226;   <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
  &#8226;   <a href="#pdfconduit.watermark.label">pdfconduit.watermark.label</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdfconduit.utils.receipt"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/utils/receipt.py" type="text/plain"><tt>pdfconduit.utils.receipt</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PySimpleGUI">PySimpleGUI</a>
+ &#8226;   <a href="#datetime">datetime</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdfconduit.utils">pdfconduit.utils</a>
 
   </div>
 
@@ -11069,9 +11113,9 @@ imported by:
     <a href="#pdfconduit">pdfconduit</a>
  &#8226;   <a href="#pdfconduit.utils.gui">pdfconduit.utils.gui</a>
  &#8226;   <a href="#pdfconduit.watermark.add">pdfconduit.watermark.add</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
  &#8226;   <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
  &#8226;   <a href="#pdfconduit.watermark.label">pdfconduit.watermark.label</a>
- &#8226;   <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
  &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
  &#8226;   <a href="#tests.test_watermark_label">tests.test_watermark_label</a>
 
@@ -11088,7 +11132,6 @@ imports:
  &#8226;   <a href="#pdfconduit.rotate">pdfconduit.rotate</a>
  &#8226;   <a href="#pdfconduit.upscale">pdfconduit.upscale</a>
  &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
- &#8226;   <a href="#pdfconduit.utils.info">pdfconduit.utils.info</a>
  &#8226;   <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
  &#8226;   <a href="#pdfrw">pdfrw</a>
  &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
@@ -11105,19 +11148,20 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="pdfconduit.watermark.draw"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/draw/__init__.py" type="text/plain"><tt>pdfconduit.watermark.draw</tt></a>
+  <a name="pdfconduit.watermark.canvas"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/canvas/__init__.py" type="text/plain"><tt>pdfconduit.watermark.canvas</tt></a>
 <span class="moduletype">Package</span>  <div class="import">
 imports:
     <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.constructor">pdfconduit.watermark.canvas.constructor</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.objects">pdfconduit.watermark.canvas.objects</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
+    <a href="#pdfconduit.watermark.canvas.constructor">pdfconduit.watermark.canvas.constructor</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.objects">pdfconduit.watermark.canvas.objects</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
  &#8226;   <a href="#pdfconduit.watermark.label">pdfconduit.watermark.label</a>
  &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
 
@@ -11126,23 +11170,60 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="pdfconduit.watermark.draw.canvas"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/draw/canvas.py" type="text/plain"><tt>pdfconduit.watermark.draw.canvas</tt></a>
+  <a name="pdfconduit.watermark.canvas.constructor"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/canvas/constructor.py" type="text/plain"><tt>pdfconduit.watermark.canvas.constructor</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#io">io</a>
+    <a href="#datetime">datetime</a>
+ &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
- &#8226;   <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.objects">pdfconduit.watermark.canvas.objects</a>
  &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
- &#8226;   <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
- &#8226;   <a href="#reportlab.pdfbase.pdfmetrics">reportlab.pdfbase.pdfmetrics</a>
- &#8226;   <a href="#reportlab.pdfgen.canvas">reportlab.pdfgen.canvas</a>
- &#8226;   <a href="#tempfile">tempfile</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
+    <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdfconduit.watermark.canvas.objects"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/canvas/objects.py" type="text/plain"><tt>pdfconduit.watermark.canvas.objects</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#pdfconduit.utils">pdfconduit.utils</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas.constructor">pdfconduit.watermark.canvas.constructor</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdfconduit.watermark.draw"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/draw/__init__.py" type="text/plain"><tt>pdfconduit.watermark.draw</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
+ &#8226;   <a href="#pdfconduit.watermark.label">pdfconduit.watermark.label</a>
+ &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
 
   </div>
 
@@ -11161,14 +11242,37 @@ imports:
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
  &#8226;   <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
- &#8226;   <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
+ &#8226;   <a href="#tempfile">tempfile</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdfconduit.watermark.canvas.constructor">pdfconduit.watermark.canvas.constructor</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdfconduit.watermark.draw.pdf"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/draw/pdf.py" type="text/plain"><tt>pdfconduit.watermark.draw.pdf</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#io">io</a>
+ &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
+ &#8226;   <a href="#reportlab.pdfbase.pdfmetrics">reportlab.pdfbase.pdfmetrics</a>
+ &#8226;   <a href="#reportlab.pdfgen.canvas">reportlab.pdfgen.canvas</a>
  &#8226;   <a href="#tempfile">tempfile</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
 
   </div>
 
@@ -11181,6 +11285,7 @@ imported by:
 imports:
     <a href="#pdfconduit.utils.path">pdfconduit.utils.path</a>
  &#8226;   <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
  &#8226;   <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
  &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
 
@@ -11188,70 +11293,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pdfconduit.watermark.lib"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/lib/__init__.py" type="text/plain"><tt>pdfconduit.watermark.lib</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.receipt">pdfconduit.watermark.lib.receipt</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pdfconduit.utils.gui">pdfconduit.utils.gui</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.receipt">pdfconduit.watermark.lib.receipt</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
- &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pdfconduit.watermark.lib.receipt"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/lib/receipt.py" type="text/plain"><tt>pdfconduit.watermark.lib.receipt</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PySimpleGUI">PySimpleGUI</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pdfconduit.watermark.lib.utils"></a>
-  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/lib/utils.py" type="text/plain"><tt>pdfconduit.watermark.lib.utils</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#os">os</a>
- &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
- &#8226;   <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
- &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
- &#8226;   <a href="#reportlab.pdfbase">reportlab.pdfbase</a>
- &#8226;   <a href="#reportlab.pdfbase.pdfmetrics">reportlab.pdfbase.pdfmetrics</a>
- &#8226;   <a href="#reportlab.pdfbase.ttfonts">reportlab.pdfbase.ttfonts</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
 
   </div>
 
@@ -11262,15 +11303,14 @@ imported by:
   <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdfconduit/watermark/watermark.py" type="text/plain"><tt>pdfconduit.watermark.watermark</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#datetime">datetime</a>
- &#8226;   <a href="#looptools">looptools</a>
+    <a href="#looptools">looptools</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pdfconduit.encrypt">pdfconduit.encrypt</a>
  &#8226;   <a href="#pdfconduit.utils">pdfconduit.utils</a>
  &#8226;   <a href="#pdfconduit.watermark">pdfconduit.watermark</a>
  &#8226;   <a href="#pdfconduit.watermark.add">pdfconduit.watermark.add</a>
+ &#8226;   <a href="#pdfconduit.watermark.canvas">pdfconduit.watermark.canvas</a>
  &#8226;   <a href="#pdfconduit.watermark.draw">pdfconduit.watermark.draw</a>
- &#8226;   <a href="#pdfconduit.watermark.lib">pdfconduit.watermark.lib</a>
  &#8226;   <a href="#shutil">shutil</a>
  &#8226;   <a href="#tempfile">tempfile</a>
 
@@ -12320,6 +12360,7 @@ imports:
  &#8226;   <a href="#reportlab.lib.PyFontify">reportlab.lib.PyFontify</a>
  &#8226;   <a href="#reportlab.lib.colors">reportlab.lib.colors</a>
  &#8226;   <a href="#reportlab.lib.fonts">reportlab.lib.fonts</a>
+ &#8226;   <a href="#reportlab.lib.pagesizes">reportlab.lib.pagesizes</a>
  &#8226;   <a href="#reportlab.lib.pdfencrypt">reportlab.lib.pdfencrypt</a>
  &#8226;   <a href="#reportlab.lib.textsplit">reportlab.lib.textsplit</a>
 
@@ -12547,8 +12588,9 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.watermark.add">pdfconduit.watermark.add</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
+    <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
+ &#8226;   <a href="#pdfconduit.watermark.add">pdfconduit.watermark.add</a>
+ &#8226;   <a href="#reportlab.lib">reportlab.lib</a>
  &#8226;   <a href="#reportlab.rl_config">reportlab.rl_config</a>
 
   </div>
@@ -12849,7 +12891,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
+    <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
  &#8226;   <a href="#reportlab.lib.pdfencrypt">reportlab.lib.pdfencrypt</a>
  &#8226;   <a href="#reportlab.pdfbase._fontdata">reportlab.pdfbase._fontdata</a>
  &#8226;   <a href="#reportlab.pdfbase._fontdata_enc_macexpert">reportlab.pdfbase._fontdata_enc_macexpert</a>
@@ -13374,8 +13416,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
- &#8226;   <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
+    <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
  &#8226;   <a href="#reportlab.lib.textsplit">reportlab.lib.textsplit</a>
  &#8226;   <a href="#reportlab.lib.utils">reportlab.lib.utils</a>
  &#8226;   <a href="#reportlab.pdfbase">reportlab.pdfbase</a>
@@ -13469,7 +13511,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.watermark.lib.utils">pdfconduit.watermark.lib.utils</a>
+    <a href="#pdfconduit.utils.lib">pdfconduit.utils.lib</a>
 
   </div>
 
@@ -13532,7 +13574,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
+    <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
  &#8226;   <a href="#reportlab.lib.pdfencrypt">reportlab.lib.pdfencrypt</a>
  &#8226;   <a href="#reportlab.pdfbase.acroform">reportlab.pdfbase.acroform</a>
  &#8226;   <a href="#reportlab.platypus.doctemplate">reportlab.platypus.doctemplate</a>
@@ -14764,8 +14806,8 @@ imported by:
  &#8226;   <a href="#pdfconduit.slice">pdfconduit.slice</a>
  &#8226;   <a href="#pdfconduit.upscale">pdfconduit.upscale</a>
  &#8226;   <a href="#pdfconduit.watermark.add">pdfconduit.watermark.add</a>
- &#8226;   <a href="#pdfconduit.watermark.draw.canvas">pdfconduit.watermark.draw.canvas</a>
  &#8226;   <a href="#pdfconduit.watermark.draw.image">pdfconduit.watermark.draw.image</a>
+ &#8226;   <a href="#pdfconduit.watermark.draw.pdf">pdfconduit.watermark.draw.pdf</a>
  &#8226;   <a href="#pdfconduit.watermark.watermark">pdfconduit.watermark.watermark</a>
  &#8226;   <a href="#pipes">pipes</a>
  &#8226;   <a href="#pydoc">pydoc</a>
