@@ -4,10 +4,10 @@ import shutil
 from datetime import datetime
 from tempfile import mkdtemp
 from looptools import Timer
-from pdfconduit.watermark.add import WatermarkAdd
 from pdfconduit.utils import add_suffix, open_window, Receipt, IMAGE_DIRECTORY, IMAGE_DEFAULT
 from pdfconduit.encrypt import Encrypt
 from pdfconduit.watermark.draw import WatermarkDraw, CanvasObjects, CanvasStr, CanvasImg, DrawPIL
+from pdfconduit.watermark.add import WatermarkAdd
 
 
 class CanvasConstructor:
