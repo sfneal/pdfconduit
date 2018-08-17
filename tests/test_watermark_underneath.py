@@ -1,20 +1,20 @@
-from pdfconduit import Watermark
 import os
-from tests import pdf, directory
+from pdfconduit import Watermark
+from tests import pdf
 
 
-def main(move_temps, flatten, rotate):
+def main():
     print('Testing Watermark draw and add functionality')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
 
-    w1 = Watermark(pdf, use_receipt=False, move_temps=move_temps)
-    wtrmrk1 = w1.draw(address, str(town + ', ' + state), opacity=0.08, flatten=flatten, rotate=rotate)
+    w1 = Watermark(pdf, use_receipt=False)
+    wtrmrk1 = w1.draw(address, str(town + ', ' + state))
     added1 = w1.add(suffix='watermarked_overlay')
 
-    w2 = Watermark(pdf, use_receipt=False, move_temps=move_temps)
-    wtrmrk2 = w2.draw(address, str(town + ', ' + state), opacity=0.08, flatten=flatten, rotate=rotate)
+    w2 = Watermark(pdf, use_receipt=False)
+    wtrmrk2 = w2.draw(address, str(town + ', ' + state))
     added2 = w2.add(underneath=True, suffix='watermarked_underneath')
 
     w1.cleanup()
@@ -31,5 +31,4 @@ def main(move_temps, flatten, rotate):
 
 
 if __name__ == '__main__':
-    main(directory, False, 30)
-    # main(directory, True, 30)
+    main()

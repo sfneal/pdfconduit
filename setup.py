@@ -21,13 +21,11 @@ setup(
     version=__version__,
     packages=find_packages(),
     install_requires=[
-        'pdfrw',
         'PyPDF3',
         'Pillow',
         'PySimpleGUI',
         'reportlab',
         'looptools',
-        'tqdm'
     ],
     include_package_data=True,
     url='https://github.com/mrstephenneal/pdfconduit',

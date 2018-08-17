@@ -1,6 +1,5 @@
 # Merge PDF documents
 import os
-from tqdm import tqdm
 from PyPDF3 import PdfFileMerger
 
 
@@ -37,11 +36,7 @@ class Merge:
         pdf_merger = PdfFileMerger()
 
         # Appending pdfs one by one
-        if len(pdf_files) > 5:
-            loop = tqdm(pdf_files, desc='Merging PDFs', total=len(pdf_files))
-        else:
-            loop = pdf_files
-        for pdf in loop:
+        for pdf in pdf_files:
             pdf_merger.append(pdf)
 
         # writing combined pdf to output pdf file
