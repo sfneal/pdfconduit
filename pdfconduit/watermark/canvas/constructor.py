@@ -36,7 +36,7 @@ class CanvasConstructor:
     def img(self):
         img = DrawPIL(tempdir=self.tempdir)
 
-        img.draw_img(os.path.join(IMAGE_DIRECTORY, self.image), x=0, y=153, opacity=self.opacity)
+        img.draw_img(os.path.join(IMAGE_DIRECTORY, self.image), x=0, y=50, opacity=self.opacity)
         if self.copyright:
             img.draw_text('© copyright ' + str(datetime.now().year), size=16, y='center')
         if self.text2:
