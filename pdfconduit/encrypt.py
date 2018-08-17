@@ -5,7 +5,7 @@ from PyPDF3 import PdfFileReader, PdfFileWriter
 
 class Encrypt:
     def __init__(self, pdf, user_pw, owner_pw=None, output=None, bit128=True, allow_printing=True,
-                 allow_commenting=False):
+                 allow_commenting=False, overwrite_permission=None):
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
         self.user_pw = user_pw
@@ -14,6 +14,7 @@ class Encrypt:
         self.encrypt_128 = bit128
         self.allow_printing = allow_printing
         self.allow_commenting = allow_commenting
+        self.overwrite_permission = overwrite_permission
         self.encrypt()
 
     def __str__(self):
@@ -33,7 +34,8 @@ class Encrypt:
 
             # Apply encryption to writer object
             pdf_writer.encrypt(self.user_pw, self.owner_pw, use_128bit=self.encrypt_128,
-                               allow_printing=self.allow_printing, allow_commenting=self.allow_commenting)
+                               allow_printing=self.allow_printing, allow_commenting=self.allow_commenting,
+                               overwrite_permission=self.overwrite_permission)
 
             pdf_writer.addMetadata({
                 '/Producer': 'pdfconduit',
