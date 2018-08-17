@@ -26,7 +26,7 @@ def overlay_pdfs(top_pdf, bottom_pdf, destination):
 def write_pdf(pdf_obj, destination):
     """
     Write PDF object to file
-    :param pdf: PDF object to be written to file
+    :param pdf_obj: PDF object to be written to file
     :param destination: Desintation path
     """
     reader = PdfFileReader(pdf_obj)  # Create new PDF object

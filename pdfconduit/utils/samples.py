@@ -1,9 +1,7 @@
 # Generate sample PDF documents
 import os
-from pdfconduit import Merge, slicer, info
-from pdfconduit.utils import open_window
-from pdfconduit.watermark.lib import available_images
-from pdfconduit.watermark import Label, Watermark
+from pdfconduit.utils import open_window, available_images
+from pdfconduit import Label, Watermark, Merge, slicer, info
 from tests import pdf
 
 
