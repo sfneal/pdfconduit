@@ -1,7 +1,7 @@
 import os
 import PySimpleGUI as gui
 from pdfconduit import __version__
-from pdfconduit.watermark.lib import available_images
+from pdfconduit.utils import available_images
 
 
 def get_directory():
