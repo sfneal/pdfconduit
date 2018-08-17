@@ -133,7 +133,7 @@ class GUI:
 
     @staticmethod
     def watermark():
-        from pdfconduit.watermark.lib import Receipt
+        from pdfconduit.utils import Receipt
         from pdfconduit.watermark import Watermark
 
         label_w = 20
