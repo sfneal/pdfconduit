@@ -20,6 +20,11 @@ def _reader(path, password=None, prompt=True):
     return pdf
 
 
+def _resolved_objects(pdf, object):
+    """Retrieve rotatation info."""
+    return [pdf.getPage(i).get(object) for i in range(pdf.getNumPages())][0]
+
+
 def encrypted(path):
     """Check weather a PDF is encrypted"""
     return True if not _reader(path, prompt=False) else False
@@ -57,6 +62,5 @@ def dimensions(path, password=None):
 
 
 def rotate(path, password=None):
-    """Retrieve rotatation info."""
-    pdf = _reader(path, password)
-    return [pdf.getPage(i).get('/Rotate') for i in range(pages(path, password))][0]
+    """Retrieve rotation info."""
+    return _resolved_objects(_reader(path, password), '/Rotate')
