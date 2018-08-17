@@ -25,9 +25,9 @@ class Info:
         return pdf
 
     @staticmethod
-    def _resolved_objects(pdf, object):
+    def _resolved_objects(pdf, xobject):
         """Retrieve rotatation info."""
-        return [pdf.getPage(i).get(object) for i in range(pdf.getNumPages())][0]
+        return [pdf.getPage(i).get(xobject) for i in range(pdf.getNumPages())][0]
 
     @property
     def encrypted(self):
