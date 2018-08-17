@@ -5,6 +5,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from pdfconduit.utils import resource_path, write_pdf, LETTER
 from pdfconduit.watermark.draw.image import img_opacity
+from pdfconduit.watermark.canvas import CanvasStr, CanvasImg
 
 
 def center_str(txt, font, size, offset=0):
