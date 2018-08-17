@@ -7,7 +7,7 @@ from pdfconduit.utils.path import resource_path, bundle_dir
 
 def register_font(font='Vera.ttf'):
     """Register fonts for report labs canvas."""
-    directory = os.path.join(bundle_dir(), 'font')
+    directory = os.path.join(bundle_dir(), 'lib', 'font')
     ttfFile = resource_path(os.path.join(directory, font))
     if os.path.exists(ttfFile):
         pdfmetrics.registerFont(TTFont("Vera", ttfFile))
@@ -17,7 +17,7 @@ def register_font(font='Vera.ttf'):
 
 
 def _image_directory():
-    directory = os.path.join(bundle_dir(), 'img')
+    directory = os.path.join(bundle_dir(), 'lib', 'img')
     if os.path.exists(directory):
         return directory
     else:

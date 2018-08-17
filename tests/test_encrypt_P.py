@@ -24,6 +24,7 @@ def main():
                 print('Success!', '\n')
             except AssertionError:
                 print('Failed!')
+                print(security)
 
 
 if __name__ == '__main__':
