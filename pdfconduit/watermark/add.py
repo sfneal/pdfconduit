@@ -1,6 +1,5 @@
 # Add a watermark PDF file to another PDF file
 from tempfile import NamedTemporaryFile
-from pdfrw import PdfReader, PdfWriter, PageMerge
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
 from pdfconduit.upscale import upscale
@@ -9,8 +8,8 @@ from pdfconduit.utils import add_suffix, resource_path, Info
 
 
 class WatermarkAdd:
-    def __init__(self, document, watermark, underneath=False, overwrite=False, output=None, suffix='watermarked',
-                 decrypt=False, tempdir=None):
+    def __init__(self, document, watermark, overwrite=False, output=None, suffix='watermarked', decrypt=False,
+                 tempdir=None):
         """
         Add a watermark to an existing PDF document
 
@@ -51,7 +50,7 @@ class WatermarkAdd:
         else:
             self.output_filename = add_suffix(document, suffix)
 
-        self.add(pdf_fname, wtrmrk_fname, underneath)
+        self.add(pdf_fname, wtrmrk_fname)
 
     def __str__(self):
         return str(self.output_filename)
@@ -136,54 +135,35 @@ class WatermarkAdd:
             watermark = self.watermark_file['path']
         return pdf, watermark
 
-    def add(self, document, watermark, underneath=False, method='pypdf3'):
+    def add(self, document, watermark):
         """Add watermark to PDF by merging original PDF and watermark file."""
         # 5a. Create output PDF file name
         output_filename = self.output_filename
 
-        def pypdf3():
-            # 5b. Get our files ready
-            document_reader = self.document_reader
-            output_file = PdfFileWriter()
+        # 5b. Get our files ready
+        document_reader = PdfFileReader(document)
+        output_file = PdfFileWriter()
 
-            # Number of pages in input document
-            page_count = document_reader.getNumPages()
+        # Number of pages in input document
+        page_count = document_reader.getNumPages()
 
-            # Watermark objects
-            watermark_reader = PdfFileReader(watermark)
-            wtrmrk_page = watermark_reader.getPage(0)
-            wtrmrk_width = (wtrmrk_page.mediaBox.getWidth() / 2) + 0
-            wtrmrk_height = (wtrmrk_page.mediaBox.getHeight() / 2) + 80
-            wtrmrk_rotate = Info(watermark_reader).rotate
+        # Watermark objects
+        watermark_reader = PdfFileReader(watermark)
+        wtrmrk_page = watermark_reader.getPage(0)
+        wtrmrk_width = (wtrmrk_page.mediaBox.getWidth() / 2) + 0
+        wtrmrk_height = (wtrmrk_page.mediaBox.getHeight() / 2) + 80
+        wtrmrk_rotate = Info(watermark_reader).rotate
 
-            # 5c. Go through all the input file pages to add a watermark to them
-            for page_number in range(page_count):
-                # Merge the watermark with the page
-                input_page = document_reader.getPage(page_number)
-                input_page.mergeRotatedTranslatedPage(wtrmrk_page, -wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+        # 5c. Go through all the input file pages to add a watermark to them
+        for page_number in range(page_count):
+            # Merge the watermark with the page
+            input_page = document_reader.getPage(page_number)
+            input_page.mergeRotatedTranslatedPage(wtrmrk_page, -wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
 
-                # Add page from input file to output document
-                output_file.addPage(input_page)
+            # Add page from input file to output document
+            output_file.addPage(input_page)
 
-            # 5d. finally, write "output" to PDF
-            with open(output_filename, "wb") as outputStream:
-                output_file.write(outputStream)
-            return output_filename
-
-        def pdfrw():
-            # 5b. Get watermark from reader
-            wmark = PageMerge().add(PdfReader(watermark).pages[0])[0]
-
-            # 5c. Add watermark to each page of document
-            trailer = PdfReader(document)
-            for page in trailer.pages:
-                PageMerge(page).add(wmark, prepend=underneath).render()
-
-            # 5d. Write PDF to file
-            PdfWriter(output_filename, trailer=trailer).write()
-            return output_filename
-
-        if method is 'pypdf3':
-            return pypdf3()
-        else:
-            return pdfrw()
+        # 5d. finally, write "output" to PDF
+        with open(output_filename, "wb") as outputStream:
+            output_file.write(outputStream)
+        return output_filename
