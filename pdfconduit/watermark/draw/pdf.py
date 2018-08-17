@@ -13,7 +13,7 @@ def center_str(txt, font, size, offset=0):
     return -(text_width / 2.0) + offset
 
 
-class Draw:
+class DrawPDF:
     def __init__(self, tempdir=None, compress=0):
         if tempdir:
             self.dir = tempdir
@@ -38,7 +38,7 @@ class Draw:
         return self._write()
 
 
-class WatermarkDraw(Draw):
+class WatermarkDraw(DrawPDF):
     def __init__(self, canvas_objects, rotate=0, compress=0, tempdir=None):
         super(WatermarkDraw, self).__init__(tempdir, compress)
         self.canvas_objects = canvas_objects
