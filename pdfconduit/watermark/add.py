@@ -1,6 +1,7 @@
 # Add a watermark PDF file to another PDF file
 from tempfile import NamedTemporaryFile
 from PyPDF3 import PdfFileReader, PdfFileWriter
+from PyPDF3.pdf import PageObject
 from reportlab.lib.pagesizes import letter
 from pdfconduit.upscale import upscale
 from pdfconduit.rotate import rotate
@@ -8,8 +9,8 @@ from pdfconduit.utils import add_suffix, resource_path, Info
 
 
 class WatermarkAdd:
-    def __init__(self, document, watermark, overwrite=False, output=None, suffix='watermarked', decrypt=False,
-                 tempdir=None):
+    def __init__(self, document, watermark, underneath=False, overwrite=False, output=None, suffix='watermarked',
+                 decrypt=False, tempdir=None):
         """
         Add a watermark to an existing PDF document
 
@@ -33,6 +34,7 @@ class WatermarkAdd:
         """
         self.rotate = 0
         self.scale = 0
+        self.underneath = underneath
         self.tempdir = tempdir
         self.document_reader = self._document_reader(document, decrypt)
         self.document = self._get_document_info(document)
@@ -157,8 +159,14 @@ class WatermarkAdd:
         # 5c. Go through all the input file pages to add a watermark to them
         for page_number in range(page_count):
             # Merge the watermark with the page
-            input_page = document_reader.getPage(page_number)
-            input_page.mergeRotatedTranslatedPage(wtrmrk_page, -wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+            if not self.underneath:
+                input_page = document_reader.getPage(page_number)
+                input_page.mergeRotatedTranslatedPage(wtrmrk_page, -wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+            else:
+                size = Info(document_reader).dimensions
+                input_page = PageObject().createBlankPage(document_reader, size['w'], size['h'])
+                input_page.mergeRotatedTranslatedPage(wtrmrk_page, -wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+                input_page.mergePage(document_reader.getPage(page_number))
 
             # Add page from input file to output document
             output_file.addPage(input_page)
