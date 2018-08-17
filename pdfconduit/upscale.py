@@ -7,7 +7,7 @@ from PyPDF3.pdf import PageObject
 from pdfconduit.utils import Info, add_suffix
 
 
-def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypdf3', suffix='scaled', tempdir=None):
+def upscale(file_name, margin_x=0, margin_y=0, scale=1.5, method='pypdf3', suffix='scaled', tempdir=None):
     """Upscale a PDF to a large size."""
     # Set output file name
     if tempdir:
@@ -21,7 +21,7 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
         def adjust(page):
             info = PageMerge().add(page)
             x1, y1, x2, y2 = info.xobj_box
-            viewrect = (margin, margin, x2 - x1 - 2 * margin, y2 - y1 - 2 * margin)
+            viewrect = (margin_x, margin_y, x2 - x1 - 2 * margin_x, y2 - y1 - 2 * margin_y)
             page = PageMerge().add(page, viewrect=viewrect)
             page[0].scale(scale)
             return page.render()
