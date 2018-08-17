@@ -1,5 +1,5 @@
 import os
-from pdfconduit import Merge, info
+from pdfconduit import Merge, Info
 from tests import directory
 
 
@@ -12,7 +12,7 @@ def main():
 
     try:
         assert os.path.exists(m.file) is True
-        assert sum([info.pages(pdf) for pdf in pdfs]) == info.pages(m.file)
+        assert sum([Info(pdf).pages for pdf in pdfs]) == Info(m.file).pages
         print('Success!')
     except AssertionError:
         print('Failed!')

@@ -1,6 +1,6 @@
 # Test encrypt module reliability
 import os
-from pdfconduit import Encrypt, info
+from pdfconduit import Encrypt, Info
 from tests import pdf, directory
 from looptools import ActiveTimer
 
@@ -14,11 +14,12 @@ def main():
     print(_range)
     for i in _range:
         with ActiveTimer(i):
-            p = Encrypt(pdf, user_pw, owner_pw, output=os.path.join(directory, 'P', str(i) + '.pdf'), allow_printing=i)
-            security = info.security(p.output, user_pw)
+            p = Encrypt(pdf, user_pw, owner_pw, output=os.path.join(directory, 'P', str(i) + '.pdf'),
+                        overwrite_permission=i)
+            security = Info(p.output, user_pw).security
 
             try:
-                assert info.encrypted(p.output) is True
+                assert Info(p.output, user_pw).encrypted is True
                 assert security['/Length'] == 128
                 assert security['/P'] == i
                 print('Success!', '\n')

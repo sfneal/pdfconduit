@@ -5,8 +5,7 @@ from PyPDF3 import PdfFileReader, PdfFileWriter
 from reportlab.lib.pagesizes import letter
 from pdfconduit.upscale import upscale
 from pdfconduit.rotate import rotate
-from pdfconduit.utils import add_suffix, resource_path
-from pdfconduit.utils.info import dimensions
+from pdfconduit.utils import add_suffix, resource_path, Info
 
 
 class WatermarkAdd:
@@ -71,7 +70,7 @@ class WatermarkAdd:
         pdf_file = {'path': filename}
 
         # 2a. Get PDF width and height
-        pdf_file.update(dimensions(self.document_reader))
+        pdf_file.update(Info(self.document_reader).dimensions)
 
         # 2b. Get PDF file orientation
         if pdf_file['h'] > pdf_file['w']:
@@ -91,7 +90,7 @@ class WatermarkAdd:
     def _get_watermark_info(self, document, watermark, margin_x=0, margin_y=0):
         # 3a. Get watermark path and dimensions
         watermark_file = {'path': watermark}
-        watermark_file.update(dimensions(watermark))
+        watermark_file.update(Info(watermark).dimensions)
 
         # 3b. Check if watermark file needs to be rotated
         if watermark_file['w'] > watermark_file['h'] and document['orientation'] is 'portrait':
@@ -101,7 +100,7 @@ class WatermarkAdd:
         # Set watermark file to be used for upscaling
         try:
             wtrmrk = watermark_file['rotated']
-            watermark_file.update(dimensions(watermark_file['rotated']))
+            watermark_file.update(Info(watermark_file['rotated']).dimensions)
         except KeyError:
             wtrmrk = watermark_file['path']
 

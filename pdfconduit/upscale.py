@@ -3,7 +3,7 @@ from tempfile import NamedTemporaryFile
 from pdfrw import PdfReader, PdfWriter, PageMerge, IndirectPdfDict
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.pdf import PageObject
-from pdfconduit.utils import info
+from pdfconduit.utils import Info
 
 
 def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypdf3', tempdir=None):
@@ -30,7 +30,7 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
     def pypdf3():
         reader = PdfFileReader(file_name)
         writer = PdfFileWriter()
-        dims = info.dimensions(file_name)
+        dims = Info(file_name).dimensions
         target_w = dims['w'] * scale
         target_h = dims['h'] * scale
 

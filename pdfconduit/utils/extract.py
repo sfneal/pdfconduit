@@ -1,12 +1,12 @@
 # Extract images from a PDF
 from PIL import Image
-from pdfconduit.utils.info import _reader
+from pdfconduit.utils.info import Info
 
 
 # Todo: Fix img_extract and develop tests
 def img_extract(pdf, password=None):
     # Read PDF file
-    reader = _reader(pdf, password)
+    reader = Info(pdf, password).pdf
 
     # Number of pages in input document
     page_count = reader.getNumPages()
@@ -42,6 +42,6 @@ def img_extract(pdf, password=None):
 # TODO: Fix text extract and interpret extracted text
 def text_extract(path, password=None):
     """Extract text from a PDF file"""
-    pdf = _reader(path, password)
+    pdf = Info(path, password).pdf
 
     return [pdf.getPage(i).extractText() for i in range(pdf.getNumPages())]

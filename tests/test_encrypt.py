@@ -1,5 +1,5 @@
 # Test encrypt module reliability
-from pdfconduit import Encrypt, info
+from pdfconduit import Encrypt, Info
 from tests import pdf
 
 
@@ -10,10 +10,10 @@ def main():
 
     p = Encrypt(pdf, user_pw, owner_pw)
 
-    security = info.security(p.output, user_pw)
+    security = Info(p.output, user_pw).security
 
     try:
-        assert info.encrypted(p.output) is True
+        assert Info(p.output, user_pw).encrypted is True
         assert security['/Length'] == 128
         assert security['/P'] == -1852
         print('Success!')

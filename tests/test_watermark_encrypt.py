@@ -1,4 +1,4 @@
-from pdfconduit import Watermark, info
+from pdfconduit import Watermark, Info
 import os
 from tests import pdf
 
@@ -18,7 +18,7 @@ def main():
     encrypted = w.encrypt(user_pw, owner_pw)
     w.cleanup()
 
-    security = info.security(encrypted, user_pw)
+    security = Info(encrypted, user_pw).security
 
     try:
         # File checks
@@ -27,12 +27,12 @@ def main():
         assert os.path.exists(encrypted) is True
 
         # Encryption checks
-        assert info.encrypted(encrypted) is True
+        assert Info(encrypted).encrypted is True
         assert security['/Length'] == 128
         # assert security['/P'] == -1852
         print('Success!')
         print('\n', security['/P'])
-        print(info.metadata(encrypted, user_pw))
+        print(Info(encrypted, user_pw).metadata)
     except AssertionError:
         print('Failed!')
 
