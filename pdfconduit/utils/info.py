@@ -47,10 +47,16 @@ def security(path, password=None):
     return {k: v for i in pdf.resolvedObjects.items() for k, v in i[1].items()}
 
 
-def dimensions(file_name, password=None):
+def dimensions(path, password=None):
     """Get width and height of a PDF"""
     try:
-        size = _reader(file_name, password).getPage(0).mediaBox
+        size = _reader(path, password).getPage(0).mediaBox
     except AttributeError:
-        size = file_name.getPage(0).mediaBox
+        size = path.getPage(0).mediaBox
     return {'w': float(size[2]), 'h': float(size[3])}
+
+
+def rotate(path, password=None):
+    """Retrieve rotatation info."""
+    pdf = _reader(path, password)
+    return [pdf.getPage(i).get('/Rotate') for i in range(pages(path, password))][0]
