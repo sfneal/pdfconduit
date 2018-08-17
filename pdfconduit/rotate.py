@@ -6,7 +6,7 @@ from pdfconduit.utils import add_suffix
 from pdfrw import PdfReader, PdfWriter
 
 
-def rotate(file_name, rotate, suffix='rotated', method='pypdf3', tempdir=None):
+def rotate(file_name, rotate, method='pypdf3', suffix='rotated', tempdir=None):
     """Rotate PDF by increments of 90 degrees."""
     # Set output file name
     if tempdir:
