@@ -92,10 +92,7 @@ class DrawPIL:
 
     def draw_img(self, img, x=0, y=0, opacity=1.0):
         scaled = self._scale(img)
-
-        # scaled = im.resize(target_width)
         opacity = Image.open(img_opacity(scaled, opacity, self.tempdir))
-
         self.img.paste(opacity, (x, y))
 
     def rotate(self, rotate):
@@ -109,7 +106,6 @@ class DrawPIL:
         mask.rotate(rotate, expand=True)
 
         # Determine difference in size between mask and front
-        x_margin = int((mask.size[0] - front.size[0]) / 2)
         y_margin = int((mask.size[1] - front.size[1]) / 3)
 
         # Create another new image
