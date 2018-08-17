@@ -113,7 +113,7 @@ class Watermark:
             self.add()
             return self.cleanup()
 
-    def add(self, document=None, watermark=None, output=None, suffix='watermarked'):
+    def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked'):
         """
         Add a watermark file to an existing PDF document.
 
@@ -138,13 +138,14 @@ class Watermark:
             watermark = self.watermark
         if not document:
             document = self.document
-        self.document = str(WatermarkAdd(document, watermark, output=output, tempdir=self.tempdir, suffix=suffix))
+        self.document = str(WatermarkAdd(document, watermark, output=output, underneath=underneath,
+                                         tempdir=self.tempdir, suffix=suffix))
         self.receipt.add('Watermarked PDF', os.path.basename(self.document))
         if self.open_file:
             open_window(self.document)
         return self.document
 
-    def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, restrict_permission=True):
+    def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, allow_printing=True, allow_commenting=False):
         """
         Encrypt a PDF document to add passwords and restrict permissions.
 
@@ -159,7 +160,7 @@ class Watermark:
             Owner password required to alter security settings and permissions
         :param encrypt_128: bool
             Encrypt PDF document using 128 bit keys
-        :param restrict_permission: bool
+        :param allow_printing: bool
             Restrict permissions to print only
         :return: str
             Encrypted PDF full path
@@ -170,11 +171,11 @@ class Watermark:
             self.receipt.add('Encryption key size', '128')
         else:
             self.receipt.add('Encryption key size', '40')
-        if restrict_permission:
+        if allow_printing:
             self.receipt.add('Permissions', 'Allow printing')
         else:
             self.receipt.add('Permissions', 'Allow ALL')
         p = str(Encrypt(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
-                        bit128=encrypt_128, allow_printing=restrict_permission))
+                        bit128=encrypt_128, allow_printing=allow_printing, allow_commenting=allow_commenting))
         self.receipt.add('Secured PDF', os.path.basename(p))
         return p
