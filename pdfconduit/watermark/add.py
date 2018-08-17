@@ -136,13 +136,12 @@ class WatermarkAdd:
             watermark = self.watermark_file['path']
         return pdf, watermark
 
-    def add(self, document, watermark, underneath=False, method='pypdf2'):
+    def add(self, document, watermark, underneath=False, method='pypdf3'):
         """Add watermark to PDF by merging original PDF and watermark file."""
         # 5a. Create output PDF file name
         output_filename = self.output_filename
 
-        def pypdf2():
-            # TODO: Fix functionality
+        def pypdf3():
             # 5b. Get our files ready
             document_reader = self.document_reader
             output_file = PdfFileWriter()
@@ -153,13 +152,9 @@ class WatermarkAdd:
             # Watermark objects
             watermark_reader = PdfFileReader(watermark)
             wtrmrk_page = watermark_reader.getPage(0)
-            wtrmrk_width = wtrmrk_page.mediaBox.getWidth() / 2
-            wtrmrk_height = wtrmrk_page.mediaBox.getHeight() / 2
+            wtrmrk_width = (wtrmrk_page.mediaBox.getWidth() / 2) + 0
+            wtrmrk_height = (wtrmrk_page.mediaBox.getHeight() / 2) + 80
             wtrmrk_rotate = Info(watermark_reader).rotate
-            print(wtrmrk_width, wtrmrk_height)
-            print(watermark)
-            print(Info(watermark_reader).size)
-            print(wtrmrk_rotate)
 
             # 5c. Go through all the input file pages to add a watermark to them
             for page_number in range(page_count):
@@ -188,7 +183,7 @@ class WatermarkAdd:
             PdfWriter(output_filename, trailer=trailer).write()
             return output_filename
 
-        if method is 'pypdf2':
-            return pypdf2()
+        if method is 'pypdf3':
+            return pypdf3()
         else:
             return pdfrw()
