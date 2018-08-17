@@ -9,7 +9,7 @@ class Info:
     @staticmethod
     def _reader(path, password, prompt):
         """Read PDF and decrypt if encrypted."""
-        pdf = PdfFileReader(path)
+        pdf = PdfFileReader(path) if not isinstance(path, PdfFileReader) else path
         # Check that PDF is encrypted
         if pdf.isEncrypted:
             # Check that password is none
