@@ -1,6 +1,6 @@
 __all__ = ["upscale", "rotate", "Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd", "slicer",
            "GUI"]
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 __author__ = 'Stephen Neal'
 
 
