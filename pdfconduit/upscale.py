@@ -1,15 +1,21 @@
 # Upscale a PDF file
+import os
 from tempfile import NamedTemporaryFile
 from pdfrw import PdfReader, PdfWriter, PageMerge, IndirectPdfDict
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.pdf import PageObject
-from pdfconduit.utils import Info
+from pdfconduit.utils import Info, add_suffix
 
 
-def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypdf3', tempdir=None):
+def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypdf3', suffix='scaled', tempdir=None):
     """Upscale a PDF to a large size."""
-    # Output file name
-    output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False)
+    # Set output file name
+    if tempdir:
+        output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False).name
+    elif suffix:
+        output = os.path.join(os.path.dirname(file_name), add_suffix(file_name, suffix))
+    else:
+        output = NamedTemporaryFile(suffix='.pdf').name
 
     def pdfrw():
         def adjust(page):
@@ -44,11 +50,11 @@ def upscale(file_name, margin=0, margin_x=0, margin_y=0, scale=1.5, method='pypd
             page.mergeScaledTranslatedPage(wtrmrk, scale, margin_x, margin_y)
             writer.addPage(page)
 
-        with open(output.name, "wb") as outputStream:
+        with open(output, "wb") as outputStream:
             writer.write(outputStream)
 
     if method is 'pypdf3':
         pypdf3()
     else:
         pdfrw()
-    return output.name
+    return output
