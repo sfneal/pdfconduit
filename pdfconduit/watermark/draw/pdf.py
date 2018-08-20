@@ -103,12 +103,12 @@ class WatermarkDraw(DrawPDF):
         # X and Y are both centered
         if cs.y_centered and cs.x_centered:
             x = center_str(cs.string, cs.font, cs.size, offset=0)
-            y = ((LETTER[1]) / 2)
+            y = 0
 
         # Y is centered and X is not
         elif cs.y_centered and not cs.x_centered:
             x = cs.x
-            y = ((LETTER[1]) / 2)
+            y = 0
 
         # X is centered and Y is not
         elif cs.x_centered and not cs.y_centered:
