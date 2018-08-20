@@ -45,11 +45,11 @@ class WatermarkAdd:
             self.output_filename = document
         elif output:
             self.output_filename = output
-        elif tempdir:
+        elif suffix:
+            self.output_filename = add_suffix(document, suffix)
+        else:
             tmpf = NamedTemporaryFile(suffix='.pdf', dir=self.tempdir, delete=False)
             self.output_filename = resource_path(tmpf.name)
-        else:
-            self.output_filename = add_suffix(document, suffix)
 
         self.add(pdf_fname, wtrmrk_fname)
 
