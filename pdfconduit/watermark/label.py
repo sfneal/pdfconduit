@@ -10,11 +10,11 @@ class Label(WatermarkDraw):
         self.document = document
         self.watermark = self._write()
 
-        if suffix:
+        if output:
+            self.output = output
+        elif suffix:
             suffix = label if not suffix else suffix
             self.output = add_suffix(self.document, suffix)
-        elif output:
-            self.output = output
         else:
             self.output = self.dst
 
