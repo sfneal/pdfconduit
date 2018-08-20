@@ -46,7 +46,7 @@ class Encrypt:
             # Write encrypted PDF to file
             with open(self.output, 'wb') as output_pdf:
                 pdf_writer.write(output_pdf)
-            return self.output
+        return self.output
 
 
 def main():
