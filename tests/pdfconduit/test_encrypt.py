@@ -13,7 +13,7 @@ class TestEncrypt(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         # Destination directory
-        dst = os.path.join(directory, 'results')
+        dst = os.path.join(directory, 'results', 'encrypt')
 
         # Create destination if it does not exist
         if not os.path.isdir(dst):

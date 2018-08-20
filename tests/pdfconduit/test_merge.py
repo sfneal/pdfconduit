@@ -1,5 +1,6 @@
 import unittest
 import os
+import shutil
 from pdfconduit import Info, Merge
 from tests import directory
 
@@ -11,6 +12,8 @@ class TestMerge(unittest.TestCase):
 
         self.assertTrue(os.path.exists(m.file))
         self.assertEqual(sum([Info(pdf).pages for pdf in pdfs]), Info(m.file).pages)
+
+        shutil.move(m.file, os.path.join(directory, 'results', os.path.basename(m.file)))
 
 
 if __name__ == '__main__':
