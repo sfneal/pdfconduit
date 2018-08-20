@@ -20,7 +20,10 @@ class TestWatermarkMethods(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         # Destination directory
-        dst = os.path.join(directory, 'results', 'watermark')
+        results = os.path.join(directory, 'results')
+        if not os.path.isdir(results):
+            os.mkdir(results)
+        dst = os.path.join(results, 'watermark')
 
         # Create destination if it does not exist
         if not os.path.isdir(dst):

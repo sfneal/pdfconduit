@@ -13,7 +13,10 @@ class TestRotate(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         # Destination directory
-        dst = os.path.join(directory, 'results', 'rotate')
+        results = os.path.join(directory, 'results')
+        if not os.path.isdir(results):
+            os.mkdir(results)
+        dst = os.path.join(results, 'rotate')
 
         # Create destination if it does not exist
         if not os.path.isdir(dst):
