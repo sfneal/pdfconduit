@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from pdfconduit import __version__, __author__
+from pdfconduit._version import __version__, __author__
 
 long_description = """
 A Pure-Python library built as a PDF toolkit.  Prepare documents for distribution.
