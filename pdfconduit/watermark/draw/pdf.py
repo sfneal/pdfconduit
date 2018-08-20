@@ -14,7 +14,7 @@ def center_str(txt, font, size, offset=0):
 
 
 class DrawPDF:
-    def __init__(self, tempdir=None, compress=0):
+    def __init__(self, tempdir=None, compress=0, pagesize=LETTER):
         if tempdir:
             self.dir = tempdir
         else:
@@ -24,7 +24,7 @@ class DrawPDF:
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
-        self.can = Canvas(self.packet, pagesize=LETTER, pageCompression=compress, bottomup=1)  # Initialize canvas
+        self.can = Canvas(self.packet, pagesize=pagesize, pageCompression=compress, bottomup=1)  # Initialize canvas
 
     def __str__(self):
         return str(self.dst)
@@ -39,8 +39,8 @@ class DrawPDF:
 
 
 class WatermarkDraw(DrawPDF):
-    def __init__(self, canvas_objects, rotate=0, compress=0, tempdir=None):
-        super(WatermarkDraw, self).__init__(tempdir, compress)
+    def __init__(self, canvas_objects, rotate=0, compress=0, pagesize=LETTER, tempdir=None):
+        super(WatermarkDraw, self).__init__(tempdir, compress, pagesize)
         self.canvas_objects = canvas_objects
         self.rotate = rotate
 

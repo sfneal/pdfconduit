@@ -1,12 +1,15 @@
 from pdfconduit.watermark.canvas import CanvasObjects, CanvasStr
 from pdfconduit.watermark.watermark import Watermark
 from pdfconduit.watermark.draw import WatermarkDraw
+from pdfconduit.utils.info import Info
 from pdfconduit.utils.path import add_suffix
 
 
 class Label(WatermarkDraw):
     def __init__(self, document, label, title_page=False, suffix='labeled', output=None, tempdir=None):
-        super(Label, self).__init__(self._create_canvas_objects(label, title_page), tempdir=tempdir)
+        self.size = Info(document).size
+        super(Label, self).__init__(self._create_canvas_objects(label, title_page),
+                                    pagesize=self.size, tempdir=tempdir)
         self.document = document
         self.watermark = self._write()
 
@@ -18,11 +21,12 @@ class Label(WatermarkDraw):
         else:
             self.output = self.dst
 
-    @staticmethod
-    def _create_canvas_objects(label, title_page):
+    def _create_canvas_objects(self, label, title_page):
         objects = CanvasObjects()
         if not title_page:
-            objects.add(CanvasStr(label, size=14, opacity=1, x=15, y=25, x_centered=False))
+            objects.add(CanvasStr(label, size=14, opacity=1,
+                                  x=-(self.size[0] / 2) + 15,
+                                  y=-(self.size[1] / 2) + 25, x_centered=False))
         else:
             objects.add(CanvasStr(label, size=60, opacity=1, y_centered=True))
         return objects
