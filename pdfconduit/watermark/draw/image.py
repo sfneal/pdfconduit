@@ -21,22 +21,22 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
     assert os.path.isfile(image), 'Image is not a file'
 
     # Open image in RGBA mode if not already in RGBA
-    im = Image.open(image)
-    if im.mode != 'RGBA':
-        im = im.convert('RGBA')
-    else:
-        im = im.copy()
+    with Image.open(image) as im:
+        if im.mode != 'RGBA':
+            im = im.convert('RGBA')
+        else:
+            im = im.copy()
 
-    # Adjust opacity
-    alpha = im.split()[3]
-    alpha = ImageEnhance.Brightness(alpha).enhance(opacity)
-    im.putalpha(alpha)
-    if bw:
-        im.convert('L')
+        # Adjust opacity
+        alpha = im.split()[3]
+        alpha = ImageEnhance.Brightness(alpha).enhance(opacity)
+        im.putalpha(alpha)
+        if bw:
+            im.convert('L')
 
-    # Save modified image file
-    dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
-    im.save(dst)
+        # Save modified image file
+        dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
+        im.save(dst)
     return dst.name
 
 
