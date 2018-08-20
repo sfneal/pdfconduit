@@ -154,7 +154,7 @@ class WatermarkAdd:
         wtrmrk_page = watermark_reader.getPage(0)
         wtrmrk_width = (wtrmrk_page.mediaBox.getWidth() / 2) + 0
         wtrmrk_height = (wtrmrk_page.mediaBox.getHeight() / 2) + 80
-        wtrmrk_rotate = Info(watermark_reader).rotate
+        wtrmrk_rotate = -int(Info(watermark_reader).rotate) if Info(watermark_reader).rotate is not None else 0
 
         # 5c. Go through all the input file pages to add a watermark to them
         for page_number in range(page_count):
