@@ -1,5 +1,6 @@
 import unittest
 import os
+import shutil
 from pdfconduit import Watermark, slicer, Info, Label
 from tests import directory, pdf as p
 
@@ -7,19 +8,34 @@ from tests import directory, pdf as p
 class TestWatermarkMethods(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        pdfs = ['plan_l.pdf', 'plan_p.pdf']
+        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
         # pdfs.append('con docs_sliced.pdf')
 
         cls.w = Watermark(p, use_receipt=False, open_file=False)
-        if 'con docs_sliced.pdf' in pdfs and not os.path.exists(os.path.join(directory, 'con docs_sliced.pdf')):
+        if 'con docs_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs_sliced.pdf')):
             slicer(os.path.join(directory, 'con docs.pdf'), first_page=1, last_page=1, suffix='sliced')
+
+        cls.files = []
 
     @classmethod
     def tearDownClass(cls):
+        # Destination directory
+        dst = os.path.join(directory, 'results')
+
+        # Create destination if it does not exist
+        if not os.path.isdir(dst):
+            os.mkdir(dst)
+
+        # Move each file into results folder
+        for i in cls.files:
+            source = i
+            target = os.path.join(dst, str(os.path.basename(i)))
+            shutil.move(source, target)
+
         cls.w.cleanup()
 
     def setUp(self):
-        self.pdfs = [os.path.join(directory, pdf) for pdf in pdfs]
+        self.pdfs = [os.path.join(directory, pdf) for pdf in self.pdfs]
         self.address = '43 Indian Lane'
         self.town = 'Franklin'
         self.state = 'MA'
@@ -31,6 +47,7 @@ class TestWatermarkMethods(unittest.TestCase):
         for pdf in self.pdfs:
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
             added = self.w.add(pdf, wtrmrk)
+            self.files.append(added)
 
             self.assertTrue(os.path.exists(wtrmrk))
             self.assertTrue(os.path.exists(added))
@@ -40,6 +57,7 @@ class TestWatermarkMethods(unittest.TestCase):
         for pdf in self.pdfs:
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
             added = self.w.add(pdf, wtrmrk, underneath=True, suffix='watermarked_underneath')
+            self.files.append(added)
 
             self.assertTrue(os.path.exists(wtrmrk))
             self.assertTrue(os.path.exists(added))
@@ -49,6 +67,7 @@ class TestWatermarkMethods(unittest.TestCase):
         for pdf in self.pdfs:
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
             added = self.w.add(pdf, wtrmrk, underneath=False, suffix='watermarked_overlay')
+            self.files.append(added)
 
             self.assertTrue(os.path.exists(wtrmrk))
             self.assertTrue(os.path.exists(added))
@@ -58,6 +77,7 @@ class TestWatermarkMethods(unittest.TestCase):
         for pdf in self.pdfs:
             flat = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=True)
             added = self.w.add(pdf, flat, suffix='watermarked_flat')
+            self.files.append(added)
 
             self.assertTrue(os.path.exists(flat))
             self.assertTrue(os.path.exists(added))
@@ -67,6 +87,7 @@ class TestWatermarkMethods(unittest.TestCase):
         for pdf in self.pdfs:
             layered = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=False)
             added = self.w.add(pdf, layered, suffix='watermarked_layered')
+            self.files.append(added)
 
             self.assertTrue(os.path.exists(layered))
             self.assertTrue(os.path.exists(added))
@@ -89,7 +110,8 @@ class TestWatermarkMethods(unittest.TestCase):
     def test_watermark_label(self):
         for pdf in self.pdfs:
             label = os.path.basename(pdf)
-            l = Label(pdf, label).write()
+            l = Label(pdf, label, tempdir=self.w.tempdir).write(cleanup=False)
+            self.files.append(l)
 
             self.assertTrue(os.path.exists(l))
             self.assertTrue(Info(l).resources())
