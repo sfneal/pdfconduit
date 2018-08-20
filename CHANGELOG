@@ -1,0 +1,4 @@
+﻿Version 1.1.5, 2018-08-20
+--------------------------
+ - Fixed test suite and added unit testing modules
+ - Fixed Label class x and y calculations
