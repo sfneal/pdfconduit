@@ -12,9 +12,9 @@ missing module named 'java.lang' - imported by platform, xml.sax._exceptions, C:
 missing module named vms_lib - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named termios - imported by tty, getpass, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named grp - imported by shutil, tarfile, pathlib, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
-missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, netrc, getpass, pathlib, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named _dummy_threading - imported by dummy_threading, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
+missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named cStringIO - imported by PyPDF3.pdf, PyPDF3.filters, PyPDF3.merger, cPickle
 missing module named copy_reg - imported by cStringIO, cPickle
 missing module named md5 - imported by PyPDF3.pdf, reportlab.lib.utils
@@ -52,4 +52,3 @@ missing module named macfs - imported by reportlab.lib.utils
 missing module named StringIO - imported by reportlab.lib.utils
 missing module named cPickle - imported by reportlab.lib.utils
 missing module named pyfribidi2 - imported by reportlab.pdfgen.textobject
-missing module named pdfconduit.Info - imported by pdfconduit, tests.test_encrypt, tests.test_merge, tests.test_watermark_encrypt
