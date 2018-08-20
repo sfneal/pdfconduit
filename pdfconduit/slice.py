@@ -13,7 +13,7 @@ def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=N
     elif suffix:
         output = os.path.join(os.path.dirname(document), add_suffix(document, suffix))
     else:
-        output = NamedTemporaryFile(suffix='.pdf')
+        output = NamedTemporaryFile(suffix='.pdf').name
 
     # Reindex page selections for simple user input
     first_page = first_page - 1 if not None else None
@@ -25,6 +25,6 @@ def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=N
     for page in pages:
         writer.addPage(pdf.getPage(page))
 
-    with open(output.name, 'wb') as out:
+    with open(output, 'wb') as out:
         writer.write(out)
-    return output.name
+    return output
