@@ -7,14 +7,11 @@ from tests import pdf
 def main():
     print('Testing Rotate reliability')
     r = 90
-    rotated1 = rotate(pdf, r, suffix='rotated_pypdf3', method='pypdf3')
-    rotated2 = rotate(pdf, r, suffix='rotated_pdfrw', method='pdfrw')
+    rotated1 = rotate(pdf, r)
 
     print(Info(rotated1).rotate)
     try:
         assert os.path.isfile(rotated1)
-        assert Info(rotated1).rotate == r
-        assert os.path.isfile(rotated2)
         assert Info(rotated1).rotate == r
         print('Success!', '\n')
     except AssertionError:
