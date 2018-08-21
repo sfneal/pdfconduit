@@ -10,8 +10,8 @@ class TestWatermarkMethods(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs_sliced.pdf']
-        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
-        # cls.pdfs = ['con docs2_sliced.pdf']
+        # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
+        cls.pdfs = ['con docs2_sliced.pdf']
 
         cls.w = Watermark(p, use_receipt=False, open_file=False)
         if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs2_sliced.pdf')):
@@ -53,61 +53,61 @@ class TestWatermarkMethods(unittest.TestCase):
         t = time.time() - self.startTime
         print("%s: %.3f" % (self.id(), t))
 
-    def test_watermark(self):
+    def test_watermark_pypdf3(self):
         for pdf in self.pdfs:
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate,
                                  flatten=False)
-            added = self.w.add(pdf, wtrmrk)
+            added = self.w.add(pdf, wtrmrk, method='pypdf3', suffix='watermarked_pypdf3')
             self.files.append(added)
 
             self.assertTrue(os.path.exists(wtrmrk))
             self.assertTrue(os.path.exists(added))
             self.assertTrue(Info(added).resources())
 
-    def test_watermark_underneath(self):
+    def test_watermark_underneath_pypdf3(self):
         for pdf in self.pdfs:
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
-            added = self.w.add(pdf, wtrmrk, underneath=True, suffix='watermarked_underneath')
+            added = self.w.add(pdf, wtrmrk, underneath=True, suffix='watermarked_underneath_pypdf3', method='pypdf3')
             self.files.append(added)
 
             self.assertTrue(os.path.exists(wtrmrk))
             self.assertTrue(os.path.exists(added))
             self.assertTrue(Info(added).resources())
 
-    def test_watermark_overlay(self):
+    def test_watermark_overlay_pypdf3(self):
         for pdf in self.pdfs:
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
-            added = self.w.add(pdf, wtrmrk, underneath=False, suffix='watermarked_overlay')
+            added = self.w.add(pdf, wtrmrk, underneath=False, suffix='watermarked_overlay_pypdf3', method='pypdf3')
             self.files.append(added)
 
             self.assertTrue(os.path.exists(wtrmrk))
             self.assertTrue(os.path.exists(added))
             self.assertTrue(Info(added).resources())
 
-    def test_watermark_flat(self):
+    def test_watermark_flat_pypdf3(self):
         for pdf in self.pdfs:
             flat = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=True)
-            added = self.w.add(pdf, flat, suffix='watermarked_flat')
+            added = self.w.add(pdf, flat, suffix='watermarked_flat_pypdf3', method='pypdf3')
             self.files.append(added)
 
             self.assertTrue(os.path.exists(flat))
             self.assertTrue(os.path.exists(added))
             self.assertTrue(Info(added).resources())
 
-    def test_watermark_layered(self):
+    def test_watermark_layered_pypdf3(self):
         for pdf in self.pdfs:
             layered = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=False)
-            added = self.w.add(pdf, layered, suffix='watermarked_layered')
+            added = self.w.add(pdf, layered, suffix='watermarked_layered_pypdf3', method='pypdf3')
             self.files.append(added)
 
             self.assertTrue(os.path.exists(layered))
             self.assertTrue(os.path.exists(added))
             self.assertTrue(Info(added).resources())
 
-    def test_watermark_encrypt(self):
+    def test_watermark_encrypt_pypdf3(self):
         for pdf in self.pdfs:
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08)
-            added = self.w.add(pdf, wtrmrk)
+            added = self.w.add(pdf, wtrmrk, suffix='watermarked_encrypted_pypdf3', method='pypdf3')
             encrypted = self.w.encrypt(self.user_pw, self.owner_pw)
             security = Info(encrypted, self.user_pw).security
 
@@ -128,13 +128,5 @@ class TestWatermarkMethods(unittest.TestCase):
             self.assertTrue(Info(l).resources())
 
 
-def suite():
-    suite = unittest.TestSuite()
-    suite.addTest(TestWatermarkMethods("test_watermark"))
-    runner = unittest.TextTestRunner()
-    runner.run(suite)
-
-
 if __name__ == '__main__':
-    # unittest.main()
-    suite()
+    unittest.main()
