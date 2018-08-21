@@ -22,6 +22,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'PyPDF3',
+        'pdfrw',
         'Pillow',
         'PySimpleGUI',
         'reportlab',

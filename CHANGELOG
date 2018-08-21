@@ -1,4 +1,11 @@
-﻿Version 1.1.5, 2018-08-20
+﻿Version 1.1.6, 2018-08-21
+--------------------------
+ - Fixed issue where large PDF files were taking a long time to write
+ - Added progress bar parameters to Encrypt module
+ - Restored pdfrw methods to upscale, rotate and add because of speed
+   limitations with PyPDF3
+
+Version 1.1.5, 2018-08-20
 --------------------------
  - Fixed test suite and added unit testing modules
  - Fixed Label class x and y calculations
