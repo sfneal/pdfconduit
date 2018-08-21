@@ -113,7 +113,7 @@ class Watermark:
             self.add()
             return self.cleanup()
 
-    def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked'):
+    def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked', method='pdfrw'):
         """
         Add a watermark file to an existing PDF document.
 
@@ -130,6 +130,8 @@ class Watermark:
             Output file path
         :param suffix: str
             Suffix to append to existing PDF document file name
+        :param method: str
+            PDF library to be used for watermark adding
         :return: str
             Watermarked PDF Document full path
         """
@@ -139,7 +141,7 @@ class Watermark:
         if not document:
             document = self.document
         self.document = str(WatermarkAdd(document, watermark, output=output, underneath=underneath,
-                                         tempdir=self.tempdir, suffix=suffix))
+                                         tempdir=self.tempdir, suffix=suffix, method=method))
         self.receipt.add('Watermarked PDF', os.path.basename(self.document))
         if self.open_file:
             open_window(self.document)

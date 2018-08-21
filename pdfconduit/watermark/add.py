@@ -11,7 +11,7 @@ from pdfconduit.utils import add_suffix, resource_path, Info
 
 class WatermarkAdd:
     def __init__(self, document, watermark, underneath=False, overwrite=False, output=None, suffix='watermarked',
-                 decrypt=False, tempdir=None):
+                 decrypt=False, tempdir=None, method='pdfrw'):
         """
         Add a watermark to an existing PDF document
 
@@ -37,6 +37,7 @@ class WatermarkAdd:
         self.scale = 0
         self.underneath = underneath
         self.tempdir = tempdir
+
         self.document_reader = self._document_reader(document, decrypt)
         self.document = self._get_document_info(document)
         self.watermark_file = self._get_watermark_info(self.document, watermark)
@@ -52,7 +53,7 @@ class WatermarkAdd:
             tmpf = NamedTemporaryFile(suffix='.pdf', dir=self.tempdir, delete=False)
             self.output_filename = resource_path(tmpf.name)
 
-        self.add(pdf_fname, wtrmrk_fname)
+        self.add(pdf_fname, wtrmrk_fname, method)
 
     def __str__(self):
         return str(self.output_filename)
@@ -137,7 +138,7 @@ class WatermarkAdd:
             watermark = self.watermark_file['path']
         return pdf, watermark
 
-    def add(self, document, watermark, method='pdfrw'):
+    def add(self, document, watermark, method):
         """Add watermark to PDF by merging original PDF and watermark file."""
         # 5a. Create output PDF file name
         output_filename = self.output_filename
