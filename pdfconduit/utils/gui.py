@@ -292,7 +292,7 @@ class GUI:
 
         for pdf in params['pdf']:
             # Execute Watermark class
-            wm = Watermark(pdf, receipt=receipt)
+            wm = Watermark(pdf, receipt=receipt, progress_bar='gui', progress_bar_enabled=True)
             wm.draw(text1=params['address'],
                     text2=str(params['town'] + ', ' + params['state']),
                     image=params['image'],
