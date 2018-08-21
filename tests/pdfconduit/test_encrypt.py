@@ -1,6 +1,7 @@
 import unittest
 import os
 import shutil
+import time
 from pdfconduit import Encrypt, Info
 from tests import pdf, directory
 
@@ -40,6 +41,11 @@ class TestEncrypt(unittest.TestCase):
     def setUp(self):
         self.owner_pw = 'foo'
         self.user_pw = 'baz'
+        self.startTime = time.time()
+
+    def tearDown(self):
+        t = time.time() - self.startTime
+        print("%s: %.3f" % (self.id(), t))
 
     def test_encrypt(self):
         p = Encrypt(pdf, self.user_pw, self.owner_pw, suffix='secured')

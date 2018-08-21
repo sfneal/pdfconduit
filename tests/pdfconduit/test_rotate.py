@@ -1,6 +1,7 @@
 import unittest
 import os
 import shutil
+import time
 from pdfconduit import Info, rotate
 from tests import pdf, directory
 
@@ -27,6 +28,13 @@ class TestRotate(unittest.TestCase):
             source = i
             target = os.path.join(dst, str(os.path.basename(i)))
             shutil.move(source, target)
+
+    def setUp(self):
+        self.startTime = time.time()
+
+    def tearDown(self):
+        t = time.time() - self.startTime
+        print("%s: %.3f" % (self.id(), t))
 
     def test_rotate(self):
         r = 90

@@ -1,6 +1,7 @@
 import unittest
 import os
 import shutil
+import time
 from pdfconduit import Watermark, slicer, Info, Label
 from tests import directory, pdf as p
 
@@ -46,6 +47,11 @@ class TestWatermarkMethods(unittest.TestCase):
         self.rotate = 30
         self.owner_pw = 'foo'
         self.user_pw = 'baz'
+        self.startTime = time.time()
+
+    def tearDown(self):
+        t = time.time() - self.startTime
+        print("%s: %.3f" % (self.id(), t))
 
     def test_watermark(self):
         for pdf in self.pdfs:

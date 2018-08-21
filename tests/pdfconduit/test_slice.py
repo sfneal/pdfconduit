@@ -1,6 +1,7 @@
 import unittest
 import os
 import shutil
+import time
 from pdfconduit import Info, slicer
 from tests import directory
 
@@ -30,6 +31,11 @@ class TestSlice(unittest.TestCase):
 
     def setUp(self):
         self.pdf = os.path.join(directory, 'manual.pdf')
+        self.startTime = time.time()
+
+    def tearDown(self):
+        t = time.time() - self.startTime
+        print("%s: %.3f" % (self.id(), t))
 
     def test_slice(self):
         fp = 10
