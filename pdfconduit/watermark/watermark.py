@@ -12,7 +12,7 @@ from pdfconduit.watermark.canvas import CanvasConstructor
 
 class Watermark:
     def __init__(self, document, remove_temps=True, move_temps=None, open_file=True, tempdir=mkdtemp(), receipt=None,
-                 use_receipt=True):
+                 use_receipt=True, progress_bar_enabled=False, progress_bar='gui'):
         """
         Watermark and encrypt a PDF document.
 
@@ -40,6 +40,8 @@ class Watermark:
         self.move_temps = move_temps
         self.open_file = open_file
         self.tempdir = tempdir
+        self.progress_bar_enabled = progress_bar_enabled
+        self.progress_bar = progress_bar
 
         self.use_receipt = use_receipt
         if isinstance(receipt, Receipt):
@@ -178,6 +180,7 @@ class Watermark:
         else:
             self.receipt.add('Permissions', 'Allow ALL')
         p = str(Encrypt(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
-                        bit128=encrypt_128, allow_printing=allow_printing, allow_commenting=allow_commenting))
+                        bit128=encrypt_128, allow_printing=allow_printing, allow_commenting=allow_commenting,
+                        progress_bar_enabled=self.progress_bar_enabled, progress_bar=self.progress_bar))
         self.receipt.add('Secured PDF', os.path.basename(p))
         return p
