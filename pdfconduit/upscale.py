@@ -7,38 +7,56 @@ from pdfrw import PdfReader, PdfWriter, PageMerge, IndirectPdfDict
 from pdfconduit.utils import Info, add_suffix
 
 
-def upscale(file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempdir=None, method='pypdf3'):
-    """Upscale a PDF to a large size."""
-    # Set output file name
-    if tempdir:
-        output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False).name
-    elif suffix:
-        output = os.path.join(os.path.dirname(file_name), add_suffix(file_name, suffix))
-    else:
-        output = NamedTemporaryFile(suffix='.pdf').name
+class Upscale:
+    def __init__(self, file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempdir=None, method='pypdf3'):
+        self.file_name = file_name
+        self.margin_x = margin_x
+        self.margin_y = margin_y
+        self.scale = scale
+        self.suffix = suffix
 
-    def pdfrw():
+        # Set output file name
+        if tempdir:
+            self.output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False).name
+        elif suffix:
+            self.output = os.path.join(os.path.dirname(file_name), add_suffix(file_name, suffix))
+        else:
+            self.output = NamedTemporaryFile(suffix='.pdf').name
+
+        if method is 'pypdf3':
+            self.pypdf3()
+        else:
+            self.pdfrw()
+
+    def __str__(self):
+        return self.file
+
+    @property
+    def file(self):
+        return str(self.output)
+
+    def pdfrw(self):
         def adjust(page):
             info = PageMerge().add(page)
             x1, y1, x2, y2 = info.xobj_box
-            viewrect = (margin_x, margin_y, x2 - x1 - 2 * margin_x, y2 - y1 - 2 * margin_y)
+            viewrect = (self.margin_x, self.margin_y, x2 - x1 - 2 * self.margin_x, y2 - y1 - 2 * self.margin_y)
             page = PageMerge().add(page, viewrect=viewrect)
-            page[0].scale(scale)
+            page[0].scale(self.scale)
             return page.render()
 
-        reader = PdfReader(file_name)
-        writer = PdfWriter(output)
+        reader = PdfReader(self.file_name)
+        writer = PdfWriter(self.output)
         for i in list(range(0, len(reader.pages))):
             writer.addpage(adjust(reader.pages[i]))
         writer.trailer.Info = IndirectPdfDict(reader.Info or {})
         writer.write()
 
-    def pypdf3():
-        reader = PdfFileReader(file_name)
+    def pypdf3(self):
+        reader = PdfFileReader(self.file_name)
         writer = PdfFileWriter()
-        dims = Info(file_name).dimensions
-        target_w = dims['w'] * scale
-        target_h = dims['h'] * scale
+        dims = Info(self.file_name).dimensions
+        target_w = dims['w'] * self.scale
+        target_h = dims['h'] * self.scale
 
         # Number of pages in input document
         page_count = reader.getNumPages()
@@ -47,15 +65,13 @@ def upscale(file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempd
             wtrmrk = reader.getPage(page_number)
 
             page = PageObject.createBlankPage(width=target_w, height=target_h)
-            page.mergeScaledTranslatedPage(wtrmrk, scale, margin_x, margin_y)
+            page.mergeScaledTranslatedPage(wtrmrk, self.scale, self.margin_x, self.margin_y)
             writer.addPage(page)
 
-        with open(output, "wb") as outputStream:
+        with open(self.output, "wb") as outputStream:
             writer.write(outputStream)
-        return output
+        return self.output
 
-    if method is 'pypdf3':
-        pypdf3()
-    else:
-        pdfrw()
-    return output
+
+def upscale(file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempdir=None, method='pypdf3'):
+    return str(Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir, method))
