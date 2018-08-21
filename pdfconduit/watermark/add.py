@@ -37,6 +37,7 @@ class WatermarkAdd:
         self.scale = 0
         self.underneath = underneath
         self.tempdir = tempdir
+        self.method = method
 
         self.document_reader = self._document_reader(document, decrypt)
         self.document = self._get_document_info(document)
@@ -53,7 +54,7 @@ class WatermarkAdd:
             tmpf = NamedTemporaryFile(suffix='.pdf', dir=self.tempdir, delete=False)
             self.output_filename = resource_path(tmpf.name)
 
-        self.add(pdf_fname, wtrmrk_fname, method)
+        self.add(pdf_fname, wtrmrk_fname)
 
     def __str__(self):
         return str(self.output_filename)
@@ -97,7 +98,7 @@ class WatermarkAdd:
         # 3b. Check if watermark file needs to be rotated
         if watermark_file['w'] > watermark_file['h'] and document['orientation'] is 'portrait':
             self.rotate = 90
-            watermark_file['rotated'] = rotate(watermark, self.rotate, tempdir=self.tempdir)
+            watermark_file['rotated'] = rotate(watermark, self.rotate, tempdir=self.tempdir, method=self.method)
 
         # Set watermark file to be used for upscaling
         try:
@@ -116,7 +117,8 @@ class WatermarkAdd:
 
             if watermark_file['w'] * scale < document['w']:
                 margin_x = (document['w'] - watermark_file['w'] * scale) / 2
-            watermark_file['upscaled'] = upscale(wtrmrk, margin_x=margin_x, scale=scale, tempdir=self.tempdir)
+            watermark_file['upscaled'] = upscale(wtrmrk, margin_x=margin_x, scale=scale, tempdir=self.tempdir,
+                                                 method=self.method)
         self.scale = scale
         return watermark_file
 
@@ -138,7 +140,7 @@ class WatermarkAdd:
             watermark = self.watermark_file['path']
         return pdf, watermark
 
-    def add(self, document, watermark, method):
+    def add(self, document, watermark):
         """Add watermark to PDF by merging original PDF and watermark file."""
         # 5a. Create output PDF file name
         output_filename = self.output_filename
@@ -203,7 +205,7 @@ class WatermarkAdd:
             PdfWriter(output_filename, trailer=trailer).write()
             return output_filename
 
-        if method is 'pypdf3':
+        if self.method is 'pypdf3':
             return pypdf3()
         else:
             return pdfrw()
