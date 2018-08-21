@@ -31,7 +31,7 @@ class TestUpscale(unittest.TestCase):
 
     def tearDown(self):
         t = time.time() - self.startTime
-        print("%s: %.3f" % (self.id(), t))
+        print("{0:15} --> {1}".format(' '.join(self.id().split('.')[-1].split('_')[2:]), t))
 
     def test_upscale_pypdf3(self):
         s = 2.0
