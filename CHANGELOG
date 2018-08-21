@@ -6,6 +6,7 @@
  - Added progress bar parameters to Encrypt module
  - Restored pdfrw methods to upscale, rotate and add because of speed
    limitations with PyPDF3
+ - Added pdf2img.py to convert PDF files to image files
 
 Version 1.1.5, 2018-08-20
 --------------------------
