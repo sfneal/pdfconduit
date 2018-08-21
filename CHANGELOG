@@ -1,6 +1,8 @@
 ﻿Version 1.1.6, 2018-08-21
 --------------------------
- - Fixed issue where large PDF files were taking a long time to write
+ - Fixed issue large PDF files issue
+    - Files taking a long time to write
+    - File size was too large
  - Added progress bar parameters to Encrypt module
  - Restored pdfrw methods to upscale, rotate and add because of speed
    limitations with PyPDF3
