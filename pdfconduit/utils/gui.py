@@ -299,7 +299,7 @@ class GUI:
                     opacity=params['opacity'],
                     compress=params['compression']['compressed'],
                     flatten=params['flattening']['flattened'])
-            wm.add(underneath=params['placement']['underneath'])
+            wm.add(underneath=params['placement']['underneath'], method='pdfrw')
             if params['encrypt']:
                 wm.encrypt(params['user_pw'], params['owner_pw'])
         wm.cleanup()
