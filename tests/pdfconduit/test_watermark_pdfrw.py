@@ -104,20 +104,6 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
             self.assertTrue(os.path.exists(added))
             self.assertTrue(Info(added).resources())
 
-    def test_watermark_encrypt_pdfrw(self):
-        for pdf in self.pdfs:
-            wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08)
-            added = self.w.add(pdf, wtrmrk, suffix='watermarked_encrypted_pdfrw', method='pdfrw')
-            encrypted = self.w.encrypt(self.user_pw, self.owner_pw)
-            security = Info(encrypted, self.user_pw).security
-
-            self.assertTrue(os.path.exists(wtrmrk))
-            self.assertTrue(os.path.exists(added))
-            self.assertTrue(os.path.exists(encrypted))
-            self.assertTrue(Info(encrypted, self.user_pw).resources())
-            self.assertEqual(security['/Length'], 128)
-            self.assertEqual(security['/P'], -1852)
-
     def test_watermark_label(self):
         for pdf in self.pdfs:
             label = os.path.basename(pdf)
