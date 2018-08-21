@@ -6,7 +6,7 @@ from pdfconduit import Watermark, slicer, Info, Label
 from tests import directory, pdf as p
 
 
-class TestWatermarkMethods(unittest.TestCase):
+class TestWatermarkMethodsPdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs_sliced.pdf']

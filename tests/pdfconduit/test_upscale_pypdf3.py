@@ -6,7 +6,7 @@ from pdfconduit import Info, upscale
 from tests import pdf, directory
 
 
-class TestUpscale(unittest.TestCase):
+class TestUpscalePyPDF3(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.files = []
