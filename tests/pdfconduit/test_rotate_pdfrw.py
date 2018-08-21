@@ -6,7 +6,7 @@ from pdfconduit import Info, rotate
 from tests import pdf, directory
 
 
-class TestRotate(unittest.TestCase):
+class TestRotatePdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.files = []
@@ -36,33 +36,33 @@ class TestRotate(unittest.TestCase):
         t = time.time() - self.startTime
         print("{0:15} --> {1}".format(' '.join(self.id().split('.')[-1].split('_')[2:]), t))
 
-    def test_rotate(self):
+    def test_rotate_pdfrw(self):
         r = 90
-        rotated1 = rotate(pdf, r)
+        rotated1 = rotate(pdf, r, suffix='rotated_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))
         self.assertEqual(Info(rotated1).rotate, r)
 
-    def test_rotate_90(self):
+    def test_rotate_90_pdfrw(self):
         r = 90
-        rotated1 = rotate(pdf, r, suffix='rotated_90')
+        rotated1 = rotate(pdf, r, suffix='rotated_90_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))
         self.assertEqual(Info(rotated1).rotate, r)
 
-    def test_rotate_180(self):
+    def test_rotate_180_pdfrw(self):
         r = 180
-        rotated1 = rotate(pdf, r, suffix='rotated_180')
+        rotated1 = rotate(pdf, r, suffix='rotated_180_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))
         self.assertEqual(Info(rotated1).rotate, r)
 
-    def test_rotate_270(self):
+    def test_rotate_270_pdfrw(self):
         r = 270
-        rotated1 = rotate(pdf, r, suffix='rotated_270')
+        rotated1 = rotate(pdf, r, suffix='rotated_270_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))
