@@ -9,22 +9,17 @@ from tests import pdf, directory
 class TestUpscalePyPDF3(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.files = []
-
-    @classmethod
-    def tearDownClass(cls):
         # Destination directory
-        dst = os.path.join(directory, 'results', 'scale')
+        results = os.path.join(directory, 'results')
+        if not os.path.isdir(results):
+            os.mkdir(results)
+        cls.dst = os.path.join(results, 'scale')
 
         # Create destination if it does not exist
-        if not os.path.isdir(dst):
-            os.mkdir(dst)
+        if not os.path.isdir(cls.dst):
+            os.mkdir(cls.dst)
 
-        # Move each file into results folder
-        for i in cls.files:
-            source = i
-            target = os.path.join(dst, str(os.path.basename(i)))
-            shutil.move(source, target)
+        cls.files = []
 
     def setUp(self):
         self.startTime = time.time()
@@ -32,6 +27,13 @@ class TestUpscalePyPDF3(unittest.TestCase):
     def tearDown(self):
         t = time.time() - self.startTime
         print("{0:15} --> {1}".format(' '.join(self.id().split('.')[-1].split('_')[2:]), t))
+
+        # Move each file into results folder
+        for i in self.files:
+            source = i
+            target = os.path.join(self.dst, str(os.path.basename(i)))
+            shutil.move(source, target)
+            self.files.remove(i)
 
     def test_upscale_pypdf3(self):
         s = 2.0

@@ -17,26 +17,20 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs2_sliced.pdf')):
             slicer(os.path.join(directory, 'con docs2.pdf'), first_page=1, last_page=1, suffix='sliced')
 
-        cls.files = []
-
-    @classmethod
-    def tearDownClass(cls):
         # Destination directory
         results = os.path.join(directory, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
-        dst = os.path.join(results, 'watermark')
+        cls.dst = os.path.join(results, 'watermark')
 
         # Create destination if it does not exist
-        if not os.path.isdir(dst):
-            os.mkdir(dst)
+        if not os.path.isdir(cls.dst):
+            os.mkdir(cls.dst)
 
-        # Move each file into results folder
-        for i in cls.files:
-            source = i
-            target = os.path.join(dst, str(os.path.basename(i)))
-            shutil.move(source, target)
+        cls.files = []
 
+    @classmethod
+    def tearDownClass(cls):
         cls.w.cleanup()
 
     def setUp(self):
@@ -52,6 +46,13 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
     def tearDown(self):
         t = time.time() - self.startTime
         print("{0:15} --> {1}".format(' '.join(self.id().split('.')[-1].split('_')[2:]), t))
+
+        # Move each file into results folder
+        for i in self.files:
+            source = i
+            target = os.path.join(self.dst, str(os.path.basename(i)))
+            shutil.move(source, target)
+            self.files.remove(i)
 
     def test_watermark_pdfrw(self):
         for pdf in self.pdfs:
