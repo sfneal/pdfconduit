@@ -35,7 +35,7 @@ class TestSlice(unittest.TestCase):
 
     def tearDown(self):
         t = time.time() - self.startTime
-        print("%s: %.3f" % (' '.join(self.id().split('.')[-1].split('_')[2:]), t))
+        print("%s: %.3f" % (' '.join(self.id().split('.')[-1].split('_')[1:]), t))
 
     def test_slice(self):
         fp = 10
