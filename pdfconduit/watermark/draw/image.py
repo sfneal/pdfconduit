@@ -110,11 +110,12 @@ class DrawPIL:
         # Create another new image
         rotated = Image.new('RGBA', self.img.size, color=(255, 255, 255, 0))
 
-        # Paste front into new image and set x offset equal to half the difference of front and mask size
+        # Paste front into new image and set x offset equal to half
+        # the difference of front and mask size
         rotated.paste(front, (0, y_margin))
         self.img = rotated
 
-    def save(self, destination=None, file_name='pil', img=None):
+    def save(self, img=None, destination=None, file_name='pil'):
         img = self.img if not img else img
         fn = file_name.strip('.png') if '.png' in file_name else file_name
         if self.tempdir:
