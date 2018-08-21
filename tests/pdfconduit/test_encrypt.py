@@ -47,7 +47,7 @@ class TestEncrypt(unittest.TestCase):
         t = time.time() - self.startTime
         print("{0:15} --> {1}".format(' '.join(self.id().split('.')[-1].split('_')[2:]), t))
 
-    def test_encrypt(self):
+    def test_encrypt_printing(self):
         p = Encrypt(pdf, self.user_pw, self.owner_pw, suffix='secured')
         self.files.append(str(p))
         security = Info(p.output, self.user_pw).security
@@ -78,17 +78,17 @@ class TestEncrypt(unittest.TestCase):
         self.assertTrue(Info(p.output, self.user_pw).encrypted)
         self.assertEqual(security['/P'], -1500)
 
-    def test_encrypt_pflag(self):
-        _range = [-(x + 50) for x in range(0, 1852)[::100]]
-        for i in _range:
-            p = Encrypt(pdf, self.user_pw, self.owner_pw, output=os.path.join(directory, str(i) + '.pdf'),
-                        overwrite_permission=i)
-            self.files.append(str(p))
-            security = Info(p.output, self.user_pw).security
-
-            self.assertTrue(Info(p.output, self.user_pw).encrypted)
-            self.assertEqual(security['/Length'], 128)
-            self.assertEqual(security['/P'], i)
+    # def test_encrypt_pflag(self):
+    #     _range = [-(x + 50) for x in range(0, 1852)[::100]]
+    #     for i in _range:
+    #         p = Encrypt(pdf, self.user_pw, self.owner_pw, output=os.path.join(directory, str(i) + '.pdf'),
+    #                     overwrite_permission=i)
+    #         self.files.append(str(p))
+    #         security = Info(p.output, self.user_pw).security
+    #
+    #         self.assertTrue(Info(p.output, self.user_pw).encrypted)
+    #         self.assertEqual(security['/Length'], 128)
+    #         self.assertEqual(security['/P'], i)
 
 
 if __name__ == '__main__':
