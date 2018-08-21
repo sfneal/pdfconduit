@@ -17,13 +17,15 @@ missing module named _dummy_threading - imported by dummy_threading, C:\Users\St
 missing module named 'org.python' - imported by copy, xml.sax, C:\Users\Stephen\Scripts\pdfconduit\watermarker.py
 missing module named cStringIO - imported by PyPDF3.pdf, PyPDF3.filters, PyPDF3.merger, cPickle
 missing module named copy_reg - imported by cStringIO, cPickle
+missing module named tqdm - imported by PyPDF3.pdf
 missing module named md5 - imported by PyPDF3.pdf, reportlab.lib.utils
 missing module named sets - imported by PyPDF3.pdf, reportlab.platypus.doctemplate
 missing module named System - imported by PyPDF3.filters
+missing module named Crypto - imported by pdfrw.crypt
 missing module named PIL._imagingagg - imported by PIL, PIL.ImageDraw
 missing module named numpy - imported by PIL.ImageFilter
-missing module named olefile - imported by PIL.MicImagePlugin, PIL.FpxImagePlugin
 missing module named UserDict - imported by PIL.PdfParser
+missing module named olefile - imported by PIL.MicImagePlugin, PIL.FpxImagePlugin
 missing module named Tkinter - imported by PIL.ImageTk
 missing module named 'PySide.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt4.QtCore' - imported by PIL.ImageQt
