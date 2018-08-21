@@ -160,11 +160,21 @@ class WatermarkAdd:
             # Merge the watermark with the page
             if not self.underneath:
                 input_page = document_reader.getPage(page_number)
-                input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+                if wtrmrk_rotate is not 0:
+                    input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+                else:
+                    wtrmrk_width = 0
+                    wtrmrk_height = 0
+                    input_page.mergeTranslatedPage(wtrmrk_page, wtrmrk_width, wtrmrk_height)
             else:
                 size = Info(document_reader).dimensions
                 input_page = PageObject().createBlankPage(document_reader, size['w'], size['h'])
-                input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+                if wtrmrk_rotate is not 0:
+                    input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+                else:
+                    wtrmrk_width = 0
+                    wtrmrk_height = 0
+                    input_page.mergeTranslatedPage(wtrmrk_page, wtrmrk_width, wtrmrk_height)
                 input_page.mergePage(document_reader.getPage(page_number))
 
             # Add page from input file to output document
