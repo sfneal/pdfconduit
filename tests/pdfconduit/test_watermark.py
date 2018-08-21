@@ -8,12 +8,13 @@ from tests import directory, pdf as p
 class TestWatermarkMethods(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs_sliced.pdf']
         cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
-        # pdfs.append('con docs_sliced.pdf')
+        # cls.pdfs = ['con docs2_sliced.pdf']
 
         cls.w = Watermark(p, use_receipt=False, open_file=False)
-        if 'con docs_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs_sliced.pdf')):
-            slicer(os.path.join(directory, 'con docs.pdf'), first_page=1, last_page=1, suffix='sliced')
+        if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs2_sliced.pdf')):
+            slicer(os.path.join(directory, 'con docs2.pdf'), first_page=1, last_page=1, suffix='sliced')
 
         cls.files = []
 
@@ -48,7 +49,8 @@ class TestWatermarkMethods(unittest.TestCase):
 
     def test_watermark(self):
         for pdf in self.pdfs:
-            wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
+            wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate,
+                                 flatten=False)
             added = self.w.add(pdf, wtrmrk)
             self.files.append(added)
 
@@ -120,5 +122,13 @@ class TestWatermarkMethods(unittest.TestCase):
             self.assertTrue(Info(l).resources())
 
 
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(TestWatermarkMethods("test_watermark"))
+    runner = unittest.TextTestRunner()
+    runner.run(suite)
+
+
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    suite()
