@@ -135,6 +135,7 @@ class GUI:
     def watermark():
         from pdfconduit.utils import Receipt
         from pdfconduit.watermark import Watermark
+        from pdfconduit.flatten import Flatten
 
         label_w = 20
         title = 'PDF Watermarker'
@@ -222,6 +223,9 @@ class GUI:
                      gui.Checkbox('Allow Commenting', default=params['allow_commenting'])],
                     [gui.Text('User Password', size=(label_w, 1), auto_size_text=False), gui.InputText(params['user_pw'])],
                     [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText(params['owner_pw'])],
+
+                    [_line()],
+                    [gui.Checkbox('Flatten PDF pages', default=params['flat'])],
                 ]
                 layout = []
                 layout.extend(header())
@@ -247,6 +251,7 @@ class GUI:
             params['allow_commenting'] = values[14]
             params['user_pw'] = values[15] if len(values[15]) > 0 else ''
             params['owner_pw'] = values[16] if len(values[16]) > 0 else ''
+            params['flat'] = values[17]
             if button == 'Folder':
                 params = folder(params)
                 params = settings(params)
@@ -277,9 +282,11 @@ class GUI:
             'allow_commenting': False,
             'user_pw': '',
             'owner_pw': '',
+            'flat': False,
         }
 
         params = settings(params)
+        print(params['flat'])
 
         if os.path.isfile(params['pdf']):
             params['pdf'] = [params['pdf']]
@@ -299,9 +306,12 @@ class GUI:
                     opacity=params['opacity'],
                     compress=params['compression']['compressed'],
                     flatten=params['flattening']['flattened'])
-            wm.add(underneath=params['placement']['underneath'], method='pdfrw')
+            doc = wm.add(underneath=params['placement']['underneath'], method='pdfrw')
             if params['encrypt']:
                 wm.encrypt(params['user_pw'], params['owner_pw'])
+
+            if params['flat']:
+                flat = Flatten(doc, 2.0, progress_bar='gui', tempdir=wm.tempdir).save()
         wm.cleanup()
 
         print('\nSuccess!')
