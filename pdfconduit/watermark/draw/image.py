@@ -17,7 +17,10 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
     :return:  Path to modified PNG
     """
     # Validate parameters
-    assert 0 <= opacity <= 1, 'Opacity must be a float between 0 and 1'
+    try:
+        assert 0 <= opacity < 1
+    except AssertionError:
+        return image
     assert os.path.isfile(image), 'Image is not a file'
 
     # Open image in RGBA mode if not already in RGBA
