@@ -73,5 +73,5 @@ class Upscale:
         return self.output
 
 
-def upscale(file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempdir=None, method='pypdf3'):
+def upscale(file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempdir=None, method='pdfrw'):
     return str(Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir, method))
