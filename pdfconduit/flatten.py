@@ -194,17 +194,3 @@ class Flatten:
         i2p = IMGtoPDF(self.imgs, self.directory, self.tempdir, self.progress_bar)
         self.pdf = i2p.save(remove_temps=remove_temps, output_name=add_suffix(self._file_name, self.suffix))
         return self.pdf
-
-
-def main():
-    from looptools import ActiveTimer
-    from tests import directory
-    fname = os.path.join(directory, 'document.pdf')
-
-    with ActiveTimer(Flatten):
-        flat = Flatten(fname, scale=1.5, progress_bar='gui').save(remove_temps=False)
-    print(flat)
-
-
-if __name__ == '__main__':
-    main()
