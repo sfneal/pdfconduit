@@ -198,7 +198,7 @@ class Flatten:
 
 def main():
     from looptools import ActiveTimer
-    directory = '/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data'
+    from tests import directory
     fname = os.path.join(directory, 'document.pdf')
 
     with ActiveTimer(Flatten):
