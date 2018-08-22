@@ -194,6 +194,9 @@ class WatermarkAdd:
         def pdfrw():
             """Faster than PyPDF3 method by as much as 15x."""
             # TODO: Fix issue where watermark is improperly placed on large pagesize PDFs
+            # print(Info(document).size)
+            # print(Info(watermark).size)
+            # print('\n')
 
             # Open both the source files
             wmark_trailer = PdfReader(watermark)

@@ -9,7 +9,7 @@ from tests import directory, pdf as p
 class TestWatermarkMethodsPdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs2_sliced.pdf']
+        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs2.pdf']
         # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
         # cls.pdfs = ['con docs2_sliced.pdf']
 

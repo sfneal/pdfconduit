@@ -9,8 +9,8 @@ from tests import directory, pdf as p
 class TestWatermarkMethodsPyPDF3(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs_sliced.pdf']
-        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
+        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs2.pdf']
+        # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
         # cls.pdfs = ['con docs2_sliced.pdf']
 
         cls.w = Watermark(p, use_receipt=False, open_file=False)
