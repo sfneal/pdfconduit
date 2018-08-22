@@ -3,13 +3,12 @@ import os
 import shutil
 import time
 from pdfconduit import Info, Flatten
+from tests import directory
 
 
 class TestFlatten(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        directory = '/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data'
-
         # Destination directory
         results = os.path.join(directory, 'results')
         if not os.path.isdir(results):

@@ -160,7 +160,10 @@ class IMGtoPDF:
         m = str(Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir))
         if remove_temps:
             if os.path.isdir(self.tempdir):
-                shutil.rmtree(self.tempdir)
+                try:
+                    shutil.rmtree(self.tempdir)
+                except PermissionError:
+                    print(self.tempdir, 'was not removed')
         return m
 
 
