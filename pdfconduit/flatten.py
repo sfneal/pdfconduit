@@ -106,13 +106,14 @@ class IMGtoPDF:
 
 
 class Flatten:
-    def __init__(self, file_name, scale=2.0, tempdir=None):
+    def __init__(self, file_name, scale=2.0, suffix='flat', tempdir=None):
         """Create a flat single-layer PDF by converting each page to a PNG image"""
         self._file_name = file_name
         self.tempdir = tempdir if tempdir else mkdtemp()
+        self.suffix = suffix
         self.directory = os.path.dirname(file_name)
 
-        if scale and scale is not 0:
+        if scale and scale is not 0 and scale is not 1.0:
             self.file_name = upscale(file_name, scale=scale, tempdir=tempdir)
         else:
             self.file_name = self._file_name
@@ -131,7 +132,7 @@ class Flatten:
         if self.imgs is None:
             self.get_imgs()
         i2p = IMGtoPDF(self.imgs, self.directory, self.tempdir)
-        self.pdf = i2p.save(remove_temps=remove_temps, output_name=add_suffix(self._file_name, 'flat'))
+        self.pdf = i2p.save(remove_temps=remove_temps, output_name=add_suffix(self._file_name, self.suffix))
         return self.pdf
 
 
