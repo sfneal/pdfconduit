@@ -7,7 +7,7 @@ from pdfconduit.utils import add_suffix
 
 
 class Rotate:
-    def __init__(self, file_name, rotation, suffix='rotated', tempdir=None, method='pypdf3'):
+    def __init__(self, file_name, rotation, suffix='rotated', tempdir=None, method='pdfrw'):
         self.file_name = file_name
         self.rotation = rotation
         self.suffix = suffix

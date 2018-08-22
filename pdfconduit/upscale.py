@@ -8,7 +8,7 @@ from pdfconduit.utils import Info, add_suffix
 
 
 class Upscale:
-    def __init__(self, file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempdir=None, method='pypdf3'):
+    def __init__(self, file_name, margin_x=0, margin_y=0, scale=1.5, suffix='scaled', tempdir=None, method='pdfrw'):
         self.file_name = file_name
         self.margin_x = margin_x
         self.margin_y = margin_y
