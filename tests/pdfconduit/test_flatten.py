@@ -20,7 +20,7 @@ class TestFlatten(unittest.TestCase):
         if not os.path.isdir(cls.dst):
             os.mkdir(cls.dst)
 
-        cls.fname = os.path.join(directory, 'document.pdf')
+        cls.fname = os.path.join(directory, 'con docs2.pdf')
 
         cls.files = []
 
