@@ -18,29 +18,29 @@ class PDFtoIMG:
     def __init__(self, file_name, tempdir=None, ext='png', progress_bar=None):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
-        self.doc = fitz.open(self.file_name)
-        self.ext = ext
-        self.output_dir = os.path.dirname(file_name) if tempdir is None else tempdir
         self.tempdir = tempdir
+        self.ext = ext
         self.progress_bar = progress_bar
+
+        self.doc = fitz.open(self.file_name)
+        self.output_dir = os.path.dirname(file_name) if tempdir is None else tempdir
 
         # storage for page display lists
         self.dlist_tab = [None] * len(self.doc)
         self.pdf_data = self._get_pdf_data()
 
     def _get_pdf_data(self):
-        if self.progress_bar:
-            if self.progress_bar is 'gui':
-                data = []
-                for cur_page in range(len(self.doc)):
-                    if not gui.EasyProgressMeter('Getting PDF page data', cur_page + 1, len(self.doc), orientation='h'):
-                        break
-                    data.append(self._get_page_data(cur_page))
-                return data
-            elif self.progress_bar is 'tqdm':
-                return [self._get_page_data(cur_page) for cur_page in tqdm(range(len(self.doc)),
-                                                                           desc='Getting PDF page data',
-                                                                           total=len(self.doc), unit='Pages')]
+        if self.progress_bar is 'gui':
+            data = []
+            for cur_page in range(len(self.doc)):
+                if not gui.EasyProgressMeter('Getting PDF page data', cur_page + 1, len(self.doc), orientation='h'):
+                    break
+                data.append(self._get_page_data(cur_page))
+            return data
+        elif self.progress_bar is 'tqdm':
+            return [self._get_page_data(cur_page) for cur_page in tqdm(range(len(self.doc)),
+                                                                       desc='Getting PDF page data',
+                                                                       total=len(self.doc), unit='Pages')]
         else:
             return [self._get_page_data(cur_page) for cur_page in range(len(self.doc))]
 
@@ -82,20 +82,19 @@ class PDFtoIMG:
             return NamedTemporaryFile(suffix='.png', dir=self.tempdir, delete=False).name
 
     def save(self):
-        if self.progress_bar:
-            if self.progress_bar is 'gui':
-                saved = []
-                for i, img in enumerate(self.pdf_data):
-                    if not gui.EasyProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h'):
-                        break
-                    output = self._get_output(i)
-                    saved.append(output)
-                    image = Image.open(BytesIO(img))
-                    image.save(output)
-                return saved
-            elif self.progress_bar is 'tqdm':
-                loop = enumerate(tqdm(self.pdf_data, desc='Saving PDF pages as PNGs', total=len(self.pdf_data),
-                                      unit='PNGs'))
+        if self.progress_bar is 'gui':
+            saved = []
+            for i, img in enumerate(self.pdf_data):
+                if not gui.EasyProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h'):
+                    break
+                output = self._get_output(i)
+                saved.append(output)
+                image = Image.open(BytesIO(img))
+                image.save(output)
+            return saved
+        elif self.progress_bar is 'tqdm':
+            loop = enumerate(tqdm(self.pdf_data, desc='Saving PDF pages as PNGs', total=len(self.pdf_data),
+                                  unit='PNGs'))
         else:
             loop = enumerate(self.pdf_data)
         saved = []
@@ -118,23 +117,22 @@ class IMGtoPDF:
         self.pdf_pages = self.img2pdf()
 
     def img2pdf(self):
-        if self.progress_bar:
-            if self.progress_bar is 'gui':
-                pdfs = []
-                for index, i in enumerate(self.imgs):
-                    if not gui.EasyProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
-                        break
-                    im = Image.open(i)
-                    width, height = im.size
+        if self.progress_bar is 'gui':
+            pdfs = []
+            for index, i in enumerate(self.imgs):
+                if not gui.EasyProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
+                    break
+                im = Image.open(i)
+                width, height = im.size
 
-                    co = CanvasObjects()
-                    co.add(CanvasImg(i, 1.0, w=width, h=height))
+                co = CanvasObjects()
+                co.add(CanvasImg(i, 1.0, w=width, h=height))
 
-                    pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
-                    pdfs.append(pdf)
-                return pdfs
-            elif self.progress_bar is 'tqdm':
-                loop = tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
+                pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
+                pdfs.append(pdf)
+            return pdfs
+        elif self.progress_bar is 'tqdm':
+            loop = tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
         else:
             loop = self.imgs
         pdfs = []
