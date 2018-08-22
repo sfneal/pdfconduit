@@ -30,17 +30,20 @@ class PDFtoIMG:
         self.pdf_data = self._get_pdf_data()
 
     def _get_pdf_data(self):
+        # PySimpleGUI progress bar
         if self.progress_bar is 'gui':
             data = []
-            for cur_page in range(len(self.doc)):
-                if not gui.EasyProgressMeter('Getting PDF page data', cur_page + 1, len(self.doc), orientation='h'):
-                    break
+            for i, cur_page in enumerate(range(len(self.doc))):
                 data.append(self._get_page_data(cur_page))
+                if not gui.EasyProgressMeter('Getting PDF page data', i + 1, len(self.doc), orientation='h'):
+                    break
             return data
+        # TQDM progress bar
         elif self.progress_bar is 'tqdm':
             return [self._get_page_data(cur_page) for cur_page in tqdm(range(len(self.doc)),
                                                                        desc='Getting PDF page data',
                                                                        total=len(self.doc), unit='Pages')]
+        # No progress bar
         else:
             return [self._get_page_data(cur_page) for cur_page in range(len(self.doc))]
 
@@ -82,19 +85,22 @@ class PDFtoIMG:
             return NamedTemporaryFile(suffix='.png', dir=self.tempdir, delete=False).name
 
     def save(self):
+        # PySimpleGUI progress bar
         if self.progress_bar is 'gui':
             saved = []
             for i, img in enumerate(self.pdf_data):
-                if not gui.EasyProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h'):
-                    break
                 output = self._get_output(i)
                 saved.append(output)
                 image = Image.open(BytesIO(img))
                 image.save(output)
+                if not gui.EasyProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h'):
+                    break
             return saved
+        # TQDM progress bar
         elif self.progress_bar is 'tqdm':
             loop = enumerate(tqdm(self.pdf_data, desc='Saving PDF pages as PNGs', total=len(self.pdf_data),
                                   unit='PNGs'))
+        # No progress bar
         else:
             loop = enumerate(self.pdf_data)
         saved = []
@@ -117,11 +123,10 @@ class IMGtoPDF:
         self.pdf_pages = self.img2pdf()
 
     def img2pdf(self):
+        # PySimpleGUI progress bar
         if self.progress_bar is 'gui':
             pdfs = []
             for index, i in enumerate(self.imgs):
-                if not gui.EasyProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
-                    break
                 im = Image.open(i)
                 width, height = im.size
 
@@ -130,9 +135,13 @@ class IMGtoPDF:
 
                 pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
                 pdfs.append(pdf)
+                if not gui.EasyProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
+                    break
             return pdfs
+        # TQDM progress bar
         elif self.progress_bar is 'tqdm':
             loop = tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
+        # No progress bar
         else:
             loop = self.imgs
         pdfs = []
@@ -190,10 +199,10 @@ class Flatten:
 def main():
     from looptools import ActiveTimer
     directory = '/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data'
-    fname = os.path.join(directory, 'con docs2.pdf')
+    fname = os.path.join(directory, 'document.pdf')
 
     with ActiveTimer(Flatten):
-        flat = Flatten(fname, scale=1.5, progress_bar='gui').save()
+        flat = Flatten(fname, scale=1.5, progress_bar='gui').save(remove_temps=False)
     print(flat)
 
 
