@@ -286,7 +286,6 @@ class GUI:
         }
 
         params = settings(params)
-        print(params['flat'])
 
         if os.path.isfile(params['pdf']):
             params['pdf'] = [params['pdf']]
@@ -307,11 +306,11 @@ class GUI:
                     compress=params['compression']['compressed'],
                     flatten=params['flattening']['flattened'])
             doc = wm.add(underneath=params['placement']['underneath'], method='pdfrw')
-            if params['encrypt']:
-                wm.encrypt(params['user_pw'], params['owner_pw'])
-
             if params['flat']:
-                flat = Flatten(doc, 2.0, progress_bar='gui', tempdir=wm.tempdir).save()
+                doc = Flatten(doc, 2.0, progress_bar='gui', tempdir=wm.tempdir).save()
+            if params['encrypt']:
+                doc = wm.encrypt(params['user_pw'], params['owner_pw'], document=doc)
+
         wm.cleanup()
 
         print('\nSuccess!')

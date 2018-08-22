@@ -149,7 +149,8 @@ class Watermark:
             open_window(self.document)
         return self.document
 
-    def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, allow_printing=True, allow_commenting=False):
+    def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, allow_printing=True, allow_commenting=False,
+                document=None):
         """
         Encrypt a PDF document to add passwords and restrict permissions.
 
@@ -169,6 +170,7 @@ class Watermark:
         :return: str
             Encrypted PDF full path
         """
+        document = self.document if document is None else document
         self.receipt.add('User pw', user_pw)
         self.receipt.add('Owner pw', owner_pw)
         if encrypt_128:
@@ -179,7 +181,7 @@ class Watermark:
             self.receipt.add('Permissions', 'Allow printing')
         else:
             self.receipt.add('Permissions', 'Allow ALL')
-        p = str(Encrypt(self.document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
+        p = str(Encrypt(document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
                         bit128=encrypt_128, allow_printing=allow_printing, allow_commenting=allow_commenting,
                         progress_bar_enabled=self.progress_bar_enabled, progress_bar=self.progress_bar))
         self.receipt.add('Secured PDF', os.path.basename(p))
