@@ -1,5 +1,14 @@
 ﻿Version 1.1.6, 2018-08-21
 --------------------------
+ - Created flatten module to convert PDF page contents to singular flat layer
+ - Added flatten.py file
+    - Convert PDF file into PNG file for each page
+    - Convert images into multiple PDFs or a single merged PDF
+ - Added flatten parameter to watermarker GUI
+
+
+Version 1.1.6, 2018-08-21
+--------------------------
  - Fixed issue large PDF files issue
     - Files taking a long time to write
     - File size was too large
@@ -7,6 +16,7 @@
  - Restored pdfrw methods to upscale, rotate and add because of speed
    limitations with PyPDF3
  - Added pdf2img.py to convert PDF files to image files
+
 
 Version 1.1.5, 2018-08-20
 --------------------------
