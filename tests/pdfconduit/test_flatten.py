@@ -44,8 +44,8 @@ class TestFlatten(unittest.TestCase):
 
         self.assertTrue(os.path.exists(flat))
         self.assertEqual(Info(self.fname).pages, Info(flat).pages)
-        self.assertTrue(abs(Info(self.fname).size[0] / Info(flat).size[0]) < 1)
-        self.assertTrue(abs(Info(self.fname).size[1] / Info(flat).size[1]) < 1)
+        self.assertTrue(abs(Info(self.fname).size[0] / Info(flat).size[0]) <= 1)
+        self.assertTrue(abs(Info(self.fname).size[1] / Info(flat).size[1]) <= 1)
 
     def test_flatten_2x(self):
         scale = 2.0
@@ -54,8 +54,8 @@ class TestFlatten(unittest.TestCase):
 
         self.assertTrue(os.path.exists(flat))
         self.assertEqual(Info(self.fname).pages, Info(flat).pages)
-        self.assertTrue(abs(Info(self.fname).size[0] * scale / Info(flat).size[0]) < 1)
-        self.assertTrue(abs(Info(self.fname).size[1] * scale / Info(flat).size[1]) < 1)
+        self.assertTrue(abs(Info(self.fname).size[0] * scale / Info(flat).size[0]) <= 1)
+        self.assertTrue(abs(Info(self.fname).size[1] * scale / Info(flat).size[1]) <= 1)
 
     def test_flatten_3x(self):
         scale = 3.0
@@ -64,8 +64,8 @@ class TestFlatten(unittest.TestCase):
 
         self.assertTrue(os.path.exists(flat))
         self.assertEqual(Info(self.fname).pages, Info(flat).pages)
-        self.assertTrue(abs(Info(self.fname).size[0] * scale / Info(flat).size[0]) < 1)
-        self.assertTrue(abs(Info(self.fname).size[1] * scale / Info(flat).size[1]) < 1)
+        self.assertTrue(abs(Info(self.fname).size[0] * scale / Info(flat).size[0]) <= 1)
+        self.assertTrue(abs(Info(self.fname).size[1] * scale / Info(flat).size[1]) <= 1)
 
 
 if __name__ == '__main__':
