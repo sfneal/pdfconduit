@@ -10,6 +10,9 @@ class Merge:
         self.output = os.path.join(self.directory, output_name.strip('.pdf') + '.pdf')
         self.file = self.merge(self.pdfs, self.output)
 
+    def __str__(self):
+        return str(self.file)
+
     @staticmethod
     def validate(pdf):
         if not pdf.startswith('.') and pdf.endswith('.pdf'):
