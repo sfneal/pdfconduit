@@ -10,8 +10,6 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs2.pdf']
-        # cls.pdfs = ['plan_l.pdf', 'plan_p.pdf']
-        # cls.pdfs = ['con docs2_sliced.pdf']
 
         cls.w = Watermark(p, use_receipt=False, open_file=False)
         if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs2_sliced.pdf')):
@@ -31,8 +29,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        # cls.w.cleanup()
-        pass
+        cls.w.cleanup()
 
     def setUp(self):
         self.pdfs = [os.path.join(directory, pdf) for pdf in self.pdfs]
