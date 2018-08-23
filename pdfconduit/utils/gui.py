@@ -1,5 +1,6 @@
 import os
 import PySimpleGUI as gui
+from platform import system
 from pdfconduit import __version__
 from pdfconduit.utils import available_images
 
@@ -234,15 +235,33 @@ class GUI:
 
         def window():
             """GUI window for inputing Watermark parameters"""
-            with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
-                layout = []
-                layout.extend(header())
-                layout.extend(input_source())
-                layout.extend(input_text())
-                layout.extend(input_watermark_settings())
-                layout.extend(input_encryption())
-                layout.extend(footer())
-                return form.LayoutAndShow(layout)
+            print(system())
+            if system() is 'Windows':
+                with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+                    with gui.FlexForm(title) as form2:
+                        layout_tab_1 = []
+                        layout_tab_1.extend(header())
+                        layout_tab_1.extend(input_source())
+                        layout_tab_1.extend(input_text())
+                        layout_tab_1.extend(input_encryption())
+                        layout_tab_1.extend(footer())
+
+                        layout_tab_2 = []
+                        layout_tab_2.extend(input_watermark_settings())
+
+                        return gui.ShowTabbedForm(title, (form, layout_tab_1, 'Document Settings'),
+                                                  (form2, layout_tab_2, 'Watermark Settings'))
+
+            else:
+                with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+                    layout = []
+                    layout.extend(header())
+                    layout.extend(input_source())
+                    layout.extend(input_text())
+                    layout.extend(input_watermark_settings())
+                    layout.extend(input_encryption())
+                    layout.extend(footer())
+                    return form.LayoutAndShow(layout)
 
         def settings(params):
             # Fix opacity if it is adjusted$
@@ -250,6 +269,8 @@ class GUI:
                 params['opacity'] = int(params['opacity'] * 100)
 
             (button, (values)) = window()
+            print(button)
+            print(values)
 
             params['pdf'] = values[0]
             params['address'] = values[1]
