@@ -2,7 +2,7 @@
 import os
 from tempfile import NamedTemporaryFile
 from PyPDF3 import PdfFileReader, PdfFileWriter
-from pdfconduit.utils import add_suffix
+from pdfconduit.utils import add_suffix, Info
 
 
 def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=None):
@@ -17,6 +17,11 @@ def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=N
 
     # Reindex page selections for simple user input
     first_page = first_page - 1 if not None else None
+
+    # Validate page range by comparing selection to number of pages in PDF document
+    pages = Info(document).pages
+    invalid = 'Number of pages: ' + str(pages) + ' ----> Page Range Input: ' + str(first_page) + '-' + str(last_page)
+    assert first_page <= last_page <= pages, invalid
 
     pdf = PdfFileReader(document)
     writer = PdfFileWriter()
