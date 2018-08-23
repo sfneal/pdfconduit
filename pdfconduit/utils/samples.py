@@ -20,15 +20,16 @@ class Samples:
         self.wm.cleanup()
 
     def watermarks(self, images=available_images()):
-        watermarks = [self._title('Watermark Images')]
+        watermarks = []
         for i in images:
             wm = self.wm.draw(text1=i, image=i, copyright=False)
             watermarks.append(wm)
+        watermarks.insert(0, self._title(wm, 'Watermark Images'))
         m = Merge(watermarks, 'Watermarks samples', self.dst)
         return m.file
 
     def opacity(self):
-        samples = [self._title('Opacity Comparisons')]
+        samples = []
         _range = range(4, 25)[::3]
         if Info(self.src).pages > 1:
             self.src = slicer(self.src, 1, 1, tempdir=self.wm.tempdir)
@@ -39,6 +40,7 @@ class Samples:
 
             labeled_pdf = Label(watermarked, str(str(i).zfill(2) + '%'), tempdir=self.wm.tempdir).write(cleanup=False)
             samples.append(labeled_pdf)
+            samples.insert(0, self._title(labeled_pdf, 'Opacity Comparisons'))
         m = Merge(samples, 'Opacity comparison samples', self.dst)
         return m.file
 
@@ -47,10 +49,12 @@ class Samples:
             self.src = slicer(self.src, 1, 1, tempdir=self.wm.tempdir)
         wtrmrk = self.wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA')
         over = self.wm.add(document=self.src, watermark=wtrmrk, underneath=False)
-        over_with_label = Label(over, 'Overlayed watermark', tempdir=self.wm.tempdir).write(cleanup=False)
+        over_with_label = Label(over, 'Overlayed watermark', suffix=None,
+                                tempdir=self.wm.tempdir).write(cleanup=False)
 
         under = self.wm.add(document=self.src, watermark=wtrmrk, underneath=True)
-        under_with_label = Label(under, 'Underneath watermarked', tempdir=self.wm.tempdir).write(cleanup=False)
+        under_with_label = Label(under, 'Underneath watermarked', suffix=None,
+                                 tempdir=self.wm.tempdir).write(cleanup=False)
 
         to_merge = [self._title(under, 'Watermark Placement'), over_with_label, under_with_label]
         m = Merge(to_merge, 'Watermark Placement samples', self.dst)
