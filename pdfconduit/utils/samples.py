@@ -1,7 +1,7 @@
 # Generate sample PDF documents
 import os
 from pdfconduit.utils import available_images
-from pdfconduit import Label, Watermark, Merge, slicer, Info
+from pdfconduit import Label, Watermark, Merge, slicer, Info, Flatten, upscale
 from tests import pdf
 
 
@@ -31,7 +31,7 @@ class Samples:
         samples = [self._title('Opacity Comparisons')]
         _range = range(4, 25)[::3]
         if Info(self.src).pages > 1:
-            self.src = slicer(self.src, 1, 1, self.wm.tempdir)
+            self.src = slicer(self.src, 1, 1, tempdir=self.wm.tempdir)
         for i in _range:
             o = i * .01
             wtrmrk = self.wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', opacity=o)
@@ -44,7 +44,7 @@ class Samples:
 
     def placement(self):
         if Info(self.src).pages > 2:
-            self.src = slicer(self.src, 1, 1, self.wm.tempdir)
+            self.src = slicer(self.src, 1, 1, tempdir=self.wm.tempdir)
         wtrmrk = self.wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA')
         over = self.wm.add(document=self.src, watermark=wtrmrk, underneath=False)
         over_with_label = Label(over, 'Overlayed watermark', tempdir=self.wm.tempdir).write(cleanup=False)
@@ -58,7 +58,7 @@ class Samples:
 
     def layering(self):
         if Info(self.src).pages > 2:
-            self.src = slicer(self.src, 1, 1, self.wm.tempdir)
+            self.src = slicer(self.src, 1, 1, tempdir=self.wm.tempdir)
         flat = self.wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', flatten=True)
         layered = self.wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA', flatten=False)
 
@@ -74,16 +74,40 @@ class Samples:
         m = Merge(to_merge, 'Layering samples', self.dst)
         return m.file
 
+    def flat(self):
+        # Create one page PDF document
+        if Info(self.src).pages > 2:
+            self.src = slicer(self.src, 1, 1, tempdir=self.wm.tempdir)
+
+        # Standard watermark and layering
+        wtrmrk = self.wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA')
+        wtrmrked = self.wm.add(document=self.src, watermark=wtrmrk)
+        wtrmrked_upscaled = upscale(wtrmrked, scale=2.0, tempdir=self.wm.tempdir)
+        wtrmrked_labeled = Label(wtrmrked_upscaled, 'Layered PDF page', tempdir=self.wm.tempdir).write(cleanup=False)
+
+        # Flattened layering
+        flattened = Flatten(wtrmrked, tempdir=self.wm.tempdir, progress_bar='tqdm').save(remove_temps=False)
+        flattened_labeled = Label(flattened, 'Flattened PDF page', tempdir=self.wm.tempdir).write(cleanup=False)
+
+        print(Info(flattened_labeled).size)
+        print(Info(wtrmrked_labeled).size)
+
+        # Merge files
+        to_merge = [self._title('Flat vs. Layered pages'), flattened_labeled, wtrmrked_labeled]
+        m = Merge(to_merge, 'Flat vs. Layered', self.dst)
+        return m.file
+
 
 def main():
     src = pdf
     dst = os.path.join(os.path.dirname(src), 'samples')
 
     s = Samples(src, dst)
-    s.opacity()
-    s.watermarks()
-    s.placement()
-    s.layering()
+    # s.opacity()
+    # s.watermarks()
+    # s.placement()
+    # s.layering()
+    s.flat()
 
     s.cleanup()
 
