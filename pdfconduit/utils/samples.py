@@ -13,8 +13,8 @@ class Samples:
         self.dst = dst
         self.wm = Watermark(self.src, use_receipt=False, open_file=False, remove_temps=True)
 
-    def _title(self, title='PDF Samples'):
-        return Label(pdf, title, title_page=True, tempdir=self.wm.tempdir).watermark
+    def _title(self, document, title='PDF Samples'):
+        return Label(document, title, title_page=True, tempdir=self.wm.tempdir).watermark
 
     def cleanup(self):
         self.wm.cleanup()
@@ -52,7 +52,7 @@ class Samples:
         under = self.wm.add(document=self.src, watermark=wtrmrk, underneath=True)
         under_with_label = Label(under, 'Underneath watermarked', tempdir=self.wm.tempdir).write(cleanup=False)
 
-        to_merge = [self._title('Watermark Placement'), over_with_label, under_with_label]
+        to_merge = [self._title(under, 'Watermark Placement'), over_with_label, under_with_label]
         m = Merge(to_merge, 'Watermark Placement samples', self.dst)
         return m.file
 
@@ -70,7 +70,7 @@ class Samples:
         watermark_flat = Label(flat, 'Flat watermark', tempdir=self.wm.tempdir).write(cleanup=False)
         watermark_layer = Label(layered, 'Layered watermark', tempdir=self.wm.tempdir).write(cleanup=False)
 
-        to_merge = [self._title('Watermark Layering'), wtrmrked_flat, watermark_flat, wtrmrked_layer, watermark_layer]
+        to_merge = [self._title(watermark_layer, 'Watermark Layering'), wtrmrked_flat, watermark_flat, wtrmrked_layer, watermark_layer]
         m = Merge(to_merge, 'Layering samples', self.dst)
         return m.file
 
@@ -89,11 +89,8 @@ class Samples:
         flattened = Flatten(wtrmrked, tempdir=self.wm.tempdir, progress_bar='tqdm').save(remove_temps=False)
         flattened_labeled = Label(flattened, 'Flattened PDF page', tempdir=self.wm.tempdir).write(cleanup=False)
 
-        print(Info(flattened_labeled).size)
-        print(Info(wtrmrked_labeled).size)
-
         # Merge files
-        to_merge = [self._title('Flat vs. Layered pages'), flattened_labeled, wtrmrked_labeled]
+        to_merge = [self._title(flattened_labeled, 'Flat vs. Layered pages'), flattened_labeled, wtrmrked_labeled]
         m = Merge(to_merge, 'Flat vs. Layered', self.dst)
         return m.file
 
@@ -103,10 +100,10 @@ def main():
     dst = os.path.join(os.path.dirname(src), 'samples')
 
     s = Samples(src, dst)
-    # s.opacity()
-    # s.watermarks()
-    # s.placement()
-    # s.layering()
+    s.opacity()
+    s.watermarks()
+    s.placement()
+    s.layering()
     s.flat()
 
     s.cleanup()
