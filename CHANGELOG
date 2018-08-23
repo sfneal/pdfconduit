@@ -1,4 +1,10 @@
-﻿Version 1.2.2, 2018-08-23
+﻿Version 1.2.3, 2018-08-23
+--------------------------
+ - Added tabs to watermark GUI form
+    - Only on Windows (PySimpleGUI tabs are currently ugly on MacOS)
+
+
+Version 1.2.2, 2018-08-23
 --------------------------
  - Fixed issue when text from Label class was too big
  - Added flat method to samples.py
