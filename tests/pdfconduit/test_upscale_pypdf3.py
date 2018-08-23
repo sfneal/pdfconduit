@@ -43,25 +43,9 @@ class TestUpscalePyPDF3(unittest.TestCase):
         self.assertTrue(os.path.isfile(upscale1))
         self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
 
-    def test_upscale_pdfrw(self):
-        s = 2.0
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_pdfrw', method='pdfrw')
-        self.files.append(upscale1)
-
-        self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
-
     def test_upscale_20x_pypdf3(self):
         s = 2.0
         upscale1 = upscale(pdf, scale=s, suffix='upscaled_2.0_pypdf3', method='pypdf3')
-        self.files.append(upscale1)
-
-        self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
-
-    def test_upscale_20x_pdfrw(self):
-        s = 2.0
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_2.0_pdfrw', method='pdfrw')
         self.files.append(upscale1)
 
         self.assertTrue(os.path.isfile(upscale1))
@@ -75,25 +59,9 @@ class TestUpscalePyPDF3(unittest.TestCase):
         self.assertTrue(os.path.isfile(upscale1))
         self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
 
-    def test_upscale_15x_pdfrw(self):
-        s = 1.5
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_1.5_pdfrw', method='pdfrw')
-        self.files.append(upscale1)
-
-        self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
-
     def test_upscale_30x_pypdf3(self):
         s = 3.0
         upscale1 = upscale(pdf, scale=s, suffix='upscaled_3.0_pypdf3', method='pypdf3')
-        self.files.append(upscale1)
-
-        self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
-
-    def test_upscale_30x_pdfrw(self):
-        s = 3.0
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_3.0_pdfrw', method='pdfrw')
         self.files.append(upscale1)
 
         self.assertTrue(os.path.isfile(upscale1))
