@@ -14,6 +14,15 @@ from pdfconduit.merge import Merge
 from pdfconduit.upscale import upscale
 
 
+def clean_temps(tempdir):
+    # TODO: Files remaining open on window and preventing deletion
+    if os.path.isdir(tempdir):
+        try:
+            shutil.rmtree(tempdir)
+        except PermissionError:
+            print(tempdir, 'was not removed')
+
+
 class PDFtoIMG:
     def __init__(self, file_name, tempdir=None, ext='png', progress_bar=None):
         """Convert each page of a PDF file into a PNG image"""
@@ -82,7 +91,7 @@ class PDFtoIMG:
             output_file = add_suffix(self.file_name, str(index), ext=self.ext)
             return os.path.join(self.output_dir, output_file)
         else:
-            return NamedTemporaryFile(suffix='.png', dir=self.tempdir, delete=False).name
+            return NamedTemporaryFile(suffix='.png', dir=self.tempdir, delete=True).name
 
     def save(self):
         # PySimpleGUI progress bar
@@ -91,10 +100,11 @@ class PDFtoIMG:
             for i, img in enumerate(self.pdf_data):
                 output = self._get_output(i)
                 saved.append(output)
-                image = Image.open(BytesIO(img))
-                image.save(output)
+                with Image.open(BytesIO(img)) as image:
+                    image.save(output)
                 if not gui.EasyProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h'):
                     break
+            self.doc.close()
             return saved
         # TQDM progress bar
         elif self.progress_bar is 'tqdm':
@@ -107,8 +117,9 @@ class PDFtoIMG:
         for i, img in loop:
             output = self._get_output(i)
             saved.append(output)
-            image = Image.open(BytesIO(img))
-            image.save(output)
+            with Image.open(BytesIO(img)) as image:
+                image.save(output)
+        self.doc.close()
         return saved
 
 
@@ -127,14 +138,14 @@ class IMGtoPDF:
         if self.progress_bar is 'gui':
             pdfs = []
             for index, i in enumerate(self.imgs):
-                im = Image.open(i)
-                width, height = im.size
+                with Image.open(i) as im:
+                    width, height = im.size
 
-                co = CanvasObjects()
-                co.add(CanvasImg(i, 1.0, w=width, h=height))
+                    co = CanvasObjects()
+                    co.add(CanvasImg(i, 1.0, w=width, h=height))
 
-                pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
-                pdfs.append(pdf)
+                    pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
+                    pdfs.append(pdf)
                 if not gui.EasyProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
                     break
             return pdfs
@@ -159,11 +170,7 @@ class IMGtoPDF:
     def save(self, remove_temps=True, output_name='merged imgs'):
         m = str(Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir))
         if remove_temps:
-            if os.path.isdir(self.tempdir):
-                try:
-                    shutil.rmtree(self.tempdir)
-                except PermissionError:
-                    print(self.tempdir, 'was not removed')
+            clean_temps(self.tempdir)
         return m
 
 
