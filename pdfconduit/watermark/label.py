@@ -1,8 +1,7 @@
 from pdfconduit.watermark.canvas import CanvasObjects, CanvasStr
 from pdfconduit.watermark.watermark import Watermark
 from pdfconduit.watermark.draw import WatermarkDraw
-from pdfconduit.utils.info import Info
-from pdfconduit.utils.path import add_suffix
+from pdfconduit.utils import Info, add_suffix
 
 
 class Label(WatermarkDraw):
