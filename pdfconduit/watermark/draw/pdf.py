@@ -110,6 +110,7 @@ class WatermarkDraw(DrawPDF):
         # 4. X and Y positions
         # X and Y are both centered
         if cs.y_centered and cs.x_centered:
+            # Check if text_width is greater than the canvas page width
             if text_width(cs.string, cs.font, cs.size) > self.can._pagesize[0]:
                 str1, str2 = split_str(cs.string)
                 self.can.drawString(x=center_str(str1, cs.font, cs.size, offset=0), y=cs.size, text=str1)
