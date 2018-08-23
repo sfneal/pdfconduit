@@ -61,8 +61,8 @@ missing module named 'matplotlib.pyplot' - imported by tqdm._tqdm_gui
 missing module named matplotlib - imported by tqdm._tqdm_gui
 missing module named 'pandas.core' - imported by tqdm._tqdm
 missing module named pandas - imported by tqdm._tqdm
-missing module named UserDict - imported by PIL.PdfParser
 missing module named olefile - imported by PIL.FpxImagePlugin, PIL.MicImagePlugin
+missing module named UserDict - imported by PIL.PdfParser
 missing module named Tkinter - imported by PIL.ImageTk
 missing module named 'PySide.QtCore' - imported by PIL.ImageQt
 missing module named 'PyQt4.QtCore' - imported by PIL.ImageQt
