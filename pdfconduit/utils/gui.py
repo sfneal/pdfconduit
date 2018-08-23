@@ -277,30 +277,30 @@ class GUI:
 
             button, values, platform = window()
 
-            params['pdf'] = values[0]
-            params['address'] = values[1]
-            params['town'] = values[2]
-            params['state'] = values[3]
+            params['pdf'] = values['pdf'] if platform == 'Darwin' else values[0]
+            params['address'] = values['address'] if platform == 'Darwin' else values[1]
+            params['town'] = values['town'] if platform == 'Darwin' else values[2]
+            params['state'] = values['state'] if platform == 'Darwin' else values[3]
 
-            params['image'] = values[4] if platform is 'Darwin' else values[10]
-            params['compression']['uncompressed'] = values[5] if platform is 'Darwin' else values[11]
-            params['compression']['compressed'] = values[6] if platform is 'Darwin' else values[12]
-            params['flattening']['flattened'] = values[7] if platform is 'Darwin' else values[13]
-            params['flattening']['layered'] = values[8] if platform is 'Darwin' else values[14]
-            params['placement']['overlay'] = values[9] if platform is 'Darwin' else values[15]
-            params['placement']['underneath'] = values[10] if platform is 'Darwin' else values[16]
-            params['opacity'] = float(values[11] * .01) if platform is 'Darwin' else float(values[17] * .01)
+            params['image'] = values['image'] if platform == 'Darwin' else values[10]
+            params['compression']['uncompressed'] = values['uncompressed'] if platform == 'Darwin' else values[11]
+            params['compression']['compressed'] = values['compressed'] if platform == 'Darwin' else values[12]
+            params['flattening']['flattened'] = values['flattened'] if platform == 'Darwin' else values[13]
+            params['flattening']['layered'] = values['layered'] if platform == 'Darwin' else values[14]
+            params['placement']['overlay'] = values['overlay'] if platform == 'Darwin' else values[15]
+            params['placement']['underneath'] = values['underneath'] if platform == 'Darwin' else values[16]
+            params['opacity'] = float(values['opacity'] * .01) if platform == 'Darwin' else float(values[17] * .01)
 
-            params['encrypt'] = values[12] if platform is 'Darwin' else values[4]
-            params['allow_printing'] = values[13] if platform is 'Darwin' else values[5]
-            params['allow_commenting'] = values[14] if platform is 'Darwin' else values[6]
-            params['user_pw'] = values[15] if platform is 'Darwin' else values[7]
+            params['encrypt'] = values['encrypt'] if platform == 'Darwin' else values[4]
+            params['allow_printing'] = values['allow_printing'] if platform == 'Darwin' else values[5]
+            params['allow_commenting'] = values['allow_commenting'] if platform == 'Darwin' else values[6]
+            params['user_pw'] = values['user_pw'] if platform == 'Darwin' else values[7]
             if not len(params['user_pw']) > 0:
                 params['user_pw'] = ''
-            params['owner_pw'] = values[16] if platform is 'Darwin' else values[8]
+            params['owner_pw'] = values['owner_pw'] if platform == 'Darwin' else values[8]
             if not len(params['owner_pw']) > 0:
                 params['owner_pw'] = ''
-            params['flat'] = values[17] if platform is 'Darwin' else values[9]
+            params['flat'] = values['flat'] if platform == 'Darwin' else values[9]
             if button == 'Folder':
                 params = folder(params)
                 params = settings(params)
