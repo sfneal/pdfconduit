@@ -8,9 +8,17 @@ from pdfconduit.watermark.draw.image import img_opacity
 from pdfconduit.watermark.canvas import CanvasStr, CanvasImg
 
 
-def center_str(txt, font, size, offset=0):
-    text_width = stringWidth(txt, fontName=font, fontSize=size)
-    return -(text_width / 2.0) + offset
+def text_width(string, font_name, font_size):
+    return stringWidth(string, fontName=font_name, fontSize=font_size)
+
+
+def center_str(txt, font_name, font_size, offset=0):
+    return -(text_width(txt, font_name, font_size) / 2.0) + offset
+
+
+def split_str(string):
+    split = string.split(' ')
+    return ' '.join(split[:len(split) // 2]), ' '.join(split[len(split) // 2:])
 
 
 class DrawPDF:
@@ -102,8 +110,14 @@ class WatermarkDraw(DrawPDF):
         # 4. X and Y positions
         # X and Y are both centered
         if cs.y_centered and cs.x_centered:
-            x = center_str(cs.string, cs.font, cs.size, offset=0)
-            y = 0
+            if text_width(cs.string, cs.font, cs.size) > self.can._pagesize[0]:
+                str1, str2 = split_str(cs.string)
+                self.can.drawString(x=center_str(str1, cs.font, cs.size, offset=0), y=cs.size, text=str1)
+                self.can.drawString(x=center_str(str2, cs.font, cs.size, offset=0), y=-cs.size, text=str2)
+                return
+            else:
+                x = center_str(cs.string, cs.font, cs.size, offset=0)
+                y = 0
 
         # Y is centered and X is not
         elif cs.y_centered and not cs.x_centered:
@@ -112,9 +126,10 @@ class WatermarkDraw(DrawPDF):
 
         # X is centered and Y is not
         elif cs.x_centered and not cs.y_centered:
-            x = center_str(cs.string, cs.font, cs.size)
+            x = center_str(cs.string, cs.font, cs.size, offset=0)
             y = cs.y
         else:
             x = cs.x
             y = cs.y
         self.can.drawString(x=x, y=y, text=cs.string)
+        return
