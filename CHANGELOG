@@ -1,4 +1,14 @@
-﻿Version 1.2.0, 2018-08-22
+﻿Version 1.2.1, 2018-08-23
+--------------------------
+ - Fixed issue in add.py where upscale call was giving unneeded margin_x param
+ - Added assertion to slice.py to validate page_range
+ - Moved target_w and target_h params to __init__ method of upscale.py
+ - Removed redundant tests from test_upscale_pypdf3.py
+ - Added PDF dimensions print statements to test_upscale tearDown methods
+ - Added Flat vs. Layered PDF generator to samples.py
+
+
+Version 1.2.0, 2018-08-22
 --------------------------
  - Added PyMuPDF and tqdm to install_requires
     - PyMuPDF is a dependency of the flatten module
