@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 from pdfconduit import Info, slicer
-from tests import directory
+from tests import directory, pdf
 
 
 class TestSlice(unittest.TestCase):
@@ -30,7 +30,7 @@ class TestSlice(unittest.TestCase):
             shutil.move(source, target)
 
     def setUp(self):
-        self.pdf = os.path.join(directory, 'manual.pdf')
+        self.pdf = os.path.join(directory, pdf)
         self.startTime = time.time()
 
     def tearDown(self):
@@ -38,18 +38,18 @@ class TestSlice(unittest.TestCase):
         print("%s: %.3f" % (' '.join(self.id().split('.')[-1].split('_')[1:]), t))
 
     def test_slice(self):
-        fp = 10
-        lp = 31
+        fp = 1
+        lp = 1
         sliced = slicer(self.pdf, first_page=fp, last_page=lp)
         self.files.append(sliced)
 
         self.assertTrue(os.path.isfile(sliced))
         self.assertEqual(Info(sliced).pages, len(range(fp, lp+1)))
 
-    def test_slice_15to50(self):
-        fp = 15
-        lp = 50
-        sliced = slicer(self.pdf, first_page=fp, last_page=lp, suffix='sliced_15-50')
+    def test_slice_4to7(self):
+        fp = 4
+        lp = 7
+        sliced = slicer(self.pdf, first_page=fp, last_page=lp, suffix='sliced_4-7')
         self.files.append(sliced)
 
         self.assertTrue(os.path.isfile(sliced))
