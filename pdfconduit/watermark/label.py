@@ -4,6 +4,10 @@ from pdfconduit.watermark.draw import WatermarkDraw
 from pdfconduit.utils import Info, add_suffix
 
 
+def mean(numbers):
+    return float(sum(numbers)) / max(len(numbers), 1)
+
+
 class Label(WatermarkDraw):
     def __init__(self, document, label, title_page=False, suffix='labeled', output=None, tempdir=None):
         self.size = Info(document).size
@@ -23,11 +27,11 @@ class Label(WatermarkDraw):
     def _create_canvas_objects(self, label, title_page):
         objects = CanvasObjects()
         if not title_page:
-            objects.add(CanvasStr(label, size=14, opacity=1,
+            objects.add(CanvasStr(label, size=int(mean(self.size) * .02), opacity=1,
                                   x=-(self.size[0] / 2) + 15,
                                   y=-(self.size[1] / 2) + 25, x_centered=False))
         else:
-            objects.add(CanvasStr(label, size=60, opacity=1, y_centered=True))
+            objects.add(CanvasStr(label, size=int(mean(self.size) * .1), opacity=1, y_centered=True))
         return objects
 
     def write(self, cleanup=True):
