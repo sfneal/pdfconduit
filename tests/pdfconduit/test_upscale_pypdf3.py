@@ -32,6 +32,7 @@ class TestUpscalePyPDF3(unittest.TestCase):
         for i in self.files:
             source = i
             target = os.path.join(self.dst, str(os.path.basename(i)))
+            print(Info(i).dimensions)
             shutil.move(source, target)
             self.files.remove(i)
 
