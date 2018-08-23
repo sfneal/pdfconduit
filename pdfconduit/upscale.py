@@ -23,6 +23,12 @@ class Upscale:
         else:
             self.output = NamedTemporaryFile(suffix='.pdf').name
 
+        # Get target width and height
+        dims = Info(self.file_name).dimensions
+        self.target_w = dims['w'] * self.scale
+        self.target_h = dims['h'] * self.scale
+
+        # Execute either pdfrw or PyPDF3 method
         if method is 'pypdf3':
             self.pypdf3()
         else:
@@ -54,9 +60,6 @@ class Upscale:
     def pypdf3(self):
         reader = PdfFileReader(self.file_name)
         writer = PdfFileWriter()
-        dims = Info(self.file_name).dimensions
-        target_w = dims['w'] * self.scale
-        target_h = dims['h'] * self.scale
 
         # Number of pages in input document
         page_count = reader.getNumPages()
@@ -64,7 +67,7 @@ class Upscale:
         for page_number in range(page_count):
             wtrmrk = reader.getPage(page_number)
 
-            page = PageObject.createBlankPage(width=target_w, height=target_h)
+            page = PageObject.createBlankPage(width=self.target_w, height=self.target_h)
             page.mergeScaledTranslatedPage(wtrmrk, self.scale, self.margin_x, self.margin_y)
             writer.addPage(page)
 
