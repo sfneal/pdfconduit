@@ -2,6 +2,7 @@
 --------------------------
  - Added tabs to watermark GUI form
     - Only on Windows (PySimpleGUI tabs are currently ugly on MacOS)
+ - Console no longer appears when watermarker.exe is launched
 
 
 Version 1.2.2, 2018-08-23
