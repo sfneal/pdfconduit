@@ -176,7 +176,7 @@ class GUI:
                 # Source
                 [gui.Text('Source', font=('Helvetica', 15), justification='left')],
                 [gui.Text('Source file or folder', size=(label_w, 1), auto_size_text=False),
-                 gui.InputText(params['pdf'], size=(30, 1)),
+                 gui.InputText(params['pdf'], size=(30, 1), key='pdf'),
                  gui.FileBrowse(button_text='File', file_types=(("PDF Files", "*.pdf"),)),
                  gui.SimpleButton('Folder')],
                 [_line()],
@@ -186,9 +186,9 @@ class GUI:
             return [
                 # Watermark Text
                 [gui.Text('Project address', font=('Helvetica', 15), justification='left')],
-                [gui.Text('Address', size=(label_w, 1), auto_size_text=False), gui.InputText(params['address'])],
-                [gui.Text('Town', size=(label_w, 1), auto_size_text=False), gui.InputText(params['town'])],
-                [gui.Text('State', size=(label_w, 1), auto_size_text=False), gui.InputText(params['state'])],
+                [gui.Text('Address', size=(label_w, 1), auto_size_text=False), gui.InputText(params['address'], key='address')],
+                [gui.Text('Town', size=(label_w, 1), auto_size_text=False), gui.InputText(params['town'], key='town')],
+                [gui.Text('State', size=(label_w, 1), auto_size_text=False), gui.InputText(params['state'], key='state')],
 
                 [_line()],
             ]
@@ -198,21 +198,21 @@ class GUI:
                 # Watermark Settings
                 [gui.Text('Watermark Settings', font=('Helvetica', 15), justification='left')],
                 [gui.Text('Logo Image', size=(label_w, 1), auto_size_text=False),
-                 gui.InputCombo(values=(params['image']), size=(30, 4))],
+                 gui.InputCombo(values=(params['image']), size=(30, 4), key='image')],
 
                 [gui.Text('File Compression', size=(label_w, 1), auto_size_text=False),
-                 gui.Radio('Uncompressed', "RADIO1", default=params['compression']['uncompressed']),
-                 gui.Radio('Compressed', "RADIO1", default=params['compression']['compressed'])],
+                 gui.Radio('Uncompressed', "RADIO1", default=params['compression']['uncompressed'], key='uncompressed'),
+                 gui.Radio('Compressed', "RADIO1", default=params['compression']['compressed'], key='compressed')],
 
                 [gui.Text('Watermark Flattening', size=(label_w, 1), auto_size_text=False),
-                 gui.Radio('Flattened', "RADIO3", default=params['flattening']['flattened']),
-                 gui.Radio('Layered', "RADIO3", default=params['flattening']['layered'])],
+                 gui.Radio('Flattened', "RADIO3", default=params['flattening']['flattened'], key='flattened'),
+                 gui.Radio('Layered', "RADIO3", default=params['flattening']['layered'], key='layered')],
                 [gui.Text('Watermark Placement', size=(label_w, 1), auto_size_text=False),
-                 gui.Radio('Overlay', "RADIO2", default=params['placement']['overlay']),
-                 gui.Radio('Underneath', "RADIO2", default=params['placement']['underneath'])],
+                 gui.Radio('Overlay', "RADIO2", default=params['placement']['overlay'], key='overlay'),
+                 gui.Radio('Underneath', "RADIO2", default=params['placement']['underneath'], key='underneath')],
 
                 [gui.Text('Opacity', size=(label_w, 1), auto_size_text=False),
-                 gui.Slider(range=(1, 20), orientation='h', size=(34, 30), default_value=params['opacity'])],
+                 gui.Slider(range=(1, 20), orientation='h', size=(34, 30), default_value=params['opacity'], key='opacity')],
 
                 [_line()],
             ]
@@ -221,21 +221,21 @@ class GUI:
             return [
                 # Encryption
                 [gui.Text('Encryption Settings', font=('Helvetica', 15), justification='left')],
-                [gui.Checkbox('Encrypt', default=params['encrypt']),
-                 gui.Checkbox('Allow Printing', default=params['allow_printing']),
-                 gui.Checkbox('Allow Commenting', default=params['allow_commenting'])],
+                [gui.Checkbox('Encrypt', default=params['encrypt'], key='encrypt'),
+                 gui.Checkbox('Allow Printing', default=params['allow_printing'], key='allow_printing'),
+                 gui.Checkbox('Allow Commenting', default=params['allow_commenting'], key='allow_commenting')],
                 [gui.Text('User Password', size=(label_w, 1), auto_size_text=False),
-                 gui.InputText(params['user_pw'])],
+                 gui.InputText(params['user_pw'], key='user_pw')],
                 [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False),
-                 gui.InputText(params['owner_pw'])],
+                 gui.InputText(params['owner_pw'], key='owner_pw')],
 
                 [_line()],
-                [gui.Checkbox('Flatten PDF pages', default=params['flat'])],
+                [gui.Checkbox('Flatten PDF pages', default=params['flat'], key='flat')],
             ]
 
         def window():
             """GUI window for inputing Watermark parameters"""
-            print(system())
+            platform = system()
             if system() is 'Windows':
                 with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
                     with gui.FlexForm(title) as form2:
@@ -249,9 +249,15 @@ class GUI:
                         layout_tab_2 = []
                         layout_tab_2.extend(input_watermark_settings())
 
-                        return gui.ShowTabbedForm(title, (form, layout_tab_1, 'Document Settings'),
-                                                  (form2, layout_tab_2, 'Watermark Settings'))
-
+                        r = gui.ShowTabbedForm(title, (form, layout_tab_1, 'Document Settings'),
+                                               (form2, layout_tab_2, 'Watermark Settings'))
+                        values = []
+                        button = None
+                        for but, result in r:
+                            if but is not None:
+                                button = but
+                            values.extend(result)
+                        return button, values, platform
             else:
                 with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
                     layout = []
@@ -261,35 +267,40 @@ class GUI:
                     layout.extend(input_watermark_settings())
                     layout.extend(input_encryption())
                     layout.extend(footer())
-                    return form.LayoutAndShow(layout)
+                    button, values = form.LayoutAndShow(layout)
+                    return button, values, platform
 
         def settings(params):
             # Fix opacity if it is adjusted$
             if params['opacity'] < 1:
                 params['opacity'] = int(params['opacity'] * 100)
 
-            (button, (values)) = window()
-            print(button)
-            print(values)
+            button, values, platform = window()
 
             params['pdf'] = values[0]
             params['address'] = values[1]
             params['town'] = values[2]
             params['state'] = values[3]
-            params['image'] = values[4]
-            params['compression']['uncompressed'] = values[5]
-            params['compression']['compressed'] = values[6]
-            params['flattening']['flattened'] = values[7]
-            params['flattening']['layered'] = values[8]
-            params['placement']['overlay'] = values[9]
-            params['placement']['underneath'] = values[10]
-            params['opacity'] = float(values[11] * .01)
-            params['encrypt'] = values[12]
-            params['allow_printing'] = values[13]
-            params['allow_commenting'] = values[14]
-            params['user_pw'] = values[15] if len(values[15]) > 0 else ''
-            params['owner_pw'] = values[16] if len(values[16]) > 0 else ''
-            params['flat'] = values[17]
+
+            params['image'] = values[4] if platform is 'Darwin' else values[10]
+            params['compression']['uncompressed'] = values[5] if platform is 'Darwin' else values[11]
+            params['compression']['compressed'] = values[6] if platform is 'Darwin' else values[12]
+            params['flattening']['flattened'] = values[7] if platform is 'Darwin' else values[13]
+            params['flattening']['layered'] = values[8] if platform is 'Darwin' else values[14]
+            params['placement']['overlay'] = values[9] if platform is 'Darwin' else values[15]
+            params['placement']['underneath'] = values[10] if platform is 'Darwin' else values[16]
+            params['opacity'] = float(values[11] * .01) if platform is 'Darwin' else float(values[17] * .01)
+
+            params['encrypt'] = values[12] if platform is 'Darwin' else values[4]
+            params['allow_printing'] = values[13] if platform is 'Darwin' else values[5]
+            params['allow_commenting'] = values[14] if platform is 'Darwin' else values[6]
+            params['user_pw'] = values[15] if platform is 'Darwin' else values[7]
+            if not len(params['user_pw']) > 0:
+                params['user_pw'] = ''
+            params['owner_pw'] = values[16] if platform is 'Darwin' else values[8]
+            if not len(params['owner_pw']) > 0:
+                params['owner_pw'] = ''
+            params['flat'] = values[17] if platform is 'Darwin' else values[9]
             if button == 'Folder':
                 params = folder(params)
                 params = settings(params)
