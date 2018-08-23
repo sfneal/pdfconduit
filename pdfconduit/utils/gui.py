@@ -170,14 +170,9 @@ class GUI:
             params['pdf'] = values[0]
             return params
 
-        def settings(params):
-            # Fix opacity if it is adjusted$
-            if params['opacity'] < 1:
-                params['opacity'] = int(params['opacity'] * 100)
-
+        def window():
             """GUI window for inputing Watermark parameters"""
             with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
-
                 inputs = [
                     # Source
                     [gui.Text('Source', font=('Helvetica', 15), justification='left')],
@@ -221,8 +216,10 @@ class GUI:
                     [gui.Checkbox('Encrypt', default=params['encrypt']),
                      gui.Checkbox('Allow Printing', default=params['allow_printing']),
                      gui.Checkbox('Allow Commenting', default=params['allow_commenting'])],
-                    [gui.Text('User Password', size=(label_w, 1), auto_size_text=False), gui.InputText(params['user_pw'])],
-                    [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText(params['owner_pw'])],
+                    [gui.Text('User Password', size=(label_w, 1), auto_size_text=False),
+                     gui.InputText(params['user_pw'])],
+                    [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False),
+                     gui.InputText(params['owner_pw'])],
 
                     [_line()],
                     [gui.Checkbox('Flatten PDF pages', default=params['flat'])],
@@ -232,7 +229,15 @@ class GUI:
                 layout.extend(inputs)
                 layout.extend(footer())
 
-                (button, (values)) = form.LayoutAndShow(layout)
+                # (button, (values)) = form.LayoutAndShow(layout)
+                return form.LayoutAndShow(layout)
+
+        def settings(params):
+            # Fix opacity if it is adjusted$
+            if params['opacity'] < 1:
+                params['opacity'] = int(params['opacity'] * 100)
+
+            (button, (values)) = window()
 
             params['pdf'] = values[0]
             params['address'] = values[1]
