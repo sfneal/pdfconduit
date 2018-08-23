@@ -41,19 +41,19 @@ class Upscale:
     def file(self):
         return str(self.output)
 
-    def pdfrw(self):
-        def adjust(page):
-            info = PageMerge().add(page)
-            x1, y1, x2, y2 = info.xobj_box
-            viewrect = (self.margin_x, self.margin_y, x2 - x1 - 2 * self.margin_x, y2 - y1 - 2 * self.margin_y)
-            page = PageMerge().add(page, viewrect=viewrect)
-            page[0].scale(self.scale)
-            return page.render()
+    def _pdfrw_adjust(self, page):
+        info = PageMerge().add(page)
+        x1, y1, x2, y2 = info.xobj_box
+        viewrect = (self.margin_x, self.margin_y, x2 - x1 - 2 * self.margin_x, y2 - y1 - 2 * self.margin_y)
+        page = PageMerge().add(page, viewrect=viewrect)
+        page[0].scale(self.scale)
+        return page.render()
 
+    def pdfrw(self):
         reader = PdfReader(self.file_name)
         writer = PdfWriter(self.output)
         for i in list(range(0, len(reader.pages))):
-            writer.addpage(adjust(reader.pages[i]))
+            writer.addpage(self._pdfrw_adjust(reader.pages[i]))
         writer.trailer.Info = IndirectPdfDict(reader.Info or {})
         writer.write()
 
