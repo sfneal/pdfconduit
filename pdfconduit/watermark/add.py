@@ -115,7 +115,10 @@ class WatermarkAdd:
             if watermark_file['h'] * scale > document['h']:
                 scale = float(document['h'] / watermark_file['h'])
 
-            watermark_file['upscaled'] = upscale(wtrmrk, scale=scale, tempdir=self.tempdir, method=self.method)
+            if watermark_file['w'] * scale < document['w']:
+                margin_x = (document['w'] - watermark_file['w'] * scale) / 2
+            watermark_file['upscaled'] = upscale(wtrmrk, margin_x=margin_x, scale=scale, tempdir=self.tempdir,
+                                                 method=self.method)
         self.scale = scale
         return watermark_file
 
