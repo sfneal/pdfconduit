@@ -170,66 +170,78 @@ class GUI:
             params['pdf'] = values[0]
             return params
 
+        def input_source():
+            return [
+                # Source
+                [gui.Text('Source', font=('Helvetica', 15), justification='left')],
+                [gui.Text('Source file or folder', size=(label_w, 1), auto_size_text=False),
+                 gui.InputText(params['pdf'], size=(30, 1)),
+                 gui.FileBrowse(button_text='File', file_types=(("PDF Files", "*.pdf"),)),
+                 gui.SimpleButton('Folder')],
+                [_line()],
+            ]
+
+        def input_text():
+            return [
+                # Watermark Text
+                [gui.Text('Project address', font=('Helvetica', 15), justification='left')],
+                [gui.Text('Address', size=(label_w, 1), auto_size_text=False), gui.InputText(params['address'])],
+                [gui.Text('Town', size=(label_w, 1), auto_size_text=False), gui.InputText(params['town'])],
+                [gui.Text('State', size=(label_w, 1), auto_size_text=False), gui.InputText(params['state'])],
+
+                [_line()],
+            ]
+
+        def input_watermark_settings():
+            return [
+                # Watermark Settings
+                [gui.Text('Watermark Settings', font=('Helvetica', 15), justification='left')],
+                [gui.Text('Logo Image', size=(label_w, 1), auto_size_text=False),
+                 gui.InputCombo(values=(params['image']), size=(30, 4))],
+
+                [gui.Text('File Compression', size=(label_w, 1), auto_size_text=False),
+                 gui.Radio('Uncompressed', "RADIO1", default=params['compression']['uncompressed']),
+                 gui.Radio('Compressed', "RADIO1", default=params['compression']['compressed'])],
+
+                [gui.Text('Watermark Flattening', size=(label_w, 1), auto_size_text=False),
+                 gui.Radio('Flattened', "RADIO3", default=params['flattening']['flattened']),
+                 gui.Radio('Layered', "RADIO3", default=params['flattening']['layered'])],
+                [gui.Text('Watermark Placement', size=(label_w, 1), auto_size_text=False),
+                 gui.Radio('Overlay', "RADIO2", default=params['placement']['overlay']),
+                 gui.Radio('Underneath', "RADIO2", default=params['placement']['underneath'])],
+
+                [gui.Text('Opacity', size=(label_w, 1), auto_size_text=False),
+                 gui.Slider(range=(1, 20), orientation='h', size=(34, 30), default_value=params['opacity'])],
+
+                [_line()],
+            ]
+
+        def input_encryption():
+            return [
+                # Encryption
+                [gui.Text('Encryption Settings', font=('Helvetica', 15), justification='left')],
+                [gui.Checkbox('Encrypt', default=params['encrypt']),
+                 gui.Checkbox('Allow Printing', default=params['allow_printing']),
+                 gui.Checkbox('Allow Commenting', default=params['allow_commenting'])],
+                [gui.Text('User Password', size=(label_w, 1), auto_size_text=False),
+                 gui.InputText(params['user_pw'])],
+                [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False),
+                 gui.InputText(params['owner_pw'])],
+
+                [_line()],
+                [gui.Checkbox('Flatten PDF pages', default=params['flat'])],
+            ]
+
         def window():
             """GUI window for inputing Watermark parameters"""
             with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
-                inputs = [
-                    # Source
-                    [gui.Text('Source', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('Source file or folder', size=(label_w, 1), auto_size_text=False),
-                     gui.InputText(params['pdf'], size=(30, 1)),
-                     gui.FileBrowse(button_text='File', file_types=(("PDF Files", "*.pdf"),)),
-                     gui.SimpleButton('Folder')],
-
-                    [_line()],
-
-                    # Files and non-empty-folders
-                    [gui.Text('Project address', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('Address', size=(label_w, 1), auto_size_text=False), gui.InputText(params['address'])],
-                    [gui.Text('Town', size=(label_w, 1), auto_size_text=False), gui.InputText(params['town'])],
-                    [gui.Text('State', size=(label_w, 1), auto_size_text=False), gui.InputText(params['state'])],
-
-                    [_line()],
-
-                    [gui.Text('Watermark Settings', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('Logo Image', size=(label_w, 1), auto_size_text=False),
-                     gui.InputCombo(values=(params['image']), size=(30, 4))],
-
-                    [gui.Text('File Compression', size=(label_w, 1), auto_size_text=False),
-                     gui.Radio('Uncompressed', "RADIO1", default=params['compression']['uncompressed']),
-                     gui.Radio('Compressed', "RADIO1", default=params['compression']['compressed'])],
-
-                    [gui.Text('Watermark Flattening', size=(label_w, 1), auto_size_text=False),
-                     gui.Radio('Flattened', "RADIO3", default=params['flattening']['flattened']),
-                     gui.Radio('Layered', "RADIO3", default=params['flattening']['layered'])],
-                    [gui.Text('Watermark Placement', size=(label_w, 1), auto_size_text=False),
-                     gui.Radio('Overlay', "RADIO2", default=params['placement']['overlay']),
-                     gui.Radio('Underneath', "RADIO2", default=params['placement']['underneath'])],
-
-                    [gui.Text('Opacity', size=(label_w, 1), auto_size_text=False),
-                     gui.Slider(range=(1, 20), orientation='h', size=(34, 30), default_value=params['opacity'])],
-
-                    [_line()],
-
-                    # Encryption
-                    [gui.Text('Encryption Settings', font=('Helvetica', 15), justification='left')],
-                    [gui.Checkbox('Encrypt', default=params['encrypt']),
-                     gui.Checkbox('Allow Printing', default=params['allow_printing']),
-                     gui.Checkbox('Allow Commenting', default=params['allow_commenting'])],
-                    [gui.Text('User Password', size=(label_w, 1), auto_size_text=False),
-                     gui.InputText(params['user_pw'])],
-                    [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False),
-                     gui.InputText(params['owner_pw'])],
-
-                    [_line()],
-                    [gui.Checkbox('Flatten PDF pages', default=params['flat'])],
-                ]
                 layout = []
                 layout.extend(header())
-                layout.extend(inputs)
+                layout.extend(input_source())
+                layout.extend(input_text())
+                layout.extend(input_watermark_settings())
+                layout.extend(input_encryption())
                 layout.extend(footer())
-
-                # (button, (values)) = form.LayoutAndShow(layout)
                 return form.LayoutAndShow(layout)
 
         def settings(params):
