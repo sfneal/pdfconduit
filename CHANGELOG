@@ -1,4 +1,11 @@
-﻿Version 1.2.1, 2018-08-23
+﻿Version 1.2.2, 2018-08-23
+--------------------------
+ - Fixed issue when text from Label class was too big
+ - Added flat method to samples.py
+ - Created function to calculate font size in Label class
+
+
+Version 1.2.1, 2018-08-23
 --------------------------
  - Fixed issue in add.py where upscale call was giving unneeded margin_x param
  - Added assertion to slice.py to validate page_range
