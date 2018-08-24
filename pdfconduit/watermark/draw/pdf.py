@@ -75,6 +75,7 @@ class WatermarkDraw(DrawPDF):
                 self._draw_string(obj)
             elif isinstance(obj, CanvasImg):
                 self._draw_image(obj)
+        self.can.showPage()
         self.can.save()
 
     def _draw_image(self, ci):
