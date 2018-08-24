@@ -95,6 +95,8 @@ class Watermark:
         :return: str
             Watermark PDF file full path
         """
+        if not os.path.isfile(image):
+            image = None
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
