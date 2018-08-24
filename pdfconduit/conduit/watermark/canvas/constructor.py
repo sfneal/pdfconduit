@@ -1,6 +1,4 @@
-import os
 from datetime import datetime
-from ...utils import IMAGE_DIRECTORY
 from .objects import CanvasObjects, CanvasStr, CanvasImg
 from ..draw.image import DrawPIL
 
@@ -24,7 +22,7 @@ class CanvasConstructor:
 
     def canvas(self):
         if self.image is not None:
-            self.obj.add(CanvasImg(os.path.join(IMAGE_DIRECTORY, self.image), opacity=self.opacity, x=0, y=153))
+            self.obj.add(CanvasImg(self.image, opacity=self.opacity, x=0, y=153))
             if self.copyright:
                 self.obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=-10, opacity=self.opacity))
             if self.text2:
@@ -48,7 +46,7 @@ class CanvasConstructor:
         img = DrawPIL(tempdir=self.tempdir)
 
         if self.image is not None:
-            img.draw_img(os.path.join(IMAGE_DIRECTORY, self.image), x=0, y=50, opacity=self.opacity)
+            img.draw_img(self.image, x=0, y=50, opacity=self.opacity)
             if self.copyright:
                 img.draw_text('© copyright ' + str(datetime.now().year), size=16, y='center')
             if self.text2:
