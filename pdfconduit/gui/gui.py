@@ -2,7 +2,22 @@ import os
 import PySimpleGUI as gui
 from platform import system
 from pdfconduit import __version__
-from .lib import available_images
+from pdfconduit.conduit.utils.path import bundle_dir
+
+
+def _image_directory():
+    directory = os.path.join(bundle_dir(), 'lib', 'img')
+    if os.path.exists(directory):
+        return directory
+    else:
+        print(directory, 'can not be found')
+
+
+def available_images():
+    return sorted([i for i in os.listdir(IMAGE_DIRECTORY) if not i.startswith('.')], reverse=True)
+
+
+IMAGE_DIRECTORY = _image_directory()
 
 
 def get_directory():
@@ -35,7 +50,7 @@ def _line(char='_', width=105, size=(75, 1)):
 class GUI:
     @staticmethod
     def encrypt():
-        from pdfconduit.encrypt import Encrypt
+        from .. import Encrypt
 
         title = 'PDF Encryptor'
         label_w = 20
@@ -134,9 +149,9 @@ class GUI:
 
     @staticmethod
     def watermark():
-        from pdfconduit.utils import Receipt
-        from pdfconduit.watermark import Watermark
-        from pdfconduit.flatten import Flatten
+        from ..conduit.utils import Receipt
+        from .. import Watermark
+        from .. import Flatten
 
         label_w = 20
         title = 'PDF Watermarker'
