@@ -38,7 +38,7 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
             im.convert('L')
 
         # Save modified image file
-        dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False)
+        dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False).name
         im.save(dst)
     return dst.name
 
