@@ -4,6 +4,7 @@ import shutil
 import time
 from pdfconduit import Info, rotate
 from tests import pdf, directory
+print(rotate)
 
 
 class TestRotatePdfrw(unittest.TestCase):
