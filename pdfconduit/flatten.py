@@ -134,6 +134,7 @@ class IMGtoPDF:
         self.pdf_pages = self.img2pdf()
 
     def img2pdf(self):
+        # TODO: Figure out weather this method is causing unclosed file warnings and errors
         # PySimpleGUI progress bar
         if self.progress_bar is 'gui':
             pdfs = []
@@ -157,8 +158,8 @@ class IMGtoPDF:
             loop = self.imgs
         pdfs = []
         for i in loop:
-            im = Image.open(i)
-            width, height = im.size
+            with Image.open(i) as im:
+                width, height = im.size
 
             co = CanvasObjects()
             co.add(CanvasImg(i, 1.0, w=width, h=height))
