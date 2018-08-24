@@ -21,7 +21,7 @@ setup(
     version=__version__,
     packages=find_packages(),
     install_requires=[
-        'PyPDF3=>0.0.6',
+        'PyPDF3>=0.0.6',
         'pdfrw',
         'PyMuPDF',
         'Pillow',
