@@ -40,7 +40,7 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
         # Save modified image file
         dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False).name
         im.save(dst)
-    return dst.name
+    return dst
 
 
 class DrawPIL:
