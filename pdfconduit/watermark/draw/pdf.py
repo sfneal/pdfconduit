@@ -9,14 +9,17 @@ from pdfconduit.watermark.canvas import CanvasStr, CanvasImg
 
 
 def text_width(string, font_name, font_size):
+    """Determine with width in pixels of string."""
     return stringWidth(string, fontName=font_name, fontSize=font_size)
 
 
 def center_str(txt, font_name, font_size, offset=0):
+    """Center a string on the x axis of a reportslab canvas"""
     return -(text_width(txt, font_name, font_size) / 2.0) + offset
 
 
 def split_str(string):
+    """Split string in half to return two strings"""
     split = string.split(' ')
     return ' '.join(split[:len(split) // 2]), ' '.join(split[len(split) // 2:])
 
