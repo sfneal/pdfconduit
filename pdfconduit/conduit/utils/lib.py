@@ -16,19 +16,6 @@ def register_font(font='Vera.ttf'):
         print(ttfFile, 'can not be found')
 
 
-def _image_directory():
-    directory = os.path.join(bundle_dir(), 'lib', 'img')
-    if os.path.exists(directory):
-        return directory
-    else:
-        print(directory, 'can not be found')
-
-
-def available_images():
-    return sorted([i for i in os.listdir(IMAGE_DIRECTORY) if not i.startswith('.')], reverse=True)
-
-
 FONT = register_font()
 LETTER = letter[1], letter[0]
-IMAGE_DIRECTORY = _image_directory()
 IMAGE_DEFAULT = resource_path('Wide.png')
