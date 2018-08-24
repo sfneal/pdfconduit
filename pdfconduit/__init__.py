@@ -1,13 +1,13 @@
-from pdfconduit._version import __author__, __version__
-from pdfconduit.utils import *
-from pdfconduit.watermark import Watermark, Label, WatermarkAdd
-from pdfconduit.upscale import upscale
-from pdfconduit.rotate import rotate
-from pdfconduit.encrypt import Encrypt
-from pdfconduit.merge import Merge
-from pdfconduit.slice import slicer
-from pdfconduit.flatten import Flatten
-from pdfconduit.utils.gui import GUI
+from ._version import __author__, __version__
+from .utils import *
+from .watermark import Watermark, Label, WatermarkAdd
+from .upscale import upscale
+from .rotate import rotate
+from .encrypt import Encrypt
+from .merge import Merge
+from .slice import slicer
+from .flatten import Flatten
+from .utils.gui import GUI
 
 
 __all__ = ["upscale", "rotate", "Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd", "slicer",
