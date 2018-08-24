@@ -95,8 +95,16 @@ class Watermark:
         :return: str
             Watermark PDF file full path
         """
-        if not os.path.isfile(image):
+        try:
+            from pdfconduit.gui.gui import IMAGE_DIRECTORY
+            im_path = os.path.join(IMAGE_DIRECTORY, image)
+            if os.path.isfile(im_path):
+                image = im_path
+        except ImportError:
             image = None
+        except FileNotFoundError:
+            image = None
+
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
