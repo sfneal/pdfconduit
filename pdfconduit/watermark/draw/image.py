@@ -59,7 +59,7 @@ class DrawPIL:
     def _centered_y(self, size):
         # Get img size
         page_height = self.img.size[1]
-        y = (page_height - size) / 2
+        y = (page_height / 2) - size
         return y
 
     def _scale(self, img, func='min'):
