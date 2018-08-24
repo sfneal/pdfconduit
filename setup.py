@@ -25,7 +25,6 @@ setup(
         'pdfrw',
         'PyMuPDF',
         'Pillow',
-        'PySimpleGUI>=2.9.0',
         'reportlab',
         'looptools',
         'tqdm',
