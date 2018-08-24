@@ -1,4 +1,4 @@
-from pdfconduit.utils import LETTER
+from ...utils import LETTER
 
 
 class CanvasStr:

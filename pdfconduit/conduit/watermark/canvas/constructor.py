@@ -1,8 +1,8 @@
 import os
 from datetime import datetime
-from pdfconduit.utils import IMAGE_DIRECTORY
-from pdfconduit.watermark.canvas.objects import CanvasObjects, CanvasStr, CanvasImg
-from pdfconduit.watermark.draw.image import DrawPIL
+from ...utils import IMAGE_DIRECTORY
+from .objects import CanvasObjects, CanvasStr, CanvasImg
+from ..draw.image import DrawPIL
 
 
 class CanvasConstructor:

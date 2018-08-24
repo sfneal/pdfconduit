@@ -3,9 +3,9 @@ import io
 from tempfile import NamedTemporaryFile, mkdtemp
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
-from pdfconduit.utils import resource_path, write_pdf, LETTER
-from pdfconduit.watermark.draw.image import img_opacity
-from pdfconduit.watermark.canvas import CanvasStr, CanvasImg
+from ...utils import resource_path, write_pdf, LETTER
+from .image import img_opacity
+from ..canvas import CanvasStr, CanvasImg
 
 
 def text_width(string, font_name, font_size):

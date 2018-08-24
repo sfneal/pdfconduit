@@ -2,7 +2,7 @@ import os
 import PySimpleGUI as gui
 from platform import system
 from pdfconduit import __version__
-from pdfconduit.utils import available_images
+from .lib import available_images
 
 
 def get_directory():

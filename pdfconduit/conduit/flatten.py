@@ -7,11 +7,11 @@ from io import BytesIO
 from PIL import Image
 from tempfile import NamedTemporaryFile, mkdtemp
 from tqdm import tqdm
-from pdfconduit.utils import add_suffix
-from pdfconduit.watermark.canvas.objects import CanvasImg, CanvasObjects
-from pdfconduit.watermark.draw.pdf import WatermarkDraw
-from pdfconduit.merge import Merge
-from pdfconduit.upscale import upscale
+from .utils import add_suffix
+from .watermark.canvas.objects import CanvasImg, CanvasObjects
+from .watermark.draw.pdf import WatermarkDraw
+from .merge import Merge
+from .upscale import upscale
 
 
 def clean_temps(tempdir):

@@ -1,6 +1,6 @@
 # Generate sample PDF documents
 import os
-from pdfconduit.utils import available_images
+from . import available_images
 from pdfconduit import Label, Watermark, Merge, slicer, Info, Flatten, upscale
 from tests import pdf
 

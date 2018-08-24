@@ -3,11 +3,11 @@ import os
 import shutil
 from tempfile import mkdtemp
 from looptools import Timer
-from pdfconduit.utils import add_suffix, open_window, Receipt, IMAGE_DEFAULT
-from pdfconduit.encrypt import Encrypt
-from pdfconduit.watermark.draw import WatermarkDraw
-from pdfconduit.watermark.add import WatermarkAdd
-from pdfconduit.watermark.canvas import CanvasConstructor
+from ..utils import add_suffix, open_window, Receipt, IMAGE_DEFAULT
+from ..encrypt import Encrypt
+from .draw import WatermarkDraw
+from .add import WatermarkAdd
+from .canvas import CanvasConstructor
 
 
 class Watermark:
