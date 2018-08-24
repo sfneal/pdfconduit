@@ -1,2 +1,1 @@
-include pdfconduit/utils/lib/font/*
-include pdfconduit/utils/lib/img/*
+include pdfconduit/conduit/utils/lib/font/*
