@@ -1,4 +1,11 @@
-﻿Version 1.2.4, 2018-08-24
+﻿Version 1.2.5, 2018-08-24
+--------------------------
+ - Improved Watermark.draw() method functionality
+    - Modified constructor.py to handle cases where text2, image or copyright are None
+    - Updated constructor.py handles scenario where image directory is not available
+
+
+Version 1.2.4, 2018-08-24
 --------------------------
  - Fixed issue where watermarker.py would exit with a warning on windows
  - Identified merge.py as a possible cause of UnclosedResource warnings
