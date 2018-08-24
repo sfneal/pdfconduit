@@ -5,14 +5,14 @@ from looptools import functimer
 
 
 @functimer
-def main(move_temps, flatten, rotate):
+def main(move_temps):
     print('Testing Watermark draw and add functionality')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
 
     w = Watermark(pdf, use_receipt=False, move_temps=move_temps)
-    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=flatten, rotate=rotate)
+    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=True, rotate=30)
     added = w.add()
     w.cleanup()
 
@@ -26,4 +26,4 @@ def main(move_temps, flatten, rotate):
 
 
 if __name__ == '__main__':
-    main(directory, True, 30)
+    main(directory)
