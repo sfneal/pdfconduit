@@ -6,6 +6,7 @@ PASSWORD = 'pythonstealth19'
 
 
 def main():
+    print('Creating ~~gui~~ source distribution')
     os.chdir(os.path.dirname(__file__))
     os.system('python setup.py sdist')
     sleep(1)

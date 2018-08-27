@@ -1,2 +1,1 @@
 include pdf/conduit/utils/lib/font/*
-exclude tests/*
