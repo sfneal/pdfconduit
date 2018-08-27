@@ -1,5 +1,5 @@
 # Encrypt a PDF file with password protection
-from .utils import add_suffix
+from .utils.path import add_suffix
 from PyPDF3 import PdfFileReader, PdfFileWriter
 
 

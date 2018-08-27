@@ -7,7 +7,7 @@ from io import BytesIO
 from PIL import Image
 from tempfile import NamedTemporaryFile, mkdtemp
 from tqdm import tqdm
-from .utils import add_suffix
+from .utils.path import add_suffix
 from .watermark.canvas.objects import CanvasImg, CanvasObjects
 from .watermark.draw.pdf import WatermarkDraw
 from .merge import Merge
