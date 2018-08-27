@@ -1,5 +1,4 @@
 MANIFEST.in
-README.md
 setup.py
 pdf/__init__.py
 pdf/conduit/__init__.py

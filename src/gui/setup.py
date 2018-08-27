@@ -6,7 +6,7 @@ GUI wrapper for pdf.
 """
 
 # Retrieve version number
-VERSIONFILE = "pdf/conduit/_version.py"
+VERSIONFILE = "pdf/gui/_version.py"
 verstrline = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
 mo = re.search(VSRE, verstrline, re.M)
