@@ -2,8 +2,8 @@
 import os
 from tempfile import NamedTemporaryFile
 from PyPDF3 import PdfFileReader, PdfFileWriter
-from pdf.conduit import add_suffix
-from pdf.conduit import Info
+from .utils.path import add_suffix
+from .utils.info import Info
 
 
 def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=None):

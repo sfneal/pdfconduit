@@ -8,8 +8,8 @@ from PIL import Image
 from tempfile import NamedTemporaryFile, mkdtemp
 from tqdm import tqdm
 from pdf.conduit import add_suffix
-from pdf.conduit.watermark import CanvasImg, CanvasObjects
-from pdf.conduit.watermark import WatermarkDraw
+from .watermark.canvas import CanvasImg, CanvasObjects
+from .watermark.draw import WatermarkDraw
 from .merge import Merge
 from .upscale import upscale
 

@@ -4,8 +4,8 @@ from tempfile import NamedTemporaryFile
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.pdf import PageObject
 from pdfrw import PdfReader, PdfWriter, PageMerge, IndirectPdfDict
-from pdf.conduit import add_suffix
-from pdf.conduit import Info
+from .utils.path import add_suffix
+from .utils.info import Info
 
 
 class Upscale:
