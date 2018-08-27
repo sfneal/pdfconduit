@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 from pdfconduit import Info, upscale
-from tests.tests import pdf, directory
+from tests import pdf, directory
 
 
 class TestUpscalePdfrw(unittest.TestCase):

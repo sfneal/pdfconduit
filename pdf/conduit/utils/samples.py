@@ -2,7 +2,7 @@
 import os
 from .path import available_images
 from .. import Label, Watermark, Merge, slicer, Info, Flatten, upscale
-from tests.tests import pdf
+from tests.__init__ import pdf
 
 
 class Samples:

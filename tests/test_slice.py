@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 from pdfconduit import Info, slicer
-from tests.tests import directory, pdf
+from tests import pdf, directory
 
 
 class TestSlice(unittest.TestCase):

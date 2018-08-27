@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 from pdfconduit import Watermark, slicer, Info, Label
-from tests.tests import directory, pdf as p
+from tests.__init__ import directory, pdf as p
 
 
 class TestWatermarkMethodsPyPDF3(unittest.TestCase):

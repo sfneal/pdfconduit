@@ -1,6 +1,6 @@
 from pdf.conduit import Watermark
 import os
-from tests.tests import pdf, directory
+from tests.__init__ import pdf, directory
 from looptools import functimer
 
 

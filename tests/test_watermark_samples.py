@@ -1,7 +1,7 @@
 import unittest
 import os
 from pdf.conduit.utils.samples import Samples
-from tests.tests import pdf
+from tests.__init__ import pdf
 
 
 class TestWatermarkSamples(unittest.TestCase):
