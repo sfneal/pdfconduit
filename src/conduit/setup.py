@@ -33,6 +33,7 @@ setup(
         'PyMuPDF',
         'Pillow',
         'reportlab',
+        'PySimpleGUI',
         'looptools',
         'tqdm',
     ],

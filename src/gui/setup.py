@@ -17,13 +17,6 @@ else:
 
 setup(
     install_requires=[
-        'PyPDF3>=0.0.6',
-        'pdfrw',
-        'PyMuPDF',
-        'Pillow',
-        'PySimpleGUI>=2.9.0',
-        'reportlab',
-        'looptools',
         'pdfconduit',
     ],
     name='pdfconduit-gui',
