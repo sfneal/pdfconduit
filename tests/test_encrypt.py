@@ -2,8 +2,8 @@ import unittest
 import os
 import shutil
 import time
-from pdfconduit import Encrypt, Info
-from tests import pdf, directory
+from pdf.conduit import Encrypt, Info
+from tests.tests import pdf, directory
 
 
 class TestEncrypt(unittest.TestCase):

@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 from pdfconduit import Watermark, slicer, Info, Label
-from tests import directory, pdf as p
+from tests.tests import directory, pdf as p
 
 
 class TestWatermarkMethodsPdfrw(unittest.TestCase):

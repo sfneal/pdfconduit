@@ -1,6 +1,6 @@
 # Test encrypt module reliability
-from pdfconduit import Encrypt, Info
-from tests import pdf
+from pdf.conduit import Encrypt, Info
+from tests.tests import pdf
 
 
 def main():

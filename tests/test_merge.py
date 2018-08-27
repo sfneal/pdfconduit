@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 from pdfconduit import Info, Merge
-from tests import directory
+from tests.tests import directory
 
 
 class TestMerge(unittest.TestCase):

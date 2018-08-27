@@ -1,4 +1,4 @@
-from pdfconduit import GUI
+from pdf.conduit import GUI
 
 
 def main():
