@@ -1,8 +1,13 @@
+MANIFEST.in
 setup.py
 pdf/__init__.py
 pdf/gui/__init__.py
 pdf/gui/_version.py
 pdf/gui/gui.py
+pdf/gui/lib/img/Standard (no blocks).png
+pdf/gui/lib/img/Standard.png
+pdf/gui/lib/img/Wide (no blocks).png
+pdf/gui/lib/img/Wide.png
 pdfconduit_gui.egg-info/PKG-INFO
 pdfconduit_gui.egg-info/SOURCES.txt
 pdfconduit_gui.egg-info/dependency_links.txt
