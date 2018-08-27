@@ -1,8 +1,8 @@
 # Generate sample PDF documents
 import os
-from . import available_images
-from pdf import Label, Watermark, Merge, slicer, Info, Flatten, upscale
-from tests import pdf
+from .path import available_images
+from .. import Label, Watermark, Merge, slicer, Info, Flatten, upscale
+from tests.tests import pdf
 
 
 class Samples:
