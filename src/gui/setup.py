@@ -35,7 +35,7 @@ setup(
     license='',
     author='Stephen Neal',
     author_email='stephen@stephenneal.net',
-    description='PDF toolkit for preparing documents for distribution.',
+    description='GUI wrapper for pdfconduit.',
     long_description=long_description,
 )
 
