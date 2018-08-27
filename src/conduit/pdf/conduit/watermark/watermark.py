@@ -96,7 +96,7 @@ class Watermark:
             Watermark PDF file full path
         """
         try:
-            from pdf.gui.gui import IMAGE_DIRECTORY
+            from src.conduit.pdf import IMAGE_DIRECTORY
             im_path = os.path.join(IMAGE_DIRECTORY, image)
             if os.path.isfile(im_path):
                 image = im_path
