@@ -1,9 +1,6 @@
 import os
 from datetime import datetime
-try:
-    import PySimpleGUI as sg
-except ModuleNotFoundError:
-    GUI = False
+import PySimpleGUI as sg
 
 
 class Receipt:
@@ -40,5 +37,5 @@ class Receipt:
             for item in self.items:
                 f.write(item + '\n')
 
-        if self.gui and not not GUI:
+        if self.gui:
             sg.MsgBox('Success!')
