@@ -16,6 +16,7 @@ Features:
 - Retrieve document metadata and information
 """
 
+# Retrieve version number
 VERSIONFILE = "pdf/conduit/_version.py"
 verstrline = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
@@ -40,7 +41,7 @@ setup(
     packages=find_packages(),
     namespace_packages=['pdf'],
     include_package_data=True,
-    url='https://github.com/mrstephenneal/pdf',
+    url='https://github.com/mrstephenneal/pdfconduit',
     license='',
     author='Stephen Neal',
     author_email='stephen@stephenneal.net',
