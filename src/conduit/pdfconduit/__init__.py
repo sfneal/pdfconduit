@@ -4,7 +4,7 @@ __all__.extend(["upscale", "rotate", "Encrypt", "Merge", "Watermark", "Label", "
                 "Flatten"])
 
 try:
-    from ..pdf.gui import GUI
+    from pdf.gui import GUI
     GUI_INSTALLED = True
     __all__.extend("GUI")
 except ImportError:
