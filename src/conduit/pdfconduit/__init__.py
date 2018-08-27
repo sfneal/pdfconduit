@@ -1,5 +1,7 @@
 __all__ = []
 
+from pdf.conduit import *
+
 __all__.extend(["upscale", "rotate", "Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd", "slicer", "Info",
                 "Flatten"])
 
