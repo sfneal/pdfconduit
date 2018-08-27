@@ -4,7 +4,7 @@ import shutil
 from tempfile import mkdtemp
 from looptools import Timer
 from ..utils import add_suffix, open_window, Receipt, IMAGE_DEFAULT
-from pdf.conduit.encrypt import Encrypt
+from ..encrypt import Encrypt
 from .draw import WatermarkDraw
 from .add import WatermarkAdd
 from .canvas import CanvasConstructor
