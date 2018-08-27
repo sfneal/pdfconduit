@@ -3,5 +3,6 @@ pdfrw
 PyMuPDF
 Pillow
 reportlab
+PySimpleGUI
 looptools
 tqdm
