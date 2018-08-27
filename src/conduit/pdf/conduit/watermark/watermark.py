@@ -108,7 +108,7 @@ class Watermark:
         # Add to receipt
         self.receipt.add('Text1', text1)
         self.receipt.add('Text2', text2)
-        self.receipt.add('Image', image)
+        self.receipt.add('Image', os.path.basename(image))
         self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
         self.receipt.add('WM Compression', compress)
         self.receipt.add('WM Flattening', flatten)
