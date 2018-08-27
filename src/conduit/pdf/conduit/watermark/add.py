@@ -4,7 +4,7 @@ from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.pdf import PageObject
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from reportlab.lib.pagesizes import letter
-from src.conduit.pdf.conduit.upscale import upscale
+from ..upscale import upscale
 from ..rotate import rotate
 from ..utils import add_suffix, resource_path, Info
 
