@@ -50,7 +50,7 @@ def _line(char='_', width=105, size=(75, 1)):
 class GUI:
     @staticmethod
     def encrypt():
-        from .. import Encrypt
+        from pdfconduit import Encrypt
 
         title = 'PDF Encryptor'
         label_w = 20
@@ -149,9 +149,9 @@ class GUI:
 
     @staticmethod
     def watermark():
-        from ..conduit.utils import Receipt
-        from .. import Watermark
-        from .. import Flatten
+        from pdf.conduit.utils import Receipt
+        from pdfconduit import Watermark
+        from pdfconduit import Flatten
 
         label_w = 20
         title = 'PDF Watermarker'
