@@ -1,5 +1,5 @@
 # Test encrypt module reliability
-from pdf.conduit import Encrypt, Info
+from pdfconduit import Encrypt, Info
 from tests import pdf
 
 

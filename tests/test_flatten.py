@@ -2,7 +2,7 @@ import unittest
 import os
 import shutil
 import time
-from pdf import Info, Flatten
+from src.conduit.pdf import Info, Flatten
 from tests import directory
 
 
