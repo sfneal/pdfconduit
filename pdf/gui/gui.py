@@ -1,7 +1,7 @@
 import os
 import PySimpleGUI as gui
 from platform import system
-from ._version import __version__
+from pdf.conduit._version import __version__
 from pdf.conduit.utils.path import bundle_dir
 
 
