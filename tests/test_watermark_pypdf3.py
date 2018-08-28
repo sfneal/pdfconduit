@@ -54,6 +54,7 @@ class TestWatermarkMethodsPyPDF3(unittest.TestCase):
 
     def test_watermark_pypdf3(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate,
                                  flatten=False)
             added = self.w.add(pdf, wtrmrk, method='pypdf3', suffix='watermarked_pypdf3')
@@ -65,6 +66,7 @@ class TestWatermarkMethodsPyPDF3(unittest.TestCase):
 
     def test_watermark_underneath_pypdf3(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
             added = self.w.add(pdf, wtrmrk, underneath=True, suffix='watermarked_underneath_pypdf3', method='pypdf3')
             self.files.append(added)
@@ -75,6 +77,7 @@ class TestWatermarkMethodsPyPDF3(unittest.TestCase):
 
     def test_watermark_overlay_pypdf3(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
             added = self.w.add(pdf, wtrmrk, underneath=False, suffix='watermarked_overlay_pypdf3', method='pypdf3')
             self.files.append(added)
@@ -85,6 +88,7 @@ class TestWatermarkMethodsPyPDF3(unittest.TestCase):
 
     def test_watermark_flat_pypdf3(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             flat = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=True)
             added = self.w.add(pdf, flat, suffix='watermarked_flat_pypdf3', method='pypdf3')
             self.files.append(added)
@@ -106,6 +110,7 @@ class TestWatermarkMethodsPyPDF3(unittest.TestCase):
 
     def test_watermark_label(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             label = os.path.basename(pdf)
             l = Label(pdf, label, tempdir=self.w.tempdir).write(cleanup=False)
             self.files.append(l)

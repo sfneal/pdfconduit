@@ -54,6 +54,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     def test_watermark_pdfrw(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate,
                                  flatten=False)
             added = self.w.add(pdf, wtrmrk, method='pdfrw', suffix='watermarked_pdfrw')
@@ -65,6 +66,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     def test_watermark_underneath_pdfrw(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
             added = self.w.add(pdf, wtrmrk, underneath=True, suffix='watermarked_underneath_pdfrw', method='pdfrw')
             self.files.append(added)
@@ -75,6 +77,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     def test_watermark_overlay_pdfrw(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             wtrmrk = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
             added = self.w.add(pdf, wtrmrk, underneath=False, suffix='watermarked_overlay_pdfrw', method='pdfrw')
             self.files.append(added)
@@ -85,6 +88,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     def test_watermark_flat_pdfrw(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             flat = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=True)
             added = self.w.add(pdf, flat, suffix='watermarked_flat_pdfrw', method='pdfrw')
             self.files.append(added)
@@ -95,6 +99,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     def test_watermark_layered_pdfrw(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             layered = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=False)
             added = self.w.add(pdf, layered, suffix='watermarked_layered_pdfrw', method='pdfrw')
             self.files.append(added)
@@ -106,6 +111,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     def test_watermark_label(self):
         for pdf in self.pdfs:
+            self.w.document = pdf
             label = os.path.basename(pdf)
             l = Label(pdf, label, tempdir=self.w.tempdir).write(cleanup=False)
             self.files.append(l)
