@@ -155,6 +155,7 @@ class GUI:
 
         label_w = 20
         title = 'PDF Watermarker'
+        gui.SetOptions(background_color='white')
 
         def header():
             return [[gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
