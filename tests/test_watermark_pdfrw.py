@@ -9,7 +9,7 @@ from tests import pdf, directory
 class TestWatermarkMethodsPdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs2.pdf']
+        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs2.pdf', 'document.pdf']
 
         cls.w = Watermark(pdf, use_receipt=False, open_file=False)
         if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs2_sliced.pdf')):
