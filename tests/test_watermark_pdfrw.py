@@ -98,6 +98,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
             layered = self.w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=False)
             added = self.w.add(pdf, layered, suffix='watermarked_layered_pdfrw', method='pdfrw')
             self.files.append(added)
+            self.files.append(layered)
 
             self.assertTrue(os.path.exists(layered))
             self.assertTrue(os.path.exists(added))
