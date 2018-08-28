@@ -3,7 +3,7 @@ import os
 import shutil
 from tempfile import mkdtemp
 from looptools import Timer
-from pdf.conduit.utils import add_suffix, open_window, Receipt, IMAGE_DEFAULT
+from pdf.conduit.utils import add_suffix, open_window, Receipt, IMAGE_DEFAULT, Info
 from pdf.conduit.encrypt import Encrypt
 from pdf.conduit.watermark.draw import WatermarkDraw
 from pdf.conduit.watermark.add import WatermarkAdd
@@ -117,7 +117,8 @@ class Watermark:
         objects, rotate = co.img() if flatten else co.canvas()  # Run img constructor method if flatten is True
 
         # Draw watermark to file
-        self.watermark = WatermarkDraw(objects, rotate=rotate, compress=compress, tempdir=self.tempdir).write()
+        self.watermark = WatermarkDraw(objects, rotate=rotate, compress=compress, tempdir=self.tempdir,
+                                       pagesize=Info(self.document_og).size).write()
 
         if not add:
             return self.watermark
