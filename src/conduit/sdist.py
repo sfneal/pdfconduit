@@ -5,10 +5,11 @@ from time import sleep
 USERNAME = 'stephenneal'
 PASSWORD = 'pythonstealth19'
 
-SRC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdf', 'conduit'))
-DST_PATH = os.path.join(os.path.dirname(__file__), 'pdf', 'conduit')
-print(SRC_PATH)
-print(DST_PATH)
+SRC_PATH1 = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdf', 'conduit'))
+DST_PATH1 = os.path.join(os.path.dirname(__file__), 'pdf', 'conduit')
+
+SRC_PATH2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdfconduit'))
+DST_PATH2 = os.path.join(os.path.dirname(__file__), 'pdfconduit')
 
 
 def sync_folder(source, destination):
@@ -19,7 +20,8 @@ def sync_folder(source, destination):
 
 def main():
     print('Creating ~~conduit~~ source distribution')
-    sync_folder(SRC_PATH, DST_PATH)
+    sync_folder(SRC_PATH1, DST_PATH1)
+    sync_folder(SRC_PATH2, DST_PATH2)
     os.chdir(os.path.dirname(__file__))
     os.system('python setup.py sdist')
     sleep(1)

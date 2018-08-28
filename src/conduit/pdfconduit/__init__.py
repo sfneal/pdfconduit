@@ -1,12 +1,9 @@
-__all__ = []
+__all__ = ["upscale", "rotate", "Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd", "slicer", "Info", "Flatten"]
 
 from pdf.conduit import *
 
-__all__.extend(["upscale", "rotate", "Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd", "slicer", "Info",
-                "Flatten"])
-
 try:
-    from pdf.gui import GUI
+    from pdf.gui.gui import GUI
     GUI_INSTALLED = True
     __all__.extend("GUI")
 except ImportError:
