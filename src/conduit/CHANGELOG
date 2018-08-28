@@ -1,4 +1,10 @@
-﻿Version 1.3.13, 2018-08-24
+﻿Version 1.3.13.1, 2018-08-24
+--------------------------
+ - FIXED: pagescale parameter placement in WatermarkDraw call in watermark.py draw method
+    - Was causing a syntax error
+
+
+Version 1.3.13, 2018-08-24
 --------------------------
  - FIXED: Issue where Flatten class created incorrectly scaled PDF documents
     - Issue was created by pagescaling in WatermarkDraw __init__ method
