@@ -118,7 +118,7 @@ class Watermark:
 
         # Draw watermark to file
         self.watermark = WatermarkDraw(objects, rotate=rotate, compress=compress, tempdir=self.tempdir,
-                                       pagesize=Info(self.document_og).size).write()
+                                       pagesize=Info(self.document_og, pagescale=True).size).write()
 
         if not add:
             return self.watermark
