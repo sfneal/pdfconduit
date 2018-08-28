@@ -45,44 +45,66 @@ PyPi update (no cache dir to force install of newest version)
 ```bash
 pip install --no-cache-dir --upgrade pdfconduit
 ```
+PyPi install (with GUI)
+
+```bash
+pip install pdfconduit-gui
+```
 
 ### Project Structure
 
 ```bash
-pdfconduit
-├── utils
+pdf
+├── conduit
 │   ├── __init__.py
-│   ├── extract.py
-│   ├── gui.py
-│   ├── info.py
-│   ├── override.py
-│   ├── path.py
-│   ├── samples.py
-│   ├── view.py
-│   └── write.py
-├── watermark
-│   ├── draw
+│   ├── _version.py
+│   ├── encrypt.py
+│   ├── flatten.py
+│   ├── merge.py
+│   ├── rotate.py
+│   ├── slice.py
+│   ├── upscale.py
+│   ├── utils
 │   │   ├── __init__.py
-│   │   ├── canvas.py
-│   │   └── image.py
-│   ├── lib
-│   │   ├── font
-│   │   ├── icon
-│   │   ├── img
-│   │   ├── __init__.py
+│   │   ├── extract.py
+│   │   ├── info.py
+│   │   ├── lib
+│   │   │   └── font
+│   │   │       └── Vera.ttf
+│   │   ├── lib.py
+│   │   ├── path.py
 │   │   ├── receipt.py
-│   │   └── utils.py
-│   ├── __init__.py
-│   ├── add.py
-│   ├── label.py
-│   └── watermark.py
+│   │   ├── samples.py
+│   │   ├── view.py
+│   │   └── write.py
+│   └── watermark
+│       ├── __init__.py
+│       ├── add.py
+│       ├── canvas
+│       │   ├── __init__.py
+│       │   ├── constructor.py
+│       │   └── objects.py
+│       ├── draw
+│       │   ├── __init__.py
+│       │   ├── image.py
+│       │   └── pdf.py
+│       ├── label.py
+│       └── watermark.py
+└── gui
+    ├── __init__.py
+    ├── _version.py
+    ├── gui.py
+    └── lib
+        ├── icon
+        │   ├── lock.ico
+        │   └── stamp.ico
+        └── img
+            ├── Standard\ (no\ blocks).png
+            ├── Standard.png
+            ├── Wide\ (no\ blocks).png
+            └── Wide.png
+pdfconduit
 ├── __init__.py
-├── encrypt.py
-├── encrypt.py
-├── merge.py
-├── rotate.py
-├── slice.py
-└── upscale.py
 ```
 
 
@@ -405,7 +427,7 @@ restrict_permission | `str` | Restrict permissions to print only
 * [Pillow](https://python-pillow.org/) - The friendly PIL fork (Python Imaging Library)
 * [PySimpleGUI](https://github.com/MikeTheWatchGuy/PySimpleGUI) - A simple yet powerful GUI built on top of tkinter.
 * [reportlab](https://bitbucket.org/rptlab/reportlab) - Allows rapid creation of rich PDF documents, and also creation of charts in a variety of bitmap and vector formats.
-* [Looptools](https://github.com/mrstephenneal/looptools) - Logging output, timing processes and counting iterations.
+* [looptools](https://github.com/mrstephenneal/looptools) - Logging output, timing processes and counting iterations.
 * [tqdm](https://github.com/tqdm/tqdm) - A fast, extensible progress bar for Python
 
 ## Contributing
