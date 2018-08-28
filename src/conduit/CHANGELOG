@@ -1,4 +1,11 @@
-﻿Version 1.3.11, 2018-08-24
+﻿Version 1.3.12, 2018-08-24
+--------------------------
+ - FIXED: Issue where Flatten class created incorrectly scaled PDF documents
+    - Issue was created by pagescaling in WatermarkDraw __init__ method
+    - Fixed by added parameter pagescale set to default of False
+
+
+Version 1.3.11, 2018-08-24
 --------------------------
  - FIXED: Issue where watermark was inconsistently place on 11x17 PDF documents
     - Added watermark pagesize scaling to WatermarkDraw method
