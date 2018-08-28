@@ -9,11 +9,11 @@ from tests import pdf, directory
 class TestWatermarkMethodsPdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'con docs2.pdf', 'document.pdf']
+        cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'document.pdf', 'con docs2_sliced.pdf']
 
         cls.w = Watermark(pdf, use_receipt=False, open_file=False)
         if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs2_sliced.pdf')):
-            slicer(os.path.join(directory, 'con docs2.pdf'), first_page=1, last_page=1, suffix='sliced')
+            slicer(os.path.join(directory, 'con docs2.pdf'), first_page=1, last_page=5, suffix='sliced')
 
         # Destination directory
         results = os.path.join(directory, 'results')
