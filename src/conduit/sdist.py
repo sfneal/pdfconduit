@@ -1,12 +1,25 @@
 import os
+import shutil
 from time import sleep
 
 USERNAME = 'stephenneal'
 PASSWORD = 'pythonstealth19'
 
+SRC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdf', 'conduit'))
+DST_PATH = os.path.join(os.path.dirname(__file__), 'pdf', 'conduit')
+print(SRC_PATH)
+print(DST_PATH)
+
+
+def sync_folder(source, destination):
+    if os.path.exists(destination):
+        shutil.rmtree(destination)
+    shutil.copytree(source, destination)
+
 
 def main():
     print('Creating ~~conduit~~ source distribution')
+    sync_folder(SRC_PATH, DST_PATH)
     os.chdir(os.path.dirname(__file__))
     os.system('python setup.py sdist')
     sleep(1)
