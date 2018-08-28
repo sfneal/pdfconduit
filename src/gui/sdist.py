@@ -7,8 +7,6 @@ PASSWORD = 'pythonstealth19'
 
 SRC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdf', 'gui'))
 DST_PATH = os.path.join(os.path.dirname(__file__), 'pdf', 'gui')
-print(SRC_PATH)
-print(DST_PATH)
 
 
 def sync_folder(source, destination):
