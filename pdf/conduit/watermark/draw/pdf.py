@@ -55,6 +55,18 @@ class WatermarkDraw(DrawPDF):
         self.canvas_objects = canvas_objects
         self.rotate = rotate
 
+        # Scale width, height and font size if pagesize is not letter sized
+        if self.can._pagesize != LETTER:
+            w_scale = self.can._pagesize[0] / LETTER[0]
+            h_scale = self.can._pagesize[1] / LETTER[1]
+            for i in self.canvas_objects:
+                if hasattr(i, 'w'):
+                    i.w = i.w * w_scale
+                if hasattr(i, 'h'):
+                    i.h = i.h * h_scale
+                if hasattr(i, 'size'):
+                    i.size = i.size * ((h_scale * w_scale) / 2)
+
         self.draw()
 
     def draw(self):
