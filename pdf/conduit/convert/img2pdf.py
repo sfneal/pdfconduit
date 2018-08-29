@@ -68,3 +68,7 @@ class IMG2PDF:
         if remove_temps:
             clean_temps(self.tempdir)
         return m
+
+
+def img2pdf(imgs, output_name='merged_imgs', destination=None, tempdir=None, progress_bar=None):
+    return IMG2PDF(imgs, destination, tempdir, progress_bar).save(output_name)

@@ -1,5 +1,5 @@
-from pdf.conduit.convert.img2pdf import IMG2PDF
-from pdf.conduit.convert.pdf2img import PDF2IMG
+from pdf.conduit.convert.img2pdf import img2pdf
+from pdf.conduit.convert.pdf2img import pdf2img
 
 
-__all__ = ['IMG2PDF', 'PDF2IMG']
+__all__ = ['img2pdf', 'pdf2img']

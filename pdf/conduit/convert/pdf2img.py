@@ -107,3 +107,7 @@ class PDF2IMG:
                 image.save(output)
         self.doc.close()
         return saved
+
+
+def pdf2img(file_name, tempdir=None, ext='png', progress_bar=None):
+    return PDF2IMG(file_name, tempdir, ext, progress_bar).save()
