@@ -4,9 +4,10 @@ block_cipher = None
 
 
 a = Analysis(['watermarker.py'],
-             pathex=['C:\\Users\\Stephen\\Scripts\\pdfconduit\\exe'],
+             pathex=['C:\\Users\\Stephen\\Scripts\\pdfconduit'],
              binaries=[],
-             datas=[],
+             datas=[('../pdf/conduit/utils/lib/font', 'lib/font'),
+             ('../pdf/gui/lib/img', 'lib/img')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -21,9 +22,10 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          name='watermarker',
+          name='Watermarker',
+          icon='icon/stamp.ico',
           debug=False,
           strip=False,
           upx=True,
           runtime_tmpdir=None,
-          console=True )
+          console=False )
