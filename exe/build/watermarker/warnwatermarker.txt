@@ -1,0 +1,18 @@
+missing module named resource - imported by posix, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named posix - imported by os, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named _posixsubprocess - imported by subprocess, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named org - imported by pickle, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named readline - imported by cmd, code, pdb, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+excluded module named _frozen_importlib - imported by importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named _winreg - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named _scproxy - imported by urllib.request
+missing module named java - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named 'java.lang' - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py, xml.sax._exceptions
+missing module named vms_lib - imported by platform, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named termios - imported by tty, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py, getpass
+missing module named grp - imported by shutil, tarfile, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named pwd - imported by posixpath, shutil, tarfile, http.server, webbrowser, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py, netrc, getpass
+missing module named 'org.python' - imported by copy, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py, xml.sax
+missing module named _dummy_threading - imported by dummy_threading, C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
+missing module named pdfconduit - imported by C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py
