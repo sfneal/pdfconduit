@@ -65,11 +65,11 @@ class GUI:
             return [[gui.Text(message)], [gui.Submit(), gui.Cancel()]]
 
         def folder(params):
-            with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+            with gui.FlexForm(title, default_element_size=(40, 1)) as form:
                 inputs = [
                     # Source
                     [gui.Text('Source', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('Source folder', size=(label_w, 1), auto_size_text=False),
+                    [gui.Text('Source folder', size=(label_w, 1)),
                      gui.InputText(params['pdf'], size=(30, 1)),
                      gui.FolderBrowse(button_text='Folder')],
 
@@ -86,11 +86,11 @@ class GUI:
             return params
 
         def settings(p):
-            with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+            with gui.FlexForm(title, default_element_size=(40, 1)) as form:
                 inputs = [
                     # Source
                     [gui.Text('Source', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('Source PDF file', size=(label_w, 1), auto_size_text=False), gui.InputText(p['pdf']),
+                    [gui.Text('Source PDF file', size=(label_w, 1)), gui.InputText(p['pdf']),
                      gui.FileBrowse(button_text='File', file_types=(("PDF Files", "*.pdf"),)),
                      gui.SimpleButton('Folder')],
 
@@ -98,8 +98,8 @@ class GUI:
 
                     # Encryption
                     [gui.Text('Encryption Settings', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('User Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
-                    [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False), gui.InputText()],
+                    [gui.Text('User Password', size=(label_w, 1)), gui.InputText()],
+                    [gui.Text('Owner Password', size=(label_w, 1)), gui.InputText()],
                     [gui.Checkbox('128 bit encryption', default=True)],
                     [gui.Checkbox('Allow Printing', default=True), gui.Checkbox('Allow Commenting', default=False)],
                 ]
@@ -155,6 +155,8 @@ class GUI:
 
         label_w = 20
         title = 'PDF Watermarker'
+        if system() is not 'Windows':
+            gui.SetOptions(background_color='white')
 
         def header():
             return [[gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
@@ -166,11 +168,11 @@ class GUI:
             return [[gui.Text(message)], [gui.Submit(), gui.Cancel()]]
 
         def folder(params):
-            with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+            with gui.FlexForm(title, default_element_size=(40, 1)) as form:
                 inputs = [
                     # Source
                     [gui.Text('Source', font=('Helvetica', 15), justification='left')],
-                    [gui.Text('Source folder', size=(label_w, 1), auto_size_text=False),
+                    [gui.Text('Source folder', size=(label_w, 1)),
                      gui.InputText(params['pdf'], size=(30, 1)),
                      gui.FolderBrowse(button_text='Folder')],
 
@@ -190,7 +192,7 @@ class GUI:
             return [
                 # Source
                 [gui.Text('Source', font=('Helvetica', 15), justification='left')],
-                [gui.Text('Source file or folder', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('Source file or folder', size=(label_w, 1)),
                  gui.InputText(params['pdf'], size=(30, 1), key='pdf'),
                  gui.FileBrowse(button_text='File', file_types=(("PDF Files", "*.pdf"),)),
                  gui.SimpleButton('Folder')],
@@ -201,9 +203,9 @@ class GUI:
             return [
                 # Watermark Text
                 [gui.Text('Project address', font=('Helvetica', 15), justification='left')],
-                [gui.Text('Address', size=(label_w, 1), auto_size_text=False), gui.InputText(params['address'], key='address')],
-                [gui.Text('Town', size=(label_w, 1), auto_size_text=False), gui.InputText(params['town'], key='town')],
-                [gui.Text('State', size=(label_w, 1), auto_size_text=False), gui.InputText(params['state'], key='state')],
+                [gui.Text('Address', size=(label_w, 1)), gui.InputText(params['address'], key='address')],
+                [gui.Text('Town', size=(label_w, 1)), gui.InputText(params['town'], key='town')],
+                [gui.Text('State', size=(label_w, 1)), gui.InputText(params['state'], key='state')],
 
                 [_line()],
             ]
@@ -212,21 +214,21 @@ class GUI:
             return [
                 # Watermark Settings
                 [gui.Text('Watermark Settings', font=('Helvetica', 15), justification='left')],
-                [gui.Text('Logo Image', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('Logo Image', size=(label_w, 1)),
                  gui.InputCombo(values=(params['image']), size=(30, 4), key='image')],
 
-                [gui.Text('File Compression', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('File Compression', size=(label_w, 1)),
                  gui.Radio('Uncompressed', "RADIO1", default=params['compression']['uncompressed'], key='uncompressed'),
                  gui.Radio('Compressed', "RADIO1", default=params['compression']['compressed'], key='compressed')],
 
-                [gui.Text('Watermark Flattening', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('Watermark Flattening', size=(label_w, 1)),
                  gui.Radio('Flattened', "RADIO3", default=params['flattening']['flattened'], key='flattened'),
                  gui.Radio('Layered', "RADIO3", default=params['flattening']['layered'], key='layered')],
-                [gui.Text('Watermark Placement', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('Watermark Placement', size=(label_w, 1)),
                  gui.Radio('Overlay', "RADIO2", default=params['placement']['overlay'], key='overlay'),
                  gui.Radio('Underneath', "RADIO2", default=params['placement']['underneath'], key='underneath')],
 
-                [gui.Text('Opacity', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('Opacity', size=(label_w, 1)),
                  gui.Slider(range=(1, 20), orientation='h', size=(34, 30), default_value=params['opacity'], key='opacity')],
 
                 [_line()],
@@ -239,9 +241,9 @@ class GUI:
                 [gui.Checkbox('Encrypt', default=params['encrypt'], key='encrypt'),
                  gui.Checkbox('Allow Printing', default=params['allow_printing'], key='allow_printing'),
                  gui.Checkbox('Allow Commenting', default=params['allow_commenting'], key='allow_commenting')],
-                [gui.Text('User Password', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('User Password', size=(label_w, 1)),
                  gui.InputText(params['user_pw'], key='user_pw')],
-                [gui.Text('Owner Password', size=(label_w, 1), auto_size_text=False),
+                [gui.Text('Owner Password', size=(label_w, 1)),
                  gui.InputText(params['owner_pw'], key='owner_pw')],
 
                 [_line()],
@@ -252,7 +254,7 @@ class GUI:
             """GUI window for inputing Watermark parameters"""
             platform = system()
             if system() is 'Windows':
-                with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+                with gui.FlexForm(title, default_element_size=(40, 1)) as form:
                     with gui.FlexForm(title) as form2:
                         layout_tab_1 = []
                         layout_tab_1.extend(header())
@@ -274,7 +276,7 @@ class GUI:
                             values.extend(result)
                         return button, values, platform
             else:
-                with gui.FlexForm(title, auto_size_text=True, default_element_size=(40, 1)) as form:
+                with gui.FlexForm(title, default_element_size=(40, 1)) as form:
                     layout = []
                     layout.extend(header())
                     layout.extend(input_source())
