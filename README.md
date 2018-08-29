@@ -14,6 +14,7 @@ A Pure-Python library built as a PDF toolkit.
 * **Merge**: Concatenate multiple documents into one file
 * **Slice**: Extract page ranges from documents
 * **Flatten**: Flatten PDF pages and remove layers
+* **Convert**: Convert an image file to a PDF or convert a PDF to an image
 * Extract Text and Images
 * Retrieve document metadata and information
 
