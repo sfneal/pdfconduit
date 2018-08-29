@@ -9,6 +9,9 @@ pdf/conduit/merge.py
 pdf/conduit/rotate.py
 pdf/conduit/slice.py
 pdf/conduit/upscale.py
+pdf/conduit/convert/__init__.py
+pdf/conduit/convert/img2pdf.py
+pdf/conduit/convert/pdf2img.py
 pdf/conduit/utils/__init__.py
 pdf/conduit/utils/extract.py
 pdf/conduit/utils/info.py
