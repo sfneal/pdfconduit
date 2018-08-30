@@ -22,12 +22,16 @@ class CanvasConstructor:
 
     def canvas(self):
         if self.image is not None:
-            self.obj.add(CanvasImg(self.image, opacity=self.opacity, x=0, y=153))
-            if self.copyright:
-                self.obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=-10, opacity=self.opacity))
-            if self.text2:
-                self.obj.add(CanvasStr(self.text1, opacity=self.opacity, size=40, y=-110))
-                self.obj.add(CanvasStr(self.text2, opacity=self.opacity, size=40, y=-160))
+            self.obj.add(CanvasImg(self.image, opacity=self.opacity, x=0, y=253))
+
+            if self.text2 and self.copyright:
+                self.obj.add(CanvasStr('© copyright ' + str(datetime.now().year), size=16, y=-170,
+                                       opacity=self.opacity))
+                self.obj.add(CanvasStr(self.text1, opacity=self.opacity, size=40, y=-360))
+                self.obj.add(CanvasStr(self.text2, opacity=self.opacity, size=40, y=-560))
+            elif self.text2 and not self.copyright:
+                self.obj.add(CanvasStr(self.text1, opacity=self.opacity, size=40, y=90))
+                self.obj.add(CanvasStr(self.text2, opacity=self.opacity, size=40, y=0))
             else:
                 self.obj.add(CanvasStr(self.text1, opacity=self.opacity, size=40, y=-125))
         else:

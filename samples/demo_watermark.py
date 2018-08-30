@@ -12,7 +12,7 @@ def main(move_temps):
     state = 'MA'
 
     w = Watermark(pdf, use_receipt=False, move_temps=move_temps)
-    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=True, rotate=30)
+    wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=False, rotate=30)
     added = w.add()
     w.cleanup()
 
