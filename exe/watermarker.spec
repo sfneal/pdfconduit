@@ -6,8 +6,11 @@ block_cipher = None
 a = Analysis(['watermarker.py'],
              pathex=['C:\\Users\\Stephen\\Scripts\\pdfconduit'],
              binaries=[],
-             datas=[('../pdf/conduit/utils/lib/font', 'lib/font'),
-             ('../pdf/gui/lib/img', 'lib/img')],
+             datas=[
+                 ('../pdf/conduit/utils/lib/font', 'lib/font'),
+                 ('../pdf/gui/lib/img', 'lib/img'),
+                 ('../pdf/gui/config', 'pdf/gui/config')
+             ],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
