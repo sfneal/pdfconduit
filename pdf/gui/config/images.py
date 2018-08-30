@@ -26,7 +26,7 @@ def remove(image):
         os.remove(path)
 
 
-def view(gui=False):
+def view():
     """
     Return a list of available images and
     launch GUI window to view images if GUI is true.
