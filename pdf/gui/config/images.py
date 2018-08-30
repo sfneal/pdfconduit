@@ -2,7 +2,7 @@
 import os
 import shutil
 from pathlib import Path
-from pdf.conduit.utils.view import open_window
+from pdf.utils.view import open_window
 from platform import system
 from pdf.gui.view_pngs import view_pngs
 

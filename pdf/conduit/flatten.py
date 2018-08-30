@@ -1,7 +1,7 @@
 # Create flat PDF by converting each input PDF page to a PNG
 import os
 from tempfile import mkdtemp
-from pdf.conduit.utils.path import add_suffix
+from pdf.utils.path import add_suffix
 from pdf.conduit.upscale import upscale
 from pdf.conduit.convert.img2pdf import IMG2PDF
 from pdf.conduit.convert.pdf2img import PDF2IMG

@@ -3,7 +3,7 @@ import os
 from tempfile import NamedTemporaryFile
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from pdfrw import PdfReader, PdfWriter
-from .utils.path import add_suffix
+from pdf.utils.path import add_suffix
 
 
 class Rotate:

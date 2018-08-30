@@ -6,7 +6,7 @@ from io import BytesIO
 from PIL import Image
 from tempfile import NamedTemporaryFile
 from tqdm import tqdm
-from pdf.conduit.utils.path import add_suffix
+from pdf.utils.path import add_suffix
 
 
 class PDF2IMG:

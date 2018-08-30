@@ -3,7 +3,7 @@ import PySimpleGUI as gui
 import json
 from platform import system
 from pdf.conduit._version import __version__
-from pdf.conduit.utils.path import bundle_dir
+from pdf.utils.path import bundle_dir
 
 
 def _read_config():
@@ -164,7 +164,7 @@ class GUI:
 
     @staticmethod
     def watermark():
-        from pdf.conduit.utils import Receipt
+        from pdf.utils import Receipt
         from pdfconduit import Watermark
         from pdfconduit import Flatten
 
