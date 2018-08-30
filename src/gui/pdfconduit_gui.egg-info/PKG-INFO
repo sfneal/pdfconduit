@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: pdfconduit-gui
-Version: 0.2.3
+Version: 0.3.0
 Summary: GUI wrapper for pdfconduit.
 Home-page: https://github.com/mrstephenneal/pdfconduit
 Author: Stephen Neal

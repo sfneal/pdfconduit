@@ -6,8 +6,8 @@ from .flatten import Flatten
 from .upscale import upscale
 from .rotate import rotate
 from .watermark import WatermarkAdd, Watermark, Label
-from .convert import PDF2IMG, IMG2PDF
+from .convert import pdf2img, img2pdf
 
 
 __all__ = ["upscale", "rotate", "Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd", "slicer", "Info", "Flatten",
-           "PDF2IMG", "IMG2PDF"]
+           "pdf2img", "img2pdf"]
