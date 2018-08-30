@@ -6,7 +6,7 @@ from pdfrw import PdfReader, PdfWriter, PageMerge
 from reportlab.lib.pagesizes import letter
 from ..upscale import upscale
 from ..rotate import rotate
-from ..utils import add_suffix, resource_path, Info
+from pdf.utils import add_suffix, resource_path, Info
 
 
 class WatermarkAdd:

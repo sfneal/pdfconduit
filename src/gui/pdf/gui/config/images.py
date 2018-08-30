@@ -2,6 +2,9 @@
 import os
 import shutil
 from pathlib import Path
+from pdf.utils.view import open_window
+from platform import system
+from pdf.gui.view_pngs import view_pngs
 
 GUI_ROOT = os.path.dirname(os.path.dirname(__file__))
 IMG_DIR = os.path.join(GUI_ROOT, 'lib', 'img')
@@ -26,10 +29,12 @@ def remove(image):
         os.remove(path)
 
 
-def view(gui=False):
+def view(folder=IMG_DIR):
     """
     Return a list of available images and
     launch GUI window to view images if GUI is true.
     """
-    # TODO: write function
-    pass
+    if system() is 'Windows':
+        view_pngs(folder)
+    else:
+        open_window(IMG_DIR)

@@ -1,7 +1,7 @@
 from .canvas import CanvasObjects, CanvasStr
 from .watermark import Watermark
 from .draw import WatermarkDraw
-from ..utils import Info, add_suffix
+from pdf.utils import Info, add_suffix
 
 
 def mean(numbers):

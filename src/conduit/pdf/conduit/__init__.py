@@ -1,4 +1,4 @@
-from .utils import *
+from pdf.utils import *
 from .encrypt import Encrypt
 from .merge import Merge
 from .slice import slicer
