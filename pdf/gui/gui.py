@@ -1,8 +1,16 @@
 import os
 import PySimpleGUI as gui
+import json
 from platform import system
 from pdf.conduit._version import __version__
 from pdf.conduit.utils.path import bundle_dir
+
+
+def _read_config():
+    config_path = os.path.join(os.path.dirname(__file__), 'config', 'config.json')
+    with open(config_path, 'r') as cp:
+        config = json.load(cp)
+    return config
 
 
 def _image_directory():
@@ -13,11 +21,18 @@ def _image_directory():
         print(directory, 'can not be found')
 
 
-def available_images():
-    return sorted([i for i in os.listdir(IMAGE_DIRECTORY) if not i.startswith('.')], reverse=True)
+HEADER = _read_config()["global_header"]
 
 
 IMAGE_DIRECTORY = _image_directory()
+
+
+def available_images():
+    imgs = [i for i in os.listdir(IMAGE_DIRECTORY) if not i.startswith('.')]
+    if len(imgs) > 0:
+        return sorted(imgs, reverse=True)
+    else:
+        return ['Add images...']
 
 
 def get_directory():
@@ -158,11 +173,13 @@ class GUI:
         if system() is not 'Windows':
             gui.SetOptions(background_color='white')
 
-        def header():
-            return [[gui.Text('HPA Design', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
-                    [gui.Text('PDF Watermark utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+        def header(global_head=HEADER):
+            head = [[gui.Text('Watermark utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
                     [gui.Text('version: ' + __version__, size=(30, 1), font=("Helvetica", 16), text_color='blue')],
                     [_line()]]
+            if global_head:
+                head.insert(0, [gui.Text(global_head, size=(30, 1), font=("Helvetica", 25), text_color='blue')])
+            return head
 
         def footer(message='Click Submit to watermark PDF'):
             return [[gui.Text(message)], [gui.Submit(), gui.Cancel()]]
@@ -215,7 +232,8 @@ class GUI:
                 # Watermark Settings
                 [gui.Text('Watermark Settings', font=('Helvetica', 15), justification='left')],
                 [gui.Text('Logo Image', size=(label_w, 1)),
-                 gui.InputCombo(values=(params['image']), size=(30, 4), key='image')],
+                 gui.InputCombo(values=(available_images()), size=(20, 4), key='image'),
+                 gui.SimpleButton('Add'), gui.SimpleButton('View')],
 
                 [gui.Text('File Compression', size=(label_w, 1)),
                  gui.Radio('Uncompressed', "RADIO1", default=params['compression']['uncompressed'], key='uncompressed'),
@@ -287,6 +305,30 @@ class GUI:
                     button, values = form.LayoutAndShow(layout)
                     return button, values, platform
 
+        def add_image(params):
+            from pdf.gui.config.images import add
+            with gui.FlexForm(title, default_element_size=(40, 1)) as form:
+                inputs = [
+                    # Source
+                    [gui.Text('Select an image to add to your PDF Conduit image library', font=('Helvetica', 15),
+                              justification='left')],
+                    [gui.Text('Source image', size=(label_w, 1)),
+                     gui.InputText(params['pdf'], size=(30, 1)),
+                     gui.FileBrowse(button_text='File', file_types=(("PNG Files", "*.png"),))],
+                    [gui.Text('Image name', size=(label_w, 1)), gui.InputText(size=(30, 1))],
+
+                    [_line()],
+                ]
+                layout = []
+                layout.extend(header())
+                layout.extend(inputs)
+                layout.extend(footer('Click submit to add your watermark image'))
+
+                (button, (values)) = form.LayoutAndShow(layout)
+            name = values[1] if len(values[1]) > 0 else None
+            add(values[0], name)
+            return params
+
         def settings(params):
             # Fix opacity if it is adjusted$
             if params['opacity'] < 1:
@@ -298,7 +340,6 @@ class GUI:
             params['address'] = values['address'] if platform == 'Darwin' else values[1]
             params['town'] = values['town'] if platform == 'Darwin' else values[2]
             params['state'] = values['state'] if platform == 'Darwin' else values[3]
-
             params['image'] = values['image'] if platform == 'Darwin' else values[10]
             params['compression']['uncompressed'] = values['uncompressed'] if platform == 'Darwin' else values[11]
             params['compression']['compressed'] = values['compressed'] if platform == 'Darwin' else values[12]
@@ -321,6 +362,9 @@ class GUI:
             if button == 'Folder':
                 params = folder(params)
                 params = settings(params)
+            elif button == 'Add':
+                params = add_image(params)
+                params = settings(params)
 
             return params
 
@@ -329,7 +373,7 @@ class GUI:
             'address': '',
             'town': '',
             'state': '',
-            'image': available_images(),
+            'image': None,
             'compression': {
                 'uncompressed': True,
                 'compressed': False
