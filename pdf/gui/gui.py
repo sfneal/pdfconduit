@@ -329,6 +329,11 @@ class GUI:
             add(values[0], name)
             return params
 
+        def view_images(params):
+            from pdf.gui.config.images import view
+            view()
+            return params
+
         def settings(params):
             # Fix opacity if it is adjusted$
             if params['opacity'] < 1:
@@ -364,6 +369,9 @@ class GUI:
                 params = settings(params)
             elif button == 'Add':
                 params = add_image(params)
+                params = settings(params)
+            elif button == 'View':
+                params = view_images(params)
                 params = settings(params)
 
             return params
