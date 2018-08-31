@@ -28,7 +28,7 @@ class TestFlatten(unittest.TestCase):
 
     def tearDown(self):
         t = time.time() - self.startTime
-        print("{0:15} --> {1}".format(' '.join(self.id().split('.')[-1].split('_')[1:]), t))
+        print("{0:15} --> {1}".format(' '.join(self.id().split('.')), t))
 
         # Move each file into results folder
         for i in self.files:
