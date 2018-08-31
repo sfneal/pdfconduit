@@ -38,6 +38,7 @@ class TestFlatten(unittest.TestCase):
     def tearDown(self):
         t = round(time.time() - self.startTime, 2)
         print("{0:15} --> {1}".format(' '.join(self.id().split('.')), t))
+        print(self.defaultTestResult().errors)
 
         # Log dump
         rows, file_path = dump_log(test_case=self.id().split('.'), time=t)

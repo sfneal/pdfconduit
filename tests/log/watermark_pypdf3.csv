@@ -1,6 +1,6 @@
-2018-08-31 11:59:34,TestWatermarkMethodsPyPDF3,test_watermark_flat_pypdf3,con docs2.pdf,61.84078097343445,3.6.4,Darwin,8,16
-2018-08-31 11:59:34,TestWatermarkMethodsPyPDF3,test_watermark_label,con docs2.pdf,0.6316061019897461,3.6.4,Darwin,8,16
-2018-08-31 12:00:44,TestWatermarkMethodsPyPDF3,test_watermark_layered_pypdf3,con docs2.pdf,69.27332282066345,3.6.4,Darwin,8,16
-2018-08-31 12:02:08,TestWatermarkMethodsPyPDF3,test_watermark_overlay_pypdf3,con docs2.pdf,84.11144208908081,3.6.4,Darwin,8,16
-2018-08-31 12:04:19,TestWatermarkMethodsPyPDF3,test_watermark_pypdf3,con docs2.pdf,130.96574687957764,3.6.4,Darwin,8,16
-2018-08-31 12:05:34,TestWatermarkMethodsPyPDF3,test_watermark_underneath_pypdf3,con docs2.pdf,74.71018695831299,3.6.4,Darwin,8,16
+2018-08-31 12:25:46,TestWatermarkMethodsPyPDF3,test_watermark_flat_pypdf3,con docs2.pdf,167.41,3.6.4,Darwin,8,16
+2018-08-31 12:25:48,TestWatermarkMethodsPyPDF3,test_watermark_label,con docs2.pdf,2.02,3.6.4,Darwin,8,16
+2018-08-31 12:28:08,TestWatermarkMethodsPyPDF3,test_watermark_layered_pypdf3,con docs2.pdf,139.85,3.6.4,Darwin,8,16
+2018-08-31 12:32:17,TestWatermarkMethodsPyPDF3,test_watermark_overlay_pypdf3,con docs2.pdf,249.15,3.6.4,Darwin,8,16
+2018-08-31 12:35:56,TestWatermarkMethodsPyPDF3,test_watermark_pypdf3,con docs2.pdf,219.79,3.6.4,Darwin,8,16
+2018-08-31 12:40:18,TestWatermarkMethodsPyPDF3,test_watermark_underneath_pypdf3,con docs2.pdf,261.57,3.6.4,Darwin,8,16

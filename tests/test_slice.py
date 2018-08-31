@@ -38,6 +38,8 @@ class TestSlice(unittest.TestCase):
         t = time.time() - self.startTime
         print("%s: %.3f" % (' '.join(self.id().split('.')[-1].split('_')[1:]), t))
 
+        print(self.defaultTestResult())
+
         # Log dump
         rows, file_path = dump_log(test_case=self.id().split('.'), time=t)
         self.log.append(rows)
@@ -74,4 +76,4 @@ class TestSlice(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    m = unittest.main()

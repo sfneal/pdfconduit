@@ -1,4 +1,16 @@
-2018-08-31 11:57:44,TestEncrypt,test_encrypt_128bit,con docs2.pdf,20.583516836166382,3.6.4,Darwin,8,16
-2018-08-31 11:58:00,TestEncrypt,test_encrypt_40bit,con docs2.pdf,15.813944816589355,3.6.4,Darwin,8,16
-2018-08-31 11:58:15,TestEncrypt,test_encrypt_commenting,con docs2.pdf,14.965895891189575,3.6.4,Darwin,8,16
-2018-08-31 11:58:30,TestEncrypt,test_encrypt_printing,con docs2.pdf,15.518312931060791,3.6.4,Darwin,8,16
+2018-08-31 12:29:04,TestEncrypt,test_encrypt_128bit,article.pdf,0.99,3.6.4,Darwin,8,16
+2018-08-31 12:29:05,TestEncrypt,test_encrypt_40bit,article.pdf,0.85,3.6.4,Darwin,8,16
+2018-08-31 12:29:06,TestEncrypt,test_encrypt_commenting,article.pdf,1.04,3.6.4,Darwin,8,16
+2018-08-31 12:29:07,TestEncrypt,test_encrypt_printing,article.pdf,1.11,3.6.4,Darwin,8,16
+2018-08-31 12:28:42,TestEncrypt,test_encrypt_128bit,plan_l.pdf,13.34,3.6.4,Darwin,8,16
+2018-08-31 12:28:57,TestEncrypt,test_encrypt_40bit,plan_l.pdf,14.9,3.6.4,Darwin,8,16
+2018-08-31 12:29:08,TestEncrypt,test_encrypt_commenting,plan_l.pdf,10.77,3.6.4,Darwin,8,16
+2018-08-31 12:29:20,TestEncrypt,test_encrypt_printing,plan_l.pdf,12.59,3.6.4,Darwin,8,16
+2018-08-31 12:32:05,TestEncrypt,test_encrypt_128bit,article.pdf,0.92,3.6.4,Darwin,8,16
+2018-08-31 12:32:06,TestEncrypt,test_encrypt_40bit,article.pdf,0.77,3.6.4,Darwin,8,16
+2018-08-31 12:32:07,TestEncrypt,test_encrypt_commenting,article.pdf,0.81,3.6.4,Darwin,8,16
+2018-08-31 12:32:07,TestEncrypt,test_encrypt_printing,article.pdf,0.71,3.6.4,Darwin,8,16
+2018-08-31 12:33:10,TestEncrypt,test_encrypt_128bit,article.pdf,0.65,3.6.4,Darwin,8,16
+2018-08-31 12:33:10,TestEncrypt,test_encrypt_40bit,article.pdf,0.53,3.6.4,Darwin,8,16
+2018-08-31 12:33:11,TestEncrypt,test_encrypt_commenting,article.pdf,0.59,3.6.4,Darwin,8,16
+2018-08-31 12:33:12,TestEncrypt,test_encrypt_printing,article.pdf,0.65,3.6.4,Darwin,8,16
