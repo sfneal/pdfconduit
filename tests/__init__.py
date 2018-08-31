@@ -15,7 +15,7 @@ file_name = 'con docs2.pdf'
 pdf = os.path.join(directory, file_name)
 
 
-def write_log(log, file_path):
+def write_log(file_path, log):
     if os.path.isfile(file_path):
         CSV.append(log, file_path)
     else:
@@ -29,7 +29,7 @@ def dump_log(test_case=None, time=None):
     file_name = test_case[0] + '.csv'
     file_path = os.path.join(os.path.dirname(__file__), 'log', file_name)
 
-    rows = [date_time, test_case[-2], test_case[-1], pdf, str(time), platform.python_version(), platform.system(),
+    rows = [date_time, test_case[-2], test_case[-1], file_name, str(time), platform.python_version(), platform.system(),
             mp.cpu_count(), MEM.total >> 30]
     return rows, file_path
 

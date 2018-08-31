@@ -3,31 +3,32 @@ import os
 import shutil
 import time
 from pdfconduit import Info, slicer
-from tests import pdf, directory
+from tests import *
 
 
 class TestSlice(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.files = []
-
-    @classmethod
-    def tearDownClass(cls):
         # Destination directory
         results = os.path.join(directory, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
-        dst = os.path.join(results, 'slice')
+        cls.dst = os.path.join(results, 'slice')
 
         # Create destination if it does not exist
-        if not os.path.isdir(dst):
-            os.mkdir(dst)
+        if not os.path.isdir(cls.dst):
+            os.mkdir(cls.dst)
 
-        # Move each file into results folder
-        for i in cls.files:
-            source = i
-            target = os.path.join(dst, str(os.path.basename(i)))
-            shutil.move(source, target)
+        cls.files = []
+
+        # Log destination
+        cls.file_path = 'slice.csv'
+        cls.csv = os.path.join(os.path.dirname(__file__), 'log', cls.file_path)
+        cls.log = []
+
+    @classmethod
+    def tearDownClass(cls):
+        write_log(cls.csv, cls.log)
 
     def setUp(self):
         self.pdf = os.path.join(directory, pdf)
@@ -36,6 +37,18 @@ class TestSlice(unittest.TestCase):
     def tearDown(self):
         t = time.time() - self.startTime
         print("%s: %.3f" % (' '.join(self.id().split('.')[-1].split('_')[1:]), t))
+
+        # Log dump
+        rows, file_path = dump_log(test_case=self.id().split('.'), time=t)
+        self.log.append(rows)
+        self.file_path = file_path
+
+        # Move each file into results folder
+        for i in self.files:
+            source = i
+            if os.path.isfile(source):
+                target = os.path.join(self.dst, str(os.path.basename(i)))
+                shutil.move(source, target)
 
     def test_slice(self):
         fp = 1

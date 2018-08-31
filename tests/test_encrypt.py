@@ -3,40 +3,41 @@ import os
 import shutil
 import time
 from pdfconduit import Encrypt, Info
-from tests import pdf, directory
+from tests import *
 
 
 class TestEncrypt(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.files = []
-
-    @classmethod
-    def tearDownClass(cls):
         # Destination directory
         results = os.path.join(directory, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
-        dst = os.path.join(results, 'encrypt')
+        cls.dst = os.path.join(results, 'encrypt')
 
         # Create destination if it does not exist
-        if not os.path.isdir(dst):
-            os.mkdir(dst)
+        if not os.path.isdir(cls.dst):
+            os.mkdir(cls.dst)
 
-        # Move each file into results folder
-        for i in cls.files:
-            source = os.path.join(directory, str(os.path.basename(i)))
-            target = os.path.join(dst, str(os.path.basename(i)))
-            shutil.move(source, target)
+        # Log destination
+        cls.file_path = 'encrypt.csv'
+        cls.csv = os.path.join(os.path.dirname(__file__), 'log', cls.file_path)
+        cls.log = []
 
+        cls.files = []
+
+    @classmethod
+    def tearDownClass(cls):
         # Move /P value files into results/P
-        if not os.path.isdir(os.path.join(dst, 'P')):
-            os.mkdir(os.path.join(dst, 'P'))
-        for f in os.listdir(dst):
+        if not os.path.isdir(os.path.join(cls.dst, 'P')):
+            os.mkdir(os.path.join(cls.dst, 'P'))
+        for f in os.listdir(cls.dst):
             if f.startswith('-'):
-                source = os.path.join(dst, f)
-                target = os.path.join(dst, 'P', f)
+                source = os.path.join(cls.dst, f)
+                target = os.path.join(cls.dst, 'P', f)
                 shutil.move(source, target)
+
+        write_log(cls.csv, cls.log)
 
     def setUp(self):
         self.owner_pw = 'foo'
@@ -46,6 +47,17 @@ class TestEncrypt(unittest.TestCase):
     def tearDown(self):
         t = time.time() - self.startTime
         print("{0:15} --> {1}".format(' '.join(self.id().split('.')[-1].split('_')[2:]), t))
+
+        # Log dump
+        rows, file_path = dump_log(test_case=self.id().split('.'), time=t)
+        self.log.append(rows)
+        self.file_path = file_path
+
+        # Move each file into results folder
+        for i in self.files:
+            source = os.path.join(directory, str(os.path.basename(i)))
+            target = os.path.join(self.dst, str(os.path.basename(i)))
+            shutil.move(source, target)
 
     def test_encrypt_printing(self):
         p = Encrypt(pdf, self.user_pw, self.owner_pw, suffix='secured')

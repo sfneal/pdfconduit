@@ -24,13 +24,13 @@ class TestFlatten(unittest.TestCase):
         cls.csv = os.path.join(os.path.dirname(__file__), 'log', cls.file_path)
         cls.log = []
 
-        cls.fname = os.path.join(directory, 'document.pdf')
+        cls.fname = pdf
 
         cls.files = []
 
     @classmethod
     def tearDownClass(cls):
-        write_log(cls.csv, cls.file_path)
+        write_log(cls.csv, cls.log)
 
     def setUp(self):
         self.startTime = time.time()
@@ -39,6 +39,7 @@ class TestFlatten(unittest.TestCase):
         t = round(time.time() - self.startTime, 2)
         print("{0:15} --> {1}".format(' '.join(self.id().split('.')), t))
 
+        # Log dump
         rows, file_path = dump_log(test_case=self.id().split('.'), time=t)
         self.log.append(rows)
         self.file_path = file_path
