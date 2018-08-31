@@ -28,7 +28,7 @@ else:
 
 setup(
     install_requires=[
-        'PyPDF3>=0.0.6',
+        'PyPDF3>=1.0.0',
         'pdfrw',
         'PyMuPDF',
         'Pillow',
