@@ -1,0 +1,32 @@
+2018-08-31 13:59:15,TestEncrypt,test_encrypt_128bit,article.pdf,PASS,0.47,3.6.4,Darwin,8,16
+2018-08-31 13:59:16,TestEncrypt,test_encrypt_40bit,article.pdf,PASS,0.43,3.6.4,Darwin,8,16
+2018-08-31 13:59:16,TestEncrypt,test_encrypt_commenting,article.pdf,PASS,0.53,3.6.4,Darwin,8,16
+2018-08-31 13:59:17,TestEncrypt,test_encrypt_printing,article.pdf,PASS,0.53,3.6.4,Darwin,8,16
+2018-08-31 14:01:58,TestEncrypt,test_encrypt_128bit,plan_p.pdf,PASS,10.55,3.6.4,Darwin,8,16
+2018-08-31 14:02:09,TestEncrypt,test_encrypt_40bit,plan_p.pdf,PASS,10.82,3.6.4,Darwin,8,16
+2018-08-31 14:02:24,TestEncrypt,test_encrypt_commenting,plan_p.pdf,PASS,15.29,3.6.4,Darwin,8,16
+2018-08-31 14:02:36,TestEncrypt,test_encrypt_printing,plan_p.pdf,PASS,11.9,3.6.4,Darwin,8,16
+2018-08-31 14:06:09,TestEncrypt,test_encrypt_128bit,plan_l.pdf,PASS,5.72,3.6.4,Darwin,8,16
+2018-08-31 14:06:14,TestEncrypt,test_encrypt_40bit,plan_l.pdf,PASS,5.61,3.6.4,Darwin,8,16
+2018-08-31 14:06:20,TestEncrypt,test_encrypt_commenting,plan_l.pdf,PASS,5.56,3.6.4,Darwin,8,16
+2018-08-31 14:06:26,TestEncrypt,test_encrypt_printing,plan_l.pdf,PASS,6.42,3.6.4,Darwin,8,16
+2018-08-31 14:06:12,TestEncrypt,test_encrypt_128bit,plan_l.pdf,ERROR,6.01,3.6.4,Darwin,8,16
+2018-08-31 14:06:17,TestEncrypt,test_encrypt_40bit,plan_l.pdf,ERROR,5.68,3.6.4,Darwin,8,16
+2018-08-31 14:06:22,TestEncrypt,test_encrypt_commenting,plan_l.pdf,ERROR,4.99,3.6.4,Darwin,8,16
+2018-08-31 14:06:29,TestEncrypt,test_encrypt_printing,plan_l.pdf,ERROR,6.49,3.6.4,Darwin,8,16
+2018-08-31 14:06:18,TestEncrypt,test_encrypt_128bit,plan_l.pdf,ERROR,5.44,3.6.4,Darwin,8,16
+2018-08-31 14:06:24,TestEncrypt,test_encrypt_40bit,plan_l.pdf,ERROR,5.89,3.6.4,Darwin,8,16
+2018-08-31 14:06:30,TestEncrypt,test_encrypt_commenting,plan_l.pdf,ERROR,5.59,3.6.4,Darwin,8,16
+2018-08-31 14:06:37,TestEncrypt,test_encrypt_printing,plan_l.pdf,PASS,6.69,3.6.4,Darwin,8,16
+2018-08-31 14:10:29,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,21.22,3.6.4,Darwin,8,16
+2018-08-31 14:10:44,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,14.97,3.6.4,Darwin,8,16
+2018-08-31 14:10:58,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,13.99,3.6.4,Darwin,8,16
+2018-08-31 14:11:20,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,22.14,3.6.4,Darwin,8,16
+2018-08-31 14:11:39,TestEncrypt,test_encrypt_128bit,plan_p.pdf,PASS,9.72,3.6.4,Darwin,8,16
+2018-08-31 14:11:51,TestEncrypt,test_encrypt_40bit,plan_p.pdf,PASS,11.38,3.6.4,Darwin,8,16
+2018-08-31 14:11:59,TestEncrypt,test_encrypt_commenting,plan_p.pdf,PASS,8.31,3.6.4,Darwin,8,16
+2018-08-31 14:12:08,TestEncrypt,test_encrypt_printing,plan_p.pdf,PASS,8.86,3.6.4,Darwin,8,16
+2018-08-31 14:12:45,TestEncrypt,test_encrypt_128bit,document.pdf,PASS,0.91,3.6.4,Darwin,8,16
+2018-08-31 14:12:45,TestEncrypt,test_encrypt_40bit,document.pdf,PASS,0.81,3.6.4,Darwin,8,16
+2018-08-31 14:12:46,TestEncrypt,test_encrypt_commenting,document.pdf,PASS,0.86,3.6.4,Darwin,8,16
+2018-08-31 14:12:47,TestEncrypt,test_encrypt_printing,document.pdf,PASS,0.88,3.6.4,Darwin,8,16

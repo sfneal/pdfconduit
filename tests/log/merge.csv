@@ -1,0 +1,14 @@
+2018-08-31 13:59:28,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.77,3.6.4,Darwin,8,16
+2018-08-31 13:59:30,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,2.63,3.6.4,Darwin,8,16
+2018-08-31 14:06:39,TestMerge,test_merge_pdfrw,plan_l.pdf,PASS,0.7,3.6.4,Darwin,8,16
+2018-08-31 14:06:41,TestMerge,test_merge_pypdf3,plan_l.pdf,PASS,2.43,3.6.4,Darwin,8,16
+2018-08-31 14:06:42,TestMerge,test_merge_pdfrw,plan_l.pdf,PASS,0.91,3.6.4,Darwin,8,16
+2018-08-31 14:06:45,TestMerge,test_merge_pypdf3,plan_l.pdf,PASS,2.63,3.6.4,Darwin,8,16
+2018-08-31 14:06:50,TestMerge,test_merge_pdfrw,plan_l.pdf,PASS,1.11,3.6.4,Darwin,8,16
+2018-08-31 14:06:52,TestMerge,test_merge_pypdf3,plan_l.pdf,PASS,2.16,3.6.4,Darwin,8,16
+2018-08-31 14:11:30,TestMerge,test_merge_pdfrw,plan_p.pdf,PASS,0.47,3.6.4,Darwin,8,16
+2018-08-31 14:11:31,TestMerge,test_merge_pypdf3,plan_p.pdf,PASS,1.91,3.6.4,Darwin,8,16
+2018-08-31 14:12:28,TestMerge,test_merge_pdfrw,document.pdf,PASS,0.58,3.6.4,Darwin,8,16
+2018-08-31 14:12:30,TestMerge,test_merge_pypdf3,document.pdf,PASS,1.95,3.6.4,Darwin,8,16
+2018-08-31 14:13:04,TestMerge,test_merge_pdfrw,document.pdf,PASS,0.47,3.6.4,Darwin,8,16
+2018-08-31 14:13:05,TestMerge,test_merge_pypdf3,document.pdf,PASS,1.67,3.6.4,Darwin,8,16

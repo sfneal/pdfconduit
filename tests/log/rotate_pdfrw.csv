@@ -1,0 +1,28 @@
+2018-08-31 13:59:36,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,1.62,3.6.4,Darwin,8,16
+2018-08-31 13:59:38,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,1.7,3.6.4,Darwin,8,16
+2018-08-31 13:59:39,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,1.64,3.6.4,Darwin,8,16
+2018-08-31 13:59:41,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,1.37,3.6.4,Darwin,8,16
+2018-08-31 14:06:29,TestRotatePdfrw,test_rotate_180_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:29,TestRotatePdfrw,test_rotate_270_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:29,TestRotatePdfrw,test_rotate_90_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:29,TestRotatePdfrw,test_rotate_pdfrw,plan_l.pdf,PASS,0.02,3.6.4,Darwin,8,16
+2018-08-31 14:06:32,TestRotatePdfrw,test_rotate_180_pdfrw,plan_l.pdf,PASS,0.04,3.6.4,Darwin,8,16
+2018-08-31 14:06:32,TestRotatePdfrw,test_rotate_270_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:32,TestRotatePdfrw,test_rotate_90_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:32,TestRotatePdfrw,test_rotate_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:40,TestRotatePdfrw,test_rotate_180_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:40,TestRotatePdfrw,test_rotate_270_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:40,TestRotatePdfrw,test_rotate_90_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:06:40,TestRotatePdfrw,test_rotate_pdfrw,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:11:22,TestRotatePdfrw,test_rotate_180_pdfrw,plan_p.pdf,PASS,0.04,3.6.4,Darwin,8,16
+2018-08-31 14:11:22,TestRotatePdfrw,test_rotate_270_pdfrw,plan_p.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:11:22,TestRotatePdfrw,test_rotate_90_pdfrw,plan_p.pdf,PASS,0.04,3.6.4,Darwin,8,16
+2018-08-31 14:11:22,TestRotatePdfrw,test_rotate_pdfrw,plan_p.pdf,PASS,0.04,3.6.4,Darwin,8,16
+2018-08-31 14:12:10,TestRotatePdfrw,test_rotate_180_pdfrw,document.pdf,PASS,0.06,3.6.4,Darwin,8,16
+2018-08-31 14:12:10,TestRotatePdfrw,test_rotate_270_pdfrw,document.pdf,PASS,0.07,3.6.4,Darwin,8,16
+2018-08-31 14:12:10,TestRotatePdfrw,test_rotate_90_pdfrw,document.pdf,PASS,0.07,3.6.4,Darwin,8,16
+2018-08-31 14:12:10,TestRotatePdfrw,test_rotate_pdfrw,document.pdf,PASS,0.12,3.6.4,Darwin,8,16
+2018-08-31 14:12:49,TestRotatePdfrw,test_rotate_180_pdfrw,document.pdf,PASS,0.06,3.6.4,Darwin,8,16
+2018-08-31 14:12:49,TestRotatePdfrw,test_rotate_270_pdfrw,document.pdf,PASS,0.07,3.6.4,Darwin,8,16
+2018-08-31 14:12:49,TestRotatePdfrw,test_rotate_90_pdfrw,document.pdf,PASS,0.07,3.6.4,Darwin,8,16
+2018-08-31 14:12:49,TestRotatePdfrw,test_rotate_pdfrw,document.pdf,PASS,0.06,3.6.4,Darwin,8,16

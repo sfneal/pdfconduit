@@ -1,0 +1,14 @@
+2018-08-31 14:00:20,TestSlice,test_slice,con docs2.pdf,PASS,2.34,3.6.4,Darwin,8,16
+2018-08-31 14:00:23,TestSlice,test_slice_4to7,con docs2.pdf,PASS,2.67,3.6.4,Darwin,8,16
+2018-08-31 14:07:06,TestSlice,test_slice,plan_l.pdf,PASS,0.04,3.6.4,Darwin,8,16
+2018-08-31 14:07:06,TestSlice,test_slice_4to7,plan_l.pdf,FAIL,0.01,3.6.4,Darwin,8,16
+2018-08-31 14:07:12,TestSlice,test_slice,plan_l.pdf,PASS,0.04,3.6.4,Darwin,8,16
+2018-08-31 14:07:12,TestSlice,test_slice_4to7,plan_l.pdf,FAIL,0.01,3.6.4,Darwin,8,16
+2018-08-31 14:07:18,TestSlice,test_slice,plan_l.pdf,PASS,0.03,3.6.4,Darwin,8,16
+2018-08-31 14:07:18,TestSlice,test_slice_4to7,plan_l.pdf,FAIL,0.01,3.6.4,Darwin,8,16
+2018-08-31 14:11:52,TestSlice,test_slice,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
+2018-08-31 14:11:52,TestSlice,test_slice_4to7,plan_p.pdf,FAIL,0.01,3.6.4,Darwin,8,16
+2018-08-31 14:12:50,TestSlice,test_slice,document.pdf,PASS,0.07,3.6.4,Darwin,8,16
+2018-08-31 14:12:50,TestSlice,test_slice_4to7,document.pdf,PASS,0.09,3.6.4,Darwin,8,16
+2018-08-31 14:13:22,TestSlice,test_slice,document.pdf,PASS,0.08,3.6.4,Darwin,8,16
+2018-08-31 14:13:22,TestSlice,test_slice_4to7,document.pdf,PASS,0.09,3.6.4,Darwin,8,16

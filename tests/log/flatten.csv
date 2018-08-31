@@ -1,0 +1,18 @@
+2018-08-31 13:59:08,TestFlatten,test_flatten_1x,article.pdf,PASS,0.59,3.6.4,Darwin,8,16
+2018-08-31 13:59:10,TestFlatten,test_flatten_2x,article.pdf,PASS,1.68,3.6.4,Darwin,8,16
+2018-08-31 13:59:13,TestFlatten,test_flatten_3x,article.pdf,PASS,3.35,3.6.4,Darwin,8,16
+2018-08-31 14:01:00,TestFlatten,test_flatten_1x,plan_p.pdf,PASS,1.35,3.6.4,Darwin,8,16
+2018-08-31 14:01:06,TestFlatten,test_flatten_2x,plan_p.pdf,PASS,5.37,3.6.4,Darwin,8,16
+2018-08-31 14:01:14,TestFlatten,test_flatten_3x,plan_p.pdf,PASS,8.51,3.6.4,Darwin,8,16
+2018-08-31 14:05:30,TestFlatten,test_flatten_1x,plan_p.pdf,PASS,0.76,3.6.4,Darwin,8,16
+2018-08-31 14:05:34,TestFlatten,test_flatten_2x,plan_p.pdf,PASS,3.69,3.6.4,Darwin,8,16
+2018-08-31 14:05:35,TestFlatten,test_flatten_1x,article.pdf,PASS,0.63,3.6.4,Darwin,8,16
+2018-08-31 14:05:37,TestFlatten,test_flatten_2x,article.pdf,PASS,2.04,3.6.4,Darwin,8,16
+2018-08-31 14:05:43,TestFlatten,test_flatten_1x,plan_l.pdf,PASS,0.53,3.6.4,Darwin,8,16
+2018-08-31 14:05:45,TestFlatten,test_flatten_2x,plan_l.pdf,PASS,1.46,3.6.4,Darwin,8,16
+2018-08-31 14:08:45,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,30.75,3.6.4,Darwin,8,16
+2018-08-31 14:09:47,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,62.45,3.6.4,Darwin,8,16
+2018-08-31 14:11:07,TestFlatten,test_flatten_1x,plan_p.pdf,PASS,0.63,3.6.4,Darwin,8,16
+2018-08-31 14:11:09,TestFlatten,test_flatten_2x,plan_p.pdf,PASS,1.97,3.6.4,Darwin,8,16
+2018-08-31 14:12:03,TestFlatten,test_flatten_1x,document.pdf,PASS,4.36,3.6.4,Darwin,8,16
+2018-08-31 14:12:17,TestFlatten,test_flatten_2x,document.pdf,PASS,13.51,3.6.4,Darwin,8,16
