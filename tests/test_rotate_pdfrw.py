@@ -46,8 +46,11 @@ class TestRotatePdfrw(unittest.TestCase):
         for i in self.files:
             source = i
             target = os.path.join(self.dst, str(os.path.basename(i)))
-            shutil.move(source, target)
-            self.files.remove(i)
+            try:
+                shutil.move(source, target)
+                self.files.remove(i)
+            except FileNotFoundError:
+                pass
 
     def test_rotate_pdfrw(self):
         r = 90

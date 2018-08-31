@@ -48,7 +48,11 @@ class TestSlice(unittest.TestCase):
             source = i
             if os.path.isfile(source):
                 target = os.path.join(self.dst, str(os.path.basename(i)))
-                shutil.move(source, target)
+                try:
+                    shutil.move(source, target)
+                    self.files.remove(i)
+                except FileNotFoundError:
+                    pass
 
     def test_slice(self):
         fp = 1

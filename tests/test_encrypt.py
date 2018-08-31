@@ -57,7 +57,11 @@ class TestEncrypt(unittest.TestCase):
         for i in self.files:
             source = os.path.join(directory, str(os.path.basename(i)))
             target = os.path.join(self.dst, str(os.path.basename(i)))
-            shutil.move(source, target)
+            try:
+                shutil.move(source, target)
+                self.files.remove(i)
+            except FileNotFoundError:
+                pass
 
     def test_encrypt_printing(self):
         p = Encrypt(pdf, self.user_pw, self.owner_pw, suffix='secured')

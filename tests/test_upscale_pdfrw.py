@@ -46,8 +46,11 @@ class TestUpscalePdfrw(unittest.TestCase):
         for i in self.files:
             source = i
             target = os.path.join(self.dst, str(os.path.basename(i)))
-            shutil.move(source, target)
-            self.files.remove(i)
+            try:
+                shutil.move(source, target)
+                self.files.remove(i)
+            except FileNotFoundError:
+                pass
 
     def test_upscale_pdfrw(self):
         s = 2.0

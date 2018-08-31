@@ -48,8 +48,11 @@ class TestFlatten(unittest.TestCase):
         for i in self.files:
             source = i
             target = os.path.join(self.dst, str(os.path.basename(i)))
-            shutil.move(source, target)
-            self.files.remove(i)
+            try:
+                shutil.move(source, target)
+                self.files.remove(i)
+            except FileNotFoundError:
+                pass
 
     def test_flatten_gui(self):
         flat = Flatten(self.fname, scale=1.0, suffix='flat_gui', progress_bar='gui').save()
