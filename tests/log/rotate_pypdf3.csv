@@ -1,0 +1,4 @@
+2018-08-31 12:06:44,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,0.9516611099243164,3.6.4,Darwin,8,16
+2018-08-31 12:06:45,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,1.0684123039245605,3.6.4,Darwin,8,16
+2018-08-31 12:06:46,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,1.066821813583374,3.6.4,Darwin,8,16
+2018-08-31 12:06:47,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,1.1025471687316895,3.6.4,Darwin,8,16

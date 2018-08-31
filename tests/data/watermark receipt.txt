@@ -1,0 +1,123 @@
+PDF Watermarker     --> 2018-08-30 12:04
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs2.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs2_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> con docs2_secured.pdf
+~run time~          --> sec: 17.841006994247437
+*******************************************************************
+PDF Watermarker     --> 2018-08-30 12:05
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs2.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> True
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs2_watermarked.pdf
+~run time~          --> sec: 1.4516749382019043
+*******************************************************************
+PDF Watermarker     --> 2018-08-30 12:06
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs2.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> False
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs2_watermarked.pdf
+~run time~          --> sec: 1.3071670532226562
+*******************************************************************
+PDF Watermarker     --> 2018-08-30 12:07
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs2.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> False
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs2_watermarked.pdf
+~run time~          --> sec: 1.3243200778961182
+*******************************************************************
+PDF Watermarker     --> 2018-08-30 12:25
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs2.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> False
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs2_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> con docs2_secured.pdf
+~run time~          --> sec: 17.068967819213867
+*******************************************************************
+PDF Watermarker     --> 2018-08-30 12:27
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> False
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs_watermarked.pdf
+~run time~          --> sec: 1.8576278686523438
+*******************************************************************
+PDF Watermarker     --> 2018-08-30 13:35
+Directory           --> //Mac/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> con docs_secured.pdf
+~run time~          --> min: 1.5671064456303914
+*******************************************************************
+PDF Watermarker     --> 2018-08-30 13:38
+Directory           --> //Mac/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs2.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs2_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> con docs2_secured.pdf
+~run time~          --> min: 1.5233656485875449

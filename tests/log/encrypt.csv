@@ -1,0 +1,4 @@
+2018-08-31 11:57:44,TestEncrypt,test_encrypt_128bit,con docs2.pdf,20.583516836166382,3.6.4,Darwin,8,16
+2018-08-31 11:58:00,TestEncrypt,test_encrypt_40bit,con docs2.pdf,15.813944816589355,3.6.4,Darwin,8,16
+2018-08-31 11:58:15,TestEncrypt,test_encrypt_commenting,con docs2.pdf,14.965895891189575,3.6.4,Darwin,8,16
+2018-08-31 11:58:30,TestEncrypt,test_encrypt_printing,con docs2.pdf,15.518312931060791,3.6.4,Darwin,8,16
