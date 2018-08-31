@@ -38,10 +38,24 @@ class TestSlice(unittest.TestCase):
         t = time.time() - self.startTime
         print("%s: %.3f" % (' '.join(self.id().split('.')[-1].split('_')[1:]), t))
 
-        print(self.defaultTestResult())
+        # Determine test result
+        if hasattr(self, '_outcome'):  # Python 3.4+
+            result = self.defaultTestResult()  # these 2 methods have no side effects
+            self._feedErrorsToResult(result, self._outcome.errors)
+        else:  # Python 3.2 - 3.3 or 3.0 - 3.1 and 2.7
+            result = getattr(self, '_outcomeForDoCleanups', self._resultForDoCleanups)
+        error = self.list2reason(result.errors)
+        failure = self.list2reason(result.failures)
+        ok = not error and not failure
+
+        # demo:   report short info immediately (not important)
+        if not ok:
+            typ, text = ('ERROR', error) if error else ('FAIL', failure)
+        else:
+            typ = 'PASS'
 
         # Log dump
-        rows, file_path = dump_log(test_case=self.id().split('.'), time=t)
+        rows, file_path = dump_log(test_case=self.id().split('.'), time=t, result=typ)
         self.log.append(rows)
         self.file_path = file_path
 
@@ -55,6 +69,10 @@ class TestSlice(unittest.TestCase):
                     self.files.remove(i)
                 except FileNotFoundError:
                     pass
+
+    def list2reason(self, exc_list):
+        if exc_list and exc_list[-1][0] is self:
+            return exc_list[-1][1]
 
     def test_slice(self):
         fp = 1

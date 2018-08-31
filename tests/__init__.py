@@ -22,14 +22,14 @@ def write_log(file_path, log):
         CSV.write(log, file_path)
 
 
-def dump_log(test_case=None, time=None):
+def dump_log(test_case=None, time=None, result=None):
     MEM = virtual_memory()
     now = datetime.datetime.now()
     date_time = str(now).split('.', 1)[0]
     fname = test_case[0] + '.csv'
     file_path = os.path.join(os.path.dirname(__file__), 'log', fname)
 
-    rows = [date_time, test_case[-2], test_case[-1], file_name, str(round(time, 2)), platform.python_version(),
+    rows = [date_time, test_case[-2], test_case[-1], file_name, result, str(round(time, 2)), platform.python_version(),
             platform.system(),
             mp.cpu_count(), MEM.total >> 30]
     return rows, file_path
