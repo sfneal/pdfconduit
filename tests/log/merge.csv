@@ -12,3 +12,13 @@
 2018-08-31 14:12:30,TestMerge,test_merge_pypdf3,document.pdf,PASS,1.95,3.6.4,Darwin,8,16
 2018-08-31 14:13:04,TestMerge,test_merge_pdfrw,document.pdf,PASS,0.47,3.6.4,Darwin,8,16
 2018-08-31 14:13:05,TestMerge,test_merge_pypdf3,document.pdf,PASS,1.67,3.6.4,Darwin,8,16
+2018-08-31 14:33:33,TestMerge,test_merge_pdfrw,document.pdf,PASS,0.31,3.6.6,Windows,4,3
+2018-08-31 14:33:34,TestMerge,test_merge_pypdf3,document.pdf,PASS,1.79,3.6.6,Windows,4,3
+2018-08-31 14:34:36,TestMerge,test_merge_pdfrw,document.pdf,PASS,0.41,3.6.6,Windows,4,3
+2018-08-31 14:34:38,TestMerge,test_merge_pypdf3,document.pdf,PASS,1.55,3.6.6,Windows,4,3
+2018-08-31 14:34:59,TestMerge,test_merge_pdfrw,document.pdf,PASS,1.16,3.6.6,Windows,4,3
+2018-08-31 14:35:03,TestMerge,test_merge_pypdf3,document.pdf,PASS,3.25,3.6.6,Windows,4,3
+2018-08-31 14:35:09,TestMerge,test_merge_pdfrw,document.pdf,PASS,0.58,3.6.6,Windows,4,3
+2018-08-31 14:35:11,TestMerge,test_merge_pypdf3,document.pdf,PASS,2.15,3.6.6,Windows,4,3
+2018-08-31 14:41:30,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.33,3.6.6,Windows,4,3
+2018-08-31 14:41:31,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,1.17,3.6.6,Windows,4,3

@@ -16,3 +16,13 @@
 2018-08-31 14:11:09,TestFlatten,test_flatten_2x,plan_p.pdf,PASS,1.97,3.6.4,Darwin,8,16
 2018-08-31 14:12:03,TestFlatten,test_flatten_1x,document.pdf,PASS,4.36,3.6.4,Darwin,8,16
 2018-08-31 14:12:17,TestFlatten,test_flatten_2x,document.pdf,PASS,13.51,3.6.4,Darwin,8,16
+2018-08-31 14:33:09,TestFlatten,test_flatten_1x,document.pdf,PASS,1.92,3.6.6,Windows,4,3
+2018-08-31 14:33:14,TestFlatten,test_flatten_2x,document.pdf,PASS,4.9,3.6.6,Windows,4,3
+2018-08-31 14:34:09,TestFlatten,test_flatten_1x,document.pdf,PASS,4.16,3.6.6,Windows,4,3
+2018-08-31 14:34:13,TestFlatten,test_flatten_2x,document.pdf,FAIL,4.14,3.6.6,Windows,4,3
+2018-08-31 14:34:13,TestFlatten,test_flatten_1x,document.pdf,PASS,4.47,3.6.6,Windows,4,3
+2018-08-31 14:34:31,TestFlatten,test_flatten_2x,document.pdf,PASS,17.73,3.6.6,Windows,4,3
+2018-08-31 14:34:36,TestFlatten,test_flatten_1x,document.pdf,ERROR,0.17,3.6.6,Windows,4,3
+2018-08-31 14:34:50,TestFlatten,test_flatten_2x,document.pdf,PASS,14.06,3.6.6,Windows,4,3
+2018-08-31 14:39:24,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.04,3.6.6,Windows,4,3
+2018-08-31 14:40:25,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,61.44,3.6.6,Windows,4,3

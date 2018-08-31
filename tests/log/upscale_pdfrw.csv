@@ -26,3 +26,23 @@
 2018-08-31 14:13:07,TestUpscalePdfrw,test_upscale_20x_pdfrw,document.pdf,PASS,0.11,3.6.4,Darwin,8,16
 2018-08-31 14:13:07,TestUpscalePdfrw,test_upscale_30x_pdfrw,document.pdf,PASS,0.11,3.6.4,Darwin,8,16
 2018-08-31 14:13:08,TestUpscalePdfrw,test_upscale_pdfrw,document.pdf,PASS,0.11,3.6.4,Darwin,8,16
+2018-08-31 14:33:39,TestUpscalePdfrw,test_upscale_15x_pdfrw,document.pdf,PASS,0.08,3.6.6,Windows,4,3
+2018-08-31 14:33:39,TestUpscalePdfrw,test_upscale_20x_pdfrw,document.pdf,PASS,0.06,3.6.6,Windows,4,3
+2018-08-31 14:33:39,TestUpscalePdfrw,test_upscale_30x_pdfrw,document.pdf,PASS,0.08,3.6.6,Windows,4,3
+2018-08-31 14:33:39,TestUpscalePdfrw,test_upscale_pdfrw,document.pdf,PASS,0.06,3.6.6,Windows,4,3
+2018-08-31 14:34:47,TestUpscalePdfrw,test_upscale_15x_pdfrw,document.pdf,PASS,0.16,3.6.6,Windows,4,3
+2018-08-31 14:34:47,TestUpscalePdfrw,test_upscale_20x_pdfrw,document.pdf,PASS,0.16,3.6.6,Windows,4,3
+2018-08-31 14:34:47,TestUpscalePdfrw,test_upscale_30x_pdfrw,document.pdf,PASS,0.09,3.6.6,Windows,4,3
+2018-08-31 14:34:47,TestUpscalePdfrw,test_upscale_pdfrw,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:35:12,TestUpscalePdfrw,test_upscale_15x_pdfrw,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:35:12,TestUpscalePdfrw,test_upscale_20x_pdfrw,document.pdf,PASS,0.09,3.6.6,Windows,4,3
+2018-08-31 14:35:12,TestUpscalePdfrw,test_upscale_30x_pdfrw,document.pdf,PASS,0.12,3.6.6,Windows,4,3
+2018-08-31 14:35:13,TestUpscalePdfrw,test_upscale_pdfrw,document.pdf,PASS,0.1,3.6.6,Windows,4,3
+2018-08-31 14:35:20,TestUpscalePdfrw,test_upscale_15x_pdfrw,document.pdf,PASS,0.09,3.6.6,Windows,4,3
+2018-08-31 14:35:20,TestUpscalePdfrw,test_upscale_20x_pdfrw,document.pdf,PASS,0.09,3.6.6,Windows,4,3
+2018-08-31 14:35:20,TestUpscalePdfrw,test_upscale_30x_pdfrw,document.pdf,PASS,0.09,3.6.6,Windows,4,3
+2018-08-31 14:35:20,TestUpscalePdfrw,test_upscale_pdfrw,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:41:45,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,0.85,3.6.6,Windows,4,3
+2018-08-31 14:41:46,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.97,3.6.6,Windows,4,3
+2018-08-31 14:41:48,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,1.83,3.6.6,Windows,4,3
+2018-08-31 14:41:49,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.98,3.6.6,Windows,4,3

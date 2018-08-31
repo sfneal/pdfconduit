@@ -12,3 +12,13 @@
 2018-08-31 14:12:50,TestSlice,test_slice_4to7,document.pdf,PASS,0.09,3.6.4,Darwin,8,16
 2018-08-31 14:13:22,TestSlice,test_slice,document.pdf,PASS,0.08,3.6.4,Darwin,8,16
 2018-08-31 14:13:22,TestSlice,test_slice_4to7,document.pdf,PASS,0.09,3.6.4,Darwin,8,16
+2018-08-31 14:33:38,TestSlice,test_slice,document.pdf,PASS,0.05,3.6.6,Windows,4,3
+2018-08-31 14:33:38,TestSlice,test_slice_4to7,document.pdf,PASS,0.05,3.6.6,Windows,4,3
+2018-08-31 14:34:45,TestSlice,test_slice,document.pdf,PASS,0.14,3.6.6,Windows,4,3
+2018-08-31 14:34:45,TestSlice,test_slice_4to7,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:35:10,TestSlice,test_slice,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:35:10,TestSlice,test_slice_4to7,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:35:18,TestSlice,test_slice,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:35:18,TestSlice,test_slice_4to7,document.pdf,PASS,0.11,3.6.6,Windows,4,3
+2018-08-31 14:41:43,TestSlice,test_slice,con docs2.pdf,PASS,0.62,3.6.6,Windows,4,3
+2018-08-31 14:41:43,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.64,3.6.6,Windows,4,3

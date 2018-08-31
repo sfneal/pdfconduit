@@ -12,3 +12,13 @@
 2018-08-31 14:12:23,TestFlatten,test_flatten_tqdm,document.pdf,PASS,4.69,3.6.4,Darwin,8,16
 2018-08-31 14:12:56,TestFlatten,test_flatten_gui,document.pdf,PASS,4.64,3.6.4,Darwin,8,16
 2018-08-31 14:12:59,TestFlatten,test_flatten_tqdm,document.pdf,PASS,3.73,3.6.4,Darwin,8,16
+2018-08-31 14:33:20,TestFlatten,test_flatten_gui,document.pdf,PASS,5.58,3.6.6,Windows,4,3
+2018-08-31 14:33:30,TestFlatten,test_flatten_tqdm,document.pdf,PASS,9.59,3.6.6,Windows,4,3
+2018-08-31 14:34:29,TestFlatten,test_flatten_gui,document.pdf,PASS,9.94,3.6.6,Windows,4,3
+2018-08-31 14:34:34,TestFlatten,test_flatten_tqdm,document.pdf,PASS,4.47,3.6.6,Windows,4,3
+2018-08-31 14:34:48,TestFlatten,test_flatten_gui,document.pdf,PASS,12.48,3.6.6,Windows,4,3
+2018-08-31 14:34:55,TestFlatten,test_flatten_tqdm,document.pdf,PASS,5.41,3.6.6,Windows,4,3
+2018-08-31 14:35:00,TestFlatten,test_flatten_gui,document.pdf,PASS,8.24,3.6.6,Windows,4,3
+2018-08-31 14:35:07,TestFlatten,test_flatten_tqdm,document.pdf,PASS,6.53,3.6.6,Windows,4,3
+2018-08-31 14:41:00,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,30.41,3.6.6,Windows,4,3
+2018-08-31 14:41:25,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,25.45,3.6.6,Windows,4,3

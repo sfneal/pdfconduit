@@ -30,3 +30,35 @@
 2018-08-31 14:12:45,TestEncrypt,test_encrypt_40bit,document.pdf,PASS,0.81,3.6.4,Darwin,8,16
 2018-08-31 14:12:46,TestEncrypt,test_encrypt_commenting,document.pdf,PASS,0.86,3.6.4,Darwin,8,16
 2018-08-31 14:12:47,TestEncrypt,test_encrypt_printing,document.pdf,PASS,0.88,3.6.4,Darwin,8,16
+2018-08-31 14:33:06,TestEncrypt,test_encrypt_128bit,document.pdf,PASS,0.28,3.6.6,Windows,4,3
+2018-08-31 14:33:06,TestEncrypt,test_encrypt_40bit,document.pdf,PASS,0.25,3.6.6,Windows,4,3
+2018-08-31 14:33:06,TestEncrypt,test_encrypt_commenting,document.pdf,PASS,0.27,3.6.6,Windows,4,3
+2018-08-31 14:33:07,TestEncrypt,test_encrypt_printing,document.pdf,PASS,0.28,3.6.6,Windows,4,3
+2018-08-31 14:33:49,TestEncrypt,test_encrypt_128bit,plan_l.pdf,PASS,4.43,3.6.6,Windows,4,3
+2018-08-31 14:33:53,TestEncrypt,test_encrypt_40bit,plan_l.pdf,PASS,3.94,3.6.6,Windows,4,3
+2018-08-31 14:33:57,TestEncrypt,test_encrypt_commenting,plan_l.pdf,PASS,3.88,3.6.6,Windows,4,3
+2018-08-31 14:34:01,TestEncrypt,test_encrypt_printing,plan_l.pdf,PASS,4.32,3.6.6,Windows,4,3
+2018-08-31 14:34:05,TestEncrypt,test_encrypt_128bit,document.pdf,PASS,0.75,3.6.6,Windows,4,3
+
+2018-08-31 14:34:06,TestEncrypt,test_encrypt_40bit,document.pdf,PASS,0.67,3.6.6,Windows,4,3
+
+2018-08-31 14:34:07,TestEncrypt,test_encrypt_commenting,document.pdf,PASS,0.56,3.6.6,Windows,4,3
+
+2018-08-31 14:34:07,TestEncrypt,test_encrypt_printing,document.pdf,PASS,0.65,3.6.6,Windows,4,3
+
+2018-08-31 14:34:03,TestEncrypt,test_encrypt_128bit,plan_p.pdf,PASS,8.51,3.6.6,Windows,4,3
+
+2018-08-31 14:34:10,TestEncrypt,test_encrypt_40bit,plan_p.pdf,PASS,7.29,3.6.6,Windows,4,3
+
+2018-08-31 14:34:19,TestEncrypt,test_encrypt_commenting,plan_p.pdf,PASS,8.44,3.6.6,Windows,4,3
+
+2018-08-31 14:34:31,TestEncrypt,test_encrypt_printing,plan_p.pdf,PASS,12.72,3.6.6,Windows,4,3
+
+2018-08-31 14:38:35,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,11.11,3.6.6,Windows,4,3
+
+2018-08-31 14:38:46,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,10.69,3.6.6,Windows,4,3
+
+2018-08-31 14:38:57,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,10.63,3.6.6,Windows,4,3
+
+2018-08-31 14:39:07,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,10.42,3.6.6,Windows,4,3
+
