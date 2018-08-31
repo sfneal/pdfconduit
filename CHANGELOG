@@ -1,4 +1,10 @@
-﻿Version 1.4.2, 2018-08-30
+﻿Version 1.4.3, 2018-08-31
+--------------------------
+ - Created logging feature for test suite which records testing information and saves to .csv
+ - Added requirements.txt for development
+
+
+Version 1.4.2, 2018-08-30
 --------------------------
  - Moved utils into its own sub-module
  - Imports optimization

@@ -9,8 +9,8 @@ from psutil import virtual_memory
 directory = os.path.join(os.path.dirname(__file__), 'data')
 # file_name = 'plan_l.pdf'
 # file_name = 'plan_p.pdf'
-file_name = 'article.pdf'
-# file_name = 'con docs2.pdf'
+# file_name = 'article.pdf'
+file_name = 'con docs2.pdf'
 # file_name = 'con docs2_sliced.pdf'
 pdf = os.path.join(directory, file_name)
 
@@ -26,8 +26,8 @@ def dump_log(test_case=None, time=None):
     MEM = virtual_memory()
     now = datetime.datetime.now()
     date_time = str(now).split('.', 1)[0]
-    file_name = test_case[0] + '.csv'
-    file_path = os.path.join(os.path.dirname(__file__), 'log', file_name)
+    fname = test_case[0] + '.csv'
+    file_path = os.path.join(os.path.dirname(__file__), 'log', fname)
 
     rows = [date_time, test_case[-2], test_case[-1], file_name, str(time), platform.python_version(), platform.system(),
             mp.cpu_count(), MEM.total >> 30]
