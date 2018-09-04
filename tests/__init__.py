@@ -1,8 +1,8 @@
 import os
 import datetime
-from databasetools import CSV
 import platform
 import multiprocess as mp
+from databasetools import CSV
 from psutil import virtual_memory
 
 
