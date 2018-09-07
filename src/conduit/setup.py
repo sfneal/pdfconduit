@@ -36,6 +36,7 @@ setup(
         'PySimpleGUI',
         'looptools',
         'tqdm',
+        'pybundle',
     ],
     name='pdfconduit',
     version=verstr,
