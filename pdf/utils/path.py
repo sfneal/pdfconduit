@@ -5,6 +5,7 @@ from inspect import stack
 from pathlib import Path
 
 
+# TODO: Remove and add pybundle as dependency
 def bundle_dir():
     """Handle resource management within an executable file."""
     if getattr(sys, 'frozen', False):
