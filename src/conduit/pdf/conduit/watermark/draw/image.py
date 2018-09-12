@@ -1,8 +1,8 @@
 import os
 from tempfile import NamedTemporaryFile
 from PIL import Image, ImageEnhance, ImageDraw, ImageFont
-from pdf.utils import FONT
 from pybundle import bundle_dir, resource_path
+from pdf.utils import FONT
 
 
 def img_opacity(image, opacity, tempdir=None, bw=True):

@@ -1,8 +1,8 @@
 import os
 import PySimpleGUI as gui
 import json
-from pybundle import bundle_dir
 from platform import system
+from pybundle import bundle_dir
 from pdf.conduit._version import __version__
 
 
@@ -95,7 +95,7 @@ class GUI:
                 layout.extend(inputs)
                 layout.extend(footer())
 
-                (button, (values)) = form.LayoutAndShow(layout)
+                (button, (values)) = form.LayoutAndRead(layout)
 
             params['pdf'] = values[0]
             return params
@@ -123,7 +123,7 @@ class GUI:
                 layout.extend(inputs)
                 layout.extend(footer())
 
-                (button, (values)) = form.LayoutAndShow(layout)
+                (button, (values)) = form.LayoutAndRead(layout)
 
             user_pw = values[1] if len(values[1]) > 0 else ''
             owner_pw = values[2] if len(values[2]) > 0 else ''
@@ -200,7 +200,7 @@ class GUI:
                 layout.extend(inputs)
                 layout.extend(footer())
 
-                (button, (values)) = form.LayoutAndShow(layout)
+                (button, (values)) = form.LayoutAndRead(layout)
 
             params['pdf'] = values[0]
             return params
@@ -302,7 +302,7 @@ class GUI:
                     layout.extend(input_watermark_settings())
                     layout.extend(input_encryption())
                     layout.extend(footer())
-                    button, values = form.LayoutAndShow(layout)
+                    button, values = form.LayoutAndRead(layout)
                     return button, values, platform
 
         def add_image(params):
@@ -324,7 +324,7 @@ class GUI:
                 layout.extend(inputs)
                 layout.extend(footer('Click submit to add your watermark image'))
 
-                (button, (values)) = form.LayoutAndShow(layout)
+                (button, (values)) = form.LayoutAndRead(layout)
             name = values[1] if len(values[1]) > 0 else None
             add(values[0], name)
             return params
