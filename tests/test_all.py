@@ -1,4 +1,5 @@
 import os
+import sys
 from databasetools import CSV
 
 
@@ -32,7 +33,7 @@ def main():
     for i in test_scripts:
         print(i)
         m = str('tests.' + os.path.basename(i).strip('.py'))
-        command = 'python -m unittest ' + m
+        command = sys.executable + ' -m unittest ' + m
         os.system(command)
 
     merge_logs(directory)

@@ -1,9 +1,13 @@
 import os
 import datetime
 import platform
-import multiprocess as mp
 from databasetools import CSV
 from psutil import virtual_memory
+try:
+    import multiprocess as mp
+    CPUs = mp.cpu_count()
+except ModuleNotFoundError:
+    CPUs = 'N/A'
 
 
 directory = os.path.join(os.path.dirname(__file__), 'data')
@@ -32,7 +36,7 @@ def dump_log(test_case=None, time=None, result=None):
 
     rows = [date_time, test_case[-2], test_case[-1], file_name, result, str(round(time, 2)), platform.python_version(),
             platform.system(),
-            mp.cpu_count(), MEM.total >> 30]
+            CPUs, MEM.total >> 30]
     return rows, file_path
 
 
