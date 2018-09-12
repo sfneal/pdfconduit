@@ -24,3 +24,5 @@
 2018-08-31 14:41:31,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,1.17,3.6.6,Windows,4,3
 2018-09-12 14:01:37,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.23,3.7.0,Darwin,8,16
 2018-09-12 14:01:37,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.78,3.7.0,Darwin,8,16
+2018-09-12 14:09:40,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.27,3.6.4,Darwin,8,16
+2018-09-12 14:09:41,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,1.07,3.6.4,Darwin,8,16
