@@ -1,9 +1,9 @@
 import os
 import PySimpleGUI as gui
 import json
+from pybundle import bundle_dir
 from platform import system
 from pdf.conduit._version import __version__
-from pdf.utils.path import bundle_dir
 
 
 def _read_config():
