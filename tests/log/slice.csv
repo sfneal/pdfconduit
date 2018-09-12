@@ -28,3 +28,7 @@
 2018-09-12 14:10:03,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.63,3.6.4,Darwin,8,16
 2018-09-12 14:49:03,TestSlice,test_slice,con docs2.pdf,PASS,0.33,3.6.6,Windows,4,3
 2018-09-12 14:49:04,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.33,3.6.6,Windows,4,3
+2018-09-12 15:48:59,TestSlice,test_slice,con docs2.pdf,PASS,0.41,3.6.4,Darwin,8,16
+2018-09-12 15:48:59,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.47,3.6.4,Darwin,8,16
+2018-09-12 15:52:20,TestSlice,test_slice,con docs2.pdf,PASS,0.34,3.7.0,Darwin,8,16
+2018-09-12 15:52:20,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.36,3.7.0,Darwin,8,16
