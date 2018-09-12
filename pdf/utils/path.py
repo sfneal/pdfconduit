@@ -2,8 +2,6 @@
 import os
 import sys
 from pathlib import Path
-from pybundle import bundle_dir, resource_path
-# TODO: Fix executable build
 
 
 if 'pathlib' in sys.modules:

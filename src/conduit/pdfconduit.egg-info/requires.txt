@@ -1,8 +1,9 @@
-PyPDF3>=0.0.6
+PyPDF3>=1.0.0
 pdfrw
 PyMuPDF
 Pillow
 reportlab
-PySimpleGUI
+PySimpleGUI>=3.0.3
 looptools
 tqdm
+pybundle

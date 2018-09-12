@@ -62,3 +62,11 @@
 
 2018-08-31 14:39:07,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,10.42,3.6.6,Windows,4,3
 
+2018-09-12 14:00:19,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,15.25,3.7.0,Darwin,8,16
+2018-09-12 14:00:33,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,13.49,3.7.0,Darwin,8,16
+2018-09-12 14:00:43,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,10.67,3.7.0,Darwin,8,16
+2018-09-12 14:00:54,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,10.39,3.7.0,Darwin,8,16
+2018-09-12 14:07:57,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,20.14,3.6.4,Darwin,8,16
+2018-09-12 14:08:13,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,15.71,3.6.4,Darwin,8,16
+2018-09-12 14:08:28,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,15.23,3.6.4,Darwin,8,16
+2018-09-12 14:08:43,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,15.14,3.6.4,Darwin,8,16

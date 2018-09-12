@@ -22,3 +22,7 @@
 2018-08-31 14:35:07,TestFlatten,test_flatten_tqdm,document.pdf,PASS,6.53,3.6.6,Windows,4,3
 2018-08-31 14:41:00,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,30.41,3.6.6,Windows,4,3
 2018-08-31 14:41:25,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,25.45,3.6.6,Windows,4,3
+2018-09-12 14:01:16,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,19.46,3.7.0,Darwin,8,16
+2018-09-12 14:01:33,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,16.56,3.7.0,Darwin,8,16
+2018-09-12 14:09:13,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,24.79,3.6.4,Darwin,8,16
+2018-09-12 14:09:36,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,22.89,3.6.4,Darwin,8,16

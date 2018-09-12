@@ -4,9 +4,10 @@ from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.pdf import PageObject
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from reportlab.lib.pagesizes import letter
+from pybundle import resource_path
 from ..upscale import upscale
 from ..rotate import rotate
-from pdf.utils import add_suffix, resource_path, Info
+from pdf.utils import add_suffix, Info
 
 
 class WatermarkAdd:

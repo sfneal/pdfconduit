@@ -23,7 +23,11 @@ def merge_logs(directory):
 
 def main():
     test_scripts = [os.path.join(directory, i) for i in os.listdir(directory)
-                    if not i.startswith('.') and os.path.isfile(i) and 'all' not in i and i != '__init__.py']
+                    if not i.startswith('.')
+                    and os.path.isfile(i)
+                    and i.endswith('.py')
+                    and 'all' not in i
+                    and i != '__init__.py']
 
     for i in test_scripts:
         print(i)
@@ -35,4 +39,4 @@ def main():
 
 
 if __name__ == '__main__':
-    merge_logs(directory)
+    main()
