@@ -14,7 +14,7 @@ Types if import:
 IMPORTANT: Do NOT post this list to the issue-tracker. Use it as a basis for
            yourself tracking down the missing module. Thanks!
 
-missing module named 'multiprocessing.forking' - imported by C:\Users\Stephen\Scripts\pdfconduit\venv\python36_build\lib\site-packages\PyInstaller\loader\rthooks\pyi_rth_multiprocessing.py (optional)
+missing module named 'multiprocessing.forking' - imported by C:\Users\Stephen\Scripts\pdfconduit\venv\python37_build\lib\site-packages\PyInstaller\loader\rthooks\pyi_rth_multiprocessing.py (optional)
 missing module named multiprocessing.get_context - imported by multiprocessing (top-level), multiprocessing.pool (top-level), multiprocessing.managers (top-level), multiprocessing.sharedctypes (top-level)
 missing module named multiprocessing.TimeoutError - imported by multiprocessing (top-level), multiprocessing.pool (top-level)
 missing module named multiprocessing.BufferTooShort - imported by multiprocessing (top-level), multiprocessing.connection (top-level)
@@ -45,7 +45,6 @@ missing module named termios - imported by tty (top-level), getpass (optional), 
 missing module named grp - imported by shutil (optional), tarfile (optional), pathlib (delayed), C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py (top-level)
 missing module named 'org.python' - imported by copy (optional), xml.sax (delayed, conditional), C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py (top-level)
 missing module named pwd - imported by posixpath (delayed, conditional), shutil (optional), tarfile (optional), http.server (delayed, optional), webbrowser (delayed), netrc (delayed, conditional), getpass (delayed), pathlib (delayed, conditional, optional), psutil (optional), C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py (top-level)
-missing module named _dummy_threading - imported by dummy_threading (optional), C:\Users\Stephen\Scripts\pdfconduit\exe\watermarker.py (top-level)
 missing module named rlextra - imported by reportlab.lib.pdfencrypt (delayed, optional)
 missing module named pyphen - imported by reportlab.platypus.paragraph (optional)
 missing module named htmlentitydefs - imported by reportlab.platypus.paraparser (conditional)
@@ -91,6 +90,7 @@ missing module named 'matplotlib.pyplot' - imported by tqdm._tqdm_gui (delayed)
 missing module named matplotlib - imported by tqdm._tqdm_gui (delayed)
 missing module named 'pandas.core' - imported by tqdm._tqdm (delayed, optional)
 missing module named pandas - imported by tqdm._tqdm (delayed)
+missing module named _uuid - imported by uuid (optional)
 missing module named netbios - imported by uuid (delayed)
 missing module named win32wnet - imported by uuid (delayed)
 missing module named Crypto - imported by pdfrw.crypt (optional)
