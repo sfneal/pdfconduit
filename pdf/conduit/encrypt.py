@@ -55,7 +55,7 @@ class Encrypt:
 
 
 def main():
-    from src.conduit.pdf import GUI
+    from pdf.gui.gui import GUI
     GUI.encrypt()
 
 
