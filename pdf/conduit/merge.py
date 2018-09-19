@@ -72,7 +72,7 @@ class Merge:
 
 
 def main():
-    from src.conduit.pdf import get_directory
+    from pdf.gui.gui import get_directory
     d = get_directory()
     m = Merge(d)
     print(m.output)
