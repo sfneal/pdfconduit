@@ -2,7 +2,7 @@ import os
 import PySimpleGUI as gui
 import json
 from platform import system
-from pybundle import bundle_dir
+from PyBundle import bundle_dir
 from pdf.conduit._version import __version__
 
 
