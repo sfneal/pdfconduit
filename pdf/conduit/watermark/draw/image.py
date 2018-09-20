@@ -1,7 +1,7 @@
 import os
 from tempfile import NamedTemporaryFile
 from PIL import Image, ImageEnhance, ImageDraw, ImageFont
-from pybundle import bundle_dir, resource_path
+from PyBundle import bundle_dir, resource_path
 from pdf.utils import FONT
 
 

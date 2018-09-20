@@ -2,7 +2,7 @@ import os
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.pagesizes import letter
-from pybundle import bundle_dir, resource_path
+from PyBundle import bundle_dir, resource_path
 
 
 def register_font(font='Vera.ttf'):

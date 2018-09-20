@@ -94,3 +94,15 @@
 2018-09-20 12:12:17,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,23.48,3.7.0,Windows,4,3
 2018-09-20 12:12:35,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,17.58,3.7.0,Windows,4,3
 2018-09-20 12:12:52,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,17.31,3.7.0,Windows,4,3
+2018-09-20 15:22:42,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,15.52,3.6.6,Windows,4,3
+2018-09-20 15:22:56,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,14.61,3.6.6,Windows,4,3
+2018-09-20 15:23:13,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,16.28,3.6.6,Windows,4,3
+2018-09-20 15:23:33,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,20.11,3.6.6,Windows,4,3
+2018-09-20 15:35:03,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,11.19,3.6.6,Windows,4,3
+2018-09-20 15:35:14,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,10.78,3.6.6,Windows,4,3
+2018-09-20 15:35:27,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,13.45,3.6.6,Windows,4,3
+2018-09-20 15:35:41,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,13.92,3.6.6,Windows,4,3
+2018-09-20 15:39:33,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,21.64,3.6.6,Windows,4,3
+2018-09-20 15:39:47,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,14.14,3.6.6,Windows,4,3
+2018-09-20 15:40:00,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,12.61,3.6.6,Windows,4,3
+2018-09-20 15:40:14,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,13.51,3.6.6,Windows,4,3

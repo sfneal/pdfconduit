@@ -42,12 +42,14 @@ class IMG2PDF:
 
                     pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
                     pdfs.append(pdf)
-                if not gui.EasyProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
+                if not gui.OneLineProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
                     break
             return pdfs
+
         # TQDM progress bar
         elif self.progress_bar is 'tqdm':
             loop = tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
+
         # No progress bar
         else:
             loop = self.imgs
