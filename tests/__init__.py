@@ -22,9 +22,9 @@ pdf = os.path.join(directory, file_name)
 
 def write_log(file_path, log):
     if os.path.isfile(file_path):
-        CSV.append(log, file_path)
+        CSV(file_path).append(log)
     else:
-        CSV.write(log, file_path)
+        CSV(file_path).write(log)
 
 
 def dump_log(test_case=None, time=None, result=None):
