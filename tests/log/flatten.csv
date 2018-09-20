@@ -44,3 +44,7 @@
 2018-09-20 12:14:25,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,69.56,3.7.0,Windows,4,3
 2018-09-20 15:24:08,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,33.17,3.6.6,Windows,4,3
 2018-09-20 15:25:22,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,73.61,3.6.6,Windows,4,3
+2018-09-20 15:35:59,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.78,3.6.6,Windows,4,3
+2018-09-20 15:36:50,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,51.03,3.6.6,Windows,4,3
+2018-09-20 15:40:32,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,18.09,3.6.6,Windows,4,3
+2018-09-20 15:41:17,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,44.19,3.6.6,Windows,4,3
