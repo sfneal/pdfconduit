@@ -44,3 +44,7 @@
 2018-09-20 15:37:44,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.42,3.6.6,Windows,4,3
 2018-09-20 15:42:07,TestSlice,test_slice,con docs2.pdf,PASS,0.83,3.6.6,Windows,4,3
 2018-09-20 15:42:08,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.86,3.6.6,Windows,4,3
+2018-09-20 15:58:26,TestSlice,test_slice,con docs2.pdf,PASS,0.53,3.7.0,Darwin,8,16
+2018-09-20 15:58:27,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.56,3.7.0,Darwin,8,16
+2018-09-20 16:03:35,TestSlice,test_slice,con docs2.pdf,PASS,0.48,3.6.4,Darwin,8,16
+2018-09-20 16:03:36,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.52,3.6.4,Darwin,8,16
