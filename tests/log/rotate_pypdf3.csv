@@ -74,3 +74,7 @@
 2018-09-12 16:14:47,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.47,3.6.6,Windows,4,3
 2018-09-12 16:14:47,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.52,3.6.6,Windows,4,3
 2018-09-12 16:14:48,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.48,3.6.6,Windows,4,3
+2018-09-20 12:15:42,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.84,3.7.0,Windows,4,3
+2018-09-20 12:15:43,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.95,3.7.0,Windows,4,3
+2018-09-20 12:15:44,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,1.11,3.7.0,Windows,4,3
+2018-09-20 12:15:45,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.94,3.7.0,Windows,4,3

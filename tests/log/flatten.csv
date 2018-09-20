@@ -40,3 +40,5 @@
 2018-09-12 16:10:34,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,38.33,3.7.0,Windows,4,3
 2018-09-12 16:13:19,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,19.06,3.6.6,Windows,4,3
 2018-09-12 16:14:05,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,46.59,3.6.6,Windows,4,3
+2018-09-20 12:13:16,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,22.89,3.7.0,Windows,4,3
+2018-09-20 12:14:25,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,69.56,3.7.0,Windows,4,3

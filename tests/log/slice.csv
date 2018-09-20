@@ -36,3 +36,5 @@
 2018-09-12 16:11:09,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.36,3.7.0,Windows,4,3
 2018-09-12 16:14:49,TestSlice,test_slice,con docs2.pdf,PASS,0.42,3.6.6,Windows,4,3
 2018-09-12 16:14:50,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.45,3.6.6,Windows,4,3
+2018-09-20 12:15:47,TestSlice,test_slice,con docs2.pdf,PASS,0.89,3.7.0,Windows,4,3
+2018-09-20 12:15:48,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.74,3.7.0,Windows,4,3
