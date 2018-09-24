@@ -98,3 +98,15 @@
 2018-09-20 16:03:11,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.63,3.6.4,Darwin,8,16
 2018-09-20 16:03:12,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.76,3.6.4,Darwin,8,16
 2018-09-20 16:03:12,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.88,3.6.4,Darwin,8,16
+2018-09-24 13:32:37,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.74,3.6.4,Darwin,8,16
+2018-09-24 13:32:38,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.69,3.6.4,Darwin,8,16
+2018-09-24 13:32:39,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.69,3.6.4,Darwin,8,16
+2018-09-24 13:32:39,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.66,3.6.4,Darwin,8,16
+2018-09-24 13:53:44,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.78,3.6.4,Darwin,8,16
+2018-09-24 13:53:44,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.71,3.6.4,Darwin,8,16
+2018-09-24 13:53:45,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.87,3.6.4,Darwin,8,16
+2018-09-24 13:53:46,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.77,3.6.4,Darwin,8,16
+2018-09-24 14:01:33,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,1.05,3.7.0,Darwin,8,16
+2018-09-24 14:01:33,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.84,3.7.0,Darwin,8,16
+2018-09-24 14:01:34,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.86,3.7.0,Darwin,8,16
+2018-09-24 14:01:35,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.9,3.7.0,Darwin,8,16

@@ -114,3 +114,15 @@
 2018-09-20 16:02:13,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,11.8,3.6.4,Darwin,8,16
 2018-09-20 16:02:27,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,13.46,3.6.4,Darwin,8,16
 2018-09-20 16:02:41,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,13.91,3.6.4,Darwin,8,16
+2018-09-24 13:31:23,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,15.91,3.6.4,Darwin,8,16
+2018-09-24 13:31:36,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,13.01,3.6.4,Darwin,8,16
+2018-09-24 13:31:49,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,13.06,3.6.4,Darwin,8,16
+2018-09-24 13:32:02,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,13.36,3.6.4,Darwin,8,16
+2018-09-24 13:51:59,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,20.21,3.6.4,Darwin,8,16
+2018-09-24 13:52:16,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,16.54,3.6.4,Darwin,8,16
+2018-09-24 13:52:31,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,14.79,3.6.4,Darwin,8,16
+2018-09-24 13:52:45,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,14.62,3.6.4,Darwin,8,16
+2018-09-24 13:59:23,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,17.92,3.7.0,Darwin,8,16
+2018-09-24 13:59:47,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,23.79,3.7.0,Darwin,8,16
+2018-09-24 14:00:07,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,19.51,3.7.0,Darwin,8,16
+2018-09-24 14:00:28,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,20.76,3.7.0,Darwin,8,16

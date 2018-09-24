@@ -48,3 +48,13 @@
 2018-09-20 15:58:04,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,21.51,3.7.0,Darwin,8,16
 2018-09-20 16:02:47,TestFlatten,test_flatten_gui,con docs2.pdf,ERROR,1.06,3.6.4,Darwin,8,16
 2018-09-20 16:03:08,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,21.47,3.6.4,Darwin,8,16
+2018-09-24 13:32:09,TestFlatten,test_flatten_gui,con docs2.pdf,ERROR,1.4,3.6.4,Darwin,8,16
+2018-09-24 13:32:35,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,26.55,3.6.4,Darwin,8,16
+2018-09-24 13:44:06,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,20.91,3.6.4,Darwin,8,16
+2018-09-24 13:44:29,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,23.55,3.6.4,Darwin,8,16
+2018-09-24 13:49:02,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,26.09,3.6.4,Darwin,8,16
+2018-09-24 13:49:30,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,27.41,3.6.4,Darwin,8,16
+2018-09-24 13:53:19,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,27.9,3.6.4,Darwin,8,16
+2018-09-24 13:53:41,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,22.51,3.6.4,Darwin,8,16
+2018-09-24 14:01:05,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,31.71,3.7.0,Darwin,8,16
+2018-09-24 14:01:30,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,25.84,3.7.0,Darwin,8,16

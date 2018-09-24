@@ -175,3 +175,39 @@ Encryption key size --> 128
 Permissions         --> Allow printing
 Secured PDF         --> con docs_secured.pdf
 ~run time~          --> min: 1.549218773841858
+*******************************************************************
+PDF Watermarker     --> 2018-09-24 13:39
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> charts.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> charts_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> charts_secured.pdf
+~run time~          --> sec: 2.3822319507598877
+*******************************************************************
+PDF Watermarker     --> 2018-09-24 13:40
+Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> workbook.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> workbook_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> workbook_secured.pdf
+~run time~          --> min: 2.623359469572703
