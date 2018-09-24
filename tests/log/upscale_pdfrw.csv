@@ -98,3 +98,11 @@
 2018-09-20 16:03:18,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,1.06,3.6.4,Darwin,8,16
 2018-09-20 16:03:19,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,1.04,3.6.4,Darwin,8,16
 2018-09-20 16:03:20,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.95,3.6.4,Darwin,8,16
+2018-09-24 13:19:47,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,0.84,3.6.4,Darwin,8,16
+2018-09-24 13:19:48,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.73,3.6.4,Darwin,8,16
+2018-09-24 13:19:48,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.78,3.6.4,Darwin,8,16
+2018-09-24 13:19:49,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.73,3.6.4,Darwin,8,16
+2018-09-24 13:26:25,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,0.7,3.6.4,Darwin,8,16
+2018-09-24 13:26:26,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.73,3.6.4,Darwin,8,16
+2018-09-24 13:26:26,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.81,3.6.4,Darwin,8,16
+2018-09-24 13:26:27,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.68,3.6.4,Darwin,8,16
