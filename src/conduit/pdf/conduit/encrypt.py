@@ -48,14 +48,13 @@ class Encrypt:
 
             # Write encrypted PDF to file
             with open(self.output, 'wb') as output_pdf:
-                # pdf_writer.write(output_pdf, progress_bar='gui')
                 pdf_writer.write(output_pdf, progress_bar=self.progress_bar,
                                  progress_bar_enabled=self.progress_bar_enabled)
         return self.output
 
 
 def main():
-    from src.conduit.pdf import GUI
+    from pdf.gui.gui import GUI
     GUI.encrypt()
 
 

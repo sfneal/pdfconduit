@@ -38,4 +38,4 @@ class Receipt:
                 f.write(item + '\n')
 
         if self.gui:
-            sg.MsgBox('Success!')
+            sg.Popup('Success!')
