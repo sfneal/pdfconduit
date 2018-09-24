@@ -35,8 +35,7 @@ def dump_log(test_case=None, time=None, result=None):
     file_path = os.path.join(os.path.dirname(__file__), 'log', fname)
 
     rows = [date_time, test_case[-2], test_case[-1], file_name, result, str(round(time, 2)), platform.python_version(),
-            platform.system(),
-            CPUs, MEM.total >> 30]
+            platform.system(), CPUs, MEM.total >> 30]
     return rows, file_path
 
 
