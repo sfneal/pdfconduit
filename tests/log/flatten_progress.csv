@@ -58,3 +58,5 @@
 2018-09-24 13:53:41,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,22.51,3.6.4,Darwin,8,16
 2018-09-24 14:01:05,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,31.71,3.7.0,Darwin,8,16
 2018-09-24 14:01:30,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,25.84,3.7.0,Darwin,8,16
+2018-09-24 14:11:07,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,21.81,3.6.6,Windows,4,3
+2018-09-24 14:11:30,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,22.55,3.6.6,Windows,4,3
