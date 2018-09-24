@@ -130,3 +130,7 @@
 2018-09-24 14:07:50,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,20.09,3.6.6,Windows,4,3
 2018-09-24 14:08:39,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,48.94,3.6.6,Windows,4,3
 2018-09-24 14:09:11,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,31.31,3.6.6,Windows,4,3
+2018-09-24 14:15:47,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,21.19,3.7.0,Windows,4,3
+2018-09-24 14:16:10,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,22.19,3.7.0,Windows,4,3
+2018-09-24 14:16:30,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,20.09,3.7.0,Windows,4,3
+2018-09-24 14:16:59,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,29.34,3.7.0,Windows,4,3

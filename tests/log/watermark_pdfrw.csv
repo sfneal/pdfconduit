@@ -202,3 +202,9 @@
 2018-09-24 14:11:55,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,3.98,3.6.6,Windows,4,3
 2018-09-24 14:11:58,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,3.05,3.6.6,Windows,4,3
 2018-09-24 14:12:02,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,2.88,3.6.6,Windows,4,3
+2018-09-24 14:21:15,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,con docs2.pdf,PASS,3.08,3.7.0,Windows,4,3
+2018-09-24 14:21:16,TestWatermarkMethodsPdfrw,test_watermark_label,con docs2.pdf,PASS,0.98,3.7.0,Windows,4,3
+2018-09-24 14:21:20,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,con docs2.pdf,PASS,3.92,3.7.0,Windows,4,3
+2018-09-24 14:21:24,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,3.36,3.7.0,Windows,4,3
+2018-09-24 14:21:30,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,6.22,3.7.0,Windows,4,3
+2018-09-24 14:21:36,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,5.67,3.7.0,Windows,4,3

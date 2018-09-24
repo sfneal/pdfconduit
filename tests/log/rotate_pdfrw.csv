@@ -122,3 +122,7 @@
 2018-09-24 14:11:34,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.47,3.6.6,Windows,4,3
 2018-09-24 14:11:34,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.44,3.6.6,Windows,4,3
 2018-09-24 14:11:35,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.52,3.6.6,Windows,4,3
+2018-09-24 14:20:55,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,0.64,3.7.0,Windows,4,3
+2018-09-24 14:20:55,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.51,3.7.0,Windows,4,3
+2018-09-24 14:20:56,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.58,3.7.0,Windows,4,3
+2018-09-24 14:20:57,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.58,3.7.0,Windows,4,3
