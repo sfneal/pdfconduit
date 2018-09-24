@@ -30,7 +30,8 @@ class PDF2IMG:
             data = []
             for i, cur_page in enumerate(range(len(self.doc))):
                 data.append(self._get_page_data(cur_page))
-                if not gui.OneLineProgressMeter('Getting PDF page data', i + 1, len(self.doc), orientation='h'):
+                if not gui.OneLineProgressMeter('Getting PDF page data', i + 1, len(self.doc), orientation='h',
+                                                key='progress'):
                     break
             return data
         # TQDM progress bar
@@ -88,7 +89,8 @@ class PDF2IMG:
                 saved.append(output)
                 with Image.open(BytesIO(img)) as image:
                     image.save(output)
-                if not gui.OneLineProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h'):
+                if not gui.OneLineProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h',
+                                                key='progress'):
                     break
             self.doc.close()
             return saved

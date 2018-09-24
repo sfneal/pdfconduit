@@ -42,7 +42,8 @@ class IMG2PDF:
 
                     pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
                     pdfs.append(pdf)
-                if not gui.OneLineProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs), orientation='h'):
+                if not gui.OneLineProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs),
+                                                orientation='h', key='progress'):
                     break
             return pdfs
 
