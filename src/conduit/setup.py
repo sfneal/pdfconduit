@@ -34,7 +34,8 @@ setup(
         'reportlab',
         'PyBundle>=1.0.5',
         'looptools',
-        'pdfconduit-utils'
+        'pdfconduit-utils',
+        'pdfconduit-modify'
     ],
     name='pdfconduit',
     version=verstr,
