@@ -3,11 +3,20 @@ __all__ = []
 
 # Conduit installation
 try:
-    from pdf.conduit import Encrypt, Merge, Watermark, Label, WatermarkAdd, Info
+    from pdf.conduit import Encrypt, Merge, Watermark, Label, WatermarkAdd
     CONDUIT_INSTALL = True
-    __all__.extend(["Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd", "Info"])
+    __all__.extend(["Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd"])
 except ImportError:
     CONDUIT_INSTALL = False
+
+
+# Utils installation
+try:
+    from pdf.utils import Info
+    UTILS_INSTALL = True
+    __all__.append("Info")
+except ImportError:
+    UTILS_INSTALL = False
 
 
 # GUI installation
