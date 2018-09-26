@@ -247,21 +247,3 @@ Encryption key size --> 128
 Permissions         --> Allow printing
 Secured PDF         --> con docs2_secured.pdf
 ~run time~          --> min: 1.2684896190961201
-*******************************************************************
-PDF Watermarker     --> 2018-09-26 13:10
-Directory           --> /Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
-PDF                 --> con docs.pdf
-Text1               --> 43 Indian Lane
-Text2               --> Franklin, MA
-Image               --> Wide.png
-WM Opacity          --> 8%
-WM Compression      --> False
-WM Flattening       --> True
-WM Placement        --> Overlay
-Watermarked PDF     --> con docs_watermarked.pdf
-User pw             --> baz
-Owner pw            --> foo
-Encryption key size --> 128
-Permissions         --> Allow printing
-Secured PDF         --> con docs_secured.pdf
-~run time~          --> min: 2.007602882385254
