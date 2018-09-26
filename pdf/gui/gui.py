@@ -2,7 +2,7 @@ import os
 import PySimpleGUI as gui
 import json
 from platform import system
-from PyBundle import bundle_dir
+from pdf.utils.path import available_images
 from pdf.conduit._version import __version__
 
 
@@ -13,26 +13,7 @@ def _read_config():
     return config
 
 
-def _image_directory():
-    directory = os.path.join(bundle_dir(), 'lib', 'img')
-    if os.path.exists(directory):
-        return directory
-    else:
-        print(directory, 'can not be found')
-
-
 HEADER = _read_config()["global_header"]
-
-
-IMAGE_DIRECTORY = _image_directory()
-
-
-def available_images():
-    imgs = [i for i in os.listdir(IMAGE_DIRECTORY) if not i.startswith('.')]
-    if len(imgs) > 0:
-        return sorted(imgs, reverse=True)
-    else:
-        return ['Add images...']
 
 
 def get_directory():
