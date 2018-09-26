@@ -10,7 +10,7 @@ from pdf.utils.path import add_suffix
 
 
 class PDF2IMG:
-    def __init__(self, file_name, tempdir=None, ext='png', progress_bar=None):
+    def __init__(self, file_name, tempdir=None, ext='.png', progress_bar=None):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
         self.tempdir = tempdir
