@@ -3,7 +3,8 @@ import os
 import shutil
 from tempfile import mkdtemp
 from looptools import Timer
-from pdf.utils import add_suffix, open_window, Receipt, IMAGE_DEFAULT, Info
+from pdf.utils import add_suffix, open_window, Receipt, Info
+from pdf.conduit.lib import IMAGE_DEFAULT
 from pdf.conduit.encrypt import Encrypt
 from pdf.conduit.watermark.draw import WatermarkDraw
 from pdf.conduit.watermark.add import WatermarkAdd
