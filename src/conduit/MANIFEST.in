@@ -1,0 +1,2 @@
+include pdf/conduit/lib/font/*
+include pdf/conduit/lib/img/*
