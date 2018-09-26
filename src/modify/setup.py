@@ -6,7 +6,7 @@ PDF modification package
 """
 
 # Retrieve version number
-VERSIONFILE = "pdf/convert/_version.py"
+VERSIONFILE = "pdf/modify/_version.py"
 verstrline = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
 mo = re.search(VSRE, verstrline, re.M)
