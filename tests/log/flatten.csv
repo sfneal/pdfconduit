@@ -70,3 +70,7 @@
 2018-09-26 11:36:34,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,53.23,3.7.0,Darwin,8,16
 2018-09-26 12:45:05,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.86,3.7.0,Darwin,8,16
 2018-09-26 12:45:55,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,50.13,3.7.0,Darwin,8,16
+2018-09-26 12:54:41,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,21.65,3.7.0,Darwin,8,16
+2018-09-26 12:55:33,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,51.98,3.7.0,Darwin,8,16
+2018-09-26 12:58:20,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,18.83,3.7.0,Darwin,8,16
+2018-09-26 12:59:27,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,67.44,3.7.0,Darwin,8,16

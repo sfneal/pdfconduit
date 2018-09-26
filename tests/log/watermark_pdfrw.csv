@@ -220,3 +220,15 @@
 2018-09-26 12:45:56,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,ERROR,0.0,3.7.0,Darwin,8,16
 2018-09-26 12:45:56,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,ERROR,0.0,3.7.0,Darwin,8,16
 2018-09-26 12:45:56,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,ERROR,0.0,3.7.0,Darwin,8,16
+2018-09-26 12:55:36,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,con docs2.pdf,PASS,1.93,3.7.0,Darwin,8,16
+2018-09-26 12:55:37,TestWatermarkMethodsPdfrw,test_watermark_label,con docs2.pdf,PASS,0.98,3.7.0,Darwin,8,16
+2018-09-26 12:55:40,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,con docs2.pdf,PASS,2.65,3.7.0,Darwin,8,16
+2018-09-26 12:55:42,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,2.48,3.7.0,Darwin,8,16
+2018-09-26 12:55:45,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,2.46,3.7.0,Darwin,8,16
+2018-09-26 12:55:47,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,2.35,3.7.0,Darwin,8,16
+2018-09-26 12:59:31,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,con docs2.pdf,PASS,2.47,3.7.0,Darwin,8,16
+2018-09-26 12:59:32,TestWatermarkMethodsPdfrw,test_watermark_label,con docs2.pdf,PASS,0.59,3.7.0,Darwin,8,16
+2018-09-26 12:59:35,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,con docs2.pdf,PASS,3.08,3.7.0,Darwin,8,16
+2018-09-26 12:59:38,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,3.68,3.7.0,Darwin,8,16
+2018-09-26 12:59:42,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,3.63,3.7.0,Darwin,8,16
+2018-09-26 12:59:46,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,3.74,3.7.0,Darwin,8,16
