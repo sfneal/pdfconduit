@@ -17,7 +17,7 @@ def register_font(font='Vera.ttf'):
 
 
 def _image_directory():
-    directory = os.path.join(bundle_dir(), 'lib', 'img')
+    directory = os.path.join(bundle_dir(), 'img')
     if os.path.exists(directory):
         return directory
     else:
