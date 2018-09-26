@@ -247,3 +247,137 @@ Encryption key size --> 128
 Permissions         --> Allow printing
 Secured PDF         --> con docs2_secured.pdf
 ~run time~          --> min: 1.2684896190961201
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:01
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs2.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs2_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> con docs2_secured.pdf
+~run time~          --> min: 2.3466145992279053
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:04
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> con docs.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> con docs_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> con docs_secured.pdf
+~run time~          --> min: 2.3096395134925842
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:19
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> article.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> article_watermarked.pdf
+User pw             --> 
+Owner pw            --> 
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> article_secured.pdf
+~run time~          --> sec: 1.7812538146972656
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:20
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> charts.pdf
+Text1               --> 43223
+Text2               --> 23r23f, 23f2f
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> charts_watermarked.pdf
+~run time~          --> sec: 0.4688076972961426
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:22
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> manual.pdf
+Text1               --> 44
+Text2               --> 4, 4
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> manual_watermarked.pdf
+~run time~          --> sec: 0.6874966621398926
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:24
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> article.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> article_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> article_secured.pdf
+~run time~          --> sec: 3.296915054321289
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:25
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> charts.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> charts_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> charts_secured.pdf
+~run time~          --> sec: 2.890366792678833
+*******************************************************************
+PDF Watermarker     --> 2018-09-26 14:27
+Directory           --> Z:/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data
+PDF                 --> article.pdf
+Text1               --> 43 Indian Lane
+Text2               --> Franklin, MA
+Image               --> Wide.png
+WM Opacity          --> 8%
+WM Compression      --> False
+WM Flattening       --> True
+WM Placement        --> Overlay
+Watermarked PDF     --> article_watermarked.pdf
+User pw             --> baz
+Owner pw            --> foo
+Encryption key size --> 128
+Permissions         --> Allow printing
+Secured PDF         --> article_secured.pdf
+~run time~          --> sec: 3.0781309604644775
