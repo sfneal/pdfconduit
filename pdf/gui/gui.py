@@ -2,7 +2,7 @@ import os
 import PySimpleGUI as gui
 import json
 from platform import system
-from pdf.utils.path import available_images
+from pdf.conduit.lib import available_images
 from pdf.conduit._version import __version__
 
 
