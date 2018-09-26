@@ -30,13 +30,11 @@ setup(
     install_requires=[
         'PyPDF3>=1.0.1',
         'pdfrw',
-        'PyMuPDF>=1.13.20',
         'Pillow',
         'reportlab',
         'PyBundle>=1.0.5',
-        'PySimpleGUI>=3.6.2',
         'looptools',
-        'tqdm',
+        'pdfconduit-utils'
     ],
     name='pdfconduit',
     version=verstr,
