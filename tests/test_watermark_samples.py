@@ -1,6 +1,6 @@
 import unittest
 import os
-from pdf.utils.samples import Samples
+from pdf.conduit.samples import Samples
 from tests import pdf
 
 
