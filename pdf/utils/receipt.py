@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-import PySimpleGUI as sg
+from sys import modules
 
 
 class Receipt:
@@ -9,12 +9,8 @@ class Receipt:
         self.use = use
         self.gui = gui
         self.items = []
-        self._print = self._gui_print if self.gui else print
+        self._print = print
         self.add('PDF Watermarker', datetime.now().strftime("%Y-%m-%d %H:%M"))
-
-    @staticmethod
-    def _gui_print(msg):
-        sg.Print(msg)
 
     def set_dst(self, doc, file_name='watermark receipt.txt'):
         self.dst = os.path.join(os.path.dirname(doc), file_name)
@@ -37,5 +33,6 @@ class Receipt:
             for item in self.items:
                 f.write(item + '\n')
 
-        if self.gui:
+        if self.gui and 'PySimpleGUI' in modules:
+            import PySimpleGUI as sg
             sg.Popup('Success!')
