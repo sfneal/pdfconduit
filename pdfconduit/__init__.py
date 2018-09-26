@@ -24,5 +24,3 @@ try:
     __all__.append("Flatten")
 except ImportError:
     MODIFY_INSTALLED = False
-
-print(__all__)
