@@ -12,9 +12,9 @@ except ImportError:
 
 # Utils installation
 try:
-    from pdf.utils import Info
+    from pdf.utils.info import Info
     UTILS_INSTALL = True
-    __all__.append("Info")
+    __all__.extend(["Info"])
 except ImportError:
     UTILS_INSTALL = False
 
@@ -23,7 +23,7 @@ except ImportError:
 try:
     from pdf.gui.gui import GUI
     GUI_INSTALLED = True
-    __all__.append("GUI")
+    __all__.extend(["GUI"])
 except ImportError:
     GUI_INSTALLED = False
 
@@ -39,8 +39,8 @@ except ImportError:
 
 # Convert installation
 try:
-    from pdf.convert import Flatten
+    from pdf.convert.flatten import Flatten
     MODIFY_INSTALLED = True
-    __all__.append("Flatten")
+    __all__.extend(["Flatten"])
 except ImportError:
     MODIFY_INSTALLED = False
