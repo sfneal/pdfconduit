@@ -13,7 +13,7 @@ if 'pathlib' in sys.modules:
 else:
     def _add_suffix(file_path, suffix, sep, ext):
         split = os.path.basename(file_path).rsplit('.', 1)
-        ext = split[1] if ext is None else ext
+        ext = split[1] if ext is None else str('.' + ext.strip('.'))
         return os.path.join(os.path.dirname(file_path), split[0] + sep + suffix + '.' + ext)
 
 
