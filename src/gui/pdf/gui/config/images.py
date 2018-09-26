@@ -2,8 +2,8 @@
 import os
 import shutil
 from pathlib import Path
-from pdf.utils.view import open_window
 from platform import system
+from pdf.utils.view import open_window
 from pdf.gui.view_pngs import view_pngs
 
 GUI_ROOT = os.path.dirname(os.path.dirname(__file__))

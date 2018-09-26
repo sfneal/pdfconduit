@@ -1,0 +1,15 @@
+MANIFEST.in
+setup.py
+pdf/__init__.py
+pdf/convert/__init__.py
+pdf/convert/_version.py
+pdf/convert/flatten.py
+pdf/convert/img2pdf.py
+pdf/convert/pdf2img.py
+pdfconduit/__init__.py
+pdfconduit_convert.egg-info/PKG-INFO
+pdfconduit_convert.egg-info/SOURCES.txt
+pdfconduit_convert.egg-info/dependency_links.txt
+pdfconduit_convert.egg-info/namespace_packages.txt
+pdfconduit_convert.egg-info/requires.txt
+pdfconduit_convert.egg-info/top_level.txt

@@ -8,10 +8,6 @@ pdf/gui/view_pngs.py
 pdf/gui/config/__init__.py
 pdf/gui/config/config.json
 pdf/gui/config/images.py
-pdf/gui/lib/img/Standard (no blocks).png
-pdf/gui/lib/img/Standard.png
-pdf/gui/lib/img/Wide (no blocks).png
-pdf/gui/lib/img/Wide.png
 pdfconduit_gui.egg-info/PKG-INFO
 pdfconduit_gui.egg-info/SOURCES.txt
 pdfconduit_gui.egg-info/dependency_links.txt

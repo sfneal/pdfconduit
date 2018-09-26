@@ -1,0 +1,12 @@
+Metadata-Version: 1.0
+Name: pdfconduit-modify
+Version: 1.0.0
+Summary: PDF toolkit for preparing documents for distribution.
+Home-page: https://github.com/mrstephenneal/pdfconduit
+Author: Stephen Neal
+Author-email: stephen@stephenneal.net
+License: UNKNOWN
+Description: 
+        PDF modification package
+        
+Platform: UNKNOWN

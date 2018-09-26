@@ -1,0 +1,17 @@
+MANIFEST.in
+setup.py
+pdf/__init__.py
+pdf/utils/__init__.py
+pdf/utils/_version.py
+pdf/utils/info.py
+pdf/utils/path.py
+pdf/utils/receipt.py
+pdf/utils/view.py
+pdf/utils/write.py
+pdfconduit/__init__.py
+pdfconduit_utils.egg-info/PKG-INFO
+pdfconduit_utils.egg-info/SOURCES.txt
+pdfconduit_utils.egg-info/dependency_links.txt
+pdfconduit_utils.egg-info/namespace_packages.txt
+pdfconduit_utils.egg-info/requires.txt
+pdfconduit_utils.egg-info/top_level.txt
