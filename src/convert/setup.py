@@ -21,9 +21,9 @@ setup(
         'Pillow',
         'PySimpleGUI>=3.6.2',
         'tqdm',
+        'pdfconduit',
         'pdfconduit-utils',
         'pdfconduit-modify',
-        'pdfconduit'
     ],
     name='pdfconduit-convert',
     version=verstr,
