@@ -19,6 +19,7 @@ setup(
     install_requires=[
         'pdfconduit',
         'pdfconduit-utils',
+        'pdfconduit-convert',
         'PySimpleGUI>=3.6.2'
     ],
     name='pdfconduit-gui',
