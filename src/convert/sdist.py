@@ -6,7 +6,7 @@ USERNAME = 'stephenneal'
 PASSWORD = 'pythonstealth19'
 
 SRC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdf', 'convert'))
-DST_PATH = os.path.join(os.path.dirname(__file__), 'pdf', 'conduit')
+DST_PATH = os.path.join(os.path.dirname(__file__), 'pdf', 'convert')
 
 
 def sync_folder(source, destination):
