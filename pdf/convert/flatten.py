@@ -3,8 +3,8 @@ import os
 from tempfile import mkdtemp
 from pdf.utils.path import add_suffix
 from pdf.modify.upscale import upscale
-from pdf.convert import IMG2PDF
-from pdf.convert import PDF2IMG
+from pdf.convert.img2pdf import IMG2PDF
+from pdf.convert.pdf2img import PDF2IMG
 
 
 class Flatten:
