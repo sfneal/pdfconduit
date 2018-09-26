@@ -7,8 +7,8 @@ a = Analysis(['watermarker.py'],
              pathex=['C:\\Users\\Stephen\\Scripts\\pdfconduit'],
              binaries=[],
              datas=[
-                 ('../pdf/utils/lib/font', 'lib/font'),
-                 ('../pdf/gui/lib/img', 'lib/img'),
+                 ('../pdf/conduit/lib/font', 'font'),
+                 ('../pdf/conduit/lib/img', 'img'),
                  ('../pdf/gui/config', 'pdf/gui/config')
              ],
              hiddenimports=[],
