@@ -10,9 +10,10 @@ from pdf.utils.path import add_suffix
 
 
 class PDF2IMG:
-    def __init__(self, file_name, tempdir=None, ext='.png', progress_bar=None):
+    def __init__(self, file_name, output=None, tempdir=None, ext='.png', progress_bar=None):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
+        self.output = output
         self.tempdir = tempdir
         self.ext = ext
         self.progress_bar = progress_bar
@@ -74,7 +75,9 @@ class PDF2IMG:
         return pix.getPNGData()  # return the PNG image
 
     def _get_output(self, index):
-        if not self.tempdir:
+        if self.output:
+            return self.output
+        elif not self.tempdir:
             output_file = add_suffix(self.file_name, str(index), ext=self.ext)
             return os.path.join(self.output_dir, output_file)
         else:
@@ -111,5 +114,6 @@ class PDF2IMG:
         return saved
 
 
-def pdf2img(file_name, tempdir=None, ext='png', progress_bar=None):
-    return PDF2IMG(file_name, tempdir, ext, progress_bar).save()
+def pdf2img(file_name, output=None, tempdir=None, ext='png', progress_bar=None):
+    """Wrapper function for PDF2IMG class"""
+    return PDF2IMG(file_name=file_name, output=output, tempdir=tempdir, ext=ext, progress_bar=progress_bar).save()
