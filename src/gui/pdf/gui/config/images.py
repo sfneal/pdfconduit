@@ -6,8 +6,8 @@ from platform import system
 from pdf.utils.view import open_window
 from pdf.gui.view_pngs import view_pngs
 
-GUI_ROOT = os.path.dirname(os.path.dirname(__file__))
-IMG_DIR = os.path.join(GUI_ROOT, 'lib', 'img')
+PDF_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+IMG_DIR = os.path.join(PDF_ROOT, 'conduit', 'lib', 'img')
 IMAGES = os.listdir(IMG_DIR)
 
 

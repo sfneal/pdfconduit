@@ -8,6 +8,9 @@ pdf/gui/view_pngs.py
 pdf/gui/config/__init__.py
 pdf/gui/config/config.json
 pdf/gui/config/images.py
+pdf/gui/forms/__init__.py
+pdf/gui/forms/merge.py
+pdf/gui/forms/watermark.py
 pdfconduit_gui.egg-info/PKG-INFO
 pdfconduit_gui.egg-info/SOURCES.txt
 pdfconduit_gui.egg-info/dependency_links.txt
