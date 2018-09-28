@@ -252,7 +252,8 @@ class GUI:
         def window():
             """GUI window for inputing Watermark parameters"""
             platform = system()
-            if system() is 'Windows':
+            # Tabbed layout for Windows
+            if platform is 'Windows':
                 with gui.FlexForm(title, default_element_size=(40, 1)) as form:
                     with gui.FlexForm(title) as form2:
                         layout_tab_1 = []
@@ -274,6 +275,7 @@ class GUI:
                                 button = but
                             values.extend(result)
                         return button, values, platform
+            # Standard layout for macOS
             else:
                 with gui.FlexForm(title, default_element_size=(40, 1)) as form:
                     layout = []
