@@ -8,7 +8,6 @@ from pdf.utils import open_window
 class MergeGUI:
     def __init__(self, directory=None):
         self.directory = directory
-        self.pdfs = {}
         self.run()
 
     def run(self):
