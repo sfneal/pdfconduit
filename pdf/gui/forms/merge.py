@@ -1,7 +1,7 @@
 import os
 import PySimpleGUI as sg
 from pdfconduit import Merge
-from pdf.gui.gui import _line
+from pdf.gui.gui import _line, header
 from pdf.utils import open_window
 
 
@@ -30,9 +30,9 @@ class MergeGUI:
 
         # Display form
         window = sg.Window('PDF Merger', default_element_size=(80, 1), grab_anywhere=False)
-        layout = [
-            [sg.Text('PDF File Merger', size=(20, 1), font=("Helvetica", 25))],
-
+        layout = []
+        layout.extend(header('PDF File Merger'))
+        form = [
             # Multi-selectable file list box
             [sg.Text('Select the PDF files you would like to merge', size=(40, 1), font=("Helvetica", 16))],
             [sg.Listbox(values=file_paths, size=(80, listbox_h), key='pdf_files', select_mode='multiple')],
@@ -53,6 +53,7 @@ class MergeGUI:
 
             [sg.Submit('Merge'), sg.Cancel()]
         ]
+        layout.extend(form)
 
         button, values = window.LayoutAndRead(layout)
         m = Merge(values['pdf_files'], output_name=values['file'], output_dir=values['folder'])
