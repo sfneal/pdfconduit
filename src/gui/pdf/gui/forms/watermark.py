@@ -4,8 +4,7 @@ from platform import system
 from pdfconduit import Watermark, Flatten
 from pdf.conduit.lib import available_images
 from pdf.utils import Receipt
-from pdf.conduit._version import __version__
-from pdf.gui.gui import HEADER, _line
+from pdf.gui.gui import _line, header
 
 
 LABEL_W = 20
@@ -49,15 +48,6 @@ class WatermarkGUI:
     def __init__(self):
         self.params = DEFAULT_PARAMS
         self.run()
-
-    @staticmethod
-    def header(global_head=HEADER):
-        head = [[gui.Text('Watermark utility', size=(30, 1), font=("Helvetica", 25), text_color='blue')],
-                [gui.Text('version: ' + __version__, size=(30, 1), font=("Helvetica", 16), text_color='blue')],
-                [_line()]]
-        if global_head:
-            head.insert(0, [gui.Text(global_head, size=(30, 1), font=("Helvetica", 25), text_color='blue')])
-        return head
 
     @staticmethod
     def footer(message='Click Submit to watermark PDF'):
@@ -202,7 +192,7 @@ class WatermarkGUI:
                 [_line()],
             ]
             layout = []
-            layout.extend(self.header())
+            layout.extend(header('Watermark utility'))
             layout.extend(inputs)
             layout.extend(self.footer())
 
@@ -242,14 +232,14 @@ class WatermarkGUI:
             self.params['owner_pw'] = ''
         self.params['flat'] = values['flat'] if platform == 'Darwin' else values[9]
         if button == 'Folder':
-            self.folder(self.params)
-            self.settings(self.params)
+            self.folder()
+            self.settings()
         elif button == 'Add':
-            self.add_image(self.params)
-            self.settings(self.params)
+            self.add_image()
+            self.settings()
         elif button == 'View':
-            self.view_images(self.params)
-            self.settings(self.params)
+            self.view_images()
+            self.settings()
 
     def run(self):
         if system() is not 'Windows':

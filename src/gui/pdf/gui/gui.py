@@ -41,6 +41,15 @@ def _line(char='_', width=105, size=(75, 1)):
     return gui.Text(char * width, size=size)
 
 
+def header(title, global_head=HEADER):
+    head = [[gui.Text(title, size=(30, 1), font=("Helvetica", 25), text_color='blue')],
+            [gui.Text('version: ' + __version__, size=(30, 1), font=("Helvetica", 16), text_color='blue')],
+            [_line()]]
+    if global_head:
+        head.insert(0, [gui.Text(global_head, size=(30, 1), font=("Helvetica", 25), text_color='blue')])
+    return head
+
+
 class GUI:
     @staticmethod
     def watermark():
