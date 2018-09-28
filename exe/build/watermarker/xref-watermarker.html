@@ -583,7 +583,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>'org.python'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#copy">copy</a>
+    <a href="#pickle">pickle</a>
  &#8226;   <a href="#watermarker.py">watermarker.py</a>
  &#8226;   <a href="#xml.sax">xml.sax</a>
 
@@ -2671,7 +2671,6 @@ imported by:
  &#8226;   <a href="#pdf.conduit.watermark.add">pdf.conduit.watermark.add</a>
  &#8226;   <a href="#pdf.conduit.watermark.draw.image">pdf.conduit.watermark.draw.image</a>
  &#8226;   <a href="#pdf.conduit.watermark.draw.pdf">pdf.conduit.watermark.draw.pdf</a>
- &#8226;   <a href="#pdf.utils.path">pdf.utils.path</a>
 
   </div>
 
@@ -2946,6 +2945,9 @@ imported by:
  &#8226;   <a href="#PySimpleGUI.PySimpleGUI">PySimpleGUI.PySimpleGUI</a>
  &#8226;   <a href="#pdf.convert.img2pdf">pdf.convert.img2pdf</a>
  &#8226;   <a href="#pdf.convert.pdf2img">pdf.convert.pdf2img</a>
+ &#8226;   <a href="#pdf.gui.forms.flatten">pdf.gui.forms.flatten</a>
+ &#8226;   <a href="#pdf.gui.forms.merge">pdf.gui.forms.merge</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
  &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
  &#8226;   <a href="#pdf.gui.view_pngs">pdf.gui.view_pngs</a>
  &#8226;   <a href="#pdf.utils.receipt">pdf.utils.receipt</a>
@@ -4999,8 +5001,8 @@ imported by:
   <a target="code" href="///C:/Python37/lib/copy.py" type="text/plain"><tt>copy</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'org.python'">'org.python'</a>
- &#8226;   <a href="#copyreg">copyreg</a>
+    <a href="#copyreg">copyreg</a>
+ &#8226;   <a href="#org">org</a>
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#weakref">weakref</a>
 
@@ -11345,7 +11347,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>org</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pickle">pickle</a>
+    <a href="#copy">copy</a>
  &#8226;   <a href="#watermarker.py">watermarker.py</a>
 
   </div>
@@ -11476,6 +11478,8 @@ imported by:
  &#8226;   <a href="#pdf.convert.img2pdf">pdf.convert.img2pdf</a>
  &#8226;   <a href="#pdf.convert.pdf2img">pdf.convert.pdf2img</a>
  &#8226;   <a href="#pdf.gui.config.images">pdf.gui.config.images</a>
+ &#8226;   <a href="#pdf.gui.forms.merge">pdf.gui.forms.merge</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
  &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
  &#8226;   <a href="#pdf.gui.view_pngs">pdf.gui.view_pngs</a>
  &#8226;   <a href="#pdf.modify.rotate">pdf.modify.rotate</a>
@@ -11744,7 +11748,7 @@ imported by:
  &#8226;   <a href="#pdf.conduit.watermark.draw.image">pdf.conduit.watermark.draw.image</a>
  &#8226;   <a href="#pdf.conduit.watermark.draw.pdf">pdf.conduit.watermark.draw.pdf</a>
  &#8226;   <a href="#pdf.conduit.watermark.watermark">pdf.conduit.watermark.watermark</a>
- &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
 
   </div>
 
@@ -12132,6 +12136,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdf.gui.config">pdf.gui.config</a>
+ &#8226;   <a href="#pdf.gui.forms">pdf.gui.forms</a>
  &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
  &#8226;   <a href="#pdf.gui.view_pngs">pdf.gui.view_pngs</a>
 
@@ -12175,7 +12180,90 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdf.gui.config">pdf.gui.config</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdf.gui.forms"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdf/gui/forms/__init__.py" type="text/plain"><tt>pdf.gui.forms</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#pdf.gui">pdf.gui</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdf.gui.forms.flatten">pdf.gui.forms.flatten</a>
+ &#8226;   <a href="#pdf.gui.forms.merge">pdf.gui.forms.merge</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdf.gui.forms.flatten"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdf/gui/forms/flatten.py" type="text/plain"><tt>pdf.gui.forms.flatten</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PySimpleGUI">PySimpleGUI</a>
+ &#8226;   <a href="#pdf.gui.forms">pdf.gui.forms</a>
  &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
+ &#8226;   <a href="#pdf.utils">pdf.utils</a>
+ &#8226;   <a href="#pdfconduit">pdfconduit</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdf.gui.gui">pdf.gui.gui</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdf.gui.forms.merge"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdf/gui/forms/merge.py" type="text/plain"><tt>pdf.gui.forms.merge</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PySimpleGUI">PySimpleGUI</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pdf.gui.forms">pdf.gui.forms</a>
+ &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
+ &#8226;   <a href="#pdf.utils">pdf.utils</a>
+ &#8226;   <a href="#pdfconduit">pdfconduit</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdf.gui.gui">pdf.gui.gui</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pdf.gui.forms.watermark"></a>
+  <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdf/gui/forms/watermark.py" type="text/plain"><tt>pdf.gui.forms.watermark</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PySimpleGUI">PySimpleGUI</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pdf.conduit.lib">pdf.conduit.lib</a>
+ &#8226;   <a href="#pdf.gui.config.images">pdf.gui.config.images</a>
+ &#8226;   <a href="#pdf.gui.forms">pdf.gui.forms</a>
+ &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
+ &#8226;   <a href="#pdf.utils">pdf.utils</a>
+ &#8226;   <a href="#pdfconduit">pdfconduit</a>
+ &#8226;   <a href="#platform">platform</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#pdf.gui.gui">pdf.gui.gui</a>
 
   </div>
 
@@ -12190,12 +12278,11 @@ imports:
  &#8226;   <a href="#json">json</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pdf.conduit._version">pdf.conduit._version</a>
- &#8226;   <a href="#pdf.conduit.lib">pdf.conduit.lib</a>
  &#8226;   <a href="#pdf.gui">pdf.gui</a>
- &#8226;   <a href="#pdf.gui.config.images">pdf.gui.config.images</a>
- &#8226;   <a href="#pdf.utils">pdf.utils</a>
+ &#8226;   <a href="#pdf.gui.forms.flatten">pdf.gui.forms.flatten</a>
+ &#8226;   <a href="#pdf.gui.forms.merge">pdf.gui.forms.merge</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
  &#8226;   <a href="#pdfconduit">pdfconduit</a>
- &#8226;   <a href="#platform">platform</a>
 
   </div>
   <div class="import">
@@ -12203,6 +12290,9 @@ imported by:
     <a href="#pdf.conduit.encrypt">pdf.conduit.encrypt</a>
  &#8226;   <a href="#pdf.conduit.merge">pdf.conduit.merge</a>
  &#8226;   <a href="#pdf.gui">pdf.gui</a>
+ &#8226;   <a href="#pdf.gui.forms.flatten">pdf.gui.forms.flatten</a>
+ &#8226;   <a href="#pdf.gui.forms.merge">pdf.gui.forms.merge</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
  &#8226;   <a href="#pdfconduit">pdfconduit</a>
 
   </div>
@@ -12338,7 +12428,9 @@ imported by:
  &#8226;   <a href="#pdf.conduit.watermark.draw.pdf">pdf.conduit.watermark.draw.pdf</a>
  &#8226;   <a href="#pdf.conduit.watermark.label">pdf.conduit.watermark.label</a>
  &#8226;   <a href="#pdf.conduit.watermark.watermark">pdf.conduit.watermark.watermark</a>
- &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
+ &#8226;   <a href="#pdf.gui.forms.flatten">pdf.gui.forms.flatten</a>
+ &#8226;   <a href="#pdf.gui.forms.merge">pdf.gui.forms.merge</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
  &#8226;   <a href="#pdf.utils.info">pdf.utils.info</a>
  &#8226;   <a href="#pdf.utils.path">pdf.utils.path</a>
  &#8226;   <a href="#pdf.utils.receipt">pdf.utils.receipt</a>
@@ -12374,8 +12466,7 @@ imported by:
   <a target="code" href="///C:/Users/Stephen/Scripts/pdfconduit/pdf/utils/path.py" type="text/plain"><tt>pdf.utils.path</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#PyBundle">PyBundle</a>
- &#8226;   <a href="#os">os</a>
+    <a href="#os">os</a>
  &#8226;   <a href="#pathlib">pathlib</a>
  &#8226;   <a href="#pdf.utils">pdf.utils</a>
  &#8226;   <a href="#sys">sys</a>
@@ -12468,7 +12559,10 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pdf.gui.gui">pdf.gui.gui</a>
+    <a href="#pdf.gui.forms.flatten">pdf.gui.forms.flatten</a>
+ &#8226;   <a href="#pdf.gui.forms.merge">pdf.gui.forms.merge</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
+ &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
  &#8226;   <a href="#watermarker.py">watermarker.py</a>
 
   </div>
@@ -12894,7 +12988,8 @@ imported by:
   <a target="code" href="///C:/Python37/lib/pickle.py" type="text/plain"><tt>pickle</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#_compat_pickle">_compat_pickle</a>
+    <a href="#'org.python'">'org.python'</a>
+ &#8226;   <a href="#_compat_pickle">_compat_pickle</a>
  &#8226;   <a href="#_pickle">_pickle</a>
  &#8226;   <a href="#argparse">argparse</a>
  &#8226;   <a href="#codecs">codecs</a>
@@ -12903,7 +12998,6 @@ imports:
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#itertools">itertools</a>
- &#8226;   <a href="#org">org</a>
  &#8226;   <a href="#pprint">pprint</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#struct">struct</a>
@@ -13003,7 +13097,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdf.gui.config.images">pdf.gui.config.images</a>
- &#8226;   <a href="#pdf.gui.gui">pdf.gui.gui</a>
+ &#8226;   <a href="#pdf.gui.forms.watermark">pdf.gui.forms.watermark</a>
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#reportlab.lib.utils">reportlab.lib.utils</a>
  &#8226;   <a href="#tests">tests</a>
