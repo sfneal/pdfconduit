@@ -25,12 +25,13 @@ class FlattenGUI:
         ]
 
         button, values = window.LayoutAndRead(layout)
-        f = Flatten(values['pdf'], progress_bar='gui')
-        open_window(f.pdf)
+        f = Flatten(values['pdf'], progress_bar='gui').save()
+        open_window(f)
 
 
 def main():
     FlattenGUI()
+
 
 if __name__ == '__main__':
     main()
