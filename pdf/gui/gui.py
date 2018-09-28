@@ -49,6 +49,12 @@ class GUI:
         WatermarkGUI()
 
     @staticmethod
+    def merge():
+        """Wrapper method for MergeGUI"""
+        from pdf.gui.forms.merge import MergeGUI
+        MergeGUI()
+
+    @staticmethod
     def encrypt():
         from pdfconduit import Encrypt
 
