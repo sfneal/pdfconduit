@@ -9,6 +9,7 @@ class MergeGUI:
     def __init__(self, directory=None):
         self.directory = directory
         self.pdfs = {}
+        self.run()
 
     def run(self):
         # Select directory if not already set
@@ -60,7 +61,7 @@ class MergeGUI:
 
 
 def main():
-    MergeGUI('/Users/Stephen/Dropbox/scripts/pdfconduit/tests/data').run()
+    MergeGUI().run()
 
 
 if __name__ == '__main__':
