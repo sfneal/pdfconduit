@@ -29,7 +29,7 @@ class Merge:
              List - Filters list to assert all list items are paths to PDF documents
         :return: List of PDF paths
         """
-        if type(input_pdfs) is list:
+        if isinstance(input_pdfs, list):
             return [pdf for pdf in input_pdfs if self.validate(pdf)]
         elif os.path.isdir(input_pdfs):
             return [os.path.join(input_pdfs, pdf) for pdf in os.listdir(input_pdfs) if self.validate(pdf)]
