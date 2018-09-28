@@ -43,6 +43,12 @@ def _line(char='_', width=105, size=(75, 1)):
 
 class GUI:
     @staticmethod
+    def watermark():
+        """Wrapper method for WatermarkGUI"""
+        from pdf.gui.forms.watermark import WatermarkGUI
+        WatermarkGUI()
+
+    @staticmethod
     def encrypt():
         from pdfconduit import Encrypt
 
