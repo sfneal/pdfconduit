@@ -23,7 +23,7 @@ setup(
         'tqdm',
         'pdfconduit',
         'pdfconduit-utils',
-        'pdfconduit-modify',
+        'pdfconduit-transform',
     ],
     name='pdfconduit-convert',
     version=verstr,

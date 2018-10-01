@@ -34,7 +34,7 @@ def secure(pdf, user_pw, owner_pw, restrict_permission=True, pdftk=get_pdftk_pat
 
     :param pdf: Path to PDF file
     :param user_pw: Password to open and view
-    :param owner_pw: Password to modify permissions
+    :param owner_pw: Password to transform permissions
     :param restrict_permission: Restrict permissions to print only
     :param pdftk: Path to pdftk binary
     :param output: Output path

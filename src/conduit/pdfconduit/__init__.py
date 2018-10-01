@@ -30,7 +30,7 @@ except ImportError:
 
 # Modify installation
 try:
-    from pdf.modify import upscale, rotate, slicer
+    from pdf.transform import upscale, rotate, slicer
     MODIFY_INSTALLED = True
     __all__.extend(["slicer", "upscale", "rotate"])
 except ImportError:

@@ -35,7 +35,7 @@ setup(
         'PyBundle>=1.0.5',
         'looptools',
         'pdfconduit-utils',
-        'pdfconduit-modify'
+        'pdfconduit-transform'
     ],
     name='pdfconduit',
     version=verstr,

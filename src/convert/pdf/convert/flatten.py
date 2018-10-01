@@ -2,7 +2,7 @@
 import os
 from tempfile import mkdtemp
 from pdf.utils.path import add_suffix
-from pdf.modify.upscale import upscale
+from pdf.transform.upscale import upscale
 from pdf.convert.img2pdf import IMG2PDF
 from pdf.convert.pdf2img import PDF2IMG
 

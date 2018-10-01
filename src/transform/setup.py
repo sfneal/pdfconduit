@@ -6,7 +6,7 @@ PDF modification package
 """
 
 # Retrieve version number
-VERSIONFILE = "pdf/modify/_version.py"
+VERSIONFILE = "pdf/transform/_version.py"
 verstrline = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
 mo = re.search(VSRE, verstrline, re.M)
@@ -21,7 +21,7 @@ setup(
         'pdfrw',
         'pdfconduit-utils'
     ],
-    name='pdfconduit-modify',
+    name='pdfconduit-transform',
     version=verstr,
     packages=find_packages(),
     namespace_packages=['pdf'],

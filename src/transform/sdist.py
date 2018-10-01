@@ -5,8 +5,8 @@ from time import sleep
 USERNAME = 'stephenneal'
 PASSWORD = 'pythonstealth19'
 
-SRC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdf', 'modify'))
-DST_PATH = os.path.join(os.path.dirname(__file__), 'pdf', 'modify')
+SRC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdf', 'transform'))
+DST_PATH = os.path.join(os.path.dirname(__file__), 'pdf', 'transform')
 
 SRC_PATH2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'pdfconduit'))
 DST_PATH2 = os.path.join(os.path.dirname(__file__), 'pdfconduit')
@@ -19,7 +19,7 @@ def sync_folder(source, destination):
 
 
 def main():
-    print('Creating ~~modify~~ source distribution')
+    print('Creating ~~transform~~ source distribution')
     sync_folder(SRC_PATH, DST_PATH)
     sync_folder(SRC_PATH2, DST_PATH2)
     os.chdir(os.path.dirname(__file__))

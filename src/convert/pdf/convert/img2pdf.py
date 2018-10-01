@@ -7,7 +7,7 @@ from tqdm import tqdm
 # TODO: Consider restructuring modules to avoid requiring conduit sub-module
 from pdf.conduit.watermark.canvas import CanvasImg, CanvasObjects
 from pdf.conduit.watermark.draw import WatermarkDraw
-# TODO: Consider moving to modify sub-module
+# TODO: Consider moving to transform sub-module
 from pdf.conduit.merge import Merge
 
 
