@@ -66,3 +66,5 @@
 2018-09-26 13:02:06,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.66,3.7.0,Darwin,8,16
 2018-09-26 13:43:18,TestSlice,test_slice,con docs2.pdf,PASS,0.28,3.6.6,Windows,4,3
 2018-09-26 13:43:18,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.34,3.6.6,Windows,4,3
+2018-10-01 12:46:48,TestSlice,test_slice,con docs2.pdf,PASS,0.7,3.7.0,Darwin,8,16
+2018-10-01 12:46:49,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.8,3.7.0,Darwin,8,16
