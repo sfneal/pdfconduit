@@ -1,4 +1,4 @@
-from pdf.conduit.lib import LETTER
+from pdf.modify import LETTER
 
 
 class CanvasStr:
