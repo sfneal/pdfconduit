@@ -90,3 +90,5 @@
 2018-10-01 13:58:58,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,69.4,3.7.0,Darwin,8,16
 2018-10-01 14:25:41,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,28.83,3.7.0,Windows,4,3
 2018-10-01 14:26:49,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,68.58,3.7.0,Windows,4,3
+2018-10-01 15:59:09,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,36.26,3.7.0,Windows,4,3.98 GB
+2018-10-01 16:00:52,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,102.36,3.7.0,Windows,4,3.98 GB
