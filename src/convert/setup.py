@@ -18,12 +18,9 @@ else:
 setup(
     install_requires=[
         'PyMuPDF>=1.13.20',
-        'Pillow',
-        'PySimpleGUI>=3.6.2',
-        'tqdm',
-        'pdfconduit',
         'pdfconduit-utils',
         'pdfconduit-transform',
+        'Pillow',
     ],
     name='pdfconduit-convert',
     version=verstr,
