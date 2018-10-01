@@ -1,5 +1,7 @@
 # PDF Conduit
 
+[![GuardRails badge](https://badges.production.guardrails.io/mrstephenneal/pdfconduit.svg)](https://www.guardrails.io)
+
 Prepare documents for distribution.
 
 A Pure-Python library built as a PDF toolkit.
