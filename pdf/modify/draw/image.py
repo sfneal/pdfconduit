@@ -2,7 +2,7 @@ import os
 from tempfile import NamedTemporaryFile
 from PIL import Image, ImageEnhance, ImageDraw, ImageFont
 from PyBundle import bundle_dir, resource_path
-from pdf.conduit.lib import FONT
+from pdf.modify import FONT
 
 
 def img_opacity(image, opacity, tempdir=None, bw=True):
