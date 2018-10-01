@@ -1,7 +1,7 @@
 # Convert a PNG image file to a PDF
 import os
 import shutil
-import PySimpleGUI as sg
+from sys import modules
 from PIL import Image
 from tqdm import tqdm
 from pdf.modify.canvas import CanvasImg, CanvasObjects
@@ -31,7 +31,8 @@ class IMG2PDF:
     def img2pdf(self):
         # TODO: Figure out weather this method is causing unclosed file warnings and errors
         # PySimpleGUI progress bar
-        if self.progress_bar is 'gui':
+        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
+            import PySimpleGUI as sg
             pdfs = []
             for index, i in enumerate(self.imgs):
                 with Image.open(i) as im:
@@ -66,7 +67,7 @@ class IMG2PDF:
             pdfs.append(pdf)
         return pdfs
 
-    def save(self, remove_temps=True, output_name='merged imgs'):
+    def save(self, output_name='merged imgs', remove_temps=True):
         m = str(Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir))
         if remove_temps:
             clean_temps(self.tempdir)

@@ -15,13 +15,6 @@ pdf/conduit/watermark/__init__.py
 pdf/conduit/watermark/add.py
 pdf/conduit/watermark/label.py
 pdf/conduit/watermark/watermark.py
-pdf/utils/__init__.py
-pdf/utils/_version.py
-pdf/utils/info.py
-pdf/utils/path.py
-pdf/utils/receipt.py
-pdf/utils/view.py
-pdf/utils/write.py
 pdfconduit/__init__.py
 pdfconduit.egg-info/PKG-INFO
 pdfconduit.egg-info/SOURCES.txt
