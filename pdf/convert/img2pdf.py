@@ -1,7 +1,7 @@
 # Convert a PNG image file to a PDF
 import os
 import shutil
-import PySimpleGUI as gui
+import PySimpleGUI as sg
 from PIL import Image
 from tqdm import tqdm
 from pdf.modify.canvas import CanvasImg, CanvasObjects
@@ -42,8 +42,8 @@ class IMG2PDF:
 
                     pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
                     pdfs.append(pdf)
-                if not gui.OneLineProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs),
-                                                orientation='h', key='progress'):
+                if not sg.OneLineProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs),
+                                               orientation='h', key='progress'):
                     break
             return pdfs
 
