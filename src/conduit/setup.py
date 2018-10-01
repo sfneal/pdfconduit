@@ -30,7 +30,7 @@ setup(
     install_requires=[
         'looptools',
         'pdfconduit-modify>=2.0.0',
-        'pdfconduit-transform>=1.1.0'
+        'pdfconduit-transform>=1.1.0',
         'pdfconduit-utils>=1.0.3',
     ],
     name='pdfconduit',
