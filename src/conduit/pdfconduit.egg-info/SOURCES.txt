@@ -5,11 +5,8 @@ pdf/conduit/__init__.py
 pdf/conduit/_version.py
 pdf/conduit/encrypt.py
 pdf/conduit/extract.py
-pdf/conduit/merge.py
 pdf/conduit/samples.py
 pdf/conduit/lib/__init__.py
-pdf/conduit/lib/lib.py
-pdf/conduit/lib/font/Vera.ttf
 pdf/conduit/lib/img/Standard (no blocks).png
 pdf/conduit/lib/img/Standard.png
 pdf/conduit/lib/img/Wide (no blocks).png
@@ -18,12 +15,6 @@ pdf/conduit/watermark/__init__.py
 pdf/conduit/watermark/add.py
 pdf/conduit/watermark/label.py
 pdf/conduit/watermark/watermark.py
-pdf/conduit/watermark/canvas/__init__.py
-pdf/conduit/watermark/canvas/constructor.py
-pdf/conduit/watermark/canvas/objects.py
-pdf/conduit/watermark/draw/__init__.py
-pdf/conduit/watermark/draw/image.py
-pdf/conduit/watermark/draw/pdf.py
 pdf/utils/__init__.py
 pdf/utils/_version.py
 pdf/utils/info.py

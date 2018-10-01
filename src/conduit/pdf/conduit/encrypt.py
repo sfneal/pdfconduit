@@ -1,6 +1,6 @@
 # Encrypt a PDF file with password protection
-from pdf.utils.path import add_suffix
 from PyPDF3 import PdfFileReader, PdfFileWriter
+from pdf.utils.path import add_suffix
 
 
 class Encrypt:
@@ -41,7 +41,7 @@ class Encrypt:
                                overwrite_permission=self.overwrite_permission)
 
             pdf_writer.addMetadata({
-                '/Producer': 'pdf',
+                '/Producer': 'pdfconduit',
                 '/Creator': 'HPA Design',
                 '/Author': 'HPA Design',
             })

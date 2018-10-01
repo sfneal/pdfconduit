@@ -2,7 +2,6 @@
 import os
 import sys
 from pathlib import Path
-from PyBundle import bundle_dir
 
 
 if 'pathlib' in sys.modules:

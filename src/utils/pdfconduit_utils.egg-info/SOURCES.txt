@@ -1,4 +1,3 @@
-MANIFEST.in
 setup.py
 pdf/__init__.py
 pdf/utils/__init__.py
