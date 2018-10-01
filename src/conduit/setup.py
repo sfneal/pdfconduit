@@ -28,9 +28,6 @@ else:
 
 setup(
     install_requires=[
-        'PyPDF3>=1.0.1',
-        'pdfrw',
-        'Pillow',
         'pdfconduit-modify',
         'pdfconduit-transform'
         'pdfconduit-utils',

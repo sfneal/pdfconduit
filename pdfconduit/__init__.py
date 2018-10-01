@@ -3,9 +3,9 @@ __all__ = []
 
 # Conduit installation
 try:
-    from pdf.conduit import Encrypt, Merge, Watermark, Label, WatermarkAdd
+    from pdf.conduit import Encrypt, Watermark, Label, WatermarkAdd
     CONDUIT_INSTALL = True
-    __all__.extend(["Encrypt", "Merge", "Watermark", "Label", "WatermarkAdd"])
+    __all__.extend(["Encrypt", "Watermark", "Label", "WatermarkAdd"])
 except ImportError:
     CONDUIT_INSTALL = False
 
@@ -30,9 +30,9 @@ except ImportError:
 
 # Modify installation
 try:
-    from pdf.transform import upscale, rotate, slicer
+    from pdf.transform import upscale, rotate, slicer, Merge
     MODIFY_INSTALLED = True
-    __all__.extend(["slicer", "upscale", "rotate"])
+    __all__.extend(["slicer", "upscale", "rotate", "Merge"])
 except ImportError:
     MODIFY_INSTALLED = False
 

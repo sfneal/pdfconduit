@@ -1,5 +1,5 @@
 from pdf.conduit.encrypt import Encrypt
-from pdf.conduit.merge import Merge
+from pdf.transform.merge import Merge
 from pdf.conduit.watermark import WatermarkAdd, Watermark, Label
 
 

@@ -8,7 +8,7 @@ from tqdm import tqdm
 from pdf.conduit.watermark.canvas import CanvasImg, CanvasObjects
 from pdf.conduit.watermark.draw import WatermarkDraw
 # TODO: Consider moving to transform sub-module
-from pdf.conduit.merge import Merge
+from pdf.transform.merge import Merge
 
 
 def clean_temps(tempdir):
