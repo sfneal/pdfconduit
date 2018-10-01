@@ -78,3 +78,5 @@
 2018-10-01 13:53:59,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,32.59,3.7.0,Darwin,8,16
 2018-10-01 13:55:42,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,27.85,3.7.0,Darwin,8,16
 2018-10-01 13:56:12,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,30.21,3.7.0,Darwin,8,16
+2018-10-01 14:01:27,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,25.79,3.7.0,Darwin,8,16
+2018-10-01 14:01:51,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,23.87,3.7.0,Darwin,8,16

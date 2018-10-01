@@ -86,6 +86,8 @@
 2018-10-01 13:28:51,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,53.25,3.7.0,Darwin,8,16
 2018-10-01 13:49:43,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,28.77,3.7.0,Darwin,8,16
 2018-10-01 13:51:04,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,81.35,3.7.0,Darwin,8,16
+2018-10-01 13:57:48,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,23.06,3.7.0,Darwin,8,16
+2018-10-01 13:58:58,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,69.4,3.7.0,Darwin,8,16
 2018-08-31 13:59:15,TestEncrypt,test_encrypt_128bit,article.pdf,PASS,0.47,3.6.4,Darwin,8,16
 2018-08-31 13:59:16,TestEncrypt,test_encrypt_40bit,article.pdf,PASS,0.43,3.6.4,Darwin,8,16
 2018-08-31 13:59:16,TestEncrypt,test_encrypt_commenting,article.pdf,PASS,0.53,3.6.4,Darwin,8,16
@@ -238,6 +240,10 @@
 2018-10-01 13:52:16,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,21.0,3.7.0,Darwin,8,16
 2018-10-01 13:52:39,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,22.91,3.7.0,Darwin,8,16
 2018-10-01 13:53:00,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,21.13,3.7.0,Darwin,8,16
+2018-10-01 13:59:49,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,25.23,3.7.0,Darwin,8,16
+2018-10-01 14:00:15,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,25.97,3.7.0,Darwin,8,16
+2018-10-01 14:00:38,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,23.91,3.7.0,Darwin,8,16
+2018-10-01 14:00:58,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,19.42,3.7.0,Darwin,8,16
 2018-08-31 13:59:46,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,2.3,3.6.4,Darwin,8,16
 2018-08-31 13:59:49,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,2.71,3.6.4,Darwin,8,16
 2018-08-31 13:59:51,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,2.24,3.6.4,Darwin,8,16
@@ -394,6 +400,10 @@
 2018-10-01 13:54:08,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.81,3.7.0,Darwin,8,16
 2018-10-01 13:54:09,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.88,3.7.0,Darwin,8,16
 2018-10-01 13:54:09,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.97,3.7.0,Darwin,8,16
+2018-10-01 14:02:00,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,0.95,3.7.0,Darwin,8,16
+2018-10-01 14:02:01,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.88,3.7.0,Darwin,8,16
+2018-10-01 14:02:02,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.87,3.7.0,Darwin,8,16
+2018-10-01 14:02:03,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.84,3.7.0,Darwin,8,16
 2018-08-31 13:59:36,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,1.62,3.6.4,Darwin,8,16
 2018-08-31 13:59:38,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,1.7,3.6.4,Darwin,8,16
 2018-08-31 13:59:39,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,1.64,3.6.4,Darwin,8,16
@@ -550,6 +560,10 @@
 2018-10-01 13:53:02,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.67,3.7.0,Darwin,8,16
 2018-10-01 13:53:03,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.62,3.7.0,Darwin,8,16
 2018-10-01 13:53:03,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.54,3.7.0,Darwin,8,16
+2018-10-01 14:00:59,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,0.55,3.7.0,Darwin,8,16
+2018-10-01 14:01:00,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.45,3.7.0,Darwin,8,16
+2018-10-01 14:01:00,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.44,3.7.0,Darwin,8,16
+2018-10-01 14:01:01,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.44,3.7.0,Darwin,8,16
 2018-08-31 13:59:23,TestFlatten,test_flatten_gui,article.pdf,PASS,1.36,3.6.4,Darwin,8,16
 2018-08-31 13:59:25,TestFlatten,test_flatten_tqdm,article.pdf,PASS,1.5,3.6.4,Darwin,8,16
 2018-08-31 14:06:32,TestFlatten,test_flatten_gui,plan_l.pdf,PASS,0.6,3.6.4,Darwin,8,16
@@ -628,6 +642,10 @@
 2018-10-01 13:30:32,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,18.41,3.7.0,Darwin,8,16
 2018-10-01 13:53:26,TestFlatten,test_flatten_gui,con docs2.pdf,FAIL,21.14,3.7.0,Darwin,8,16
 2018-10-01 13:53:59,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,32.59,3.7.0,Darwin,8,16
+2018-10-01 13:55:42,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,27.85,3.7.0,Darwin,8,16
+2018-10-01 13:56:12,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,30.21,3.7.0,Darwin,8,16
+2018-10-01 14:01:27,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,25.79,3.7.0,Darwin,8,16
+2018-10-01 14:01:51,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,23.87,3.7.0,Darwin,8,16
 2018-08-31 13:59:28,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.77,3.6.4,Darwin,8,16
 2018-08-31 13:59:30,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,2.63,3.6.4,Darwin,8,16
 2018-08-31 14:06:39,TestMerge,test_merge_pdfrw,plan_l.pdf,PASS,0.7,3.6.4,Darwin,8,16
@@ -700,6 +718,8 @@
 2018-10-01 13:30:37,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.97,3.7.0,Darwin,8,16
 2018-10-01 13:54:04,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.3,3.7.0,Darwin,8,16
 2018-10-01 13:54:05,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,1.08,3.7.0,Darwin,8,16
+2018-10-01 14:01:57,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.35,3.7.0,Darwin,8,16
+2018-10-01 14:01:58,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,1.18,3.7.0,Darwin,8,16
 2018-08-31 14:00:20,TestSlice,test_slice,con docs2.pdf,PASS,2.34,3.6.4,Darwin,8,16
 2018-08-31 14:00:23,TestSlice,test_slice_4to7,con docs2.pdf,PASS,2.67,3.6.4,Darwin,8,16
 2018-08-31 14:07:06,TestSlice,test_slice,plan_l.pdf,PASS,0.04,3.6.4,Darwin,8,16
@@ -774,6 +794,8 @@
 2018-10-01 13:31:11,TestSlice,test_slice_4to7,con docs2.pdf,PASS,2.83,3.7.0,Darwin,8,16
 2018-10-01 13:54:12,TestSlice,test_slice,con docs2.pdf,PASS,0.74,3.7.0,Darwin,8,16
 2018-10-01 13:54:13,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.98,3.7.0,Darwin,8,16
+2018-10-01 14:02:21,TestSlice,test_slice,con docs2.pdf,PASS,0.66,3.7.0,Darwin,8,16
+2018-10-01 14:02:22,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.71,3.7.0,Darwin,8,16
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_180_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_270_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_90_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
@@ -922,6 +944,10 @@
 2018-10-01 13:54:01,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.7,3.7.0,Darwin,8,16
 2018-10-01 13:54:02,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.76,3.7.0,Darwin,8,16
 2018-10-01 13:54:02,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.66,3.7.0,Darwin,8,16
+2018-10-01 14:01:53,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.98,3.7.0,Darwin,8,16
+2018-10-01 14:01:54,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.71,3.7.0,Darwin,8,16
+2018-10-01 14:01:55,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.77,3.7.0,Darwin,8,16
+2018-10-01 14:01:56,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.72,3.7.0,Darwin,8,16
 2018-08-31 13:59:09,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,article.pdf,PASS,3.53,3.6.4,Darwin,8,16
 2018-08-31 13:59:10,TestWatermarkMethodsPdfrw,test_watermark_label,article.pdf,PASS,1.43,3.6.4,Darwin,8,16
 2018-08-31 13:59:14,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,article.pdf,PASS,3.63,3.6.4,Darwin,8,16
@@ -1192,3 +1218,9 @@
 2018-10-01 13:53:22,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,5.27,3.7.0,Darwin,8,16
 2018-10-01 13:53:27,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,5.07,3.7.0,Darwin,8,16
 2018-10-01 13:53:33,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,6.27,3.7.0,Darwin,8,16
+2018-10-01 13:59:02,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,con docs2.pdf,PASS,2.82,3.7.0,Darwin,8,16
+2018-10-01 13:59:03,TestWatermarkMethodsPdfrw,test_watermark_label,con docs2.pdf,PASS,0.85,3.7.0,Darwin,8,16
+2018-10-01 13:59:07,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,con docs2.pdf,PASS,3.93,3.7.0,Darwin,8,16
+2018-10-01 13:59:11,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,4.72,3.7.0,Darwin,8,16
+2018-10-01 13:59:17,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,5.29,3.7.0,Darwin,8,16
+2018-10-01 13:59:22,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,5.17,3.7.0,Darwin,8,16

@@ -72,3 +72,5 @@
 2018-10-01 13:31:11,TestSlice,test_slice_4to7,con docs2.pdf,PASS,2.83,3.7.0,Darwin,8,16
 2018-10-01 13:54:12,TestSlice,test_slice,con docs2.pdf,PASS,0.74,3.7.0,Darwin,8,16
 2018-10-01 13:54:13,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.98,3.7.0,Darwin,8,16
+2018-10-01 14:02:21,TestSlice,test_slice,con docs2.pdf,PASS,0.66,3.7.0,Darwin,8,16
+2018-10-01 14:02:22,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.71,3.7.0,Darwin,8,16
