@@ -18,8 +18,8 @@ else:
 setup(
     install_requires=[
         'reportlab',
-        'Pillow'
         'pdfrw',
+        'Pillow'
         'pdfconduit-utils',
     ],
     name='pdfconduit-modify',
