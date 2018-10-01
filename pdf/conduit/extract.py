@@ -1,6 +1,6 @@
 # Extract images from a PDF
-from PIL import Image
 from pdf.utils.info import Info
+from PIL import Image
 
 
 # Todo: Fix img_extract and develop tests
