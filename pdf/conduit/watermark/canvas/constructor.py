@@ -1,6 +1,6 @@
 from datetime import datetime
-from .objects import CanvasObjects, CanvasStr, CanvasImg
-from ..draw.image import DrawPIL
+from pdf.conduit.watermark.objects import CanvasObjects, CanvasStr, CanvasImg
+from pdf.conduit.watermark.draw.image import DrawPIL
 
 
 class CanvasConstructor:

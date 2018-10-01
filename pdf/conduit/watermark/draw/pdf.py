@@ -4,8 +4,8 @@ from tempfile import NamedTemporaryFile, mkdtemp
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from PyBundle import resource_path
-from .image import img_opacity
-from ..canvas import CanvasStr, CanvasImg
+from pdf.conduit.watermark.draw.image import img_opacity
+from pdf.conduit.watermark.canvas import CanvasStr, CanvasImg
 from pdf.utils import write_pdf
 from pdf.conduit.lib import LETTER
 
