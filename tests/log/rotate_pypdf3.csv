@@ -138,3 +138,7 @@
 2018-10-01 12:46:38,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.81,3.7.0,Darwin,8,16
 2018-10-01 12:46:39,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.93,3.7.0,Darwin,8,16
 2018-10-01 12:46:40,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.83,3.7.0,Darwin,8,16
+2018-10-01 13:30:33,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.65,3.7.0,Darwin,8,16
+2018-10-01 13:30:34,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.61,3.7.0,Darwin,8,16
+2018-10-01 13:30:35,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.72,3.7.0,Darwin,8,16
+2018-10-01 13:30:35,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.67,3.7.0,Darwin,8,16
