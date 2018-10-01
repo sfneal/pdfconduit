@@ -4,12 +4,8 @@ import shutil
 import PySimpleGUI as gui
 from PIL import Image
 from tqdm import tqdm
-
-# TODO: Consider restructuring modules to avoid requiring conduit sub-module
 from pdf.modify.canvas import CanvasImg, CanvasObjects
 from pdf.modify.draw import WatermarkDraw
-
-# TODO: Consider moving to transform sub-module
 from pdf.transform.merge import Merge
 
 
