@@ -6,9 +6,9 @@ from looptools import Timer
 from pdf.utils import add_suffix, open_window, Receipt, Info
 from pdf.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
 from pdf.conduit.encrypt import Encrypt
-from pdf.conduit.watermark.draw import WatermarkDraw
+from pdf.modify.draw import WatermarkDraw
+from pdf.modify.canvas import CanvasConstructor
 from pdf.conduit.watermark.add import WatermarkAdd
-from pdf.conduit.watermark.canvas import CanvasConstructor
 
 
 class Watermark:
