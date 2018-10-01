@@ -28,6 +28,7 @@ else:
 
 setup(
     install_requires=[
+        'looptools',
         'pdfconduit-modify',
         'pdfconduit-transform'
         'pdfconduit-utils',
