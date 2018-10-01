@@ -1,12 +1,12 @@
 Metadata-Version: 1.0
-Name: pdfconduit-convert
-Version: 1.1.3
+Name: pdfconduit-transform
+Version: 1.1.1
 Summary: PDF toolkit for preparing documents for distribution.
 Home-page: https://github.com/mrstephenneal/pdfconduit
 Author: Stephen Neal
 Author-email: stephen@stephenneal.net
 License: UNKNOWN
 Description: 
-        PDF conversion package
+        PDF modification package
         
 Platform: UNKNOWN

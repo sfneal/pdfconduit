@@ -1,7 +1,7 @@
 # Convert each page of PDF to images
 import os
 import fitz
-import PySimpleGUI as gui
+from sys import modules
 from io import BytesIO
 from PIL import Image
 from tempfile import NamedTemporaryFile
@@ -27,7 +27,8 @@ class PDF2IMG:
 
     def _get_pdf_data(self):
         # PySimpleGUI progress bar
-        if self.progress_bar is 'gui':
+        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
+            import PySimpleGUI as gui
             data = []
             for i, cur_page in enumerate(range(len(self.doc))):
                 data.append(self._get_page_data(cur_page))
@@ -35,6 +36,7 @@ class PDF2IMG:
                                                 key='progress'):
                     break
             return data
+
         # TQDM progress bar
         elif self.progress_bar is 'tqdm':
             return [self._get_page_data(cur_page) for cur_page in tqdm(range(len(self.doc)),
@@ -85,7 +87,8 @@ class PDF2IMG:
 
     def save(self):
         # PySimpleGUI progress bar
-        if self.progress_bar is 'gui':
+        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
+            import PySimpleGUI as gui
             saved = []
             for i, img in enumerate(self.pdf_data):
                 output = self._get_output(i)

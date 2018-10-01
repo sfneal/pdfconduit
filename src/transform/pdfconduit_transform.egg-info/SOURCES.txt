@@ -1,0 +1,15 @@
+setup.py
+pdf/__init__.py
+pdf/transform/__init__.py
+pdf/transform/_version.py
+pdf/transform/merge.py
+pdf/transform/rotate.py
+pdf/transform/slice.py
+pdf/transform/upscale.py
+pdfconduit/__init__.py
+pdfconduit_transform.egg-info/PKG-INFO
+pdfconduit_transform.egg-info/SOURCES.txt
+pdfconduit_transform.egg-info/dependency_links.txt
+pdfconduit_transform.egg-info/namespace_packages.txt
+pdfconduit_transform.egg-info/requires.txt
+pdfconduit_transform.egg-info/top_level.txt

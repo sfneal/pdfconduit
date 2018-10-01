@@ -1,0 +1,4 @@
+reportlab
+pdfrw
+Pillow
+pdfconduit-utils>=1.0.3
