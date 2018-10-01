@@ -4,10 +4,10 @@ from pdf.modify.draw.image import DrawPIL
 
 
 class CanvasConstructor:
-    def __init__(self, text1=None, text2=None, copyright=None, image=None, rotate=0, opacity=0.08, tempdir=None):
+    def __init__(self, text1=None, text2=None, copyright_=None, image=None, rotate=0, opacity=0.08, tempdir=None):
         self.text1 = text1
         self.text2 = text2
-        self.copyright = copyright
+        self.copyright = copyright_
         self.image = image
         self.rotate = rotate
         self.opacity = opacity
