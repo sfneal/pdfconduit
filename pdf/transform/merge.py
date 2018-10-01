@@ -53,6 +53,7 @@ class Merge:
         # writing combined pdf to output pdf file
         with open(output, 'wb') as f:
             pdf_merger.write(f)
+        pdf_merger.close()
         return output
 
     @staticmethod
