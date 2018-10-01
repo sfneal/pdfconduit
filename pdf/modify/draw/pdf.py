@@ -4,10 +4,10 @@ from tempfile import NamedTemporaryFile, mkdtemp
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from PyBundle import resource_path
+from pdf.modify import LETTER
 from pdf.modify.draw.image import img_opacity
 from pdf.modify.canvas import CanvasStr, CanvasImg
 from pdf.utils import write_pdf
-from pdf.conduit.lib import LETTER
 
 
 def text_width(string, font_name, font_size):
