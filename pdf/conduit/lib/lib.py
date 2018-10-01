@@ -1,7 +1,6 @@
 import os
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.pagesizes import letter
 from PyBundle import bundle_dir, resource_path
 
 
@@ -36,5 +35,4 @@ def available_images():
 
 
 FONT = register_font()
-LETTER = letter[1], letter[0]
 IMAGE_DEFAULT = resource_path('Wide.png')
