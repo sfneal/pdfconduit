@@ -2,12 +2,11 @@
 import os
 import shutil
 from tempfile import mkdtemp
-from looptools import Timer
 from pdf.utils import add_suffix, open_window, Receipt, Info
-from pdf.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
-from pdf.conduit.encrypt import Encrypt
 from pdf.modify.draw import WatermarkDraw
 from pdf.modify.canvas import CanvasConstructor
+from pdf.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
+from pdf.conduit.encrypt import Encrypt
 from pdf.conduit.watermark.add import WatermarkAdd
 
 
@@ -33,7 +32,6 @@ class Watermark:
         :param use_receipt: bool
             Print receipt information to console and write to file
         """
-        self.time = Timer()
         self.document_og = document
         self.document = self.document_og
         self.watermark = None

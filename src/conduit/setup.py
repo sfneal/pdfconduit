@@ -31,11 +31,9 @@ setup(
         'PyPDF3>=1.0.1',
         'pdfrw',
         'Pillow',
-        'reportlab',
-        'PyBundle>=1.0.5',
-        'looptools',
-        'pdfconduit-utils',
+        'pdfconduit-modify',
         'pdfconduit-transform'
+        'pdfconduit-utils',
     ],
     name='pdfconduit',
     version=verstr,

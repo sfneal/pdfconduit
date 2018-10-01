@@ -41,7 +41,7 @@ class Encrypt:
                                overwrite_permission=self.overwrite_permission)
 
             pdf_writer.addMetadata({
-                '/Producer': 'pdf',
+                '/Producer': 'pdfconduit',
                 '/Creator': 'HPA Design',
                 '/Author': 'HPA Design',
             })
