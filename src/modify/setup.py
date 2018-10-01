@@ -20,7 +20,7 @@ setup(
         'reportlab',
         'pdfrw',
         'Pillow'
-        'pdfconduit-utils',
+        'pdfconduit-utils>=1.0.3',
     ],
     name='pdfconduit-modify',
     version=verstr,
