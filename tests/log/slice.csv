@@ -76,3 +76,5 @@
 2018-10-01 14:02:22,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.71,3.7.0,Darwin,8,16
 2018-10-01 14:27:50,TestSlice,test_slice,con docs2.pdf,PASS,0.36,3.7.0,Windows,4,3
 2018-10-01 14:27:50,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.39,3.7.0,Windows,4,3
+2018-10-01 16:02:20,TestSlice,test_slice,con docs2.pdf,PASS,1.36,3.7.0,Windows,4,3.98 GB
+2018-10-01 16:02:22,TestSlice,test_slice_4to7,con docs2.pdf,PASS,1.65,3.7.0,Windows,4,3.98 GB
