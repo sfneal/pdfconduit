@@ -64,6 +64,12 @@ class GUI:
         MergeGUI()
 
     @staticmethod
+    def flatten():
+        """Wrapper method for FlattenGUI"""
+        from pdf.gui.forms.flatten import FlattenGUI
+        FlattenGUI()
+
+    @staticmethod
     def encrypt():
         from pdfconduit import Encrypt
 

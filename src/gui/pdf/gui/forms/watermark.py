@@ -149,7 +149,7 @@ class WatermarkGUI:
             with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
                 with gui.FlexForm(TITLE) as form2:
                     layout_tab_1 = []
-                    layout_tab_1.extend(self.header())
+                    layout_tab_1.extend(header('PDF Watermark Utility'))
                     layout_tab_1.extend(self.input_source())
                     layout_tab_1.extend(self.input_text())
                     layout_tab_1.extend(self.input_encryption())
@@ -171,7 +171,7 @@ class WatermarkGUI:
         else:
             with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
                 layout = []
-                layout.extend(self.header())
+                layout.extend(header('PDF Watermark Utility'))
                 layout.extend(self.input_source())
                 layout.extend(self.input_text())
                 layout.extend(self.input_watermark_settings())
