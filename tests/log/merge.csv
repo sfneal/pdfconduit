@@ -111,3 +111,7 @@
 2018-10-01 14:27:45,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.66,3.7.0,Windows,4,3
 2018-10-01 16:02:00,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.38,3.7.0,Windows,4,3.98 GB
 2018-10-01 16:02:02,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,1.48,3.7.0,Windows,4,3.98 GB
+2019-02-21 14:24:13,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.21,3.7.1,Darwin,8,N/A
+2019-02-21 14:24:14,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.86,3.7.1,Darwin,8,N/A
+2019-02-21 14:28:28,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.17,3.7.1,Darwin,8,16 GB
+2019-02-21 14:28:29,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.73,3.7.1,Darwin,8,16 GB
