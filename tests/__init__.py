@@ -1,7 +1,7 @@
 import os
 import datetime
 from databasetools import CSV
-from envinfo import EnvInfo
+from synfo import Synfo
 
 
 directory = os.path.join(os.path.dirname(__file__), 'data')
@@ -14,7 +14,7 @@ file_name = 'con docs2.pdf'
 pdf = os.path.join(directory, file_name)
 
 
-info = EnvInfo()
+info = Synfo()
 
 
 def write_log(file_path, log):
