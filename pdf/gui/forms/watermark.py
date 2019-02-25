@@ -140,7 +140,7 @@ class WatermarkGUI:
         ]
 
     def window(self):
-        """GUI window for inputing Watermark parameters"""
+        """GUI window for Watermark parameters input."""
         platform = system()
         # Tabbed layout for Windows
         if platform is 'Windows':
