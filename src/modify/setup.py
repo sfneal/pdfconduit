@@ -17,9 +17,9 @@ else:
 
 setup(
     install_requires=[
-        'reportlab',
-        'pdfrw',
-        'Pillow',
+        'reportlab>=3.5.13',
+        'pdfrw>=0.4',
+        'Pillow>=5.4.1',
         'pdfconduit-utils>=1.0.3',
     ],
     name='pdfconduit-modify',
