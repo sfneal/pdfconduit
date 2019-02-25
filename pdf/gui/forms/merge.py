@@ -11,7 +11,6 @@ class MergeGUI:
 
     def run(self):
         # Display form
-        window = sg.Window('PDF Merger', default_element_size=(80, 1), grab_anywhere=False)
         layout = []
         layout.extend(header('PDF File Merger'))
         form = [
@@ -39,7 +38,8 @@ class MergeGUI:
         ]
         layout.extend(form)
 
-        button, values = window.LayoutAndRead(layout)
+        button, values = sg.Window('PDF Merger', default_element_size=(80, 1), grab_anywhere=False).Layout(layout).Read()
+
         files = values['pdf_files'].split(';')
         output = values['folder'] if os.path.isdir(values['folder']) else os.path.dirname(files[0])
         m = Merge(files, output_name=values['file'], output_dir=output)

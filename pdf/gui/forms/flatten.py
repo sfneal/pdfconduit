@@ -9,9 +9,6 @@ class FlattenGUI:
         self.run()
 
     def run(self):
-        # Display form
-        window = sg.Window('PDF Flattener', default_element_size=(80, 1), grab_anywhere=False)
-
         layout = []
         layout.extend(header('PDF File Flattener'))
         form = [
@@ -26,7 +23,7 @@ class FlattenGUI:
         ]
         layout.extend(form)
 
-        button, values = window.LayoutAndRead(layout)
+        button, values = sg.Window('PDF Flattener', default_element_size=(80, 1), grab_anywhere=False).Layout(layout).Read()
         f = Flatten(values['pdf'], progress_bar='gui').save()
         open_window(f)
 
