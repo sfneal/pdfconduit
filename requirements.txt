@@ -9,7 +9,7 @@ psutil==5.4.7
 PyBundle==1.0.5
 PyMuPDF==1.13.20
 PyPDF3==1.0.1
-PySimpleGUI==3.10.3
+PySimpleGUI==3.25.0
 reportlab==3.5.6
 synfo==2.0.1
 tqdm==4.26.0
