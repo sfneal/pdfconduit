@@ -94,3 +94,5 @@
 2019-02-25 11:49:56,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,30.48,3.7.1,Darwin,8,16 GB
 2019-02-25 12:07:01,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,33.02,3.7.1,Darwin,8,16 GB
 2019-02-25 12:07:28,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,27.73,3.7.1,Darwin,8,16 GB
+2019-02-25 12:47:12,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,22.41,3.7.1,Windows,4,3.98 GB
+2019-02-25 12:47:32,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,19.72,3.7.1,Windows,4,3.98 GB

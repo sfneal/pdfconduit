@@ -123,3 +123,5 @@
 2019-02-25 11:56:16,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.87,3.7.1,Darwin,8,16 GB
 2019-02-25 12:07:33,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.21,3.7.1,Darwin,8,16 GB
 2019-02-25 12:07:34,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.88,3.7.1,Darwin,8,16 GB
+2019-02-25 12:47:33,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.25,3.7.1,Windows,4,3.98 GB
+2019-02-25 12:47:34,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.81,3.7.1,Windows,4,3.98 GB
