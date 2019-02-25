@@ -159,6 +159,7 @@ class WatermarkGUI:
                                      gui.Tab('Watermark Settings', layout_tab_2)]])]]
             window = gui.Window('PDF Watermark Utility', auto_close=True)
             button, values = window.Layout(layout).Read()
+            window.Close()
             return button, values, platform
         # Standard layout for macOS
         else:
@@ -169,8 +170,9 @@ class WatermarkGUI:
             layout.extend(self.input_watermark_settings())
             layout.extend(self.input_encryption())
             layout.extend(self.footer())
-            window = gui.Window(TITLE, default_element_size=(40, 1), auto_close=True)
+            window = gui.Window(TITLE, default_element_size=(40, 1), auto_close=False)
             button, values = window.Layout(layout).Read()
+            window.Close()
             return button, values, platform
 
     def folder(self):
@@ -189,6 +191,7 @@ class WatermarkGUI:
         layout.extend(self.footer())
         window = gui.Window(TITLE, default_element_size=(40, 1), auto_close=True)
         button, values = window.Layout(layout).Read()
+        window.Close()
 
         self.params['pdf'] = values[0]
         return self.params

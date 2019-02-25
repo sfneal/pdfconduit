@@ -41,6 +41,7 @@ class MergeGUI:
 
         window = sg.Window('PDF Merger', default_element_size=(80, 1), grab_anywhere=False)
         button, values = window.Layout(layout).Read()
+        window.Close()
 
         files = values['pdf_files'].split(';')
         output = values['folder'] if os.path.isdir(values['folder']) else os.path.dirname(files[0])
