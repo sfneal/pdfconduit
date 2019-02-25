@@ -39,15 +39,15 @@ DEFAULT_PARAMS = {
 }
 
 
-def view_images():
-    from pdf.gui.config.images import view
-    view()
-
-
 class WatermarkGUI:
     def __init__(self):
         self.params = DEFAULT_PARAMS
         self.run()
+
+    @staticmethod
+    def view_images():
+        from pdf.gui.config.images import view
+        view()
 
     @staticmethod
     def footer(message='Click Submit to watermark PDF'):
