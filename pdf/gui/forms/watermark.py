@@ -70,7 +70,8 @@ class WatermarkGUI:
         layout.extend(inputs)
         layout.extend(self.footer('Click submit to add your watermark image'))
 
-        button, values = gui.Window(TITLE, default_element_size=(40, 1)).Layout(layout).Read()
+        window = gui.Window(TITLE, default_element_size=(40, 1), auto_close=True)
+        button, values = window.Layout(layout).Read()
         name = values[1] if len(values[1]) > 0 else None
         add(values[0], name)
 
@@ -156,7 +157,8 @@ class WatermarkGUI:
 
             layout = [[gui.TabGroup([[gui.Tab('Document Settings', layout_tab_1),
                                      gui.Tab('Watermark Settings', layout_tab_2)]])]]
-            button, values = gui.Window('PDF Watermark Utility').Layout(layout).Read()
+            window = gui.Window('PDF Watermark Utility', auto_close=True)
+            button, values = window.Layout(layout).Read()
             return button, values, platform
         # Standard layout for macOS
         else:
@@ -167,26 +169,26 @@ class WatermarkGUI:
             layout.extend(self.input_watermark_settings())
             layout.extend(self.input_encryption())
             layout.extend(self.footer())
-            button, values = gui.Window(TITLE, default_element_size=(40, 1)).Layout(layout).Read()
+            window = gui.Window(TITLE, default_element_size=(40, 1), auto_close=True)
+            button, values = window.Layout(layout).Read()
             return button, values, platform
 
     def folder(self):
-        with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
-            inputs = [
-                # Source
-                [gui.Text('Source', font=('Helvetica', 15), justification='left')],
-                [gui.Text('Source folder', size=(LABEL_W, 1)),
-                 gui.InputText(self.params['pdf'], size=(30, 1)),
-                 gui.FolderBrowse(button_text='Folder')],
+        inputs = [
+            # Source
+            [gui.Text('Source', font=('Helvetica', 15), justification='left')],
+            [gui.Text('Source folder', size=(LABEL_W, 1)),
+             gui.InputText(self.params['pdf'], size=(30, 1)),
+             gui.FolderBrowse(button_text='Folder')],
 
-                [_line()],
-            ]
-            layout = []
-            layout.extend(header('Watermark utility'))
-            layout.extend(inputs)
-            layout.extend(self.footer())
-
-            (button, (values)) = form.LayoutAndRead(layout)
+            [_line()],
+        ]
+        layout = []
+        layout.extend(header('Watermark utility'))
+        layout.extend(inputs)
+        layout.extend(self.footer())
+        window = gui.Window(TITLE, default_element_size=(40, 1), auto_close=True)
+        button, values = window.Layout(layout).Read()
 
         self.params['pdf'] = values[0]
         return self.params

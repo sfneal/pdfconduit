@@ -156,7 +156,9 @@ class WatermarkGUI:
 
             layout = [[gui.TabGroup([[gui.Tab('Document Settings', layout_tab_1),
                                      gui.Tab('Watermark Settings', layout_tab_2)]])]]
-            button, values = gui.Window('PDF Watermark Utility').Layout(layout).Read()
+            while True:
+                window = gui.Window('PDF Watermark Utility')
+                button, values = window.Layout(layout).Read()
             return button, values, platform
         # Standard layout for macOS
         else:
