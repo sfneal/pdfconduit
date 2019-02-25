@@ -90,3 +90,7 @@
 2019-02-21 14:28:25,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,18.4,3.7.1,Darwin,8,16 GB
 2019-02-25 09:42:40,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,30.44,3.7.1,Darwin,8,16 GB
 2019-02-25 09:43:02,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,21.73,3.7.1,Darwin,8,16 GB
+2019-02-25 11:49:26,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,28.11,3.7.1,Darwin,8,16 GB
+2019-02-25 11:49:56,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,30.48,3.7.1,Darwin,8,16 GB
+2019-02-25 12:07:01,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,33.02,3.7.1,Darwin,8,16 GB
+2019-02-25 12:07:28,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,27.73,3.7.1,Darwin,8,16 GB

@@ -13,7 +13,7 @@ def merge_logs(directory):
 
     master = []
     for i in log_files:
-        data = [r for r in CSV(i).read() if all(c.strip() is not None for c in r) and len(r) > 1]
+        data = [r for r in CSV(i).read() if all(str(c).strip() is not None for c in r) and len(r) > 1]
         for d in data:
             print(d)
         master.extend(data)
