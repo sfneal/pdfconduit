@@ -55,24 +55,22 @@ class WatermarkGUI:
 
     def add_image(self):
         from pdf.gui.config.images import add
-        with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
-            inputs = [
-                # Source
-                [gui.Text('Select an image to add to your PDF Conduit image library', font=('Helvetica', 15),
-                          justification='left')],
-                [gui.Text('Source image', size=(LABEL_W, 1)),
-                 gui.InputText(self.params['pdf'], size=(30, 1)),
-                 gui.FileBrowse(button_text='File', file_types=(("PNG Files", "*.png"),))],
-                [gui.Text('Image name', size=(LABEL_W, 1)), gui.InputText(size=(30, 1))],
+        inputs = [
+            # Source
+            [gui.Text('Select an image to add to your PDF Conduit image library', font=('Helvetica', 15),
+                      justification='left')],
+            [gui.Text('Source image', size=(LABEL_W, 1)),
+             gui.InputText(self.params['pdf'], size=(30, 1)),
+             gui.FileBrowse(button_text='File', file_types=(("PNG Files", "*.png"),))],
+            [gui.Text('Image name', size=(LABEL_W, 1)), gui.InputText(size=(30, 1))],
 
-                [_line()],
-            ]
-            layout = []
-            layout.extend(self.header())
-            layout.extend(inputs)
-            layout.extend(self.footer('Click submit to add your watermark image'))
+            [_line()],
+        ]
+        layout = []
+        layout.extend(inputs)
+        layout.extend(self.footer('Click submit to add your watermark image'))
 
-            (button, (values)) = form.LayoutAndRead(layout)
+        button, values = gui.Window(TITLE, default_element_size=(40, 1)).Layout(layout).Read()
         name = values[1] if len(values[1]) > 0 else None
         add(values[0], name)
 
@@ -169,16 +167,16 @@ class WatermarkGUI:
                     return button, values, platform
         # Standard layout for macOS
         else:
-            with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
-                layout = []
-                layout.extend(header('PDF Watermark Utility'))
-                layout.extend(self.input_source())
-                layout.extend(self.input_text())
-                layout.extend(self.input_watermark_settings())
-                layout.extend(self.input_encryption())
-                layout.extend(self.footer())
-                button, values = form.LayoutAndRead(layout)
-                return button, values, platform
+            # with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
+            layout = []
+            layout.extend(header('PDF Watermark Utility'))
+            layout.extend(self.input_source())
+            layout.extend(self.input_text())
+            layout.extend(self.input_watermark_settings())
+            layout.extend(self.input_encryption())
+            layout.extend(self.footer())
+            button, values = gui.Window(TITLE, default_element_size=(40, 1)).Layout(layout).Read()
+            return button, values, platform
 
     def folder(self):
         with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
