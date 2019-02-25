@@ -18,7 +18,7 @@ else:
 setup(
     install_requires=[
         'pdfrw>=0.4',
-        'pdfconduit-utils>=1.0.3',
+        'pdfconduit-utils>=1.0.4',
     ],
     name='pdfconduit-transform',
     version=verstr,

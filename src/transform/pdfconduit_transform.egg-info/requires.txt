@@ -1,2 +1,2 @@
-pdfrw
-pdfconduit-utils>=1.0.3
+pdfrw>=0.4
+pdfconduit-utils>=1.0.4
