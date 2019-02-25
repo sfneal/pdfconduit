@@ -166,3 +166,7 @@
 2019-02-21 14:28:27,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.45,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:27,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.5,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:27,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.45,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:03,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.52,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:03,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.51,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:04,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.55,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:04,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.51,3.7.1,Darwin,8,16 GB

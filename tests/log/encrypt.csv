@@ -178,3 +178,7 @@
 2019-02-21 14:27:19,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,12.46,3.7.1,Darwin,8,16 GB
 2019-02-21 14:27:30,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,11.01,3.7.1,Darwin,8,16 GB
 2019-02-21 14:27:41,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,10.57,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:59,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,23.7,3.7.1,Darwin,8,16 GB
+2019-02-25 09:41:20,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,21.26,3.7.1,Darwin,8,16 GB
+2019-02-25 09:41:38,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,18.2,3.7.1,Darwin,8,16 GB
+2019-02-25 09:42:02,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,23.58,3.7.1,Darwin,8,16 GB

@@ -94,6 +94,8 @@
 2018-10-01 16:00:52,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,102.36,3.7.0,Windows,4,3.98 GB
 2019-02-21 14:25:27,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.05,3.7.1,Darwin,8,16 GB
 2019-02-21 14:26:38,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,70.46,3.7.1,Darwin,8,16 GB
+2019-02-25 09:38:48,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,19.36,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:07,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,78.88,3.7.1,Darwin,8,16 GB
 2018-08-31 13:59:15,TestEncrypt,test_encrypt_128bit,article.pdf,PASS,0.47,3.6.4,Darwin,8,16
 2018-08-31 13:59:16,TestEncrypt,test_encrypt_40bit,article.pdf,PASS,0.43,3.6.4,Darwin,8,16
 2018-08-31 13:59:16,TestEncrypt,test_encrypt_commenting,article.pdf,PASS,0.53,3.6.4,Darwin,8,16
@@ -262,6 +264,10 @@
 2019-02-21 14:27:19,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,12.46,3.7.1,Darwin,8,16 GB
 2019-02-21 14:27:30,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,11.01,3.7.1,Darwin,8,16 GB
 2019-02-21 14:27:41,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,10.57,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:59,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,23.7,3.7.1,Darwin,8,16 GB
+2019-02-25 09:41:20,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,21.26,3.7.1,Darwin,8,16 GB
+2019-02-25 09:41:38,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,18.2,3.7.1,Darwin,8,16 GB
+2019-02-25 09:42:02,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,23.58,3.7.1,Darwin,8,16 GB
 2018-08-31 13:59:46,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,2.3,3.6.4,Darwin,8,16
 2018-08-31 13:59:49,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,2.71,3.6.4,Darwin,8,16
 2018-08-31 13:59:51,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,2.24,3.6.4,Darwin,8,16
@@ -438,6 +444,10 @@
 2019-02-21 14:28:31,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:31,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.62,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:32,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.58,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:07,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,0.85,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:08,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.89,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:09,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.79,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:10,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,1.03,3.7.1,Darwin,8,16 GB
 2018-08-31 13:59:36,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,1.62,3.6.4,Darwin,8,16
 2018-08-31 13:59:38,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,1.7,3.6.4,Darwin,8,16
 2018-08-31 13:59:39,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,1.64,3.6.4,Darwin,8,16
@@ -610,6 +620,10 @@
 2019-02-21 14:27:42,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.32,3.7.1,Darwin,8,16 GB
 2019-02-21 14:27:42,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.3,3.7.1,Darwin,8,16 GB
 2019-02-21 14:27:43,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.3,3.7.1,Darwin,8,16 GB
+2019-02-25 09:42:05,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,1.1,3.7.1,Darwin,8,16 GB
+2019-02-25 09:42:06,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.97,3.7.1,Darwin,8,16 GB
+2019-02-25 09:42:07,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,16 GB
+2019-02-25 09:42:07,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.63,3.7.1,Darwin,8,16 GB
 2018-08-31 13:59:23,TestFlatten,test_flatten_gui,article.pdf,PASS,1.36,3.6.4,Darwin,8,16
 2018-08-31 13:59:25,TestFlatten,test_flatten_tqdm,article.pdf,PASS,1.5,3.6.4,Darwin,8,16
 2018-08-31 14:06:32,TestFlatten,test_flatten_gui,plan_l.pdf,PASS,0.6,3.6.4,Darwin,8,16
@@ -700,6 +714,8 @@
 2018-10-01 16:01:59,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,28.47,3.7.0,Windows,4,3.98 GB
 2019-02-21 14:28:07,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,23.43,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:25,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,18.4,3.7.1,Darwin,8,16 GB
+2019-02-25 09:42:40,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,30.44,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:02,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,21.73,3.7.1,Darwin,8,16 GB
 2018-08-31 13:59:28,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.77,3.6.4,Darwin,8,16
 2018-08-31 13:59:30,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,2.63,3.6.4,Darwin,8,16
 2018-08-31 14:06:39,TestMerge,test_merge_pdfrw,plan_l.pdf,PASS,0.7,3.6.4,Darwin,8,16
@@ -817,6 +833,8 @@
 2019-02-21 14:24:14,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.86,3.7.1,Darwin,8,N/A
 2019-02-21 14:28:28,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.17,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:29,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.73,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:05,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.21,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:06,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.81,3.7.1,Darwin,8,16 GB
 2018-08-31 14:00:20,TestSlice,test_slice,con docs2.pdf,PASS,2.34,3.6.4,Darwin,8,16
 2018-08-31 14:00:23,TestSlice,test_slice_4to7,con docs2.pdf,PASS,2.67,3.6.4,Darwin,8,16
 2018-08-31 14:07:06,TestSlice,test_slice,plan_l.pdf,PASS,0.04,3.6.4,Darwin,8,16
@@ -901,6 +919,8 @@
 2019-02-21 14:24:28,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.42,3.7.1,Darwin,8,N/A
 2019-02-21 14:28:43,TestSlice,test_slice,con docs2.pdf,PASS,0.41,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:43,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.44,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:28,TestSlice,test_slice,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:29,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,16 GB
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_180_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_270_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_90_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
@@ -1069,6 +1089,10 @@
 2019-02-21 14:28:27,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.45,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:27,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.5,3.7.1,Darwin,8,16 GB
 2019-02-21 14:28:27,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.45,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:03,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.52,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:03,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.51,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:04,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.55,3.7.1,Darwin,8,16 GB
+2019-02-25 09:43:04,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.51,3.7.1,Darwin,8,16 GB
 2018-08-31 13:59:09,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,article.pdf,PASS,3.53,3.6.4,Darwin,8,16
 2018-08-31 13:59:10,TestWatermarkMethodsPdfrw,test_watermark_label,article.pdf,PASS,1.43,3.6.4,Darwin,8,16
 2018-08-31 13:59:14,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,article.pdf,PASS,3.63,3.6.4,Darwin,8,16
@@ -1363,3 +1387,9 @@
 2019-02-21 14:26:47,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,2.41,3.7.1,Darwin,8,16 GB
 2019-02-21 14:26:49,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,2.69,3.7.1,Darwin,8,16 GB
 2019-02-21 14:26:52,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,2.9,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:15,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,con docs2.pdf,PASS,6.88,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:17,TestWatermarkMethodsPdfrw,test_watermark_label,con docs2.pdf,PASS,1.22,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:22,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,con docs2.pdf,PASS,5.23,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:27,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,4.89,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:31,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,3.91,3.7.1,Darwin,8,16 GB
+2019-02-25 09:40:34,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,3.63,3.7.1,Darwin,8,16 GB
