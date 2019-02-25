@@ -90,3 +90,5 @@
 2019-02-25 12:07:52,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,16 GB
 2019-02-25 12:47:40,TestSlice,test_slice,con docs2.pdf,PASS,0.44,3.7.1,Windows,4,3.98 GB
 2019-02-25 12:47:40,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.45,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:07:10,TestSlice,test_slice,con docs2.pdf,PASS,0.33,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:07:10,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.36,3.7.1,Windows,4,3.98 GB
