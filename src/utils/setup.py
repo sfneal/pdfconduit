@@ -18,7 +18,7 @@ else:
 setup(
     install_requires=[
         'PyPDF3>=1.0.1',
-        'PyBundle>=1.0.5',
+        'PyBundle>=1.0.6',
     ],
     name='pdfconduit-utils',
     version=verstr,
