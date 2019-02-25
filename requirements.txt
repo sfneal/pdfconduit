@@ -15,5 +15,5 @@ PyPDF3==1.0.1
 PySimpleGUI==3.25.0
 reportlab==3.5.13
 sqlparse==0.2.4
-synfo==2.0.1
+synfo==2.0.2
 tqdm==4.31.1
