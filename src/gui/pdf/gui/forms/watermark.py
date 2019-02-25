@@ -160,14 +160,13 @@ class WatermarkGUI:
             return button, values, platform
         # Standard layout for macOS
         else:
-            layout = [
-                header('PDF Watermark Utility'),
-                self.input_source(),
-                self.input_text(),
-                self.input_watermark_settings(),
-                self.input_encryption(),
-                self.footer()
-            ]
+            layout = []
+            layout.extend(header('PDF Watermark Utility'))
+            layout.extend(self.input_source())
+            layout.extend(self.input_text())
+            layout.extend(self.input_watermark_settings())
+            layout.extend(self.input_encryption())
+            layout.extend(self.footer())
             button, values = gui.Window(TITLE, default_element_size=(40, 1)).Layout(layout).Read()
             return button, values, platform
 
