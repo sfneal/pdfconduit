@@ -8,7 +8,8 @@ class FlattenGUI:
     def __init__(self):
         self.run()
 
-    def run(self):
+    @staticmethod
+    def run():
         layout = []
         layout.extend(header('PDF File Flattener'))
         form = [

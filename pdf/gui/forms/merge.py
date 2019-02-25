@@ -9,7 +9,8 @@ class MergeGUI:
     def __init__(self):
         self.run()
 
-    def run(self):
+    @staticmethod
+    def run():
         # Display form
         layout = []
         layout.extend(header('PDF File Merger'))
