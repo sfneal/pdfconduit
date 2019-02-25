@@ -17,7 +17,7 @@ else:
 
 setup(
     install_requires=[
-        'PyMuPDF>=1.13.20',
+        'PyMuPDF>=1.14.8',
         'pdfconduit-modify>=2.0.1',
         'pdfconduit-transform>=1.1.0',
         'pdfconduit-utils>=1.0.3',
