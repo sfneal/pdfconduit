@@ -18,7 +18,7 @@ else:
 setup(
     install_requires=[
         'pdfconduit',
-        'PySimpleGUI>=3.6.2',
+        'PySimpleGUI>=3.25.0',
     ],
     name='pdfconduit-gui',
     version=verstr,

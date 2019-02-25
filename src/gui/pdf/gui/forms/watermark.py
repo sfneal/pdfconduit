@@ -39,15 +39,15 @@ DEFAULT_PARAMS = {
 }
 
 
-def view_images():
-    from pdf.gui.config.images import view
-    view()
-
-
 class WatermarkGUI:
     def __init__(self):
         self.params = DEFAULT_PARAMS
         self.run()
+
+    @staticmethod
+    def view_images():
+        from pdf.gui.config.images import view
+        view()
 
     @staticmethod
     def footer(message='Click Submit to watermark PDF'):
@@ -55,24 +55,22 @@ class WatermarkGUI:
 
     def add_image(self):
         from pdf.gui.config.images import add
-        with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
-            inputs = [
-                # Source
-                [gui.Text('Select an image to add to your PDF Conduit image library', font=('Helvetica', 15),
-                          justification='left')],
-                [gui.Text('Source image', size=(LABEL_W, 1)),
-                 gui.InputText(self.params['pdf'], size=(30, 1)),
-                 gui.FileBrowse(button_text='File', file_types=(("PNG Files", "*.png"),))],
-                [gui.Text('Image name', size=(LABEL_W, 1)), gui.InputText(size=(30, 1))],
+        inputs = [
+            # Source
+            [gui.Text('Select an image to add to your PDF Conduit image library', font=('Helvetica', 15),
+                      justification='left')],
+            [gui.Text('Source image', size=(LABEL_W, 1)),
+             gui.InputText(self.params['pdf'], size=(30, 1)),
+             gui.FileBrowse(button_text='File', file_types=(("PNG Files", "*.png"),))],
+            [gui.Text('Image name', size=(LABEL_W, 1)), gui.InputText(size=(30, 1))],
 
-                [_line()],
-            ]
-            layout = []
-            layout.extend(self.header())
-            layout.extend(inputs)
-            layout.extend(self.footer('Click submit to add your watermark image'))
+            [_line()],
+        ]
+        layout = []
+        layout.extend(inputs)
+        layout.extend(self.footer('Click submit to add your watermark image'))
 
-            (button, (values)) = form.LayoutAndRead(layout)
+        button, values = gui.Window(TITLE, default_element_size=(40, 1)).Layout(layout).Read()
         name = values[1] if len(values[1]) > 0 else None
         add(values[0], name)
 
@@ -142,43 +140,36 @@ class WatermarkGUI:
         ]
 
     def window(self):
-        """GUI window for inputing Watermark parameters"""
+        """GUI window for Watermark parameters input."""
         platform = system()
         # Tabbed layout for Windows
         if platform is 'Windows':
-            with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
-                with gui.FlexForm(TITLE) as form2:
-                    layout_tab_1 = []
-                    layout_tab_1.extend(header('PDF Watermark Utility'))
-                    layout_tab_1.extend(self.input_source())
-                    layout_tab_1.extend(self.input_text())
-                    layout_tab_1.extend(self.input_encryption())
-                    layout_tab_1.extend(self.footer())
+            layout_tab_1 = []
+            layout_tab_1.extend(header('PDF Watermark Utility'))
+            layout_tab_1.extend(self.input_source())
+            layout_tab_1.extend(self.input_text())
+            layout_tab_1.extend(self.input_encryption())
+            layout_tab_1.extend(self.footer())
 
-                    layout_tab_2 = []
-                    layout_tab_2.extend(self.input_watermark_settings())
+            layout_tab_2 = []
+            layout_tab_2.extend(self.input_watermark_settings())
 
-                    r = gui.ShowTabbedForm(TITLE, (form, layout_tab_1, 'Document Settings'),
-                                           (form2, layout_tab_2, 'Watermark Settings'))
-                    values = []
-                    button = None
-                    for but, result in r:
-                        if but is not None:
-                            button = but
-                        values.extend(result)
-                    return button, values, platform
+            layout = [[gui.TabGroup([[gui.Tab('Document Settings', layout_tab_1),
+                                     gui.Tab('Watermark Settings', layout_tab_2)]])]]
+            button, values = gui.Window('PDF Watermark Utility').Layout(layout).Read()
+            return button, values, platform
         # Standard layout for macOS
         else:
-            with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
-                layout = []
-                layout.extend(header('PDF Watermark Utility'))
-                layout.extend(self.input_source())
-                layout.extend(self.input_text())
-                layout.extend(self.input_watermark_settings())
-                layout.extend(self.input_encryption())
-                layout.extend(self.footer())
-                button, values = form.LayoutAndRead(layout)
-                return button, values, platform
+            layout = [
+                header('PDF Watermark Utility'),
+                self.input_source(),
+                self.input_text(),
+                self.input_watermark_settings(),
+                self.input_encryption(),
+                self.footer()
+            ]
+            button, values = gui.Window(TITLE, default_element_size=(40, 1)).Layout(layout).Read()
+            return button, values, platform
 
     def folder(self):
         with gui.FlexForm(TITLE, default_element_size=(40, 1)) as form:
@@ -208,29 +199,29 @@ class WatermarkGUI:
 
         button, values, platform = self.window()
 
-        self.params['pdf'] = values['pdf'] if platform == 'Darwin' else values[0]
-        self.params['address'] = values['address'] if platform == 'Darwin' else values[1]
-        self.params['town'] = values['town'] if platform == 'Darwin' else values[2]
-        self.params['state'] = values['state'] if platform == 'Darwin' else values[3]
-        self.params['image'] = values['image'] if platform == 'Darwin' else values[10]
-        self.params['compression']['uncompressed'] = values['uncompressed'] if platform == 'Darwin' else values[11]
-        self.params['compression']['compressed'] = values['compressed'] if platform == 'Darwin' else values[12]
-        self.params['flattening']['flattened'] = values['flattened'] if platform == 'Darwin' else values[13]
-        self.params['flattening']['layered'] = values['layered'] if platform == 'Darwin' else values[14]
-        self.params['placement']['overlay'] = values['overlay'] if platform == 'Darwin' else values[15]
-        self.params['placement']['underneath'] = values['underneath'] if platform == 'Darwin' else values[16]
-        self.params['opacity'] = float(values['opacity'] * .01) if platform == 'Darwin' else float(values[17] * .01)
+        self.params['pdf'] = values['pdf']
+        self.params['address'] = values['address']
+        self.params['town'] = values['town']
+        self.params['state'] = values['state']
+        self.params['image'] = values['image']
+        self.params['compression']['uncompressed'] = values['uncompressed']
+        self.params['compression']['compressed'] = values['compressed']
+        self.params['flattening']['flattened'] = values['flattened']
+        self.params['flattening']['layered'] = values['layered']
+        self.params['placement']['overlay'] = values['overlay']
+        self.params['placement']['underneath'] = values['underneath']
+        self.params['opacity'] = float(values['opacity'] * .01)
 
-        self.params['encrypt'] = values['encrypt'] if platform == 'Darwin' else values[4]
-        self.params['allow_printing'] = values['allow_printing'] if platform == 'Darwin' else values[5]
-        self.params['allow_commenting'] = values['allow_commenting'] if platform == 'Darwin' else values[6]
-        self.params['user_pw'] = values['user_pw'] if platform == 'Darwin' else values[7]
+        self.params['encrypt'] = values['encrypt']
+        self.params['allow_printing'] = values['allow_printing']
+        self.params['allow_commenting'] = values['allow_commenting']
+        self.params['user_pw'] = values['user_pw']
         if not len(self.params['user_pw']) > 0:
             self.params['user_pw'] = ''
-        self.params['owner_pw'] = values['owner_pw'] if platform == 'Darwin' else values[8]
+        self.params['owner_pw'] = values['owner_pw']
         if not len(self.params['owner_pw']) > 0:
             self.params['owner_pw'] = ''
-        self.params['flat'] = values['flat'] if platform == 'Darwin' else values[9]
+        self.params['flat'] = values['flat']
         if button == 'Folder':
             self.folder()
             self.settings()
