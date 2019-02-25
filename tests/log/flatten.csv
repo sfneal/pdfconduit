@@ -104,3 +104,5 @@
 2019-02-25 12:05:06,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,79.35,3.7.1,Darwin,8,16 GB
 2019-02-25 12:45:59,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.53,3.7.1,Windows,4,3.98 GB
 2019-02-25 12:46:49,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,49.37,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:05:15,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,19.41,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:06:23,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,67.54,3.7.1,Windows,4,3.98 GB

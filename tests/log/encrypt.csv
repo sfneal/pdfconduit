@@ -198,3 +198,7 @@
 2019-02-25 12:45:18,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,12.17,3.7.1,Windows,4,3.98 GB
 2019-02-25 12:45:30,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,12.64,3.7.1,Windows,4,3.98 GB
 2019-02-25 12:45:42,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,11.88,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:04:10,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,13.42,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:04:28,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,17.97,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:04:42,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,13.78,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:04:55,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,13.5,3.7.1,Windows,4,3.98 GB

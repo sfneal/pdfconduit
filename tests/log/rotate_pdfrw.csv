@@ -190,3 +190,7 @@
 2019-02-25 12:47:35,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.39,3.7.1,Windows,4,3.98 GB
 2019-02-25 12:47:36,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.36,3.7.1,Windows,4,3.98 GB
 2019-02-25 12:47:36,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.38,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:07:03,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,0.3,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:07:03,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.31,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:07:03,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.3,3.7.1,Windows,4,3.98 GB
+2019-02-25 13:07:04,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.31,3.7.1,Windows,4,3.98 GB
