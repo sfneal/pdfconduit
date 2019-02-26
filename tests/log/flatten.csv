@@ -110,3 +110,5 @@
 2019-02-26 10:45:16,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,73.09,3.7.1,Windows,4,3.98 GB
 2019-02-26 10:54:39,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,23.67,3.7.1,Windows,4,3.98 GB
 2019-02-26 10:55:48,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,69.59,3.7.1,Windows,4,3.98 GB
+2019-02-26 11:30:28,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,23.28,3.7.1,Windows,4,3.98 GB
+2019-02-26 11:31:59,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,90.58,3.7.1,Windows,4,3.98 GB

@@ -206,3 +206,7 @@
 2019-02-26 10:57:01,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,1.03,3.7.1,Windows,4,3.98 GB
 2019-02-26 10:57:02,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,1.16,3.7.1,Windows,4,3.98 GB
 2019-02-26 10:57:03,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,1.08,3.7.1,Windows,4,3.98 GB
+2019-02-26 11:33:29,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,1.09,3.7.1,Windows,4,3.98 GB
+2019-02-26 11:33:31,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,1.26,3.7.1,Windows,4,3.98 GB
+2019-02-26 11:33:32,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,1.19,3.7.1,Windows,4,3.98 GB
+2019-02-26 11:33:33,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,1.08,3.7.1,Windows,4,3.98 GB
