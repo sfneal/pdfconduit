@@ -218,3 +218,7 @@
 2019-02-26 11:53:58,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,10.64,3.7.2,Linux,4,N/A
 2019-02-26 11:54:08,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,9.71,3.7.2,Linux,4,N/A
 2019-02-26 11:54:20,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,11.96,3.7.2,Linux,4,N/A
+2019-02-26 12:11:43,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,21.19,3.7.1,Windows,4,N/A
+2019-02-26 12:12:03,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,19.94,3.7.1,Windows,4,N/A
+2019-02-26 12:12:23,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,20.25,3.7.1,Windows,4,N/A
+2019-02-26 12:12:39,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,15.96,3.7.1,Windows,4,N/A

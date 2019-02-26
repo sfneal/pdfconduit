@@ -106,3 +106,5 @@
 2019-02-26 11:33:14,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,36.04,3.7.1,Windows,4,3.98 GB
 2019-02-26 11:57:32,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,30.76,3.7.2,Linux,4,N/A
 2019-02-26 11:57:58,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,25.73,3.7.2,Linux,4,N/A
+2019-02-26 12:14:19,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,27.02,3.7.1,Windows,4,N/A
+2019-02-26 12:14:37,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,17.93,3.7.1,Windows,4,N/A
