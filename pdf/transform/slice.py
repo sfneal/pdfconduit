@@ -10,11 +10,13 @@ def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=N
     """Slice a PDF document to remove pages."""
     # Set output file name
     if tempdir:
-        output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False).name
+        with NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False) as temp:
+            output = temp.name
     elif suffix:
         output = os.path.join(os.path.dirname(document), add_suffix(document, suffix))
     else:
-        output = NamedTemporaryFile(suffix='.pdf').name
+        with NamedTemporaryFile(suffix='.pdf') as temp:
+            output = temp.name
 
     # Reindex page selections for simple user input
     first_page = first_page - 1 if not None else None
