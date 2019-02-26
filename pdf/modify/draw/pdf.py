@@ -32,8 +32,9 @@ class DrawPDF:
             self.dir = tempdir
         else:
             self.dir = mkdtemp()
-        tmppdf = NamedTemporaryFile(suffix='.pdf', dir=self.dir, delete=False)
-        self.dst = resource_path(tmppdf.name)
+
+        with NamedTemporaryFile(suffix='.pdf', dir=self.dir, delete=False) as tmppdf:
+            self.dst = resource_path(tmppdf.name)
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()

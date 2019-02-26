@@ -14,7 +14,8 @@ class Rotate:
         self.tempdir = tempdir
 
         if tempdir:
-            self.outfn = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False).name
+            with NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False) as temp:
+                self.outfn = temp.name
         elif suffix:
             self.outfn = os.path.join(os.path.dirname(file_name), add_suffix(file_name, suffix))
         else:
