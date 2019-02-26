@@ -39,9 +39,9 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
             im.convert('L')
 
         # Save modified image file
-        dst = NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False).name
-        im.save(dst)
-    return dst
+        with NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False) as dst:
+            im.save(dst)
+            return dst.name
 
 
 class DrawPIL:
@@ -73,7 +73,9 @@ class DrawPIL:
 
         im.thumbnail((int(im.size[0] * scale), int(im.size[1] * scale)))
 
-        return im if isinstance(img, Image.Image) else self.save(img=im)
+        image = im if isinstance(img, Image.Image) else self.save(img=im)
+        im.close()
+        return image
 
     def draw_text(self, text, x='center', y=140, font=FONT, size=40, opacity=0.1):
         # Set drawing context
@@ -125,6 +127,7 @@ class DrawPIL:
         if self.tempdir:
             tmpimg = NamedTemporaryFile(suffix='.png', dir=self.tempdir, delete=False)
             output = resource_path(tmpimg.name)
+            tmpimg.close()
         elif destination:
             output = os.path.join(destination, fn + '.png')
         else:
