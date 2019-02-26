@@ -18,7 +18,8 @@ class Upscale:
 
         # Set output file name
         if tempdir:
-            self.output = NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False).name
+            with NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False) as temp:
+                self.output = temp.name
         elif suffix:
             self.output = os.path.join(os.path.dirname(file_name), add_suffix(file_name, suffix))
         else:

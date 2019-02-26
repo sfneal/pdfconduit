@@ -83,7 +83,8 @@ class PDF2IMG:
             output_file = add_suffix(self.file_name, str(index), ext=self.ext)
             return os.path.join(self.output_dir, output_file)
         else:
-            return NamedTemporaryFile(suffix=self.ext, dir=self.tempdir, delete=True).name
+            with NamedTemporaryFile(suffix=self.ext, dir=self.tempdir, delete=True) as temp:
+                return temp.name
 
     def save(self):
         # PySimpleGUI progress bar
