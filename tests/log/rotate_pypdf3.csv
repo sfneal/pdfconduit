@@ -206,3 +206,11 @@
 2019-02-26 11:33:22,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.75,3.7.1,Windows,4,3.98 GB
 2019-02-26 11:33:23,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.79,3.7.1,Windows,4,3.98 GB
 2019-02-26 11:33:24,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.82,3.7.1,Windows,4,3.98 GB
+2019-02-26 11:57:59,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.76,3.7.2,Linux,4,N/A
+2019-02-26 11:58:00,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.75,3.7.2,Linux,4,N/A
+2019-02-26 11:58:01,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.81,3.7.2,Linux,4,N/A
+2019-02-26 11:58:02,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.82,3.7.2,Linux,4,N/A
+2019-02-26 12:14:42,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.45,3.7.1,Windows,4,N/A
+2019-02-26 12:14:42,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.48,3.7.1,Windows,4,N/A
+2019-02-26 12:14:43,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.5,3.7.1,Windows,4,N/A
+2019-02-26 12:14:44,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.47,3.7.1,Windows,4,N/A
