@@ -45,10 +45,11 @@ class Watermark:
         self.progress_bar = progress_bar
 
         self.use_receipt = use_receipt
-        if isinstance(receipt, Receipt):
-            self.receipt = receipt
-        else:
-            self.receipt = Receipt(use_receipt).set_dst(document)
+        if use_receipt:
+            if isinstance(receipt, Receipt):
+                self.receipt = receipt
+            else:
+                self.receipt = Receipt(use_receipt).set_dst(document)
 
     def __str__(self):
         return str(self.document)
@@ -101,12 +102,13 @@ class Watermark:
             image = im_path
 
         # Add to receipt
-        self.receipt.add('Text1', text1)
-        self.receipt.add('Text2', text2)
-        self.receipt.add('Image', os.path.basename(image))
-        self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
-        self.receipt.add('WM Compression', compress)
-        self.receipt.add('WM Flattening', flatten)
+        if self.use_receipt:
+            self.receipt.add('Text1', text1)
+            self.receipt.add('Text2', text2)
+            self.receipt.add('Image', os.path.basename(image))
+            self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
+            self.receipt.add('WM Compression', compress)
+            self.receipt.add('WM Flattening', flatten)
 
         co = CanvasConstructor(text1, text2, copyright, image, rotate, opacity, tempdir=self.tempdir)
         objects, rotate = co.img() if flatten else co.canvas()  # Run img constructor method if flatten is True
@@ -143,14 +145,16 @@ class Watermark:
         :return: str
             Watermarked PDF Document full path
         """
-        self.receipt.add('WM Placement', 'Overlay')
+        if self.use_receipt:
+            self.receipt.add('WM Placement', 'Overlay')
         if not watermark:
             watermark = self.watermark
         if not document:
             document = self.document
         self.document = str(WatermarkAdd(document, watermark, output=output, underneath=underneath,
                                          tempdir=self.tempdir, suffix=suffix, method=method))
-        self.receipt.add('Watermarked PDF', os.path.basename(self.document))
+        if self.use_receipt:
+            self.receipt.add('Watermarked PDF', os.path.basename(self.document))
         if self.open_file:
             open_window(self.document)
         return self.document
@@ -177,18 +181,20 @@ class Watermark:
             Encrypted PDF full path
         """
         document = self.document if document is None else document
-        self.receipt.add('User pw', user_pw)
-        self.receipt.add('Owner pw', owner_pw)
-        if encrypt_128:
-            self.receipt.add('Encryption key size', '128')
-        else:
-            self.receipt.add('Encryption key size', '40')
-        if allow_printing:
-            self.receipt.add('Permissions', 'Allow printing')
-        else:
-            self.receipt.add('Permissions', 'Allow ALL')
+        if self.use_receipt:
+            self.receipt.add('User pw', user_pw)
+            self.receipt.add('Owner pw', owner_pw)
+            if encrypt_128:
+                self.receipt.add('Encryption key size', '128')
+            else:
+                self.receipt.add('Encryption key size', '40')
+            if allow_printing:
+                self.receipt.add('Permissions', 'Allow printing')
+            else:
+                self.receipt.add('Permissions', 'Allow ALL')
         p = str(Encrypt(document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
                         bit128=encrypt_128, allow_printing=allow_printing, allow_commenting=allow_commenting,
                         progress_bar_enabled=self.progress_bar_enabled, progress_bar=self.progress_bar))
-        self.receipt.add('Secured PDF', os.path.basename(p))
+        if self.use_receipt:
+            self.receipt.add('Secured PDF', os.path.basename(p))
         return p
