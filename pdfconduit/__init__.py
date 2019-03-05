@@ -39,8 +39,8 @@ except ImportError:
 
 # Convert installation
 try:
-    from pdf.convert.flatten import Flatten
-    MODIFY_INSTALLED = True
+    from pdf.convert import Flatten
+    CONVERT_INSTALLED = True
     __all__.extend(["Flatten"])
 except ImportError:
-    MODIFY_INSTALLED = False
+    CONVERT_INSTALLED = False

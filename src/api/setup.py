@@ -32,7 +32,7 @@ setup(
         'werkzeug',
         'pdfconduit>=1.7.6'
     ],
-    name='pdfconduit',
+    name='pdfconduit-api',
     version=verstr,
     packages=find_packages(),
     namespace_packages=['pdf'],
