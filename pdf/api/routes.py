@@ -18,7 +18,7 @@ def index():
     return 'pdfconduit api is running'
 
 
-@app.route(construct_url('watermark'), methods=['POST'])
+@app.route('/watermark', methods=['POST'])
 def watermark():
     """Apply a watermark to a PDF file."""
     if not request.method == 'POST':
@@ -28,6 +28,8 @@ def watermark():
     if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
+
+    return 'file'
 
     # If user does not select file, browser also submit an empty part without filename
     if request.files['file'].filename == '':
@@ -52,8 +54,11 @@ def watermark():
         # Save file to uploads folder
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        if os.path.exists(file_path):
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], str(uuid4))
+
+        # Make uploads directory if it does not exist
+        if not os.path.exists(app.config['UPLOAD_FOLDER']):
+            os.mkdir(app.config['UPLOAD_FOLDER'])
+
         file.save(file_path)
 
         # Create new watermarked file and return file path

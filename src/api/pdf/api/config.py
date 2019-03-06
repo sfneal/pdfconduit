@@ -1,10 +1,7 @@
-import os
-
-
 APP_NAME = 'pdfconduit'
 VERSION = 1.0
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
+UPLOAD_FOLDER = '/app/uploads'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 # 16mb max file size

@@ -222,3 +222,7 @@
 2019-02-26 12:12:03,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,19.94,3.7.1,Windows,4,N/A
 2019-02-26 12:12:23,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,20.25,3.7.1,Windows,4,N/A
 2019-02-26 12:12:39,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,15.96,3.7.1,Windows,4,N/A
+2019-03-05 17:12:07,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,12.78,3.7.1,Darwin,8,N/A
+2019-03-05 17:12:22,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,15.65,3.7.1,Darwin,8,N/A
+2019-03-05 17:12:36,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,13.34,3.7.1,Darwin,8,N/A
+2019-03-05 17:12:48,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,11.98,3.7.1,Darwin,8,N/A
