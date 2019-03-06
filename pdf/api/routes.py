@@ -29,8 +29,6 @@ def watermark():
         flash('No file part')
         return redirect(request.url)
 
-    return 'file'
-
     # If user does not select file, browser also submit an empty part without filename
     if request.files['file'].filename == '':
         flash('No selected file')
