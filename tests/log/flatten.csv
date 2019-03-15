@@ -122,3 +122,5 @@
 2019-03-15 15:25:14,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,52.58,3.7.1,Darwin,8,N/A
 2019-03-15 15:28:46,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.4,3.7.1,Darwin,8,N/A
 2019-03-15 15:29:36,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,50.42,3.7.1,Darwin,8,N/A
+2019-03-15 15:35:52,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.02,3.7.1,Darwin,8,N/A
+2019-03-15 15:36:42,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,49.59,3.7.1,Darwin,8,N/A

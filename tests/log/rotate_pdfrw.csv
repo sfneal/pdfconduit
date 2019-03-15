@@ -230,3 +230,7 @@
 2019-03-15 15:30:25,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.33,3.7.1,Darwin,8,N/A
 2019-03-15 15:30:25,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.29,3.7.1,Darwin,8,N/A
 2019-03-15 15:30:26,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.32,3.7.1,Darwin,8,N/A
+2019-03-15 15:38:10,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,0.53,3.7.1,Darwin,8,N/A
+2019-03-15 15:38:11,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.54,3.7.1,Darwin,8,N/A
+2019-03-15 15:38:11,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.52,3.7.1,Darwin,8,N/A
+2019-03-15 15:38:12,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.51,3.7.1,Darwin,8,N/A

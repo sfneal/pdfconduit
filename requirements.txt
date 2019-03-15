@@ -1,11 +1,11 @@
 bleach==3.1.0
-certifi==2018.11.29
+certifi==2019.3.9
 chardet==3.0.4
 Click==7.0
 databasetools==1.4.4
 differentiate==1.2.1
 dill==0.2.9
-dirutility==0.5.1
+dirutility==0.5.6
 docutils==0.14
 Flask==1.0.2
 idna==2.8

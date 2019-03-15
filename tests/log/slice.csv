@@ -106,3 +106,5 @@
 2019-03-15 15:26:55,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.37,3.7.1,Darwin,8,N/A
 2019-03-15 15:31:15,TestSlice,test_slice,con docs2.pdf,PASS,0.35,3.7.1,Darwin,8,N/A
 2019-03-15 15:31:15,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.36,3.7.1,Darwin,8,N/A
+2019-03-15 15:39:19,TestSlice,test_slice,con docs2.pdf,PASS,0.4,3.7.1,Darwin,8,N/A
+2019-03-15 15:39:19,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.43,3.7.1,Darwin,8,N/A
