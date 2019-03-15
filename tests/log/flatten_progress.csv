@@ -108,3 +108,7 @@
 2019-02-26 11:57:58,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,25.73,3.7.2,Linux,4,N/A
 2019-02-26 12:14:19,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,27.02,3.7.1,Windows,4,N/A
 2019-02-26 12:14:37,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,17.93,3.7.1,Windows,4,N/A
+2019-03-15 15:26:24,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,17.33,3.7.1,Darwin,8,N/A
+2019-03-15 15:26:40,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,15.58,3.7.1,Darwin,8,N/A
+2019-03-15 15:30:44,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,17.48,3.7.1,Darwin,8,N/A
+2019-03-15 15:31:00,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,16.22,3.7.1,Darwin,8,N/A

@@ -226,3 +226,11 @@
 2019-03-05 17:12:22,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,15.65,3.7.1,Darwin,8,N/A
 2019-03-05 17:12:36,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,13.34,3.7.1,Darwin,8,N/A
 2019-03-05 17:12:48,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,11.98,3.7.1,Darwin,8,N/A
+2019-03-15 15:25:35,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,9.7,3.7.1,Darwin,8,N/A
+2019-03-15 15:25:45,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,10.02,3.7.1,Darwin,8,N/A
+2019-03-15 15:25:55,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,9.54,3.7.1,Darwin,8,N/A
+2019-03-15 15:26:04,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,9.39,3.7.1,Darwin,8,N/A
+2019-03-15 15:29:57,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,9.3,3.7.1,Darwin,8,N/A
+2019-03-15 15:30:06,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,9.06,3.7.1,Darwin,8,N/A
+2019-03-15 15:30:15,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,9.06,3.7.1,Darwin,8,N/A
+2019-03-15 15:30:24,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,9.08,3.7.1,Darwin,8,N/A

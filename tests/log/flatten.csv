@@ -118,3 +118,7 @@
 2019-02-26 12:13:51,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,46.21,3.7.1,Windows,4,N/A
 2019-03-05 17:09:43,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,35.02,3.7.1,Darwin,8,N/A
 2019-03-05 17:11:38,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,114.2,3.7.1,Darwin,8,N/A
+2019-03-15 15:24:22,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,15.99,3.7.1,Darwin,8,N/A
+2019-03-15 15:25:14,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,52.58,3.7.1,Darwin,8,N/A
+2019-03-15 15:28:46,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.4,3.7.1,Darwin,8,N/A
+2019-03-15 15:29:36,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,50.42,3.7.1,Darwin,8,N/A
