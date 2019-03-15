@@ -230,3 +230,7 @@
 2019-03-15 15:39:06,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.68,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:07,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.72,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:07,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.67,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:48,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,0.62,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:49,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.6,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:49,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.65,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:50,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,N/A

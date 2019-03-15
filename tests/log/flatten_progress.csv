@@ -114,3 +114,5 @@
 2019-03-15 15:31:00,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,16.22,3.7.1,Darwin,8,N/A
 2019-03-15 15:38:40,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,27.59,3.7.1,Darwin,8,N/A
 2019-03-15 15:38:59,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,18.44,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:23,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,19.93,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:42,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,19.0,3.7.1,Darwin,8,N/A

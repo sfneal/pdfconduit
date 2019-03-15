@@ -143,3 +143,5 @@
 2019-03-15 15:31:03,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.59,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:03,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.22,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:04,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.84,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:46,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.18,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:47,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.76,3.7.1,Darwin,8,N/A

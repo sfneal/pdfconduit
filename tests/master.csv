@@ -124,6 +124,8 @@
 2019-03-15 15:29:36,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,50.42,3.7.1,Darwin,8,N/A
 2019-03-15 15:35:52,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.02,3.7.1,Darwin,8,N/A
 2019-03-15 15:36:42,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,49.59,3.7.1,Darwin,8,N/A
+2019-03-15 15:56:13,TestFlatten,test_flatten_1x,con docs2.pdf,PASS,16.33,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:06,TestFlatten,test_flatten_2x,con docs2.pdf,PASS,53.08,3.7.1,Darwin,8,N/A
 2018-08-31 13:59:15,TestEncrypt,test_encrypt_128bit,article.pdf,PASS,0.47,3.6.4,Darwin,8,16
 2018-08-31 13:59:16,TestEncrypt,test_encrypt_40bit,article.pdf,PASS,0.43,3.6.4,Darwin,8,16
 2018-08-31 13:59:16,TestEncrypt,test_encrypt_commenting,article.pdf,PASS,0.53,3.6.4,Darwin,8,16
@@ -352,6 +354,10 @@
 2019-03-15 15:37:18,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,12.13,3.7.1,Darwin,8,N/A
 2019-03-15 15:37:47,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,29.32,3.7.1,Darwin,8,N/A
 2019-03-15 15:38:08,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,20.93,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:31,TestEncrypt,test_encrypt_128bit,con docs2.pdf,PASS,11.4,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:41,TestEncrypt,test_encrypt_40bit,con docs2.pdf,PASS,10.11,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:51,TestEncrypt,test_encrypt_commenting,con docs2.pdf,PASS,9.96,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:01,TestEncrypt,test_encrypt_printing,con docs2.pdf,PASS,10.39,3.7.1,Darwin,8,N/A
 2018-08-31 13:59:46,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,2.3,3.6.4,Darwin,8,16
 2018-08-31 13:59:49,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,2.71,3.6.4,Darwin,8,16
 2018-08-31 13:59:51,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,2.24,3.6.4,Darwin,8,16
@@ -584,6 +590,10 @@
 2019-03-15 15:39:06,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.68,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:07,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.72,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:07,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.67,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:48,TestUpscalePdfrw,test_upscale_15x_pdfrw,con docs2.pdf,PASS,0.62,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:49,TestUpscalePdfrw,test_upscale_20x_pdfrw,con docs2.pdf,PASS,0.6,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:49,TestUpscalePdfrw,test_upscale_30x_pdfrw,con docs2.pdf,PASS,0.65,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:50,TestUpscalePdfrw,test_upscale_pdfrw,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,N/A
 2018-08-31 13:59:36,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,1.62,3.6.4,Darwin,8,16
 2018-08-31 13:59:38,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,1.7,3.6.4,Darwin,8,16
 2018-08-31 13:59:39,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,1.64,3.6.4,Darwin,8,16
@@ -820,6 +830,10 @@
 2019-03-15 15:38:11,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.54,3.7.1,Darwin,8,N/A
 2019-03-15 15:38:11,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.52,3.7.1,Darwin,8,N/A
 2019-03-15 15:38:12,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.51,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:02,TestRotatePdfrw,test_rotate_180_pdfrw,con docs2.pdf,PASS,0.31,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:02,TestRotatePdfrw,test_rotate_270_pdfrw,con docs2.pdf,PASS,0.32,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:03,TestRotatePdfrw,test_rotate_90_pdfrw,con docs2.pdf,PASS,0.3,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:03,TestRotatePdfrw,test_rotate_pdfrw,con docs2.pdf,PASS,0.31,3.7.1,Darwin,8,N/A
 2018-08-31 13:59:23,TestFlatten,test_flatten_gui,article.pdf,PASS,1.36,3.6.4,Darwin,8,16
 2018-08-31 13:59:25,TestFlatten,test_flatten_tqdm,article.pdf,PASS,1.5,3.6.4,Darwin,8,16
 2018-08-31 14:06:32,TestFlatten,test_flatten_gui,plan_l.pdf,PASS,0.6,3.6.4,Darwin,8,16
@@ -936,6 +950,8 @@
 2019-03-15 15:31:00,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,16.22,3.7.1,Darwin,8,N/A
 2019-03-15 15:38:40,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,27.59,3.7.1,Darwin,8,N/A
 2019-03-15 15:38:59,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,18.44,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:23,TestFlatten,test_flatten_gui,con docs2.pdf,PASS,19.93,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:42,TestFlatten,test_flatten_tqdm,con docs2.pdf,PASS,19.0,3.7.1,Darwin,8,N/A
 2018-08-31 13:59:28,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.77,3.6.4,Darwin,8,16
 2018-08-31 13:59:30,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,2.63,3.6.4,Darwin,8,16
 2018-08-31 14:06:39,TestMerge,test_merge_pdfrw,plan_l.pdf,PASS,0.7,3.6.4,Darwin,8,16
@@ -1081,6 +1097,8 @@
 2019-03-15 15:31:03,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.59,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:03,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.22,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:04,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.84,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:46,TestMerge,test_merge_pdfrw,con docs2.pdf,PASS,0.18,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:47,TestMerge,test_merge_pypdf3,con docs2.pdf,PASS,0.76,3.7.1,Darwin,8,N/A
 2018-08-31 14:00:20,TestSlice,test_slice,con docs2.pdf,PASS,2.34,3.6.4,Darwin,8,16
 2018-08-31 14:00:23,TestSlice,test_slice_4to7,con docs2.pdf,PASS,2.67,3.6.4,Darwin,8,16
 2018-08-31 14:07:06,TestSlice,test_slice,plan_l.pdf,PASS,0.04,3.6.4,Darwin,8,16
@@ -1191,6 +1209,8 @@
 2019-03-15 15:31:15,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.36,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:19,TestSlice,test_slice,con docs2.pdf,PASS,0.4,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:19,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.43,3.7.1,Darwin,8,N/A
+2019-03-15 15:59:01,TestSlice,test_slice,con docs2.pdf,PASS,0.39,3.7.1,Darwin,8,N/A
+2019-03-15 15:59:01,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.42,3.7.1,Darwin,8,N/A
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_180_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_270_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
 2018-08-31 14:04:24,TestRotatePyPDF3,test_rotate_90_pypdf3,plan_p.pdf,PASS,0.05,3.6.4,Darwin,8,16
@@ -1419,6 +1439,10 @@
 2019-03-15 15:39:01,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.56,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:01,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.61,3.7.1,Darwin,8,N/A
 2019-03-15 15:39:02,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.56,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:44,TestRotatePyPDF3,test_rotate_180_pypdf3,con docs2.pdf,PASS,0.51,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:44,TestRotatePyPDF3,test_rotate_270_pypdf3,con docs2.pdf,PASS,0.49,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:45,TestRotatePyPDF3,test_rotate_90_pypdf3,con docs2.pdf,PASS,0.53,3.7.1,Darwin,8,N/A
+2019-03-15 15:58:45,TestRotatePyPDF3,test_rotate_pypdf3,con docs2.pdf,PASS,0.48,3.7.1,Darwin,8,N/A
 2018-08-31 13:59:09,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,article.pdf,PASS,3.53,3.6.4,Darwin,8,16
 2018-08-31 13:59:10,TestWatermarkMethodsPdfrw,test_watermark_label,article.pdf,PASS,1.43,3.6.4,Darwin,8,16
 2018-08-31 13:59:14,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,article.pdf,PASS,3.63,3.6.4,Darwin,8,16
@@ -1887,3 +1911,9 @@
 2019-03-15 15:36:50,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,2.58,3.7.1,Darwin,8,N/A
 2019-03-15 15:36:52,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,2.22,3.7.1,Darwin,8,N/A
 2019-03-15 15:36:54,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,2.22,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:09,TestWatermarkMethodsPdfrw,test_watermark_flat_pdfrw,con docs2.pdf,PASS,1.89,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:10,TestWatermarkMethodsPdfrw,test_watermark_label,con docs2.pdf,PASS,0.42,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:12,TestWatermarkMethodsPdfrw,test_watermark_layered_pdfrw,con docs2.pdf,PASS,1.99,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:14,TestWatermarkMethodsPdfrw,test_watermark_overlay_pdfrw,con docs2.pdf,PASS,2.17,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:16,TestWatermarkMethodsPdfrw,test_watermark_pdfrw,con docs2.pdf,PASS,2.35,3.7.1,Darwin,8,N/A
+2019-03-15 15:57:18,TestWatermarkMethodsPdfrw,test_watermark_underneath_pdfrw,con docs2.pdf,PASS,2.38,3.7.1,Darwin,8,N/A
