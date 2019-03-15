@@ -56,8 +56,8 @@ class Watermark:
 
     def cleanup(self):
         runtime = self.time.end
-        self.receipt.add('~run time~', runtime)
         if self.use_receipt:
+            self.receipt.add('~run time~', runtime)
             self.receipt.dump()
         if self.move_temps:
             if os.path.isdir(self.move_temps):
