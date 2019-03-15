@@ -16,16 +16,16 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'pdfconduit api is running'
+    return 'pdfconduit api is running!!!'
 
 
-@app.route('/watermark', methods=['GET'])
+@app.route('/watermark', methods=['GET', 'POST'])
 def watermark():
     return '''
         <!doctype html>
         <title>Upload new File</title>
         <h1>Upload new File</h1>
-        <form method=post enctype=multipart/form-data>
+        <form method=post action=/watermark/process enctype=multipart/form-data>
           <input type=file name=file>
           <input type=submit value=Upload>
         </form>
@@ -50,16 +50,21 @@ def watermark_process():
         return redirect(request.url)
 
     # Check if the file is an allowed file type
-    if not allowed_file(request.files['file'].filename.filename):
+    if not allowed_file(request.files['file'].filename):
         flash('Invalid file type.  Only .pdf files are permitted')
         return redirect(request.url)
 
     # Retrieve PDF file and parameters
     file = request.files['file']
+    # params = {
+    #     'address': request.form['address'],
+    #     'town': request.form['town'],
+    #     'state': request.form['state'],
+    # }
     params = {
-        'address': request.form['address'],
-        'town': request.form['town'],
-        'state': request.form['state'],
+        'address': '43 Indian Lane',
+        'town': 'Franklin',
+        'state': 'MA',
     }
 
     # File has been added and validated
@@ -76,7 +81,7 @@ def watermark_process():
 
         # Create new watermarked file and return file path
         watermarked = apply_watermark(file_path, params)
-        return send_from_directory(app.config['UPLOAD_FOLDER'], os.path.basename(watermarked))
+        return redirect('/uploads/{0}'.format(os.path.basename(watermarked)))
 
 
 @app.route('/uploads/<filename>')
