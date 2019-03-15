@@ -26,62 +26,56 @@ def watermark():
         <title>Upload new File</title>
         <h1>Upload new File</h1>
         <form method=post action=/watermark/process enctype=multipart/form-data>
-          <input type=file name=file>
+          <input type=file name=pdf>
+          <input type=text name=address>
+          <input type=text name=town>
+          <input type=text name=state>
           <input type=submit value=Upload>
         </form>
         '''
 
 
-@app.route('/watermark/process', methods=['POST'])
+@app.route('/watermark/process', methods=['POST', 'GET'])
 def watermark_process():
     """Apply a watermark to a PDF file."""
     # Redirect to watermark page that contains form
     if not request.method == 'POST':
-        redirect('/watermark')
+        abort(403)
 
     # Check if the post request has the file part
-    if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
-
-    # If user does not select file, browser also submit an empty part without filename
-    if request.files['file'].filename == '':
-        flash('No selected file')
-        return redirect(request.url)
-
-    # Check if the file is an allowed file type
-    if not allowed_file(request.files['file'].filename):
-        flash('Invalid file type.  Only .pdf files are permitted')
-        return redirect(request.url)
+    if 'pdf' not in request.files:
+        abort(403)
 
     # Retrieve PDF file and parameters
-    file = request.files['file']
-    # params = {
-    #     'address': request.form['address'],
-    #     'town': request.form['town'],
-    #     'state': request.form['state'],
-    # }
+    file = request.files['pdf']
+
+    # If user does not select file, browser also submit an empty part without filename
+    if file.filename == '':
+        abort(403)
+
+    # Check if the file is an allowed file type
+    if not allowed_file(file.filename):
+        abort(403)
+
     params = {
-        'address': '43 Indian Lane',
-        'town': 'Franklin',
-        'state': 'MA',
+        'address': request.form['address'],
+        'town': request.form['town'],
+        'state': request.form['state'],
     }
 
-    # File has been added and validated
-    if file:
-        # Save file to uploads folder
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    # Save file to uploads folder
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-        # Make uploads directory if it does not exist
-        if not os.path.exists(app.config['UPLOAD_FOLDER']):
-            os.mkdir(app.config['UPLOAD_FOLDER'])
+    # Make uploads directory if it does not exist
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.mkdir(app.config['UPLOAD_FOLDER'])
 
-        file.save(file_path)
+    file.save(file_path)
 
-        # Create new watermarked file and return file path
-        watermarked = apply_watermark(file_path, params)
-        return redirect('/uploads/{0}'.format(os.path.basename(watermarked)))
+    # Create new watermarked file and return file path
+    watermarked = apply_watermark(file_path, params)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], os.path.basename(watermarked))
 
 
 @app.route('/uploads/<filename>')
@@ -91,7 +85,7 @@ def uploaded_file(filename):
 
 @app.route('/uploads', methods=['GET'])
 def all_uploads():
-    uploads = DirPaths(UPLOAD_FOLDER, full_paths=True).walk()
+    uploads = sorted(DirPaths(UPLOAD_FOLDER, full_paths=True).walk())
     if len(uploads) > 0:
         response = '<h2>Files on mounted drive</h2>'
         response += '<ul>'
