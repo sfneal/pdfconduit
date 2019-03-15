@@ -110,3 +110,5 @@
 2019-03-15 15:39:19,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.43,3.7.1,Darwin,8,N/A
 2019-03-15 15:59:01,TestSlice,test_slice,con docs2.pdf,PASS,0.39,3.7.1,Darwin,8,N/A
 2019-03-15 15:59:01,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.42,3.7.1,Darwin,8,N/A
+2019-03-15 16:19:03,TestSlice,test_slice,con docs2.pdf,PASS,0.33,3.7.2,Linux,4,N/A
+2019-03-15 16:19:04,TestSlice,test_slice_4to7,con docs2.pdf,PASS,0.37,3.7.2,Linux,4,N/A
