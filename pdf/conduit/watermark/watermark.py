@@ -12,7 +12,7 @@ from pdf.conduit.watermark.add import WatermarkAdd
 
 
 class Watermark:
-    def __init__(self, document, remove_temps=True, move_temps=None, open_file=True, tempdir=mkdtemp(), receipt=None,
+    def __init__(self, document, remove_temps=True, move_temps=None, open_file=False, tempdir=mkdtemp(), receipt=None,
                  use_receipt=True, progress_bar_enabled=False, progress_bar='tqdm'):
         """
         Watermark and encrypt a PDF document.
