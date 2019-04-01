@@ -1,6 +1,4 @@
 import os
-import datetime
-from databasetools import CSV
 
 
 pdfs_dir = os.path.join(os.path.dirname(__file__), 'data')
