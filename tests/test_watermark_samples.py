@@ -1,13 +1,13 @@
 import unittest
 import os
 from pdf.conduit.samples import Samples
-from tests import pdf
+from tests import pdf_path
 
 
 class TestWatermarkSamples(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        src = pdf
+        src = pdf_path
         dst = os.path.join(os.path.dirname(src), 'samples')
 
         cls.s = Samples(src, dst)

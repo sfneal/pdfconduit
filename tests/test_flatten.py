@@ -10,7 +10,7 @@ class TestFlatten(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Destination directory
-        results = os.path.join(directory, 'results')
+        results = os.path.join(pdfs_dir, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
         cls.dst = os.path.join(results, 'flatten')
@@ -24,7 +24,7 @@ class TestFlatten(unittest.TestCase):
         cls.csv = os.path.join(os.path.dirname(__file__), 'log', cls.file_path)
         cls.log = []
 
-        cls.fname = pdf
+        cls.fname = pdf_path
 
         cls.files = []
 

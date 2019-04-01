@@ -15,7 +15,7 @@ class TestEncrypt(unittest.TestCase):
         self.temp = NamedTemporaryFile(suffix='.pdf')
 
     def test_encrypt_printing(self):
-        p = Encrypt(pdf, self.user_pw, self.owner_pw, output=self.temp.name, suffix='secured')
+        p = Encrypt(pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, suffix='secured')
         security = Info(p.output, self.user_pw).security
 
         self.assertTrue(Info(p.output, self.user_pw).encrypted)
@@ -23,19 +23,19 @@ class TestEncrypt(unittest.TestCase):
         self.assertEqual(security['/P'], -1852)
 
     def test_encrypt_128bit(self):
-        p = Encrypt(pdf, self.user_pw, self.owner_pw, output=self.temp.name, bit128=True, suffix='secured_128bit')
+        p = Encrypt(pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, bit128=True, suffix='secured_128bit')
         security = Info(p.output, self.user_pw).security
 
         self.assertTrue(Info(p.output, self.user_pw).encrypted)
         self.assertEqual(security['/Length'], 128)
 
     def test_encrypt_40bit(self):
-        p = Encrypt(pdf, self.user_pw, self.owner_pw, output=self.temp.name, bit128=False, suffix='secured_40bit')
+        p = Encrypt(pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, bit128=False, suffix='secured_40bit')
 
         self.assertTrue(Info(p.output, self.user_pw).encrypted)
 
     def test_encrypt_commenting(self):
-        p = Encrypt(pdf, self.user_pw, self.owner_pw, output=self.temp.name, allow_commenting=True, suffix='secured_commenting')
+        p = Encrypt(pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, allow_commenting=True, suffix='secured_commenting')
         security = Info(p.output, self.user_pw).security
 
         self.assertTrue(Info(p.output, self.user_pw).encrypted)

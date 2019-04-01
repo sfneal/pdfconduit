@@ -11,12 +11,12 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
     def setUpClass(cls):
         cls.pdfs = ['plan_l.pdf', 'plan_p.pdf', 'document.pdf', 'con docs2_sliced.pdf']
 
-        cls.w = Watermark(pdf, use_receipt=False, open_file=False)
-        if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(directory, 'con docs2_sliced.pdf')):
-            slicer(os.path.join(directory, 'con docs2.pdf'), first_page=1, last_page=5, suffix='sliced')
+        cls.w = Watermark(pdf_path, use_receipt=False, open_file=False)
+        if 'con docs2_sliced.pdf' in cls.pdfs and not os.path.exists(os.path.join(pdfs_dir, 'con docs2_sliced.pdf')):
+            slicer(os.path.join(pdfs_dir, 'con docs2.pdf'), first_page=1, last_page=5, suffix='sliced')
 
         # Destination directory
-        results = os.path.join(directory, 'results')
+        results = os.path.join(pdfs_dir, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
         cls.dst = os.path.join(results, 'watermark')
@@ -38,7 +38,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         cls.w.cleanup()
 
     def setUp(self):
-        self.pdfs = [os.path.join(directory, pdf) for pdf in self.pdfs]
+        self.pdfs = [os.path.join(pdfs_dir, pdf) for pdf in self.pdfs]
         self.address = '43 Indian Lane'
         self.town = 'Franklin'
         self.state = 'MA'

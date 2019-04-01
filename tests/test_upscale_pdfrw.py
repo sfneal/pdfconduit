@@ -10,7 +10,7 @@ class TestUpscalePdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Destination directory
-        results = os.path.join(directory, 'results')
+        results = os.path.join(pdfs_dir, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
         cls.dst = os.path.join(results, 'scale')
@@ -74,35 +74,35 @@ class TestUpscalePdfrw(unittest.TestCase):
 
     def test_upscale_pdfrw(self):
         s = 2.0
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_pdfrw', method='pdfrw')
+        upscale1 = upscale(pdf_path, scale=s, suffix='upscaled_pdfrw', method='pdfrw')
         self.files.append(upscale1)
 
         self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
+        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf_path).size]))
 
     def test_upscale_20x_pdfrw(self):
         s = 2.0
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_2.0_pdfrw', method='pdfrw')
+        upscale1 = upscale(pdf_path, scale=s, suffix='upscaled_2.0_pdfrw', method='pdfrw')
         self.files.append(upscale1)
 
         self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
+        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf_path).size]))
 
     def test_upscale_15x_pdfrw(self):
         s = 1.5
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_1.5_pdfrw', method='pdfrw')
+        upscale1 = upscale(pdf_path, scale=s, suffix='upscaled_1.5_pdfrw', method='pdfrw')
         self.files.append(upscale1)
 
         self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
+        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf_path).size]))
 
     def test_upscale_30x_pdfrw(self):
         s = 3.0
-        upscale1 = upscale(pdf, scale=s, suffix='upscaled_3.0_pdfrw', method='pdfrw')
+        upscale1 = upscale(pdf_path, scale=s, suffix='upscaled_3.0_pdfrw', method='pdfrw')
         self.files.append(upscale1)
 
         self.assertTrue(os.path.isfile(upscale1))
-        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf).size]))
+        self.assertEqual(Info(upscale1).size, tuple([i * s for i in Info(pdf_path).size]))
 
 
 if __name__ == '__main__':

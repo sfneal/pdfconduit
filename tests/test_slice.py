@@ -10,7 +10,7 @@ class TestSlice(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Destination directory
-        results = os.path.join(directory, 'results')
+        results = os.path.join(pdfs_dir, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
         cls.dst = os.path.join(results, 'slice')
@@ -31,7 +31,7 @@ class TestSlice(unittest.TestCase):
         write_log(cls.csv, cls.log)
 
     def setUp(self):
-        self.pdf = os.path.join(directory, pdf)
+        self.pdf = os.path.join(pdfs_dir, pdf_path)
         self.startTime = time.time()
 
     def tearDown(self):

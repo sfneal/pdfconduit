@@ -10,7 +10,7 @@ class TestRotatePdfrw(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Destination directory
-        results = os.path.join(directory, 'results')
+        results = os.path.join(pdfs_dir, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
         cls.dst = os.path.join(results, 'rotate')
@@ -74,7 +74,7 @@ class TestRotatePdfrw(unittest.TestCase):
 
     def test_rotate_pdfrw(self):
         r = 90
-        rotated1 = rotate(pdf, r, suffix='rotated_pdfrw', method='pdfrw')
+        rotated1 = rotate(pdf_path, r, suffix='rotated_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))
@@ -82,7 +82,7 @@ class TestRotatePdfrw(unittest.TestCase):
 
     def test_rotate_90_pdfrw(self):
         r = 90
-        rotated1 = rotate(pdf, r, suffix='rotated_90_pdfrw', method='pdfrw')
+        rotated1 = rotate(pdf_path, r, suffix='rotated_90_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))
@@ -90,7 +90,7 @@ class TestRotatePdfrw(unittest.TestCase):
 
     def test_rotate_180_pdfrw(self):
         r = 180
-        rotated1 = rotate(pdf, r, suffix='rotated_180_pdfrw', method='pdfrw')
+        rotated1 = rotate(pdf_path, r, suffix='rotated_180_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))
@@ -98,7 +98,7 @@ class TestRotatePdfrw(unittest.TestCase):
 
     def test_rotate_270_pdfrw(self):
         r = 270
-        rotated1 = rotate(pdf, r, suffix='rotated_270_pdfrw', method='pdfrw')
+        rotated1 = rotate(pdf_path, r, suffix='rotated_270_pdfrw', method='pdfrw')
         self.files.append(rotated1)
 
         self.assertTrue(os.path.isfile(rotated1))

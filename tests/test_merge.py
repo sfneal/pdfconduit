@@ -10,7 +10,7 @@ class TestMerge(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Destination directory
-        results = os.path.join(directory, 'results')
+        results = os.path.join(pdfs_dir, 'results')
         if not os.path.isdir(results):
             os.mkdir(results)
         cls.dst = os.path.join(results, 'merge')
@@ -73,7 +73,7 @@ class TestMerge(unittest.TestCase):
             return exc_list[-1][1]
 
     def test_merge_pypdf3(self):
-        pdfs = [os.path.join(directory, p) for p in ['article.pdf', 'charts.pdf', 'document.pdf', 'manual.pdf']]
+        pdfs = [os.path.join(pdfs_dir, p) for p in ['article.pdf', 'charts.pdf', 'document.pdf', 'manual.pdf']]
         m = Merge(pdfs, output_name='merged_pypdf3', method='pypdf3')
 
         self.assertTrue(os.path.exists(m.file))
@@ -82,7 +82,7 @@ class TestMerge(unittest.TestCase):
         self.files.append(m.file)
 
     def test_merge_pdfrw(self):
-        pdfs = [os.path.join(directory, p) for p in ['article.pdf', 'charts.pdf', 'document.pdf', 'manual.pdf']]
+        pdfs = [os.path.join(pdfs_dir, p) for p in ['article.pdf', 'charts.pdf', 'document.pdf', 'manual.pdf']]
         m = Merge(pdfs, output_name='merged_pdfrw', method='pdfrw')
 
         self.assertTrue(os.path.exists(m.file))
