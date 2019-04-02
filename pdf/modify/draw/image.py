@@ -5,23 +5,26 @@ from PyBundle import bundle_dir, resource_path
 from pdf.modify import FONT
 
 
-def img_opacity(image, opacity, tempdir=None, bw=True):
+def img_adjust(image, opacity=1.0, rotate=None, fit=0, tempdir=None, bw=False):
     """
-    Reduce the opacity of a PNG image.
+    Reduce the opacity of a PNG image or add rotation.
 
     Inspiration: http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/362879
 
     :param image: PNG image file
     :param opacity: float representing opacity percentage
+    :param rotate: Degrees to rotate
+    :param fit: If true, expands the size of the image to fit the whole canvas
     :param tempdir: Temporary directory
     :param bw: Set image to black and white
     :return:  Path to modified PNG
     """
     # Validate parameters
-    try:
-        assert 0 <= opacity < 1
-    except AssertionError:
-        return image
+    if opacity:
+        try:
+            assert 0 <= opacity <= 1
+        except AssertionError:
+            return image
     assert os.path.isfile(image), 'Image is not a file'
 
     # Open image in RGBA mode if not already in RGBA
@@ -30,6 +33,17 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
             im = im.convert('RGBA')
         else:
             im = im.copy()
+
+        if rotate:
+            # Rotate the image
+            if rotate == 90:
+                im = im.transpose(Image.ROTATE_90)
+            elif rotate == 180:
+                im = im.transpose(Image.ROTATE_180)
+            elif rotate == 270:
+                im = im.transpose(Image.ROTATE_270)
+            else:
+                im = im.rotate(rotate, expand=fit)
 
         # Adjust opacity
         alpha = im.split()[3]
@@ -41,41 +55,6 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
         # Save modified image file
         with NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False) as dst:
             im.save(dst)
-            return dst.name
-
-
-def img_rotate(image, rotate, fit=0, tempdir=None):
-    """
-    Reduce the opacity of a PNG image.
-
-    :param image: PNG image file
-    :param rotate: Degrees to rotate
-    :param fit: If true, expands the size of the image to fit the whole canvas
-    :param tempdir: Temporary directory
-    :return:  Path to modified PNG
-    """
-    # Validate parameters
-    try:
-        assert 0 <= rotate <= 360
-    except AssertionError:
-        return image
-    assert os.path.isfile(image), 'Image is not a file'
-
-    # Open image in RGBA mode if not already in RGBA
-    with Image.open(image) as im:
-        # Rotate the image
-        if rotate == 90:
-            rotated = im.transpose(Image.ROTATE_90)
-        elif rotate == 180:
-            rotated = im.transpose(Image.ROTATE_180)
-        elif rotate == 270:
-            im.transpose(Image.ROTATE_270)
-        else:
-            rotated = im.rotate(rotate, expand=fit)
-
-        # Save modified image file
-        with NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False) as dst:
-            rotated.save(dst)
             return dst.name
 
 
@@ -135,10 +114,9 @@ class DrawPIL:
         # Draw text to image
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
-    def draw_img(self, img, x=0, y=0, opacity=1.0):
-        scaled = self.scale(img)
-        opacity = Image.open(img_opacity(scaled, opacity, self.tempdir))
-        self.img.paste(opacity, (x, y))
+    def draw_img(self, img, x=0, y=0, opacity=1.0, rotate=0, fit=1):
+        adjusted = Image.open(img_adjust(self.scale(img), opacity, rotate, fit, self.tempdir))
+        self.img.alpha_composite(adjusted, (x, y))
 
     def rotate(self, rotate):
         # Create transparent image that is the same size as self.img

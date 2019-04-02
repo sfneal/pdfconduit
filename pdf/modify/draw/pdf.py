@@ -5,7 +5,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from PyBundle import resource_path
 from pdf.modify import LETTER
-from pdf.modify.draw.image import img_opacity
+from pdf.modify.draw.image import img_adjust
 from pdf.modify.canvas import CanvasStr, CanvasImg
 from pdf.utils import write_pdf
 
@@ -99,7 +99,7 @@ class WatermarkDraw(DrawPDF):
 
         :param ci: CanvasImage object
         """
-        img = img_opacity(ci.image, ci.opacity, tempdir=self.dir)
+        img = img_adjust(ci.image, ci.opacity, tempdir=self.dir)
         self.can.drawImage(img, x=ci.x, y=ci.y, width=ci.w, height=ci.h, mask=ci.mask,
                            preserveAspectRatio=ci.preserve_aspect_ratio, anchorAtXY=True)
 
