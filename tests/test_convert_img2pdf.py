@@ -16,13 +16,14 @@ class TestConvertImg2Pdf(unittest.TestCase):
         self.temp = TemporaryDirectory()
 
     def tearDown(self):
+        self.temp.cleanup()
         if os.path.exists(self.pdf):
             os.remove(self.pdf)
 
     @Timer.decorator
     def test_convert_img2pdf(self):
         """Create a 'flattened' pdf file without layers."""
-        pdf = IMG2PDF([self.img_path], destination=test_data_dir, tempdir=self.temp.name).save()
+        pdf = IMG2PDF([self.img_path], destination=test_data_dir).save(remove_temps=False)
 
         # Assert pdf file exists
         self.assertTrue(os.path.exists(pdf))
