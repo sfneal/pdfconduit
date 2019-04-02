@@ -1,3 +1,0 @@
-Flask>=1.0.2
-werkzeug
-pdfconduit>=1.7.6

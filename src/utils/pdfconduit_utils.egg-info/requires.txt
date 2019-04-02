@@ -1,2 +1,0 @@
-PyPDF3>=1.0.1
-PyBundle>=1.0.6
