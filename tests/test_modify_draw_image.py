@@ -1,9 +1,11 @@
-import unittest
 import os
+import unittest
 from tempfile import TemporaryDirectory
+
 from looptools import Timer
-from pdf.modify.draw.image import DrawPIL, img_adjust
+
 from pdf.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
+from pdf.modify.draw.image import DrawPIL, img_adjust
 from tests import *
 
 

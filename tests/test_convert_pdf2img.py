@@ -1,7 +1,9 @@
-import unittest
 import os
+import unittest
 from tempfile import TemporaryDirectory
+
 from looptools import Timer
+
 from pdf.convert import PDF2IMG
 from tests import *
 

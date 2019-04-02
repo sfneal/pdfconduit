@@ -1,6 +1,8 @@
-import unittest
 import os
+import unittest
+
 from looptools import Timer
+
 from pdfconduit import Info, Flatten
 from tests import *
 

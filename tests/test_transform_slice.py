@@ -1,7 +1,9 @@
-import unittest
 import os
+import unittest
 from tempfile import TemporaryDirectory
+
 from looptools import Timer
+
 from pdfconduit import Info, slicer
 from tests import *
 

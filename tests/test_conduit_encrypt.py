@@ -1,6 +1,7 @@
-import unittest
 import os
+import unittest
 from tempfile import NamedTemporaryFile
+
 from pdfconduit import Encrypt, Info
 from tests import *
 
