@@ -11,10 +11,6 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
     def setUpClass(cls):
         cls.pdf_path = pdf_path
 
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
     def setUp(self):
         self.temp = TemporaryDirectory()
         self.address = '43 Indian Lane'
