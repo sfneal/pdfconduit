@@ -34,6 +34,7 @@ class TestFlatten(unittest.TestCase):
 
     @Timer.decorator
     def test_flatten_gui(self):
+        """Create a 'flattened' pdf file without layers and monitor using a PySimpleGUI progress bar."""
         flat = Flatten(self.pdf_path, suffix='flat_gui', progress_bar='gui').save()
 
         # Assert pdf file exists
@@ -50,6 +51,7 @@ class TestFlatten(unittest.TestCase):
 
     @Timer.decorator
     def test_flatten_tqdm(self):
+        """Create a 'flattened' pdf file without layers and monitor using a tqdm progress bar."""
         flat = Flatten(self.pdf_path, suffix='flat_tqdm', progress_bar='tqdm').save()
 
         # Assert pdf file exists
