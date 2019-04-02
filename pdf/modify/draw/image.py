@@ -44,12 +44,13 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
             return dst.name
 
 
-def img_rotate(image, rotate, tempdir=None):
+def img_rotate(image, rotate, fit=0, tempdir=None):
     """
     Reduce the opacity of a PNG image.
 
     :param image: PNG image file
     :param rotate: Degrees to rotate
+    :param fit: If true, expands the size of the image to fit the whole canvas
     :param tempdir: Temporary directory
     :return:  Path to modified PNG
     """
@@ -70,7 +71,7 @@ def img_rotate(image, rotate, tempdir=None):
         elif rotate == 270:
             im.transpose(Image.ROTATE_270)
         else:
-            rotated = im.rotate(rotate)
+            rotated = im.rotate(rotate, expand=fit)
 
         # Save modified image file
         with NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False) as dst:

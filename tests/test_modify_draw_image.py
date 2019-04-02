@@ -41,7 +41,7 @@ class TestModifyDrawImage(unittest.TestCase):
     @Timer.decorator
     def test_modify_draw_image_image_rotate(self):
         """Test the function 'img_rotate.'"""
-        rotated = img_rotate(self.wtrmrk_path, 30, self.temp.name)
+        rotated = img_rotate(self.wtrmrk_path, 30, 1)
 
         # Assert the rotate file exists
         self.assertTrue(os.path.exists(rotated))
