@@ -20,7 +20,7 @@ class TestTransformSlice(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_transform_slice(self):
+    def test_slice(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 1
         lp = 1
@@ -34,7 +34,7 @@ class TestTransformSlice(unittest.TestCase):
         return sliced
 
     @Timer.decorator
-    def test_transform_slice2(self):
+    def test_slice2(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 4
         lp = 7

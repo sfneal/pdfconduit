@@ -23,7 +23,7 @@ class TestConvertPdf2Img(unittest.TestCase):
             os.remove(self.img)
 
     @Timer.decorator
-    def test_convert_pdf2img(self):
+    def test_pdf2img(self):
         """Convert a PDF file to a png image."""
         img = PDF2IMG(self.pdf_path).save()
 

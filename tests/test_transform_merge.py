@@ -20,7 +20,7 @@ class TestTransformMerge(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_transform_merge_pypdf3(self):
+    def test_merge_pypdf3(self):
         """Merge multiple PDF files into a single PDF using the `PyPDF3` library."""
         merged = Merge(self.pdfs, output_name='merged_pypdf3', output_dir=self.temp.name, method='pypdf3')
 
@@ -32,7 +32,7 @@ class TestTransformMerge(unittest.TestCase):
         return merged
 
     @Timer.decorator
-    def test_transform_merge_pdfrw(self):
+    def test_merge_pdfrw(self):
         """Merge multiple PDF files into a single PDF using the `pdfrw` library."""
         merged = Merge(self.pdfs, output_name='merged_pdfrw', output_dir=self.temp.name, method='pdfrw')
 

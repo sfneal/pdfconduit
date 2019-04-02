@@ -18,7 +18,7 @@ class TestConvertFlatten(unittest.TestCase):
             os.remove(self.flat)
 
     @Timer.decorator
-    def test_convert_flatten(self):
+    def test_flatten(self):
         """Create a 'flattened' pdf file without layers."""
         flat = Flatten(self.pdf_path, suffix='flat').save()
 

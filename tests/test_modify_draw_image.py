@@ -23,7 +23,7 @@ class TestModifyDrawImage(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_modify_draw_image_draw_text(self):
+    def test_draw_text(self):
         """Draw text onto an image."""
         draw = DrawPIL(tempdir=self.temp.name)
         draw.draw_text('Here is the first text', y=10, opacity=50)
@@ -35,7 +35,7 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_modify_draw_image_draw_img(self):
+    def test_draw_img(self):
         """Draw text onto an image."""
         draw = DrawPIL(tempdir=self.temp.name)
         draw.draw_img(self.img_path)
@@ -47,7 +47,7 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_modify_draw_image_image_rotate(self):
+    def test_image_rotate(self):
         """Test the function 'img_rotate.'"""
         rotated = img_adjust(self.wtrmrk_path, rotate=30, fit=1)
 
