@@ -45,6 +45,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         self.assertTrue(Info(added).resources())
         return added
 
+    @Timer.decorator
     def test_watermark_underneath_pdfrw(self):
         """Apply a watermark underneath original content of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
@@ -61,6 +62,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         self.assertTrue(Info(added).resources())
         return added
 
+    @Timer.decorator
     def test_watermark_overlay_pdfrw(self):
         """Apply a watermark overlaid over original content of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
@@ -77,6 +79,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         self.assertTrue(Info(added).resources())
         return added
 
+    @Timer.decorator
     def test_watermark_flat_pdfrw(self):
         """Apply a flattened watermark to a PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
@@ -93,6 +96,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         self.assertTrue(Info(added).resources())
         return added
 
+    @Timer.decorator
     def test_watermark_layered_pdfrw(self):
         """Apply a flattened watermark to a PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
@@ -109,6 +113,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         self.assertTrue(Info(added).resources())
         return added
 
+    @Timer.decorator
     def test_watermark_label(self):
         """Apply a watermark label to a PDF file."""
         label = os.path.basename(self.pdf_path)
