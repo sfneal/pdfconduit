@@ -44,6 +44,40 @@ def img_opacity(image, opacity, tempdir=None, bw=True):
             return dst.name
 
 
+def img_rotate(image, rotate, tempdir=None):
+    """
+    Reduce the opacity of a PNG image.
+
+    :param image: PNG image file
+    :param rotate: Degrees to rotate
+    :param tempdir: Temporary directory
+    :return:  Path to modified PNG
+    """
+    # Validate parameters
+    try:
+        assert 0 <= rotate <= 360
+    except AssertionError:
+        return image
+    assert os.path.isfile(image), 'Image is not a file'
+
+    # Open image in RGBA mode if not already in RGBA
+    with Image.open(image) as im:
+        # Rotate the image
+        if rotate == 90:
+            rotated = im.transpose(Image.ROTATE_90)
+        elif rotate == 180:
+            rotated = im.transpose(Image.ROTATE_180)
+        elif rotate == 270:
+            im.transpose(Image.ROTATE_270)
+        else:
+            rotated = im.rotate(rotate)
+
+        # Save modified image file
+        with NamedTemporaryFile(suffix='.png', dir=tempdir, delete=False) as dst:
+            rotated.save(dst)
+            return dst.name
+
+
 class DrawPIL:
     def __init__(self, size=(792, 612), tempdir=None):
         # Create a black image
@@ -72,7 +106,7 @@ class DrawPIL:
         # ('Image Size' / 2) - 'Font Size'
         return (self.img.size[1] / 2) - font_size
 
-    def _scale(self, img, func='min'):
+    def scale(self, img, func='min'):
         im = img if isinstance(img, Image.Image) else Image.open(img)
 
         if func is 'min':
@@ -101,7 +135,7 @@ class DrawPIL:
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
     def draw_img(self, img, x=0, y=0, opacity=1.0):
-        scaled = self._scale(img)
+        scaled = self.scale(img)
         opacity = Image.open(img_opacity(scaled, opacity, self.tempdir))
         self.img.paste(opacity, (x, y))
 

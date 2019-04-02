@@ -2,7 +2,7 @@ import unittest
 import os
 from tempfile import TemporaryDirectory
 from looptools import Timer
-from pdf.modify.draw.image import DrawPIL
+from pdf.modify.draw.image import DrawPIL, img_rotate
 from pdf.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
 from tests import *
 
@@ -37,6 +37,14 @@ class TestModifyDrawImage(unittest.TestCase):
         draw.draw_img(self.wtrmrk_path)
         d = draw.save(destination=test_data_dir, file_name='draw_img')
         print(d)
+
+    @Timer.decorator
+    def test_modify_draw_image_image_rotate(self):
+        """Test the function 'img_rotate.'"""
+        rotated = img_rotate(self.wtrmrk_path, 30, self.temp.name)
+
+        # Assert the rotate file exists
+        self.assertTrue(os.path.exists(rotated))
 
 
 if __name__ == '__main__':
