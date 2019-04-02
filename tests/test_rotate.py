@@ -58,6 +58,42 @@ class TestRotatePdfrw(unittest.TestCase):
         self.assertEqual(Info(rotated).rotate, rotation)
         return rotated
 
+    def test_rotate_90_pypdf3(self):
+        """Rotate a PDF file by 90 degrees using the `pypdf3` library."""
+        rotation = 90
+        rotated = rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pypdf3')
+
+        # Assert rotated pdf file exists
+        self.assertTrue(os.path.isfile(rotated))
+
+        # Assert pdf file was rotated by the correct amount of degrees
+        self.assertEqual(Info(rotated).rotate, rotation)
+        return rotated
+
+    def test_rotate_180_pypdf3(self):
+        """Rotate a PDF file by 180 degrees using the `pypdf3` library."""
+        rotation = 180
+        rotated = rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name, method='pypdf3')
+
+        # Assert rotated pdf file exists
+        self.assertTrue(os.path.isfile(rotated))
+
+        # Assert pdf file was rotated by the correct amount of degrees
+        self.assertEqual(Info(rotated).rotate, rotation)
+        return rotated
+
+    def test_rotate_270_pypdf3(self):
+        """Rotate a PDF file by 270 degrees using the `pypdf3` library."""
+        rotation = 270
+        rotated = rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name, method='pypdf3')
+
+        # Assert rotated pdf file exists
+        self.assertTrue(os.path.isfile(rotated))
+
+        # Assert pdf file was rotated by the correct amount of degrees
+        self.assertEqual(Info(rotated).rotate, rotation)
+        return rotated
+
 
 if __name__ == '__main__':
     unittest.main()
