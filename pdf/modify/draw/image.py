@@ -98,7 +98,6 @@ class DrawPIL:
         y = self._centered_y(size) if 'center' in str(y).lower() else y
 
         # Draw text to image
-        print(0, 0, 0, opacity)
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
     def draw_img(self, img, x=0, y=0, opacity=1.0):
