@@ -39,6 +39,7 @@ class TestFlatten(unittest.TestCase):
         # Confirm that PDF page sizes have not increased
         self.assertTrue(abs(Info(self.pdf_path).size[0] / Info(flat).size[0]) <= 1)
         self.assertTrue(abs(Info(self.pdf_path).size[1] / Info(flat).size[1]) <= 1)
+        return flat
 
     @Timer.decorator
     def test_flatten_tqdm(self):
@@ -53,6 +54,7 @@ class TestFlatten(unittest.TestCase):
         # Confirm that PDF page sizes have not increased
         self.assertTrue(abs(Info(self.pdf_path).size[0] / Info(flat).size[0]) <= 1)
         self.assertTrue(abs(Info(self.pdf_path).size[1] / Info(flat).size[1]) <= 1)
+        return flat
 
 
 if __name__ == '__main__':
