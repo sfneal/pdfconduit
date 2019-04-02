@@ -16,7 +16,7 @@ class TestConvertFlatten(unittest.TestCase):
             os.remove(self.flat)
 
     @Timer.decorator
-    def test_flatten(self):
+    def test_convert_flatten(self):
         """Create a 'flattened' pdf file without layers."""
         flat = Flatten(self.pdf_path, suffix='flat').save()
 
@@ -33,7 +33,7 @@ class TestConvertFlatten(unittest.TestCase):
         return flat
 
     @Timer.decorator
-    def test_flatten_gui(self):
+    def test_convert_flatten_gui(self):
         """Create a 'flattened' pdf file without layers and monitor using a PySimpleGUI progress bar."""
         flat = Flatten(self.pdf_path, suffix='flat_gui', progress_bar='gui').save()
 
@@ -50,7 +50,7 @@ class TestConvertFlatten(unittest.TestCase):
         return flat
 
     @Timer.decorator
-    def test_flatten_tqdm(self):
+    def test_convert_flatten_tqdm(self):
         """Create a 'flattened' pdf file without layers and monitor using a tqdm progress bar."""
         flat = Flatten(self.pdf_path, suffix='flat_tqdm', progress_bar='tqdm').save()
 
