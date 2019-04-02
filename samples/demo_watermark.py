@@ -1,6 +1,6 @@
 from pdfconduit import Watermark
 import os
-from tests import pdf_path, pdfs_dir
+from tests import pdf_path, test_data_dir
 from looptools import functimer
 
 
@@ -26,4 +26,4 @@ def main(move_temps):
 
 
 if __name__ == '__main__':
-    main(pdfs_dir)
+    main(test_data_dir)

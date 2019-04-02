@@ -9,7 +9,7 @@ from tests import *
 class TestMerge(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pdfs = [os.path.join(pdfs_dir, p) for p in ['article.pdf', 'charts.pdf', 'document.pdf', 'manual.pdf']]
+        cls.pdfs = [os.path.join(test_data_dir, p) for p in ['article.pdf', 'charts.pdf', 'document.pdf', 'manual.pdf']]
 
     def setUp(self):
         self.temp = TemporaryDirectory()
