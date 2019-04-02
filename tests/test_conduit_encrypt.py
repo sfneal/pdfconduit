@@ -5,7 +5,7 @@ from pdfconduit import Encrypt, Info
 from tests import *
 
 
-class TestEncrypt(unittest.TestCase):
+class TestConduitEncrypt(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Encryption passwords
@@ -16,7 +16,7 @@ class TestEncrypt(unittest.TestCase):
     def setUp(self):
         self.temp = NamedTemporaryFile(suffix='.pdf')
 
-    def test_encrypt_printing(self):
+    def test_conduit_encrypt_printing(self):
         """Encrypt a PDF file and allow users to print."""
         encrypted = Encrypt(self.pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, suffix='secured')
 
@@ -35,7 +35,7 @@ class TestEncrypt(unittest.TestCase):
         # Assert pdf security value is -1852
         self.assertEqual(security['/P'], -1852)
 
-    def test_encrypt_128bit(self):
+    def test_conduit_encrypt_128bit(self):
         """Encrypt PDF file with 128bit encryption."""
         encrypted = Encrypt(self.pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, bit128=True,
                             suffix='secured_128bit')
@@ -52,7 +52,7 @@ class TestEncrypt(unittest.TestCase):
         # Assert encryption bit size is 128
         self.assertEqual(security['/Length'], 128)
 
-    def test_encrypt_40bit(self):
+    def test_conduit_encrypt_40bit(self):
         """Encrypt PDF file with 40bit encryption."""
         encrypted = Encrypt(self.pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, bit128=False,
                             suffix='secured_40bit')
@@ -69,7 +69,7 @@ class TestEncrypt(unittest.TestCase):
         # Assert pdf security value is -1852
         self.assertEqual(security['/P'], -1852)
 
-    def test_encrypt_commenting(self):
+    def test_conduit_encrypt_commenting(self):
         """Encrypt a PDF file but allow the user to add comments."""
         encrypted = Encrypt(self.pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, allow_commenting=True,
                             suffix='secured_commenting')

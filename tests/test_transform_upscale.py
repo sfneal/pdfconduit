@@ -6,7 +6,7 @@ from pdfconduit import Info, upscale
 from tests import *
 
 
-class TestUpscalePdfrw(unittest.TestCase):
+class TestTransformUpscale(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pdf_path = pdf_path
@@ -18,7 +18,7 @@ class TestUpscalePdfrw(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_upscale_pdfrw_20x(self):
+    def test_transform_upscale_pdfrw_20x(self):
         """Resize a PDF file to 2.0x times the original scale."""
         s = 2.0
         upscaled = upscale(pdf_path, scale=s, suffix='upscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw')
@@ -31,7 +31,7 @@ class TestUpscalePdfrw(unittest.TestCase):
         return upscaled
 
     @Timer.decorator
-    def test_upscale_pdfrw_15x(self):
+    def test_transform_upscale_pdfrw_15x(self):
         """Resize a PDF file to 1.5x times the original scale."""
         s = 1.5
         upscaled = upscale(pdf_path, scale=s, suffix='upscaled_1.5_pdfrw', tempdir=self.temp.name, method='pdfrw')
@@ -44,7 +44,7 @@ class TestUpscalePdfrw(unittest.TestCase):
         return upscaled
 
     @Timer.decorator
-    def test_upscale_pdfrw_30x(self):
+    def test_transform_upscale_pdfrw_30x(self):
         """Resize a PDF file to 3.0x times the original scale."""
         s = 3.0
         upscaled = upscale(pdf_path, scale=s, suffix='upscaled_3.0_pdfrw', tempdir=self.temp.name, method='pdfrw')

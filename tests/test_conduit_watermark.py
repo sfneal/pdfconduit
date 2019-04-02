@@ -6,7 +6,7 @@ from pdfconduit import Watermark, Info, Label
 from tests import *
 
 
-class TestWatermarkMethodsPdfrw(unittest.TestCase):
+class TestConduitWatermark(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pdf_path = pdf_path
@@ -24,7 +24,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_watermark_pdfrw(self):
+    def test_conduit_watermark_pdfrw(self):
         """Apply a watermark to all pages of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate,
@@ -42,7 +42,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         return added
 
     @Timer.decorator
-    def test_watermark_underneath_pdfrw(self):
+    def test_conduit_watermark_underneath_pdfrw(self):
         """Apply a watermark underneath original content of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
@@ -59,7 +59,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         return added
 
     @Timer.decorator
-    def test_watermark_overlay_pdfrw(self):
+    def test_conduit_watermark_overlay_pdfrw(self):
         """Apply a watermark overlaid over original content of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
@@ -76,7 +76,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         return added
 
     @Timer.decorator
-    def test_watermark_flat_pdfrw(self):
+    def test_conduit_watermark_flat_pdfrw(self):
         """Apply a flattened watermark to a PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         flat = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=True)
@@ -93,7 +93,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         return added
 
     @Timer.decorator
-    def test_watermark_layered_pdfrw(self):
+    def test_conduit_watermark_layered_pdfrw(self):
         """Apply a flattened watermark to a PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         layered = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=False)
@@ -110,7 +110,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         return added
 
     @Timer.decorator
-    def test_watermark_label(self):
+    def test_conduit_watermark_label(self):
         """Apply a watermark label to a PDF file."""
         label = os.path.basename(self.pdf_path)
         labeled = Label(self.pdf_path, label, tempdir=self.temp.name, suffix=None).write(cleanup=False)
