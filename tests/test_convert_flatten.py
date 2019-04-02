@@ -5,7 +5,7 @@ from pdfconduit import Info, Flatten
 from tests import *
 
 
-class TestFlatten(unittest.TestCase):
+class TestConvertFlatten(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pdf_path = pdf_path
