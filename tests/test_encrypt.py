@@ -66,8 +66,8 @@ class TestEncrypt(unittest.TestCase):
         # Assert that pdf file is now encrypted
         self.assertTrue(Info(encrypted.output, self.user_pw).encrypted)
 
-        # Assert encryption bit size is 40
-        self.assertEqual(security['/Length'], 40)
+        # Assert pdf security value is -1852
+        self.assertEqual(security['/P'], -1852)
 
     def test_encrypt_commenting(self):
         """Encrypt a PDF file but allow the user to add comments."""
