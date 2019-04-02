@@ -111,12 +111,8 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
 
     def test_watermark_label(self):
         """Apply a watermark label to a PDF file."""
-        w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         label = os.path.basename(self.pdf_path)
         labeled = Label(self.pdf_path, label, tempdir=self.temp.name).write(cleanup=False)
-
-        # Assert the watermark file exists
-        self.assertTrue(os.path.exists(label))
 
         # Assert watermarked PDF file exists
         self.assertTrue(os.path.exists(labeled))
