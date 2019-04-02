@@ -9,6 +9,11 @@ class TestFlatten(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pdf_path = pdf_path
+        cls.flat = None
+
+    def tearDown(self):
+        if os.path.exists(self.flat):
+            os.remove(self.flat)
 
     @Timer.decorator
     def test_flatten(self):
@@ -24,6 +29,7 @@ class TestFlatten(unittest.TestCase):
         # Confirm that PDF page sizes have not increased
         self.assertTrue(abs(Info(self.pdf_path).size[0] / Info(flat).size[0]) <= 1)
         self.assertTrue(abs(Info(self.pdf_path).size[1] / Info(flat).size[1]) <= 1)
+        self.flat = flat
         return flat
 
     @Timer.decorator
@@ -39,6 +45,7 @@ class TestFlatten(unittest.TestCase):
         # Confirm that PDF page sizes have not increased
         self.assertTrue(abs(Info(self.pdf_path).size[0] / Info(flat).size[0]) <= 1)
         self.assertTrue(abs(Info(self.pdf_path).size[1] / Info(flat).size[1]) <= 1)
+        self.flat = flat
         return flat
 
     @Timer.decorator
@@ -54,6 +61,7 @@ class TestFlatten(unittest.TestCase):
         # Confirm that PDF page sizes have not increased
         self.assertTrue(abs(Info(self.pdf_path).size[0] / Info(flat).size[0]) <= 1)
         self.assertTrue(abs(Info(self.pdf_path).size[1] / Info(flat).size[1]) <= 1)
+        self.flat = flat
         return flat
 
 
