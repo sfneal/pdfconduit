@@ -1,6 +1,7 @@
 import unittest
 import os
 from tempfile import TemporaryDirectory
+from looptools import Timer
 from pdfconduit import Info, slicer
 from tests import *
 
@@ -20,6 +21,7 @@ class TestSlice(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
+    @Timer.decorator
     def test_slice(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 1
@@ -33,6 +35,7 @@ class TestSlice(unittest.TestCase):
         self.assertEqual(Info(sliced).pages, len(range(fp, lp+1)))
         return sliced
 
+    @Timer.decorator
     def test_slice2(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 4
