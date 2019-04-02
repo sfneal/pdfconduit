@@ -22,7 +22,7 @@ class TestRotatePdfrw(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_rotate_90_pdfrw(self):
+    def test_rotate_pdfrw_90(self):
         """Rotate a PDF file by 90 degrees using the `pdfrw` library."""
         rotation = 90
         rotated = rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pdfrw')
@@ -35,7 +35,7 @@ class TestRotatePdfrw(unittest.TestCase):
         return rotated
 
     @Timer.decorator
-    def test_rotate_180_pdfrw(self):
+    def test_rotate_pdfrw_180(self):
         """Rotate a PDF file by 180 degrees using the `pdfrw` library."""
         rotation = 180
         rotated = rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name, method='pdfrw')
@@ -48,7 +48,7 @@ class TestRotatePdfrw(unittest.TestCase):
         return rotated
 
     @Timer.decorator
-    def test_rotate_270_pdfrw(self):
+    def test_rotate_pdfrw_270(self):
         """Rotate a PDF file by 270 degrees using the `pdfrw` library."""
         rotation = 270
         rotated = rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name, method='pdfrw')
@@ -61,7 +61,7 @@ class TestRotatePdfrw(unittest.TestCase):
         return rotated
 
     @Timer.decorator
-    def test_rotate_90_pypdf3(self):
+    def test_rotate_pypdf3_90(self):
         """Rotate a PDF file by 90 degrees using the `pypdf3` library."""
         rotation = 90
         rotated = rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pypdf3')
@@ -74,7 +74,7 @@ class TestRotatePdfrw(unittest.TestCase):
         return rotated
 
     @Timer.decorator
-    def test_rotate_180_pypdf3(self):
+    def test_rotate_pypdf3_180(self):
         """Rotate a PDF file by 180 degrees using the `pypdf3` library."""
         rotation = 180
         rotated = rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name, method='pypdf3')
@@ -87,7 +87,7 @@ class TestRotatePdfrw(unittest.TestCase):
         return rotated
 
     @Timer.decorator
-    def test_rotate_270_pypdf3(self):
+    def test_rotate_pypdf3_270(self):
         """Rotate a PDF file by 270 degrees using the `pypdf3` library."""
         rotation = 270
         rotated = rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name, method='pypdf3')
