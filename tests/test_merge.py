@@ -1,6 +1,7 @@
 import unittest
 import os
 from tempfile import TemporaryDirectory
+from looptools import Timer
 from pdfconduit import Info, Merge
 from tests import *
 
@@ -16,6 +17,7 @@ class TestMerge(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
+    @Timer.decorator
     def test_merge_pypdf3(self):
         """Merge multiple PDF files into a single PDF using the `PyPDF3` library."""
         merged = Merge(self.pdfs, output_name='merged_pypdf3', output_dir=self.temp.name, method='pypdf3')
@@ -27,6 +29,7 @@ class TestMerge(unittest.TestCase):
         self.assertEqual(sum([Info(pdf).pages for pdf in self.pdfs]), Info(merged.file).pages)
         return merged
 
+    @Timer.decorator
     def test_merge_pdfrw(self):
         """Merge multiple PDF files into a single PDF using the `pdfrw` library."""
         merged = Merge(self.pdfs, output_name='merged_pdfrw', output_dir=self.temp.name, method='pdfrw')
