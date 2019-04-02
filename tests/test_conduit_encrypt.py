@@ -14,7 +14,11 @@ class TestConduitEncrypt(unittest.TestCase):
         cls.pdf_path = pdf_path
 
     def setUp(self):
-        self.temp = NamedTemporaryFile(suffix='.pdf')
+        self.temp = NamedTemporaryFile(suffix='.pdf', delete=False)
+
+    def tearDown(self):
+        if os.path.exists(self.temp.name):
+            os.remove(self.temp.name)
 
     def test_conduit_encrypt_printing(self):
         """Encrypt a PDF file and allow users to print."""

@@ -17,6 +17,8 @@ class TestConvertPdf2Img(unittest.TestCase):
 
     def tearDown(self):
         self.temp.cleanup()
+        if os.path.exists(self.img):
+            os.remove(self.img)
 
     @Timer.decorator
     def test_convert_pdf2img(self):
