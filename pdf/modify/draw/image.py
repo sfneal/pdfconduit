@@ -87,8 +87,10 @@ class DrawPIL:
         return (self.img.size[1] / 2) - font_size
 
     def scale(self, img, func='min'):
+        """Scale an image to fit the Pillow canvas."""
         im = img if isinstance(img, Image.Image) else Image.open(img)
 
+        # Use either the shortest edge (min) or the longest edge (max) to determine scale factor
         if func is 'min':
             scale = min(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
         else:
