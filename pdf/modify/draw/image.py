@@ -57,7 +57,7 @@ class DrawPIL:
         :param text: String to be centered
         :param drawing: PIL.ImageDraw.Draw instance
         :param font_type: Registered font family type
-        :return: X coordinate
+        :return: X coordinate value
         """
         # ('Page Width' - 'Text Width') / 2
         return (self.img.size[0] - drawing.textsize(text, font=font_type)[0]) / 2
@@ -67,7 +67,7 @@ class DrawPIL:
         Retrieve a 'y' value that centers the image in the canvas.
 
         :param font_size: Font size
-        :return: Y coordinate
+        :return: Y coordinate value
         """
         # ('Image Size' / 2) - 'Font Size'
         return (self.img.size[1] / 2) - font_size
@@ -86,7 +86,7 @@ class DrawPIL:
         im.close()
         return image
 
-    def draw_text(self, text, x='center', y=140, font=FONT, size=40, opacity=0.1):
+    def draw_text(self, text, x='center', y=140, font=FONT, size=40, opacity=25):
         # Set drawing context
         d = ImageDraw.Draw(self.img)
 
@@ -98,7 +98,8 @@ class DrawPIL:
         y = self._centered_y(size) if 'center' in str(y).lower() else y
 
         # Draw text to image
-        d.text((x, y), text, font=fnt, fill=(0, 0, 0, int(255 / (opacity * 100))))
+        print(0, 0, 0, opacity)
+        d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
     def draw_img(self, img, x=0, y=0, opacity=1.0):
         scaled = self._scale(img)
