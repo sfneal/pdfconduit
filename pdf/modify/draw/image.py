@@ -100,23 +100,47 @@ class DrawPIL:
         im.close()
         return image
 
-    def draw_text(self, text, x='center', y=140, font=FONT, size=40, opacity=25):
+    def draw_text(self, text, x='center', y=140, font=FONT, font_size=40, opacity=25):
+        """
+        Draw text onto a Pillow image canvas.
+        
+        :param text: Text string 
+        :param x: X coordinate value
+        :param y: Y coordinate value
+        :param font: Registered font family 
+        :param font_size: Font size
+        :param opacity: Opacity of text to be drawn
+        :return: 
+        """
         # Set drawing context
         d = ImageDraw.Draw(self.img)
 
         # Set a font
-        fnt = ImageFont.truetype(font, int(size * 1.00))  # multiply size of font if needed
+        fnt = ImageFont.truetype(font, int(font_size * 1.00))  # multiply size of font if needed
 
         # Check if x or y is set to 'center'
         x = self._centered_x(text, d, fnt) if 'center' in str(x).lower() else x
-        y = self._centered_y(size) if 'center' in str(y).lower() else y
+        y = self._centered_y(font_size) if 'center' in str(y).lower() else y
 
         # Draw text to image
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
     def draw_img(self, img, x=0, y=0, opacity=1.0, rotate=0, fit=1):
-        adjusted = Image.open(img_adjust(self.scale(img), opacity, rotate, fit, self.tempdir))
-        self.img.alpha_composite(adjusted, (x, y))
+        """
+        Alpha composite paste an image into the image canvas.
+
+        Optionally place the image (x, y), adjust the images opacity
+        or apply a rotation.
+
+        :param img: Path to image to paste
+        :param x: X coordinates value
+        :param y: Y coordinates value
+        :param opacity: Opacity value
+        :param rotate: Rotation degrees
+        :param fit: When true, expands image canvas size to fit rotated image
+        :return:
+        """
+        self.img.alpha_composite(Image.open(img_adjust(self.scale(img), opacity, rotate, fit, self.tempdir)), (x, y))
 
     def rotate(self, rotate):
         # Create transparent image that is the same size as self.img

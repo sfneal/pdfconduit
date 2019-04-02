@@ -23,7 +23,7 @@ class TestModifyDrawImage(unittest.TestCase):
     @Timer.decorator
     def test_modify_draw_image_draw_text(self):
         """Draw text onto an image."""
-        draw = DrawPIL()
+        draw = DrawPIL(tempdir=self.temp.name)
         draw.draw_text('Here is the first text', y=10, opacity=50)
         draw.draw_text('Here is the second text', y=50, opacity=50)
         d = draw.save(destination=test_data_dir, file_name='draw_text')
@@ -35,10 +35,12 @@ class TestModifyDrawImage(unittest.TestCase):
     @Timer.decorator
     def test_modify_draw_image_draw_img(self):
         """Draw text onto an image."""
-        draw = DrawPIL()
+        draw = DrawPIL(tempdir=self.temp.name)
         draw.draw_img(self.img_path)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
+        print('About to save!')
         d = draw.save(destination=test_data_dir, file_name='draw_img')
+        print('Saved!')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
