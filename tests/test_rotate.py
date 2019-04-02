@@ -6,7 +6,7 @@ from pdfconduit import Info, rotate
 from tests import *
 
 
-class TestRotatePdfrw(unittest.TestCase):
+class TestRotate(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pdf_path = pdf_path
