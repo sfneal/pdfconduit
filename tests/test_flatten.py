@@ -12,7 +12,7 @@ class TestFlatten(unittest.TestCase):
 
     @Timer.decorator
     def test_flatten(self):
-        # Created a 'flattened' pdf file
+        """Create a 'flattened' pdf file without layers."""
         flat = Flatten(self.pdf_path, suffix='flat_2x').save()
 
         # Assert pdf file exists
