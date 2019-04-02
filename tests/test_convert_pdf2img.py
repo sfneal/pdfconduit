@@ -30,8 +30,8 @@ class TestConvertPdf2Img(unittest.TestCase):
 
         # Assert img file is correct file type
         self.assertTrue(img[0].endswith('.png'))
-        self.img = img
-        return img
+        self.img = img[0]
+        return img[0]
 
 
 if __name__ == '__main__':
