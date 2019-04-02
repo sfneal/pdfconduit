@@ -33,7 +33,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate,
                         flatten=False)
-        added = w.add(self.pdf_path, wtrmrk, method='pdfrw', suffix='watermarked_pdfrw')
+        added = w.add(self.pdf_path, wtrmrk, method='pdfrw', suffix=None)
 
         # Assert the watermark file exists
         self.assertTrue(os.path.exists(wtrmrk))
@@ -50,7 +50,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         """Apply a watermark underneath original content of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
-        added = w.add(self.pdf_path, wtrmrk, underneath=True, suffix='watermarked_underneath_pdfrw', method='pdfrw')
+        added = w.add(self.pdf_path, wtrmrk, underneath=True, suffix=None, method='pdfrw')
 
         # Assert the watermark file exists
         self.assertTrue(os.path.exists(wtrmrk))
@@ -67,7 +67,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         """Apply a watermark overlaid over original content of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
-        added = w.add(self.pdf_path, wtrmrk, underneath=False, suffix='watermarked_overlay_pdfrw', method='pdfrw')
+        added = w.add(self.pdf_path, wtrmrk, underneath=False, suffix=None, method='pdfrw')
 
         # Assert the watermark file exists
         self.assertTrue(os.path.exists(wtrmrk))
@@ -84,7 +84,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         """Apply a flattened watermark to a PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         flat = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=True)
-        added = w.add(self.pdf_path, flat, suffix='watermarked_flat_pdfrw', method='pdfrw')
+        added = w.add(self.pdf_path, flat, suffix=None, method='pdfrw')
 
         # Assert the watermark file exists
         self.assertTrue(os.path.exists(flat))
@@ -101,7 +101,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
         """Apply a flattened watermark to a PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
         layered = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=False)
-        added = w.add(self.pdf_path, layered, suffix='watermarked_layered_pdfrw', method='pdfrw')
+        added = w.add(self.pdf_path, layered, suffix=None, method='pdfrw')
 
         # Assert the watermark file exists
         self.assertTrue(os.path.exists(layered))
@@ -117,7 +117,7 @@ class TestWatermarkMethodsPdfrw(unittest.TestCase):
     def test_watermark_label(self):
         """Apply a watermark label to a PDF file."""
         label = os.path.basename(self.pdf_path)
-        labeled = Label(self.pdf_path, label, tempdir=self.temp.name).write(cleanup=False)
+        labeled = Label(self.pdf_path, label, tempdir=self.temp.name, suffix=None).write(cleanup=False)
 
         # Assert watermarked PDF file exists
         self.assertTrue(os.path.exists(labeled))
