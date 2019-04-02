@@ -40,9 +40,7 @@ class TestModifyDrawImage(unittest.TestCase):
         draw = DrawPIL(tempdir=self.temp.name)
         draw.draw_img(self.img_path)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
-        print('About to save!')
         d = draw.save(destination=test_data_dir, file_name='draw_img')
-        print('Saved!')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
