@@ -1,8 +1,7 @@
 import unittest
 import os
-import shutil
-import time
 from tempfile import TemporaryDirectory
+from looptools import Timer
 from pdfconduit import Info, rotate
 from tests import *
 
@@ -22,6 +21,7 @@ class TestRotatePdfrw(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
+    @Timer.decorator
     def test_rotate_90_pdfrw(self):
         """Rotate a PDF file by 90 degrees using the `pdfrw` library."""
         rotation = 90
@@ -34,6 +34,7 @@ class TestRotatePdfrw(unittest.TestCase):
         self.assertEqual(Info(rotated).rotate, rotation)
         return rotated
 
+    @Timer.decorator
     def test_rotate_180_pdfrw(self):
         """Rotate a PDF file by 180 degrees using the `pdfrw` library."""
         rotation = 180
@@ -46,6 +47,7 @@ class TestRotatePdfrw(unittest.TestCase):
         self.assertEqual(Info(rotated).rotate, rotation)
         return rotated
 
+    @Timer.decorator
     def test_rotate_270_pdfrw(self):
         """Rotate a PDF file by 270 degrees using the `pdfrw` library."""
         rotation = 270
@@ -58,6 +60,7 @@ class TestRotatePdfrw(unittest.TestCase):
         self.assertEqual(Info(rotated).rotate, rotation)
         return rotated
 
+    @Timer.decorator
     def test_rotate_90_pypdf3(self):
         """Rotate a PDF file by 90 degrees using the `pypdf3` library."""
         rotation = 90
@@ -70,6 +73,7 @@ class TestRotatePdfrw(unittest.TestCase):
         self.assertEqual(Info(rotated).rotate, rotation)
         return rotated
 
+    @Timer.decorator
     def test_rotate_180_pypdf3(self):
         """Rotate a PDF file by 180 degrees using the `pypdf3` library."""
         rotation = 180
@@ -82,6 +86,7 @@ class TestRotatePdfrw(unittest.TestCase):
         self.assertEqual(Info(rotated).rotate, rotation)
         return rotated
 
+    @Timer.decorator
     def test_rotate_270_pypdf3(self):
         """Rotate a PDF file by 270 degrees using the `pypdf3` library."""
         rotation = 270
