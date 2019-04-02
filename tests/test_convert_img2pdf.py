@@ -22,7 +22,7 @@ class TestConvertImg2Pdf(unittest.TestCase):
 
     @Timer.decorator
     def test_convert_img2pdf(self):
-        """Create a 'flattened' pdf file without layers."""
+        """Convert an image file into PDF."""
         pdf = IMG2PDF([self.img_path], destination=test_data_dir).save(remove_temps=False)
 
         # Assert pdf file exists
