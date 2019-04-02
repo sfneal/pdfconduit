@@ -1,10 +1,10 @@
 from pdfconduit import Watermark
 import os
 from tests import pdf_path, test_data_dir
-from looptools import functimer
+from looptools import Timer
 
 
-@functimer
+@Timer.decorator
 def main(move_temps):
     print('Testing Watermark draw and add functionality')
     address = '43 Indian Lane'
