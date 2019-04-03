@@ -64,10 +64,52 @@ class TestModifyDrawImage(unittest.TestCase):
         draw.draw_img(self.img_path)
         draw.rotate(30)
         d = draw.save(destination=test_data_dir, file_name='rotate')
-        print(d)
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
+        return d
+
+    @Timer.decorator
+    def test_DrawPIL_size(self):
+        """Draw text onto an image."""
+        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        size = draw.size
+        d = draw.save(destination=test_data_dir, file_name='size')
+
+        # Assert file exists
+        self.assertTrue(os.path.exists(d))
+
+        # Assert image size is correct
+        self.assertIsInstance(size, tuple)
+        self.assertTrue(size == (2706, 2226))
+        return d
+
+    @Timer.decorator
+    def test_DrawPIL_width(self):
+        """Draw text onto an image."""
+        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        width = draw.width
+        d = draw.save(destination=test_data_dir, file_name='size')
+
+        # Assert file exists
+        self.assertTrue(os.path.exists(d))
+
+        # Assert image size is correct
+        self.assertTrue(width == 2706)
+        return d
+
+    @Timer.decorator
+    def test_DrawPIL_height(self):
+        """Draw text onto an image."""
+        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        height = draw.height
+        d = draw.save(destination=test_data_dir, file_name='size')
+
+        # Assert file exists
+        self.assertTrue(os.path.exists(d))
+
+        # Assert image size is correct
+        self.assertTrue(height == 2226)
         return d
 
     @Timer.decorator

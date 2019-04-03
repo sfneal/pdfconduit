@@ -68,6 +68,21 @@ class DrawPIL:
             self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
         self.tempdir = tempdir
 
+    @property
+    def size(self):
+        """Return a tuple (Width, Height) with image dimensions."""
+        return self.img.size
+
+    @property
+    def width(self):
+        """Return the width value of the image's dimensions."""
+        return self.size[0]
+
+    @property
+    def height(self):
+        """Return the height value of the image's dimensions."""
+        return self.size[1]
+
     def _centered_x(self, text, drawing, font_type):
         """
         Retrieve a 'x' value that centers the image in the canvas.
@@ -140,8 +155,8 @@ class DrawPIL:
         or apply a rotation.
 
         :param img: Path to image to paste
-        :param x: X coordinates value
-        :param y: Y coordinates value
+        :param x: X coordinates value (Left)
+        :param y: Y coordinates value (Top)
         :param opacity: Opacity value
         :param rotate: Rotation degrees
         :param fit: When true, expands image canvas size to fit rotated image
