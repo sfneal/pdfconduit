@@ -275,3 +275,7 @@ class DrawPIL:
         # Save image file
         img.save(output)
         return output
+
+    def show(self):
+        """Display a Pillow image on your operating system."""
+        return self.img.show()
