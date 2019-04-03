@@ -73,7 +73,7 @@ def img_adjust(image, opacity=1.0, rotate=None, fit=0, tempdir=None, bw=False):
             return dst.name
 
 
-class DrawPIL:
+class PillowImage:
     def __init__(self, img=None, size=(792, 612), tempdir=None):
         # Create a black image
         if img:

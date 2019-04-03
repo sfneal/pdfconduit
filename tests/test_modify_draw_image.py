@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 from looptools import Timer
 
 from pdf.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
-from pdf.modify.draw.image import DrawPIL, img_adjust
+from pdf.modify.draw.image import PillowImage, img_adjust
 from tests import *
 
 
@@ -23,9 +23,9 @@ class TestModifyDrawImage(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_DrawPIL_draw_text(self):
+    def test_PillowImage_draw_text(self):
         """Draw text onto an image."""
-        draw = DrawPIL(tempdir=self.temp.name)
+        draw = PillowImage(tempdir=self.temp.name)
         draw.draw_text('Here is the first text', y=10, opacity=50)
         draw.draw_text('Here is the second text', y=50, opacity=50)
         d = draw.save(destination=test_data_dir, file_name='draw_text')
@@ -35,9 +35,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_draw_img(self):
+    def test_PillowImage_draw_img(self):
         """Draw text onto an image."""
-        draw = DrawPIL(tempdir=self.temp.name)
+        draw = PillowImage(tempdir=self.temp.name)
         draw.draw_img(self.img_path)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
         d = draw.save(destination=test_data_dir, file_name='draw_img')
@@ -47,9 +47,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_draw_img_fromimg(self):
+    def test_PillowImage_draw_img_fromimg(self):
         """Draw text onto an image."""
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
         d = draw.save(destination=test_data_dir, file_name='draw_img_fromimg')
 
@@ -58,9 +58,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_draw_img_fromimg_centered(self):
+    def test_PillowImage_draw_img_fromimg_centered(self):
         """Draw text onto an image."""
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x='center', y='center')
         d = draw.save(destination=test_data_dir, file_name='draw_img_fromimg_centered')
 
@@ -69,9 +69,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_draw_img_fromimg_negbound(self):
+    def test_PillowImage_draw_img_fromimg_negbound(self):
         """Draw text onto an image."""
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=-2000, y=-2000)
         d = draw.save(destination=test_data_dir, file_name='draw_img_fromimg_negbound')
 
@@ -80,9 +80,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_draw_img_fromimg_percentage(self):
+    def test_PillowImage_draw_img_fromimg_percentage(self):
         """Draw text onto an image."""
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=.5, y=.1)
         d = draw.save(destination=test_data_dir, file_name='draw_img_fromimg_percentage')
 
@@ -91,10 +91,10 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_draw_img_fromimg_resized(self):
+    def test_PillowImage_draw_img_fromimg_resized(self):
         """Draw text onto an image."""
         longest_side = 500
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
         draw.resize(longest_side)
         d = draw.save(destination=test_data_dir, file_name='draw_img_fromimg_resized')
@@ -107,9 +107,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_rotate(self):
+    def test_PillowImage_rotate(self):
         """Draw text onto an image."""
-        draw = DrawPIL(tempdir=self.temp.name)
+        draw = PillowImage(tempdir=self.temp.name)
         draw.draw_img(self.img_path)
         draw.rotate(30)
         d = draw.save(destination=test_data_dir, file_name='rotate')
@@ -119,9 +119,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_size(self):
+    def test_PillowImage_size(self):
         """Draw text onto an image."""
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         size = draw.size
         d = draw.save(destination=test_data_dir, file_name='size')
 
@@ -134,9 +134,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_width(self):
+    def test_PillowImage_width(self):
         """Draw text onto an image."""
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         width = draw.width
         d = draw.save(destination=test_data_dir, file_name='size')
 
@@ -148,9 +148,9 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
-    def test_DrawPIL_height(self):
+    def test_PillowImage_height(self):
         """Draw text onto an image."""
-        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw = PillowImage(img=self.img_path, tempdir=self.temp.name)
         height = draw.height
         d = draw.save(destination=test_data_dir, file_name='size')
 

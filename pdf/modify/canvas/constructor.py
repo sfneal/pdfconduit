@@ -1,6 +1,6 @@
 from datetime import datetime
 from pdf.modify.canvas.objects import CanvasObjects, CanvasStr, CanvasImg
-from pdf.modify.draw.image import DrawPIL
+from pdf.modify.draw.image import PillowImage
 
 
 class CanvasConstructor:
@@ -47,7 +47,7 @@ class CanvasConstructor:
         return self.objects
 
     def img(self):
-        img = DrawPIL(tempdir=self.tempdir)
+        img = PillowImage(tempdir=self.tempdir)
 
         if self.image is not None:
             img.draw_img(self.image, x=0, y=50, opacity=self.opacity)
