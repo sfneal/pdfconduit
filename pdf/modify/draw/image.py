@@ -149,7 +149,7 @@ class DrawPIL:
 
     def draw_img(self, img, x=0, y=0, opacity=1.0, rotate=0, fit=1):
         """
-        Alpha composite paste an image into the image canvas.
+        Scale an image to fit the canvas then alpha composite paste the image.
 
         Optionally place the image (x, y), adjust the images opacity
         or apply a rotation.
