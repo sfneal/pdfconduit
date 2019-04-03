@@ -127,8 +127,15 @@ class DrawPIL:
         """
         def calculator(value, img_size, center_func):
             """Helper function to perform bound calculations for either x or y values."""
+            # Center the image
             if 'center' in str(value).lower():
                 return center_func(image)
+
+            # Percentage value, calculate based on percentages
+            elif 0 < float(value) < 1:
+                return int(img_size * float(value))
+
+            # Negative value, calculate distance from far edge (Right, Bottom
             elif int(value) < 0:
                 return int(img_size - abs(value))
             else:
