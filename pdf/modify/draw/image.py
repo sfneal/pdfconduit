@@ -169,12 +169,12 @@ class DrawPIL:
     def save(self, img=None, destination=None, file_name='pil'):
         img = self.img if not img else img
         fn = file_name.strip('.png') if '.png' in file_name else file_name
-        if self.tempdir:
+        if destination:
+            output = os.path.join(destination, fn + '.png')
+        elif self.tempdir:
             tmpimg = NamedTemporaryFile(suffix='.png', dir=self.tempdir, delete=False)
             output = resource_path(tmpimg.name)
             tmpimg.close()
-        elif destination:
-            output = os.path.join(destination, fn + '.png')
         else:
             output = os.path.join(bundle_dir(), fn + '.png')
 
