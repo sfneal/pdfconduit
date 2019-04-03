@@ -93,7 +93,7 @@ class DrawPIL:
         :return: X coordinate value
         """
         # ('Page Width' - 'Text Width') / 2
-        return (self.img.size[0] - drawing.textsize(text, font=font_type)[0]) / 2
+        return (self.width - drawing.textsize(text, font=font_type)[0]) / 2
 
     def _centered_y(self, font_size):
         """
@@ -103,7 +103,7 @@ class DrawPIL:
         :return: Y coordinate value
         """
         # ('Image Size' / 2) - 'Font Size'
-        return (self.img.size[1] / 2) - font_size
+        return (self.height / 2) - font_size
 
     def scale(self, img, func='min'):
         """Scale an image to fit the Pillow canvas."""
@@ -111,9 +111,9 @@ class DrawPIL:
 
         # Use either the shortest edge (min) or the longest edge (max) to determine scale factor
         if func is 'min':
-            scale = min(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
+            scale = min(float(self.width / im.size[0]), float(self.height / im.size[1]))
         else:
-            scale = max(float(self.img.size[0] / im.size[0]), float(self.img.size[1] / im.size[1]))
+            scale = max(float(self.width / im.size[0]), float(self.height / im.size[1]))
 
         im.thumbnail((int(im.size[0] * scale), int(im.size[1] * scale)))
 
