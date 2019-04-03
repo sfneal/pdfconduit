@@ -125,21 +125,16 @@ class DrawPIL:
         :param y:
         :return: X and Y values
         """
-        if 'center' in str(x).lower():
-            x = self._img_centered_x(image)
-        elif int(x) < 0:
-            x = int(self.width - abs(x))
-        else:
-            x = int(x)
+        def calculator(value, img_size, center_func):
+            """Helper function to perform bound calculations for either x or y values."""
+            if 'center' in str(value).lower():
+                return center_func(image)
+            elif int(value) < 0:
+                return int(img_size - abs(value))
+            else:
+                return int(value)
 
-        if 'center' in str(y).lower():
-            y = self._img_centered_y(image)
-        elif int(y) < 0:
-            y = int(self.height - abs(y))
-        else:
-            y = int(y)
-        print(x, y)
-        return x, y
+        return calculator(x, self.width, self._img_centered_x), calculator(y, self.height, self._img_centered_x)
 
     def scale(self, img, func='min', scale=None):
         """Scale an image to fit the Pillow canvas."""
