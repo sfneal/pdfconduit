@@ -83,7 +83,7 @@ class DrawPIL:
         """Return the height value of the image's dimensions."""
         return self.size[1]
 
-    def _centered_x(self, text, drawing, font_type):
+    def _text_centered_x(self, text, drawing, font_type):
         """
         Retrieve a 'x' value that centers the image in the canvas.
 
@@ -95,7 +95,7 @@ class DrawPIL:
         # ('Page Width' - 'Text Width') / 2
         return (self.width - drawing.textsize(text, font=font_type)[0]) / 2
 
-    def _centered_y(self, font_size):
+    def _text_centered_y(self, font_size):
         """
         Retrieve a 'y' value that centers the image in the canvas.
 
@@ -140,8 +140,8 @@ class DrawPIL:
         fnt = ImageFont.truetype(font, int(font_size * 1.00))  # multiply size of font if needed
 
         # Check if x or y is set to 'center'
-        x = self._centered_x(text, d, fnt) if 'center' in str(x).lower() else x
-        y = self._centered_y(font_size) if 'center' in str(y).lower() else y
+        x = self._text_centered_x(text, d, fnt) if 'center' in str(x).lower() else x
+        y = self._text_centered_y(font_size) if 'center' in str(y).lower() else y
 
         # Draw text to image
         opacity = int(opacity * 100) if opacity < 1 else opacity
