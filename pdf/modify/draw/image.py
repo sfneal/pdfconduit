@@ -85,7 +85,7 @@ class DrawPIL:
 
     def _text_centered_x(self, text, drawing, font_type):
         """
-        Retrieve a 'x' value that centers the image in the canvas.
+        Retrieve a 'x' value that centers the text in the canvas.
 
         :param text: String to be centered
         :param drawing: PIL.ImageDraw.Draw instance
@@ -105,15 +105,24 @@ class DrawPIL:
         # ('Image Size' / 2) - 'Font Size'
         return (self.height / 2) - font_size
 
-    def scale(self, img, func='min'):
+    def _img_centered_x(self, image):
+        """Retrieve an 'x' value that horizontally centers the image in the canvas."""
+        return int((self.width / 2) - (image.size[0] / 2))
+
+    def _img_centered_y(self, image):
+        """Retrieve an 'y' value that vertically centers the image in the canvas."""
+        return int((self.height / 2) - (image.size[1] / 2))
+
+    def scale(self, img, func='min', scale=None):
         """Scale an image to fit the Pillow canvas."""
         im = img if isinstance(img, Image.Image) else Image.open(img)
 
         # Use either the shortest edge (min) or the longest edge (max) to determine scale factor
-        if func is 'min':
-            scale = min(float(self.width / im.size[0]), float(self.height / im.size[1]))
-        else:
-            scale = max(float(self.width / im.size[0]), float(self.height / im.size[1]))
+        if not scale:
+            if func is 'min':
+                scale = min(float(self.width / im.size[0]), float(self.height / im.size[1]))
+            else:
+                scale = max(float(self.width / im.size[0]), float(self.height / im.size[1]))
 
         im.thumbnail((int(im.size[0] * scale), int(im.size[1] * scale)))
 
@@ -147,7 +156,7 @@ class DrawPIL:
         opacity = int(opacity * 100) if opacity < 1 else opacity
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
-    def draw_img(self, img, x=0, y=0, opacity=1.0, rotate=0, fit=1, scale_to_fit=True):
+    def draw_img(self, img, x='center', y='center', opacity=1.0, rotate=0, fit=1, scale_to_fit=True):
         """
         Scale an image to fit the canvas then alpha composite paste the image.
 
@@ -160,13 +169,13 @@ class DrawPIL:
         :param opacity: Opacity value
         :param rotate: Rotation degrees
         :param fit: When true, expands image canvas size to fit rotated image
-        :param fit: When true, image is scaled to fit canvas size
+        :param scale_to_fit: When true, image is scaled to fit canvas size
         :return:
         """
-        self.img.alpha_composite(
-            Image.open(img_adjust(self.scale(img) if scale_to_fit else img, opacity, rotate, fit, self.tempdir)),
-            (x, y)
-        )
+        image = Image.open(img_adjust(self.scale(img) if scale_to_fit else img, opacity, rotate, fit, self.tempdir))
+        x = self._img_centered_x(image) if 'center' in str(x).lower() else int(x)
+        y = self._img_centered_y(image) if 'center' in str(y).lower() else int(y)
+        self.img.alpha_composite(image, (x, y))
 
     def rotate(self, rotate):
         # Create transparent image that is the same size as self.img
