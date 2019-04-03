@@ -113,6 +113,34 @@ class DrawPIL:
         """Retrieve an 'y' value that vertically centers the image in the canvas."""
         return int((self.height / 2) - (image.size[1] / 2))
 
+    def image_bound(self, image, x, y):
+        """
+        Calculate the image bounds.
+
+        If 'center' is found in x or y, a value that centers the image is calculated.
+        If a x or y value is negative, values are calculated as that distance from the right/bottom.
+
+        :param image: Image to-be pasted
+        :param x:
+        :param y:
+        :return: X and Y values
+        """
+        if 'center' in str(x).lower():
+            x = self._img_centered_x(image)
+        elif int(x) < 0:
+            x = int(self.width - abs(x))
+        else:
+            x = int(x)
+
+        if 'center' in str(y).lower():
+            y = self._img_centered_y(image)
+        elif int(y) < 0:
+            y = int(self.height - abs(y))
+        else:
+            y = int(y)
+        print(x, y)
+        return x, y
+
     def scale(self, img, func='min', scale=None):
         """Scale an image to fit the Pillow canvas."""
         im = img if isinstance(img, Image.Image) else Image.open(img)
@@ -173,8 +201,7 @@ class DrawPIL:
         :return:
         """
         image = Image.open(img_adjust(self.scale(img) if scale_to_fit else img, opacity, rotate, fit, self.tempdir))
-        x = self._img_centered_x(image) if 'center' in str(x).lower() else int(x)
-        y = self._img_centered_y(image) if 'center' in str(y).lower() else int(y)
+        x, y = self.image_bound(image, x, y)
         self.img.alpha_composite(image, (x, y))
 
     def rotate(self, rotate):
