@@ -59,9 +59,13 @@ def img_adjust(image, opacity=1.0, rotate=None, fit=0, tempdir=None, bw=False):
 
 
 class DrawPIL:
-    def __init__(self, size=(792, 612), tempdir=None):
+    def __init__(self, img=None, size=(792, 612), tempdir=None):
         # Create a black image
-        self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
+        if img:
+            self.img = Image.open(img)
+            self.img = self.img.convert('RGBA') if self.img.mode != 'RGBA' else self.img.copy()
+        else:
+            self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
         self.tempdir = tempdir
 
     def _centered_x(self, text, drawing, font_type):
