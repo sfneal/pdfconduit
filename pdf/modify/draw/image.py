@@ -147,7 +147,7 @@ class DrawPIL:
         opacity = int(opacity * 100) if opacity < 1 else opacity
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
-    def draw_img(self, img, x=0, y=0, opacity=1.0, rotate=0, fit=1):
+    def draw_img(self, img, x=0, y=0, opacity=1.0, rotate=0, fit=1, scale_to_fit=True):
         """
         Scale an image to fit the canvas then alpha composite paste the image.
 
@@ -160,9 +160,13 @@ class DrawPIL:
         :param opacity: Opacity value
         :param rotate: Rotation degrees
         :param fit: When true, expands image canvas size to fit rotated image
+        :param fit: When true, image is scaled to fit canvas size
         :return:
         """
-        self.img.alpha_composite(Image.open(img_adjust(self.scale(img), opacity, rotate, fit, self.tempdir)), (x, y))
+        self.img.alpha_composite(
+            Image.open(img_adjust(self.scale(img) if scale_to_fit else img, opacity, rotate, fit, self.tempdir)),
+            (x, y)
+        )
 
     def rotate(self, rotate):
         # Create transparent image that is the same size as self.img
