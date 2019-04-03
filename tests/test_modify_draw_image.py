@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 from looptools import Timer
 
 from pdf.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
-from pdf.modify.draw.image import PillowImage, img_adjust
+from pdf.modify.draw import PillowImage, img_adjust
 from tests import *
 
 

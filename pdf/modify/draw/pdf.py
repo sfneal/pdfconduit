@@ -4,8 +4,8 @@ from tempfile import NamedTemporaryFile, mkdtemp
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from PyBundle import resource_path
+from PillowImage import img_adjust
 from pdf.modify import LETTER
-from pdf.modify.draw.image import img_adjust
 from pdf.modify.canvas import CanvasStr, CanvasImg
 from pdf.utils import write_pdf
 
