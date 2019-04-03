@@ -67,10 +67,8 @@ class IMG2PDF:
             pdfs.append(pdf)
         return pdfs
 
-    def save(self, output_name='merged imgs', remove_temps=True):
+    def save(self, output_name='merged imgs'):
         m = str(Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir))
-        if remove_temps:
-            clean_temps(self.tempdir)
         return m
 
 
