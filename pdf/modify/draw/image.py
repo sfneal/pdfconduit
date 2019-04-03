@@ -83,6 +83,11 @@ class DrawPIL:
         """Return the height value of the image's dimensions."""
         return self.size[1]
 
+    @property
+    def longest_side(self):
+        """Return the longest side value (width or height) of the image."""
+        return max(self.height, self.width)
+
     def _text_centered_x(self, text, drawing, font_type):
         """
         Retrieve a 'x' value that centers the text in the canvas.
@@ -119,6 +124,7 @@ class DrawPIL:
 
         If 'center' is found in x or y, a value that centers the image is calculated.
         If a x or y value is negative, values are calculated as that distance from the right/bottom.
+
 
         :param image: Image to-be pasted
         :param x:
@@ -159,6 +165,18 @@ class DrawPIL:
         image = im if isinstance(img, Image.Image) else self.save(img=im)
         im.close()
         return image
+
+    def resize(self, longest_side):
+        """Resize by specifying the longest side length."""
+        if self.width > self.height:
+            width_percent = (longest_side / float(self.width))
+            height_size = int((float(self.height)) * float(width_percent))
+            self.img = self.img.resize((longest_side, height_size), Image.ANTIALIAS)
+        else:
+            height_percent = (longest_side / float(self.height))
+            width_size = int((float(self.width) * float(height_percent)))
+            self.img = self.img.resize((width_size, longest_side), Image.ANTIALIAS)
+        return self.img
 
     def draw_text(self, text, x='center', y=140, font=FONT, font_size=40, opacity=25):
         """

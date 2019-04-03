@@ -91,6 +91,22 @@ class TestModifyDrawImage(unittest.TestCase):
         return d
 
     @Timer.decorator
+    def test_DrawPIL_draw_img_fromimg_resized(self):
+        """Draw text onto an image."""
+        longest_side = 500
+        draw = DrawPIL(img=self.img_path, tempdir=self.temp.name)
+        draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
+        draw.resize(longest_side)
+        d = draw.save(destination=test_data_dir, file_name='draw_img_fromimg_resized')
+
+        # Assert file exists
+        self.assertTrue(os.path.exists(d))
+
+        # Assert actual longest edge is equal to target longest edge
+        self.assertEqual(longest_side, draw.longest_side)
+        return d
+
+    @Timer.decorator
     def test_DrawPIL_rotate(self):
         """Draw text onto an image."""
         draw = DrawPIL(tempdir=self.temp.name)
