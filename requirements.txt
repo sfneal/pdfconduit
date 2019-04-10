@@ -8,6 +8,7 @@ mysql-connector==2.1.7
 mysql-toolkit==1.8.17
 pdfrw==0.4
 Pillow==5.4.1
+PillowImage==1.0.4
 PyBundle==1.0.6
 PyMuPDF==1.14.8
 PyPDF3==1.0.1
