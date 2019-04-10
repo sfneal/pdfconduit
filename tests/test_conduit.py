@@ -1,6 +1,7 @@
 import os
 import unittest
 from tempfile import NamedTemporaryFile, TemporaryDirectory
+
 from looptools import Timer
 
 from pdfconduit import Encrypt, Info, Watermark, Label
