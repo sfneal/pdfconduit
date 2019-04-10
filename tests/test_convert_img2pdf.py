@@ -20,7 +20,6 @@ class TestConvertImg2Pdf(unittest.TestCase):
     @Timer.decorator
     def test_convert(self):
         """Convert an image file into PDF."""
-        # pdf = IMG2PDF([self.img_path], destination=test_data_dir).save()
         ip = IMG2PDF()
         self.pdf = ip.convert(self.img_path)
         ip.cleanup()
