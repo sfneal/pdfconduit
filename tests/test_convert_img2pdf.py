@@ -25,7 +25,7 @@ class TestConvertImg2Pdf(unittest.TestCase):
     @Timer.decorator
     def test_img2pdf(self):
         """Convert an image file into PDF."""
-        pdf = IMG2PDF([self.img_path], destination=test_data_dir).save(remove_temps=False)
+        pdf = IMG2PDF([self.img_path], destination=test_data_dir).save()
 
         # Assert pdf file exists
         self.assertTrue(os.path.exists(pdf))
