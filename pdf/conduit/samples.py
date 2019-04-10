@@ -1,10 +1,11 @@
 # Generate sample PDF documents
 import os
-from pdf.utils import Info
-from pdf.transform import slicer, upscale, Merge
-from pdf.convert import Flatten
+
 from pdf.conduit import Label, Watermark
 from pdf.conduit.lib import available_images
+from pdf.convert import Flatten
+from pdf.transform import slicer, upscale, Merge
+from pdf.utils import Info
 from tests import pdf_path
 
 

@@ -1,6 +1,8 @@
 from datetime import datetime
-from pdf.modify.canvas.objects import CanvasObjects, CanvasStr, CanvasImg
+
 from PillowImage import PillowImage
+
+from pdf.modify.canvas.objects import CanvasObjects, CanvasStr, CanvasImg
 
 
 class CanvasConstructor:

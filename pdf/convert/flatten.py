@@ -1,10 +1,11 @@
 # Create flat PDF by converting each input PDF page to a PNG
 import os
 from tempfile import TemporaryDirectory
-from pdf.utils.path import add_suffix
-from pdf.transform.upscale import upscale
+
 from pdf.convert.img2pdf import IMG2PDF
 from pdf.convert.pdf2img import PDF2IMG
+from pdf.transform.upscale import upscale
+from pdf.utils.path import add_suffix
 
 
 class Flatten:

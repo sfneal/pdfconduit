@@ -1,9 +1,11 @@
 # Slice PDF to remove unwanted pages
 import os
 from tempfile import NamedTemporaryFile
+
 from PyPDF3 import PdfFileReader, PdfFileWriter
-from pdf.utils.path import add_suffix
+
 from pdf.utils.info import Info
+from pdf.utils.path import add_suffix
 
 
 def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=None):

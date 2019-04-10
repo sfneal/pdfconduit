@@ -1,7 +1,7 @@
 # View directories and files in a window
-from sys import modules
 from pathlib import Path
 from subprocess import call, Popen
+from sys import modules
 
 
 def open_window(path):

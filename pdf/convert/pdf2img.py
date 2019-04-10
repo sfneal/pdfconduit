@@ -1,11 +1,13 @@
 # Convert each page of PDF to images
 import os
-import fitz
-from sys import modules
 from io import BytesIO
-from PIL import Image
+from sys import modules
 from tempfile import NamedTemporaryFile
+
+import fitz
+from PIL import Image
 from tqdm import tqdm
+
 from pdf.utils.path import add_suffix
 
 

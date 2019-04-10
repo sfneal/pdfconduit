@@ -1,8 +1,9 @@
 # Convert a PNG image file to a PDF
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from PIL import Image
 from tqdm import tqdm
-from tempfile import TemporaryDirectory
-from pathlib import Path
 
 from pdf.modify.canvas import CanvasImg, CanvasObjects
 from pdf.modify.draw import WatermarkDraw

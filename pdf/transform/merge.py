@@ -1,5 +1,6 @@
 # Merge PDF documents
 import os
+
 from PyPDF3 import PdfFileMerger
 from pdfrw import PdfReader, PdfWriter, IndirectPdfDict
 
