@@ -14,23 +14,21 @@ class TestConvertImg2Pdf(unittest.TestCase):
         cls.img_path = img_path
         cls.pdf = None
 
-    def setUp(self):
-        self.temp = TemporaryDirectory()
-
-    def tearDown(self):
-        self.temp.cleanup()
-        if os.path.exists(self.pdf):
-            os.remove(self.pdf)
+    # def tearDown(self):
+    #     if os.path.exists(self.pdf):
+    #         os.remove(self.pdf)
 
     @Timer.decorator
-    def test_img2pdf(self):
+    def test_convert(self):
         """Convert an image file into PDF."""
-        pdf = IMG2PDF([self.img_path], destination=test_data_dir).save()
+        # pdf = IMG2PDF([self.img_path], destination=test_data_dir).save()
+        ip = IMG2PDF()
+        self.pdf = ip.convert(self.img_path)
+        ip.cleanup()
 
         # Assert pdf file exists
-        self.assertTrue(os.path.exists(pdf))
-        self.pdf = pdf
-        return pdf
+        self.assertTrue(os.path.exists(self.pdf))
+        return self.pdf
 
 
 if __name__ == '__main__':
