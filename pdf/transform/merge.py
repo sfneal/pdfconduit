@@ -8,7 +8,7 @@ class Merge:
     def __init__(self, input_pdfs, output_name='merged', output_dir=None, method='pdfrw'):
         self.pdfs = self._get_pdf_list(input_pdfs)
         self.directory = output_dir if output_dir else os.path.dirname(self.pdfs[0])
-        self.output = os.path.join(self.directory, output_name + '.pdf')
+        self.output = os.path.join(self.directory, output_name.replace('.pdf', '') + '.pdf')
         self.method = method
         self.file = self.merge(self.pdfs, self.output)
 
