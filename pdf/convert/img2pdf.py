@@ -1,5 +1,4 @@
 # Convert a PNG image file to a PDF
-from sys import modules
 from PIL import Image
 from tqdm import tqdm
 from tempfile import TemporaryDirectory
@@ -21,48 +20,30 @@ class IMG2PDF:
 
         self.pdf_pages = self.img2pdf()
 
-    def img2pdf(self):
-        # TODO: Figure out weather this method is causing unclosed file warnings and errors
-        # PySimpleGUI progress bar
-        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
-            import PySimpleGUI as sg
-            pdfs = []
-            for index, i in enumerate(self.imgs):
-                with Image.open(i) as im:
-                    width, height = im.size
-
-                    co = CanvasObjects()
-                    co.add(CanvasImg(i, 1.0, w=width, h=height))
-
-                    pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
-                    pdfs.append(pdf)
-                if not sg.OneLineProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs),
-                                               orientation='h', key='progress'):
-                    break
-            return pdfs
-
-        # TQDM progress bar
-        elif self.progress_bar is 'tqdm':
-            loop = tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
-
-        # No progress bar
+    def _image_loop(self):
+        """Retrieve an iterable of images either with, or without a progress bar."""
+        if self.progress_bar and 'tqdm' in self.progress_bar.lower():
+            return tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
         else:
-            loop = self.imgs
-        pdfs = []
-        for i in loop:
-            with Image.open(i) as im:
-                width, height = im.size
+            return self.imgs
+
+    def convert(self, image):
+        """Convert a single PNG image to a PDF."""
+        with Image.open(image) as im:
+            width, height = im.size
 
             co = CanvasObjects()
-            co.add(CanvasImg(i, 1.0, w=width, h=height))
+            co.add(CanvasImg(image, 1.0, w=width, h=height))
 
-            pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
-            pdfs.append(pdf)
-        return pdfs
+            return WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
 
-    def save(self, output_name='merged imgs'):
+    def img2pdf(self):
+        """Convert a list of images into a PDF files."""
+        return [self.convert(image) for image in self._image_loop()]
+
+    def save(self, output_name='merged imgs', clean_temp=True):
         m = str(Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir))
-        if hasattr(self, '_temp'):
+        if clean_temp and hasattr(self, '_temp'):
             self._temp.cleanup()
         return m
 
