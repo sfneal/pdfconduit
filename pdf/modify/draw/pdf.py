@@ -33,8 +33,7 @@ class DrawPDF:
         else:
             self.dir = mkdtemp()
 
-        with NamedTemporaryFile(suffix='.pdf', dir=self.dir, delete=False) as tmppdf:
-            self.dst = resource_path(tmppdf.name)
+        self._dst = None
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
@@ -43,9 +42,16 @@ class DrawPDF:
     def __str__(self):
         return str(self.dst)
 
+    @property
+    def dst(self):
+        if not self._dst:
+            with NamedTemporaryFile(suffix='.pdf', dir=self.dir, delete=False) as tmppdf:
+                self._dst = resource_path(tmppdf.name)
+        return self._dst
+
     def _write(self, output):
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
-        output = self.dst if not output else output
+        output = output if output else self.dst
         write_pdf(self.packet, output)  # Save new pdf file
         return output
 

@@ -74,11 +74,7 @@ class TestConvertPdf2Img(unittest.TestCase):
         cls.pdf_path = os.path.join(test_data_dir, 'plan_p.pdf')
         cls.img = None
 
-    def setUp(self):
-        self.temp = TemporaryDirectory()
-
     def tearDown(self):
-        self.temp.cleanup()
         if os.path.exists(self.img):
             os.remove(self.img)
 
