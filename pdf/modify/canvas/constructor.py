@@ -47,30 +47,29 @@ class CanvasConstructor:
         return self.objects
 
     def img(self):
-        img = PillowImage(tempdir=self.tempdir)
-
-        if self.image is not None:
-            img.draw_img(self.image, x=0, y=50, opacity=self.opacity)
-            if self.copyright:
-                img.draw_text('© copyright ' + str(datetime.now().year), font_size=16, y='center')
-            if self.text2:
-                img.draw_text(self.text1, font_size=40, y=416, opacity=self.opacity)
-                img.draw_text(self.text2, font_size=40, y=466, opacity=self.opacity)
+        with PillowImage() as img:
+            if self.image is not None:
+                img.draw_img(self.image, x=0, y=50, opacity=self.opacity)
+                if self.copyright:
+                    img.draw_text('© copyright ' + str(datetime.now().year), font_size=16, y='center')
+                if self.text2:
+                    img.draw_text(self.text1, font_size=40, y=416, opacity=self.opacity)
+                    img.draw_text(self.text2, font_size=40, y=466, opacity=self.opacity)
+                else:
+                    img.draw_text(self.text2, font_size=40, y=427, opacity=self.opacity)
             else:
-                img.draw_text(self.text2, font_size=40, y=427, opacity=self.opacity)
-        else:
-            if self.text2 and self.copyright:
-                img.draw_text('© copyright ' + str(datetime.now().year), font_size=16, y=350)
-                img.draw_text(self.text1, font_size=80, y=106, opacity=self.opacity)
-                img.draw_text(self.text2, font_size=80, y=206, opacity=self.opacity)
-            elif self.text2 and not self.copyright:
-                img.draw_text(self.text1, font_size=80, y=106, opacity=self.opacity)
-                img.draw_text(self.text2, font_size=80, y=206, opacity=self.opacity)
-            else:
-                img.draw_text(self.text1, font_size=80, y='center', opacity=self.opacity)
+                if self.text2 and self.copyright:
+                    img.draw_text('© copyright ' + str(datetime.now().year), font_size=16, y=350)
+                    img.draw_text(self.text1, font_size=80, y=106, opacity=self.opacity)
+                    img.draw_text(self.text2, font_size=80, y=206, opacity=self.opacity)
+                elif self.text2 and not self.copyright:
+                    img.draw_text(self.text1, font_size=80, y=106, opacity=self.opacity)
+                    img.draw_text(self.text2, font_size=80, y=206, opacity=self.opacity)
+                else:
+                    img.draw_text(self.text1, font_size=80, y='center', opacity=self.opacity)
 
-        img.rotate(self.rotate)
-        self.rotate = 0
-        i = img.save()
-        self.obj.add(CanvasImg(i, opacity=1, centered=True))
+            img.rotate(self.rotate)
+            self.rotate = 0
+            i = img.save()
+            self.obj.add(CanvasImg(i, opacity=1, centered=True))
         return self.objects
