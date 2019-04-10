@@ -1,11 +1,13 @@
 # Dynamically generate watermark pdf file
 import io
 from tempfile import NamedTemporaryFile, mkdtemp
-from reportlab.pdfgen.canvas import Canvas
-from reportlab.pdfbase.pdfmetrics import stringWidth
+
+from PillowImage import img_adjust
 from PyBundle import resource_path
+from reportlab.pdfbase.pdfmetrics import stringWidth
+from reportlab.pdfgen.canvas import Canvas
+
 from pdf.modify import LETTER
-from pdf.modify.draw.image import img_opacity
 from pdf.modify.canvas import CanvasStr, CanvasImg
 from pdf.utils import write_pdf
 
@@ -33,8 +35,7 @@ class DrawPDF:
         else:
             self.dir = mkdtemp()
 
-        with NamedTemporaryFile(suffix='.pdf', dir=self.dir, delete=False) as tmppdf:
-            self.dst = resource_path(tmppdf.name)
+        self._dst = None
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
@@ -43,13 +44,21 @@ class DrawPDF:
     def __str__(self):
         return str(self.dst)
 
-    def _write(self):
-        self.packet.seek(0)  # move to the beginning of the StringIO buffer
-        write_pdf(self.packet, self.dst)  # Save new pdf file
-        return self.dst
+    @property
+    def dst(self):
+        if not self._dst:
+            with NamedTemporaryFile(suffix='.pdf', dir=self.dir, delete=False) as tmppdf:
+                self._dst = resource_path(tmppdf.name)
+        return self._dst
 
-    def write(self):
-        return self._write()
+    def _write(self, output=None):
+        self.packet.seek(0)  # move to the beginning of the StringIO buffer
+        output = output if output else self.dst
+        write_pdf(self.packet, output)  # Save new pdf file
+        return output
+
+    def write(self, output=None):
+        return self._write(output)
 
 
 class WatermarkDraw(DrawPDF):
@@ -99,7 +108,7 @@ class WatermarkDraw(DrawPDF):
 
         :param ci: CanvasImage object
         """
-        img = img_opacity(ci.image, ci.opacity, tempdir=self.dir)
+        img = img_adjust(ci.image, ci.opacity, tempdir=self.dir)
         self.can.drawImage(img, x=ci.x, y=ci.y, width=ci.w, height=ci.h, mask=ci.mask,
                            preserveAspectRatio=ci.preserve_aspect_ratio, anchorAtXY=True)
 

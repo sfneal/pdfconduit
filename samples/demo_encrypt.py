@@ -1,6 +1,6 @@
 # Test encrypt module reliability
 from pdfconduit import Encrypt, Info
-from tests import pdf
+from tests import pdf_path
 
 
 def main():
@@ -8,7 +8,7 @@ def main():
     owner_pw = 'foo'
     user_pw = 'baz'
 
-    p = Encrypt(pdf, user_pw, owner_pw)
+    p = Encrypt(pdf_path, user_pw, owner_pw)
     print(p.output)
 
     security = Info(p.output, user_pw).security

@@ -1,11 +1,12 @@
 # Generate sample PDF documents
 import os
-from pdf.utils import Info
-from pdf.transform import slicer, upscale, Merge
-from pdf.convert import Flatten
+
 from pdf.conduit import Label, Watermark
 from pdf.conduit.lib import available_images
-from tests import pdf
+from pdf.convert import Flatten
+from pdf.transform import slicer, upscale, Merge
+from pdf.utils import Info
+from tests import pdf_path
 
 
 class Samples:
@@ -103,7 +104,7 @@ class Samples:
 
 
 def main():
-    src = pdf
+    src = pdf_path
     dst = os.path.join(os.path.dirname(src), 'samples')
 
     s = Samples(src, dst)

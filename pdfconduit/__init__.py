@@ -28,7 +28,7 @@ except ImportError:
     GUI_INSTALLED = False
 
 
-# Modify installation
+# Transform installation
 try:
     from pdf.transform import upscale, rotate, slicer, Merge
     MODIFY_INSTALLED = True

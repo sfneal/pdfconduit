@@ -1,76 +1,76 @@
 # Convert a PNG image file to a PDF
-import os
-import shutil
-from sys import modules
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from PIL import Image
 from tqdm import tqdm
+
 from pdf.modify.canvas import CanvasImg, CanvasObjects
 from pdf.modify.draw import WatermarkDraw
 from pdf.transform.merge import Merge
 
 
-def clean_temps(tempdir):
-    # TODO: Files remaining open on window and preventing deletion
-    if os.path.isdir(tempdir):
-        try:
-            shutil.rmtree(tempdir)
-        except PermissionError:
-            print(tempdir, 'was not removed')
-
-
 class IMG2PDF:
-    def __init__(self, imgs, destination=None, tempdir=None, progress_bar=None):
+    def __init__(self, imgs=None, destination=None, tempdir=None, progress_bar=None):
         """Convert each image into a PDF page and merge all pages to one PDF file"""
         self.imgs = imgs
         self.output_dir = destination
-        self.tempdir = tempdir
+        if not tempdir:
+            self._temp = TemporaryDirectory()
+            self.tempdir = self._temp.name
+        elif isinstance(tempdir, TemporaryDirectory):
+            self._temp = tempdir
+            self.tempdir = self._temp.name
+        else:
+            self.tempdir = tempdir
         self.progress_bar = progress_bar
 
-        self.pdf_pages = self.img2pdf()
+        self._pdf_pages = None
 
-    def img2pdf(self):
-        # TODO: Figure out weather this method is causing unclosed file warnings and errors
-        # PySimpleGUI progress bar
-        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
-            import PySimpleGUI as sg
-            pdfs = []
-            for index, i in enumerate(self.imgs):
-                with Image.open(i) as im:
-                    width, height = im.size
+    @property
+    def pdf_pages(self):
+        if not self._pdf_pages:
+            self._pdf_pages = self.img2pdf()
+        return self._pdf_pages
 
-                    co = CanvasObjects()
-                    co.add(CanvasImg(i, 1.0, w=width, h=height))
+    def cleanup(self, clean_temp=True):
+        if clean_temp and hasattr(self, '_temp'):
+            self._temp.cleanup()
 
-                    pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
-                    pdfs.append(pdf)
-                if not sg.OneLineProgressMeter('Saving PNGs as flat PDFs', index + 1, len(self.imgs),
-                                               orientation='h', key='progress'):
-                    break
-            return pdfs
-
-        # TQDM progress bar
-        elif self.progress_bar is 'tqdm':
-            loop = tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
-
-        # No progress bar
+    def _image_loop(self):
+        """Retrieve an iterable of images either with, or without a progress bar."""
+        if self.progress_bar and 'tqdm' in self.progress_bar.lower():
+            return tqdm(self.imgs, desc='Saving PNGs as flat PDFs', total=len(self.imgs), unit='PDFs')
         else:
-            loop = self.imgs
-        pdfs = []
-        for i in loop:
-            with Image.open(i) as im:
-                width, height = im.size
+            return self.imgs
+
+    def _convert(self, image, output=None):
+        """Private method for converting a single PNG image to a PDF."""
+        with Image.open(image) as im:
+            width, height = im.size
 
             co = CanvasObjects()
-            co.add(CanvasImg(i, 1.0, w=width, h=height))
+            co.add(CanvasImg(image, 1.0, w=width, h=height))
 
-            pdf = WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write()
-            pdfs.append(pdf)
-        return pdfs
+            return WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write(output)
 
-    def save(self, output_name='merged imgs', remove_temps=True):
+    def convert(self, image, output=None):
+        """
+        Convert an image to a PDF.
+
+        :param image: Image file path
+        :param output: Output name, same as image name with .pdf extension by default
+        :return: PDF file path
+        """
+        return self._convert(image, image.replace(Path(image).suffix, '.pdf') if not output else output)
+
+    def img2pdf(self):
+        """Convert a list of images into a PDF files."""
+        return [self._convert(image) for image in self._image_loop()]
+
+    def save(self, output_name='merged imgs', clean_temp=True):
         m = str(Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir))
-        if remove_temps:
-            clean_temps(self.tempdir)
+        self.cleanup(clean_temp)
         return m
 
 

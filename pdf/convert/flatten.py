@@ -1,17 +1,27 @@
 # Create flat PDF by converting each input PDF page to a PNG
 import os
-from tempfile import mkdtemp
-from pdf.utils.path import add_suffix
-from pdf.transform.upscale import upscale
+from tempfile import TemporaryDirectory
+
 from pdf.convert.img2pdf import IMG2PDF
 from pdf.convert.pdf2img import PDF2IMG
+from pdf.transform.upscale import upscale
+from pdf.utils.path import add_suffix
 
 
 class Flatten:
-    def __init__(self, file_name, scale=2.0, suffix='flat', tempdir=None, progress_bar=None):
+    def __init__(self, file_name, scale=1.0, suffix='flat', tempdir=None, progress_bar=None):
         """Create a flat single-layer PDF by converting each page to a PNG image"""
         self._file_name = file_name
-        self.tempdir = tempdir if tempdir else mkdtemp()
+
+        if not tempdir:
+            self._temp = TemporaryDirectory()
+            self.tempdir = self._temp.name
+        elif isinstance(tempdir, TemporaryDirectory):
+            self._temp = tempdir
+            self.tempdir = self._temp.name
+        else:
+            self.tempdir = tempdir
+
         self.suffix = suffix
         self.directory = os.path.dirname(file_name)
         self.progress_bar = progress_bar
@@ -35,5 +45,10 @@ class Flatten:
         if self.imgs is None:
             self.get_imgs()
         i2p = IMG2PDF(self.imgs, self.directory, self.tempdir, self.progress_bar)
-        self.pdf = i2p.save(remove_temps=remove_temps, output_name=add_suffix(self._file_name, self.suffix))
+        self.pdf = i2p.save(clean_temp=False, output_name=add_suffix(self._file_name, self.suffix))
+        self.cleanup(remove_temps)
         return self.pdf
+
+    def cleanup(self, clean_temp=True):
+        if clean_temp and hasattr(self, '_temp'):
+            self._temp.cleanup()

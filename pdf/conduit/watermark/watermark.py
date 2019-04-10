@@ -1,7 +1,7 @@
 # Apply a watermark to a PDF file
 import os
 import shutil
-from tempfile import mkdtemp
+from tempfile import TemporaryDirectory
 from looptools import Timer
 from pdf.utils import add_suffix, open_window, Receipt, Info
 from pdf.modify.draw import WatermarkDraw
@@ -12,7 +12,7 @@ from pdf.conduit.watermark.add import WatermarkAdd
 
 
 class Watermark:
-    def __init__(self, document, remove_temps=True, move_temps=None, open_file=False, tempdir=mkdtemp(), receipt=None,
+    def __init__(self, document, remove_temps=True, move_temps=None, open_file=False, tempdir=None, receipt=None,
                  use_receipt=True, progress_bar_enabled=False, progress_bar='tqdm'):
         """
         Watermark and encrypt a PDF document.
@@ -40,7 +40,16 @@ class Watermark:
         self.remove_temps = remove_temps
         self.move_temps = move_temps
         self.open_file = open_file
-        self.tempdir = tempdir
+
+        if not tempdir:
+            self._temp = TemporaryDirectory()
+            self.tempdir = self._temp.name
+        elif isinstance(tempdir, TemporaryDirectory):
+            self._temp = tempdir
+            self.tempdir = self._temp.name
+        else:
+            self.tempdir = tempdir
+
         self.progress_bar_enabled = progress_bar_enabled
         self.progress_bar = progress_bar
 

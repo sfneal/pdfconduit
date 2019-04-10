@@ -1,17 +1,17 @@
 from pdfconduit import Watermark
 import os
-from tests import pdf, directory
-from looptools import functimer
+from tests import pdf_path, test_data_dir
+from looptools import Timer
 
 
-@functimer
+@Timer.decorator
 def main(move_temps):
     print('Testing Watermark draw and add functionality')
     address = '43 Indian Lane'
     town = 'Franklin'
     state = 'MA'
 
-    w = Watermark(pdf, use_receipt=False, move_temps=move_temps)
+    w = Watermark(pdf_path, use_receipt=False, move_temps=move_temps)
     wtrmrk = w.draw(address, str(town + ', ' + state), opacity=0.08, flatten=False, rotate=30)
     added = w.add()
     w.cleanup()
@@ -26,4 +26,4 @@ def main(move_temps):
 
 
 if __name__ == '__main__':
-    main(directory)
+    main(test_data_dir)
