@@ -43,13 +43,14 @@ class DrawPDF:
     def __str__(self):
         return str(self.dst)
 
-    def _write(self):
+    def _write(self, output):
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
-        write_pdf(self.packet, self.dst)  # Save new pdf file
-        return self.dst
+        output = self.dst if not output else output
+        write_pdf(self.packet, output)  # Save new pdf file
+        return output
 
-    def write(self):
-        return self._write()
+    def write(self, output=None):
+        return self._write(output)
 
 
 class WatermarkDraw(DrawPDF):
