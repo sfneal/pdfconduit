@@ -70,6 +70,6 @@ class CanvasConstructor:
 
             img.rotate(self.rotate)
             self.rotate = 0
-            i = img.save()
+            i = img.save(destination=self.tempdir)
             self.obj.add(CanvasImg(i, opacity=1, centered=True))
-        return self.objects
+            return self.objects

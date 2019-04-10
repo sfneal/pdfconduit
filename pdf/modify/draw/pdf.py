@@ -49,7 +49,7 @@ class DrawPDF:
                 self._dst = resource_path(tmppdf.name)
         return self._dst
 
-    def _write(self, output):
+    def _write(self, output=None):
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
         output = output if output else self.dst
         write_pdf(self.packet, output)  # Save new pdf file
