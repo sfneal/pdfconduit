@@ -17,6 +17,9 @@ class IMG2PDF:
         if not tempdir:
             self._temp = TemporaryDirectory()
             self.tempdir = self._temp.name
+        elif isinstance(tempdir, TemporaryDirectory):
+            self._temp = tempdir
+            self.tempdir = self._temp.name
         else:
             self.tempdir = tempdir
         self.progress_bar = progress_bar
