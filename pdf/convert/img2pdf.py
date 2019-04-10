@@ -1,21 +1,12 @@
 # Convert a PNG image file to a PDF
-import os
-import shutil
 from sys import modules
 from PIL import Image
 from tqdm import tqdm
+from tempfile import TemporaryDirectory
+
 from pdf.modify.canvas import CanvasImg, CanvasObjects
 from pdf.modify.draw import WatermarkDraw
 from pdf.transform.merge import Merge
-
-
-def clean_temps(tempdir):
-    # TODO: Files remaining open on window and preventing deletion
-    if os.path.isdir(tempdir):
-        try:
-            shutil.rmtree(tempdir)
-        except PermissionError:
-            print(tempdir, 'was not removed')
 
 
 class IMG2PDF:
@@ -23,7 +14,9 @@ class IMG2PDF:
         """Convert each image into a PDF page and merge all pages to one PDF file"""
         self.imgs = imgs
         self.output_dir = destination
-        self.tempdir = tempdir
+        if not tempdir:
+            self._temp = TemporaryDirectory()
+            self.tempdir = self._temp.name
         self.progress_bar = progress_bar
 
         self.pdf_pages = self.img2pdf()
@@ -69,6 +62,8 @@ class IMG2PDF:
 
     def save(self, output_name='merged imgs'):
         m = str(Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir))
+        if hasattr(self, '_temp'):
+            self._temp.cleanup()
         return m
 
 
