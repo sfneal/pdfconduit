@@ -83,7 +83,7 @@ class PDF2IMG:
         if self.output:
             return self.output
         elif not self.tempdir:
-            output_file = add_suffix(self.file_name, str(index), ext=self.ext)
+            output_file = add_suffix(self.file_name, str(index + 1), ext=self.ext)
             return os.path.join(self.output_dir, output_file)
         else:
             with NamedTemporaryFile(suffix=self.ext, dir=self.tempdir, delete=True) as temp:
