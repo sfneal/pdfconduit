@@ -26,7 +26,13 @@ class PDF2IMG:
 
         # storage for page display lists
         self.dlist_tab = [None] * len(self.doc)
-        self.pdf_data = self._get_pdf_data()
+        self._page_data = None
+
+    @property
+    def pdf_data(self):
+        if not self._page_data:
+            self._page_data = self._get_pdf_data()
+        return self._page_data
 
     def _get_pdf_data(self):
         # PySimpleGUI progress bar
