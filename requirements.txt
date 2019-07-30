@@ -10,7 +10,7 @@ pdfrw==0.4
 Pillow==6.0.0
 PillowImage==1.0.8
 PyBundle==1.0.6
-PyMuPDF==1.14.19
+PyMuPDF
 PyPDF3==1.0.1
 PySimpleGUI==3.28.0
 reportlab==3.5.19
