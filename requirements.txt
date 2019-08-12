@@ -2,7 +2,7 @@ databasetools==1.4.5
 differentiate==1.2.1
 dill==0.2.9
 dirutility==0.6.1
-looptools==1.1.2
+looptools==1.2.3
 multiprocess==0.70.7
 mysql-connector==2.2.9
 mysql-toolkit==1.9.1
@@ -10,7 +10,7 @@ pdfrw==0.4
 Pillow==6.0.0
 PillowImage==1.0.8
 PyBundle==1.0.6
-PyMuPDF
+PyMuPDF==1.14.19
 PyPDF3==1.0.1
 PySimpleGUI==3.28.0
 reportlab==3.5.19
