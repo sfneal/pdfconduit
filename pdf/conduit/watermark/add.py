@@ -78,7 +78,7 @@ class WatermarkAdd:
         if pdf_file['w'] <= letter_size['w'] or pdf_file['h'] <= letter_size['h']:
             scale = float(letter_size['w'] / pdf_file['w'])
             pdf_file['upscaled'] = upscale(pdf_file['path'], scale=scale, tempdir=self.tempdir)
-            self.document_reader = self._document_reader(pdf_file['upscaled'])
+            self.document_reader = pypdf3_reader(pdf_file['upscaled'])
         return pdf_file
 
     def _get_watermark_info(self, document, watermark, margin_x=0, margin_y=0):
