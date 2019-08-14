@@ -7,7 +7,7 @@ from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.pdf import PageObject
 from pdf.transform.upscale import upscale
 from pdf.transform.rotate import rotate
-from pdf.utils import add_suffix, Info
+from pdf.utils import add_suffix, Info, pypdf3_reader
 
 
 class WatermarkAdd:
@@ -40,7 +40,7 @@ class WatermarkAdd:
         self.tempdir = tempdir
         self.method = method
 
-        self.document_reader = self._document_reader(document, decrypt)
+        self.document_reader = pypdf3_reader(document, decrypt)
         self.document = self._get_document_info(document)
         self.watermark_file = self._get_watermark_info(self.document, watermark)
         pdf_fname, wtrmrk_fname = self._set_filenames
@@ -59,16 +59,6 @@ class WatermarkAdd:
 
     def __str__(self):
         return str(self.output_filename)
-
-    @staticmethod
-    def _document_reader(document, decrypt=False):
-        # 1. Read PDF document and create file reader object
-        if decrypt:
-            reader = PdfFileReader(document)
-            reader.decrypt(decrypt)
-            return reader
-        else:
-            return PdfFileReader(document)
 
     def _get_document_info(self, filename):
         pdf_file = {'path': filename}

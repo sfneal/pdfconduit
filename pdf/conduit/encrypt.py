@@ -1,7 +1,7 @@
 # Encrypt a PDF file with password protection
-from PyPDF3 import PdfFileReader, PdfFileWriter
+from PyPDF3 import PdfFileWriter
 
-from pdf.utils.path import add_suffix
+from pdf.utils import add_suffix, pypdf3_reader
 
 
 class Encrypt:
@@ -24,12 +24,12 @@ class Encrypt:
     def __str__(self):
         return str(self.output)
 
-    def encrypt(self):
+    def encrypt(self, decrypt=None):
         # Create PDF writer object
         pdf_writer = PdfFileWriter()
         with open(self.pdf, 'rb') as pdf_file:
             # Read opened PDF file
-            pdf_reader = PdfFileReader(pdf_file)
+            pdf_reader = pypdf3_reader(pdf_file, decrypt)
 
             # Add each page from source PDF
             for page_num in range(pdf_reader.numPages):
