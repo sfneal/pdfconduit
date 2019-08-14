@@ -6,7 +6,8 @@ from pdf.utils import add_suffix, pypdf3_reader
 
 class Encrypt:
     def __init__(self, pdf, user_pw, owner_pw=None, output=None, suffix='secured', bit128=True, allow_printing=True,
-                 allow_commenting=False, overwrite_permission=None, progress_bar_enabled=False, progress_bar='gui'):
+                 allow_commenting=False, overwrite_permission=None, progress_bar_enabled=False, progress_bar='gui',
+                 decrypt=None):
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
         self.user_pw = user_pw
@@ -19,7 +20,7 @@ class Encrypt:
         self.progress_bar_enabled = progress_bar_enabled
         self.progress_bar = progress_bar
 
-        self.encrypt()
+        self.encrypt(decrypt)
 
     def __str__(self):
         return str(self.output)
