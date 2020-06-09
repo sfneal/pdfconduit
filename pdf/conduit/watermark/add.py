@@ -87,7 +87,7 @@ class WatermarkAdd:
         watermark_file.update(Info(watermark).dimensions)
 
         # 3b. Check if watermark file needs to be rotated
-        if watermark_file['w'] > watermark_file['h'] and document['orientation'] is 'portrait':
+        if watermark_file['w'] > watermark_file['h'] and document['orientation'] == 'portrait':
             self.rotate = 90
             watermark_file['rotated'] = rotate(watermark, self.rotate, tempdir=self.tempdir, method=self.method)
 
@@ -154,7 +154,7 @@ class WatermarkAdd:
                 # Merge the watermark with the page
                 if not self.underneath:
                     input_page = document_reader.getPage(page_number)
-                    if wtrmrk_rotate is not 0:
+                    if wtrmrk_rotate != 0:
                         input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
                     else:
                         wtrmrk_width = 0
@@ -163,7 +163,7 @@ class WatermarkAdd:
                 else:
                     size = Info(document_reader).dimensions
                     input_page = PageObject().createBlankPage(document_reader, size['w'], size['h'])
-                    if wtrmrk_rotate is not 0:
+                    if wtrmrk_rotate != 0:
                         input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
                     else:
                         wtrmrk_width = 0
@@ -246,7 +246,7 @@ class WatermarkAdd:
             # Write out the destination file
             PdfWriter(output_filename, trailer=trailer).write()
 
-        if self.method is 'pypdf3':
+        if self.method == 'pypdf3':
             return pypdf3()
         else:
             return pdfrw()

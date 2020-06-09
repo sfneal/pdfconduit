@@ -36,7 +36,7 @@ class PDF2IMG:
 
     def _get_pdf_data(self):
         # PySimpleGUI progress bar
-        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
+        if self.progress_bar == 'gui' and 'PySimpleGUI' in modules:
             import PySimpleGUI as gui
             data = []
             for i, cur_page in enumerate(range(len(self.doc))):
@@ -47,7 +47,7 @@ class PDF2IMG:
             return data
 
         # TQDM progress bar
-        elif self.progress_bar is 'tqdm':
+        elif self.progress_bar == 'tqdm':
             return [self._get_page_data(cur_page) for cur_page in tqdm(range(len(self.doc)),
                                                                        desc='Getting PDF page data',
                                                                        total=len(self.doc), unit='Pages')]
@@ -97,7 +97,7 @@ class PDF2IMG:
 
     def save(self):
         # PySimpleGUI progress bar
-        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
+        if self.progress_bar == 'gui' and 'PySimpleGUI' in modules:
             import PySimpleGUI as gui
             saved = []
             for i, img in enumerate(self.pdf_data):
@@ -111,7 +111,7 @@ class PDF2IMG:
             self.doc.close()
             return saved
         # TQDM progress bar
-        elif self.progress_bar is 'tqdm':
+        elif self.progress_bar == 'tqdm':
             loop = enumerate(tqdm(self.pdf_data, desc='Saving PDF pages as PNGs', total=len(self.pdf_data),
                                   unit='PNGs'))
         # No progress bar

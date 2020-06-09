@@ -37,7 +37,7 @@ class Merge:
 
     def merge(self, pdf_files, output):
         """Merge list of PDF files to a single PDF file."""
-        if self.method is 'pypdf3':
+        if self.method == 'pypdf3':
             return self.pypdf3(pdf_files, output)
         else:
             return self.pdfrw(pdf_files, output)
