@@ -42,6 +42,7 @@ class Encrypt:
                                allow_printing=self.allow_printing, allow_commenting=self.allow_commenting,
                                overwrite_permission=self.overwrite_permission)
 
+            # todo: add metadata adding functionality
             pdf_writer.addMetadata({
                 '/Producer': 'pdfconduit',
                 '/Creator': 'HPA Design',
