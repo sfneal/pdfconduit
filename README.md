@@ -1,5 +1,8 @@
 # PDF Conduit
 
+[![Build Status](https://img.shields.io/travis/sfneal/pdfconduit/master.svg?style=flat-square)](https://travis-ci.org
+/sfneal/pdfconduit)
+
 Prepare documents for distribution.
 
 A Pure-Python library built as a PDF toolkit.
