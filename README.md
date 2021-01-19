@@ -1,7 +1,10 @@
 # PDF Conduit
 
-[![Build Status](https://img.shields.io/travis/sfneal/pdfconduit/master.svg?style=flat-square)](https://travis-ci.org
-/sfneal/pdfconduit)
+[![Build Status](https://travis-ci.com/sfneal/pdfconduit.svg?branch=master)](https://travis-ci.com/sfneal/pdfconduit)
+[![PyPi version](https://img.shields.io/pypi/v/pdfconduit)](https://pypi.org/project/pdfconduit)
+[![PyPi Python support](https://img.shields.io/pypi/pyversions/pdfconduit)](https://pypi.org/project/pdfconduit)
+[![PyPi downloads per month](https://img.shields.io/pypi/dm/pdfconduit)](https://pypi.org/project/pdfconduit)
+[![PyPi license](https://img.shields.io/pypi/l/pdfconduit)](https://pypi.org/project/pdfconduit)
 
 Prepare documents for distribution.
 
