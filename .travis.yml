@@ -1,4 +1,8 @@
-language: python
+language: php
+
+os: linux
+
+arch: arm64-graviton2
 
 cache:
   pip: true
