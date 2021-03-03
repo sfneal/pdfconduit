@@ -1,12 +1,13 @@
 # Encrypt a PDF file with password protection
-from PyPDF3 import PdfFileReader, PdfFileWriter
+from PyPDF3 import PdfFileWriter
 
-from pdf.utils.path import add_suffix
+from pdf.utils import add_suffix, pypdf3_reader
 
 
 class Encrypt:
     def __init__(self, pdf, user_pw, owner_pw=None, output=None, suffix='secured', bit128=True, allow_printing=True,
-                 allow_commenting=False, overwrite_permission=None, progress_bar_enabled=False, progress_bar='gui'):
+                 allow_commenting=False, overwrite_permission=None, progress_bar_enabled=False, progress_bar='gui',
+                 decrypt=None):
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
         self.user_pw = user_pw
@@ -19,17 +20,17 @@ class Encrypt:
         self.progress_bar_enabled = progress_bar_enabled
         self.progress_bar = progress_bar
 
-        self.encrypt()
+        self.encrypt(decrypt)
 
     def __str__(self):
         return str(self.output)
 
-    def encrypt(self):
+    def encrypt(self, decrypt=None):
         # Create PDF writer object
         pdf_writer = PdfFileWriter()
         with open(self.pdf, 'rb') as pdf_file:
             # Read opened PDF file
-            pdf_reader = PdfFileReader(pdf_file)
+            pdf_reader = pypdf3_reader(pdf_file, decrypt)
 
             # Add each page from source PDF
             for page_num in range(pdf_reader.numPages):
@@ -41,6 +42,7 @@ class Encrypt:
                                allow_printing=self.allow_printing, allow_commenting=self.allow_commenting,
                                overwrite_permission=self.overwrite_permission)
 
+            # todo: add metadata adding functionality
             pdf_writer.addMetadata({
                 '/Producer': 'pdfconduit',
                 '/Creator': 'HPA Design',

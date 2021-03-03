@@ -26,7 +26,7 @@ class Flatten:
         self.directory = os.path.dirname(file_name)
         self.progress_bar = progress_bar
 
-        if scale and scale is not 0 and scale is not 1.0:
+        if scale and scale != 0 and scale != 1.0:
             self.file_name = upscale(file_name, scale=scale, tempdir=self.tempdir)
         else:
             self.file_name = self._file_name

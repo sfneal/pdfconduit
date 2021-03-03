@@ -50,7 +50,7 @@ class IMG2PDF:
             width, height = im.size
 
             co = CanvasObjects()
-            co.add(CanvasImg(image, 1.0, w=width, h=height))
+            co.add(CanvasImg(image, 1.0, w=width, h=height, mask=None))
 
             return WatermarkDraw(co, tempdir=self.tempdir, pagesize=(width, height)).write(output)
 

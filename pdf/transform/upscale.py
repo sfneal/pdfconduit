@@ -20,12 +20,12 @@ class Upscale:
 
         # Set output file name
         if tempdir:
-            with NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False) as temp:
+            with NamedTemporaryFile(suffix='_' + suffix + '.pdf', dir=tempdir, delete=False) as temp:
                 self.output = temp.name
         elif suffix:
             self.output = os.path.join(os.path.dirname(file_name), add_suffix(file_name, suffix))
         else:
-            self.output = NamedTemporaryFile(suffix='.pdf').name
+            self.output = NamedTemporaryFile(suffix='_' + suffix + '.pdf').name
 
         # Get target width and height
         dims = Info(self.file_name).dimensions
@@ -33,7 +33,7 @@ class Upscale:
         self.target_h = dims['h'] * self.scale
 
         # Execute either pdfrw or PyPDF3 method
-        if method is 'pypdf3':
+        if method == 'pypdf3':
             self.pypdf3()
         else:
             self.pdfrw()

@@ -23,7 +23,7 @@ class Rotate:
         else:
             self.outfn = NamedTemporaryFile(suffix='.pdf').name
 
-        if method is 'pypdf3':
+        if method == 'pypdf3':
             self.pypdf3()
         else:
             self.pdfrw()

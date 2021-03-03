@@ -12,24 +12,31 @@ from pdf.utils.path import add_suffix
 
 
 class PDF2IMG:
-    def __init__(self, file_name, output=None, tempdir=None, ext='.png', progress_bar=None):
+    def __init__(self, file_name, output=None, tempdir=None, ext='.png', progress_bar=None, alpha=False):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
         self.output = output
         self.tempdir = tempdir
         self.ext = ext
         self.progress_bar = progress_bar
+        self.alpha = alpha
 
         self.doc = fitz.open(self.file_name)
         self.output_dir = os.path.dirname(file_name) if tempdir is None else tempdir
 
         # storage for page display lists
         self.dlist_tab = [None] * len(self.doc)
-        self.pdf_data = self._get_pdf_data()
+        self._page_data = None
+
+    @property
+    def pdf_data(self):
+        if not self._page_data:
+            self._page_data = self._get_pdf_data()
+        return self._page_data
 
     def _get_pdf_data(self):
         # PySimpleGUI progress bar
-        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
+        if self.progress_bar == 'gui' and 'PySimpleGUI' in modules:
             import PySimpleGUI as gui
             data = []
             for i, cur_page in enumerate(range(len(self.doc))):
@@ -40,7 +47,7 @@ class PDF2IMG:
             return data
 
         # TQDM progress bar
-        elif self.progress_bar is 'tqdm':
+        elif self.progress_bar == 'tqdm':
             return [self._get_page_data(cur_page) for cur_page in tqdm(range(len(self.doc)),
                                                                        desc='Getting PDF page data',
                                                                        total=len(self.doc), unit='Pages')]
@@ -73,16 +80,16 @@ class PDF2IMG:
         elif zoom == 3:  # bot-left
             clip = fitz.Rect(ml, mb)
         if zoom == 0:  # total page
-            pix = dlist.getPixmap(alpha=False)
+            pix = dlist.getPixmap(alpha=self.alpha)
         else:
-            pix = dlist.getPixmap(alpha=False, matrix=mat, clip=clip)
+            pix = dlist.getPixmap(alpha=self.alpha, matrix=mat, clip=clip)
         return pix.getPNGData()  # return the PNG image
 
     def _get_output(self, index):
         if self.output:
             return self.output
         elif not self.tempdir:
-            output_file = add_suffix(self.file_name, str(index), ext=self.ext)
+            output_file = add_suffix(self.file_name, str(index + 1), ext=self.ext)
             return os.path.join(self.output_dir, output_file)
         else:
             with NamedTemporaryFile(suffix=self.ext, dir=self.tempdir, delete=True) as temp:
@@ -90,7 +97,7 @@ class PDF2IMG:
 
     def save(self):
         # PySimpleGUI progress bar
-        if self.progress_bar is 'gui' and 'PySimpleGUI' in modules:
+        if self.progress_bar == 'gui' and 'PySimpleGUI' in modules:
             import PySimpleGUI as gui
             saved = []
             for i, img in enumerate(self.pdf_data):
@@ -104,7 +111,7 @@ class PDF2IMG:
             self.doc.close()
             return saved
         # TQDM progress bar
-        elif self.progress_bar is 'tqdm':
+        elif self.progress_bar == 'tqdm':
             loop = enumerate(tqdm(self.pdf_data, desc='Saving PDF pages as PNGs', total=len(self.pdf_data),
                                   unit='PNGs'))
         # No progress bar
@@ -120,6 +127,7 @@ class PDF2IMG:
         return saved
 
 
-def pdf2img(file_name, output=None, tempdir=None, ext='png', progress_bar=None):
+def pdf2img(file_name, output=None, tempdir=None, ext='png', progress_bar=None, alpha=False):
     """Wrapper function for PDF2IMG class"""
-    return PDF2IMG(file_name=file_name, output=output, tempdir=tempdir, ext=ext, progress_bar=progress_bar).save()
+    return PDF2IMG(file_name=file_name, output=output, tempdir=tempdir, ext=ext, progress_bar=progress_bar,
+                   alpha=alpha).save()
