@@ -71,14 +71,3 @@ class Merge:
         )
         writer.write(output)
         return output
-
-
-def main():
-    from pdf.gui.gui import get_directory
-    d = get_directory()
-    m = Merge(d)
-    print(m.output)
-
-
-if __name__ == '__main__':
-    main()
