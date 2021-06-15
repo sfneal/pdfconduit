@@ -28,7 +28,6 @@ setup(
     name='pdfconduit',
     version=get_version(),
     packages=find_packages(),
-    namespace_packages=['pdf'],
     install_requires=[
         'looptools',
         'pdfrw>=0.4',
