@@ -1,19 +1,5 @@
 import os
 from datetime import datetime
-from sys import modules
-
-
-try:
-    import PySimpleGUI as sg
-except ModuleNotFoundError:
-    pass
-
-if 'PySimpleGUI' in modules:
-    def gui_print(msg):
-        sg.Print(msg)
-else:
-    def gui_print(msg):
-        print(msg)
 
 
 class Receipt:
@@ -22,12 +8,8 @@ class Receipt:
         self.use = use
         self.gui = gui
         self.items = []
-        if 'PySimpleGUI' in modules:
-            self.gui = gui
-            self._print = gui_print
-        else:
-            self.gui = False
-            self._print = print
+        self._print = print
+
         self.add('PDF Watermarker', datetime.now().strftime("%Y-%m-%d %H:%M"))
 
     def set_dst(self, doc, file_name='watermark receipt.txt'):
@@ -51,7 +33,4 @@ class Receipt:
             for item in self.items:
                 f.write(item + '\n')
 
-        if self.gui and 'PySimpleGUI' in modules:
-            sg.Popup('Success!')
-        else:
-            print('Success!')
+        print('Success!')

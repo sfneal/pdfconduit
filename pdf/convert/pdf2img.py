@@ -1,7 +1,6 @@
 # Convert each page of PDF to images
 import os
 from io import BytesIO
-from sys import modules
 from tempfile import NamedTemporaryFile
 
 import fitz
@@ -35,19 +34,8 @@ class PDF2IMG:
         return self._page_data
 
     def _get_pdf_data(self):
-        # PySimpleGUI progress bar
-        if self.progress_bar == 'gui' and 'PySimpleGUI' in modules:
-            import PySimpleGUI as gui
-            data = []
-            for i, cur_page in enumerate(range(len(self.doc))):
-                data.append(self._get_page_data(cur_page))
-                if not gui.OneLineProgressMeter('Getting PDF page data', i + 1, len(self.doc), orientation='h',
-                                                key='progress'):
-                    break
-            return data
-
         # TQDM progress bar
-        elif self.progress_bar == 'tqdm':
+        if self.progress_bar == 'tqdm':
             return [self._get_page_data(cur_page) for cur_page in tqdm(range(len(self.doc)),
                                                                        desc='Getting PDF page data',
                                                                        total=len(self.doc), unit='Pages')]
@@ -96,27 +84,14 @@ class PDF2IMG:
                 return temp.name
 
     def save(self):
-        # PySimpleGUI progress bar
-        if self.progress_bar == 'gui' and 'PySimpleGUI' in modules:
-            import PySimpleGUI as gui
-            saved = []
-            for i, img in enumerate(self.pdf_data):
-                output = self._get_output(i)
-                saved.append(output)
-                with Image.open(BytesIO(img)) as image:
-                    image.save(output)
-                if not gui.OneLineProgressMeter('Saving PDF pages as PNGs', i + 1, len(self.doc), orientation='h',
-                                                key='progress'):
-                    break
-            self.doc.close()
-            return saved
         # TQDM progress bar
-        elif self.progress_bar == 'tqdm':
+        if self.progress_bar == 'tqdm':
             loop = enumerate(tqdm(self.pdf_data, desc='Saving PDF pages as PNGs', total=len(self.pdf_data),
                                   unit='PNGs'))
         # No progress bar
         else:
             loop = enumerate(self.pdf_data)
+
         saved = []
         for i, img in loop:
             output = self._get_output(i)
