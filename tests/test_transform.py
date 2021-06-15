@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory
 
 from looptools import Timer
 
-from pdfconduit import Info, Merge, upscale, slicer, rotate
+from pdfconduit import Info, Merge, Upscale, Rotate, slicer
 from tests import *
 
 
@@ -58,7 +58,7 @@ class TestTransformUpscale(unittest.TestCase):
     def test_upscale_pdfrw_20x(self):
         """Resize a PDF file to 2.0x times the original scale."""
         s = 2.0
-        upscaled = upscale(pdf_path, scale=s, suffix='upscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw')
+        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert upscaled file exists
         self.assertTrue(os.path.isfile(upscaled))
@@ -71,7 +71,7 @@ class TestTransformUpscale(unittest.TestCase):
     def test_upscale_pdfrw_15x(self):
         """Resize a PDF file to 1.5x times the original scale."""
         s = 1.5
-        upscaled = upscale(pdf_path, scale=s, suffix='upscaled_1.5_pdfrw', tempdir=self.temp.name, method='pdfrw')
+        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_1.5_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert upscaled file exists
         self.assertTrue(os.path.isfile(upscaled))
@@ -84,7 +84,7 @@ class TestTransformUpscale(unittest.TestCase):
     def test_upscale_pdfrw_30x(self):
         """Resize a PDF file to 3.0x times the original scale."""
         s = 3.0
-        upscaled = upscale(pdf_path, scale=s, suffix='upscaled_3.0_pdfrw', tempdir=self.temp.name, method='pdfrw')
+        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_3.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert upscaled file exists
         self.assertTrue(os.path.isfile(upscaled))
@@ -97,7 +97,7 @@ class TestTransformUpscale(unittest.TestCase):
     def test_downscale_pdfrw_20x(self):
         """Resize a PDF file to 3.0x times the original scale."""
         s = 1 / 2
-        upscaled = upscale(pdf_path, scale=s, suffix='downscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw')
+        upscaled = Upscale(pdf_path, scale=s, suffix='downscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert upscaled file exists
         self.assertTrue(os.path.isfile(upscaled))
@@ -162,7 +162,7 @@ class TestRotate(unittest.TestCase):
     def test_rotate_pdfrw_90(self):
         """Rotate a PDF file by 90 degrees using the `pdfrw` library."""
         rotation = 90
-        rotated = rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pdfrw')
+        rotated = Rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert rotated pdf file exists
         self.assertTrue(os.path.isfile(rotated))
@@ -175,7 +175,7 @@ class TestRotate(unittest.TestCase):
     def test_rotate_pdfrw_180(self):
         """Rotate a PDF file by 180 degrees using the `pdfrw` library."""
         rotation = 180
-        rotated = rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name, method='pdfrw')
+        rotated = Rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert rotated pdf file exists
         self.assertTrue(os.path.isfile(rotated))
@@ -188,7 +188,7 @@ class TestRotate(unittest.TestCase):
     def test_rotate_pdfrw_270(self):
         """Rotate a PDF file by 270 degrees using the `pdfrw` library."""
         rotation = 270
-        rotated = rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name, method='pdfrw')
+        rotated = Rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert rotated pdf file exists
         self.assertTrue(os.path.isfile(rotated))
@@ -201,7 +201,7 @@ class TestRotate(unittest.TestCase):
     def test_rotate_pypdf3_90(self):
         """Rotate a PDF file by 90 degrees using the `pypdf3` library."""
         rotation = 90
-        rotated = rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pypdf3')
+        rotated = Rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pypdf3').file
 
         # Assert rotated pdf file exists
         self.assertTrue(os.path.isfile(rotated))
@@ -214,7 +214,7 @@ class TestRotate(unittest.TestCase):
     def test_rotate_pypdf3_180(self):
         """Rotate a PDF file by 180 degrees using the `pypdf3` library."""
         rotation = 180
-        rotated = rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name, method='pypdf3')
+        rotated = Rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name, method='pypdf3').file
 
         # Assert rotated pdf file exists
         self.assertTrue(os.path.isfile(rotated))
@@ -227,7 +227,7 @@ class TestRotate(unittest.TestCase):
     def test_rotate_pypdf3_270(self):
         """Rotate a PDF file by 270 degrees using the `pypdf3` library."""
         rotation = 270
-        rotated = rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name, method='pypdf3')
+        rotated = Rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name, method='pypdf3').file
 
         # Assert rotated pdf file exists
         self.assertTrue(os.path.isfile(rotated))

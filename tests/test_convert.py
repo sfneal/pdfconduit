@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory
 
 from looptools import Timer
 
-from pdf.convert import IMG2PDF, PDF2IMG
+from pdfconduit.convert import IMG2PDF, PDF2IMG
 from pdfconduit import Info, Flatten
 from tests import *
 

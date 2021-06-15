@@ -4,7 +4,9 @@ from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 from looptools import Timer
 
-from pdfconduit import Encrypt, Info, Watermark, Label
+from pdfconduit.conduit import Encrypt, Watermark
+from pdfconduit.conduit.watermark.label import Label
+from pdfconduit.utils import Info
 from tests import *
 
 
