@@ -29,7 +29,7 @@ def img_extract(pdf, password=None):
 
                 if xobj[obj]['/Filter'] == '/FlateDecode':
                     img = Image.frombytes(mode, size, data)
-                    img.save(obj[1:] + ".png")  # TODO: Add save destination parameter
+                    img.save(obj[1:] + ".png")    # TODO: Add save destination parameter
                 elif xobj[obj]['/Filter'] == '/DCTDecode':
                     img = open(obj[1:] + ".jpg", "wb")
                     img.write(data)

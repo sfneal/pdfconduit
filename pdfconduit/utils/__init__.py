@@ -5,6 +5,6 @@ from pdfconduit.utils.write import overlay_pdfs, write_pdf
 from pdfconduit.utils.read import pypdf3_reader
 from pdfconduit.utils.view import open_window
 
-
-__all__ = ['set_destination', 'add_suffix', 'open_window', 'overlay_pdfs', 'write_pdf', 'Info', 'Receipt',
-           'pypdf3_reader']
+__all__ = [
+    'set_destination', 'add_suffix', 'open_window', 'overlay_pdfs', 'write_pdf', 'Info', 'Receipt', 'pypdf3_reader'
+]

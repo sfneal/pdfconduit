@@ -12,8 +12,16 @@ from pdfconduit.conduit.watermark.add import WatermarkAdd
 
 
 class Watermark:
-    def __init__(self, document, remove_temps=True, move_temps=None, open_file=False, tempdir=None, receipt=None,
-                 use_receipt=True, progress_bar_enabled=False, progress_bar='tqdm'):
+    def __init__(self,
+                 document,
+                 remove_temps=True,
+                 move_temps=None,
+                 open_file=False,
+                 tempdir=None,
+                 receipt=None,
+                 use_receipt=True,
+                 progress_bar_enabled=False,
+                 progress_bar='tqdm'):
         """
         Watermark and encrypt a PDF document.
 
@@ -78,8 +86,16 @@ class Watermark:
             open_window(self.tempdir)
         return self.document
 
-    def draw(self, text1=None, text2=None, copyright=True, image=IMAGE_DEFAULT, rotate=30, opacity=0.08, compress=0,
-             flatten=False, add=False):
+    def draw(self,
+             text1=None,
+             text2=None,
+             copyright=True,
+             image=IMAGE_DEFAULT,
+             rotate=30,
+             opacity=0.08,
+             compress=0,
+             flatten=False,
+             add=False):
         """
         Draw watermark PDF file.
 
@@ -120,11 +136,15 @@ class Watermark:
             self.receipt.add('WM Flattening', flatten)
 
         co = CanvasConstructor(text1, text2, copyright, image, rotate, opacity, tempdir=self.tempdir)
-        objects, rotate = co.img() if flatten else co.canvas()  # Run img constructor method if flatten is True
+        objects, rotate = co.img() if flatten else co.canvas()    # Run img constructor method if flatten is True
 
         # Draw watermark to file
-        self.watermark = WatermarkDraw(objects, rotate=rotate, compress=compress, tempdir=self.tempdir,
-                                       pagesize=Info(self.document_og).size, pagescale=True).write()
+        self.watermark = WatermarkDraw(objects,
+                                       rotate=rotate,
+                                       compress=compress,
+                                       tempdir=self.tempdir,
+                                       pagesize=Info(self.document_og).size,
+                                       pagescale=True).write()
 
         if not add:
             return self.watermark
@@ -160,15 +180,26 @@ class Watermark:
             watermark = self.watermark
         if not document:
             document = self.document
-        self.document = str(WatermarkAdd(document, watermark, output=output, underneath=underneath,
-                                         tempdir=self.tempdir, suffix=suffix, method=method))
+        self.document = str(
+            WatermarkAdd(document,
+                         watermark,
+                         output=output,
+                         underneath=underneath,
+                         tempdir=self.tempdir,
+                         suffix=suffix,
+                         method=method))
         if self.use_receipt:
             self.receipt.add('Watermarked PDF', os.path.basename(self.document))
         if self.open_file:
             open_window(self.document)
         return self.document
 
-    def encrypt(self, user_pw='', owner_pw=None, encrypt_128=True, allow_printing=True, allow_commenting=False,
+    def encrypt(self,
+                user_pw='',
+                owner_pw=None,
+                encrypt_128=True,
+                allow_printing=True,
+                allow_commenting=False,
                 document=None):
         """
         Encrypt a PDF document to add passwords and restrict permissions.
@@ -201,9 +232,16 @@ class Watermark:
                 self.receipt.add('Permissions', 'Allow printing')
             else:
                 self.receipt.add('Permissions', 'Allow ALL')
-        p = str(Encrypt(document, user_pw, owner_pw, output=add_suffix(self.document_og, 'secured'),
-                        bit128=encrypt_128, allow_printing=allow_printing, allow_commenting=allow_commenting,
-                        progress_bar_enabled=self.progress_bar_enabled, progress_bar=self.progress_bar))
+        p = str(
+            Encrypt(document,
+                    user_pw,
+                    owner_pw,
+                    output=add_suffix(self.document_og, 'secured'),
+                    bit128=encrypt_128,
+                    allow_printing=allow_printing,
+                    allow_commenting=allow_commenting,
+                    progress_bar_enabled=self.progress_bar_enabled,
+                    progress_bar=self.progress_bar))
         if self.use_receipt:
             self.receipt.add('Secured PDF', os.path.basename(p))
         return p

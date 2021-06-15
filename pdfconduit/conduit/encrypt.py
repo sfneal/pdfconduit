@@ -5,8 +5,18 @@ from pdfconduit.utils import add_suffix, pypdf3_reader
 
 
 class Encrypt:
-    def __init__(self, pdf, user_pw, owner_pw=None, output=None, suffix='secured', bit128=True, allow_printing=True,
-                 allow_commenting=False, overwrite_permission=None, progress_bar_enabled=False, progress_bar='gui',
+    def __init__(self,
+                 pdf,
+                 user_pw,
+                 owner_pw=None,
+                 output=None,
+                 suffix='secured',
+                 bit128=True,
+                 allow_printing=True,
+                 allow_commenting=False,
+                 overwrite_permission=None,
+                 progress_bar_enabled=False,
+                 progress_bar='gui',
                  decrypt=None):
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
@@ -38,8 +48,11 @@ class Encrypt:
                 pdf_writer.addPage(page)
 
             # Apply encryption to writer object
-            pdf_writer.encrypt(self.user_pw, self.owner_pw, use_128bit=self.encrypt_128,
-                               allow_printing=self.allow_printing, allow_commenting=self.allow_commenting,
+            pdf_writer.encrypt(self.user_pw,
+                               self.owner_pw,
+                               use_128bit=self.encrypt_128,
+                               allow_printing=self.allow_printing,
+                               allow_commenting=self.allow_commenting,
                                overwrite_permission=self.overwrite_permission)
 
             # todo: add metadata adding functionality
@@ -51,7 +64,8 @@ class Encrypt:
 
             # Write encrypted PDF to file
             with open(self.output, 'wb') as output_pdf:
-                pdf_writer.write(output_pdf, progress_bar=self.progress_bar,
+                pdf_writer.write(output_pdf,
+                                 progress_bar=self.progress_bar,
                                  progress_bar_enabled=self.progress_bar_enabled)
         return self.output
 
