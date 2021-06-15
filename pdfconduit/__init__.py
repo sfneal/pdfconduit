@@ -19,15 +19,6 @@ except ImportError:
     UTILS_INSTALL = False
 
 
-# GUI installation
-try:
-    from pdf.gui.gui import GUI
-    GUI_INSTALLED = True
-    __all__.extend(["GUI"])
-except ImportError:
-    GUI_INSTALLED = False
-
-
 # Transform installation
 try:
     from pdf.transform import upscale, rotate, slicer, Merge
