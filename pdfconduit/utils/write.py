@@ -9,13 +9,13 @@ def overlay_pdfs(top_pdf, bottom_pdf, destination):
     :param bottom_pdf: PDF file to be placed underneath
     :param destination: Desintation path
     """
-    drawing = PdfFileReader(top_pdf)  # Create new PDF object
-    template = PdfFileReader(bottom_pdf)  # read your existing PDF
+    drawing = PdfFileReader(top_pdf)    # Create new PDF object
+    template = PdfFileReader(bottom_pdf)    # read your existing PDF
 
     # add the "watermark" (which is the new pdf) on the existing page
     page = template.getPage(0)
     page.mergePage(drawing.getPage(0))
-    output = PdfFileWriter()  # Create new PDF file
+    output = PdfFileWriter()    # Create new PDF file
     output.addPage(page)
 
     # finally, write "output" to a real file
@@ -29,7 +29,7 @@ def write_pdf(pdf_obj, destination):
     :param pdf_obj: PDF object to be written to file
     :param destination: Desintation path
     """
-    reader = PdfFileReader(pdf_obj)  # Create new PDF object
+    reader = PdfFileReader(pdf_obj)    # Create new PDF object
     writer = PdfFileWriter()
 
     page_count = reader.getNumPages()

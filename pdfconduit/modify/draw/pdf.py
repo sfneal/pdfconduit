@@ -39,7 +39,7 @@ class DrawPDF:
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
-        self.can = Canvas(self.packet, pagesize=pagesize, pageCompression=compress, bottomup=1)  # Initialize canvas
+        self.can = Canvas(self.packet, pagesize=pagesize, pageCompression=compress, bottomup=1)    # Initialize canvas
 
     def __str__(self):
         return str(self.dst)
@@ -52,9 +52,9 @@ class DrawPDF:
         return self._dst
 
     def _write(self, output=None):
-        self.packet.seek(0)  # move to the beginning of the StringIO buffer
+        self.packet.seek(0)    # move to the beginning of the StringIO buffer
         output = output if output else self.dst
-        write_pdf(self.packet, output)  # Save new pdf file
+        write_pdf(self.packet, output)    # Save new pdf file
         return output
 
     def write(self, output=None):
@@ -109,8 +109,14 @@ class WatermarkDraw(DrawPDF):
         :param ci: CanvasImage object
         """
         img = img_adjust(ci.image, ci.opacity, tempdir=self.dir)
-        self.can.drawImage(img, x=ci.x, y=ci.y, width=ci.w, height=ci.h, mask=ci.mask,
-                           preserveAspectRatio=ci.preserve_aspect_ratio, anchorAtXY=True)
+        self.can.drawImage(img,
+                           x=ci.x,
+                           y=ci.y,
+                           width=ci.w,
+                           height=ci.h,
+                           mask=ci.mask,
+                           preserveAspectRatio=ci.preserve_aspect_ratio,
+                           anchorAtXY=True)
 
     def _draw_string(self, cs):
         """

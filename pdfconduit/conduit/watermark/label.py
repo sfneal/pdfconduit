@@ -11,8 +11,7 @@ def mean(numbers):
 class Label(WatermarkDraw):
     def __init__(self, document, label, title_page=False, suffix='labeled', output=None, tempdir=None):
         self.size = Info(document).size
-        super(Label, self).__init__(self._create_canvas_objects(label, title_page),
-                                    pagesize=self.size, tempdir=tempdir)
+        super(Label, self).__init__(self._create_canvas_objects(label, title_page), pagesize=self.size, tempdir=tempdir)
         self.document = document
         self.watermark = self._write()
 
@@ -27,9 +26,13 @@ class Label(WatermarkDraw):
     def _create_canvas_objects(self, label, title_page):
         objects = CanvasObjects()
         if not title_page:
-            objects.add(CanvasStr(label, size=int(mean(self.size) * .02), opacity=1,
-                                  x=-(self.size[0] / 2) + 15,
-                                  y=-(self.size[1] / 2) + 25, x_centered=False))
+            objects.add(
+                CanvasStr(label,
+                          size=int(mean(self.size) * .02),
+                          opacity=1,
+                          x=-(self.size[0] / 2) + 15,
+                          y=-(self.size[1] / 2) + 25,
+                          x_centered=False))
         else:
             objects.add(CanvasStr(label, size=int(mean(self.size) * .1), opacity=1, y_centered=True))
         return objects

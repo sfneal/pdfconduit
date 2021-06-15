@@ -11,8 +11,16 @@ from pdfconduit.utils import add_suffix, Info, pypdf3_reader
 
 
 class WatermarkAdd:
-    def __init__(self, document, watermark, underneath=False, overwrite=False, output=None, suffix='watermarked',
-                 decrypt=False, tempdir=None, method='pdfrw'):
+    def __init__(self,
+                 document,
+                 watermark,
+                 underneath=False,
+                 overwrite=False,
+                 output=None,
+                 suffix='watermarked',
+                 decrypt=False,
+                 tempdir=None,
+                 method='pdfrw'):
         """
         Add a watermark to an existing PDF document
 
@@ -217,7 +225,7 @@ class WatermarkAdd:
 
                     page_x, page_y, page_x1, page_y1 = mbox
                     page_w = page_x1 - page_x
-                    page_h = page_y1 - page_y  # For illustration, not used
+                    page_h = page_y1 - page_y    # For illustration, not used
 
                     # Scale the watermark if it is too wide for the page
                     # (Could do the same for height instead if needed)

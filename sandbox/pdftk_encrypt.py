@@ -7,7 +7,6 @@ https://www.pdflabs.com/tools/pdftk-server/
 import os
 from PyPDF2 import PdfFileReader
 
-
 # Replace with your own pdftk path
 PDFTK_PATH = '/opt/pdflabs/pdftk/bin/pdftk'
 

@@ -53,8 +53,7 @@ class Samples:
             self.src = slicer(self.src, 1, 1, tempdir=self.wm.tempdir)
         wtrmrk = self.wm.draw(text1='200 Stonewall Blvd', text2='Wrentham, MA')
         over = self.wm.add(document=self.src, watermark=wtrmrk, underneath=False)
-        over_with_label = Label(over, 'Overlayed watermark', suffix=None,
-                                tempdir=self.wm.tempdir).write(cleanup=False)
+        over_with_label = Label(over, 'Overlayed watermark', suffix=None, tempdir=self.wm.tempdir).write(cleanup=False)
 
         under = self.wm.add(document=self.src, watermark=wtrmrk, underneath=True)
         under_with_label = Label(under, 'Underneath watermarked', suffix=None,
@@ -72,13 +71,17 @@ class Samples:
 
         wtrmrked_flat = Label(self.wm.add(document=self.src, watermark=flat), 'Flat watermark',
                               tempdir=self.wm.tempdir).write(cleanup=False)
-        wtrmrked_layer = Label(self.wm.add(document=self.src, watermark=layered), 'Layered watermark',
+        wtrmrked_layer = Label(self.wm.add(document=self.src, watermark=layered),
+                               'Layered watermark',
                                tempdir=self.wm.tempdir).write(cleanup=False)
 
         watermark_flat = Label(flat, 'Flat watermark', tempdir=self.wm.tempdir).write(cleanup=False)
         watermark_layer = Label(layered, 'Layered watermark', tempdir=self.wm.tempdir).write(cleanup=False)
 
-        to_merge = [self._title(watermark_layer, 'Watermark Layering'), wtrmrked_flat, watermark_flat, wtrmrked_layer, watermark_layer]
+        to_merge = [
+            self._title(watermark_layer, 'Watermark Layering'), wtrmrked_flat, watermark_flat, wtrmrked_layer,
+            watermark_layer
+        ]
         m = Merge(to_merge, 'Layering samples', self.dst)
         return m.file
 

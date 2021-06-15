@@ -48,7 +48,11 @@ class TestConduitEncrypt(unittest.TestCase):
     @Timer.decorator
     def test_encrypt_128bit(self):
         """Encrypt PDF file with 128bit encryption."""
-        encrypted = Encrypt(self.pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, bit128=True,
+        encrypted = Encrypt(self.pdf_path,
+                            self.user_pw,
+                            self.owner_pw,
+                            output=self.temp.name,
+                            bit128=True,
                             suffix='secured_128bit')
 
         # Encrypted pdf security info
@@ -66,7 +70,11 @@ class TestConduitEncrypt(unittest.TestCase):
     @Timer.decorator
     def test_encrypt_40bit(self):
         """Encrypt PDF file with 40bit encryption."""
-        encrypted = Encrypt(self.pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, bit128=False,
+        encrypted = Encrypt(self.pdf_path,
+                            self.user_pw,
+                            self.owner_pw,
+                            output=self.temp.name,
+                            bit128=False,
                             suffix='secured_40bit')
 
         # Encrypted pdf security info
@@ -84,7 +92,11 @@ class TestConduitEncrypt(unittest.TestCase):
     @Timer.decorator
     def test_encrypt_commenting(self):
         """Encrypt a PDF file but allow the user to add comments."""
-        encrypted = Encrypt(self.pdf_path, self.user_pw, self.owner_pw, output=self.temp.name, allow_commenting=True,
+        encrypted = Encrypt(self.pdf_path,
+                            self.user_pw,
+                            self.owner_pw,
+                            output=self.temp.name,
+                            allow_commenting=True,
                             suffix='secured_commenting')
 
         # Encrypted pdf security info
@@ -121,7 +133,10 @@ class TestConduitWatermark(unittest.TestCase):
     def test_conduit_watermark_pdfrw(self):
         """Apply a watermark to all pages of PDF using the `pdfrw` method."""
         w = Watermark(self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name)
-        wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate,
+        wtrmrk = w.draw(self.address,
+                        str(self.town + ', ' + self.state),
+                        opacity=0.08,
+                        rotate=self.rotate,
                         flatten=False)
         added = w.add(self.pdf_path, wtrmrk, method='pdfrw', suffix=None)
 

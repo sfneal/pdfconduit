@@ -23,5 +23,4 @@ def available_images():
 
 IMAGE_DEFAULT = resource_path('Wide.png')
 
-
 __all__ = ['IMAGE_DEFAULT', 'IMAGE_DIRECTORY', 'available_images']

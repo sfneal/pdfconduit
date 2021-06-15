@@ -6,4 +6,3 @@ ALLOWED_EXTENSIONS = {'pdf'}
 
 # 16mb max file size
 MAX_CONTENT_LENGTH = 16 * (1024 * 1024)
-
