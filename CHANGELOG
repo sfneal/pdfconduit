@@ -2,7 +2,7 @@
 --------------------------
 - refactor pdfconduit so that all modules are installable via `pip install pdfconduit` command
 - cut 'api' & 'gui' modules
-- add Scrutinizer & Style CI support Stephen Neal* Today 2:20 PM
+- add Scrutinizer & Style CI support
 - optimize dependencies
 
 
