@@ -1,4 +1,9 @@
-﻿Version 2.0.0, 2021-06-16
+﻿Version 2.0.1, 2021-06-16
+--------------------------
+- fix issue with MANIFEST.in not including watermarking image files in PyPi distribution
+
+
+Version 2.0.0, 2021-06-16
 --------------------------
 - refactor pdfconduit so that all modules are installable via `pip install pdfconduit` command
 - cut 'api' & 'gui' modules
