@@ -11,10 +11,10 @@ env:
   - secure: wPmdO3EBkUWBVIqLSDmq2xPZuqG4JcUttqVidOJzb+e5ZvFZOsEDnIHb0/80dzIQ2Qiu/jrAQRhokpc/4GIbWue2IxwBs0hg5hxo1Ox/ZvnpVpYnOyShDUWF9hcpw+pMyL+dfI7wE/VXqE/FSUpR57DYwMQbGBszXWY4gK3D+h/j2TJ3m5J1Bz23KvRMCaE0QQ3mF/ZFKeL8cpj6e0A67D5HWgk02SZxz1yGtCxJZ46yVq4TFKibh612YvvGtF0ISG6EK7iYy59+muV2lljjeyt0QcZrpqGoxA5sdM+7Q4GavYCuYaZ9H54molOMMv9MlLUYchFmsSZOPqaaImSWonapMYB1SIE8beAQ2eMeD543fkapWKGhY+UMWKM5ezvE7kFPTux22x+P/tWlWJFE8pEVgWkEEZXhRrb8qk8Bh1BrFBIbBzVG0dcZGLvXudHKLBnhIObGSDcO+C+C1rax683PBRnK+ZjBO/S4suJEeK41la/1blYAWJKSTT119PK9a1qKupm7bIsSbjIpzUXpaNKiG4vEauKR3kof7vCKS5JINsqzk6NLyZectxOPTOOOwtQzK1Holj/T4sPICPT0HIWjmT35eZpwFa0odPhseDMKMPiqqgf4cb9FMPx1DGcDKHkSH9fw/0b4glP9dpMW1fklNqklg7Z273Bz0FZhKd4=
 
 python:
-  - 3.6
-  - 3.7
-  - 3.8
   - 3.9
+  - 3.8
+  - 3.7
+  - 3.6
   - 3.10-dev
   - nightly
 
@@ -31,9 +31,6 @@ install:
 
 script:
   - sh unittest.sh
-
-before_deploy:
-  - pip install -r requirements_dist.txt
 
 deploy:
   provider: pypi
