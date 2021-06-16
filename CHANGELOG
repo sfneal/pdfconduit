@@ -1,4 +1,12 @@
-﻿Version 1.4.3, 2018-08-31
+﻿Version 2.0.0, 2021-06-16
+--------------------------
+- refactor pdfconduit so that all modules are installable via `pip install pdfconduit` command
+- cut 'api' & 'gui' modules
+- add Scrutinizer & Style CI support
+- optimize dependencies
+
+
+Version 1.4.3, 2018-08-31
 --------------------------
  - Created logging feature for test suite which records testing information and saves to .csv
  - Added requirements.txt for development
