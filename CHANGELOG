@@ -1,4 +1,10 @@
-﻿Version 2.0.1, 2021-06-16
+﻿Version 2.0.2, 2021-06-17
+--------------------------
+- cut sub-module version files
+- refactor test suite to contain one test class per file
+
+
+Version 2.0.1, 2021-06-16
 --------------------------
 - fix issue with MANIFEST.in not including watermarking image files in PyPi distribution
 
