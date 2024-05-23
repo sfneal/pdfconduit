@@ -5,7 +5,7 @@ Pillow==9.5.0; python_version <= "3.8"
 pillow==10.3.0; python_version >= "3.9"
 PillowImage==1.2.0
 PyBundle==1.0.6
-PyMuPDF==1.22.5; python_version <= "3.8"
+PyMuPDF==1.22.5; python_version <= "3.7"
 PyMuPDF==1.24.0; python_version >= "3.8"
 PyMuPDFb==1.24.0; python_version >= "3.8"
 PyPDF3==1.0.6
