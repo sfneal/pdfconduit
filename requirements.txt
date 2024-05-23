@@ -2,7 +2,7 @@ looptools>=1.2.3
 pdfrw==0.4
 PillowImage>=1.2.0
 PyBundle>=1.0.6
-PyMuPDF>=1.17.7,<=1.18.8
+PyMuPDF>=1.17.7,<=1.19
 PyPDF3>=1.0.1
 reportlab>=3.5.49
 tqdm>=4.49.0
