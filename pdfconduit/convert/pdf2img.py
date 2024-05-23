@@ -51,7 +51,7 @@ class PDF2IMG:
         """
         dlist = self.dlist_tab[pno]    # get display list
         if not dlist:    # create if not yet there
-            self.dlist_tab[pno] = self.doc[pno].getDisplayList()
+            self.dlist_tab[pno] = self.doc[pno].get_displaylist()
             dlist = self.dlist_tab[pno]
         r = dlist.rect    # page rectangle
         mp = r.tl + (r.br - r.tl) * 0.5    # rect middle point
@@ -69,10 +69,10 @@ class PDF2IMG:
         elif zoom == 3:    # bot-left
             clip = fitz.Rect(ml, mb)
         if zoom == 0:    # total page
-            pix = dlist.getPixmap(alpha=self.alpha)
+            pix = dlist.get_pixmap(alpha=self.alpha)
         else:
-            pix = dlist.getPixmap(alpha=self.alpha, matrix=mat, clip=clip)
-        return pix.getPNGData()    # return the PNG image
+            pix = dlist.get_pixmap(alpha=self.alpha, matrix=mat, clip=clip)
+        return pix.tobytes()    # return the PNG image
 
     def _get_output(self, index):
         if self.output:
