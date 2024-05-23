@@ -1,7 +1,8 @@
 chardet==5.2.0
 looptools==1.2.4
 pdfrw==0.4
-pillow==10.3.0
+Pillow==9.5.0; python_version <= "3.8"
+pillow==10.3.0; python_version >= "3.9"
 PillowImage==1.2.0
 PyBundle==1.0.6
 PyMuPDF==1.24.0
