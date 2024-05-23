@@ -5,7 +5,7 @@ checks:
 
 build:
   environment:
-    python: 3.9.1
+    python: 3.10
   nodes:
     analysis:
       project_setup:
