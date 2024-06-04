@@ -46,7 +46,6 @@ class TestWatermark(unittest.TestCase):
 
         # Assert watermarked PDF has page resources
         self.assertTrue(Info(added).resources())
-        return added
 
     @Timer.decorator
     def test_conduit_watermark_underneath_pdfrw(self):
@@ -63,7 +62,6 @@ class TestWatermark(unittest.TestCase):
 
         # Assert watermarked PDF has page resources
         self.assertTrue(Info(added).resources())
-        return added
 
     @Timer.decorator
     def test_conduit_watermark_overlay_pdfrw(self):
@@ -80,7 +78,6 @@ class TestWatermark(unittest.TestCase):
 
         # Assert watermarked PDF has page resources
         self.assertTrue(Info(added).resources())
-        return added
 
     @Timer.decorator
     def test_conduit_watermark_flat_pdfrw(self):
@@ -97,7 +94,6 @@ class TestWatermark(unittest.TestCase):
 
         # Assert watermarked PDF has page resources
         self.assertTrue(Info(added).resources())
-        return added
 
     @Timer.decorator
     def test_conduit_watermark_layered_pdfrw(self):
@@ -114,7 +110,6 @@ class TestWatermark(unittest.TestCase):
 
         # Assert watermarked PDF has page resources
         self.assertTrue(Info(added).resources())
-        return added
 
     @Timer.decorator
     def test_conduit_watermark_label(self):
@@ -127,7 +122,6 @@ class TestWatermark(unittest.TestCase):
 
         # Assert watermarked PDF has page resources
         self.assertTrue(Info(labeled).resources())
-        return labeled
 
 
 if __name__ == '__main__':

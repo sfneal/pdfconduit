@@ -29,7 +29,6 @@ class TestUpscale(unittest.TestCase):
 
         # Assert upscaled pdf file is the correct size
         self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
-        return upscaled
 
     @Timer.decorator
     def test_upscale_pdfrw_15x(self):
@@ -42,7 +41,6 @@ class TestUpscale(unittest.TestCase):
 
         # Assert upscaled pdf file is the correct size
         self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
-        return upscaled
 
     @Timer.decorator
     def test_upscale_pdfrw_30x(self):
@@ -55,7 +53,6 @@ class TestUpscale(unittest.TestCase):
 
         # Assert upscaled pdf file is the correct size
         self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
-        return upscaled
 
     @Timer.decorator
     def test_downscale_pdfrw_20x(self):
@@ -69,7 +66,6 @@ class TestUpscale(unittest.TestCase):
 
         # Assert upscaled pdf file is the correct size
         self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
-        return upscaled
 
 
 if __name__ == '__main__':

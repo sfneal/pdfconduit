@@ -2,13 +2,15 @@
 import os
 import shutil
 from tempfile import TemporaryDirectory
+
 from looptools import Timer
-from pdfconduit.utils import add_suffix, open_window, Receipt, Info
-from pdfconduit.modify.draw import WatermarkDraw
-from pdfconduit.modify.canvas import CanvasConstructor
-from pdfconduit.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
+
 from pdfconduit.conduit.encrypt import Encrypt
+from pdfconduit.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
 from pdfconduit.conduit.watermark.add import WatermarkAdd
+from pdfconduit.modify.canvas import CanvasConstructor
+from pdfconduit.modify.draw import WatermarkDraw
+from pdfconduit.utils import add_suffix, open_window, Receipt, Info
 
 
 class Watermark:

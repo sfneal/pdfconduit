@@ -32,7 +32,6 @@ class TestFlatten(unittest.TestCase):
         self.assertTrue(abs(Info(self.pdf_path).size[0] / Info(flat).size[0]) <= 1)
         self.assertTrue(abs(Info(self.pdf_path).size[1] / Info(flat).size[1]) <= 1)
         self.flat = flat
-        return flat
 
 
 if __name__ == '__main__':
