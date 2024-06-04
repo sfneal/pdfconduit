@@ -31,7 +31,6 @@ class TestSlice(unittest.TestCase):
 
         # Confirm slicer sliced the correct number of pages
         self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))
-        return sliced
 
     @Timer.decorator
     def test_slice2(self):
@@ -45,7 +44,6 @@ class TestSlice(unittest.TestCase):
 
         # Confirm slicer sliced the correct number of pages
         self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))
-        return sliced
 
 
 if __name__ == '__main__':

@@ -32,7 +32,6 @@ class TestImg2Pdf(unittest.TestCase):
 
         # Assert pdf file exists
         self.assertTrue(os.path.exists(self.pdf))
-        return self.pdf
 
     @Timer.decorator
     def test_convert_packet(self):
@@ -43,7 +42,6 @@ class TestImg2Pdf(unittest.TestCase):
 
         # Assert pdf file exists
         self.assertTrue(os.path.exists(self.pdf))
-        return self.pdf
 
 
 if __name__ == '__main__':

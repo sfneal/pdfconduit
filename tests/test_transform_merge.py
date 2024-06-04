@@ -29,7 +29,6 @@ class TestMerge(unittest.TestCase):
 
         # Assert sum of pages in original pdf files equals sum of pages in merged pdf
         self.assertEqual(sum([Info(pdf).pages for pdf in self.pdfs]), Info(merged.file).pages)
-        return merged
 
     @Timer.decorator
     def test_merge_pdfrw(self):
@@ -41,7 +40,6 @@ class TestMerge(unittest.TestCase):
 
         # Assert sum of pages in original pdf files equals sum of pages in merged pdf
         self.assertEqual(sum([Info(pdf).pages for pdf in self.pdfs]), Info(merged.file).pages)
-        return merged
 
 
 if __name__ == '__main__':

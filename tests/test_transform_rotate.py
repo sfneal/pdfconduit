@@ -30,7 +30,6 @@ class TestRotate(unittest.TestCase):
 
         # Assert pdf file was rotated by the correct amount of degrees
         self.assertEqual(Info(rotated).rotate, rotation)
-        return rotated
 
     @Timer.decorator
     def test_rotate_pdfrw_180(self):
@@ -44,7 +43,6 @@ class TestRotate(unittest.TestCase):
 
         # Assert pdf file was rotated by the correct amount of degrees
         self.assertEqual(Info(rotated).rotate, rotation)
-        return rotated
 
     @Timer.decorator
     def test_rotate_pdfrw_270(self):
@@ -58,7 +56,6 @@ class TestRotate(unittest.TestCase):
 
         # Assert pdf file was rotated by the correct amount of degrees
         self.assertEqual(Info(rotated).rotate, rotation)
-        return rotated
 
     @Timer.decorator
     def test_rotate_pypdf3_90(self):
@@ -71,7 +68,6 @@ class TestRotate(unittest.TestCase):
 
         # Assert pdf file was rotated by the correct amount of degrees
         self.assertEqual(Info(rotated).rotate, rotation)
-        return rotated
 
     @Timer.decorator
     def test_rotate_pypdf3_180(self):
@@ -85,7 +81,6 @@ class TestRotate(unittest.TestCase):
 
         # Assert pdf file was rotated by the correct amount of degrees
         self.assertEqual(Info(rotated).rotate, rotation)
-        return rotated
 
     @Timer.decorator
     def test_rotate_pypdf3_270(self):
@@ -99,7 +94,6 @@ class TestRotate(unittest.TestCase):
 
         # Assert pdf file was rotated by the correct amount of degrees
         self.assertEqual(Info(rotated).rotate, rotation)
-        return rotated
 
 
 if __name__ == '__main__':
