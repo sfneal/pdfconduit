@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory
 
 from looptools import Timer
 
-from pdfconduit import Info, Merge, Upscale, Rotate, slicer
+from pdfconduit import Info, Merge
 from tests import *
 
 

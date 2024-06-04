@@ -1,7 +1,7 @@
+from pdfconduit.conduit.watermark import Watermark
 from pdfconduit.modify.canvas import CanvasObjects, CanvasStr
 from pdfconduit.modify.draw import WatermarkDraw
 from pdfconduit.utils import Info, add_suffix
-from pdfconduit.conduit.watermark import Watermark
 
 
 def mean(numbers):
