@@ -10,3 +10,12 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      pymupdf:
+        applies-to: version-updates
+        patterns:
+          - "pymupdf"
+          - "pymupdfb"
+        update-types:
+          - "minor"
+          - "patch"
