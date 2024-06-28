@@ -59,7 +59,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertSecurityValue(security, -1852)
 
     @Timer.decorator
-    def test_encrypt_printing(self):
+    def test_encrypt_128bit_allow_printing(self):
         """Encrypt a PDF file and allow users to print."""
         # todo: allow and don't allow tests
         encrypted = Encrypt(
@@ -67,8 +67,9 @@ class TestEncrypt(unittest.TestCase):
             self.user_pw,
             self.owner_pw,
             allow_printing=True,
+            bit128=True,
             output=self.temp.name,
-            suffix='allow_printing',
+            suffix='128bit_allow_printing',
         )
 
         security = self._getPdfSecurity(encrypted)
@@ -114,6 +115,25 @@ class TestEncrypt(unittest.TestCase):
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
         self.assertSecurityValue(security, -1500)
+
+    @Timer.decorator
+    def test_encrypt_40bit_allow_printing(self):
+        encrypted = Encrypt(
+            self.pdf_path,
+            self.user_pw,
+            self.owner_pw,
+            allow_printing=True,
+            bit128=False,
+            output=self.temp.name,
+            suffix='40bit_allow_printing',
+        )
+
+        security = self._getPdfSecurity(encrypted)
+
+        self.assertPdfExists(encrypted)
+        self.assertEncrypted(encrypted)
+        self.assert40BitEncryption(security)
+        self.assertSecurityValue(security, -1852)
 
     @Timer.decorator
     def test_encrypt_40bit_allow_commenting(self):
