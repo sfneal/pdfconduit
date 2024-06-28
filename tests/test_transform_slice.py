@@ -26,11 +26,8 @@ class TestSlice(unittest.TestCase):
         lp = 1
         sliced = slicer(self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name)
 
-        # Assert sliced file exists
-        self.assertTrue(os.path.isfile(sliced))
-
-        # Confirm slicer sliced the correct number of pages
-        self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))
+        self.assertPdfExists(sliced)
+        self.assertCorrectPagesSliced(fp, lp, sliced)
 
     @Timer.decorator
     def test_slice_4th_through_7th_pages(self):
@@ -39,11 +36,14 @@ class TestSlice(unittest.TestCase):
         lp = 7
         sliced = slicer(self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name)
 
-        # Assert sliced file exists
-        self.assertTrue(os.path.isfile(sliced))
+        self.assertPdfExists(sliced)
+        self.assertCorrectPagesSliced(fp, lp, sliced)
 
-        # Confirm slicer sliced the correct number of pages
+    def assertCorrectPagesSliced(self, fp, lp, sliced):
         self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))
+
+    def assertPdfExists(self, sliced):
+        self.assertTrue(os.path.isfile(sliced))
 
 
 if __name__ == '__main__':
