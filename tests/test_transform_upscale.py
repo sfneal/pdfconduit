@@ -25,10 +25,10 @@ class TestUpscale(unittest.TestCase):
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
         # Assert upscaled file exists
-        self.assertTrue(os.path.isfile(upscaled))
+        self.assertPdfExists(upscaled)
 
         # Assert upscaled pdf file is the correct size
-        self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
+        self.assertPdfUpscaled(s, upscaled)
 
     @Timer.decorator
     def test_upscale_pdfrw_15x(self):
@@ -36,11 +36,8 @@ class TestUpscale(unittest.TestCase):
         s = 1.5
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_1.5_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
-        # Assert upscaled file exists
-        self.assertTrue(os.path.isfile(upscaled))
-
-        # Assert upscaled pdf file is the correct size
-        self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
+        self.assertPdfExists(upscaled)
+        self.assertPdfUpscaled(s, upscaled)
 
     @Timer.decorator
     def test_upscale_pdfrw_30x(self):
@@ -48,11 +45,8 @@ class TestUpscale(unittest.TestCase):
         s = 3.0
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_3.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
-        # Assert upscaled file exists
-        self.assertTrue(os.path.isfile(upscaled))
-
-        # Assert upscaled pdf file is the correct size
-        self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
+        self.assertPdfExists(upscaled)
+        self.assertPdfUpscaled(s, upscaled)
 
     @Timer.decorator
     def test_downscale_pdfrw_20x(self):
@@ -61,11 +55,14 @@ class TestUpscale(unittest.TestCase):
         upscaled = Upscale(pdf_path, scale=s, suffix='downscaled_2.0_pdfrw', tempdir=self.temp.name,
                            method='pdfrw').file
 
-        # Assert upscaled file exists
-        self.assertTrue(os.path.isfile(upscaled))
+        self.assertPdfExists(upscaled)
+        self.assertPdfUpscaled(s, upscaled)
 
-        # Assert upscaled pdf file is the correct size
+    def assertPdfUpscaled(self, s, upscaled):
         self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
+
+    def assertPdfExists(self, upscaled):
+        self.assertTrue(os.path.isfile(upscaled))
 
 
 if __name__ == '__main__':
