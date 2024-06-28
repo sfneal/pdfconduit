@@ -20,7 +20,7 @@ class TestSlice(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_slice(self):
+    def test_slice_only_first_page(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 1
         lp = 1
@@ -33,7 +33,7 @@ class TestSlice(unittest.TestCase):
         self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))
 
     @Timer.decorator
-    def test_slice2(self):
+    def test_slice_4th_through_7th_pages(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 4
         lp = 7
