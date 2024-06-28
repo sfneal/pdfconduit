@@ -38,14 +38,11 @@ class TestWatermark(unittest.TestCase):
                         flatten=False)
         added = w.add(self.pdf_path, wtrmrk, method='pdfrw', suffix=None)
 
-        # Assert the watermark file exists
-        self.assertTrue(os.path.exists(wtrmrk))
+        self.assertPdfExists(wtrmrk)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
 
-        # Assert watermarked PDF file exists
-        self.assertTrue(os.path.exists(added))
 
-        # Assert watermarked PDF has page resources
-        self.assertTrue(Info(added).resources())
 
     @Timer.decorator
     def test_conduit_watermark_underneath_pdfrw(self):
@@ -54,14 +51,9 @@ class TestWatermark(unittest.TestCase):
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
         added = w.add(self.pdf_path, wtrmrk, underneath=True, suffix=None, method='pdfrw')
 
-        # Assert the watermark file exists
-        self.assertTrue(os.path.exists(wtrmrk))
-
-        # Assert watermarked PDF file exists
-        self.assertTrue(os.path.exists(added))
-
-        # Assert watermarked PDF has page resources
-        self.assertTrue(Info(added).resources())
+        self.assertPdfExists(wtrmrk)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
 
     @Timer.decorator
     def test_conduit_watermark_overlay_pdfrw(self):
@@ -70,14 +62,9 @@ class TestWatermark(unittest.TestCase):
         wtrmrk = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, rotate=self.rotate)
         added = w.add(self.pdf_path, wtrmrk, underneath=False, suffix=None, method='pdfrw')
 
-        # Assert the watermark file exists
-        self.assertTrue(os.path.exists(wtrmrk))
-
-        # Assert watermarked PDF file exists
-        self.assertTrue(os.path.exists(added))
-
-        # Assert watermarked PDF has page resources
-        self.assertTrue(Info(added).resources())
+        self.assertPdfExists(wtrmrk)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
 
     @Timer.decorator
     def test_conduit_watermark_flat_pdfrw(self):
@@ -86,14 +73,9 @@ class TestWatermark(unittest.TestCase):
         flat = w.draw(self.address, str(self.town + ', ' + self.state), opacity=0.08, flatten=True)
         added = w.add(self.pdf_path, flat, suffix=None, method='pdfrw')
 
-        # Assert the watermark file exists
-        self.assertTrue(os.path.exists(flat))
-
-        # Assert watermarked PDF file exists
-        self.assertTrue(os.path.exists(added))
-
-        # Assert watermarked PDF has page resources
-        self.assertTrue(Info(added).resources())
+        self.assertPdfExists(flat)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
 
     @Timer.decorator
     def test_conduit_watermark_layered_pdfrw(self):
@@ -103,13 +85,9 @@ class TestWatermark(unittest.TestCase):
         added = w.add(self.pdf_path, layered, suffix=None, method='pdfrw')
 
         # Assert the watermark file exists
-        self.assertTrue(os.path.exists(layered))
-
-        # Assert watermarked PDF file exists
-        self.assertTrue(os.path.exists(added))
-
-        # Assert watermarked PDF has page resources
-        self.assertTrue(Info(added).resources())
+        self.assertPdfExists(layered)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
 
     @Timer.decorator
     def test_conduit_watermark_label(self):
@@ -117,11 +95,16 @@ class TestWatermark(unittest.TestCase):
         label = os.path.basename(self.pdf_path)
         labeled = Label(self.pdf_path, label, tempdir=self.temp.name, suffix=None).write(cleanup=False)
 
-        # Assert watermarked PDF file exists
-        self.assertTrue(os.path.exists(labeled))
+        self.assertPdfExists(labeled)
+        self.assertPdfHasResources(labeled)
 
+    def assertPdfExists(self, pdf):
+        # Assert watermarked PDF file exists
+        self.assertTrue(os.path.exists(pdf))
+
+    def assertPdfHasResources(self, pdf):
         # Assert watermarked PDF has page resources
-        self.assertTrue(Info(labeled).resources())
+        self.assertTrue(Info(pdf).resources())
 
 
 if __name__ == '__main__':
