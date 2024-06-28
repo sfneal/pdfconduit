@@ -25,11 +25,8 @@ class TestRotate(unittest.TestCase):
         rotation = 90
         rotated = Rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
-        # Assert rotated pdf file exists
-        self.assertTrue(os.path.isfile(rotated))
-
-        # Assert pdf file was rotated by the correct amount of degrees
-        self.assertEqual(Info(rotated).rotate, rotation)
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
 
     @Timer.decorator
     def test_rotate_pdfrw_180(self):
@@ -38,11 +35,8 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name,
                          method='pdfrw').file
 
-        # Assert rotated pdf file exists
-        self.assertTrue(os.path.isfile(rotated))
-
-        # Assert pdf file was rotated by the correct amount of degrees
-        self.assertEqual(Info(rotated).rotate, rotation)
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
 
     @Timer.decorator
     def test_rotate_pdfrw_270(self):
@@ -51,11 +45,8 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name,
                          method='pdfrw').file
 
-        # Assert rotated pdf file exists
-        self.assertTrue(os.path.isfile(rotated))
-
-        # Assert pdf file was rotated by the correct amount of degrees
-        self.assertEqual(Info(rotated).rotate, rotation)
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
 
     @Timer.decorator
     def test_rotate_pypdf3_90(self):
@@ -63,11 +54,8 @@ class TestRotate(unittest.TestCase):
         rotation = 90
         rotated = Rotate(self.pdf_path, rotation, suffix='rotated_pdfrw', tempdir=self.temp.name, method='pypdf3').file
 
-        # Assert rotated pdf file exists
-        self.assertTrue(os.path.isfile(rotated))
-
-        # Assert pdf file was rotated by the correct amount of degrees
-        self.assertEqual(Info(rotated).rotate, rotation)
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
 
     @Timer.decorator
     def test_rotate_pypdf3_180(self):
@@ -76,11 +64,12 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(self.pdf_path, rotation, suffix='rotated_180_pdfrw', tempdir=self.temp.name,
                          method='pypdf3').file
 
-        # Assert rotated pdf file exists
-        self.assertTrue(os.path.isfile(rotated))
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
 
-        # Assert pdf file was rotated by the correct amount of degrees
-        self.assertEqual(Info(rotated).rotate, rotation)
+    def assertPdfExists(self, pdf):
+        # Assert rotated pdf file exists
+        self.assertTrue(os.path.isfile(pdf))
 
     @Timer.decorator
     def test_rotate_pypdf3_270(self):
@@ -89,10 +78,10 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(self.pdf_path, rotation, suffix='rotated_270_pdfrw', tempdir=self.temp.name,
                          method='pypdf3').file
 
-        # Assert rotated pdf file exists
-        self.assertTrue(os.path.isfile(rotated))
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
 
-        # Assert pdf file was rotated by the correct amount of degrees
+    def assertPdfRotation(self, rotated, rotation):
         self.assertEqual(Info(rotated).rotate, rotation)
 
 
