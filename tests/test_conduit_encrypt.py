@@ -26,7 +26,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_encrypt_128bit(self):
-        """Encrypt PDF file with 128bit encryption."""
         encrypted = Encrypt(self.pdf_path,
                             self.user_pw,
                             self.owner_pw,
@@ -43,7 +42,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_encrypt_40bit(self):
-        """Encrypt PDF file with 40bit encryption."""
         encrypted = Encrypt(self.pdf_path,
                             self.user_pw,
                             self.owner_pw,
@@ -60,7 +58,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_encrypt_128bit_allow_printing(self):
-        """Encrypt a PDF file and allow users to print."""
         # todo: allow and don't allow tests
         encrypted = Encrypt(
             self.pdf_path,
@@ -81,7 +78,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_encrypt_128bit_allow_commenting(self):
-        """Encrypt a PDF file but allow the user to add comments."""
         encrypted = Encrypt(self.pdf_path,
                             self.user_pw,
                             self.owner_pw,
@@ -99,7 +95,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_encrypt_128bit_allow_printing_and_commenting(self):
-        """Encrypt a PDF file but allow the user to add comments."""
         encrypted = Encrypt(self.pdf_path,
                             self.user_pw,
                             self.owner_pw,
@@ -137,7 +132,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_encrypt_40bit_allow_commenting(self):
-        """Encrypt a PDF file but allow the user to add comments."""
         encrypted = Encrypt(self.pdf_path,
                             self.user_pw,
                             self.owner_pw,
@@ -156,7 +150,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_encrypt_40bit_allow_printing_and_commenting(self):
-        """Encrypt a PDF file but allow the user to add comments."""
         encrypted = Encrypt(self.pdf_path,
                             self.user_pw,
                             self.owner_pw,
@@ -175,7 +168,6 @@ class TestEncrypt(unittest.TestCase):
 
     @Timer.decorator
     def test_password_byte_string(self):
-        """Encrypt a PDF file and allow users to print."""
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
