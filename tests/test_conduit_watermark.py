@@ -42,7 +42,7 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
-
+        expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
     def test_conduit_watermark_underneath_pdfrw(self):
@@ -55,6 +55,8 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
+        expected_equals_output(function_name_to_file_name(), added)
+
     @Timer.decorator
     def test_conduit_watermark_overlay_pdfrw(self):
         """Apply a watermark overlaid over original content of PDF using the `pdfrw` method."""
@@ -66,6 +68,8 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
+        expected_equals_output(function_name_to_file_name(), added)
+
     @Timer.decorator
     def test_conduit_watermark_flat_pdfrw(self):
         """Apply a flattened watermark to a PDF using the `pdfrw` method."""
@@ -76,6 +80,8 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(flat)
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
+
+        expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
     def test_conduit_watermark_layered_pdfrw(self):
@@ -89,6 +95,8 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
+        expected_equals_output(function_name_to_file_name(), added)
+
     @Timer.decorator
     def test_conduit_watermark_label(self):
         """Apply a watermark label to a PDF file."""
@@ -97,6 +105,8 @@ class TestWatermark(unittest.TestCase):
 
         self.assertPdfExists(labeled)
         self.assertPdfHasResources(labeled)
+
+        expected_equals_output(function_name_to_file_name(), labeled)
 
     def assertPdfExists(self, pdf):
         # Assert watermarked PDF file exists
