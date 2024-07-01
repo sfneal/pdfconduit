@@ -64,8 +64,9 @@ class Merge:
             writer.addpages(PdfReader(inpfn).pages)
 
         writer.trailer.Info = IndirectPdfDict(
-            Author='pdfconduit',
+            Author='Stephen Neal',
             Creator='pdfconduit',
+            Producer='pdfconduit',
         )
         writer.write(output)
         return output
