@@ -31,8 +31,8 @@ def files_are_equal(file1_path, file2_path):
     return file1_content == file2_content
 
 
-def function_name_to_file_name():
-    return inspect.stack()[1][3] + '.pdf'
+def function_name_to_file_name(extension='.pdf'):
+    return inspect.stack()[1][3] + extension
 
 
 def copy_pdf_to_output_directory(pdf, save_name):
