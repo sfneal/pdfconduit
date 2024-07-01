@@ -64,10 +64,8 @@ class Merge:
             writer.addpages(PdfReader(inpfn).pages)
 
         writer.trailer.Info = IndirectPdfDict(
-            Title='HPA Design',
-            Author='HPA Design',
-            Subject='HPA Design',
-            Creator='HPA Design',
+            Author='pdfconduit',
+            Creator='pdfconduit',
         )
         writer.write(output)
         return output
