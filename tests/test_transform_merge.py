@@ -30,6 +30,10 @@ class TestMerge(unittest.TestCase):
         # Assert sum of pages in original pdf files equals sum of pages in merged pdf
         self.assertEqual(sum([Info(pdf).pages for pdf in self.pdfs]), Info(merged.file).pages)
 
+        # Assert metadata was added correctly
+        metadata = Info(merged.output).metadata
+        self.assertEqual(metadata['/Producer'], 'PyPDF3')
+
     @Timer.decorator
     def test_merge_pdfrw(self):
         """Merge multiple PDF files into a single PDF using the `pdfrw` library."""
@@ -40,6 +44,12 @@ class TestMerge(unittest.TestCase):
 
         # Assert sum of pages in original pdf files equals sum of pages in merged pdf
         self.assertEqual(sum([Info(pdf).pages for pdf in self.pdfs]), Info(merged.file).pages)
+
+        # Assert metadata was added correctly
+        metadata = Info(merged.output).metadata
+        self.assertEqual(metadata['/Producer'], 'pdfconduit')
+        self.assertEqual(metadata['/Creator'], 'pdfconduit')
+        self.assertEqual(metadata['/Author'], 'Stephen Neal')
 
 
 if __name__ == '__main__':
