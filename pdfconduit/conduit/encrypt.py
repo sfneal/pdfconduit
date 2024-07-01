@@ -71,30 +71,26 @@ class Encrypt:
 
 
 def main():
-    try:
-        from pdfconduit import GUI
-        GUI.encrypt()
-    except ImportError:
-        from argparse import ArgumentParser
-        # TODO: Finish implementing argparse
+    from argparse import ArgumentParser
+    # TODO: Finish implementing argparse
 
-        # Declare argparse argument descriptions
-        usage = 'Encrypt PDF files'
-        description = 'Password protect a PDF file by applying encryption.'
-        helpers = {
-            'pdf': "PDF file to encrypt",
-            'p': "Retrieve Python interpreter information such as Python version and Python compiler",
-            's': "Retrieve software related information such as operating system, machine type, username, etc.",
-            'hw': "Retrieve Hardware related information such as memory and processor information",
-        }
+    # Declare argparse argument descriptions
+    usage = 'Encrypt PDF files'
+    description = 'Password protect a PDF file by applying encryption.'
+    helpers = {
+        'pdf': "PDF file to encrypt",
+        'p': "Retrieve Python interpreter information such as Python version and Python compiler",
+        's': "Retrieve software related information such as operating system, machine type, username, etc.",
+        'hw': "Retrieve Hardware related information such as memory and processor information",
+    }
 
-        # construct the argument parse and parse the arguments
-        ap = ArgumentParser(usage=usage, description=description)
-        ap.add_argument("pdf", help=helpers['pdf'])
-        ap.add_argument("-upw", '--user_pw', help=helpers['upw'])
-        ap.add_argument("-opw", '--owner_pw', help=helpers['opw'])
-        ap.add_argument("-out", '--output', help=helpers['out'])
-        args = vars(ap.parse_args())
+    # construct the argument parse and parse the arguments
+    ap = ArgumentParser(usage=usage, description=description)
+    ap.add_argument("pdf", help=helpers['pdf'])
+    ap.add_argument("-upw", '--user_pw', help=helpers['upw'])
+    ap.add_argument("-opw", '--owner_pw', help=helpers['opw'])
+    ap.add_argument("-out", '--output', help=helpers['out'])
+    args = vars(ap.parse_args())
 
 
 if __name__ == '__main__':
