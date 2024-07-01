@@ -30,6 +30,8 @@ class TestUpscale(unittest.TestCase):
         # Assert upscaled pdf file is the correct size
         self.assertPdfUpscaled(s, upscaled)
 
+        expected_equals_output(function_name_to_file_name(), upscaled)
+
     @Timer.decorator
     def test_upscale_pdfrw_15x(self):
         """Resize a PDF file to 1.5x times the original scale."""
@@ -38,6 +40,8 @@ class TestUpscale(unittest.TestCase):
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
+
+        expected_equals_output(function_name_to_file_name(), upscaled)
 
     @Timer.decorator
     def test_upscale_pdfrw_30x(self):
@@ -48,6 +52,8 @@ class TestUpscale(unittest.TestCase):
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
 
+        expected_equals_output(function_name_to_file_name(), upscaled)
+
     @Timer.decorator
     def test_downscale_pdfrw_20x(self):
         """Resize a PDF file to 3.0x times the original scale."""
@@ -57,6 +63,8 @@ class TestUpscale(unittest.TestCase):
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
+
+        expected_equals_output(function_name_to_file_name(), upscaled)
 
     def assertPdfUpscaled(self, s, upscaled):
         self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))

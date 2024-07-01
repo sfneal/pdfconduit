@@ -29,6 +29,8 @@ class TestSlice(unittest.TestCase):
         self.assertPdfExists(sliced)
         self.assertCorrectPagesSliced(fp, lp, sliced)
 
+        expected_equals_output(function_name_to_file_name(), sliced)
+
     @Timer.decorator
     def test_slice_4th_through_7th_pages(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
@@ -38,6 +40,8 @@ class TestSlice(unittest.TestCase):
 
         self.assertPdfExists(sliced)
         self.assertCorrectPagesSliced(fp, lp, sliced)
+
+        expected_equals_output(function_name_to_file_name(), sliced)
 
     def assertCorrectPagesSliced(self, fp, lp, sliced):
         self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))

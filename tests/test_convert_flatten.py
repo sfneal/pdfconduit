@@ -35,6 +35,8 @@ class TestFlatten(unittest.TestCase):
         self.assertTrue(abs(info_og.size[0] / info_flat.size[0]) <= 1)
         self.assertTrue(abs(info_og.size[1] / info_flat.size[1]) <= 1)
 
+        expected_equals_output(function_name_to_file_name(), self.flat)
+
 
 if __name__ == '__main__':
     unittest.main()

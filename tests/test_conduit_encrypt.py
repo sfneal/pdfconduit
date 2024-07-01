@@ -40,6 +40,8 @@ class TestEncrypt(unittest.TestCase):
         self.assert128BitEncryption(security)
         self.assertSecurityValue(security, -1852)
 
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
+
     @Timer.decorator
     def test_encrypt_40bit(self):
         encrypted = Encrypt(self.pdf_path,
@@ -55,6 +57,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
         self.assertSecurityValue(security, -1852)
+
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
 
     @Timer.decorator
     def test_encrypt_128bit_allow_printing(self):
@@ -76,6 +80,8 @@ class TestEncrypt(unittest.TestCase):
         self.assert128BitEncryption(security)
         self.assertSecurityValue(security, -1852)
 
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
+
     @Timer.decorator
     def test_encrypt_128bit_allow_commenting(self):
         encrypted = Encrypt(self.pdf_path,
@@ -92,6 +98,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assertSecurityValue(security, -800)
+
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
 
     @Timer.decorator
     def test_encrypt_128bit_allow_printing_and_commenting(self):
@@ -110,6 +118,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
         self.assertSecurityValue(security, -1500)
+
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
 
     @Timer.decorator
     def test_encrypt_40bit_allow_printing(self):
@@ -130,6 +140,8 @@ class TestEncrypt(unittest.TestCase):
         self.assert40BitEncryption(security)
         self.assertSecurityValue(security, -1852)
 
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
+
     @Timer.decorator
     def test_encrypt_40bit_allow_commenting(self):
         encrypted = Encrypt(self.pdf_path,
@@ -148,6 +160,8 @@ class TestEncrypt(unittest.TestCase):
         self.assert40BitEncryption(security)
         self.assertSecurityValue(security, -800)
 
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
+
     @Timer.decorator
     def test_encrypt_40bit_allow_printing_and_commenting(self):
         encrypted = Encrypt(self.pdf_path,
@@ -165,6 +179,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
         self.assertSecurityValue(security, -1500)
+
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
 
     @Timer.decorator
     def test_password_byte_string(self):
@@ -189,6 +205,8 @@ class TestEncrypt(unittest.TestCase):
             b'\xd0H\xd1R\x9eS]\x18\x84\xcd8V6{\x18KJ\x90\xdf\x01\xe67\xd1n\xca\x06[\xafNd\x90\x0b'
         )
 
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
+
     @Timer.decorator
     def test_encrypted_pdf_has_metadata(self):
         encrypted = Encrypt(self.pdf_path,
@@ -205,6 +223,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertEqual(metadata['/Producer'], 'pdfconduit')
         self.assertEqual(metadata['/Creator'], 'pdfconduit')
         self.assertEqual(metadata['/Author'], 'Stephen Neal')
+
+        expected_equals_output(function_name_to_file_name(), encrypted.output)
 
     def _getPdfSecurity(self, encrypted):
         return Info(encrypted.output, self.user_pw).security
