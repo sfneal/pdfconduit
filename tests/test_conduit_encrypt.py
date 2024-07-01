@@ -189,6 +189,23 @@ class TestEncrypt(unittest.TestCase):
             b'\xd0H\xd1R\x9eS]\x18\x84\xcd8V6{\x18KJ\x90\xdf\x01\xe67\xd1n\xca\x06[\xafNd\x90\x0b'
         )
 
+    @Timer.decorator
+    def test_encrypted_pdf_has_metadata(self):
+        encrypted = Encrypt(self.pdf_path,
+                            self.user_pw,
+                            self.owner_pw,
+                            output=self.temp.name,
+                            bit128=True,
+                            suffix='metadata')
+
+        self.assertPdfExists(encrypted)
+        self.assertEncrypted(encrypted)
+
+        metadata = Info(encrypted.output, self.user_pw).metadata
+        self.assertEqual(metadata['/Producer'], 'pdfconduit')
+        self.assertEqual(metadata['/Creator'], 'pdfconduit')
+        self.assertEqual(metadata['/Author'], 'Stephen Neal')
+
     def _getPdfSecurity(self, encrypted):
         return Info(encrypted.output, self.user_pw).security
 
