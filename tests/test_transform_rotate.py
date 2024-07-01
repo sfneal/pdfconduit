@@ -28,6 +28,8 @@ class TestRotate(unittest.TestCase):
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
 
+        expected_equals_output(function_name_to_file_name(), rotated)
+
     @Timer.decorator
     def test_rotate_pdfrw_180(self):
         """Rotate a PDF file by 180 degrees using the `pdfrw` library."""
@@ -37,6 +39,8 @@ class TestRotate(unittest.TestCase):
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
+
+        expected_equals_output(function_name_to_file_name(), rotated)
 
     @Timer.decorator
     def test_rotate_pdfrw_270(self):
@@ -48,6 +52,8 @@ class TestRotate(unittest.TestCase):
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
 
+        expected_equals_output(function_name_to_file_name(), rotated)
+
     @Timer.decorator
     def test_rotate_pypdf3_90(self):
         """Rotate a PDF file by 90 degrees using the `pypdf3` library."""
@@ -56,6 +62,8 @@ class TestRotate(unittest.TestCase):
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
+
+        expected_equals_output(function_name_to_file_name(), rotated)
 
     @Timer.decorator
     def test_rotate_pypdf3_180(self):
@@ -67,9 +75,7 @@ class TestRotate(unittest.TestCase):
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
 
-    def assertPdfExists(self, pdf):
-        # Assert rotated pdf file exists
-        self.assertTrue(os.path.isfile(pdf))
+        expected_equals_output(function_name_to_file_name(), rotated)
 
     @Timer.decorator
     def test_rotate_pypdf3_270(self):
@@ -80,6 +86,12 @@ class TestRotate(unittest.TestCase):
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
+
+        expected_equals_output(function_name_to_file_name(), rotated)
+
+    def assertPdfExists(self, pdf):
+        # Assert rotated pdf file exists
+        self.assertTrue(os.path.isfile(pdf))
 
     def assertPdfRotation(self, rotated, rotation):
         self.assertEqual(Info(rotated).rotate, rotation)
