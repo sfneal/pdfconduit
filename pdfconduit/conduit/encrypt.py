@@ -58,8 +58,8 @@ class Encrypt:
             # todo: add metadata adding functionality
             pdf_writer.addMetadata({
                 '/Producer': 'pdfconduit',
-                '/Creator': 'HPA Design',
-                '/Author': 'HPA Design',
+                '/Creator': 'pdfconduit',
+                '/Author': 'Stephen Neal',
             })
 
             # Write encrypted PDF to file
