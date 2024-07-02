@@ -62,7 +62,8 @@ class TestUpscale(unittest.TestCase):
     @Timer.decorator
     def test_upscale_pypdf3_20x(self):
         s = 2.0
-        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_2.0_pypdf3', tempdir=self.temp.name, method='pypdf3').file
+        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_2.0_pypdf3', tempdir=self.temp.name,
+                           method='pypdf3').file
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -72,7 +73,8 @@ class TestUpscale(unittest.TestCase):
     @Timer.decorator
     def test_upscale_pypdf3_15x(self):
         s = 1.5
-        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_1.5_pypdf3', tempdir=self.temp.name, method='pypdf3').file
+        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_1.5_pypdf3', tempdir=self.temp.name,
+                           method='pypdf3').file
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -82,7 +84,8 @@ class TestUpscale(unittest.TestCase):
     @Timer.decorator
     def test_upscale_pypdf3_30x(self):
         s = 3.0
-        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_3.0_pypdf3', tempdir=self.temp.name, method='pypdf3').file
+        upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_3.0_pypdf3', tempdir=self.temp.name,
+                           method='pypdf3').file
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
