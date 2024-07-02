@@ -14,11 +14,11 @@ class Info:
         if pdf.isEncrypted:
             # Check that password is none
             if not password:
-                pdf.decrypt('')
+                pdf.decrypt("")
                 # Try and decrypt PDF using no password, prompt for password
                 if pdf.isEncrypted and prompt:
-                    print('No password has been given for encrypted PDF ', path)
-                    password = input('Enter Password: ')
+                    print("No password has been given for encrypted PDF ", path)
+                    password = input("Enter Password: ")
                 else:
                     return False
             pdf.decrypt(password)
@@ -62,7 +62,7 @@ class Info:
     def dimensions(self):
         """Get width and height of a PDF"""
         size = self.pdf.getPage(0).mediaBox
-        return {'w': float(size[2]), 'h': float(size[3])}
+        return {"w": float(size[2]), "h": float(size[3])}
 
     @property
     def size(self):
@@ -73,4 +73,4 @@ class Info:
     @property
     def rotate(self):
         """Retrieve rotation info."""
-        return self._resolved_objects(self.pdf, '/Rotate')
+        return self._resolved_objects(self.pdf, "/Rotate")

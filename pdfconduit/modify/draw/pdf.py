@@ -24,8 +24,8 @@ def center_str(txt, font_name, font_size, offset=0):
 
 def split_str(string):
     """Split string in half to return two strings"""
-    split = string.split(' ')
-    return ' '.join(split[:len(split) // 2]), ' '.join(split[len(split) // 2:])
+    split = string.split(" ")
+    return " ".join(split[: len(split) // 2]), " ".join(split[len(split) // 2 :])
 
 
 class DrawPDF:
@@ -39,7 +39,9 @@ class DrawPDF:
 
         # create a new PDF with Reportlab
         self.packet = io.BytesIO()
-        self.can = Canvas(self.packet, pagesize=pagesize, pageCompression=compress, bottomup=1)    # Initialize canvas
+        self.can = Canvas(
+            self.packet, pagesize=pagesize, pageCompression=compress, bottomup=1
+        )  # Initialize canvas
 
     def __str__(self):
         return str(self.dst)
@@ -47,14 +49,16 @@ class DrawPDF:
     @property
     def dst(self):
         if not self._dst:
-            with NamedTemporaryFile(suffix='.pdf', dir=self.dir, delete=False) as tmppdf:
+            with NamedTemporaryFile(
+                suffix=".pdf", dir=self.dir, delete=False
+            ) as tmppdf:
                 self._dst = resource_path(tmppdf.name)
         return self._dst
 
     def _write(self, output=None):
-        self.packet.seek(0)    # move to the beginning of the StringIO buffer
+        self.packet.seek(0)  # move to the beginning of the StringIO buffer
         output = output if output else self.dst
-        write_pdf(self.packet, output)    # Save new pdf file
+        write_pdf(self.packet, output)  # Save new pdf file
         return output
 
     def write(self, output=None):
@@ -62,7 +66,15 @@ class DrawPDF:
 
 
 class WatermarkDraw(DrawPDF):
-    def __init__(self, canvas_objects, rotate=0, compress=0, pagesize=LETTER, tempdir=None, pagescale=False):
+    def __init__(
+        self,
+        canvas_objects,
+        rotate=0,
+        compress=0,
+        pagesize=LETTER,
+        tempdir=None,
+        pagescale=False,
+    ):
         super(WatermarkDraw, self).__init__(tempdir, compress, pagesize)
         self.canvas_objects = canvas_objects
         self.rotate = rotate
@@ -72,11 +84,11 @@ class WatermarkDraw(DrawPDF):
             w_scale = self.can._pagesize[0] / LETTER[0]
             h_scale = self.can._pagesize[1] / LETTER[1]
             for i in self.canvas_objects:
-                if hasattr(i, 'w'):
+                if hasattr(i, "w"):
                     i.w = i.w * w_scale
-                if hasattr(i, 'h'):
+                if hasattr(i, "h"):
                     i.h = i.h * h_scale
-                if hasattr(i, 'size'):
+                if hasattr(i, "size"):
                     i.size = i.size * ((h_scale * w_scale) / 2)
 
         self.draw()
@@ -109,14 +121,16 @@ class WatermarkDraw(DrawPDF):
         :param ci: CanvasImage object
         """
         img = img_adjust(ci.image, ci.opacity, tempdir=self.dir)
-        self.can.drawImage(img,
-                           x=ci.x,
-                           y=ci.y,
-                           width=ci.w,
-                           height=ci.h,
-                           mask=ci.mask,
-                           preserveAspectRatio=ci.preserve_aspect_ratio,
-                           anchorAtXY=True)
+        self.can.drawImage(
+            img,
+            x=ci.x,
+            y=ci.y,
+            width=ci.w,
+            height=ci.h,
+            mask=ci.mask,
+            preserveAspectRatio=ci.preserve_aspect_ratio,
+            anchorAtXY=True,
+        )
 
     def _draw_string(self, cs):
         """
@@ -147,8 +161,14 @@ class WatermarkDraw(DrawPDF):
             # Check if text_width is greater than the canvas page width
             if text_width(cs.string, cs.font, cs.size) > self.can._pagesize[0]:
                 str1, str2 = split_str(cs.string)
-                self.can.drawString(x=center_str(str1, cs.font, cs.size, offset=0), y=cs.size, text=str1)
-                self.can.drawString(x=center_str(str2, cs.font, cs.size, offset=0), y=-cs.size, text=str2)
+                self.can.drawString(
+                    x=center_str(str1, cs.font, cs.size, offset=0), y=cs.size, text=str1
+                )
+                self.can.drawString(
+                    x=center_str(str2, cs.font, cs.size, offset=0),
+                    y=-cs.size,
+                    text=str2,
+                )
                 return
             else:
                 x = center_str(cs.string, cs.font, cs.size, offset=0)

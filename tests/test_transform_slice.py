@@ -24,7 +24,9 @@ class TestSlice(unittest.TestCase):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 1
         lp = 1
-        sliced = slicer(self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name)
+        sliced = slicer(
+            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name
+        )
 
         self.assertPdfExists(sliced)
         self.assertCorrectPagesSliced(fp, lp, sliced)
@@ -36,7 +38,9 @@ class TestSlice(unittest.TestCase):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 4
         lp = 7
-        sliced = slicer(self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name)
+        sliced = slicer(
+            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name
+        )
 
         self.assertPdfExists(sliced)
         self.assertCorrectPagesSliced(fp, lp, sliced)
@@ -50,5 +54,5 @@ class TestSlice(unittest.TestCase):
         self.assertTrue(os.path.isfile(sliced))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: pdfconduit
+Version: 2.1.0
+Summary: PDF toolkit for preparing documents for distribution.
+Home-page: https://github.com/sfneal/pdfconduit
+Author: Stephen Neal
+Author-email: stephen@stephenneal.net
+Requires-Python: >3.6.8
+License-File: LICENSE.md
+Requires-Dist: looptools
+Requires-Dist: pdfrw>=0.4
+Requires-Dist: PyMuPDF<=1.24.7,>=1.17.7
+Requires-Dist: PyPDF3>=1.0.1
+Requires-Dist: PillowImage>=1.2.0
+Requires-Dist: PyBundle>=1.0.6
+
+
+A Pure-Python library built as a PDF toolkit.  Prepare documents for distribution.
+
+Features:
+- Watermark: Dynamically generate watermarks and add watermark to existing document
+- Label: Overlay text labels such as filename or date to documents 
+- Encrypt: Password protect and restrict permissions to print only
+- Rotate: Rotate by increments of 90 degrees
+- Upscale: Scale PDF size
+- Merge: Concatenate multiple documents into one file
+- Slice: Extract page ranges from documents
+- Extract Text and Images
+- Retrieve document metadata and information

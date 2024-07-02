@@ -17,24 +17,24 @@ def img_extract(pdf, password=None):
         # Merge the watermark with the page
         page = reader.getPage(page_number)
 
-        xobj = page['/Resources']['/XObject'].getObject()
+        xobj = page["/Resources"]["/XObject"].getObject()
         for obj in xobj:
-            if xobj[obj]['/Subtype'] == '/Image':
-                size = (xobj[obj]['/Width'], xobj[obj]['/Height'])
+            if xobj[obj]["/Subtype"] == "/Image":
+                size = (xobj[obj]["/Width"], xobj[obj]["/Height"])
                 data = xobj[obj].getData()
-                if xobj[obj]['/ColorSpace'] == '/DeviceRGB':
+                if xobj[obj]["/ColorSpace"] == "/DeviceRGB":
                     mode = "RGB"
                 else:
                     mode = "P"
 
-                if xobj[obj]['/Filter'] == '/FlateDecode':
+                if xobj[obj]["/Filter"] == "/FlateDecode":
                     img = Image.frombytes(mode, size, data)
-                    img.save(obj[1:] + ".png")    # TODO: Add save destination parameter
-                elif xobj[obj]['/Filter'] == '/DCTDecode':
+                    img.save(obj[1:] + ".png")  # TODO: Add save destination parameter
+                elif xobj[obj]["/Filter"] == "/DCTDecode":
                     img = open(obj[1:] + ".jpg", "wb")
                     img.write(data)
                     img.close()
-                elif xobj[obj]['/Filter'] == '/JPXDecode':
+                elif xobj[obj]["/Filter"] == "/JPXDecode":
                     img = open(obj[1:] + ".jp2", "wb")
                     img.write(data)
                     img.close()

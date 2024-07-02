@@ -20,7 +20,7 @@ class TestFlatten(unittest.TestCase):
     @Timer.decorator
     def test_flatten(self):
         """Create a 'flattened' pdf file without layers."""
-        self.flat = Flatten(self.pdf_path, suffix='flat').save()
+        self.flat = Flatten(self.pdf_path, suffix="flat").save()
 
         info_og = Info(self.pdf_path)
         info_flat = Info(self.flat)
@@ -38,5 +38,5 @@ class TestFlatten(unittest.TestCase):
         expected_equals_output(function_name_to_file_name(), self.flat)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

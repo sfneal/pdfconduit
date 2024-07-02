@@ -6,10 +6,10 @@ from sys import modules
 
 def open_window(path):
     """Open path in finder or explorer window"""
-    if 'pathlib' in modules:
+    if "pathlib" in modules:
         try:
             call(["open", "-R", str(Path(str(path)))])
         except FileNotFoundError:
-            Popen(r'explorer /select,' + str(Path(str(path))))
+            Popen(r"explorer /select," + str(Path(str(path))))
     else:
-        print('pathlib module must be installed to execute open_window function')
+        print("pathlib module must be installed to execute open_window function")

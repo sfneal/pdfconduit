@@ -11,7 +11,15 @@ from pdfconduit.utils.path import add_suffix
 
 
 class PDF2IMG:
-    def __init__(self, file_name, output=None, tempdir=None, ext='.png', progress_bar=None, alpha=False):
+    def __init__(
+        self,
+        file_name,
+        output=None,
+        tempdir=None,
+        ext=".png",
+        progress_bar=None,
+        alpha=False,
+    ):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
         self.output = output
@@ -35,10 +43,15 @@ class PDF2IMG:
 
     def _get_pdf_data(self):
         # TQDM progress bar
-        if self.progress_bar == 'tqdm':
+        if self.progress_bar == "tqdm":
             return [
-                self._get_page_data(cur_page) for cur_page in tqdm(
-                    range(len(self.doc)), desc='Getting PDF page data', total=len(self.doc), unit='Pages')
+                self._get_page_data(cur_page)
+                for cur_page in tqdm(
+                    range(len(self.doc)),
+                    desc="Getting PDF page data",
+                    total=len(self.doc),
+                    unit="Pages",
+                )
             ]
         # No progress bar
         else:
@@ -49,30 +62,30 @@ class PDF2IMG:
         Return a PNG image for a document page number. If zoom is other than 0, one of
         the 4 page quadrants are zoomed-in instead and the corresponding clip returned.
         """
-        dlist = self.dlist_tab[pno]    # get display list
-        if not dlist:    # create if not yet there
+        dlist = self.dlist_tab[pno]  # get display list
+        if not dlist:  # create if not yet there
             self.dlist_tab[pno] = self.doc[pno].get_displaylist()
             dlist = self.dlist_tab[pno]
-        r = dlist.rect    # page rectangle
-        mp = r.tl + (r.br - r.tl) * 0.5    # rect middle point
-        mt = r.tl + (r.tr - r.tl) * 0.5    # middle of top edge
-        ml = r.tl + (r.bl - r.tl) * 0.5    # middle of left edge
-        mr = r.tr + (r.br - r.tr) * 0.5    # middle of right egde
-        mb = r.bl + (r.br - r.bl) * 0.5    # middle of bottom edge
-        mat = fitz.Matrix(2, 2)    # zoom matrix
-        if zoom == 1:    # top-left quadrant
+        r = dlist.rect  # page rectangle
+        mp = r.tl + (r.br - r.tl) * 0.5  # rect middle point
+        mt = r.tl + (r.tr - r.tl) * 0.5  # middle of top edge
+        ml = r.tl + (r.bl - r.tl) * 0.5  # middle of left edge
+        mr = r.tr + (r.br - r.tr) * 0.5  # middle of right egde
+        mb = r.bl + (r.br - r.bl) * 0.5  # middle of bottom edge
+        mat = fitz.Matrix(2, 2)  # zoom matrix
+        if zoom == 1:  # top-left quadrant
             clip = fitz.Rect(r.tl, mp)
-        elif zoom == 4:    # bot-right quadrant
+        elif zoom == 4:  # bot-right quadrant
             clip = fitz.Rect(mp, r.br)
-        elif zoom == 2:    # top-right
+        elif zoom == 2:  # top-right
             clip = fitz.Rect(mt, mr)
-        elif zoom == 3:    # bot-left
+        elif zoom == 3:  # bot-left
             clip = fitz.Rect(ml, mb)
-        if zoom == 0:    # total page
+        if zoom == 0:  # total page
             pix = dlist.get_pixmap(alpha=self.alpha)
         else:
             pix = dlist.get_pixmap(alpha=self.alpha, matrix=mat, clip=clip)
-        return pix.tobytes()    # return the PNG image
+        return pix.tobytes()  # return the PNG image
 
     def _get_output(self, index):
         if self.output:
@@ -81,14 +94,22 @@ class PDF2IMG:
             output_file = add_suffix(self.file_name, str(index + 1), ext=self.ext)
             return os.path.join(self.output_dir, output_file)
         else:
-            with NamedTemporaryFile(suffix=self.ext, dir=self.tempdir, delete=True) as temp:
+            with NamedTemporaryFile(
+                suffix=self.ext, dir=self.tempdir, delete=True
+            ) as temp:
                 return temp.name
 
     def save(self):
         # TQDM progress bar
-        if self.progress_bar == 'tqdm':
-            loop = enumerate(tqdm(self.pdf_data, desc='Saving PDF pages as PNGs', total=len(self.pdf_data),
-                                  unit='PNGs'))
+        if self.progress_bar == "tqdm":
+            loop = enumerate(
+                tqdm(
+                    self.pdf_data,
+                    desc="Saving PDF pages as PNGs",
+                    total=len(self.pdf_data),
+                    unit="PNGs",
+                )
+            )
         # No progress bar
         else:
             loop = enumerate(self.pdf_data)
@@ -103,7 +124,15 @@ class PDF2IMG:
         return saved
 
 
-def pdf2img(file_name, output=None, tempdir=None, ext='png', progress_bar=None, alpha=False):
+def pdf2img(
+    file_name, output=None, tempdir=None, ext="png", progress_bar=None, alpha=False
+):
     """Wrapper function for PDF2IMG class"""
-    return PDF2IMG(file_name=file_name, output=output, tempdir=tempdir, ext=ext, progress_bar=progress_bar,
-                   alpha=alpha).save()
+    return PDF2IMG(
+        file_name=file_name,
+        output=output,
+        tempdir=tempdir,
+        ext=ext,
+        progress_bar=progress_bar,
+        alpha=alpha,
+    ).save()
