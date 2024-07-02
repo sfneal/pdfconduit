@@ -17,7 +17,7 @@ class TestImg2Pdf(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        if hasattr(cls, 'tempdir'):
+        if hasattr(cls, "tempdir"):
             cls.tempdir.cleanup()
 
     def tearDown(self):
@@ -38,9 +38,11 @@ class TestImg2Pdf(unittest.TestCase):
     @Timer.decorator
     def test_convert_packet(self):
         """Convert an image file into PDF."""
-        self.pdf = IMG2PDF([self.img_path, self.img_path, self.img_path],
-                           destination=test_data_dir,
-                           tempdir=self.tempdir).save(clean_temp=False)
+        self.pdf = IMG2PDF(
+            [self.img_path, self.img_path, self.img_path],
+            destination=test_data_dir,
+            tempdir=self.tempdir,
+        ).save(clean_temp=False)
 
         # Assert pdf file exists
         self.assertTrue(os.path.exists(self.pdf))
@@ -48,5 +50,5 @@ class TestImg2Pdf(unittest.TestCase):
         expected_equals_output(function_name_to_file_name(), self.pdf)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

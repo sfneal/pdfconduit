@@ -5,19 +5,21 @@ from pdfconduit.utils import add_suffix, pypdf3_reader
 
 
 class Encrypt:
-    def __init__(self,
-                 pdf,
-                 user_pw,
-                 owner_pw=None,
-                 output=None,
-                 suffix='secured',
-                 bit128=True,
-                 allow_printing=True,
-                 allow_commenting=False,
-                 overwrite_permission=None,
-                 progress_bar_enabled=False,
-                 progress_bar='gui',
-                 decrypt=None):
+    def __init__(
+        self,
+        pdf,
+        user_pw,
+        owner_pw=None,
+        output=None,
+        suffix="secured",
+        bit128=True,
+        allow_printing=True,
+        allow_commenting=False,
+        overwrite_permission=None,
+        progress_bar_enabled=False,
+        progress_bar="gui",
+        decrypt=None,
+    ):
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
         self.user_pw = user_pw
@@ -38,7 +40,7 @@ class Encrypt:
     def encrypt(self, decrypt=None):
         # Create PDF writer object
         pdf_writer = PdfFileWriter()
-        with open(self.pdf, 'rb') as pdf_file:
+        with open(self.pdf, "rb") as pdf_file:
             # Read opened PDF file
             pdf_reader = pypdf3_reader(pdf_file, decrypt)
 
@@ -48,50 +50,57 @@ class Encrypt:
                 pdf_writer.addPage(page)
 
             # Apply encryption to writer object
-            pdf_writer.encrypt(self.user_pw,
-                               self.owner_pw,
-                               use_128bit=self.encrypt_128,
-                               allow_printing=self.allow_printing,
-                               allow_commenting=self.allow_commenting,
-                               overwrite_permission=self.overwrite_permission)
+            pdf_writer.encrypt(
+                self.user_pw,
+                self.owner_pw,
+                use_128bit=self.encrypt_128,
+                allow_printing=self.allow_printing,
+                allow_commenting=self.allow_commenting,
+                overwrite_permission=self.overwrite_permission,
+            )
 
             # todo: add metadata adding functionality
-            pdf_writer.addMetadata({
-                '/Producer': 'pdfconduit',
-                '/Creator': 'pdfconduit',
-                '/Author': 'Stephen Neal',
-            })
+            pdf_writer.addMetadata(
+                {
+                    "/Producer": "pdfconduit",
+                    "/Creator": "pdfconduit",
+                    "/Author": "Stephen Neal",
+                }
+            )
 
             # Write encrypted PDF to file
-            with open(self.output, 'wb') as output_pdf:
-                pdf_writer.write(output_pdf,
-                                 progress_bar=self.progress_bar,
-                                 progress_bar_enabled=self.progress_bar_enabled)
+            with open(self.output, "wb") as output_pdf:
+                pdf_writer.write(
+                    output_pdf,
+                    progress_bar=self.progress_bar,
+                    progress_bar_enabled=self.progress_bar_enabled,
+                )
         return self.output
 
 
 def main():
     from argparse import ArgumentParser
+
     # TODO: Finish implementing argparse
 
     # Declare argparse argument descriptions
-    usage = 'Encrypt PDF files'
-    description = 'Password protect a PDF file by applying encryption.'
+    usage = "Encrypt PDF files"
+    description = "Password protect a PDF file by applying encryption."
     helpers = {
-        'pdf': "PDF file to encrypt",
-        'p': "Retrieve Python interpreter information such as Python version and Python compiler",
-        's': "Retrieve software related information such as operating system, machine type, username, etc.",
-        'hw': "Retrieve Hardware related information such as memory and processor information",
+        "pdf": "PDF file to encrypt",
+        "p": "Retrieve Python interpreter information such as Python version and Python compiler",
+        "s": "Retrieve software related information such as operating system, machine type, username, etc.",
+        "hw": "Retrieve Hardware related information such as memory and processor information",
     }
 
     # construct the argument parse and parse the arguments
     ap = ArgumentParser(usage=usage, description=description)
-    ap.add_argument("pdf", help=helpers['pdf'])
-    ap.add_argument("-upw", '--user_pw', help=helpers['upw'])
-    ap.add_argument("-opw", '--owner_pw', help=helpers['opw'])
-    ap.add_argument("-out", '--output', help=helpers['out'])
+    ap.add_argument("pdf", help=helpers["pdf"])
+    ap.add_argument("-upw", "--user_pw", help=helpers["upw"])
+    ap.add_argument("-opw", "--owner_pw", help=helpers["opw"])
+    ap.add_argument("-out", "--output", help=helpers["out"])
     args = vars(ap.parse_args())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

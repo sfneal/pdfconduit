@@ -14,16 +14,18 @@ from pdfconduit.utils import add_suffix, open_window, Receipt, Info
 
 
 class Watermark:
-    def __init__(self,
-                 document,
-                 remove_temps=True,
-                 move_temps=None,
-                 open_file=False,
-                 tempdir=None,
-                 receipt=None,
-                 use_receipt=True,
-                 progress_bar_enabled=False,
-                 progress_bar='tqdm'):
+    def __init__(
+        self,
+        document,
+        remove_temps=True,
+        move_temps=None,
+        open_file=False,
+        tempdir=None,
+        receipt=None,
+        use_receipt=True,
+        progress_bar_enabled=False,
+        progress_bar="tqdm",
+    ):
         """
         Watermark and encrypt a PDF document.
 
@@ -76,7 +78,7 @@ class Watermark:
     def cleanup(self):
         runtime = self.time.end
         if self.use_receipt:
-            self.receipt.add('~run time~', runtime)
+            self.receipt.add("~run time~", runtime)
             self.receipt.dump()
         if self.move_temps:
             if os.path.isdir(self.move_temps):
@@ -88,16 +90,18 @@ class Watermark:
             open_window(self.tempdir)
         return self.document
 
-    def draw(self,
-             text1=None,
-             text2=None,
-             copyright=True,
-             image=IMAGE_DEFAULT,
-             rotate=30,
-             opacity=0.08,
-             compress=0,
-             flatten=False,
-             add=False):
+    def draw(
+        self,
+        text1=None,
+        text2=None,
+        copyright=True,
+        image=IMAGE_DEFAULT,
+        rotate=30,
+        opacity=0.08,
+        compress=0,
+        flatten=False,
+        add=False,
+    ):
         """
         Draw watermark PDF file.
 
@@ -130,23 +134,29 @@ class Watermark:
 
         # Add to receipt
         if self.use_receipt:
-            self.receipt.add('Text1', text1)
-            self.receipt.add('Text2', text2)
-            self.receipt.add('Image', os.path.basename(image))
-            self.receipt.add('WM Opacity', str(int(opacity * 100)) + '%')
-            self.receipt.add('WM Compression', compress)
-            self.receipt.add('WM Flattening', flatten)
+            self.receipt.add("Text1", text1)
+            self.receipt.add("Text2", text2)
+            self.receipt.add("Image", os.path.basename(image))
+            self.receipt.add("WM Opacity", str(int(opacity * 100)) + "%")
+            self.receipt.add("WM Compression", compress)
+            self.receipt.add("WM Flattening", flatten)
 
-        co = CanvasConstructor(text1, text2, copyright, image, rotate, opacity, tempdir=self.tempdir)
-        objects, rotate = co.img() if flatten else co.canvas()    # Run img constructor method if flatten is True
+        co = CanvasConstructor(
+            text1, text2, copyright, image, rotate, opacity, tempdir=self.tempdir
+        )
+        objects, rotate = (
+            co.img() if flatten else co.canvas()
+        )  # Run img constructor method if flatten is True
 
         # Draw watermark to file
-        self.watermark = WatermarkDraw(objects,
-                                       rotate=rotate,
-                                       compress=compress,
-                                       tempdir=self.tempdir,
-                                       pagesize=Info(self.document_og).size,
-                                       pagescale=True).write()
+        self.watermark = WatermarkDraw(
+            objects,
+            rotate=rotate,
+            compress=compress,
+            tempdir=self.tempdir,
+            pagesize=Info(self.document_og).size,
+            pagescale=True,
+        ).write()
 
         if not add:
             return self.watermark
@@ -154,7 +164,15 @@ class Watermark:
             self.add()
             return self.cleanup()
 
-    def add(self, document=None, watermark=None, underneath=False, output=None, suffix='watermarked', method='pdfrw'):
+    def add(
+        self,
+        document=None,
+        watermark=None,
+        underneath=False,
+        output=None,
+        suffix="watermarked",
+        method="pdfrw",
+    ):
         """
         Add a watermark file to an existing PDF document.
 
@@ -177,32 +195,37 @@ class Watermark:
             Watermarked PDF Document full path
         """
         if self.use_receipt:
-            self.receipt.add('WM Placement', 'Overlay')
+            self.receipt.add("WM Placement", "Overlay")
         if not watermark:
             watermark = self.watermark
         if not document:
             document = self.document
         self.document = str(
-            WatermarkAdd(document,
-                         watermark,
-                         output=output,
-                         underneath=underneath,
-                         tempdir=self.tempdir,
-                         suffix=suffix,
-                         method=method))
+            WatermarkAdd(
+                document,
+                watermark,
+                output=output,
+                underneath=underneath,
+                tempdir=self.tempdir,
+                suffix=suffix,
+                method=method,
+            )
+        )
         if self.use_receipt:
-            self.receipt.add('Watermarked PDF', os.path.basename(self.document))
+            self.receipt.add("Watermarked PDF", os.path.basename(self.document))
         if self.open_file:
             open_window(self.document)
         return self.document
 
-    def encrypt(self,
-                user_pw='',
-                owner_pw=None,
-                encrypt_128=True,
-                allow_printing=True,
-                allow_commenting=False,
-                document=None):
+    def encrypt(
+        self,
+        user_pw="",
+        owner_pw=None,
+        encrypt_128=True,
+        allow_printing=True,
+        allow_commenting=False,
+        document=None,
+    ):
         """
         Encrypt a PDF document to add passwords and restrict permissions.
 
@@ -224,26 +247,29 @@ class Watermark:
         """
         document = self.document if document is None else document
         if self.use_receipt:
-            self.receipt.add('User pw', user_pw)
-            self.receipt.add('Owner pw', owner_pw)
+            self.receipt.add("User pw", user_pw)
+            self.receipt.add("Owner pw", owner_pw)
             if encrypt_128:
-                self.receipt.add('Encryption key size', '128')
+                self.receipt.add("Encryption key size", "128")
             else:
-                self.receipt.add('Encryption key size', '40')
+                self.receipt.add("Encryption key size", "40")
             if allow_printing:
-                self.receipt.add('Permissions', 'Allow printing')
+                self.receipt.add("Permissions", "Allow printing")
             else:
-                self.receipt.add('Permissions', 'Allow ALL')
+                self.receipt.add("Permissions", "Allow ALL")
         p = str(
-            Encrypt(document,
-                    user_pw,
-                    owner_pw,
-                    output=add_suffix(self.document_og, 'secured'),
-                    bit128=encrypt_128,
-                    allow_printing=allow_printing,
-                    allow_commenting=allow_commenting,
-                    progress_bar_enabled=self.progress_bar_enabled,
-                    progress_bar=self.progress_bar))
+            Encrypt(
+                document,
+                user_pw,
+                owner_pw,
+                output=add_suffix(self.document_og, "secured"),
+                bit128=encrypt_128,
+                allow_printing=allow_printing,
+                allow_commenting=allow_commenting,
+                progress_bar_enabled=self.progress_bar_enabled,
+                progress_bar=self.progress_bar,
+            )
+        )
         if self.use_receipt:
-            self.receipt.add('Secured PDF', os.path.basename(p))
+            self.receipt.add("Secured PDF", os.path.basename(p))
         return p

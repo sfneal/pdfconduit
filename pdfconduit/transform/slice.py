@@ -8,16 +8,16 @@ from pdfconduit.utils.info import Info
 from pdfconduit.utils.path import add_suffix
 
 
-def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=None):
+def slicer(document, first_page=None, last_page=None, suffix="sliced", tempdir=None):
     """Slice a PDF document to remove pages."""
     # Set output file name
     if tempdir:
-        with NamedTemporaryFile(suffix='.pdf', dir=tempdir, delete=False) as temp:
+        with NamedTemporaryFile(suffix=".pdf", dir=tempdir, delete=False) as temp:
             output = temp.name
     elif suffix:
         output = os.path.join(os.path.dirname(document), add_suffix(document, suffix))
     else:
-        with NamedTemporaryFile(suffix='.pdf') as temp:
+        with NamedTemporaryFile(suffix=".pdf") as temp:
             output = temp.name
 
     # Reindex page selections for simple user input
@@ -25,7 +25,14 @@ def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=N
 
     # Validate page range by comparing selection to number of pages in PDF document
     pages = Info(document).pages
-    invalid = 'Number of pages: ' + str(pages) + ' ----> Page Range Input: ' + str(first_page) + '-' + str(last_page)
+    invalid = (
+        "Number of pages: "
+        + str(pages)
+        + " ----> Page Range Input: "
+        + str(first_page)
+        + "-"
+        + str(last_page)
+    )
     assert first_page <= last_page <= pages, invalid
 
     pdf = PdfFileReader(document)
@@ -35,6 +42,6 @@ def slicer(document, first_page=None, last_page=None, suffix='sliced', tempdir=N
     for page in pages:
         writer.addPage(pdf.getPage(page))
 
-    with open(output, 'wb') as out:
+    with open(output, "wb") as out:
         writer.write(out)
     return output
