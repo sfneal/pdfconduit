@@ -62,6 +62,7 @@ class Upscale:
         writer.write()
 
     def pypdf3(self):
+        # much slower than pdfrw
         reader = PdfFileReader(self.file_name)
         writer = PdfFileWriter()
 
