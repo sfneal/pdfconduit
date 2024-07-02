@@ -22,6 +22,6 @@ def available_images():
         return ['Add images...']
 
 
-IMAGE_DEFAULT = resource_path('Wide.png')
+IMAGE_DEFAULT = resource_path('watermark.png')
 
 __all__ = ['IMAGE_DEFAULT', 'IMAGE_DIRECTORY', 'available_images']
