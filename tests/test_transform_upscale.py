@@ -24,10 +24,7 @@ class TestUpscale(unittest.TestCase):
         s = 2.0
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
-        # Assert upscaled file exists
         self.assertPdfExists(upscaled)
-
-        # Assert upscaled pdf file is the correct size
         self.assertPdfUpscaled(s, upscaled)
 
         expected_equals_output(function_name_to_file_name(), upscaled)
