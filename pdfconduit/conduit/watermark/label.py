@@ -9,9 +9,21 @@ def mean(numbers):
 
 
 class Label(WatermarkDraw):
-    def __init__(self, document, label, title_page=False, suffix='labeled', output=None, tempdir=None):
+    def __init__(
+        self,
+        document,
+        label,
+        title_page=False,
+        suffix="labeled",
+        output=None,
+        tempdir=None,
+    ):
         self.size = Info(document).size
-        super(Label, self).__init__(self._create_canvas_objects(label, title_page), pagesize=self.size, tempdir=tempdir)
+        super(Label, self).__init__(
+            self._create_canvas_objects(label, title_page),
+            pagesize=self.size,
+            tempdir=tempdir,
+        )
         self.document = document
         self.watermark = self._write()
 
@@ -27,18 +39,31 @@ class Label(WatermarkDraw):
         objects = CanvasObjects()
         if not title_page:
             objects.add(
-                CanvasStr(label,
-                          size=int(mean(self.size) * .02),
-                          opacity=1,
-                          x=-(self.size[0] / 2) + 15,
-                          y=-(self.size[1] / 2) + 25,
-                          x_centered=False))
+                CanvasStr(
+                    label,
+                    size=int(mean(self.size) * 0.02),
+                    opacity=1,
+                    x=-(self.size[0] / 2) + 15,
+                    y=-(self.size[1] / 2) + 25,
+                    x_centered=False,
+                )
+            )
         else:
-            objects.add(CanvasStr(label, size=int(mean(self.size) * .1), opacity=1, y_centered=True))
+            objects.add(
+                CanvasStr(
+                    label, size=int(mean(self.size) * 0.1), opacity=1, y_centered=True
+                )
+            )
         return objects
 
     def write(self, cleanup=True):
-        wm = Watermark(self.document, tempdir=self.dir, use_receipt=False, open_file=False, remove_temps=True)
+        wm = Watermark(
+            self.document,
+            tempdir=self.dir,
+            use_receipt=False,
+            open_file=False,
+            remove_temps=True,
+        )
         labeled = wm.add(watermark=self.watermark, output=self.output)
         if cleanup:
             wm.cleanup()

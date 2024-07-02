@@ -6,10 +6,14 @@ from pdfrw import PdfReader, PdfWriter, IndirectPdfDict
 
 
 class Merge:
-    def __init__(self, input_pdfs, output_name='merged', output_dir=None, method='pdfrw'):
+    def __init__(
+        self, input_pdfs, output_name="merged", output_dir=None, method="pdfrw"
+    ):
         self.pdfs = self._get_pdf_list(input_pdfs)
         self.directory = output_dir if output_dir else os.path.dirname(self.pdfs[0])
-        self.output = os.path.join(self.directory, output_name.replace('.pdf', '') + '.pdf')
+        self.output = os.path.join(
+            self.directory, output_name.replace(".pdf", "") + ".pdf"
+        )
         self.method = method
         self.file = self.merge(self.pdfs, self.output)
 
@@ -18,7 +22,7 @@ class Merge:
 
     @staticmethod
     def validate(pdf):
-        if not pdf.startswith('.') and pdf.endswith('.pdf'):
+        if not pdf.startswith(".") and pdf.endswith(".pdf"):
             return True
 
     def _get_pdf_list(self, input_pdfs):
@@ -33,11 +37,15 @@ class Merge:
         if isinstance(input_pdfs, list):
             return [pdf for pdf in input_pdfs if self.validate(pdf)]
         elif os.path.isdir(input_pdfs):
-            return [os.path.join(input_pdfs, pdf) for pdf in os.listdir(input_pdfs) if self.validate(pdf)]
+            return [
+                os.path.join(input_pdfs, pdf)
+                for pdf in os.listdir(input_pdfs)
+                if self.validate(pdf)
+            ]
 
     def merge(self, pdf_files, output):
         """Merge list of PDF files to a single PDF file."""
-        if self.method == 'pypdf3':
+        if self.method == "pypdf3":
             return self.pypdf3(pdf_files, output)
         else:
             return self.pdfrw(pdf_files, output)
@@ -52,7 +60,7 @@ class Merge:
             pdf_merger.append(pdf)
 
         # writing combined pdf to output pdf file
-        with open(output, 'wb') as f:
+        with open(output, "wb") as f:
             pdf_merger.write(f)
         pdf_merger.close()
         return output
@@ -64,9 +72,9 @@ class Merge:
             writer.addpages(PdfReader(inpfn).pages)
 
         writer.trailer.Info = IndirectPdfDict(
-            Author='Stephen Neal',
-            Creator='pdfconduit',
-            Producer='pdfconduit',
+            Author="Stephen Neal",
+            Creator="pdfconduit",
+            Producer="pdfconduit",
         )
         writer.write(output)
         return output

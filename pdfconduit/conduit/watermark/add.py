@@ -13,16 +13,18 @@ from pdfconduit.utils import add_suffix, Info, pypdf3_reader
 
 
 class WatermarkAdd:
-    def __init__(self,
-                 document,
-                 watermark,
-                 underneath=False,
-                 overwrite=False,
-                 output=None,
-                 suffix='watermarked',
-                 decrypt=False,
-                 tempdir=None,
-                 method='pdfrw'):
+    def __init__(
+        self,
+        document,
+        watermark,
+        underneath=False,
+        overwrite=False,
+        output=None,
+        suffix="watermarked",
+        decrypt=False,
+        tempdir=None,
+        method="pdfrw",
+    ):
         """
         Add a watermark to an existing PDF document
 
@@ -62,7 +64,7 @@ class WatermarkAdd:
         elif suffix:
             self.output_filename = add_suffix(document, suffix)
         else:
-            tmpf = NamedTemporaryFile(suffix='.pdf', dir=self.tempdir, delete=False)
+            tmpf = NamedTemporaryFile(suffix=".pdf", dir=self.tempdir, delete=False)
             self.output_filename = resource_path(tmpf.name)
 
         self.add(pdf_fname, wtrmrk_fname)
@@ -71,52 +73,61 @@ class WatermarkAdd:
         return str(self.output_filename)
 
     def _get_document_info(self, filename):
-        pdf_file = {'path': filename}
+        pdf_file = {"path": filename}
 
         # 2a. Get PDF width and height
         pdf_file.update(Info(self.document_reader).dimensions)
 
         # 2b. Get PDF file orientation
-        if pdf_file['h'] > pdf_file['w']:
-            pdf_file['orientation'] = 'portrait'
-            letter_size = {'w': int(letter[0]), 'h': int(letter[1])}
+        if pdf_file["h"] > pdf_file["w"]:
+            pdf_file["orientation"] = "portrait"
+            letter_size = {"w": int(letter[0]), "h": int(letter[1])}
         else:
-            pdf_file['orientation'] = 'landscape'
-            letter_size = {'h': int(letter[0]), 'w': int(letter[1])}
+            pdf_file["orientation"] = "landscape"
+            letter_size = {"h": int(letter[0]), "w": int(letter[1])}
 
         # 2c. Upscale PDF if it is smaller than a letter
-        if pdf_file['w'] <= letter_size['w'] or pdf_file['h'] <= letter_size['h']:
-            scale = float(letter_size['w'] / pdf_file['w'])
-            pdf_file['upscaled'] = upscale(pdf_file['path'], scale=scale, tempdir=self.tempdir)
-            self.document_reader = pypdf3_reader(pdf_file['upscaled'])
+        if pdf_file["w"] <= letter_size["w"] or pdf_file["h"] <= letter_size["h"]:
+            scale = float(letter_size["w"] / pdf_file["w"])
+            pdf_file["upscaled"] = upscale(
+                pdf_file["path"], scale=scale, tempdir=self.tempdir
+            )
+            self.document_reader = pypdf3_reader(pdf_file["upscaled"])
         return pdf_file
 
     def _get_watermark_info(self, document, watermark, margin_x=0, margin_y=0):
         # 3a. Get watermark path and dimensions
-        watermark_file = {'path': watermark}
+        watermark_file = {"path": watermark}
         watermark_file.update(Info(watermark).dimensions)
 
         # 3b. Check if watermark file needs to be rotated
-        if watermark_file['w'] > watermark_file['h'] and document['orientation'] == 'portrait':
+        if (
+            watermark_file["w"] > watermark_file["h"]
+            and document["orientation"] == "portrait"
+        ):
             self.rotate = 90
-            watermark_file['rotated'] = rotate(watermark, self.rotate, tempdir=self.tempdir, method=self.method)
+            watermark_file["rotated"] = rotate(
+                watermark, self.rotate, tempdir=self.tempdir, method=self.method
+            )
 
         # Set watermark file to be used for upscaling
         try:
-            wtrmrk = watermark_file['rotated']
-            watermark_file.update(Info(watermark_file['rotated']).dimensions)
+            wtrmrk = watermark_file["rotated"]
+            watermark_file.update(Info(watermark_file["rotated"]).dimensions)
         except KeyError:
-            wtrmrk = watermark_file['path']
+            wtrmrk = watermark_file["path"]
 
         # 3c. Check if watermark file needs to be upscaled
         scale = 0
-        if watermark_file['w'] <= document['w']:
-            scale = float(document['w'] / watermark_file['w'])
+        if watermark_file["w"] <= document["w"]:
+            scale = float(document["w"] / watermark_file["w"])
 
-            if watermark_file['h'] * scale > document['h']:
-                scale = float(document['h'] / watermark_file['h'])
+            if watermark_file["h"] * scale > document["h"]:
+                scale = float(document["h"] / watermark_file["h"])
 
-            watermark_file['upscaled'] = upscale(wtrmrk, scale=scale, tempdir=self.tempdir, method=self.method)
+            watermark_file["upscaled"] = upscale(
+                wtrmrk, scale=scale, tempdir=self.tempdir, method=self.method
+            )
         self.scale = scale
         return watermark_file
 
@@ -124,18 +135,18 @@ class WatermarkAdd:
     def _set_filenames(self):
         # 4a. If upscaled PDF file does not exists use input PDF path
         try:
-            pdf = self.document['upscaled']
+            pdf = self.document["upscaled"]
         except KeyError:
-            pdf = self.document['path']
+            pdf = self.document["path"]
 
         # 4b. If rotated watermark file does not exists use input watermark path
         try:
             try:
-                watermark = self.watermark_file['upscaled']
+                watermark = self.watermark_file["upscaled"]
             except KeyError:
-                watermark = self.watermark_file['rotated']
+                watermark = self.watermark_file["rotated"]
         except KeyError:
-            watermark = self.watermark_file['path']
+            watermark = self.watermark_file["path"]
         return pdf, watermark
 
     def add(self, document, watermark):
@@ -157,7 +168,11 @@ class WatermarkAdd:
             wtrmrk_page = watermark_reader.getPage(0)
             wtrmrk_width = (wtrmrk_page.mediaBox.getWidth() / 2) + 0
             wtrmrk_height = (wtrmrk_page.mediaBox.getHeight() / 2) + 80
-            wtrmrk_rotate = -int(Info(watermark_reader).rotate) if Info(watermark_reader).rotate is not None else 0
+            wtrmrk_rotate = (
+                -int(Info(watermark_reader).rotate)
+                if Info(watermark_reader).rotate is not None
+                else 0
+            )
 
             # 5c. Go through all the input file pages to add a watermark to them
             for page_number in range(page_count):
@@ -165,20 +180,30 @@ class WatermarkAdd:
                 if not self.underneath:
                     input_page = document_reader.getPage(page_number)
                     if wtrmrk_rotate != 0:
-                        input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+                        input_page.mergeRotatedTranslatedPage(
+                            wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height
+                        )
                     else:
                         wtrmrk_width = 0
                         wtrmrk_height = 0
-                        input_page.mergeTranslatedPage(wtrmrk_page, wtrmrk_width, wtrmrk_height)
+                        input_page.mergeTranslatedPage(
+                            wtrmrk_page, wtrmrk_width, wtrmrk_height
+                        )
                 else:
                     size = Info(document_reader).dimensions
-                    input_page = PageObject().createBlankPage(document_reader, size['w'], size['h'])
+                    input_page = PageObject().createBlankPage(
+                        document_reader, size["w"], size["h"]
+                    )
                     if wtrmrk_rotate != 0:
-                        input_page.mergeRotatedTranslatedPage(wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height)
+                        input_page.mergeRotatedTranslatedPage(
+                            wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height
+                        )
                     else:
                         wtrmrk_width = 0
                         wtrmrk_height = 0
-                        input_page.mergeTranslatedPage(wtrmrk_page, wtrmrk_width, wtrmrk_height)
+                        input_page.mergeTranslatedPage(
+                            wtrmrk_page, wtrmrk_width, wtrmrk_height
+                        )
                     input_page.mergePage(document_reader.getPage(page_number))
 
                 # Add page from input file to output document
@@ -227,7 +252,7 @@ class WatermarkAdd:
 
                     page_x, page_y, page_x1, page_y1 = mbox
                     page_w = page_x1 - page_x
-                    page_h = page_y1 - page_y    # For illustration, not used
+                    page_h = page_y1 - page_y  # For illustration, not used
 
                     # Scale the watermark if it is too wide for the page
                     # (Could do the same for height instead if needed)
@@ -256,7 +281,7 @@ class WatermarkAdd:
             # Write out the destination file
             PdfWriter(output_filename, trailer=trailer).write()
 
-        if self.method == 'pypdf3':
+        if self.method == "pypdf3":
             return pypdf3()
         else:
             return pdfrw()

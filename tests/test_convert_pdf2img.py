@@ -10,7 +10,7 @@ from tests import *
 class TestPdf2Img(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pdf_path = os.path.join(test_data_dir, 'plan_p.pdf')
+        cls.pdf_path = os.path.join(test_data_dir, "plan_p.pdf")
         cls.img = None
 
     def tearDown(self):
@@ -26,11 +26,11 @@ class TestPdf2Img(unittest.TestCase):
         self.assertTrue(os.path.exists(img[0]))
 
         # Assert img file is correct file type
-        self.assertTrue(img[0].endswith('.png'))
+        self.assertTrue(img[0].endswith(".png"))
         self.img = img[0]
 
-        expected_equals_output(function_name_to_file_name('.png'), img[0])
+        expected_equals_output(function_name_to_file_name(".png"), img[0])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
