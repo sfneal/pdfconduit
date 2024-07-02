@@ -19,9 +19,8 @@ Features:
 
 def get_version(version_file='_version.py'):
     """Retrieve the package version from a version file in the package root."""
-    filename = os.path.join(os.path.dirname(__file__), 'pdfconduit', version_file)
-    with open(filename, 'rb') as fp:
-        return fp.read().decode('utf8').split('=')[1].strip(" \n'")
+    with open(os.path.join(os.path.dirname(__file__), 'pdfconduit', version_file), 'rb') as fp:
+        return fp.read().decode('utf8').split('=')[1].strip("\n").replace('"', '')
 
 
 setup(
