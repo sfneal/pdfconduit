@@ -20,7 +20,6 @@ class TestUpscale(unittest.TestCase):
 
     @Timer.decorator
     def test_upscale_pdfrw_20x(self):
-        """Resize a PDF file to 2.0x times the original scale."""
         s = 2.0
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_2.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
@@ -31,7 +30,6 @@ class TestUpscale(unittest.TestCase):
 
     @Timer.decorator
     def test_upscale_pdfrw_15x(self):
-        """Resize a PDF file to 1.5x times the original scale."""
         s = 1.5
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_1.5_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
@@ -42,7 +40,6 @@ class TestUpscale(unittest.TestCase):
 
     @Timer.decorator
     def test_upscale_pdfrw_30x(self):
-        """Resize a PDF file to 3.0x times the original scale."""
         s = 3.0
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_3.0_pdfrw', tempdir=self.temp.name, method='pdfrw').file
 
@@ -53,7 +50,6 @@ class TestUpscale(unittest.TestCase):
 
     @Timer.decorator
     def test_downscale_pdfrw_20x(self):
-        """Resize a PDF file to 3.0x times the original scale."""
         s = 1 / 2
         upscaled = Upscale(pdf_path, scale=s, suffix='downscaled_2.0_pdfrw', tempdir=self.temp.name,
                            method='pdfrw').file
@@ -65,43 +61,36 @@ class TestUpscale(unittest.TestCase):
 
     @Timer.decorator
     def test_upscale_pypdf3_20x(self):
-        """Resize a PDF file to 2.0x times the original scale."""
         s = 2.0
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_2.0_pypdf3', tempdir=self.temp.name, method='pypdf3').file
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
 
-        copy_pdf_to_output_directory(upscaled, function_name_to_file_name())
-        # expected_equals_output(function_name_to_file_name(), upscaled)
+        expected_equals_output(function_name_to_file_name(), upscaled)
 
     @Timer.decorator
     def test_upscale_pypdf3_15x(self):
-        """Resize a PDF file to 1.5x times the original scale."""
         s = 1.5
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_1.5_pypdf3', tempdir=self.temp.name, method='pypdf3').file
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
 
-        copy_pdf_to_output_directory(upscaled, function_name_to_file_name())
-        # expected_equals_output(function_name_to_file_name(), upscaled)
+        expected_equals_output(function_name_to_file_name(), upscaled)
 
     @Timer.decorator
     def test_upscale_pypdf3_30x(self):
-        """Resize a PDF file to 3.0x times the original scale."""
         s = 3.0
         upscaled = Upscale(pdf_path, scale=s, suffix='upscaled_3.0_pypdf3', tempdir=self.temp.name, method='pypdf3').file
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
 
-        copy_pdf_to_output_directory(upscaled, function_name_to_file_name())
-        # expected_equals_output(function_name_to_file_name(), upscaled)
+        expected_equals_output(function_name_to_file_name(), upscaled)
 
     @Timer.decorator
     def test_downscale_pypdf3_20x(self):
-        """Resize a PDF file to 3.0x times the original scale."""
         s = 1 / 2
         upscaled = Upscale(pdf_path, scale=s, suffix='downscaled_2.0_pypdf3', tempdir=self.temp.name,
                            method='pypdf3').file
@@ -109,8 +98,7 @@ class TestUpscale(unittest.TestCase):
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
 
-        copy_pdf_to_output_directory(upscaled, function_name_to_file_name())
-        # expected_equals_output(function_name_to_file_name(), upscaled)
+        expected_equals_output(function_name_to_file_name(), upscaled)
 
     def assertPdfUpscaled(self, s, upscaled):
         self.assertEqual(Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size]))
