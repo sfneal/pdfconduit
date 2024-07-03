@@ -55,7 +55,10 @@ class Info:
     @property
     def metadata(self):
         """Retrieve PDF metadata"""
-        return self.pdf.metadata
+        if self.use_pypdf:
+            return self.pdf.metadata
+        return self.pdf.getDocumentInfo()
+
 
     def resources(self):
         """Retrieve contents of each page of PDF"""
