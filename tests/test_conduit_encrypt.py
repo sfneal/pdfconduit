@@ -224,7 +224,7 @@ class TestEncrypt(unittest.TestCase):
         # Assert user & owner password byte string is correct
         self.assertEqual(
             security["/O"],
-            'ÐHÑRžS]˘—Í8V6{˘KJ’ß\x01æ7ÑnÊ\x06[¯Nd’\x0b',
+            "ÐHÑRžS]˘—Í8V6{˘KJ’ß\x01æ7ÑnÊ\x06[¯Nd’\x0b",
         )
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -287,16 +287,27 @@ class TestEncrypt(unittest.TestCase):
         self.assertTrue("/P" in security)
         self.assertEqual(security["/P"], expected)
 
-    def assertPermissions(self, pdf, can_print=False, can_modify=False, can_copy=False, can_annotate=False,
-                          can_fill_forms=False, can_change_accessability=False, can_assemble=False,
-                          can_print_high_quality=False):
+    def assertPermissions(
+        self,
+        pdf,
+        can_print=False,
+        can_modify=False,
+        can_copy=False,
+        can_annotate=False,
+        can_fill_forms=False,
+        can_change_accessability=False,
+        can_assemble=False,
+        can_print_high_quality=False,
+    ):
         permissions = Info(pdf.output, self.user_pw, use_pypdf=True).permissions
         self.assertEqual(permissions.can_print(), can_print)
         self.assertEqual(permissions.can_modify(), can_modify)
         self.assertEqual(permissions.can_copy(), can_copy)
         self.assertEqual(permissions.can_annotate(), can_annotate)
         self.assertEqual(permissions.can_fill_forms(), can_fill_forms)
-        self.assertEqual(permissions.can_change_accessability(), can_change_accessability)
+        self.assertEqual(
+            permissions.can_change_accessability(), can_change_accessability
+        )
         self.assertEqual(permissions.can_assemble(), can_assemble)
         self.assertEqual(permissions.can_print_high_quality(), can_print_high_quality)
 
