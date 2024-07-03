@@ -1,13 +1,19 @@
 # Retrieve information about a PDF document
 from PyPDF3 import PdfFileReader
+from pdfconduit.utils.read import pypdf_reader
+from pdfconduit.utils._permissions import Permissions
 
 
 class Info:
-    def __init__(self, path, password=None, prompt=True):
-        self.pdf = self._reader(path, password, prompt)
+    def __init__(self, path, password=None, prompt=True, use_pypdf=False):
+        self.use_pypdf = use_pypdf
+        if use_pypdf:
+            self.pdf = pypdf_reader(path, password)
+        else:
+            self.pdf = self._pypdf3_reader(path, password, prompt)
 
     @staticmethod
-    def _reader(path, password, prompt):
+    def _pypdf3_reader(path, password, prompt):
         """Read PDF and decrypt if encrypted."""
         pdf = PdfFileReader(path) if not isinstance(path, PdfFileReader) else path
         # Check that PDF is encrypted
@@ -32,6 +38,8 @@ class Info:
     @property
     def encrypted(self):
         """Check weather a PDF is encrypted"""
+        if self.use_pypdf:
+            return self.pdf.is_encrypted
         return True if self.pdf.isEncrypted else False
 
     @property
@@ -47,6 +55,8 @@ class Info:
     @property
     def metadata(self):
         """Retrieve PDF metadata"""
+        if self.use_pypdf:
+            return self.pdf.metadata
         return self.pdf.getDocumentInfo()
 
     def resources(self):
@@ -56,6 +66,10 @@ class Info:
     @property
     def security(self):
         """Print security object information for a pdf document"""
+        if self.use_pypdf:
+            return {
+                k: v for i in self.pdf.resolved_objects.items() for k, v in i[1].items()
+            }
         return {k: v for i in self.pdf.resolvedObjects.items() for k, v in i[1].items()}
 
     @property
@@ -74,3 +88,8 @@ class Info:
     def rotate(self):
         """Retrieve rotation info."""
         return self._resolved_objects(self.pdf, "/Rotate")
+
+    @property
+    def permissions(self):
+        """Retrieve user access permissions."""
+        return Permissions(self.pdf)

@@ -1,7 +1,9 @@
 # Encrypt a PDF file with password protection
-from PyPDF3 import PdfFileWriter
+from pypdf import PdfWriter
+from pypdf.constants import UserAccessPermissions
 
-from pdfconduit.utils import add_suffix, pypdf3_reader
+from pdfconduit.utils import add_suffix
+from pdfconduit.utils.read import pypdf_reader
 
 
 class Encrypt:
@@ -16,8 +18,6 @@ class Encrypt:
         allow_printing=True,
         allow_commenting=False,
         overwrite_permission=None,
-        progress_bar_enabled=False,
-        progress_bar="gui",
         decrypt=None,
     ):
         """Password protect PDF file and allow all other permissions."""
@@ -29,8 +29,8 @@ class Encrypt:
         self.allow_printing = allow_printing
         self.allow_commenting = allow_commenting
         self.overwrite_permission = overwrite_permission
-        self.progress_bar_enabled = progress_bar_enabled
-        self.progress_bar = progress_bar
+
+        # todo: add algorythm parameter
 
         self.encrypt(decrypt)
 
@@ -38,29 +38,32 @@ class Encrypt:
         return str(self.output)
 
     def encrypt(self, decrypt=None):
-        # Create PDF writer object
-        pdf_writer = PdfFileWriter()
+        if self.allow_printing and self.allow_commenting:
+            permissions = UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
+        elif self.allow_printing:
+            permissions = UserAccessPermissions.PRINT
+        elif self.allow_commenting:
+            permissions = UserAccessPermissions.MODIFY
+        else:
+            permissions = UserAccessPermissions
+
         with open(self.pdf, "rb") as pdf_file:
             # Read opened PDF file
-            pdf_reader = pypdf3_reader(pdf_file, decrypt)
+            pdf_reader = pypdf_reader(pdf_file, decrypt)
 
-            # Add each page from source PDF
-            for page_num in range(pdf_reader.numPages):
-                page = pdf_reader.getPage(page_num)
-                pdf_writer.addPage(page)
+            # Create PDF writer object
+            pdf_writer = PdfWriter(clone_from=pdf_reader)
 
             # Apply encryption to writer object
             pdf_writer.encrypt(
-                self.user_pw,
-                self.owner_pw,
+                user_password=self.user_pw,
+                owner_password=self.owner_pw,
                 use_128bit=self.encrypt_128,
-                allow_printing=self.allow_printing,
-                allow_commenting=self.allow_commenting,
-                overwrite_permission=self.overwrite_permission,
+                permissions_flag=permissions,
             )
 
             # todo: add metadata adding functionality
-            pdf_writer.addMetadata(
+            pdf_writer.add_metadata(
                 {
                     "/Producer": "pdfconduit",
                     "/Creator": "pdfconduit",
@@ -70,11 +73,7 @@ class Encrypt:
 
             # Write encrypted PDF to file
             with open(self.output, "wb") as output_pdf:
-                pdf_writer.write(
-                    output_pdf,
-                    progress_bar=self.progress_bar,
-                    progress_bar_enabled=self.progress_bar_enabled,
-                )
+                pdf_writer.write(output_pdf)
         return self.output
 
 
