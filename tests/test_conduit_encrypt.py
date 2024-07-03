@@ -40,7 +40,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        # self.assertSecurityValue(security, -1852)
+        self.assertSecurityValue(security, 4)
         self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -61,7 +61,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        # self.assertSecurityValue(security, -1852)
+        self.assertSecurityValue(security, 4)
         self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -84,7 +84,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        # self.assertSecurityValue(security, -1852)
+        self.assertSecurityValue(security, 4)
         self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -106,7 +106,7 @@ class TestEncrypt(unittest.TestCase):
 
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
-        # self.assertSecurityValue(security, -800)
+        self.assertSecurityValue(security, 8)
         self.assertPermissions(encrypted, can_print=False, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -129,7 +129,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        # self.assertSecurityValue(security, -1500)
+        self.assertSecurityValue(security, 12)
         self.assertPermissions(encrypted, can_print=True, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -151,7 +151,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        # self.assertSecurityValue(security, -1852)
+        self.assertSecurityValue(security, 4)
         self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -174,7 +174,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        # self.assertSecurityValue(security, -800)
+        self.assertSecurityValue(security, 8)
         self.assertPermissions(encrypted, can_print=False, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -197,7 +197,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        # self.assertSecurityValue(security, -1500)
+        self.assertSecurityValue(security, 12)
         self.assertPermissions(encrypted, can_print=True, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -217,7 +217,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        # self.assertSecurityValue(security, -1852)
+        self.assertSecurityValue(security, 4)
 
         self.assertPermissions(encrypted, can_print=True)
 
