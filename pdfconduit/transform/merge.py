@@ -7,6 +7,7 @@ from pdfrw import (
     PdfWriter as PdfrwWriter,
     IndirectPdfDict as PdfrwIndirectPdfDict,
 )
+from pypdf import PdfWriter as PyPdfWriter
 
 
 class Merge:
@@ -51,6 +52,8 @@ class Merge:
         """Merge list of PDF files to a single PDF file."""
         if self.method == "pypdf3":
             return self.pypdf3(pdf_files, output)
+        if self.method == "pypdf":
+            return self.pypdf(pdf_files, output)
         else:
             return self.pdfrw(pdf_files, output)
 
@@ -81,4 +84,16 @@ class Merge:
             Producer="pdfconduit",
         )
         writer.write(output)
+        return output
+
+    @staticmethod
+    def pypdf(pdf_files, output):
+        merger = PyPdfWriter()
+
+        for pdf in pdf_files:
+            merger.append(pdf)
+
+        merger.write(output)
+        merger.close()
+
         return output
