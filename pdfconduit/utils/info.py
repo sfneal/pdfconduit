@@ -1,6 +1,7 @@
 # Retrieve information about a PDF document
 from PyPDF3 import PdfFileReader
 from pdfconduit.utils.read import pypdf_reader
+from pdfconduit.utils._permissions import Permissions
 
 
 class Info:
@@ -83,3 +84,8 @@ class Info:
     def rotate(self):
         """Retrieve rotation info."""
         return self._resolved_objects(self.pdf, "/Rotate")
+
+    @property
+    def permissions(self):
+        """Retrieve user access permissions."""
+        return Permissions(self.pdf)
