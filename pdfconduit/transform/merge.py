@@ -1,8 +1,12 @@
 # Merge PDF documents
 import os
 
-from PyPDF3 import PdfFileMerger
-from pdfrw import PdfReader, PdfWriter, IndirectPdfDict
+from PyPDF3 import PdfFileMerger as PyPdf3FileMerger
+from pdfrw import (
+    PdfReader as PdfrwReader,
+    PdfWriter as PdfrwWriter,
+    IndirectPdfDict as PdfrwIndirectPdfDict,
+)
 
 
 class Merge:
@@ -53,7 +57,7 @@ class Merge:
     @staticmethod
     def pypdf3(pdf_files, output):
         # Create PDF file merger object
-        pdf_merger = PdfFileMerger()
+        pdf_merger = PyPdf3FileMerger()
 
         # Appending pdfs one by one
         for pdf in pdf_files:
@@ -67,11 +71,11 @@ class Merge:
 
     @staticmethod
     def pdfrw(pdf_files, output):
-        writer = PdfWriter()
+        writer = PdfrwWriter()
         for inpfn in pdf_files:
-            writer.addpages(PdfReader(inpfn).pages)
+            writer.addpages(PdfrwReader(inpfn).pages)
 
-        writer.trailer.Info = IndirectPdfDict(
+        writer.trailer.Info = PdfrwIndirectPdfDict(
             Author="Stephen Neal",
             Creator="pdfconduit",
             Producer="pdfconduit",
