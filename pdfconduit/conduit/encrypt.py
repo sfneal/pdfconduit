@@ -47,7 +47,7 @@ class Encrypt:
         else:
             permissions = UserAccessPermissions
 
-        with open(self.pdf, 'rb') as pdf_file:
+        with open(self.pdf, "rb") as pdf_file:
             # Read opened PDF file
             pdf_reader = pypdf_reader(pdf_file, decrypt)
 
@@ -55,20 +55,24 @@ class Encrypt:
             pdf_writer = PdfWriter(clone_from=pdf_reader)
 
             # Apply encryption to writer object
-            pdf_writer.encrypt(user_password=self.user_pw,
-                               owner_password=self.owner_pw,
-                               use_128bit=self.encrypt_128,
-                               permissions_flag=permissions)
+            pdf_writer.encrypt(
+                user_password=self.user_pw,
+                owner_password=self.owner_pw,
+                use_128bit=self.encrypt_128,
+                permissions_flag=permissions,
+            )
 
             # todo: add metadata adding functionality
-            pdf_writer.add_metadata({
-                '/Producer': 'pdfconduit',
-                '/Creator': 'pdfconduit',
-                '/Author': 'Stephen Neal',
-            })
+            pdf_writer.add_metadata(
+                {
+                    "/Producer": "pdfconduit",
+                    "/Creator": "pdfconduit",
+                    "/Author": "Stephen Neal",
+                }
+            )
 
             # Write encrypted PDF to file
-            with open(self.output, 'wb') as output_pdf:
+            with open(self.output, "wb") as output_pdf:
                 pdf_writer.write(output_pdf)
         return self.output
 
