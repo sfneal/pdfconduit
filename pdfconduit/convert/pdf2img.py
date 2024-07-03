@@ -5,27 +5,17 @@ from tempfile import NamedTemporaryFile
 
 import fitz
 from PIL import Image
-from tqdm import tqdm
 
 from pdfconduit.utils.path import add_suffix
 
 
 class PDF2IMG:
-    def __init__(
-        self,
-        file_name,
-        output=None,
-        tempdir=None,
-        ext=".png",
-        progress_bar=None,
-        alpha=False,
-    ):
+    def __init__(self, file_name, output=None, tempdir=None, ext=".png", alpha=False):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
         self.output = output
         self.tempdir = tempdir
         self.ext = ext
-        self.progress_bar = progress_bar
         self.alpha = alpha
 
         self.doc = fitz.open(self.file_name)
@@ -42,20 +32,7 @@ class PDF2IMG:
         return self._page_data
 
     def _get_pdf_data(self):
-        # TQDM progress bar
-        if self.progress_bar == "tqdm":
-            return [
-                self._get_page_data(cur_page)
-                for cur_page in tqdm(
-                    range(len(self.doc)),
-                    desc="Getting PDF page data",
-                    total=len(self.doc),
-                    unit="Pages",
-                )
-            ]
-        # No progress bar
-        else:
-            return [self._get_page_data(cur_page) for cur_page in range(len(self.doc))]
+        return [self._get_page_data(cur_page) for cur_page in range(len(self.doc))]
 
     def _get_page_data(self, pno, zoom=0):
         """
@@ -100,22 +77,8 @@ class PDF2IMG:
                 return temp.name
 
     def save(self):
-        # TQDM progress bar
-        if self.progress_bar == "tqdm":
-            loop = enumerate(
-                tqdm(
-                    self.pdf_data,
-                    desc="Saving PDF pages as PNGs",
-                    total=len(self.pdf_data),
-                    unit="PNGs",
-                )
-            )
-        # No progress bar
-        else:
-            loop = enumerate(self.pdf_data)
-
         saved = []
-        for i, img in loop:
+        for i, img in enumerate(self.pdf_data):
             output = self._get_output(i)
             saved.append(output)
             with Image.open(BytesIO(img)) as image:
@@ -124,15 +87,12 @@ class PDF2IMG:
         return saved
 
 
-def pdf2img(
-    file_name, output=None, tempdir=None, ext="png", progress_bar=None, alpha=False
-):
+def pdf2img(file_name, output=None, tempdir=None, ext="png", alpha=False):
     """Wrapper function for PDF2IMG class"""
     return PDF2IMG(
         file_name=file_name,
         output=output,
         tempdir=tempdir,
         ext=ext,
-        progress_bar=progress_bar,
         alpha=alpha,
     ).save()
