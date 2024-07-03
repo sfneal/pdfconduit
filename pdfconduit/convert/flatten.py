@@ -44,7 +44,9 @@ class Flatten:
         if self.imgs is None:
             self.get_imgs()
         i2p = IMG2PDF(self.imgs, self.directory, self.tempdir)
-        self.pdf = i2p.save(clean_temp=False, output_name=add_suffix(self._file_name, self.suffix))
+        self.pdf = i2p.save(
+            clean_temp=False, output_name=add_suffix(self._file_name, self.suffix)
+        )
         self.cleanup(remove_temps)
         return self.pdf
 
