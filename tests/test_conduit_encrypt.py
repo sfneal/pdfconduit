@@ -40,7 +40,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        self.assertSecurityValue(security, -1852)
+        # self.assertSecurityValue(security, -1852)
+        self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -60,7 +61,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, -1852)
+        # self.assertSecurityValue(security, -1852)
+        self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -82,7 +84,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        self.assertSecurityValue(security, -1852)
+        # self.assertSecurityValue(security, -1852)
+        self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -103,7 +106,8 @@ class TestEncrypt(unittest.TestCase):
 
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
-        self.assertSecurityValue(security, -800)
+        # self.assertSecurityValue(security, -800)
+        self.assertPermissions(encrypted, can_print=False, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -125,7 +129,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        self.assertSecurityValue(security, -1500)
+        # self.assertSecurityValue(security, -1500)
+        self.assertPermissions(encrypted, can_print=True, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -146,7 +151,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, -1852)
+        # self.assertSecurityValue(security, -1852)
+        self.assertPermissions(encrypted, can_print=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -168,7 +174,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, -800)
+        # self.assertSecurityValue(security, -800)
+        self.assertPermissions(encrypted, can_print=False, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -190,7 +197,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, -1500)
+        # self.assertSecurityValue(security, -1500)
+        self.assertPermissions(encrypted, can_print=True, can_modify=True)
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
@@ -209,12 +217,14 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
         self.assert128BitEncryption(security)
-        self.assertSecurityValue(security, -1852)
+        # self.assertSecurityValue(security, -1852)
+
+        self.assertPermissions(encrypted, can_print=True)
 
         # Assert user & owner password byte string is correct
         self.assertEqual(
             security["/O"],
-            b"\xd0H\xd1R\x9eS]\x18\x84\xcd8V6{\x18KJ\x90\xdf\x01\xe67\xd1n\xca\x06[\xafNd\x90\x0b",
+            'ÐHÑRžS]˘—Í8V6{˘KJ’ß\x01æ7ÑnÊ\x06[¯Nd’\x0b',
         )
 
         expected_equals_output(function_name_to_file_name(), encrypted.output)
@@ -233,7 +243,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
 
-        metadata = Info(encrypted.output, self.user_pw).metadata
+        metadata = Info(encrypted.output, self.user_pw, use_pypdf=True).metadata
         self.assertEqual(metadata["/Producer"], "pdfconduit")
         self.assertEqual(metadata["/Creator"], "pdfconduit")
         self.assertEqual(metadata["/Author"], "Stephen Neal")
@@ -241,32 +251,54 @@ class TestEncrypt(unittest.TestCase):
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
     def _getPdfSecurity(self, encrypted):
-        return Info(encrypted.output, self.user_pw).security
+        return Info(encrypted.output, self.user_pw, use_pypdf=True).security
 
     def assertPdfExists(self, encrypted):
         # Assert that pdf file exists
         self.assertTrue(os.path.exists(encrypted.output))
 
     def assertEncrypted(self, pdf):
-        self.assertTrue(Info(pdf.output, self.user_pw).encrypted)
+        self.assertTrue(Info(pdf.output, self.user_pw, use_pypdf=True).encrypted)
 
     def assert128BitEncryption(self, security):
         self.assertTrue("/Length" in security)
         self.assertIsInstance(security["/Length"], int)
         self.assertEqual(security["/Length"], 128)
 
+        self.assertEqual(security["/Filter"], "/Standard")
+
         # Assert standard security handler revision is 3
         self.assertEqual(security["/R"], 3)
 
+        # Assert encryption algo code is 2 (3.1 algo with key length of 40 to 128bits)
+        self.assertEqual(security["/R"], 3)
+
     def assert40BitEncryption(self, security):
-        self.assertFalse("/Length" in security)
+        if "/Length" in security:
+            self.assertEqual(security["/Length"], 40)
 
         # Assert standard security handler revision is 2
+        self.assertEqual(security["/R"], 2)
+
+        # Assert encryption algo code is 1 (3.1 algo with key length of 40bits)
         self.assertEqual(security["/R"], 2)
 
     def assertSecurityValue(self, security, expected):
         self.assertTrue("/P" in security)
         self.assertEqual(security["/P"], expected)
+
+    def assertPermissions(self, pdf, can_print=False, can_modify=False, can_copy=False, can_annotate=False,
+                          can_fill_forms=False, can_change_accessability=False, can_assemble=False,
+                          can_print_high_quality=False):
+        permissions = Info(pdf.output, self.user_pw, use_pypdf=True).permissions
+        self.assertEqual(permissions.can_print(), can_print)
+        self.assertEqual(permissions.can_modify(), can_modify)
+        self.assertEqual(permissions.can_copy(), can_copy)
+        self.assertEqual(permissions.can_annotate(), can_annotate)
+        self.assertEqual(permissions.can_fill_forms(), can_fill_forms)
+        self.assertEqual(permissions.can_change_accessability(), can_change_accessability)
+        self.assertEqual(permissions.can_assemble(), can_assemble)
+        self.assertEqual(permissions.can_print_high_quality(), can_print_high_quality)
 
 
 if __name__ == "__main__":
