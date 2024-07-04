@@ -3,24 +3,14 @@ from PyPDF3 import PdfFileReader
 
 
 class Info:
-    def __init__(self, path, password=None, prompt=True):
-        self.pdf = self._reader(path, password, prompt)
+    def __init__(self, path, password=None):
+        self.pdf = self._reader(path, password)
 
     @staticmethod
-    def _reader(path, password, prompt):
+    def _reader(path, password):
         """Read PDF and decrypt if encrypted."""
         pdf = PdfFileReader(path) if not isinstance(path, PdfFileReader) else path
-        # Check that PDF is encrypted
-        if pdf.isEncrypted:
-            # Check that password is none
-            if not password:
-                pdf.decrypt('')
-                # Try and decrypt PDF using no password, prompt for password
-                if pdf.isEncrypted and prompt:
-                    print('No password has been given for encrypted PDF ', path)
-                    password = input('Enter Password: ')
-                else:
-                    return False
+        if password:
             pdf.decrypt(password)
         return pdf
 
@@ -37,7 +27,7 @@ class Info:
     @property
     def decrypted(self):
         """Check weather a PDF is encrypted"""
-        return True if self.pdf.isDecrypted else False
+        return not self.encrypted
 
     @property
     def pages(self):
