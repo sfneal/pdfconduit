@@ -22,7 +22,7 @@ class Info:
     @property
     def encrypted(self):
         """Check weather a PDF is encrypted"""
-        return True if self.pdf.isEncrypted else False
+        return self.pdf.isEncrypted
 
     @property
     def decrypted(self):
