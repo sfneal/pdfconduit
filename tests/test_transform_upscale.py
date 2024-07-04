@@ -214,9 +214,7 @@ class TestUpscale(unittest.TestCase):
         self.assertEqual(
             Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size])
         )
-        self.assertEqual(
-            Info(upscaled).pages, Info(pdf_path).pages
-        )
+        self.assertEqual(Info(upscaled).pages, Info(pdf_path).pages)
 
     def assertPdfExists(self, upscaled):
         self.assertTrue(os.path.isfile(upscaled))

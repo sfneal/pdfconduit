@@ -15,7 +15,9 @@ from pdfconduit.utils.info import Info
 from pdfconduit.utils.path import add_suffix
 
 
-def slicer_pypdf3(document, first_page=None, last_page=None, suffix="sliced", tempdir=None):
+def slicer_pypdf3(
+    document, first_page=None, last_page=None, suffix="sliced", tempdir=None
+):
     """Slice a PDF document to remove pages."""
     # Set output file name
     if tempdir:
@@ -54,7 +56,9 @@ def slicer_pypdf3(document, first_page=None, last_page=None, suffix="sliced", te
     return output
 
 
-def slicer_pypdf(document, first_page=None, last_page=None, suffix="sliced", tempdir=None):
+def slicer_pypdf(
+    document, first_page=None, last_page=None, suffix="sliced", tempdir=None
+):
     # Set output file name
     if tempdir:
         with NamedTemporaryFile(suffix=".pdf", dir=tempdir, delete=False) as temp:
@@ -71,12 +75,12 @@ def slicer_pypdf(document, first_page=None, last_page=None, suffix="sliced", tem
     # Validate page range by comparing selection to number of pages in PDF document
     pages = Info(document).pages
     invalid = (
-            "Number of pages: "
-            + str(pages)
-            + " ----> Page Range Input: "
-            + str(first_page)
-            + "-"
-            + str(last_page)
+        "Number of pages: "
+        + str(pages)
+        + " ----> Page Range Input: "
+        + str(first_page)
+        + "-"
+        + str(last_page)
     )
     assert first_page <= last_page <= pages, invalid
 
@@ -92,7 +96,14 @@ def slicer_pypdf(document, first_page=None, last_page=None, suffix="sliced", tem
     return output
 
 
-def slicer(document, first_page=None, last_page=None, suffix="sliced", tempdir=None, method="pypdf3"):
-    if method == 'pypdf3':
+def slicer(
+    document,
+    first_page=None,
+    last_page=None,
+    suffix="sliced",
+    tempdir=None,
+    method="pypdf3",
+):
+    if method == "pypdf3":
         return slicer_pypdf3(document, first_page, last_page, suffix, tempdir)
     return slicer_pypdf(document, first_page, last_page, suffix, tempdir)

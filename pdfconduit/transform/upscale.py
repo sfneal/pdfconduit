@@ -104,7 +104,9 @@ class Upscale:
         for page_number in range(page_count):
             wtrmrk = reader.getPage(page_number)
 
-            page = PypdfPageObject.createBlankPage(width=self.target_w, height=self.target_h)
+            page = PypdfPageObject.createBlankPage(
+                width=self.target_w, height=self.target_h
+            )
             page.mergeScaledTranslatedPage(
                 wtrmrk, self.scale, self.margin_x, self.margin_y
             )

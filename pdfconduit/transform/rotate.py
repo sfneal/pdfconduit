@@ -10,10 +10,7 @@ from pdfrw import (
     PdfReader as PdfrwReader,
     PdfWriter as PdfrwWriter,
 )
-from pypdf import (
-    PdfReader as PypdfReader,
-    PdfWriter as PypdfWriter
-)
+from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
 
 from pdfconduit.utils.path import add_suffix
 

@@ -25,7 +25,11 @@ class TestSlice(unittest.TestCase):
         fp = 1
         lp = 1
         sliced = slicer(
-            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name, method='pypdf3'
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf3",
         )
 
         self.assertPdfExists(sliced)
@@ -39,7 +43,11 @@ class TestSlice(unittest.TestCase):
         fp = 4
         lp = 7
         sliced = slicer(
-            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name, method='pypdf3'
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf3",
         )
 
         self.assertPdfExists(sliced)
@@ -53,7 +61,11 @@ class TestSlice(unittest.TestCase):
         fp = 1
         lp = 1
         sliced = slicer(
-            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name, method='pypdf'
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf",
         )
 
         self.assertPdfExists(sliced)
@@ -67,7 +79,11 @@ class TestSlice(unittest.TestCase):
         fp = 4
         lp = 7
         sliced = slicer(
-            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name, method='pypdf'
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf",
         )
 
         self.assertPdfExists(sliced)
