@@ -41,6 +41,7 @@ class Info:
 
     def resources(self):
         """Retrieve contents of each page of PDF"""
+        # todo: refactor to generator?
         return [self.pdf.getPage(i) for i in range(self.pdf.getNumPages())]
 
     @property
@@ -51,6 +52,8 @@ class Info:
     @property
     def dimensions(self):
         """Get width and height of a PDF"""
+        # todo: add page parameter?
+        # todo: add height & width methods?
         size = self.pdf.getPage(0).mediaBox
         return {'w': float(size[2]), 'h': float(size[3])}
 
@@ -63,4 +66,7 @@ class Info:
     @property
     def rotate(self):
         """Retrieve rotation info."""
+        # todo: add page param
+        # todo: refactor to `rotation()`
+        # todo: add is_rotated
         return self._resolved_objects(self.pdf, '/Rotate')
