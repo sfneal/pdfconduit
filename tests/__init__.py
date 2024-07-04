@@ -10,4 +10,9 @@ img_name = 'floor plan.png'
 pdf_path = os.path.join(test_data_dir, pdf_name)
 img_path = os.path.join(test_data_dir, img_name)
 
-__all__ = ['pdf_path', 'img_path', 'test_data_dir']
+
+def test_data_path(filename):
+    return os.path.join(test_data_dir, filename)
+
+
+__all__ = ['pdf_path', 'img_path', 'test_data_dir', 'test_data_path']
