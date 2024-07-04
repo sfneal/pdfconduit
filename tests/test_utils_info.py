@@ -125,9 +125,7 @@ class TestInfo(unittest.TestCase):
     def test_pypdf3_rotate_no_rotation(self):
         info = self._get_info('article.pdf')
 
-        self.assertIsInstance(info.rotate, list)
-        self.assertIsInstance(info.rotate[0], int)
-        self.assertEqual(info.rotate[0], 0)
+        self.assertEqual(info.rotate, None)
 
     @Timer.decorator
     def test_pypdf3_rotate_rotated(self):
