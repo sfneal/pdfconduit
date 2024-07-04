@@ -13,6 +13,10 @@ from pdfrw import (
     PageMerge as pdfrwPageMerge,
     IndirectPdfDict as pdfrwIndirectPdfDict,
 )
+from pypdf import (
+    PdfReader as pypdfReader,
+    PdfWriter as pypdfWriter,
+)
 
 from pdfconduit.utils.info import Info
 from pdfconduit.utils.path import add_suffix
@@ -56,6 +60,8 @@ class Upscale:
         # Execute either pdfrw or PyPDF3 method
         if method == "pypdf3":
             self.pypdf3()
+        elif method == "pypdf":
+            self.pypdf()
         else:
             self.pdfrw()
 
@@ -106,6 +112,22 @@ class Upscale:
 
         with open(self.output, "wb") as outputStream:
             writer.write(outputStream)
+        return self.output
+
+    def pypdf(self):
+        reader = pypdfReader(self.file_name)
+        writer = pypdfWriter()
+
+        for page_num in range(0, reader.get_num_pages()):
+            page = reader.pages[page_num]
+
+            page.scale_to(width=self.target_w, height=self.target_h)
+
+            writer.add_page(page)
+
+        with open(self.output, "wb") as fp:
+            writer.write(fp)
+
         return self.output
 
 
