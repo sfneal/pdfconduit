@@ -2,8 +2,15 @@
 import os
 from tempfile import NamedTemporaryFile
 
-from PyPDF3 import PdfFileReader, PdfFileWriter
-from pdfrw import PdfReader, PdfWriter
+from PyPDF3 import (
+    PdfFileReader as Pypdf3Reader,
+    PdfFileWriter as Pypdf3Writer,
+)
+from pdfrw import (
+    PdfReader as PdfrwReader,
+    PdfWriter as PdfrwWriter,
+)
+from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
 
 from pdfconduit.utils.path import add_suffix
 
@@ -29,6 +36,8 @@ class Rotate:
 
         if method == "pypdf3":
             self.pypdf3()
+        elif method == "pypdf":
+            self.pypdf()
         else:
             self.pdfrw()
 
@@ -41,8 +50,8 @@ class Rotate:
 
     def pypdf3(self):
         with open(self.file_name, "rb") as pdf_in:
-            pdf_writer = PdfFileWriter()
-            pdf_reader = PdfFileReader(pdf_in)
+            pdf_writer = Pypdf3Writer()
+            pdf_reader = Pypdf3Reader(pdf_in)
             for pagenum in range(pdf_reader.numPages):
                 page = pdf_reader.getPage(pagenum)
                 page.rotateClockwise(self.rotation)
@@ -53,7 +62,7 @@ class Rotate:
         return self.outfn
 
     def pdfrw(self):
-        trailer = PdfReader(self.file_name)
+        trailer = PdfrwReader(self.file_name)
         pages = trailer.pages
 
         ranges = [[1, len(pages)]]
@@ -65,9 +74,21 @@ class Rotate:
                     int(pages[pagenum].inheritable.Rotate or 0) + self.rotation
                 ) % 360
 
-        outdata = PdfWriter(self.outfn)
+        outdata = PdfrwWriter(self.outfn)
         outdata.trailer = trailer
         outdata.write()
+        return self.outfn
+
+    def pypdf(self):
+        reader = PypdfReader(self.file_name)
+        writer = PypdfWriter()
+
+        for page_num in range(1, reader.get_num_pages()):
+            writer.add_page(reader.pages[page_num]).rotate(self.rotation)
+
+        with open(self.outfn, "wb") as fp:
+            writer.write(fp)
+
         return self.outfn
 
 

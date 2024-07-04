@@ -20,12 +20,16 @@ class TestSlice(unittest.TestCase):
         self.temp.cleanup()
 
     @Timer.decorator
-    def test_slice_only_first_page(self):
+    def test_slice_pypdf3_only_first_page(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 1
         lp = 1
         sliced = slicer(
-            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf3",
         )
 
         self.assertPdfExists(sliced)
@@ -34,12 +38,52 @@ class TestSlice(unittest.TestCase):
         expected_equals_output(function_name_to_file_name(), sliced)
 
     @Timer.decorator
-    def test_slice_4th_through_7th_pages(self):
+    def test_slice_pypdf3_4th_through_7th_pages(self):
         """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
         fp = 4
         lp = 7
         sliced = slicer(
-            self.pdf_path, first_page=fp, last_page=lp, tempdir=self.temp.name
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf3",
+        )
+
+        self.assertPdfExists(sliced)
+        self.assertCorrectPagesSliced(fp, lp, sliced)
+
+        expected_equals_output(function_name_to_file_name(), sliced)
+
+    @Timer.decorator
+    def test_slice_pypdf_only_first_page(self):
+        """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
+        fp = 1
+        lp = 1
+        sliced = slicer(
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf",
+        )
+
+        self.assertPdfExists(sliced)
+        self.assertCorrectPagesSliced(fp, lp, sliced)
+
+        expected_equals_output(function_name_to_file_name(), sliced)
+
+    @Timer.decorator
+    def test_slice_pypdf_4th_through_7th_pages(self):
+        """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
+        fp = 4
+        lp = 7
+        sliced = slicer(
+            self.pdf_path,
+            first_page=fp,
+            last_page=lp,
+            tempdir=self.temp.name,
+            method="pypdf",
         )
 
         self.assertPdfExists(sliced)

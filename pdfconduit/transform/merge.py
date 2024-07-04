@@ -1,8 +1,13 @@
 # Merge PDF documents
 import os
 
-from PyPDF3 import PdfFileMerger
-from pdfrw import PdfReader, PdfWriter, IndirectPdfDict
+from PyPDF3 import PdfFileMerger as PyPdf3FileMerger
+from pdfrw import (
+    PdfReader as PdfrwReader,
+    PdfWriter as PdfrwWriter,
+    IndirectPdfDict as PdfrwIndirectPdfDict,
+)
+from pypdf import PdfWriter as PyPdfWriter
 
 
 class Merge:
@@ -47,13 +52,15 @@ class Merge:
         """Merge list of PDF files to a single PDF file."""
         if self.method == "pypdf3":
             return self.pypdf3(pdf_files, output)
+        if self.method == "pypdf":
+            return self.pypdf(pdf_files, output)
         else:
             return self.pdfrw(pdf_files, output)
 
     @staticmethod
     def pypdf3(pdf_files, output):
         # Create PDF file merger object
-        pdf_merger = PdfFileMerger()
+        pdf_merger = PyPdf3FileMerger()
 
         # Appending pdfs one by one
         for pdf in pdf_files:
@@ -67,14 +74,26 @@ class Merge:
 
     @staticmethod
     def pdfrw(pdf_files, output):
-        writer = PdfWriter()
+        writer = PdfrwWriter()
         for inpfn in pdf_files:
-            writer.addpages(PdfReader(inpfn).pages)
+            writer.addpages(PdfrwReader(inpfn).pages)
 
-        writer.trailer.Info = IndirectPdfDict(
+        writer.trailer.Info = PdfrwIndirectPdfDict(
             Author="Stephen Neal",
             Creator="pdfconduit",
             Producer="pdfconduit",
         )
         writer.write(output)
+        return output
+
+    @staticmethod
+    def pypdf(pdf_files, output):
+        merger = PyPdfWriter()
+
+        for pdf in pdf_files:
+            merger.append(pdf)
+
+        merger.write(output)
+        merger.close()
+
         return output

@@ -26,7 +26,7 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(
             self.pdf_path,
             rotation,
-            suffix="rotated_pdfrw",
+            suffix="rotated_90_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
         ).file
@@ -77,7 +77,7 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(
             self.pdf_path,
             rotation,
-            suffix="rotated_pdfrw",
+            suffix="rotated_90_pypdf3",
             tempdir=self.temp.name,
             method="pypdf3",
         ).file
@@ -94,7 +94,7 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(
             self.pdf_path,
             rotation,
-            suffix="rotated_180_pdfrw",
+            suffix="rotated_180_pypdf3",
             tempdir=self.temp.name,
             method="pypdf3",
         ).file
@@ -111,9 +111,60 @@ class TestRotate(unittest.TestCase):
         rotated = Rotate(
             self.pdf_path,
             rotation,
-            suffix="rotated_270_pdfrw",
+            suffix="rotated_270_pypdf3",
             tempdir=self.temp.name,
             method="pypdf3",
+        ).file
+
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
+
+        expected_equals_output(function_name_to_file_name(), rotated)
+
+    @Timer.decorator
+    def test_rotate_pypdf_90(self):
+        """Rotate a PDF file by 90 degrees using the `pypdf` library."""
+        rotation = 90
+        rotated = Rotate(
+            self.pdf_path,
+            rotation,
+            suffix="rotated_90_pypdf",
+            tempdir=self.temp.name,
+            method="pypdf",
+        ).file
+
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
+
+        expected_equals_output(function_name_to_file_name(), rotated)
+
+    @Timer.decorator
+    def test_rotate_pypdf_180(self):
+        """Rotate a PDF file by 180 degrees using the `pypdf` library."""
+        rotation = 180
+        rotated = Rotate(
+            self.pdf_path,
+            rotation,
+            suffix="rotated_180_pypdf",
+            tempdir=self.temp.name,
+            method="pypdf",
+        ).file
+
+        self.assertPdfExists(rotated)
+        self.assertPdfRotation(rotated, rotation)
+
+        expected_equals_output(function_name_to_file_name(), rotated)
+
+    @Timer.decorator
+    def test_rotate_pypdf_270(self):
+        """Rotate a PDF file by 270 degrees using the `pypdf` library."""
+        rotation = 270
+        rotated = Rotate(
+            self.pdf_path,
+            rotation,
+            suffix="rotated_270_pypdf",
+            tempdir=self.temp.name,
+            method="pypdf",
         ).file
 
         self.assertPdfExists(rotated)
