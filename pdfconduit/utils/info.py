@@ -1,7 +1,8 @@
 # Retrieve information about a PDF document
 from PyPDF3 import PdfFileReader
-from pdfconduit.utils.read import pypdf_reader
+
 from pdfconduit.utils._permissions import Permissions
+from pdfconduit.utils.read import pypdf_reader
 
 
 class Info:
