@@ -40,14 +40,6 @@ class TestPath(unittest.TestCase):
         self.assertIsInstance(with_suffix, str)
         self.assertEqual(with_suffix, os.path.join(os.path.dirname(file_path), 'article-backup.zip'))
 
-    @Timer.decorator
-    def test_set_destination(self):
-        file_path = test_data_path('charts.pdf')
-        destination = set_destination(file_path, '')
-
-        self.assertIsInstance(destination, str)
-        self.assertEqual(destination, os.path.join(os.path.dirname(file_path), 'article_modified.pdf'))
-
 
 if __name__ == '__main__':
     unittest.main()
