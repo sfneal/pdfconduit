@@ -3,6 +3,7 @@ from PyPDF3 import PdfFileWriter, PdfFileReader
 
 
 def overlay_pdfs(top_pdf, bottom_pdf, destination):
+    # todo: possibly remove?
     """
     Overlay PDF objects to files
     :param top_pdf: PDF object to be placed on top
