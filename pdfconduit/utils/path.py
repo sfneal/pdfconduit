@@ -27,6 +27,7 @@ def add_suffix(file_path, suffix="modified", sep="_", ext=None):
 
 
 def set_destination(source, suffix, filename=False, ext=None):
+    # todo: can be removed, not used
     """Create new pdf filename for temp files"""
     source_dirname = os.path.dirname(source)
 

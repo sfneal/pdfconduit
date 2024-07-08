@@ -5,28 +5,18 @@ from pdfconduit.utils._permissions import Permissions
 
 
 class Info:
-    def __init__(self, path, password=None, prompt=True, use_pypdf=False):
+    def __init__(self, path, password=None, use_pypdf=False):
         self.use_pypdf = use_pypdf
         if use_pypdf:
             self.pdf = pypdf_reader(path, password)
         else:
-            self.pdf = self._pypdf3_reader(path, password, prompt)
+            self.pdf = self._pypdf3_reader(path, password)
 
     @staticmethod
-    def _pypdf3_reader(path, password, prompt):
+    def _pypdf3_reader(path, password):
         """Read PDF and decrypt if encrypted."""
         pdf = PdfFileReader(path) if not isinstance(path, PdfFileReader) else path
-        # Check that PDF is encrypted
-        if pdf.isEncrypted:
-            # Check that password is none
-            if not password:
-                pdf.decrypt("")
-                # Try and decrypt PDF using no password, prompt for password
-                if pdf.isEncrypted and prompt:
-                    print("No password has been given for encrypted PDF ", path)
-                    password = input("Enter Password: ")
-                else:
-                    return False
+        if password:
             pdf.decrypt(password)
         return pdf
 
@@ -40,12 +30,12 @@ class Info:
         """Check weather a PDF is encrypted"""
         if self.use_pypdf:
             return self.pdf.is_encrypted
-        return True if self.pdf.isEncrypted else False
+        return self.pdf.isEncrypted
 
     @property
     def decrypted(self):
         """Check weather a PDF is encrypted"""
-        return True if self.pdf.isDecrypted else False
+        return not self.encrypted
 
     @property
     def pages(self):
@@ -61,6 +51,7 @@ class Info:
 
     def resources(self):
         """Retrieve contents of each page of PDF"""
+        # todo: refactor to generator?
         return [self.pdf.getPage(i) for i in range(self.pdf.getNumPages())]
 
     @property
@@ -75,6 +66,8 @@ class Info:
     @property
     def dimensions(self):
         """Get width and height of a PDF"""
+        # todo: add page parameter?
+        # todo: add height & width methods?
         size = self.pdf.getPage(0).mediaBox
         return {"w": float(size[2]), "h": float(size[3])}
 
@@ -87,6 +80,9 @@ class Info:
     @property
     def rotate(self):
         """Retrieve rotation info."""
+        # todo: add page param
+        # todo: refactor to `rotation()`
+        # todo: add is_rotated
         return self._resolved_objects(self.pdf, "/Rotate")
 
     @property

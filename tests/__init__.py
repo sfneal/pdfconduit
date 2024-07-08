@@ -13,6 +13,10 @@ pdf_path = os.path.join(test_data_dir, pdf_name)
 img_path = os.path.join(test_data_dir, img_name)
 
 
+def test_data_path(filename):
+    return os.path.join(test_data_dir, filename)
+
+
 def files_are_equal(file1_path, file2_path):
     """
     Compare two files to check if they are the same.
@@ -59,6 +63,7 @@ __all__ = [
     "pdf_path",
     "img_path",
     "test_data_dir",
+    "test_data_path",
     "function_name_to_file_name",
     "copy_pdf_to_output_directory",
     "expected_equals_output",
