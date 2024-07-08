@@ -2,15 +2,19 @@ import os
 import shutil
 import inspect
 
-test_data_dir = os.path.join(os.path.dirname(__file__), "data")
+test_data_dir = os.path.join(os.path.dirname(__file__), 'data')
 # pdf_name = 'plan_l.pdf'
 # pdf_name = 'plan_p.pdf'
 # pdf_name = 'article.pdf'
-pdf_name = "document.pdf"
+pdf_name = 'document.pdf'
 # pdf_name = 'con docs2.pdf'
-img_name = "floor plan.png"
+img_name = 'floor plan.png'
 pdf_path = os.path.join(test_data_dir, pdf_name)
 img_path = os.path.join(test_data_dir, img_name)
+
+
+def test_data_path(filename):
+    return os.path.join(test_data_dir, filename)
 
 
 def files_are_equal(file1_path, file2_path):
@@ -59,6 +63,7 @@ __all__ = [
     "pdf_path",
     "img_path",
     "test_data_dir",
+    "test_data_path",
     "function_name_to_file_name",
     "copy_pdf_to_output_directory",
     "expected_equals_output",
