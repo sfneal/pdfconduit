@@ -69,7 +69,7 @@ class Info:
         # todo: add page parameter?
         # todo: add height & width methods?
         size = self.pdf.getPage(0).mediaBox
-        return {'w': float(size[2]), 'h': float(size[3])}
+        return {"w": float(size[2]), "h": float(size[3])}
 
     @property
     def size(self):
@@ -83,7 +83,7 @@ class Info:
         # todo: add page param
         # todo: refactor to `rotation()`
         # todo: add is_rotated
-        return self._resolved_objects(self.pdf, '/Rotate')
+        return self._resolved_objects(self.pdf, "/Rotate")
 
     @property
     def permissions(self):
