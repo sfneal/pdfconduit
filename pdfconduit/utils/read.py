@@ -2,7 +2,7 @@ from PyPDF3 import PdfFileReader
 from pypdf import PdfReader
 
 
-def pypdf3_reader(pdf, decrypt=None):
+def pypdf3_reader(pdf, decrypt=None) -> PdfFileReader:
     """
     Retrieve a PdfFileReader object that has been decrypted if a password is specified.
 
@@ -18,7 +18,7 @@ def pypdf3_reader(pdf, decrypt=None):
         return PdfFileReader(pdf)
 
 
-def pypdf_reader(pdf, decrypt=None):
+def pypdf_reader(pdf, decrypt=None) -> PdfReader:
     """
     Retrieve a PdfFileReader object that has been decrypted if a password is specified.
 

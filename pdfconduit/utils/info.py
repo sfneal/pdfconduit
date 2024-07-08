@@ -1,7 +1,8 @@
 # Retrieve information about a PDF document
 from PyPDF3 import PdfFileReader
-from pdfconduit.utils.read import pypdf_reader
+
 from pdfconduit.utils._permissions import Permissions
+from pdfconduit.utils.read import pypdf_reader
 
 
 class Info:
@@ -13,7 +14,7 @@ class Info:
             self.pdf = self._pypdf3_reader(path, password)
 
     @staticmethod
-    def _pypdf3_reader(path, password):
+    def _pypdf3_reader(path, password) -> PdfFileReader:
         """Read PDF and decrypt if encrypted."""
         pdf = PdfFileReader(path) if not isinstance(path, PdfFileReader) else path
         if password:
@@ -21,8 +22,10 @@ class Info:
         return pdf
 
     @staticmethod
-    def _resolved_objects(pdf, xobject):
-        """Retrieve rotatation info."""
+    def _resolved_objects(pdf, xobject, use_pypdf=False):
+        """Retrieve rotation info."""
+        if use_pypdf:
+            return [pdf.get_page(i).get(xobject) for i in range(pdf.get_num_pages())][0]
         return [pdf.getPage(i).get(xobject) for i in range(pdf.getNumPages())][0]
 
     @property
@@ -40,6 +43,8 @@ class Info:
     @property
     def pages(self):
         """Retrieve PDF number of pages"""
+        if self.use_pypdf:
+            return self.pdf.get_num_pages()
         return self.pdf.getNumPages()
 
     @property
@@ -52,6 +57,8 @@ class Info:
     def resources(self):
         """Retrieve contents of each page of PDF"""
         # todo: refactor to generator?
+        if self.use_pypdf:
+            return [self.pdf.get_page(i) for i in range(self.pdf.get_num_pages())]
         return [self.pdf.getPage(i) for i in range(self.pdf.getNumPages())]
 
     @property
@@ -68,13 +75,20 @@ class Info:
         """Get width and height of a PDF"""
         # todo: add page parameter?
         # todo: add height & width methods?
-        size = self.pdf.getPage(0).mediaBox
+        if self.use_pypdf:
+            size = self.pdf.get_page(0).mediabox
+        else:
+            size = self.pdf.getPage(0).mediaBox
         return {"w": float(size[2]), "h": float(size[3])}
 
     @property
     def size(self):
         """Get width and height of a PDF"""
-        size = self.pdf.getPage(0).mediaBox
+        if self.use_pypdf:
+            size = self.pdf.get_page(0).mediabox
+        else:
+            size = self.pdf.getPage(0).mediaBox
+
         return float(size[2]), float(size[3])
 
     @property
@@ -83,7 +97,7 @@ class Info:
         # todo: add page param
         # todo: refactor to `rotation()`
         # todo: add is_rotated
-        return self._resolved_objects(self.pdf, "/Rotate")
+        return self._resolved_objects(self.pdf, "/Rotate", self.use_pypdf)
 
     @property
     def permissions(self):
