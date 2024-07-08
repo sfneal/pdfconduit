@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 class Receipt:
+    # todo: refactor to write to logs
     def __init__(self, use=True, gui=False):
         self.dst = None
         self.use = use

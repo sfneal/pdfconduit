@@ -4,7 +4,6 @@ import sys
 from pathlib import Path
 
 if 'pathlib' in sys.modules:
-
     def _add_suffix(file_path, suffix, sep, ext):
         p = Path(file_path)
         _ext = p.suffix if ext is None else str('.' + ext.strip('.'))
@@ -24,6 +23,7 @@ def add_suffix(file_path, suffix='modified', sep='_', ext=None):
 
 
 def set_destination(source, suffix, filename=False, ext=None):
+    # todo: can be removed, not used
     """Create new pdf filename for temp files"""
     source_dirname = os.path.dirname(source)
 
