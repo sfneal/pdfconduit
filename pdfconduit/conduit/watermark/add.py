@@ -2,9 +2,17 @@
 from tempfile import NamedTemporaryFile
 
 from PyBundle import resource_path
-from PyPDF3 import PdfFileReader, PdfFileWriter
+from PyPDF3 import (
+    PdfFileReader as Pypdf3FileReader,
+    PdfFileWriter as Pypdf3FileWriter
+)
 from PyPDF3.pdf import PageObject
 from pdfrw import PdfReader, PdfWriter, PageMerge
+from pypdf import (
+    PdfReader as PypdfReader,
+    PdfWriter as PypdfWriter,
+    Transformation
+)
 from reportlab.lib.pagesizes import letter
 
 from pdfconduit.transform.rotate import rotate
@@ -157,14 +165,14 @@ class WatermarkAdd:
         def pypdf3():
             """Much slower than PyPDF3 method."""
             # 5b. Get our files ready
-            document_reader = PdfFileReader(document)
-            output_file = PdfFileWriter()
+            document_reader = Pypdf3FileReader(document)
+            output_file = Pypdf3FileWriter()
 
             # Number of pages in input document
             page_count = document_reader.getNumPages()
 
             # Watermark objects
-            watermark_reader = PdfFileReader(watermark)
+            watermark_reader = Pypdf3FileReader(watermark)
             wtrmrk_page = watermark_reader.getPage(0)
             wtrmrk_width = (wtrmrk_page.mediaBox.getWidth() / 2) + 0
             wtrmrk_height = (wtrmrk_page.mediaBox.getHeight() / 2) + 80
@@ -212,6 +220,26 @@ class WatermarkAdd:
             # 5d. finally, write "output" to PDF
             with open(output_filename, "wb") as outputStream:
                 output_file.write(outputStream)
+            return output_filename
+
+        def pypdf():
+            watermark_page = PypdfReader(watermark).get_page(0)
+
+            writer = PypdfWriter()
+
+            reader = PypdfReader(document)
+            writer.append(reader)
+
+            width = float(watermark_page.mediabox[2]) / 2
+            height = float(watermark_page.mediabox[3]) / 2
+
+            for content_page in writer.pages:
+                # content_page.merge_translated_page(watermark_page, tx=width, ty=height, over=False)
+                content_page.merge_page(watermark_page, over=False)
+
+            with open(output_filename, "wb") as fp:
+                writer.write(fp)
+
             return output_filename
 
         def pdfrw():
@@ -283,5 +311,7 @@ class WatermarkAdd:
 
         if self.method == "pypdf3":
             return pypdf3()
+        elif self.method == "pypdf":
+            return pypdf()
         else:
             return pdfrw()
