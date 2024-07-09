@@ -252,7 +252,7 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
-        copy_pdf_to_output_directory(added, function_name_to_file_name())
+        expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
     def test_conduit_watermark_underneath_pypdf(self):
@@ -274,7 +274,7 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
-        copy_pdf_to_output_directory(added, function_name_to_file_name())
+        expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
     def test_conduit_watermark_overlay_pypdf(self):
@@ -296,7 +296,7 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
-        copy_pdf_to_output_directory(added, function_name_to_file_name())
+        expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
     def test_conduit_watermark_flat_pypdf(self):
@@ -313,7 +313,7 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
-        copy_pdf_to_output_directory(added, function_name_to_file_name())
+        expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
     def test_conduit_watermark_layered_pypdf(self):
@@ -334,7 +334,7 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
-        copy_pdf_to_output_directory(added, function_name_to_file_name())
+        expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
     def test_conduit_watermark_label(self):
