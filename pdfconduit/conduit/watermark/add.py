@@ -2,17 +2,10 @@
 from tempfile import NamedTemporaryFile
 
 from PyBundle import resource_path
-from PyPDF3 import (
-    PdfFileReader as Pypdf3FileReader,
-    PdfFileWriter as Pypdf3FileWriter
-)
+from PyPDF3 import PdfFileReader as Pypdf3FileReader, PdfFileWriter as Pypdf3FileWriter
 from PyPDF3.pdf import PageObject
 from pdfrw import PdfReader, PdfWriter, PageMerge
-from pypdf import (
-    PdfReader as PypdfReader,
-    PdfWriter as PypdfWriter,
-    Transformation
-)
+from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter, Transformation
 from reportlab.lib.pagesizes import letter
 
 from pdfconduit.transform.rotate import rotate
