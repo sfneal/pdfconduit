@@ -39,4 +39,4 @@ jobs:
         run: python setup.py sdist --dist-dir ./dist
 
       - name: Upload package to PyPi
-        run: twine upload -u __token__ -p "${{ secrets.PYPI_TOKEN }}" ./dist/pdfconduit-"${VERSION}".tar.gz
+        run: twine upload -u __token__ -p "${{ secrets.PYPI_TOKEN }}" "./dist/pdfconduit-${VERSION}.tar.gz"
