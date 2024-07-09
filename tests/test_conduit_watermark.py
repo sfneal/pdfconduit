@@ -234,6 +234,109 @@ class TestWatermark(unittest.TestCase):
         expected_equals_output(function_name_to_file_name(), added)
 
     @Timer.decorator
+    def test_conduit_watermark_pypdf(self):
+        """Apply a watermark to all pages of PDF using the `pypdf` method."""
+        w = Watermark(
+            self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name
+        )
+        wtrmrk = w.draw(
+            self.address,
+            str(self.town + ", " + self.state),
+            opacity=0.08,
+            rotate=self.rotate,
+            flatten=False,
+        )
+        added = w.add(self.pdf_path, wtrmrk, method="pypdf", suffix=None)
+
+        self.assertPdfExists(wtrmrk)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
+
+        copy_pdf_to_output_directory(added, function_name_to_file_name())
+
+    @Timer.decorator
+    def test_conduit_watermark_underneath_pypdf(self):
+        """Apply a watermark underneath original content of PDF using the `pypdf` method."""
+        w = Watermark(
+            self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name
+        )
+        wtrmrk = w.draw(
+            self.address,
+            str(self.town + ", " + self.state),
+            opacity=0.08,
+            rotate=self.rotate,
+        )
+        added = w.add(
+            self.pdf_path, wtrmrk, underneath=True, suffix=None, method="pypdf"
+        )
+
+        self.assertPdfExists(wtrmrk)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
+
+        copy_pdf_to_output_directory(added, function_name_to_file_name())
+
+    @Timer.decorator
+    def test_conduit_watermark_overlay_pypdf(self):
+        """Apply a watermark overlaid over original content of PDF using the `pypdf` method."""
+        w = Watermark(
+            self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name
+        )
+        wtrmrk = w.draw(
+            self.address,
+            str(self.town + ", " + self.state),
+            opacity=0.08,
+            rotate=self.rotate,
+        )
+        added = w.add(
+            self.pdf_path, wtrmrk, underneath=False, suffix=None, method="pypdf"
+        )
+
+        self.assertPdfExists(wtrmrk)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
+
+        copy_pdf_to_output_directory(added, function_name_to_file_name())
+
+    @Timer.decorator
+    def test_conduit_watermark_flat_pypdf(self):
+        """Apply a flattened watermark to a PDF using the `pypdf` method."""
+        w = Watermark(
+            self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name
+        )
+        flat = w.draw(
+            self.address, str(self.town + ", " + self.state), opacity=0.08, flatten=True
+        )
+        added = w.add(self.pdf_path, flat, suffix=None, method="pypdf")
+
+        self.assertPdfExists(flat)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
+
+        copy_pdf_to_output_directory(added, function_name_to_file_name())
+
+    @Timer.decorator
+    def test_conduit_watermark_layered_pypdf(self):
+        """Apply a flattened watermark to a PDF using the `pypdf` method."""
+        w = Watermark(
+            self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name
+        )
+        layered = w.draw(
+            self.address,
+            str(self.town + ", " + self.state),
+            opacity=0.08,
+            flatten=False,
+        )
+        added = w.add(self.pdf_path, layered, suffix=None, method="pypdf")
+
+        # Assert the watermark file exists
+        self.assertPdfExists(layered)
+        self.assertPdfExists(added)
+        self.assertPdfHasResources(added)
+
+        copy_pdf_to_output_directory(added, function_name_to_file_name())
+
+    @Timer.decorator
     def test_conduit_watermark_label(self):
         """Apply a watermark label to a PDF file."""
         label = os.path.basename(self.pdf_path)
