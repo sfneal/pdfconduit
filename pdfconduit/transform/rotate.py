@@ -73,6 +73,6 @@ class Rotate:
         return self.outfn
 
 
-def rotate(file_name, rotation, suffix="rotated", tempdir=None, method="pypdf3"):
+def rotate(file_name, rotation, suffix="rotated", tempdir=None, method="pdfrw"):
     """Rotate PDF by increments of 90 degrees."""
     return str(Rotate(file_name, rotation, suffix, tempdir, method))
