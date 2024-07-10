@@ -2,11 +2,6 @@
 import os
 from tempfile import NamedTemporaryFile
 
-from PyPDF3 import (
-    PdfFileReader as Pypdf3FileReader,
-    PdfFileWriter as Pypdf3FileWriter,
-)
-from PyPDF3.pdf import PageObject as PypdfPageObject
 from pdfrw import (
     PdfReader as pdfrwReader,
     PdfWriter as pdfrwWriter,
@@ -58,9 +53,7 @@ class Upscale:
         self.target_h = dims["h"] * self.scale
 
         # Execute either pdfrw or PyPDF3 method
-        if method == "pypdf3":
-            self.pypdf3()
-        elif method == "pypdf":
+        if method.startswith('pypdf'):
             self.pypdf()
         else:
             self.pdfrw()
@@ -92,29 +85,6 @@ class Upscale:
             writer.addpage(self._pdfrw_adjust(reader.pages[i]))
         writer.trailer.Info = pdfrwIndirectPdfDict(reader.Info or {})
         writer.write()
-
-    def pypdf3(self):
-        # much slower than pdfrw
-        reader = Pypdf3FileReader(self.file_name)
-        writer = Pypdf3FileWriter()
-
-        # Number of pages in input document
-        page_count = reader.getNumPages()
-
-        for page_number in range(page_count):
-            wtrmrk = reader.getPage(page_number)
-
-            page = PypdfPageObject.createBlankPage(
-                width=self.target_w, height=self.target_h
-            )
-            page.mergeScaledTranslatedPage(
-                wtrmrk, self.scale, self.margin_x, self.margin_y
-            )
-            writer.addPage(page)
-
-        with open(self.output, "wb") as outputStream:
-            writer.write(outputStream)
-        return self.output
 
     def pypdf(self):
         reader = pypdfReader(self.file_name)
