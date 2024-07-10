@@ -32,7 +32,6 @@ setup(
         'pdfrw>=0.4',
         'PyMuPDF>=1.17.7,<=1.24.7',
         'pypdf>=4.2.0',
-        'PyPDF3>=1.0.1',
         'PillowImage>=1.2.0',
         'PyBundle>=1.0.6',
     ],
