@@ -191,15 +191,15 @@ state = 'MA'
 w = Watermark(pdf)
 
 # Generate watermark file
-w.draw(text1=address, text2=town + ', ' + state, copyright=True, rotate=30, opacity=0.08
+w.draw(text1=address, text2=town + ', ' + state, include_copyright=True, rotate=30, opacity=0.08
 
 # Add watermark file to PDF document
 w.add()
->>> mypdfdoc_watermarked.pdf
+>> > mypdfdoc_watermarked.pdf
 
 # Encypt PDF document
-w.encrypt(user_pw='foo', owner_pw='baz') 
->>> mypdfdoc_secured.pdf
+w.encrypt(user_pw='foo', owner_pw='baz')
+>> > mypdfdoc_secured.pdf
 
 # Remove temp files and save receipt to disk
 w.cleanup()

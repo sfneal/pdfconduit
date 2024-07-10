@@ -27,7 +27,7 @@ class Samples:
     def watermarks(self, images=available_images()):
         watermarks = []
         for i in images:
-            wm = self.wm.draw(text1=i, image=i, copyright=False)
+            wm = self.wm.draw(text1=i, image=i, include_copyright=False)
             watermarks.append(wm)
         watermarks.insert(0, self._title(wm, 'Watermark Images'))
         m = Merge(watermarks, 'Watermarks samples', self.dst)

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pdfconduit.conduit.watermark import Watermark
 from pdfconduit.modify.canvas import CanvasObjects, CanvasStr
 from pdfconduit.modify.draw import WatermarkDraw
@@ -11,12 +13,12 @@ def mean(numbers):
 class Label(WatermarkDraw):
     def __init__(
         self,
-        document,
-        label,
-        title_page=False,
-        suffix="labeled",
-        output=None,
-        tempdir=None,
+        document: str,
+        label: str,
+        title_page: bool = False,
+        suffix: str = "labeled",
+        output: Optional[str] = None,
+        tempdir: Optional[str] = None,
     ):
         self.size = Info(document).size
         super(Label, self).__init__(
@@ -35,7 +37,7 @@ class Label(WatermarkDraw):
         else:
             self.output = self.dst
 
-    def _create_canvas_objects(self, label, title_page):
+    def _create_canvas_objects(self, label: str, title_page: bool = False) -> CanvasObjects:
         objects = CanvasObjects()
         if not title_page:
             objects.add(
@@ -56,7 +58,7 @@ class Label(WatermarkDraw):
             )
         return objects
 
-    def write(self, cleanup=True):
+    def write(self, cleanup: bool = True) -> str:
         wm = Watermark(
             self.document,
             tempdir=self.dir,
