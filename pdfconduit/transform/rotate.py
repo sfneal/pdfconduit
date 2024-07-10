@@ -2,10 +2,6 @@
 import os
 from tempfile import NamedTemporaryFile
 
-from PyPDF3 import (
-    PdfFileReader as Pypdf3Reader,
-    PdfFileWriter as Pypdf3Writer,
-)
 from pdfrw import (
     PdfReader as PdfrwReader,
     PdfWriter as PdfrwWriter,
@@ -34,9 +30,7 @@ class Rotate:
         else:
             self.outfn = NamedTemporaryFile(suffix=".pdf").name
 
-        if method == "pypdf3":
-            self.pypdf3()
-        elif method == "pypdf":
+        if method.startswith("pypdf"):
             self.pypdf()
         else:
             self.pdfrw()
@@ -47,19 +41,6 @@ class Rotate:
     @property
     def file(self):
         return str(self.outfn)
-
-    def pypdf3(self):
-        with open(self.file_name, "rb") as pdf_in:
-            pdf_writer = Pypdf3Writer()
-            pdf_reader = Pypdf3Reader(pdf_in)
-            for pagenum in range(pdf_reader.numPages):
-                page = pdf_reader.getPage(pagenum)
-                page.rotateClockwise(self.rotation)
-                pdf_writer.addPage(page)
-
-            with open(self.outfn, "wb") as pdf_out:
-                pdf_writer.write(pdf_out)
-        return self.outfn
 
     def pdfrw(self):
         trailer = PdfrwReader(self.file_name)
@@ -92,6 +73,6 @@ class Rotate:
         return self.outfn
 
 
-def rotate(file_name, rotation, suffix="rotated", tempdir=None, method="pypdf3"):
+def rotate(file_name, rotation, suffix="rotated", tempdir=None, method="pdfrw"):
     """Rotate PDF by increments of 90 degrees."""
     return str(Rotate(file_name, rotation, suffix, tempdir, method))

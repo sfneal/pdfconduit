@@ -243,7 +243,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
 
-        metadata = Info(encrypted.output, self.user_pw, use_pypdf=True).metadata
+        metadata = Info(encrypted.output, self.user_pw).metadata
         self.assertEqual(metadata["/Producer"], "pdfconduit")
         self.assertEqual(metadata["/Creator"], "pdfconduit")
         self.assertEqual(metadata["/Author"], "Stephen Neal")
@@ -251,14 +251,14 @@ class TestEncrypt(unittest.TestCase):
         expected_equals_output(function_name_to_file_name(), encrypted.output)
 
     def _getPdfSecurity(self, encrypted):
-        return Info(encrypted.output, self.user_pw, use_pypdf=True).security
+        return Info(encrypted.output, self.user_pw).security
 
     def assertPdfExists(self, encrypted):
         # Assert that pdf file exists
         self.assertTrue(os.path.exists(encrypted.output))
 
     def assertEncrypted(self, pdf):
-        self.assertTrue(Info(pdf.output, self.user_pw, use_pypdf=True).encrypted)
+        self.assertTrue(Info(pdf.output, self.user_pw).encrypted)
 
     def assert128BitEncryption(self, security):
         self.assertTrue("/Length" in security)
@@ -299,7 +299,7 @@ class TestEncrypt(unittest.TestCase):
         can_assemble=False,
         can_print_high_quality=False,
     ):
-        permissions = Info(pdf.output, self.user_pw, use_pypdf=True).permissions
+        permissions = Info(pdf.output, self.user_pw).permissions
         self.assertEqual(permissions.can_print(), can_print)
         self.assertEqual(permissions.can_modify(), can_modify)
         self.assertEqual(permissions.can_copy(), can_copy)
