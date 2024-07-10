@@ -3,13 +3,12 @@ from pdfconduit.utils.path import set_destination, add_suffix
 from pdfconduit.utils.read import pypdf_reader
 from pdfconduit.utils.receipt import Receipt
 from pdfconduit.utils.view import open_window
-from pdfconduit.utils.write import overlay_pdfs, write_pdf
+from pdfconduit.utils.write import write_pdf
 
 __all__ = [
     "set_destination",
     "add_suffix",
     "open_window",
-    "overlay_pdfs",
     "write_pdf",
     "Info",
     "Receipt",
