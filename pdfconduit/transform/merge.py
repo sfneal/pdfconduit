@@ -1,7 +1,6 @@
 # Merge PDF documents
 import os
 
-from PyPDF3 import PdfFileMerger as PyPdf3FileMerger
 from pdfrw import (
     PdfReader as PdfrwReader,
     PdfWriter as PdfrwWriter,
@@ -50,27 +49,10 @@ class Merge:
 
     def merge(self, pdf_files, output):
         """Merge list of PDF files to a single PDF file."""
-        if self.method == "pypdf3":
-            return self.pypdf3(pdf_files, output)
-        if self.method == "pypdf":
+        if self.method.startswith('pypdf'):
             return self.pypdf(pdf_files, output)
         else:
             return self.pdfrw(pdf_files, output)
-
-    @staticmethod
-    def pypdf3(pdf_files, output):
-        # Create PDF file merger object
-        pdf_merger = PyPdf3FileMerger()
-
-        # Appending pdfs one by one
-        for pdf in pdf_files:
-            pdf_merger.append(pdf)
-
-        # writing combined pdf to output pdf file
-        with open(output, "wb") as f:
-            pdf_merger.write(f)
-        pdf_merger.close()
-        return output
 
     @staticmethod
     def pdfrw(pdf_files, output):
