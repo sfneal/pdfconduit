@@ -1,4 +1,6 @@
 # Encrypt a PDF file with password protection
+from typing import Optional
+
 from pypdf import PdfWriter
 from pypdf.constants import UserAccessPermissions
 
@@ -9,17 +11,17 @@ from pdfconduit.utils.read import pypdf_reader
 class Encrypt:
     def __init__(
         self,
-        pdf,
-        user_pw,
-        owner_pw=None,
-        output=None,
-        suffix="secured",
-        bit128=True,
-        allow_printing=True,
-        allow_commenting=False,
-        overwrite_permission=None,
-        decrypt=None,
-    ):
+        pdf: str,
+        user_pw: str,
+        owner_pw: Optional[str] = None,
+        output: Optional[str] = None,
+        suffix: str = "secured",
+        bit128: bool = True,
+        allow_printing: bool=True,
+        allow_commenting: bool=False,
+        overwrite_permission: Optional[int]=None,
+        decrypt: Optional[str]=None,
+    ) -> None:
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
         self.user_pw = user_pw
@@ -34,10 +36,10 @@ class Encrypt:
 
         self.encrypt(decrypt)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.output)
 
-    def encrypt(self, decrypt=None):
+    def encrypt(self, decrypt: Optional[str]=None) -> str:
         if self.allow_printing and self.allow_commenting:
             permissions = UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
         elif self.allow_printing:
