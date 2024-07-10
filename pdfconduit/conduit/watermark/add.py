@@ -3,12 +3,12 @@ from tempfile import NamedTemporaryFile
 
 from PyBundle import resource_path
 from pdfrw import PdfReader, PdfWriter, PageMerge
-from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter, Transformation
+from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
 from reportlab.lib.pagesizes import letter
 
 from pdfconduit.transform.rotate import rotate
 from pdfconduit.transform.upscale import upscale
-from pdfconduit.utils import add_suffix, Info, pypdf3_reader
+from pdfconduit.utils import add_suffix, Info, pypdf_reader
 
 
 class WatermarkAdd:
@@ -51,7 +51,7 @@ class WatermarkAdd:
         self.tempdir = tempdir
         self.method = method
 
-        self.document_reader = pypdf3_reader(document, decrypt)
+        self.document_reader = pypdf_reader(document, decrypt)
         self.document = self._get_document_info(document)
         self.watermark_file = self._get_watermark_info(self.document, watermark)
         pdf_fname, wtrmrk_fname = self._set_filenames
@@ -92,7 +92,7 @@ class WatermarkAdd:
             pdf_file["upscaled"] = upscale(
                 pdf_file["path"], scale=scale, tempdir=self.tempdir
             )
-            self.document_reader = pypdf3_reader(pdf_file["upscaled"])
+            self.document_reader = pypdf_reader(pdf_file["upscaled"])
         return pdf_file
 
     def _get_watermark_info(self, document, watermark, margin_x=0, margin_y=0):
