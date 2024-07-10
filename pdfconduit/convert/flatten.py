@@ -1,6 +1,7 @@
 # Create flat PDF by converting each input PDF page to a PNG
 import os
 from tempfile import TemporaryDirectory
+from typing import Optional, List
 
 from pdfconduit.convert.img2pdf import IMG2PDF
 from pdfconduit.convert.pdf2img import PDF2IMG
@@ -9,7 +10,7 @@ from pdfconduit.utils.path import add_suffix
 
 
 class Flatten:
-    def __init__(self, file_name, scale=1.0, suffix="flat", tempdir=None):
+    def __init__(self, file_name: str, scale: float = 1.0, suffix: str="flat", tempdir: Optional[str]=None):
         """Create a flat single-layer PDF by converting each page to a PNG image"""
         self._file_name = file_name
 
@@ -33,14 +34,14 @@ class Flatten:
         self.imgs = None
         self.pdf = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.pdf)
 
-    def get_imgs(self):
+    def get_imgs(self) -> List[str]:
         self.imgs = PDF2IMG(self.file_name, tempdir=self.tempdir).save()
         return self.imgs
 
-    def save(self, remove_temps=True):
+    def save(self, remove_temps: bool=True)-> str:
         if self.imgs is None:
             self.get_imgs()
         i2p = IMG2PDF(self.imgs, self.directory, self.tempdir)
@@ -50,6 +51,6 @@ class Flatten:
         self.cleanup(remove_temps)
         return self.pdf
 
-    def cleanup(self, clean_temp=True):
+    def cleanup(self, clean_temp: bool=True)->None:
         if clean_temp and hasattr(self, "_temp"):
             self._temp.cleanup()
