@@ -2,6 +2,7 @@
 import os
 from io import BytesIO
 from tempfile import NamedTemporaryFile
+from typing import Optional, List
 
 import fitz
 from PIL import Image
@@ -10,7 +11,7 @@ from pdfconduit.utils.path import add_suffix
 
 
 class PDF2IMG:
-    def __init__(self, file_name, output=None, tempdir=None, ext=".png", alpha=False):
+    def __init__(self, file_name: str, output: Optional[str]=None, tempdir: Optional[str]=None, ext: str=".png", alpha: bool=False):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
         self.output = output
@@ -26,15 +27,15 @@ class PDF2IMG:
         self._page_data = None
 
     @property
-    def pdf_data(self):
+    def pdf_data(self) -> List[bytes]:
         if not self._page_data:
             self._page_data = self._get_pdf_data()
         return self._page_data
 
-    def _get_pdf_data(self):
+    def _get_pdf_data(self) -> List[bytes]:
         return [self._get_page_data(cur_page) for cur_page in range(len(self.doc))]
 
-    def _get_page_data(self, pno, zoom=0):
+    def _get_page_data(self, pno, zoom=0) -> bytes:
         """
         Return a PNG image for a document page number. If zoom is other than 0, one of
         the 4 page quadrants are zoomed-in instead and the corresponding clip returned.
@@ -64,7 +65,7 @@ class PDF2IMG:
             pix = dlist.get_pixmap(alpha=self.alpha, matrix=mat, clip=clip)
         return pix.tobytes()  # return the PNG image
 
-    def _get_output(self, index):
+    def _get_output(self, index: int) -> str:
         if self.output:
             return self.output
         elif not self.tempdir:
@@ -76,7 +77,7 @@ class PDF2IMG:
             ) as temp:
                 return temp.name
 
-    def save(self):
+    def save(self) -> List[str]:
         saved = []
         for i, img in enumerate(self.pdf_data):
             output = self._get_output(i)
@@ -87,7 +88,7 @@ class PDF2IMG:
         return saved
 
 
-def pdf2img(file_name, output=None, tempdir=None, ext="png", alpha=False):
+def pdf2img(file_name: str, output: Optional[str]=None, tempdir: Optional[str]=None, ext: str="png", alpha: bool=False):
     """Wrapper function for PDF2IMG class"""
     return PDF2IMG(
         file_name=file_name,
