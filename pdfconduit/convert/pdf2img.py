@@ -11,7 +11,14 @@ from pdfconduit.utils.path import add_suffix
 
 
 class PDF2IMG:
-    def __init__(self, file_name: str, output: Optional[str]=None, tempdir: Optional[str]=None, ext: str=".png", alpha: bool=False):
+    def __init__(
+        self,
+        file_name: str,
+        output: Optional[str] = None,
+        tempdir: Optional[str] = None,
+        ext: str = ".png",
+        alpha: bool = False,
+    ):
         """Convert each page of a PDF file into a PNG image"""
         self.file_name = file_name
         self.output = output
@@ -88,7 +95,13 @@ class PDF2IMG:
         return saved
 
 
-def pdf2img(file_name: str, output: Optional[str]=None, tempdir: Optional[str]=None, ext: str="png", alpha: bool=False):
+def pdf2img(
+    file_name: str,
+    output: Optional[str] = None,
+    tempdir: Optional[str] = None,
+    ext: str = "png",
+    alpha: bool = False,
+):
     """Wrapper function for PDF2IMG class"""
     return PDF2IMG(
         file_name=file_name,

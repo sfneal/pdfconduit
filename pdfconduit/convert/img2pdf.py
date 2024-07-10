@@ -11,7 +11,12 @@ from pdfconduit.transform.merge import Merge
 
 
 class IMG2PDF:
-    def __init__(self, imgs: Optional[List[str]]=None, destination: Optional[str]=None, tempdir: Optional[str]=None):
+    def __init__(
+        self,
+        imgs: Optional[List[str]] = None,
+        destination: Optional[str] = None,
+        tempdir: Optional[str] = None,
+    ):
         """Convert each image into a PDF page and merge all pages to one PDF file"""
         self.imgs = imgs
         self.output_dir = destination
@@ -32,15 +37,15 @@ class IMG2PDF:
             self._pdf_pages = self.img2pdf()
         return self._pdf_pages
 
-    def cleanup(self, clean_temp: bool=True)->None:
+    def cleanup(self, clean_temp: bool = True) -> None:
         if clean_temp and hasattr(self, "_temp"):
             self._temp.cleanup()
 
-    def _image_loop(self)->List[str]:
+    def _image_loop(self) -> List[str]:
         """Retrieve an iterable of images either with, or without a progress bar."""
         return self.imgs
 
-    def _convert(self, image, output: Optional[str]=None) -> str:
+    def _convert(self, image, output: Optional[str] = None) -> str:
         """Private method for converting a single PNG image to a PDF."""
         with Image.open(image) as im:
             width, height = im.size
@@ -52,7 +57,7 @@ class IMG2PDF:
                 co, tempdir=self.tempdir, pagesize=(width, height)
             ).write(output)
 
-    def convert(self, image: str, output: Optional[str]=None):
+    def convert(self, image: str, output: Optional[str] = None):
         """
         Convert an image to a PDF.
 
@@ -68,7 +73,7 @@ class IMG2PDF:
         """Convert a list of images into a PDF files."""
         return [self._convert(image) for image in self._image_loop()]
 
-    def save(self, output_name: str="merged imgs", clean_temp: bool=True) -> str:
+    def save(self, output_name: str = "merged imgs", clean_temp: bool = True) -> str:
         m = str(
             Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir)
         )
@@ -76,5 +81,10 @@ class IMG2PDF:
         return m
 
 
-def img2pdf(imgs: List[str], output_name: str="merged_imgs", destination: Optional[str]=None, tempdir: Optional[str]=None):
+def img2pdf(
+    imgs: List[str],
+    output_name: str = "merged_imgs",
+    destination: Optional[str] = None,
+    tempdir: Optional[str] = None,
+):
     return IMG2PDF(imgs, destination, tempdir).save(output_name)
