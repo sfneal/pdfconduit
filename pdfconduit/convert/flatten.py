@@ -10,7 +10,13 @@ from pdfconduit.utils.path import add_suffix
 
 
 class Flatten:
-    def __init__(self, file_name: str, scale: float = 1.0, suffix: str="flat", tempdir: Optional[str]=None):
+    def __init__(
+        self,
+        file_name: str,
+        scale: float = 1.0,
+        suffix: str = "flat",
+        tempdir: Optional[str] = None,
+    ):
         """Create a flat single-layer PDF by converting each page to a PNG image"""
         self._file_name = file_name
 
@@ -41,7 +47,7 @@ class Flatten:
         self.imgs = PDF2IMG(self.file_name, tempdir=self.tempdir).save()
         return self.imgs
 
-    def save(self, remove_temps: bool=True)-> str:
+    def save(self, remove_temps: bool = True) -> str:
         if self.imgs is None:
             self.get_imgs()
         i2p = IMG2PDF(self.imgs, self.directory, self.tempdir)
@@ -51,6 +57,6 @@ class Flatten:
         self.cleanup(remove_temps)
         return self.pdf
 
-    def cleanup(self, clean_temp: bool=True)->None:
+    def cleanup(self, clean_temp: bool = True) -> None:
         if clean_temp and hasattr(self, "_temp"):
             self._temp.cleanup()

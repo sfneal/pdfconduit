@@ -37,7 +37,9 @@ class Label(WatermarkDraw):
         else:
             self.output = self.dst
 
-    def _create_canvas_objects(self, label: str, title_page: bool = False) -> CanvasObjects:
+    def _create_canvas_objects(
+        self, label: str, title_page: bool = False
+    ) -> CanvasObjects:
         objects = CanvasObjects()
         if not title_page:
             objects.add(

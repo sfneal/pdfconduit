@@ -17,10 +17,10 @@ class Encrypt:
         output: Optional[str] = None,
         suffix: str = "secured",
         bit128: bool = True,
-        allow_printing: bool=True,
-        allow_commenting: bool=False,
-        overwrite_permission: Optional[int]=None,
-        decrypt: Optional[str]=None,
+        allow_printing: bool = True,
+        allow_commenting: bool = False,
+        overwrite_permission: Optional[int] = None,
+        decrypt: Optional[str] = None,
     ) -> None:
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
@@ -39,7 +39,7 @@ class Encrypt:
     def __str__(self) -> str:
         return str(self.output)
 
-    def encrypt(self, decrypt: Optional[str]=None) -> str:
+    def encrypt(self, decrypt: Optional[str] = None) -> str:
         if self.allow_printing and self.allow_commenting:
             permissions = UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
         elif self.allow_printing:

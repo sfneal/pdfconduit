@@ -7,7 +7,7 @@ from pdfconduit.utils.info import Info
 
 
 # Todo: Fix img_extract and develop tests
-def img_extract(pdf: str, password: Optional[str]=None)-> None:
+def img_extract(pdf: str, password: Optional[str] = None) -> None:
     # Read PDF file
     reader = Info(pdf, password).pdf
 

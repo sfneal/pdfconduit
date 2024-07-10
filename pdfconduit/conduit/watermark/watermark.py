@@ -138,7 +138,13 @@ class Watermark:
             self.receipt.add("WM Flattening", flatten)
 
         co = CanvasConstructor(
-            text1, text2, include_copyright, image, rotate, opacity, tempdir=self.tempdir
+            text1,
+            text2,
+            include_copyright,
+            image,
+            rotate,
+            opacity,
+            tempdir=self.tempdir,
         )
         objects, rotate = (
             co.img() if flatten else co.canvas()

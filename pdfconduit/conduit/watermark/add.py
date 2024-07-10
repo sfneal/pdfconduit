@@ -96,7 +96,9 @@ class WatermarkAdd:
             self.document_reader = pypdf_reader(pdf_file["upscaled"])
         return pdf_file
 
-    def _get_watermark_info(self, document: dict, watermark: str, margin_x: int = 0, margin_y: int = 0) -> dict:
+    def _get_watermark_info(
+        self, document: dict, watermark: str, margin_x: int = 0, margin_y: int = 0
+    ) -> dict:
         # 3a. Get watermark path and dimensions
         watermark_file = {"path": watermark}
         watermark_file.update(Info(watermark).dimensions)
