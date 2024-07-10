@@ -241,7 +241,7 @@ class WatermarkAdd:
             # Write out the destination file
             PdfWriter(output_filename, trailer=trailer).write()
 
-        if self.method.startswith('pypdf'):
+        if self.method.startswith("pypdf"):
             return pypdf()
         else:
             return pdfrw()

@@ -40,7 +40,9 @@ class Info:
     @property
     def security(self):
         """Print security object information for a pdf document"""
-        return {k: v for i in self.pdf.resolved_objects.items() for k, v in i[1].items()}
+        return {
+            k: v for i in self.pdf.resolved_objects.items() for k, v in i[1].items()
+        }
 
     @property
     def dimensions(self):

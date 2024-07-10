@@ -34,12 +34,12 @@ def slicer(
     # Validate page range by comparing selection to number of pages in PDF document
     pages = Info(document).pages
     invalid = (
-            "Number of pages: "
-            + str(pages)
-            + " ----> Page Range Input: "
-            + str(first_page)
-            + "-"
-            + str(last_page)
+        "Number of pages: "
+        + str(pages)
+        + " ----> Page Range Input: "
+        + str(first_page)
+        + "-"
+        + str(last_page)
     )
     assert first_page <= last_page <= pages, invalid
 

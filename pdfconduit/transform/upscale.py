@@ -53,7 +53,7 @@ class Upscale:
         self.target_h = dims["h"] * self.scale
 
         # Execute either pdfrw or PyPDF3 method
-        if method.startswith('pypdf'):
+        if method.startswith("pypdf"):
             self.pypdf()
         else:
             self.pdfrw()

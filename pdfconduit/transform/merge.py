@@ -49,7 +49,7 @@ class Merge:
 
     def merge(self, pdf_files, output):
         """Merge list of PDF files to a single PDF file."""
-        if self.method.startswith('pypdf'):
+        if self.method.startswith("pypdf"):
             return self.pypdf(pdf_files, output)
         else:
             return self.pdfrw(pdf_files, output)
