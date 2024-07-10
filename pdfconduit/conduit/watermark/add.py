@@ -2,8 +2,6 @@
 from tempfile import NamedTemporaryFile
 
 from PyBundle import resource_path
-from PyPDF3 import PdfFileReader as Pypdf3FileReader, PdfFileWriter as Pypdf3FileWriter
-from PyPDF3.pdf import PageObject
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter, Transformation
 from reportlab.lib.pagesizes import letter
@@ -77,7 +75,8 @@ class WatermarkAdd:
         pdf_file = {"path": filename}
 
         # 2a. Get PDF width and height
-        pdf_file.update(Info(self.document_reader).dimensions)
+        # todo: optimize so that a pdf reader can be passed
+        pdf_file.update(Info(filename).dimensions)
 
         # 2b. Get PDF file orientation
         if pdf_file["h"] > pdf_file["w"]:
@@ -154,66 +153,6 @@ class WatermarkAdd:
         """Add watermark to PDF by merging original PDF and watermark file."""
         # 5a. Create output PDF file name
         output_filename = self.output_filename
-
-        def pypdf3():
-            """Much slower than PyPDF3 method."""
-            # 5b. Get our files ready
-            document_reader = Pypdf3FileReader(document)
-            output_file = Pypdf3FileWriter()
-
-            # Number of pages in input document
-            page_count = document_reader.getNumPages()
-
-            # Watermark objects
-            watermark_reader = Pypdf3FileReader(watermark)
-            wtrmrk_page = watermark_reader.getPage(0)
-            wtrmrk_width = (wtrmrk_page.mediaBox.getWidth() / 2) + 0
-            wtrmrk_height = (wtrmrk_page.mediaBox.getHeight() / 2) + 80
-            wtrmrk_rotate = (
-                -int(Info(watermark_reader).rotate)
-                if Info(watermark_reader).rotate is not None
-                else 0
-            )
-
-            # 5c. Go through all the input file pages to add a watermark to them
-            for page_number in range(page_count):
-                # Merge the watermark with the page
-                if not self.underneath:
-                    input_page = document_reader.getPage(page_number)
-                    if wtrmrk_rotate != 0:
-                        input_page.mergeRotatedTranslatedPage(
-                            wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height
-                        )
-                    else:
-                        wtrmrk_width = 0
-                        wtrmrk_height = 0
-                        input_page.mergeTranslatedPage(
-                            wtrmrk_page, wtrmrk_width, wtrmrk_height
-                        )
-                else:
-                    size = Info(document_reader).dimensions
-                    input_page = PageObject().createBlankPage(
-                        document_reader, size["w"], size["h"]
-                    )
-                    if wtrmrk_rotate != 0:
-                        input_page.mergeRotatedTranslatedPage(
-                            wtrmrk_page, wtrmrk_rotate, wtrmrk_width, wtrmrk_height
-                        )
-                    else:
-                        wtrmrk_width = 0
-                        wtrmrk_height = 0
-                        input_page.mergeTranslatedPage(
-                            wtrmrk_page, wtrmrk_width, wtrmrk_height
-                        )
-                    input_page.mergePage(document_reader.getPage(page_number))
-
-                # Add page from input file to output document
-                output_file.addPage(input_page)
-
-            # 5d. finally, write "output" to PDF
-            with open(output_filename, "wb") as outputStream:
-                output_file.write(outputStream)
-            return output_filename
 
         def pypdf():
             watermark_page = PypdfReader(watermark).get_page(0)
@@ -302,9 +241,7 @@ class WatermarkAdd:
             # Write out the destination file
             PdfWriter(output_filename, trailer=trailer).write()
 
-        if self.method == "pypdf3":
-            return pypdf3()
-        elif self.method == "pypdf":
+        if self.method.startswith('pypdf'):
             return pypdf()
         else:
             return pdfrw()
