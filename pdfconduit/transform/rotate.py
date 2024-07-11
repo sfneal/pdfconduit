@@ -14,7 +14,12 @@ from pdfconduit.utils.path import add_suffix
 
 class Rotate:
     def __init__(
-        self, file_name: str, rotation: int, suffix: str="rotated", tempdir: Optional[str]=None, method: str="pdfrw"
+        self,
+        file_name: str,
+        rotation: int,
+        suffix: str = "rotated",
+        tempdir: Optional[str] = None,
+        method: str = "pdfrw",
     ):
         self.file_name = file_name
         self.rotation = rotation
@@ -74,6 +79,12 @@ class Rotate:
         return self.outfn
 
 
-def rotate(file_name: str, rotation: int, suffix: str="rotated", tempdir: Optional[str]=None, method: str="pdfrw"):
+def rotate(
+    file_name: str,
+    rotation: int,
+    suffix: str = "rotated",
+    tempdir: Optional[str] = None,
+    method: str = "pdfrw",
+):
     """Rotate PDF by increments of 90 degrees."""
     return str(Rotate(file_name, rotation, suffix, tempdir, method))

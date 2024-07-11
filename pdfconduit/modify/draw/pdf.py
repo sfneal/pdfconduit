@@ -13,12 +13,12 @@ from pdfconduit.modify.canvas import CanvasStr, CanvasImg, CanvasObjects
 from pdfconduit.utils import write_pdf
 
 
-def text_width(string: str, font_name: str = 'Vera', font_size: int = 40) -> float:
+def text_width(string: str, font_name: str = "Vera", font_size: int = 40) -> float:
     """Determine with width in pixels of string."""
     return stringWidth(string, fontName=font_name, fontSize=font_size)
 
 
-def center_str(txt: str, font_name: str, font_size: int, offset: int=0) -> float:
+def center_str(txt: str, font_name: str, font_size: int, offset: int = 0) -> float:
     """Center a string on the x-axis of a reportslab canvas"""
     return -(text_width(txt, font_name, font_size) / 2.0) + offset
 
@@ -26,11 +26,13 @@ def center_str(txt: str, font_name: str, font_size: int, offset: int=0) -> float
 def split_str(string: str) -> Tuple[str, str]:
     """Split string in half to return two strings"""
     split = string.split(" ")
-    return " ".join(split[: len(split) // 2]), " ".join(split[len(split) // 2:])
+    return " ".join(split[: len(split) // 2]), " ".join(split[len(split) // 2 :])
 
 
 class DrawPDF:
-    def __init__(self, tempdir: Optional[str]=None, compress: int=0, pagesize: float=LETTER):
+    def __init__(
+        self, tempdir: Optional[str] = None, compress: int = 0, pagesize: float = LETTER
+    ):
         if tempdir:
             self.dir = tempdir
         else:
@@ -56,13 +58,13 @@ class DrawPDF:
                 self._dst = resource_path(tmppdf.name)
         return self._dst
 
-    def _write(self, output: Optional[str]=None) -> str:
+    def _write(self, output: Optional[str] = None) -> str:
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
         output = output if output else self.dst
         write_pdf(self.packet, output)  # Save new pdf file
         return output
 
-    def write(self, output: Optional[str]=None) -> str:
+    def write(self, output: Optional[str] = None) -> str:
         return self._write(output)
 
 
@@ -70,11 +72,11 @@ class WatermarkDraw(DrawPDF):
     def __init__(
         self,
         canvas_objects: CanvasObjects,
-        rotate: int=0,
-        compress: int=0,
-        pagesize: float=LETTER,
-        tempdir: Optional[str]=None,
-        pagescale: bool=False,
+        rotate: int = 0,
+        compress: int = 0,
+        pagesize: float = LETTER,
+        tempdir: Optional[str] = None,
+        pagescale: bool = False,
     ):
         super(WatermarkDraw, self).__init__(tempdir, compress, pagesize)
         self.canvas_objects = canvas_objects

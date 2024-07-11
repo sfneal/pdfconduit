@@ -15,7 +15,11 @@ INPUT_PDFS_TYPE = Union[list, str]
 
 class Merge:
     def __init__(
-        self, input_pdfs: INPUT_PDFS_TYPE, output_name: str="merged", output_dir: Optional[str]=None, method: str="pdfrw"
+        self,
+        input_pdfs: INPUT_PDFS_TYPE,
+        output_name: str = "merged",
+        output_dir: Optional[str] = None,
+        method: str = "pdfrw",
     ):
         self.pdfs = self._get_pdf_list(input_pdfs)
         self.directory = output_dir if output_dir else os.path.dirname(self.pdfs[0])

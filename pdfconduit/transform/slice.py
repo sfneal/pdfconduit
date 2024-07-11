@@ -14,10 +14,10 @@ from pdfconduit.utils.path import add_suffix
 
 def slicer(
     document: str,
-    first_page: Optional[int]=None,
-    last_page: Optional[int]=None,
-    suffix: str="sliced",
-    tempdir: Optional[str]=None,
+    first_page: Optional[int] = None,
+    last_page: Optional[int] = None,
+    suffix: str = "sliced",
+    tempdir: Optional[str] = None,
 ):
     # Set output file name
     if tempdir:

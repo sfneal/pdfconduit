@@ -22,12 +22,12 @@ class Upscale:
     def __init__(
         self,
         file_name: str,
-        margin_x: int=0,
-        margin_y: int=0,
-        scale: float=1.5,
-        suffix: str="scaled",
-        tempdir: Optional[str]=None,
-        method: str="pdfrw",
+        margin_x: int = 0,
+        margin_y: int = 0,
+        scale: float = 1.5,
+        suffix: str = "scaled",
+        tempdir: Optional[str] = None,
+        method: str = "pdfrw",
     ):
         self.file_name = file_name
         self.margin_x = margin_x
@@ -108,11 +108,11 @@ class Upscale:
 
 def upscale(
     file_name: str,
-    margin_x: int=0,
-    margin_y: int=0,
-    scale: float=1.5,
-    suffix: str="scaled",
-    tempdir: Optional[str]=None,
-    method: str="pdfrw",
+    margin_x: int = 0,
+    margin_y: int = 0,
+    scale: float = 1.5,
+    suffix: str = "scaled",
+    tempdir: Optional[str] = None,
+    method: str = "pdfrw",
 ):
     return str(Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir, method))

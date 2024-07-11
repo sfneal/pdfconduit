@@ -9,13 +9,13 @@ from pdfconduit.modify.canvas.objects import CanvasObjects, CanvasStr, CanvasImg
 class CanvasConstructor:
     def __init__(
         self,
-        text1: str=None,
-        text2: str=None,
-        copyright_: Optional[bool]=None,
-        image: Optional[str]=None,
-        rotate: int=0,
-        opacity: Union[int, float]=8,
-        tempdir: Optional[str]=None,
+        text1: str = None,
+        text2: str = None,
+        copyright_: Optional[bool] = None,
+        image: Optional[str] = None,
+        rotate: int = 0,
+        opacity: Union[int, float] = 8,
+        tempdir: Optional[str] = None,
     ):
         self.text1 = text1
         self.text2 = text2

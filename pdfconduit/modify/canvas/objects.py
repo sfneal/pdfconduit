@@ -7,14 +7,14 @@ class CanvasStr:
     def __init__(
         self,
         string: str,
-        font: str="Vera",
-        color: str="black",
-        size: int=40,
-        opacity: float=0.1,
-        x: int=0,
-        y: int=0,
-        x_centered: bool=True,
-        y_centered: bool=False,
+        font: str = "Vera",
+        color: str = "black",
+        size: int = 40,
+        opacity: float = 0.1,
+        x: int = 0,
+        y: int = 0,
+        x_centered: bool = True,
+        y_centered: bool = False,
     ):
         self.string = string
         self.font = font
@@ -33,14 +33,14 @@ class CanvasImg:
     def __init__(
         self,
         image: str,
-        opacity: float=0.1,
-        x: int=0,
-        y: int=0,
-        w: int=LETTER[0],
-        h: int=LETTER[1],
-        mask: str="auto",
-        preserve_aspect_ratio: bool=True,
-        centered: bool=False,
+        opacity: float = 0.1,
+        x: int = 0,
+        y: int = 0,
+        w: int = LETTER[0],
+        h: int = LETTER[1],
+        mask: str = "auto",
+        preserve_aspect_ratio: bool = True,
+        centered: bool = False,
     ):
         self.image = image
         self.opacity = opacity
