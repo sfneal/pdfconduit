@@ -14,5 +14,5 @@ __all__ = [
     "Info",
     "Receipt",
     "pypdf_reader",
-    "PdfDriver"
+    "PdfDriver",
 ]

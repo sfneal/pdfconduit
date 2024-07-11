@@ -31,7 +31,10 @@ def split_str(string: str) -> Tuple[str, str]:
 
 class DrawPDF:
     def __init__(
-        self, tempdir: Optional[str] = None, compress: int = 0, pagesize: Tuple[float, float] = LETTER
+        self,
+        tempdir: Optional[str] = None,
+        compress: int = 0,
+        pagesize: Tuple[float, float] = LETTER,
     ):
         if tempdir:
             self.dir = tempdir
