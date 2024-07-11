@@ -1,11 +1,13 @@
 # Extract images from a PDF
+from typing import Optional
+
 from PIL import Image
 
 from pdfconduit.utils.info import Info
 
 
 # Todo: Fix img_extract and develop tests
-def img_extract(pdf, password=None):
+def img_extract(pdf: str, password: Optional[str] = None) -> None:
     # Read PDF file
     reader = Info(pdf, password).pdf
 

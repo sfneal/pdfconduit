@@ -1,5 +1,6 @@
 # Merge PDF documents
 import os
+from typing import Union, Optional, List
 
 from pdfrw import (
     PdfReader as PdfrwReader,
@@ -9,9 +10,16 @@ from pdfrw import (
 from pypdf import PdfWriter as PyPdfWriter
 
 
+INPUT_PDFS_TYPE = Union[list, str]
+
+
 class Merge:
     def __init__(
-        self, input_pdfs, output_name="merged", output_dir=None, method="pdfrw"
+        self,
+        input_pdfs: INPUT_PDFS_TYPE,
+        output_name: str = "merged",
+        output_dir: Optional[str] = None,
+        method: str = "pdfrw",
     ):
         self.pdfs = self._get_pdf_list(input_pdfs)
         self.directory = output_dir if output_dir else os.path.dirname(self.pdfs[0])
@@ -21,15 +29,16 @@ class Merge:
         self.method = method
         self.file = self.merge(self.pdfs, self.output)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.file)
 
     @staticmethod
-    def validate(pdf):
+    def validate(pdf) -> bool:
+        # todo: simplify logic?
         if not pdf.startswith(".") and pdf.endswith(".pdf"):
             return True
 
-    def _get_pdf_list(self, input_pdfs):
+    def _get_pdf_list(self, input_pdfs: INPUT_PDFS_TYPE) -> List[str]:
         """
         Generate list of PDF documents.
 
@@ -46,8 +55,9 @@ class Merge:
                 for pdf in os.listdir(input_pdfs)
                 if self.validate(pdf)
             ]
+        # todo: raise error if conditions aren't met?
 
-    def merge(self, pdf_files, output):
+    def merge(self, pdf_files: INPUT_PDFS_TYPE, output: str) -> str:
         """Merge list of PDF files to a single PDF file."""
         if self.method.startswith("pypdf"):
             return self.pypdf(pdf_files, output)
@@ -55,7 +65,7 @@ class Merge:
             return self.pdfrw(pdf_files, output)
 
     @staticmethod
-    def pdfrw(pdf_files, output):
+    def pdfrw(pdf_files: INPUT_PDFS_TYPE, output: str):
         writer = PdfrwWriter()
         for inpfn in pdf_files:
             writer.addpages(PdfrwReader(inpfn).pages)
@@ -69,7 +79,7 @@ class Merge:
         return output
 
     @staticmethod
-    def pypdf(pdf_files, output):
+    def pypdf(pdf_files: INPUT_PDFS_TYPE, output: str):
         merger = PyPdfWriter()
 
         for pdf in pdf_files:

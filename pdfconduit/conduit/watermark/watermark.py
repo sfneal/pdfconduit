@@ -2,6 +2,7 @@
 import os
 import shutil
 from tempfile import TemporaryDirectory
+from typing import Optional
 
 from looptools import Timer
 
@@ -16,15 +17,13 @@ from pdfconduit.utils import add_suffix, open_window, Receipt, Info
 class Watermark:
     def __init__(
         self,
-        document,
-        remove_temps=True,
-        move_temps=None,
-        open_file=False,
-        tempdir=None,
-        receipt=None,
-        use_receipt=True,
-        progress_bar_enabled=False,
-        progress_bar="tqdm",
+        document: str,
+        remove_temps: bool = True,
+        move_temps: Optional[bool] = None,
+        open_file: bool = False,
+        tempdir: Optional[str] = None,
+        receipt: Optional[bool] = None,
+        use_receipt: bool = True,
     ):
         """
         Watermark and encrypt a PDF document.
@@ -62,9 +61,6 @@ class Watermark:
         else:
             self.tempdir = tempdir
 
-        self.progress_bar_enabled = progress_bar_enabled
-        self.progress_bar = progress_bar
-
         self.use_receipt = use_receipt
         if use_receipt:
             if isinstance(receipt, Receipt):
@@ -72,10 +68,10 @@ class Watermark:
             else:
                 self.receipt = Receipt(use_receipt).set_dst(document)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.document)
 
-    def cleanup(self):
+    def cleanup(self) -> str:
         runtime = self.time.end
         if self.use_receipt:
             self.receipt.add("~run time~", runtime)
@@ -92,16 +88,16 @@ class Watermark:
 
     def draw(
         self,
-        text1=None,
-        text2=None,
-        copyright=True,
-        image=IMAGE_DEFAULT,
-        rotate=30,
-        opacity=0.08,
-        compress=0,
-        flatten=False,
-        add=False,
-    ):
+        text1: Optional[str] = None,
+        text2: Optional[str] = None,
+        include_copyright: bool = True,
+        image: str = IMAGE_DEFAULT,
+        rotate: int = 30,
+        opacity: float = 0.08,
+        compress: int = 0,
+        flatten: bool = False,
+        add: bool = False,
+    ) -> str:
         """
         Draw watermark PDF file.
 
@@ -111,7 +107,7 @@ class Watermark:
             Text line 1
         :param text2: str
             Text line 2
-        :param copyright: bool
+        :param include_copyright: bool
             Draw copyright and year to canvas
         :param image: str
             Logo image to be used as base watermark
@@ -142,7 +138,13 @@ class Watermark:
             self.receipt.add("WM Flattening", flatten)
 
         co = CanvasConstructor(
-            text1, text2, copyright, image, rotate, opacity, tempdir=self.tempdir
+            text1,
+            text2,
+            include_copyright,
+            image,
+            rotate,
+            opacity,
+            tempdir=self.tempdir,
         )
         objects, rotate = (
             co.img() if flatten else co.canvas()
@@ -166,13 +168,13 @@ class Watermark:
 
     def add(
         self,
-        document=None,
-        watermark=None,
-        underneath=False,
-        output=None,
-        suffix="watermarked",
-        method="pdfrw",
-    ):
+        document: Optional[str] = None,
+        watermark: Optional[str] = None,
+        underneath: bool = False,
+        output: Optional[str] = None,
+        suffix: str = "watermarked",
+        method: str = "pdfrw",
+    ) -> str:
         """
         Add a watermark file to an existing PDF document.
 
@@ -219,12 +221,12 @@ class Watermark:
 
     def encrypt(
         self,
-        user_pw="",
-        owner_pw=None,
-        encrypt_128=True,
-        allow_printing=True,
-        allow_commenting=False,
-        document=None,
+        user_pw: str = "",
+        owner_pw: Optional[str] = None,
+        encrypt_128: bool = True,
+        allow_printing: bool = True,
+        allow_commenting: bool = False,
+        document: Optional[str] = None,
     ):
         """
         Encrypt a PDF document to add passwords and restrict permissions.
@@ -234,7 +236,6 @@ class Watermark:
         False.  By default permissions are restricted to print only, when set to false all permissions are allowed.
         TODO: Add additional permission parameters
 
-        :param user_pw: str
             User password required to open and view PDF document
         :param owner_pw: str
             Owner password required to alter security settings and permissions
@@ -242,6 +243,8 @@ class Watermark:
             Encrypt PDF document using 128 bit keys
         :param allow_printing: bool
             Restrict permissions to print only
+        :param allow_commenting:
+        :param user_pw: str
         :return: str
             Encrypted PDF full path
         """
@@ -266,8 +269,6 @@ class Watermark:
                 bit128=encrypt_128,
                 allow_printing=allow_printing,
                 allow_commenting=allow_commenting,
-                progress_bar_enabled=self.progress_bar_enabled,
-                progress_bar=self.progress_bar,
             )
         )
         if self.use_receipt:

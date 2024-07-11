@@ -1,8 +1,12 @@
 # Write two (2) PDFs to a destination file
+from pathlib import Path
+from typing import Union
+
 from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
+from pypdf._utils import StrByteType
 
 
-def write_pdf(pdf_obj, destination):
+def write_pdf(pdf_obj: Union[StrByteType, Path], destination: str):
     """
     Write PDF object to file
     :param pdf_obj: PDF object to be written to file

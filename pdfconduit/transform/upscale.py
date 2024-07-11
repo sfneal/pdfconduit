@@ -1,6 +1,7 @@
 # Upscale a PDF file
 import os
 from tempfile import NamedTemporaryFile
+from typing import Optional
 
 from pdfrw import (
     PdfReader as pdfrwReader,
@@ -20,13 +21,13 @@ from pdfconduit.utils.path import add_suffix
 class Upscale:
     def __init__(
         self,
-        file_name,
-        margin_x=0,
-        margin_y=0,
-        scale=1.5,
-        suffix="scaled",
-        tempdir=None,
-        method="pdfrw",
+        file_name: str,
+        margin_x: int = 0,
+        margin_y: int = 0,
+        scale: float = 1.5,
+        suffix: str = "scaled",
+        tempdir: Optional[str] = None,
+        method: str = "pdfrw",
     ):
         self.file_name = file_name
         self.margin_x = margin_x
@@ -58,14 +59,14 @@ class Upscale:
         else:
             self.pdfrw()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.file
 
     @property
-    def file(self):
+    def file(self) -> str:
         return str(self.output)
 
-    def _pdfrw_adjust(self, page):
+    def _pdfrw_adjust(self, page: object):
         info = pdfrwPageMerge().add(page)
         x1, y1, x2, y2 = info.xobj_box
         viewrect = (
@@ -78,7 +79,7 @@ class Upscale:
         page[0].scale(self.scale)
         return page.render()
 
-    def pdfrw(self):
+    def pdfrw(self) -> str:
         reader = pdfrwReader(self.file_name)
         writer = pdfrwWriter(self.output)
         for i in list(range(0, len(reader.pages))):
@@ -86,7 +87,9 @@ class Upscale:
         writer.trailer.Info = pdfrwIndirectPdfDict(reader.Info or {})
         writer.write()
 
-    def pypdf(self):
+        return self.output
+
+    def pypdf(self) -> str:
         reader = pypdfReader(self.file_name)
         writer = pypdfWriter()
 
@@ -104,12 +107,12 @@ class Upscale:
 
 
 def upscale(
-    file_name,
-    margin_x=0,
-    margin_y=0,
-    scale=1.5,
-    suffix="scaled",
-    tempdir=None,
-    method="pdfrw",
+    file_name: str,
+    margin_x: int = 0,
+    margin_y: int = 0,
+    scale: float = 1.5,
+    suffix: str = "scaled",
+    tempdir: Optional[str] = None,
+    method: str = "pdfrw",
 ):
     return str(Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir, method))

@@ -1,6 +1,7 @@
 # Rotate a pdf file
 import os
 from tempfile import NamedTemporaryFile
+from typing import Optional
 
 from pdfrw import (
     PdfReader as PdfrwReader,
@@ -13,7 +14,12 @@ from pdfconduit.utils.path import add_suffix
 
 class Rotate:
     def __init__(
-        self, file_name, rotation, suffix="rotated", tempdir=None, method="pdfrw"
+        self,
+        file_name: str,
+        rotation: int,
+        suffix: str = "rotated",
+        tempdir: Optional[str] = None,
+        method: str = "pdfrw",
     ):
         self.file_name = file_name
         self.rotation = rotation
@@ -35,14 +41,14 @@ class Rotate:
         else:
             self.pdfrw()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.file
 
     @property
-    def file(self):
+    def file(self) -> str:
         return str(self.outfn)
 
-    def pdfrw(self):
+    def pdfrw(self) -> str:
         trailer = PdfrwReader(self.file_name)
         pages = trailer.pages
 
@@ -60,7 +66,7 @@ class Rotate:
         outdata.write()
         return self.outfn
 
-    def pypdf(self):
+    def pypdf(self) -> str:
         reader = PypdfReader(self.file_name)
         writer = PypdfWriter()
 
@@ -73,6 +79,12 @@ class Rotate:
         return self.outfn
 
 
-def rotate(file_name, rotation, suffix="rotated", tempdir=None, method="pdfrw"):
+def rotate(
+    file_name: str,
+    rotation: int,
+    suffix: str = "rotated",
+    tempdir: Optional[str] = None,
+    method: str = "pdfrw",
+):
     """Rotate PDF by increments of 90 degrees."""
     return str(Rotate(file_name, rotation, suffix, tempdir, method))

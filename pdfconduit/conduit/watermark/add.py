@@ -1,5 +1,6 @@
 # Add a watermark PDF file to another PDF file
 from tempfile import NamedTemporaryFile
+from typing import Optional, Tuple
 
 from PyBundle import resource_path
 from pdfrw import PdfReader, PdfWriter, PageMerge
@@ -14,15 +15,15 @@ from pdfconduit.utils import add_suffix, Info, pypdf_reader
 class WatermarkAdd:
     def __init__(
         self,
-        document,
-        watermark,
-        underneath=False,
-        overwrite=False,
-        output=None,
-        suffix="watermarked",
-        decrypt=False,
-        tempdir=None,
-        method="pdfrw",
+        document: str,
+        watermark: str,
+        underneath: bool = False,
+        overwrite: bool = False,
+        output: Optional[str] = None,
+        suffix: str = "watermarked",
+        decrypt: bool = False,
+        tempdir: Optional[str] = None,
+        method: Optional[str] = "pdfrw",
     ):
         """
         Add a watermark to an existing PDF document
@@ -71,7 +72,8 @@ class WatermarkAdd:
     def __str__(self):
         return str(self.output_filename)
 
-    def _get_document_info(self, filename):
+    def _get_document_info(self, filename: str) -> dict:
+        # todo: add use of typed dictionary
         pdf_file = {"path": filename}
 
         # 2a. Get PDF width and height
@@ -95,7 +97,10 @@ class WatermarkAdd:
             self.document_reader = pypdf_reader(pdf_file["upscaled"])
         return pdf_file
 
-    def _get_watermark_info(self, document, watermark, margin_x=0, margin_y=0):
+    def _get_watermark_info(
+        self, document: dict, watermark: str, margin_x: int = 0, margin_y: int = 0
+    ) -> dict:
+        # todo: add use of typed dictionary
         # 3a. Get watermark path and dimensions
         watermark_file = {"path": watermark}
         watermark_file.update(Info(watermark).dimensions)
@@ -132,14 +137,14 @@ class WatermarkAdd:
         return watermark_file
 
     @property
-    def _set_filenames(self):
-        # 4a. If upscaled PDF file does not exists use input PDF path
+    def _set_filenames(self) -> Tuple[str, str]:
+        # 4a. If upscaled PDF file does not exist use input PDF path
         try:
             pdf = self.document["upscaled"]
         except KeyError:
             pdf = self.document["path"]
 
-        # 4b. If rotated watermark file does not exists use input watermark path
+        # 4b. If rotated watermark file does not exist use input watermark path
         try:
             try:
                 watermark = self.watermark_file["upscaled"]
@@ -149,12 +154,12 @@ class WatermarkAdd:
             watermark = self.watermark_file["path"]
         return pdf, watermark
 
-    def add(self, document, watermark):
+    def add(self, document: str, watermark: str) -> str:
         """Add watermark to PDF by merging original PDF and watermark file."""
         # 5a. Create output PDF file name
         output_filename = self.output_filename
 
-        def pypdf():
+        def pypdf() -> str:
             watermark_page = PypdfReader(watermark).get_page(0)
 
             writer = PypdfWriter()
@@ -162,8 +167,8 @@ class WatermarkAdd:
             reader = PypdfReader(document)
             writer.append(reader)
 
-            width = float(watermark_page.mediabox[2]) / 2
-            height = float(watermark_page.mediabox[3]) / 2
+            # width = float(watermark_page.mediabox[2]) / 2
+            # height = float(watermark_page.mediabox[3]) / 2
 
             for content_page in writer.pages:
                 # content_page.merge_translated_page(watermark_page, tx=width, ty=height, over=False)
@@ -174,7 +179,7 @@ class WatermarkAdd:
 
             return output_filename
 
-        def pdfrw():
+        def pdfrw() -> str:
             """Faster than PyPDF3 method by as much as 15x."""
             # TODO: Fix issue where watermark is improperly placed on large pagesize PDFs
             # print(Info(document).size)

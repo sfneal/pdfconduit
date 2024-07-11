@@ -24,10 +24,12 @@ class Samples:
     def cleanup(self):
         self.wm.cleanup()
 
-    def watermarks(self, images=available_images()):
+    def watermarks(self, images=None):
+        if images is None:
+            images = available_images()
         watermarks = []
         for i in images:
-            wm = self.wm.draw(text1=i, image=i, copyright=False)
+            wm = self.wm.draw(text1=i, image=i, include_copyright=False)
             watermarks.append(wm)
         watermarks.insert(0, self._title(wm, 'Watermark Images'))
         m = Merge(watermarks, 'Watermarks samples', self.dst)
@@ -98,7 +100,7 @@ class Samples:
         wtrmrked_labeled = Label(wtrmrked_upscaled, 'Layered PDF page', tempdir=self.wm.tempdir).write(cleanup=False)
 
         # Flattened layering
-        flattened = Flatten(wtrmrked, tempdir=self.wm.tempdir, progress_bar='tqdm').save(remove_temps=False)
+        flattened = Flatten(wtrmrked, tempdir=self.wm.tempdir).save(remove_temps=False)
         flattened_labeled = Label(flattened, 'Flattened PDF page', tempdir=self.wm.tempdir).write(cleanup=False)
 
         # Merge files
