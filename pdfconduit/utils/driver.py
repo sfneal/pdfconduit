@@ -38,3 +38,6 @@ class PdfDriver(ABC):
     @abstractmethod
     def pypdf(self) -> str:
         raise NotImplementedError
+
+    def execute(self) -> str:
+        return self.pdfrw() if self.is_driver_pdfrw() else self.pypdf()

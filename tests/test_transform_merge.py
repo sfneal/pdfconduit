@@ -29,8 +29,7 @@ class TestMerge(unittest.TestCase):
             self.pdfs,
             output_name="merged_pdfrw",
             output_dir=self.temp.name,
-            method="pdfrw",
-        )
+        ).use_pdfrw()
         merged.merge()
 
         # Assert merged file exists
@@ -56,8 +55,7 @@ class TestMerge(unittest.TestCase):
             self.pdfs,
             output_name="merged_pypdf",
             output_dir=self.temp.name,
-            method="pypdf",
-        )
+        ).use_pypdf()
         merged.merge()
 
         # Assert merged file exists

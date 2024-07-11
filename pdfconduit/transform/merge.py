@@ -9,11 +9,12 @@ from pdfrw import (
 )
 from pypdf import PdfWriter as PyPdfWriter
 
+from pdfconduit.utils.driver import PdfDriver
 
 INPUT_PDFS_TYPE = Union[list, str]
 
 
-class Merge:
+class Merge(PdfDriver):
     file: str = None
 
     def __init__(
@@ -21,14 +22,12 @@ class Merge:
         input_pdfs: INPUT_PDFS_TYPE,
         output_name: str = "merged",
         output_dir: Optional[str] = None,
-        method: str = "pdfrw",
     ):
         self.pdfs = self._get_pdf_list(input_pdfs)
         self.directory = output_dir if output_dir else os.path.dirname(self.pdfs[0])
         self.output = os.path.join(
             self.directory, output_name.replace(".pdf", "") + ".pdf"
         )
-        self.method = method
 
     def __str__(self) -> str:
         return str(self.file)
@@ -60,17 +59,12 @@ class Merge:
 
     def merge(self) -> str:
         """Merge list of PDF files to a single PDF file."""
-        if self.method.startswith("pypdf"):
-            self.file = self.pypdf(self.pdfs, self.output)
-        else:
-            self.file = self.pdfrw(self.pdfs, self.output)
-
+        self.file = self.execute()
         return self.file
 
-    @staticmethod
-    def pdfrw(pdf_files: INPUT_PDFS_TYPE, output: str):
+    def pdfrw(self):
         writer = PdfrwWriter()
-        for inpfn in pdf_files:
+        for inpfn in self.pdfs:
             writer.addpages(PdfrwReader(inpfn).pages)
 
         writer.trailer.Info = PdfrwIndirectPdfDict(
@@ -78,17 +72,16 @@ class Merge:
             Creator="pdfconduit",
             Producer="pdfconduit",
         )
-        writer.write(output)
-        return output
+        writer.write(self.output)
+        return self.output
 
-    @staticmethod
-    def pypdf(pdf_files: INPUT_PDFS_TYPE, output: str):
+    def pypdf(self):
         merger = PyPdfWriter()
 
-        for pdf in pdf_files:
+        for pdf in self.pdfs:
             merger.append(pdf)
 
-        merger.write(output)
+        merger.write(self.output)
         merger.close()
 
-        return output
+        return self.output
