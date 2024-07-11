@@ -1,4 +1,4 @@
-from pdfconduit.conduit import Encrypt, Watermark, WatermarkAdd
+from pdfconduit.conduit import Encrypt, Watermark
 from pdfconduit.convert import IMG2PDF, PDF2IMG, Flatten
 from pdfconduit.transform import Merge, Rotate, Upscale, slicer
 from pdfconduit.utils import Info
@@ -6,7 +6,6 @@ from pdfconduit.utils import Info
 __all__ = [
     "Encrypt",
     "Watermark",
-    "WatermarkAdd",
     "IMG2PDF",
     "PDF2IMG",
     "Flatten",

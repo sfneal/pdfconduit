@@ -1,3 +1,4 @@
+from pdfconduit.utils.driver import PdfDriver
 from pdfconduit.utils.info import Info
 from pdfconduit.utils.path import set_destination, add_suffix
 from pdfconduit.utils.read import pypdf_reader
@@ -13,4 +14,5 @@ __all__ = [
     "Info",
     "Receipt",
     "pypdf_reader",
+    "PdfDriver",
 ]

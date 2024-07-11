@@ -1,10 +1,10 @@
 import unittest
 
+from looptools import Timer
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
-from looptools import Timer
-from pdfconduit.utils import pypdf_reader
 
+from pdfconduit.utils import pypdf_reader
 from tests import *
 
 
