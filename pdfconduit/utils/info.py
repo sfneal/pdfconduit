@@ -8,7 +8,7 @@ from pdfconduit.utils.read import pypdf_reader
 
 
 class Info:
-    def __init__(self, path: str, password: Optional[str]=None):
+    def __init__(self, path: str, password: Optional[str] = None):
         self.pdf = pypdf_reader(path, password)
 
     @staticmethod

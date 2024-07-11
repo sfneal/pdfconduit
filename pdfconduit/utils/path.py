@@ -22,12 +22,16 @@ else:
         )
 
 
-def add_suffix(file_path: str, suffix: str="modified", sep: str="_", ext: Optional[str]=None):
+def add_suffix(
+    file_path: str, suffix: str = "modified", sep: str = "_", ext: Optional[str] = None
+):
     """Adds suffix to a file name seperated by an underscore and returns file path."""
     return _add_suffix(file_path, suffix, sep, ext)
 
 
-def set_destination(source: str, suffix: str, filename: bool=False, ext: Optional[str]=None):
+def set_destination(
+    source: str, suffix: str, filename: bool = False, ext: Optional[str] = None
+):
     # todo: can be removed, not used
     """Create new pdf filename for temp files"""
     source_dirname = os.path.dirname(source)

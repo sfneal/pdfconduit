@@ -5,7 +5,7 @@ from typing import Self, Any
 
 class Receipt:
     # todo: refactor to write to logs
-    def __init__(self, use: bool=True):
+    def __init__(self, use: bool = True):
         self.dst = None
         self.use = use
         self.items = []
@@ -13,7 +13,7 @@ class Receipt:
 
         self.add("PDF Watermarker", datetime.now().strftime("%Y-%m-%d %H:%M"))
 
-    def set_dst(self, doc: str, file_name: str="watermark receipt.txt") -> Self:
+    def set_dst(self, doc: str, file_name: str = "watermark receipt.txt") -> Self:
         self.dst = os.path.join(os.path.dirname(doc), file_name)
         self.add("Directory", os.path.dirname(doc))
         self.add("PDF", os.path.basename(doc))
@@ -29,7 +29,9 @@ class Receipt:
         exists = os.path.isfile(self.dst)
         with open(self.dst, "a") as f:
             if exists:
-                f.write("*******************************************************************\n")
+                f.write(
+                    "*******************************************************************\n"
+                )
 
             for item in self.items:
                 f.write(item + "\n")
