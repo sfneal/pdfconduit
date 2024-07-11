@@ -14,6 +14,8 @@ INPUT_PDFS_TYPE = Union[list, str]
 
 
 class Merge:
+    file: str = None
+
     def __init__(
         self,
         input_pdfs: INPUT_PDFS_TYPE,
@@ -27,7 +29,6 @@ class Merge:
             self.directory, output_name.replace(".pdf", "") + ".pdf"
         )
         self.method = method
-        self.file = self.merge(self.pdfs, self.output)
 
     def __str__(self) -> str:
         return str(self.file)
@@ -57,12 +58,14 @@ class Merge:
             ]
         # todo: raise error if conditions aren't met?
 
-    def merge(self, pdf_files: INPUT_PDFS_TYPE, output: str) -> str:
+    def merge(self) -> str:
         """Merge list of PDF files to a single PDF file."""
         if self.method.startswith("pypdf"):
-            return self.pypdf(pdf_files, output)
+            self.file = self.pypdf(self.pdfs, self.output)
         else:
-            return self.pdfrw(pdf_files, output)
+            self.file = self.pdfrw(self.pdfs, self.output)
+
+        return self.file
 
     @staticmethod
     def pdfrw(pdf_files: INPUT_PDFS_TYPE, output: str):

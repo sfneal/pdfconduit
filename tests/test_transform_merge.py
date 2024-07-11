@@ -31,6 +31,7 @@ class TestMerge(unittest.TestCase):
             output_dir=self.temp.name,
             method="pdfrw",
         )
+        merged.merge()
 
         # Assert merged file exists
         self.assertTrue(os.path.exists(merged.file))
@@ -57,6 +58,7 @@ class TestMerge(unittest.TestCase):
             output_dir=self.temp.name,
             method="pypdf",
         )
+        merged.merge()
 
         # Assert merged file exists
         self.assertTrue(os.path.exists(merged.file))

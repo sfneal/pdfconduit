@@ -33,6 +33,7 @@ class Samples:
             watermarks.append(wm)
         watermarks.insert(0, self._title(wm, 'Watermark Images'))
         m = Merge(watermarks, 'Watermarks samples', self.dst)
+        m.merge()
         return m.file
 
     def opacity(self):
@@ -49,6 +50,7 @@ class Samples:
             samples.append(labeled_pdf)
             samples.insert(0, self._title(labeled_pdf, 'Opacity Comparisons'))
         m = Merge(samples, 'Opacity comparison samples', self.dst)
+        m.merge()
         return m.file
 
     def placement(self):
@@ -64,6 +66,7 @@ class Samples:
 
         to_merge = [self._title(under, 'Watermark Placement'), over_with_label, under_with_label]
         m = Merge(to_merge, 'Watermark Placement samples', self.dst)
+        m.merge()
         return m.file
 
     def layering(self):
@@ -86,6 +89,7 @@ class Samples:
             watermark_layer
         ]
         m = Merge(to_merge, 'Layering samples', self.dst)
+        m.merge()
         return m.file
 
     def flat(self):
@@ -106,6 +110,7 @@ class Samples:
         # Merge files
         to_merge = [self._title(flattened_labeled, 'Flat vs. Layered pages'), flattened_labeled, wtrmrked_labeled]
         m = Merge(to_merge, 'Flat vs. Layered', self.dst)
+        m.merge()
         return m.file
 
 

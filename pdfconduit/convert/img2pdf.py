@@ -74,11 +74,9 @@ class IMG2PDF:
         return [self._convert(image) for image in self._image_loop()]
 
     def save(self, output_name: str = "merged imgs", clean_temp: bool = True) -> str:
-        m = str(
-            Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir)
-        )
+        m = Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir)
         self.cleanup(clean_temp)
-        return m
+        return m.merge()
 
 
 def img2pdf(
