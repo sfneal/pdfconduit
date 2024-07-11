@@ -1,7 +1,11 @@
 import os
 from datetime import datetime
 from typing import Any
-from typing_extensions import Self
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
 
 
 class Receipt:
