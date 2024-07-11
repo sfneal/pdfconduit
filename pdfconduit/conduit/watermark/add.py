@@ -73,6 +73,7 @@ class WatermarkAdd:
         return str(self.output_filename)
 
     def _get_document_info(self, filename: str) -> dict:
+        # todo: add use of typed dictionary
         pdf_file = {"path": filename}
 
         # 2a. Get PDF width and height
@@ -99,6 +100,7 @@ class WatermarkAdd:
     def _get_watermark_info(
         self, document: dict, watermark: str, margin_x: int = 0, margin_y: int = 0
     ) -> dict:
+        # todo: add use of typed dictionary
         # 3a. Get watermark path and dimensions
         watermark_file = {"path": watermark}
         watermark_file.update(Info(watermark).dimensions)
