@@ -16,7 +16,7 @@ class Label(WatermarkDraw):
         document: str,
         label: str,
         title_page: bool = False,
-        suffix: str = "labeled",
+        suffix: Optional[str] = "labeled",
         output: Optional[str] = None,
         tempdir: Optional[str] = None,
     ):

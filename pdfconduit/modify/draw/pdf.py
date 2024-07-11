@@ -74,7 +74,7 @@ class WatermarkDraw(DrawPDF):
         canvas_objects: CanvasObjects,
         rotate: int = 0,
         compress: int = 0,
-        pagesize: float = LETTER,
+        pagesize: Tuple[float, float] = LETTER,
         tempdir: Optional[str] = None,
         pagescale: bool = False,
     ):
