@@ -4,6 +4,7 @@ from pdfconduit.utils.read import pypdf_reader
 from pdfconduit.utils.receipt import Receipt
 from pdfconduit.utils.view import open_window
 from pdfconduit.utils.write import write_pdf
+from pdfconduit.utils.driver import PdfDriver
 
 __all__ = [
     "set_destination",
@@ -13,4 +14,5 @@ __all__ = [
     "Info",
     "Receipt",
     "pypdf_reader",
+    "PdfDriver"
 ]
