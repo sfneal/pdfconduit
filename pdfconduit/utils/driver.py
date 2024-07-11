@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 
 try:
-    from typing import Self
+    from typing import Self, Union
 except ImportError:
     from typing_extensions import Self
 
@@ -16,11 +16,13 @@ class PdfDriver(ABC):
     _driver: Driver = Driver.pdfrw
 
     def use_pdfrw(self) -> Self:
-        self._driver = Driver.pdfrw
-        return self
+        return self.use(Driver.pdfrw)
 
     def use_pypdf(self) -> Self:
-        self._driver = Driver.pypdf
+        return self.use(Driver.pypdf)
+
+    def use(self, driver: Driver) -> Self:
+        self._driver = driver
         return self
 
     def is_driver_pdfrw(self) -> bool:
