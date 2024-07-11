@@ -2,10 +2,11 @@
 import os
 import sys
 from pathlib import Path
+from typing import Optional
 
 if "pathlib" in sys.modules:
 
-    def _add_suffix(file_path, suffix, sep, ext):
+    def _add_suffix(file_path: str, suffix: str, sep: str, ext: str):
         p = Path(file_path)
         _ext = p.suffix if ext is None else str("." + ext.strip("."))
         out = p.stem + sep + suffix + _ext  # p.suffix is file extension
@@ -13,7 +14,7 @@ if "pathlib" in sys.modules:
 
 else:
 
-    def _add_suffix(file_path, suffix, sep, ext):
+    def _add_suffix(file_path: str, suffix: str, sep: str, ext: str):
         split = os.path.basename(file_path).rsplit(".", 1)
         ext = split[1] if ext is None else str("." + ext.strip("."))
         return os.path.join(
@@ -21,12 +22,12 @@ else:
         )
 
 
-def add_suffix(file_path, suffix="modified", sep="_", ext=None):
+def add_suffix(file_path: str, suffix: str="modified", sep: str="_", ext: Optional[str]=None):
     """Adds suffix to a file name seperated by an underscore and returns file path."""
     return _add_suffix(file_path, suffix, sep, ext)
 
 
-def set_destination(source, suffix, filename=False, ext=None):
+def set_destination(source: str, suffix: str, filename: bool=False, ext: Optional[str]=None):
     # todo: can be removed, not used
     """Create new pdf filename for temp files"""
     source_dirname = os.path.dirname(source)
