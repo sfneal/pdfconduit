@@ -1,6 +1,6 @@
 from pdfconduit.transform.merge import Merge
-from pdfconduit.transform.rotate import rotate, Rotate
+from pdfconduit.transform.rotate import Rotate
 from pdfconduit.transform.slice import slicer
-from pdfconduit.transform.upscale import upscale, Upscale
+from pdfconduit.transform.upscale import Upscale
 
-__all__ = ["Merge", "rotate", "Rotate", "slicer", "upscale", "Upscale"]
+__all__ = ["Merge", "Rotate", "slicer", "Upscale"]
