@@ -3,7 +3,7 @@ import unittest
 
 from looptools import Timer
 
-from pdfconduit.utils import add_suffix, set_destination
+from pdfconduit.utils import add_suffix
 from tests import *
 
 
