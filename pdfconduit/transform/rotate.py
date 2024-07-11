@@ -9,17 +9,18 @@ from pdfrw import (
 )
 from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
 
+from pdfconduit.utils.driver import PdfDriver
 from pdfconduit.utils.path import add_suffix
 
 
-class Rotate:
+class Rotate(PdfDriver):
+
     def __init__(
         self,
         file_name: str,
         rotation: int,
         suffix: str = "rotated",
         tempdir: Optional[str] = None,
-        method: str = "pdfrw",
     ):
         self.file_name = file_name
         self.rotation = rotation
@@ -36,16 +37,11 @@ class Rotate:
         else:
             self.outfn = NamedTemporaryFile(suffix=".pdf").name
 
-        self.method = method
-
     def __str__(self) -> str:
         return self.file
 
     def rotate(self) -> str:
-        if self.method.startswith("pypdf"):
-            return self.pypdf()
-        else:
-            return self.pdfrw()
+        return self.execute()
 
     @property
     def file(self) -> str:
@@ -90,4 +86,10 @@ def rotate(
     method: str = "pdfrw",
 ):
     """Rotate PDF by increments of 90 degrees."""
-    return Rotate(file_name, rotation, suffix, tempdir, method).rotate()
+    # todo: remove use of function or clean this up
+    rotater = Rotate(file_name, rotation, suffix, tempdir)
+    if method == 'pdfrw':
+        rotater.use_pdfrw()
+    else:
+        rotater.use_pypdf()
+    return rotater.rotate()

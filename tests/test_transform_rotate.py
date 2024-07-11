@@ -27,9 +27,8 @@ class TestRotate(unittest.TestCase):
             self.pdf_path,
             rotation,
             suffix="rotated_90_pdfrw",
-            tempdir=self.temp.name,
-            method="pdfrw",
-        ).rotate()
+            tempdir=self.temp.name
+        ).use_pdfrw().rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -44,9 +43,8 @@ class TestRotate(unittest.TestCase):
             self.pdf_path,
             rotation,
             suffix="rotated_180_pdfrw",
-            tempdir=self.temp.name,
-            method="pdfrw",
-        ).rotate()
+            tempdir=self.temp.name
+        ).use_pdfrw().rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -61,9 +59,8 @@ class TestRotate(unittest.TestCase):
             self.pdf_path,
             rotation,
             suffix="rotated_270_pdfrw",
-            tempdir=self.temp.name,
-            method="pdfrw",
-        ).rotate()
+            tempdir=self.temp.name
+        ).use_pdfrw().rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -79,8 +76,7 @@ class TestRotate(unittest.TestCase):
             rotation,
             suffix="rotated_90_pypdf",
             tempdir=self.temp.name,
-            method="pypdf",
-        ).rotate()
+        ).use_pypdf().rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -96,8 +92,7 @@ class TestRotate(unittest.TestCase):
             rotation,
             suffix="rotated_180_pypdf",
             tempdir=self.temp.name,
-            method="pypdf",
-        ).rotate()
+        ).use_pypdf().rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -113,8 +108,7 @@ class TestRotate(unittest.TestCase):
             rotation,
             suffix="rotated_270_pypdf",
             tempdir=self.temp.name,
-            method="pypdf",
-        ).rotate()
+        ).use_pypdf().rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
