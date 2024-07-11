@@ -4,10 +4,9 @@ from datetime import datetime
 
 class Receipt:
     # todo: refactor to write to logs
-    def __init__(self, use=True, gui=False):
+    def __init__(self, use=True):
         self.dst = None
         self.use = use
-        self.gui = gui
         self.items = []
         self._print = print
 
