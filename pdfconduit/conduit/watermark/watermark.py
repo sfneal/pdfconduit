@@ -243,6 +243,7 @@ class Watermark:
             Restrict permissions to print only
         :param allow_commenting:
         :param user_pw: str
+        :param document:
         :return: str
             Encrypted PDF full path
         """
