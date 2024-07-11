@@ -14,11 +14,12 @@ from pypdf import (
     PdfWriter as pypdfWriter,
 )
 
+from pdfconduit.utils.driver import PdfDriver
 from pdfconduit.utils.info import Info
 from pdfconduit.utils.path import add_suffix
 
 
-class Upscale:
+class Upscale(PdfDriver):
     def __init__(
         self,
         file_name: str,
@@ -27,7 +28,6 @@ class Upscale:
         scale: float = 1.5,
         suffix: str = "scaled",
         tempdir: Optional[str] = None,
-        method: str = "pdfrw",
     ):
         self.file_name = file_name
         self.margin_x = margin_x
@@ -53,17 +53,12 @@ class Upscale:
         self.target_w = dims["w"] * self.scale
         self.target_h = dims["h"] * self.scale
 
-        self.method = method
-
     def __str__(self) -> str:
         return self.file
 
     def upscale(self) -> str:
         # Execute either pdfrw or PyPDF3 method
-        if self.method.startswith("pypdf"):
-            return self.pypdf()
-        else:
-            return self.pdfrw()
+        return self.execute()
 
     @property
     def file(self) -> str:
@@ -118,4 +113,9 @@ def upscale(
     tempdir: Optional[str] = None,
     method: str = "pdfrw",
 ):
-    return Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir, method).upscale()
+    upscaler = Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir)
+    if method == 'pdfrw':
+        upscaler.use_pdfrw()
+    else:
+        upscaler.use_pypdf()
+    return upscaler.upscale()
