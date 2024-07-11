@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pdfconduit.modify import LETTER
 
 
@@ -38,7 +40,7 @@ class CanvasImg:
         y: float = 0,
         w: int = LETTER[0],
         h: int = LETTER[1],
-        mask: str = "auto",
+        mask: Optional[str] = "auto",
         preserve_aspect_ratio: bool = True,
         centered: bool = False,
     ):
