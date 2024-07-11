@@ -202,8 +202,7 @@ class Watermark:
             watermark = self.watermark
         if not document:
             document = self.document
-        self.document = str(
-            WatermarkAdd(
+        self.document = WatermarkAdd(
                 document,
                 watermark,
                 output=output,
@@ -211,8 +210,7 @@ class Watermark:
                 tempdir=self.tempdir,
                 suffix=suffix,
                 method=method,
-            )
-        )
+            ).add()
         if self.use_receipt:
             self.receipt.add("Watermarked PDF", os.path.basename(self.document))
         if self.open_file:

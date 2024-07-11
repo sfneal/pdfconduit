@@ -55,7 +55,7 @@ class WatermarkAdd:
         self.document_reader = pypdf_reader(document, decrypt)
         self.document = self._get_document_info(document)
         self.watermark_file = self._get_watermark_info(self.document, watermark)
-        pdf_fname, wtrmrk_fname = self._set_filenames
+        self.pdf_fname, self.wtrmrk_fname = self._set_filenames
 
         if overwrite:
             self.output_filename = document
@@ -66,8 +66,6 @@ class WatermarkAdd:
         else:
             tmpf = NamedTemporaryFile(suffix=".pdf", dir=self.tempdir, delete=False)
             self.output_filename = resource_path(tmpf.name)
-
-        self.add(pdf_fname, wtrmrk_fname)
 
     def __str__(self):
         return str(self.output_filename)
@@ -154,8 +152,11 @@ class WatermarkAdd:
             watermark = self.watermark_file["path"]
         return pdf, watermark
 
-    def add(self, document: str, watermark: str) -> str:
+    def add(self) -> str:
         """Add watermark to PDF by merging original PDF and watermark file."""
+        document = self.pdf_fname
+        watermark = self.wtrmrk_fname
+
         # 5a. Create output PDF file name
         output_filename = self.output_filename
 
@@ -245,6 +246,7 @@ class WatermarkAdd:
 
             # Write out the destination file
             PdfWriter(output_filename, trailer=trailer).write()
+            return output_filename
 
         if self.method.startswith("pypdf"):
             return pypdf()
