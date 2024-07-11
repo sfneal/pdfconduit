@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
-from typing import Self, Any
+from typing import Any
+from typing_extensions import Self
 
 
 class Receipt:
