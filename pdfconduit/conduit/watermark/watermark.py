@@ -204,14 +204,14 @@ class Watermark:
             document = self.document
 
         watermarker = WatermarkAdd(
-                document,
-                watermark,
-                output=output,
-                underneath=underneath,
-                tempdir=self.tempdir,
-                suffix=suffix,
-            )
-        if method == 'pdfrw':
+            document,
+            watermark,
+            output=output,
+            underneath=underneath,
+            tempdir=self.tempdir,
+            suffix=suffix,
+        )
+        if method == "pdfrw":
             watermarker.use_pdfrw()
         else:
             watermarker.use_pypdf()

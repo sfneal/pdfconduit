@@ -114,7 +114,7 @@ def upscale(
     method: str = "pdfrw",
 ):
     upscaler = Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir)
-    if method == 'pdfrw':
+    if method == "pdfrw":
         upscaler.use_pdfrw()
     else:
         upscaler.use_pypdf()

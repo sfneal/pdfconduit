@@ -88,7 +88,7 @@ def rotate(
     """Rotate PDF by increments of 90 degrees."""
     # todo: remove use of function or clean this up
     rotater = Rotate(file_name, rotation, suffix, tempdir)
-    if method == 'pdfrw':
+    if method == "pdfrw":
         rotater.use_pdfrw()
     else:
         rotater.use_pypdf()

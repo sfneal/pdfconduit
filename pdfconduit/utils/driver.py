@@ -8,8 +8,8 @@ except ImportError:
 
 
 class Driver(Enum):
-    pdfrw: str = 'pdfrw'
-    pypdf: str = 'pypdf'
+    pdfrw: str = "pdfrw"
+    pypdf: str = "pypdf"
 
 
 class PdfDriver(ABC):
