@@ -1,6 +1,7 @@
 # Dynamically generate watermark pdf file
 import io
 from tempfile import NamedTemporaryFile, mkdtemp
+from typing import Tuple, Optional
 
 from PillowImage import img_adjust
 from PyBundle import resource_path
@@ -8,28 +9,28 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen.canvas import Canvas
 
 from pdfconduit.modify import LETTER
-from pdfconduit.modify.canvas import CanvasStr, CanvasImg
+from pdfconduit.modify.canvas import CanvasStr, CanvasImg, CanvasObjects
 from pdfconduit.utils import write_pdf
 
 
-def text_width(string, font_name, font_size):
+def text_width(string: str, font_name: str = 'Vera', font_size: int = 40) -> float:
     """Determine with width in pixels of string."""
     return stringWidth(string, fontName=font_name, fontSize=font_size)
 
 
-def center_str(txt, font_name, font_size, offset=0):
-    """Center a string on the x axis of a reportslab canvas"""
+def center_str(txt: str, font_name: str, font_size: int, offset: int=0) -> float:
+    """Center a string on the x-axis of a reportslab canvas"""
     return -(text_width(txt, font_name, font_size) / 2.0) + offset
 
 
-def split_str(string):
+def split_str(string: str) -> Tuple[str, str]:
     """Split string in half to return two strings"""
     split = string.split(" ")
-    return " ".join(split[: len(split) // 2]), " ".join(split[len(split) // 2 :])
+    return " ".join(split[: len(split) // 2]), " ".join(split[len(split) // 2:])
 
 
 class DrawPDF:
-    def __init__(self, tempdir=None, compress=0, pagesize=LETTER):
+    def __init__(self, tempdir: Optional[str]=None, compress: int=0, pagesize: float=LETTER):
         if tempdir:
             self.dir = tempdir
         else:
@@ -43,11 +44,11 @@ class DrawPDF:
             self.packet, pagesize=pagesize, pageCompression=compress, bottomup=1
         )  # Initialize canvas
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.dst)
 
     @property
-    def dst(self):
+    def dst(self) -> str:
         if not self._dst:
             with NamedTemporaryFile(
                 suffix=".pdf", dir=self.dir, delete=False
@@ -55,25 +56,25 @@ class DrawPDF:
                 self._dst = resource_path(tmppdf.name)
         return self._dst
 
-    def _write(self, output=None):
+    def _write(self, output: Optional[str]=None) -> str:
         self.packet.seek(0)  # move to the beginning of the StringIO buffer
         output = output if output else self.dst
         write_pdf(self.packet, output)  # Save new pdf file
         return output
 
-    def write(self, output=None):
+    def write(self, output: Optional[str]=None) -> str:
         return self._write(output)
 
 
 class WatermarkDraw(DrawPDF):
     def __init__(
         self,
-        canvas_objects,
-        rotate=0,
-        compress=0,
-        pagesize=LETTER,
-        tempdir=None,
-        pagescale=False,
+        canvas_objects: CanvasObjects,
+        rotate: int=0,
+        compress: int=0,
+        pagesize: float=LETTER,
+        tempdir: Optional[str]=None,
+        pagescale: bool=False,
     ):
         super(WatermarkDraw, self).__init__(tempdir, compress, pagesize)
         self.canvas_objects = canvas_objects
@@ -93,7 +94,7 @@ class WatermarkDraw(DrawPDF):
 
         self.draw()
 
-    def draw(self):
+    def draw(self) -> None:
         # Move canvas origin to the middle of the page
         self.can.translate(self.can._pagesize[0] / 2, self.can._pagesize[1] / 2)
 
@@ -114,7 +115,7 @@ class WatermarkDraw(DrawPDF):
         self.can.showPage()
         self.can.save()
 
-    def _draw_image(self, ci):
+    def _draw_image(self, ci: CanvasImg) -> None:
         """
         Draw image object to reportlabs canvas.
 
@@ -132,7 +133,7 @@ class WatermarkDraw(DrawPDF):
             anchorAtXY=True,
         )
 
-    def _draw_string(self, cs):
+    def _draw_string(self, cs: CanvasStr) -> None:
         """
         Draw string object to reportlabs canvas.
 

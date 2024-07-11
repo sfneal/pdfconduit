@@ -6,15 +6,15 @@ class CanvasStr:
 
     def __init__(
         self,
-        string,
-        font="Vera",
-        color="black",
-        size=40,
-        opacity=0.1,
-        x=0,
-        y=0,
-        x_centered=True,
-        y_centered=False,
+        string: str,
+        font: str="Vera",
+        color: str="black",
+        size: int=40,
+        opacity: float=0.1,
+        x: int=0,
+        y: int=0,
+        x_centered: bool=True,
+        y_centered: bool=False,
     ):
         self.string = string
         self.font = font
@@ -32,15 +32,15 @@ class CanvasImg:
 
     def __init__(
         self,
-        image,
-        opacity=0.1,
-        x=0,
-        y=0,
-        w=LETTER[0],
-        h=LETTER[1],
-        mask="auto",
-        preserve_aspect_ratio=True,
-        centered=False,
+        image: str,
+        opacity: float=0.1,
+        x: int=0,
+        y: int=0,
+        w: int=LETTER[0],
+        h: int=LETTER[1],
+        mask: str="auto",
+        preserve_aspect_ratio: bool=True,
+        centered: bool=False,
     ):
         self.image = image
         self.opacity = opacity
@@ -59,8 +59,8 @@ class CanvasObjects:
     def __init__(self):
         self.objects = []
 
-    def __iter__(self):
+    def __iter__(self) -> iter:
         return iter(self.objects)
 
-    def add(self, canvas_object):
+    def add(self, canvas_object) -> None:
         self.objects.append(canvas_object)

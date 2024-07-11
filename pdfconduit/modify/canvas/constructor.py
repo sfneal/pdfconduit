@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional, Union, Tuple
 
 from PillowImage import PillowImage
 
@@ -8,13 +9,13 @@ from pdfconduit.modify.canvas.objects import CanvasObjects, CanvasStr, CanvasImg
 class CanvasConstructor:
     def __init__(
         self,
-        text1=None,
-        text2=None,
-        copyright_=None,
-        image=None,
-        rotate=0,
-        opacity=8,
-        tempdir=None,
+        text1: str=None,
+        text2: str=None,
+        copyright_: Optional[bool]=None,
+        image: Optional[str]=None,
+        rotate: int=0,
+        opacity: Union[int, float]=8,
+        tempdir: Optional[str]=None,
     ):
         self.text1 = text1
         self.text2 = text2
@@ -28,10 +29,10 @@ class CanvasConstructor:
         self.obj = CanvasObjects()
 
     @property
-    def objects(self):
+    def objects(self) -> Tuple[CanvasObjects, int]:
         return self.obj, self.rotate
 
-    def canvas(self):
+    def canvas(self) -> Tuple[CanvasObjects, int]:
         if self.image is not None:
             self.obj.add(CanvasImg(self.image, opacity=self.opacity, x=0, y=253))
 
@@ -94,7 +95,7 @@ class CanvasConstructor:
                 )
         return self.objects
 
-    def img(self):
+    def img(self) -> Tuple[CanvasObjects, int]:
         with PillowImage() as img:
             if self.image is not None:
                 img.draw_img(self.image, x=0, y=50, opacity=self.opacity)
