@@ -10,9 +10,10 @@ from reportlab.lib.pagesizes import letter
 from pdfconduit.transform.rotate import rotate
 from pdfconduit.transform.upscale import upscale
 from pdfconduit.utils import add_suffix, Info, pypdf_reader
+from pdfconduit.utils.driver import PdfDriver
 
 
-class WatermarkAdd:
+class WatermarkAdd(PdfDriver):
     def __init__(
         self,
         document: str,
@@ -20,10 +21,9 @@ class WatermarkAdd:
         underneath: bool = False,
         overwrite: bool = False,
         output: Optional[str] = None,
-        suffix: str = "watermarked",
+        suffix: Optional[str] = "watermarked",
         decrypt: bool = False,
         tempdir: Optional[str] = None,
-        method: Optional[str] = "pdfrw",
     ):
         """
         Add a watermark to an existing PDF document
@@ -50,7 +50,6 @@ class WatermarkAdd:
         self.scale = 0
         self.underneath = underneath
         self.tempdir = tempdir
-        self.method = method
 
         self.document_reader = pypdf_reader(document, decrypt)
         self.document = self._get_document_info(document)
@@ -111,7 +110,7 @@ class WatermarkAdd:
         ):
             self.rotate = 90
             watermark_file["rotated"] = rotate(
-                watermark, self.rotate, tempdir=self.tempdir, method=self.method
+                watermark, self.rotate, tempdir=self.tempdir, method=self._driver.value
             )
 
         # Set watermark file to be used for upscaling
@@ -130,7 +129,7 @@ class WatermarkAdd:
                 scale = float(document["h"] / watermark_file["h"])
 
             watermark_file["upscaled"] = upscale(
-                wtrmrk, scale=scale, tempdir=self.tempdir, method=self.method
+                wtrmrk, scale=scale, tempdir=self.tempdir, method=self._driver.value
             )
         self.scale = scale
         return watermark_file
@@ -155,101 +154,92 @@ class WatermarkAdd:
 
     def add(self) -> str:
         """Add watermark to PDF by merging original PDF and watermark file."""
-        document = self.pdf_fname
-        watermark = self.wtrmrk_fname
+        return self.execute()
 
-        # 5a. Create output PDF file name
-        output_filename = self.output_filename
+    def pypdf(self) -> str:
+        watermark_page = PypdfReader(self.wtrmrk_fname).get_page(0)
 
-        def pypdf() -> str:
-            watermark_page = PypdfReader(watermark).get_page(0)
+        writer = PypdfWriter()
 
-            writer = PypdfWriter()
+        reader = PypdfReader(self.pdf_fname)
+        writer.append(reader)
 
-            reader = PypdfReader(document)
-            writer.append(reader)
+        # width = float(watermark_page.mediabox[2]) / 2
+        # height = float(watermark_page.mediabox[3]) / 2
 
-            # width = float(watermark_page.mediabox[2]) / 2
-            # height = float(watermark_page.mediabox[3]) / 2
+        for content_page in writer.pages:
+            # content_page.merge_translated_page(watermark_page, tx=width, ty=height, over=False)
+            content_page.merge_page(watermark_page, over=False)
 
-            for content_page in writer.pages:
-                # content_page.merge_translated_page(watermark_page, tx=width, ty=height, over=False)
-                content_page.merge_page(watermark_page, over=False)
+        with open(self.output_filename, "wb") as fp:
+            writer.write(fp)
 
-            with open(output_filename, "wb") as fp:
-                writer.write(fp)
+        return self.output_filename
 
-            return output_filename
+    def pdfrw(self) -> str:
+        """Faster than PyPDF3 method by as much as 15x."""
+        # TODO: Fix issue where watermark is improperly placed on large pagesize PDFs
+        # print(Info(document).size)
+        # print(Info(watermark).size)
+        # print('\n')
 
-        def pdfrw() -> str:
-            """Faster than PyPDF3 method by as much as 15x."""
-            # TODO: Fix issue where watermark is improperly placed on large pagesize PDFs
-            # print(Info(document).size)
-            # print(Info(watermark).size)
-            # print('\n')
+        # Open both the source files
+        wmark_trailer = PdfReader(self.wtrmrk_fname)
+        trailer = PdfReader(self.pdf_fname)
 
-            # Open both the source files
-            wmark_trailer = PdfReader(watermark)
-            trailer = PdfReader(document)
+        # Handle different sized pages in same document with
+        # a memoization cache, so we don't create more watermark
+        # objects than we need to (typically only one per document).
 
-            # Handle different sized pages in same document with
-            # a memoization cache, so we don't create more watermark
-            # objects than we need to (typically only one per document).
+        wmark_page = wmark_trailer.pages[0]
+        wmark_cache = {}
 
-            wmark_page = wmark_trailer.pages[0]
-            wmark_cache = {}
+        # Process every page
+        for pagenum, page in enumerate(trailer.pages, 1):
 
-            # Process every page
-            for pagenum, page in enumerate(trailer.pages, 1):
+            # Get the media box of the page, and see
+            # if we have a matching watermark in the cache
+            mbox = tuple(float(x) for x in page.MediaBox)
+            odd = pagenum & 1
+            key = mbox, odd
+            wmark = wmark_cache.get(key)
+            if wmark is None:
 
-                # Get the media box of the page, and see
-                # if we have a matching watermark in the cache
-                mbox = tuple(float(x) for x in page.MediaBox)
-                odd = pagenum & 1
-                key = mbox, odd
-                wmark = wmark_cache.get(key)
-                if wmark is None:
+                # Create and cache a new watermark object.
+                wmark = wmark_cache[key] = PageMerge().add(wmark_page)[0]
 
-                    # Create and cache a new watermark object.
-                    wmark = wmark_cache[key] = PageMerge().add(wmark_page)[0]
+                # The math is more complete than it probably needs to be,
+                # because the origin of all pages is almost always (0, 0).
+                # Nonetheless, we illustrate all the values and their names.
 
-                    # The math is more complete than it probably needs to be,
-                    # because the origin of all pages is almost always (0, 0).
-                    # Nonetheless, we illustrate all the values and their names.
+                page_x, page_y, page_x1, page_y1 = mbox
+                page_w = page_x1 - page_x
+                page_h = page_y1 - page_y  # For illustration, not used
 
-                    page_x, page_y, page_x1, page_y1 = mbox
-                    page_w = page_x1 - page_x
-                    page_h = page_y1 - page_y  # For illustration, not used
+                # Scale the watermark if it is too wide for the page
+                # (Could do the same for height instead if needed)
+                if wmark.w > page_w:
+                    wmark.scale(1.0 * page_w / wmark.w)
 
-                    # Scale the watermark if it is too wide for the page
-                    # (Could do the same for height instead if needed)
-                    if wmark.w > page_w:
-                        wmark.scale(1.0 * page_w / wmark.w)
+                # Always put watermark at the top of the page
+                # (but see horizontal positioning for other ideas)
+                wmark.y += page_y1 - wmark.h
 
-                    # Always put watermark at the top of the page
-                    # (but see horizontal positioning for other ideas)
-                    wmark.y += page_y1 - wmark.h
+                # For odd pages, put it at the left of the page,
+                # and for even pages, put it on the right of the page.
+                if odd:
+                    wmark.x = page_x
+                else:
+                    wmark.x += page_x1 - wmark.w
 
-                    # For odd pages, put it at the left of the page,
-                    # and for even pages, put it on the right of the page.
-                    if odd:
-                        wmark.x = page_x
-                    else:
-                        wmark.x += page_x1 - wmark.w
+                # Optimize the case where the watermark is same width
+                # as page.
+                if page_w == wmark.w:
+                    wmark_cache[mbox, not odd] = wmark
 
-                    # Optimize the case where the watermark is same width
-                    # as page.
-                    if page_w == wmark.w:
-                        wmark_cache[mbox, not odd] = wmark
+            # Add the watermark to the page
+            PageMerge(page).add(wmark, prepend=self.underneath).render()
 
-                # Add the watermark to the page
-                PageMerge(page).add(wmark, prepend=self.underneath).render()
-
-            # Write out the destination file
-            PdfWriter(output_filename, trailer=trailer).write()
-            return output_filename
-
-        if self.method.startswith("pypdf"):
-            return pypdf()
-        else:
-            return pdfrw()
+        # Write out the destination file
+        PdfWriter(self.output_filename, trailer=trailer).write()
+        return self.output_filename

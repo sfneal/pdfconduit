@@ -172,7 +172,7 @@ class Watermark:
         watermark: Optional[str] = None,
         underneath: bool = False,
         output: Optional[str] = None,
-        suffix: str = "watermarked",
+        suffix: Optional[str] = "watermarked",
         method: str = "pdfrw",
     ) -> str:
         """
@@ -202,15 +202,21 @@ class Watermark:
             watermark = self.watermark
         if not document:
             document = self.document
-        self.document = WatermarkAdd(
+
+        watermarker = WatermarkAdd(
                 document,
                 watermark,
                 output=output,
                 underneath=underneath,
                 tempdir=self.tempdir,
                 suffix=suffix,
-                method=method,
-            ).add()
+            )
+        if method == 'pdfrw':
+            watermarker.use_pdfrw()
+        else:
+            watermarker.use_pypdf()
+        self.document = watermarker.add()
+
         if self.use_receipt:
             self.receipt.add("Watermarked PDF", os.path.basename(self.document))
         if self.open_file:
