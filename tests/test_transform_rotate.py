@@ -29,7 +29,7 @@ class TestRotate(unittest.TestCase):
             suffix="rotated_90_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
-        ).file
+        ).rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -46,7 +46,7 @@ class TestRotate(unittest.TestCase):
             suffix="rotated_180_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
-        ).file
+        ).rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -63,7 +63,7 @@ class TestRotate(unittest.TestCase):
             suffix="rotated_270_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
-        ).file
+        ).rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -80,7 +80,7 @@ class TestRotate(unittest.TestCase):
             suffix="rotated_90_pypdf",
             tempdir=self.temp.name,
             method="pypdf",
-        ).file
+        ).rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -97,7 +97,7 @@ class TestRotate(unittest.TestCase):
             suffix="rotated_180_pypdf",
             tempdir=self.temp.name,
             method="pypdf",
-        ).file
+        ).rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
@@ -114,7 +114,7 @@ class TestRotate(unittest.TestCase):
             suffix="rotated_270_pypdf",
             tempdir=self.temp.name,
             method="pypdf",
-        ).file
+        ).rotate()
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)

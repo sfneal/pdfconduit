@@ -36,13 +36,16 @@ class Rotate:
         else:
             self.outfn = NamedTemporaryFile(suffix=".pdf").name
 
-        if method.startswith("pypdf"):
-            self.pypdf()
-        else:
-            self.pdfrw()
+        self.method = method
 
     def __str__(self) -> str:
         return self.file
+
+    def rotate(self) -> str:
+        if self.method.startswith("pypdf"):
+            return self.pypdf()
+        else:
+            return self.pdfrw()
 
     @property
     def file(self) -> str:
@@ -87,4 +90,4 @@ def rotate(
     method: str = "pdfrw",
 ):
     """Rotate PDF by increments of 90 degrees."""
-    return str(Rotate(file_name, rotation, suffix, tempdir, method))
+    return Rotate(file_name, rotation, suffix, tempdir, method).rotate()
