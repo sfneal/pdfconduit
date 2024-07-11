@@ -89,6 +89,7 @@ class WatermarkAdd:
         # 2c. Upscale PDF if it is smaller than a letter
         if pdf_file["w"] <= letter_size["w"] or pdf_file["h"] <= letter_size["h"]:
             scale = float(letter_size["w"] / pdf_file["w"])
+            # todo: add use of upscale class instead of function
             pdf_file["upscaled"] = upscale(
                 pdf_file["path"], scale=scale, tempdir=self.tempdir
             )

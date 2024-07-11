@@ -53,14 +53,17 @@ class Upscale:
         self.target_w = dims["w"] * self.scale
         self.target_h = dims["h"] * self.scale
 
-        # Execute either pdfrw or PyPDF3 method
-        if method.startswith("pypdf"):
-            self.pypdf()
-        else:
-            self.pdfrw()
+        self.method = method
 
     def __str__(self) -> str:
         return self.file
+
+    def upscale(self) -> str:
+        # Execute either pdfrw or PyPDF3 method
+        if self.method.startswith("pypdf"):
+            return self.pypdf()
+        else:
+            return self.pdfrw()
 
     @property
     def file(self) -> str:
@@ -115,4 +118,4 @@ def upscale(
     tempdir: Optional[str] = None,
     method: str = "pdfrw",
 ):
-    return str(Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir, method))
+    return Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir, method).upscale()

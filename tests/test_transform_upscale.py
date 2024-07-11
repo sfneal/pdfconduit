@@ -27,7 +27,7 @@ class TestUpscale(unittest.TestCase):
             suffix="upscaled_2.0_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -43,7 +43,7 @@ class TestUpscale(unittest.TestCase):
             suffix="upscaled_1.5_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -59,7 +59,7 @@ class TestUpscale(unittest.TestCase):
             suffix="upscaled_3.0_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -75,7 +75,7 @@ class TestUpscale(unittest.TestCase):
             suffix="downscaled_2.0_pdfrw",
             tempdir=self.temp.name,
             method="pdfrw",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -91,7 +91,7 @@ class TestUpscale(unittest.TestCase):
             suffix="upscaled_2.0_pypdf",
             tempdir=self.temp.name,
             method="pypdf",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -107,7 +107,7 @@ class TestUpscale(unittest.TestCase):
             suffix="upscaled_1.5_pypdf",
             tempdir=self.temp.name,
             method="pypdf",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -123,7 +123,7 @@ class TestUpscale(unittest.TestCase):
             suffix="upscaled_3.0_pypdf",
             tempdir=self.temp.name,
             method="pypdf",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
@@ -139,7 +139,7 @@ class TestUpscale(unittest.TestCase):
             suffix="downscaled_2.0_pypdf",
             tempdir=self.temp.name,
             method="pypdf",
-        ).file
+        ).upscale()
 
         self.assertPdfExists(upscaled)
         self.assertPdfUpscaled(s, upscaled)
