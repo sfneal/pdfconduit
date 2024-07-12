@@ -1,4 +1,5 @@
 # Encrypt a PDF file with password protection
+from enum import Enum
 from typing import Optional
 
 from pypdf import PdfWriter
@@ -6,6 +7,14 @@ from pypdf.constants import UserAccessPermissions
 
 from pdfconduit.utils import add_suffix
 from pdfconduit.utils.read import pypdf_reader
+
+
+class Algorithms(Enum):
+    RC4_40: str = 'RC4-40'
+    RC4_128: str = 'RC4-128'
+    AES_128: str = 'AES-128'
+    AES_256_r5: str = 'AES-256-R5'
+    AES_256: str = 'AES_256'
 
 
 class Encrypt:
@@ -21,6 +30,7 @@ class Encrypt:
         allow_commenting: bool = False,
         overwrite_permission: Optional[int] = None,
         decrypt: Optional[str] = None,
+        algorithm: Optional[Algorithms] = None
     ) -> None:
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
@@ -33,7 +43,15 @@ class Encrypt:
         self.overwrite_permission = overwrite_permission
         self.decrypt = decrypt
 
-        # todo: add algorythm parameter
+        if algorithm is not None:
+            self.algorithm = algorithm
+        elif not self.encrypt_128:
+            self.algorithm = Algorithms.RC4_40
+        else:
+            self.algorithm = Algorithms.AES_128
+
+        if self.algorithm == Algorithms.RC4_40:
+            self.encrypt_128 = False
 
     def __str__(self) -> str:
         return str(self.output)
@@ -63,6 +81,7 @@ class Encrypt:
                 owner_password=self.owner_pw,
                 use_128bit=self.encrypt_128,
                 permissions_flag=permissions,
+                algorithm=self.algorithm.value
             )
 
             # todo: add metadata adding functionality
