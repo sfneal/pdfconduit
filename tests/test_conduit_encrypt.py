@@ -34,7 +34,7 @@ class TestEncrypt(unittest.TestCase):
             output=self.temp.name,
             bit128=True,
             suffix="128bit",
-            algorithm=Algorithms.RC4_128
+            algorithm=Algorithms.RC4_128,
         )
         encrypted.encrypt()
 
@@ -57,7 +57,7 @@ class TestEncrypt(unittest.TestCase):
             output=self.temp.name,
             bit128=False,
             suffix="40bit",
-            algorithm=Algorithms.RC4_40
+            algorithm=Algorithms.RC4_40,
         )
         encrypted.encrypt()
 
@@ -82,7 +82,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=True,
             output=self.temp.name,
             suffix="128bit_allow_printing",
-            algorithm=Algorithms.RC4_128
+            algorithm=Algorithms.RC4_128,
         )
         encrypted.encrypt()
 
@@ -107,7 +107,7 @@ class TestEncrypt(unittest.TestCase):
             allow_commenting=True,
             bit128=True,
             suffix="128bit_allow_commenting",
-            algorithm=Algorithms.RC4_128
+            algorithm=Algorithms.RC4_128,
         )
         encrypted.encrypt()
 
@@ -131,7 +131,7 @@ class TestEncrypt(unittest.TestCase):
             allow_commenting=True,
             bit128=True,
             suffix="128bit_allow_printing_and_commenting",
-            algorithm=Algorithms.RC4_128
+            algorithm=Algorithms.RC4_128,
         )
         encrypted.encrypt()
 
@@ -155,7 +155,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=False,
             output=self.temp.name,
             suffix="40bit_allow_printing",
-            algorithm=Algorithms.RC4_40
+            algorithm=Algorithms.RC4_40,
         )
         encrypted.encrypt()
 
@@ -180,7 +180,7 @@ class TestEncrypt(unittest.TestCase):
             allow_commenting=True,
             bit128=False,
             suffix="40bit_allow_commenting",
-            algorithm=Algorithms.RC4_40
+            algorithm=Algorithms.RC4_40,
         )
         encrypted.encrypt()
 
@@ -205,7 +205,7 @@ class TestEncrypt(unittest.TestCase):
             allow_commenting=True,
             bit128=False,
             suffix="40bit_allow_printing_and_commenting",
-            algorithm=Algorithms.RC4_40
+            algorithm=Algorithms.RC4_40,
         )
         encrypted.encrypt()
 
@@ -227,7 +227,7 @@ class TestEncrypt(unittest.TestCase):
             self.owner_pw,
             output=self.temp.name,
             suffix="rc4_40",
-            algorithm=Algorithms.RC4_40
+            algorithm=Algorithms.RC4_40,
         )
         encrypted.encrypt()
 
@@ -249,7 +249,7 @@ class TestEncrypt(unittest.TestCase):
             self.owner_pw,
             output=self.temp.name,
             suffix="rc4_128",
-            algorithm=Algorithms.RC4_128
+            algorithm=Algorithms.RC4_128,
         )
         encrypted.encrypt()
 
@@ -270,7 +270,7 @@ class TestEncrypt(unittest.TestCase):
             self.owner_pw,
             output=self.temp.name,
             suffix="aes_128",
-            algorithm=Algorithms.AES_128
+            algorithm=Algorithms.AES_128,
         )
         encrypted.encrypt()
 
@@ -291,7 +291,7 @@ class TestEncrypt(unittest.TestCase):
             self.owner_pw,
             output=self.temp.name,
             suffix="aes_256_45",
-            algorithm=Algorithms.AES_256_r5
+            algorithm=Algorithms.AES_256_r5,
         )
         encrypted.encrypt()
 
@@ -312,7 +312,7 @@ class TestEncrypt(unittest.TestCase):
             self.owner_pw,
             output=self.temp.name,
             suffix="aes_256_45",
-            algorithm=Algorithms.AES_256
+            algorithm=Algorithms.AES_256,
         )
         encrypted.encrypt()
 
@@ -333,7 +333,7 @@ class TestEncrypt(unittest.TestCase):
             self.owner_pw,
             output=self.temp.name,
             suffix="byte_string",
-            algorithm=Algorithms.RC4_128
+            algorithm=Algorithms.RC4_128,
         )
         encrypted.encrypt()
 
@@ -397,10 +397,10 @@ class TestEncrypt(unittest.TestCase):
         self.assertEqual(security["/R"], security_handler_revision)
 
         if security_handler_revision == 4:
-            self.assertTrue('/CF' in security)
-            self.assertEqual(security['/CF']['/StdCF']['/CFM'], '/AESV2')
+            self.assertTrue("/CF" in security)
+            self.assertEqual(security["/CF"]["/StdCF"]["/CFM"], "/AESV2")
         else:
-            self.assertFalse('/CF' in security)
+            self.assertFalse("/CF" in security)
 
     def assert40BitEncryption(self, security):
         if "/Length" in security:
@@ -420,8 +420,8 @@ class TestEncrypt(unittest.TestCase):
         self.assertEqual(security["/R"], security_handler_revision)
         self.assertEqual(security["/V"], 5)
 
-        self.assertTrue('/CF' in security)
-        self.assertEqual(security['/CF']['/StdCF']['/CFM'], '/AESV3')
+        self.assertTrue("/CF" in security)
+        self.assertEqual(security["/CF"]["/StdCF"]["/CFM"], "/AESV3")
 
     def assertSecurityValue(self, security, expected):
         self.assertTrue("/P" in security)
