@@ -13,8 +13,8 @@ class Algorithms(Enum):
     RC4_40: str = 'RC4-40'
     RC4_128: str = 'RC4-128'
     AES_128: str = 'AES-128'
-    AES_256_r5: str = 'AES-256-R5'
     AES_256: str = 'AES_256'
+    AES_256_r5: str = 'AES-256-R5'
 
 
 class Encrypt:
@@ -30,7 +30,7 @@ class Encrypt:
         allow_commenting: bool = False,
         overwrite_permission: Optional[int] = None,
         decrypt: Optional[str] = None,
-        algorithm: Optional[Algorithms] = None
+        algorithm: Algorithms = Algorithms.AES_256_r5
     ) -> None:
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
