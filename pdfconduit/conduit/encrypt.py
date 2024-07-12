@@ -31,15 +31,16 @@ class Encrypt:
         self.allow_printing = allow_printing
         self.allow_commenting = allow_commenting
         self.overwrite_permission = overwrite_permission
+        self.decrypt = decrypt
 
         # todo: add algorythm parameter
-
-        self.encrypt(decrypt)
 
     def __str__(self) -> str:
         return str(self.output)
 
     def encrypt(self, decrypt: Optional[str] = None) -> str:
+        decrypt = decrypt if decrypt else self.decrypt
+
         if self.allow_printing and self.allow_commenting:
             permissions = UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
         elif self.allow_printing:

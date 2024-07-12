@@ -265,8 +265,7 @@ class Watermark:
                 self.receipt.add("Permissions", "Allow printing")
             else:
                 self.receipt.add("Permissions", "Allow ALL")
-        p = str(
-            Encrypt(
+        p = Encrypt(
                 document,
                 user_pw,
                 owner_pw,
@@ -274,8 +273,7 @@ class Watermark:
                 bit128=encrypt_128,
                 allow_printing=allow_printing,
                 allow_commenting=allow_commenting,
-            )
-        )
+            ).encrypt()
         if self.use_receipt:
             self.receipt.add("Secured PDF", os.path.basename(p))
         return p

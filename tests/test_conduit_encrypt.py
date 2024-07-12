@@ -34,6 +34,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=True,
             suffix="128bit",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -55,6 +56,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=False,
             suffix="40bit",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -78,6 +80,7 @@ class TestEncrypt(unittest.TestCase):
             output=self.temp.name,
             suffix="128bit_allow_printing",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -101,6 +104,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=True,
             suffix="128bit_allow_commenting",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -123,6 +127,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=True,
             suffix="128bit_allow_printing_and_commenting",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -145,6 +150,7 @@ class TestEncrypt(unittest.TestCase):
             output=self.temp.name,
             suffix="40bit_allow_printing",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -168,6 +174,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=False,
             suffix="40bit_allow_commenting",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -191,6 +198,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=False,
             suffix="40bit_allow_printing_and_commenting",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -211,6 +219,7 @@ class TestEncrypt(unittest.TestCase):
             output=self.temp.name,
             suffix="byte_string",
         )
+        encrypted.encrypt()
 
         security = self._getPdfSecurity(encrypted)
 
@@ -239,6 +248,7 @@ class TestEncrypt(unittest.TestCase):
             bit128=True,
             suffix="metadata",
         )
+        encrypted.encrypt()
 
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
