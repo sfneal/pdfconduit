@@ -1,4 +1,5 @@
 # Encrypt a PDF file with password protection
+from enum import Enum
 from typing import Optional
 
 from pypdf import PdfWriter
@@ -6,6 +7,14 @@ from pypdf.constants import UserAccessPermissions
 
 from pdfconduit.utils import add_suffix
 from pdfconduit.utils.read import pypdf_reader
+
+
+class Algorithms(Enum):
+    RC4_40: str = "RC4-40"
+    RC4_128: str = "RC4-128"
+    AES_128: str = "AES-128"
+    AES_256: str = "AES_256"
+    AES_256_r5: str = "AES-256-R5"
 
 
 class Encrypt:
@@ -21,6 +30,7 @@ class Encrypt:
         allow_commenting: bool = False,
         overwrite_permission: Optional[int] = None,
         decrypt: Optional[str] = None,
+        algorithm: Algorithms = Algorithms.AES_256_r5,
     ) -> None:
         """Password protect PDF file and allow all other permissions."""
         self.pdf = pdf
@@ -31,15 +41,24 @@ class Encrypt:
         self.allow_printing = allow_printing
         self.allow_commenting = allow_commenting
         self.overwrite_permission = overwrite_permission
+        self.decrypt = decrypt
 
-        # todo: add algorythm parameter
+        if algorithm is not None:
+            self.algorithm = algorithm
+        elif not self.encrypt_128:
+            self.algorithm = Algorithms.RC4_40
+        else:
+            self.algorithm = Algorithms.AES_128
 
-        self.encrypt(decrypt)
+        if self.algorithm == Algorithms.RC4_40:
+            self.encrypt_128 = False
 
     def __str__(self) -> str:
         return str(self.output)
 
     def encrypt(self, decrypt: Optional[str] = None) -> str:
+        decrypt = decrypt if decrypt else self.decrypt
+
         if self.allow_printing and self.allow_commenting:
             permissions = UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
         elif self.allow_printing:
@@ -62,6 +81,7 @@ class Encrypt:
                 owner_password=self.owner_pw,
                 use_128bit=self.encrypt_128,
                 permissions_flag=permissions,
+                algorithm=self.algorithm.value,
             )
 
             # todo: add metadata adding functionality
