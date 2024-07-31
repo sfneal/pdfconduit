@@ -1,15 +1,15 @@
 # Retrieve information about a PDF document
-from typing import Optional, List, Dict, Tuple
+from typing import Optional, List, Dict, Tuple, Union
 
-from pypdf import PdfReader, DocumentInformation, PageObject
+from pypdf import PdfReader, DocumentInformation, PageObject, PdfWriter
 
 from pdfconduit.utils._permissions import Permissions
 from pdfconduit.utils.read import pypdf_reader
 
 
 class Info:
-    def __init__(self, path: str, password: Optional[str] = None):
-        self.pdf = pypdf_reader(path, password)
+    def __init__(self, pdf: Union[str, PdfReader, PdfWriter], password: Optional[str] = None):
+        self.pdf = pdf if isinstance(pdf, (PdfReader, PdfWriter)) else pypdf_reader(pdf, password)
 
     @staticmethod
     def _resolved_objects(pdf: PdfReader, xobject: str) -> int:
