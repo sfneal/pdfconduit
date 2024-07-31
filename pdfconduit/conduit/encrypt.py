@@ -1,8 +1,8 @@
 # Encrypt a PDF file with password protection
 from enum import Enum
-from typing import Optional
+from typing import Optional, Union
 
-from pypdf import PdfWriter
+from pypdf import PdfWriter, PdfReader
 from pypdf.constants import UserAccessPermissions
 
 from pdfconduit.utils import add_suffix
@@ -20,7 +20,7 @@ class Algorithms(Enum):
 class Encrypt:
     def __init__(
         self,
-        pdf: str,
+        pdf: Union[str | PdfReader],
         user_pw: str,
         owner_pw: Optional[str] = None,
         output: Optional[str] = None,
@@ -68,34 +68,40 @@ class Encrypt:
         else:
             permissions = UserAccessPermissions
 
-        with open(self.pdf, "rb") as pdf_file:
-            # Read opened PDF file
+        if isinstance(self.pdf, PdfReader):
+            pdf_file = None
+            pdf_reader = self.pdf
+        else:
+            pdf_file = open(self.pdf, "rb")
             pdf_reader = pypdf_reader(pdf_file, decrypt)
 
-            # Create PDF writer object
-            pdf_writer = PdfWriter(clone_from=pdf_reader)
+        # Create PDF writer object
+        pdf_writer = PdfWriter(clone_from=pdf_reader)
 
-            # Apply encryption to writer object
-            pdf_writer.encrypt(
-                user_password=self.user_pw,
-                owner_password=self.owner_pw,
-                use_128bit=self.encrypt_128,
-                permissions_flag=permissions,
-                algorithm=self.algorithm.value,
-            )
+        # Apply encryption to writer object
+        pdf_writer.encrypt(
+            user_password=self.user_pw,
+            owner_password=self.owner_pw,
+            use_128bit=self.encrypt_128,
+            permissions_flag=permissions,
+            algorithm=self.algorithm.value,
+        )
 
-            # todo: add metadata adding functionality
-            pdf_writer.add_metadata(
-                {
-                    "/Producer": "pdfconduit",
-                    "/Creator": "pdfconduit",
-                    "/Author": "Stephen Neal",
-                }
-            )
+        # todo: add metadata adding functionality
+        pdf_writer.add_metadata(
+            {
+                "/Producer": "pdfconduit",
+                "/Creator": "pdfconduit",
+                "/Author": "Stephen Neal",
+            }
+        )
 
-            # Write encrypted PDF to file
-            with open(self.output, "wb") as output_pdf:
-                pdf_writer.write(output_pdf)
+        # Write encrypted PDF to file
+        with open(self.output, "wb") as output_pdf:
+            pdf_writer.write(output_pdf)
+
+        if pdf_file is not None:
+            pdf_file.close()
         return self.output
 
 
