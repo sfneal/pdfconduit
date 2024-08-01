@@ -1,5 +1,4 @@
 chardet==5.2.0
-looptools==1.2.4
 pdfrw==0.4
 Pillow==9.5.0; python_version <= "3.8"
 pillow==10.4.0; python_version >= "3.9"
