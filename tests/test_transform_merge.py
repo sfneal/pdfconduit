@@ -3,9 +3,18 @@ import unittest
 from tempfile import TemporaryDirectory
 
 from looptools import Timer
+from parameterized import parameterized
 
 from pdfconduit import Info, Merge
+from pdfconduit.utils.driver import Driver
 from tests import *
+
+
+def merge_params():
+    return [
+        ('pdfrw', Driver.pdfrw),
+        ('pypdf', Driver.pypdf),
+    ]
 
 
 class TestMerge(unittest.TestCase):
@@ -22,55 +31,27 @@ class TestMerge(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
-    @Timer.decorator
-    def test_merge_pdfrw(self):
-        """Merge multiple PDF files into a single PDF using the `pdfrw` library."""
-        merged = Merge(
-            self.pdfs,
-            output_name="merged_pdfrw",
-            output_dir=self.temp.name,
-        ).use_pdfrw()
-        merged.merge()
+    @parameterized.expand(merge_params)
+    def test_merge(self, name: str, driver: Driver):
+        merger = Merge(self.pdfs, output_name="merged_{}".format(name), output_dir=self.temp.name)
+        merger.use(driver).merge()
 
         # Assert merged file exists
-        self.assertTrue(os.path.exists(merged.file))
+        self.assertTrue(os.path.exists(merger.file))
 
         # Assert sum of pages in original pdf files equals sum of pages in merged pdf
         self.assertEqual(
-            sum([Info(pdf).pages for pdf in self.pdfs]), Info(merged.file).pages
+            sum([Info(pdf).pages for pdf in self.pdfs]), Info(merger.file).pages
         )
 
         # Assert metadata was added correctly
-        metadata = Info(merged.output).metadata
-        self.assertEqual(metadata["/Producer"], "pdfconduit")
-        self.assertEqual(metadata["/Creator"], "pdfconduit")
-        self.assertEqual(metadata["/Author"], "Stephen Neal")
-
-        expected_equals_output(function_name_to_file_name(), merged.output)
-
-    @Timer.decorator
-    def test_merge_pypdf(self):
-        """Merge multiple PDF files into a single PDF using the `pypdf` library."""
-        merged = Merge(
-            self.pdfs,
-            output_name="merged_pypdf",
-            output_dir=self.temp.name,
-        ).use_pypdf()
-        merged.merge()
-
-        # Assert merged file exists
-        self.assertTrue(os.path.exists(merged.file))
-
-        # Assert sum of pages in original pdf files equals sum of pages in merged pdf
-        self.assertEqual(
-            sum([Info(pdf).pages for pdf in self.pdfs]), Info(merged.file).pages
-        )
-
-        # Assert metadata was added correctly
-        metadata = Info(merged.output).metadata
-        self.assertEqual(metadata["/Producer"], "pypdf")
-
-        expected_equals_output(function_name_to_file_name(), merged.output)
+        metadata = Info(merger.output).metadata
+        if driver == Driver.pdfrw:
+            self.assertEqual(metadata["/Producer"], "pdfconduit")
+            self.assertEqual(metadata["/Creator"], "pdfconduit")
+            self.assertEqual(metadata["/Author"], "Stephen Neal")
+        else:
+            self.assertEqual(metadata["/Producer"], "pypdf")
 
 
 if __name__ == "__main__":
