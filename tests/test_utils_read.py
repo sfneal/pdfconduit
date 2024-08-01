@@ -1,6 +1,5 @@
 import unittest
 
-from looptools import Timer
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
@@ -9,7 +8,7 @@ from tests import *
 
 
 class TestRead(unittest.TestCase):
-    @Timer.decorator
+
     def test_pypdf_reader_can_read_unencrypted(self):
         file_path = test_data_path("document.pdf")
         reader = pypdf_reader(file_path)
@@ -17,7 +16,6 @@ class TestRead(unittest.TestCase):
         self.assertIsInstance(reader, PdfReader)
         self.assertEqual(reader.get_num_pages(), 11)
 
-    @Timer.decorator
     def test_pypdf_reader_cant_read_encrypted(self):
         file_path = test_data_path("encrypted.pdf")
         reader = pypdf_reader(file_path)
@@ -28,7 +26,6 @@ class TestRead(unittest.TestCase):
         self.assertIsInstance(context.exception, PdfReadError)
         self.assertEqual("File has not been decrypted", context.exception.__str__())
 
-    @Timer.decorator
     def test_pypdf_reader_can_read_encrypted_with_password(self):
         file_path = test_data_path("encrypted.pdf")
         reader = pypdf_reader(file_path, "foo")

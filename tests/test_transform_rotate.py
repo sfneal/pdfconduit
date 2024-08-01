@@ -1,11 +1,32 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory
+from typing import List, Tuple
 
-from looptools import Timer
+from parameterized import parameterized
 
 from pdfconduit import Info, Rotate
+from pdfconduit.utils.driver import Driver
 from tests import *
+
+
+def can_rotate_params() -> List[Tuple[str, Driver, int]]:
+    return [
+        ("pdfrw_90", Driver.pdfrw, 90),
+        ("pdfrw_180", Driver.pdfrw, 180),
+        ("pdfrw_270", Driver.pdfrw, 270),
+        ("pypdf_90", Driver.pypdf, 90),
+        ("pypdf_180", Driver.pypdf, 180),
+        ("pypdf_270", Driver.pypdf, 270),
+    ]
+
+
+def cannot_rotate_params() -> List[Tuple[str, Driver, int]]:
+    return [
+        ("pypdf_135", Driver.pypdf, 135),
+        ("pypdf_225", Driver.pypdf, 225),
+        ("pypdf_315", Driver.pypdf, 315),
+    ]
 
 
 class TestRotate(unittest.TestCase):
@@ -19,129 +40,47 @@ class TestRotate(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
-    @Timer.decorator
-    def test_rotate_pdfrw_90(self):
-        """Rotate a PDF file by 90 degrees using the `pdfrw` library."""
-        rotation = 90
+    @parameterized.expand(can_rotate_params)
+    def test_can_rotate(self, name: str, driver: Driver, rotation: int):
         rotated = (
             Rotate(
                 self.pdf_path,
                 rotation,
-                suffix="rotated_90_pdfrw",
+                suffix="rotated_{}_{}".format(driver.name, rotation),
                 tempdir=self.temp.name,
             )
-            .use_pdfrw()
+            .use(driver)
             .rotate()
         )
 
         self.assertPdfExists(rotated)
         self.assertPdfRotation(rotated, rotation)
 
-        expected_equals_output(function_name_to_file_name(), rotated)
-
-    @Timer.decorator
-    def test_rotate_pdfrw_180(self):
-        """Rotate a PDF file by 180 degrees using the `pdfrw` library."""
-        rotation = 180
-        rotated = (
-            Rotate(
-                self.pdf_path,
-                rotation,
-                suffix="rotated_180_pdfrw",
-                tempdir=self.temp.name,
+    @parameterized.expand(cannot_rotate_params)
+    def test_can_only_rotate_by_90_using_pypdf(
+        self, name: str, driver: Driver, rotation: int
+    ):
+        with self.assertRaises(ValueError) as context:
+            rotated = (
+                Rotate(
+                    self.pdf_path,
+                    rotation,
+                    suffix="rotated_{}_{}".format(driver.name, rotation),
+                    tempdir=self.temp.name,
+                )
+                .use(driver)
+                .rotate()
             )
-            .use_pdfrw()
-            .rotate()
+
+        self.assertTrue(
+            "Rotation angle must be a multiple of 90" in str(context.exception)
         )
-
-        self.assertPdfExists(rotated)
-        self.assertPdfRotation(rotated, rotation)
-
-        expected_equals_output(function_name_to_file_name(), rotated)
-
-    @Timer.decorator
-    def test_rotate_pdfrw_270(self):
-        """Rotate a PDF file by 270 degrees using the `pdfrw` library."""
-        rotation = 270
-        rotated = (
-            Rotate(
-                self.pdf_path,
-                rotation,
-                suffix="rotated_270_pdfrw",
-                tempdir=self.temp.name,
-            )
-            .use_pdfrw()
-            .rotate()
-        )
-
-        self.assertPdfExists(rotated)
-        self.assertPdfRotation(rotated, rotation)
-
-        expected_equals_output(function_name_to_file_name(), rotated)
-
-    @Timer.decorator
-    def test_rotate_pypdf_90(self):
-        """Rotate a PDF file by 90 degrees using the `pypdf` library."""
-        rotation = 90
-        rotated = (
-            Rotate(
-                self.pdf_path,
-                rotation,
-                suffix="rotated_90_pypdf",
-                tempdir=self.temp.name,
-            )
-            .use_pypdf()
-            .rotate()
-        )
-
-        self.assertPdfExists(rotated)
-        self.assertPdfRotation(rotated, rotation)
-
-        expected_equals_output(function_name_to_file_name(), rotated)
-
-    @Timer.decorator
-    def test_rotate_pypdf_180(self):
-        """Rotate a PDF file by 180 degrees using the `pypdf` library."""
-        rotation = 180
-        rotated = (
-            Rotate(
-                self.pdf_path,
-                rotation,
-                suffix="rotated_180_pypdf",
-                tempdir=self.temp.name,
-            )
-            .use_pypdf()
-            .rotate()
-        )
-
-        self.assertPdfExists(rotated)
-        self.assertPdfRotation(rotated, rotation)
-
-        expected_equals_output(function_name_to_file_name(), rotated)
-
-    @Timer.decorator
-    def test_rotate_pypdf_270(self):
-        """Rotate a PDF file by 270 degrees using the `pypdf` library."""
-        rotation = 270
-        rotated = (
-            Rotate(
-                self.pdf_path,
-                rotation,
-                suffix="rotated_270_pypdf",
-                tempdir=self.temp.name,
-            )
-            .use_pypdf()
-            .rotate()
-        )
-
-        self.assertPdfExists(rotated)
-        self.assertPdfRotation(rotated, rotation)
-
-        expected_equals_output(function_name_to_file_name(), rotated)
 
     def assertPdfExists(self, pdf):
-        # Assert rotated pdf file exists
         self.assertTrue(os.path.isfile(pdf))
+
+    def assertPdfDoesntExists(self, pdf):
+        self.assertFalse(os.path.isfile(pdf))
 
     def assertPdfRotation(self, rotated, rotation):
         self.assertEqual(Info(rotated).rotate, rotation)

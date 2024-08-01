@@ -1,7 +1,7 @@
 # Convert a PNG image file to a PDF
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Optional, List
+from typing import Optional, List, Union
 
 from PIL import Image
 
@@ -15,7 +15,7 @@ class IMG2PDF:
         self,
         imgs: Optional[List[str]] = None,
         destination: Optional[str] = None,
-        tempdir: Optional[str] = None,
+        tempdir: Optional[Union[str, TemporaryDirectory]] = None,
     ):
         """Convert each image into a PDF page and merge all pages to one PDF file"""
         self.imgs = imgs
