@@ -1,11 +1,22 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory
+from typing import Tuple, List
 
 from looptools import Timer
+from parameterized import parameterized
 
 from pdfconduit import Info, Upscale
+from pdfconduit.utils.driver import Driver
 from tests import *
+
+
+def scaling_params() -> List[Tuple[str, Driver, float]]:
+    return [
+        ("{}_{}x".format(driver.name, str(round(scale * 100))), driver, scale)
+        for driver in Driver
+        for scale in [.5, 1.5, 2.0, 3.0]
+    ]
 
 
 class TestUpscale(unittest.TestCase):
@@ -18,166 +29,30 @@ class TestUpscale(unittest.TestCase):
     def tearDownClass(cls):
         cls.temp.cleanup()
 
-    @Timer.decorator
-    def test_upscale_pdfrw_20x(self):
-        s = 2.0
-        upscaled = (
+    @parameterized.expand(scaling_params)
+    def test_scale(self, name: str, driver: Driver, scale: float):
+        scaled = (
             Upscale(
                 pdf_path,
-                scale=s,
-                suffix="upscaled_2.0_pdfrw",
+                scale=scale,
+                suffix=name,
                 tempdir=self.temp.name,
             )
-            .use_pdfrw()
+            .use(driver)
             .upscale()
         )
 
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
+        self.assertPdfExists(scaled)
+        self.assertPdfScaled(scale, scaled)
 
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    @Timer.decorator
-    def test_upscale_pdfrw_15x(self):
-        s = 1.5
-        upscaled = (
-            Upscale(
-                pdf_path,
-                scale=s,
-                suffix="upscaled_1.5_pdfrw",
-                tempdir=self.temp.name,
-            )
-            .use_pdfrw()
-            .upscale()
-        )
-
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
-
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    @Timer.decorator
-    def test_upscale_pdfrw_30x(self):
-        s = 3.0
-        upscaled = (
-            Upscale(
-                pdf_path,
-                scale=s,
-                suffix="upscaled_3.0_pdfrw",
-                tempdir=self.temp.name,
-            )
-            .use_pdfrw()
-            .upscale()
-        )
-
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
-
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    @Timer.decorator
-    def test_downscale_pdfrw_20x(self):
-        s = 1 / 2
-        upscaled = (
-            Upscale(
-                pdf_path,
-                scale=s,
-                suffix="downscaled_2.0_pdfrw",
-                tempdir=self.temp.name,
-            )
-            .use_pdfrw()
-            .upscale()
-        )
-
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
-
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    @Timer.decorator
-    def test_upscale_pypdf_20x(self):
-        s = 2.0
-        upscaled = (
-            Upscale(
-                pdf_path,
-                scale=s,
-                suffix="upscaled_2.0_pypdf",
-                tempdir=self.temp.name,
-            )
-            .use_pypdf()
-            .upscale()
-        )
-
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
-
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    @Timer.decorator
-    def test_upscale_pypdf_15x(self):
-        s = 1.5
-        upscaled = (
-            Upscale(
-                pdf_path,
-                scale=s,
-                suffix="upscaled_1.5_pypdf",
-                tempdir=self.temp.name,
-            )
-            .use_pypdf()
-            .upscale()
-        )
-
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
-
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    @Timer.decorator
-    def test_upscale_pypdf_30x(self):
-        s = 3.0
-        upscaled = (
-            Upscale(
-                pdf_path,
-                scale=s,
-                suffix="upscaled_3.0_pypdf",
-                tempdir=self.temp.name,
-            )
-            .use_pypdf()
-            .upscale()
-        )
-
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
-
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    @Timer.decorator
-    def test_downscale_pypdf_20x(self):
-        s = 1 / 2
-        upscaled = (
-            Upscale(
-                pdf_path,
-                scale=s,
-                suffix="downscaled_2.0_pypdf",
-                tempdir=self.temp.name,
-            )
-            .use_pypdf()
-            .upscale()
-        )
-
-        self.assertPdfExists(upscaled)
-        self.assertPdfUpscaled(s, upscaled)
-
-        expected_equals_output(function_name_to_file_name(), upscaled)
-
-    def assertPdfUpscaled(self, s, upscaled):
+    def assertPdfScaled(self, scale, scaled):
         self.assertEqual(
-            Info(upscaled).size, tuple([i * s for i in Info(pdf_path).size])
+            Info(scaled).size, tuple([i * scale for i in Info(pdf_path).size])
         )
-        self.assertEqual(Info(upscaled).pages, Info(pdf_path).pages)
+        self.assertEqual(Info(scaled).pages, Info(pdf_path).pages)
 
-    def assertPdfExists(self, upscaled):
-        self.assertTrue(os.path.isfile(upscaled))
+    def assertPdfExists(self, scaled):
+        self.assertTrue(os.path.isfile(scaled))
 
 
 if __name__ == "__main__":
