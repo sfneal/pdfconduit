@@ -1,6 +1,7 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory
+from typing import Tuple, List
 
 from looptools import Timer
 from parameterized import parameterized
@@ -10,7 +11,7 @@ from pdfconduit.utils.driver import Driver
 from tests import *
 
 
-def merge_params():
+def merge_params() -> List[Tuple[str, Driver]]:
     return [
         ('pdfrw', Driver.pdfrw),
         ('pypdf', Driver.pypdf),
