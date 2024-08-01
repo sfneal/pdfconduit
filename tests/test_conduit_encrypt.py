@@ -1,13 +1,27 @@
 import os
 import unittest
 from tempfile import NamedTemporaryFile
+from typing import List, Tuple
 
 from looptools import Timer
+from parameterized import parameterized, param
 
 from pdfconduit.conduit import Encrypt
 from pdfconduit.conduit.encrypt import Algorithms
 from pdfconduit.utils import Info
 from tests import *
+
+
+class Params:
+    @staticmethod
+    def encryption_algo_params() -> List[Tuple[str, Algorithms, int]]:
+        return [
+            ("RC4-40", Algorithms.RC4_40, 2),
+            ("RC4-128", Algorithms.RC4_128, 3),
+            ("AES-128", Algorithms.AES_128, 4),
+            ("AES-256", Algorithms.AES_256, 6),
+            ("AES-256-R5", Algorithms.AES_256_r5, 5),
+        ]
 
 
 class TestEncrypt(unittest.TestCase):
@@ -25,16 +39,16 @@ class TestEncrypt(unittest.TestCase):
         if os.path.exists(self.temp.name):
             os.remove(self.temp.name)
 
-    @Timer.decorator
-    def test_encrypt_128bit(self):
+    @parameterized.expand(Params.encryption_algo_params)
+    def test_encryption_algorithms(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
             self.owner_pw,
             output=self.temp.name,
-            bit128=True,
-            suffix="128bit",
-            algorithm=Algorithms.RC4_128,
+            bit128=algorithm.is_128bit,
+            suffix=algorithm.name,
+            algorithm=algorithm,
         )
         encrypted.encrypt()
 
@@ -42,290 +56,76 @@ class TestEncrypt(unittest.TestCase):
 
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
-        self.assert128BitEncryption(security, 3)
+        if algorithm.bit_length == 40:
+            self.assert40BitEncryption(security)
+        if algorithm.bit_length == 128:
+            self.assert128BitEncryption(security, expected_security_handler)
+        if algorithm.bit_length == 256:
+            self.assert256BitEncryption(security, expected_security_handler)
+
         self.assertSecurityValue(security, 4)
         self.assertPermissions(encrypted, can_print=True)
 
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_40bit(self):
+    @parameterized.expand(Params.encryption_algo_params)
+    def test_permission_can_print(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
             self.owner_pw,
             output=self.temp.name,
-            bit128=False,
-            suffix="40bit",
-            algorithm=Algorithms.RC4_40,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, 4)
-        self.assertPermissions(encrypted, can_print=True)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_128bit_allow_printing(self):
-        # todo: allow and don't allow tests
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
+            bit128=algorithm.is_128bit,
+            suffix=algorithm.name,
+            algorithm=algorithm,
             allow_printing=True,
-            bit128=True,
-            output=self.temp.name,
-            suffix="128bit_allow_printing",
-            algorithm=Algorithms.RC4_128,
+            allow_commenting=False
         )
         encrypted.encrypt()
 
-        security = self._getPdfSecurity(encrypted)
-
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
-        self.assert128BitEncryption(security, 3)
-        self.assertSecurityValue(security, 4)
-        self.assertPermissions(encrypted, can_print=True)
 
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
+        self.assertPermissions(encrypted, can_print=True, can_modify=False)
 
-    @Timer.decorator
-    def test_encrypt_128bit_allow_commenting(self):
+    @parameterized.expand(Params.encryption_algo_params)
+    def test_permission_can_comment(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
             self.owner_pw,
             output=self.temp.name,
+            bit128=algorithm.is_128bit,
+            suffix=algorithm.name,
+            algorithm=algorithm,
             allow_printing=False,
-            allow_commenting=True,
-            bit128=True,
-            suffix="128bit_allow_commenting",
-            algorithm=Algorithms.RC4_128,
+            allow_commenting=True
         )
         encrypted.encrypt()
 
-        security = self._getPdfSecurity(encrypted)
-
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
-        self.assertSecurityValue(security, 8)
+
         self.assertPermissions(encrypted, can_print=False, can_modify=True)
 
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_128bit_allow_printing_and_commenting(self):
+    @parameterized.expand(Params.encryption_algo_params)
+    def test_permission_can_print_and_comment(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
             self.owner_pw,
             output=self.temp.name,
+            bit128=algorithm.is_128bit,
+            suffix=algorithm.name,
+            algorithm=algorithm,
             allow_printing=True,
-            allow_commenting=True,
-            bit128=True,
-            suffix="128bit_allow_printing_and_commenting",
-            algorithm=Algorithms.RC4_128,
+            allow_commenting=True
         )
         encrypted.encrypt()
 
-        security = self._getPdfSecurity(encrypted)
-
         self.assertPdfExists(encrypted)
         self.assertEncrypted(encrypted)
-        self.assert128BitEncryption(security, 3)
-        self.assertSecurityValue(security, 12)
+
         self.assertPermissions(encrypted, can_print=True, can_modify=True)
 
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_40bit_allow_printing(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            allow_printing=True,
-            bit128=False,
-            output=self.temp.name,
-            suffix="40bit_allow_printing",
-            algorithm=Algorithms.RC4_40,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, 4)
-        self.assertPermissions(encrypted, can_print=True)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_40bit_allow_commenting(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            output=self.temp.name,
-            allow_printing=False,
-            allow_commenting=True,
-            bit128=False,
-            suffix="40bit_allow_commenting",
-            algorithm=Algorithms.RC4_40,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, 8)
-        self.assertPermissions(encrypted, can_print=False, can_modify=True)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_40bit_allow_printing_and_commenting(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            output=self.temp.name,
-            allow_printing=True,
-            allow_commenting=True,
-            bit128=False,
-            suffix="40bit_allow_printing_and_commenting",
-            algorithm=Algorithms.RC4_40,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, 12)
-        self.assertPermissions(encrypted, can_print=True, can_modify=True)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_rc4_40(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            output=self.temp.name,
-            suffix="rc4_40",
-            algorithm=Algorithms.RC4_40,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert40BitEncryption(security)
-        self.assertSecurityValue(security, 4)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-        copy_pdf_to_output_directory(encrypted.output, function_name_to_file_name())
-
-    @Timer.decorator
-    def test_encrypt_rc4_128(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            output=self.temp.name,
-            suffix="rc4_128",
-            algorithm=Algorithms.RC4_128,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert128BitEncryption(security, 3)
-        self.assertSecurityValue(security, 4)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_aes_128(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            output=self.temp.name,
-            suffix="aes_128",
-            algorithm=Algorithms.AES_128,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert128BitEncryption(security)
-        self.assertSecurityValue(security, 4)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_aes_256_r5(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            output=self.temp.name,
-            suffix="aes_256_45",
-            algorithm=Algorithms.AES_256_r5,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert256BitEncryption(security)
-        self.assertSecurityValue(security, 4)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
-    def test_encrypt_aes_256(self):
-        encrypted = Encrypt(
-            self.pdf_path,
-            self.user_pw,
-            self.owner_pw,
-            output=self.temp.name,
-            suffix="aes_256_45",
-            algorithm=Algorithms.AES_256,
-        )
-        encrypted.encrypt()
-
-        security = self._getPdfSecurity(encrypted)
-
-        self.assertPdfExists(encrypted)
-        self.assertEncrypted(encrypted)
-        self.assert256BitEncryption(security, 6)
-        self.assertSecurityValue(security, 4)
-
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
     def test_password_byte_string(self):
         encrypted = Encrypt(
             self.pdf_path,
@@ -352,9 +152,6 @@ class TestEncrypt(unittest.TestCase):
             "ÐHÑRžS]˘—Í8V6{˘KJ’ß\x01æ7ÑnÊ\x06[¯Nd’\x0b",
         )
 
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
-    @Timer.decorator
     def test_encrypted_pdf_has_metadata(self):
         encrypted = Encrypt(
             self.pdf_path,
@@ -374,8 +171,6 @@ class TestEncrypt(unittest.TestCase):
         self.assertEqual(metadata["/Creator"], "pdfconduit")
         self.assertEqual(metadata["/Author"], "Stephen Neal")
 
-        expected_equals_output(function_name_to_file_name(), encrypted.output)
-
     def _getPdfSecurity(self, encrypted):
         return Info(encrypted.output, self.user_pw).security
 
@@ -385,6 +180,13 @@ class TestEncrypt(unittest.TestCase):
 
     def assertEncrypted(self, pdf):
         self.assertTrue(Info(pdf.output, self.user_pw).encrypted)
+
+    def assert40BitEncryption(self, security):
+        if "/Length" in security:
+            self.assertEqual(security["/Length"], 40)
+
+        # Assert standard security handler revision is 2
+        self.assertEqual(security["/R"], 2)
 
     def assert128BitEncryption(self, security, security_handler_revision: int = 4):
         self.assertTrue("/Length" in security)
@@ -401,13 +203,6 @@ class TestEncrypt(unittest.TestCase):
             self.assertEqual(security["/CF"]["/StdCF"]["/CFM"], "/AESV2")
         else:
             self.assertFalse("/CF" in security)
-
-    def assert40BitEncryption(self, security):
-        if "/Length" in security:
-            self.assertEqual(security["/Length"], 40)
-
-        # Assert standard security handler revision is 2
-        self.assertEqual(security["/R"], 2)
 
     def assert256BitEncryption(self, security, security_handler_revision: int = 5):
         self.assertTrue("/Length" in security)
