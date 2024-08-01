@@ -15,7 +15,7 @@ class IMG2PDF:
         self,
         imgs: Optional[List[str]] = None,
         destination: Optional[str] = None,
-        tempdir: Optional[Union[str | TemporaryDirectory]] = None,
+        tempdir: Optional[Union[str, TemporaryDirectory]] = None,
     ):
         """Convert each image into a PDF page and merge all pages to one PDF file"""
         self.imgs = imgs
