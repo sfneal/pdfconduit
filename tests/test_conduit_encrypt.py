@@ -3,8 +3,7 @@ import unittest
 from tempfile import NamedTemporaryFile
 from typing import List, Tuple
 
-from looptools import Timer
-from parameterized import parameterized, param
+from parameterized import parameterized
 
 from pdfconduit.conduit import Encrypt
 from pdfconduit.conduit.encrypt import Algorithms
@@ -12,16 +11,14 @@ from pdfconduit.utils import Info
 from tests import *
 
 
-class Params:
-    @staticmethod
-    def encryption_algo_params() -> List[Tuple[str, Algorithms, int]]:
-        return [
-            ("RC4-40", Algorithms.RC4_40, 2),
-            ("RC4-128", Algorithms.RC4_128, 3),
-            ("AES-128", Algorithms.AES_128, 4),
-            ("AES-256", Algorithms.AES_256, 6),
-            ("AES-256-R5", Algorithms.AES_256_r5, 5),
-        ]
+def encryption_algo_params() -> List[Tuple[str, Algorithms, int]]:
+    return [
+        ("RC4-40", Algorithms.RC4_40, 2),
+        ("RC4-128", Algorithms.RC4_128, 3),
+        ("AES-128", Algorithms.AES_128, 4),
+        ("AES-256", Algorithms.AES_256, 6),
+        ("AES-256-R5", Algorithms.AES_256_r5, 5),
+    ]
 
 
 class TestEncrypt(unittest.TestCase):
@@ -39,7 +36,7 @@ class TestEncrypt(unittest.TestCase):
         if os.path.exists(self.temp.name):
             os.remove(self.temp.name)
 
-    @parameterized.expand(Params.encryption_algo_params)
+    @parameterized.expand(encryption_algo_params)
     def test_encryption_algorithms(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
@@ -66,7 +63,7 @@ class TestEncrypt(unittest.TestCase):
         self.assertSecurityValue(security, 4)
         self.assertPermissions(encrypted, can_print=True)
 
-    @parameterized.expand(Params.encryption_algo_params)
+    @parameterized.expand(encryption_algo_params)
     def test_permission_can_print(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
@@ -86,7 +83,7 @@ class TestEncrypt(unittest.TestCase):
 
         self.assertPermissions(encrypted, can_print=True, can_modify=False)
 
-    @parameterized.expand(Params.encryption_algo_params)
+    @parameterized.expand(encryption_algo_params)
     def test_permission_can_comment(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
@@ -106,7 +103,7 @@ class TestEncrypt(unittest.TestCase):
 
         self.assertPermissions(encrypted, can_print=False, can_modify=True)
 
-    @parameterized.expand(Params.encryption_algo_params)
+    @parameterized.expand(encryption_algo_params)
     def test_permission_can_print_and_comment(self, name: str, algorithm: Algorithms, expected_security_handler: int):
         encrypted = Encrypt(
             self.pdf_path,
