@@ -32,7 +32,7 @@ class TestSlice(unittest.TestCase):
 
     @parameterized.expand(slice_params)
     def test_slice(self, slice_range: str):
-        fp, lp = tuple(slice_range.split('to'))
+        fp, lp = tuple(slice_range.split("to"))
         fp = int(fp)
         lp = int(lp)
 

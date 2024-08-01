@@ -12,8 +12,8 @@ from tests import *
 
 def merge_params() -> List[Tuple[str, Driver]]:
     return [
-        ('pdfrw', Driver.pdfrw),
-        ('pypdf', Driver.pypdf),
+        ("pdfrw", Driver.pdfrw),
+        ("pypdf", Driver.pypdf),
     ]
 
 
@@ -33,7 +33,9 @@ class TestMerge(unittest.TestCase):
 
     @parameterized.expand(merge_params)
     def test_merge(self, name: str, driver: Driver):
-        merger = Merge(self.pdfs, output_name="merged_{}".format(name), output_dir=self.temp.name)
+        merger = Merge(
+            self.pdfs, output_name="merged_{}".format(name), output_dir=self.temp.name
+        )
         merger.use(driver).merge()
 
         # Assert merged file exists

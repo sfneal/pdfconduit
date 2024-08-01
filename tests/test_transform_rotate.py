@@ -12,20 +12,20 @@ from tests import *
 
 def can_rotate_params() -> List[Tuple[str, Driver, int]]:
     return [
-        ('pdfrw_90', Driver.pdfrw, 90),
-        ('pdfrw_180', Driver.pdfrw, 180),
-        ('pdfrw_270', Driver.pdfrw, 270),
-        ('pypdf_90', Driver.pypdf, 90),
-        ('pypdf_180', Driver.pypdf, 180),
-        ('pypdf_270', Driver.pypdf, 270),
+        ("pdfrw_90", Driver.pdfrw, 90),
+        ("pdfrw_180", Driver.pdfrw, 180),
+        ("pdfrw_270", Driver.pdfrw, 270),
+        ("pypdf_90", Driver.pypdf, 90),
+        ("pypdf_180", Driver.pypdf, 180),
+        ("pypdf_270", Driver.pypdf, 270),
     ]
 
 
 def cannot_rotate_params() -> List[Tuple[str, Driver, int]]:
     return [
-        ('pypdf_135', Driver.pypdf, 135),
-        ('pypdf_225', Driver.pypdf, 225),
-        ('pypdf_315', Driver.pypdf, 315),
+        ("pypdf_135", Driver.pypdf, 135),
+        ("pypdf_225", Driver.pypdf, 225),
+        ("pypdf_315", Driver.pypdf, 315),
     ]
 
 
@@ -57,7 +57,9 @@ class TestRotate(unittest.TestCase):
         self.assertPdfRotation(rotated, rotation)
 
     @parameterized.expand(cannot_rotate_params)
-    def test_can_only_rotate_by_90_using_pypdf(self, name: str, driver: Driver, rotation: int):
+    def test_can_only_rotate_by_90_using_pypdf(
+        self, name: str, driver: Driver, rotation: int
+    ):
         with self.assertRaises(ValueError) as context:
             rotated = (
                 Rotate(
@@ -70,7 +72,9 @@ class TestRotate(unittest.TestCase):
                 .rotate()
             )
 
-        self.assertTrue("Rotation angle must be a multiple of 90" in str(context.exception))
+        self.assertTrue(
+            "Rotation angle must be a multiple of 90" in str(context.exception)
+        )
 
     def assertPdfExists(self, pdf):
         self.assertTrue(os.path.isfile(pdf))

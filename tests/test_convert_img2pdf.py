@@ -22,7 +22,6 @@ class TestImg2Pdf(unittest.TestCase):
         if os.path.exists(self.pdf):
             os.remove(self.pdf)
 
-    
     def test_convert(self):
         """Convert an image file into PDF."""
         ip = IMG2PDF(tempdir=self.tempdir)
@@ -33,7 +32,6 @@ class TestImg2Pdf(unittest.TestCase):
 
         expected_equals_output(function_name_to_file_name(), self.pdf)
 
-    
     def test_convert_packet(self):
         """Convert an image file into PDF."""
         self.pdf = IMG2PDF(

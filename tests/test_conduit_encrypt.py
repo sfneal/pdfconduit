@@ -37,7 +37,9 @@ class TestEncrypt(unittest.TestCase):
             os.remove(self.temp.name)
 
     @parameterized.expand(encryption_algo_params)
-    def test_encryption_algorithms(self, name: str, algorithm: Algorithms, expected_security_handler: int):
+    def test_encryption_algorithms(
+        self, name: str, algorithm: Algorithms, expected_security_handler: int
+    ):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
@@ -64,7 +66,9 @@ class TestEncrypt(unittest.TestCase):
         self.assertPermissions(encrypted, can_print=True)
 
     @parameterized.expand(encryption_algo_params)
-    def test_permission_can_print(self, name: str, algorithm: Algorithms, expected_security_handler: int):
+    def test_permission_can_print(
+        self, name: str, algorithm: Algorithms, expected_security_handler: int
+    ):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
@@ -74,7 +78,7 @@ class TestEncrypt(unittest.TestCase):
             suffix=algorithm.name,
             algorithm=algorithm,
             allow_printing=True,
-            allow_commenting=False
+            allow_commenting=False,
         )
         encrypted.encrypt()
 
@@ -84,7 +88,9 @@ class TestEncrypt(unittest.TestCase):
         self.assertPermissions(encrypted, can_print=True, can_modify=False)
 
     @parameterized.expand(encryption_algo_params)
-    def test_permission_can_comment(self, name: str, algorithm: Algorithms, expected_security_handler: int):
+    def test_permission_can_comment(
+        self, name: str, algorithm: Algorithms, expected_security_handler: int
+    ):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
@@ -94,7 +100,7 @@ class TestEncrypt(unittest.TestCase):
             suffix=algorithm.name,
             algorithm=algorithm,
             allow_printing=False,
-            allow_commenting=True
+            allow_commenting=True,
         )
         encrypted.encrypt()
 
@@ -104,7 +110,9 @@ class TestEncrypt(unittest.TestCase):
         self.assertPermissions(encrypted, can_print=False, can_modify=True)
 
     @parameterized.expand(encryption_algo_params)
-    def test_permission_can_print_and_comment(self, name: str, algorithm: Algorithms, expected_security_handler: int):
+    def test_permission_can_print_and_comment(
+        self, name: str, algorithm: Algorithms, expected_security_handler: int
+    ):
         encrypted = Encrypt(
             self.pdf_path,
             self.user_pw,
@@ -114,7 +122,7 @@ class TestEncrypt(unittest.TestCase):
             suffix=algorithm.name,
             algorithm=algorithm,
             allow_printing=True,
-            allow_commenting=True
+            allow_commenting=True,
         )
         encrypted.encrypt()
 

@@ -15,7 +15,6 @@ class TestPdf2Img(unittest.TestCase):
         if os.path.exists(self.img):
             os.remove(self.img)
 
-    
     def test_pdf2img(self):
         """Convert a PDF file to a png image."""
         img = PDF2IMG(self.pdf_path).save()

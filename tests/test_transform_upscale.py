@@ -14,7 +14,7 @@ def scaling_params() -> List[Tuple[str, Driver, float]]:
     return [
         ("{}_{}x".format(driver.name, str(round(scale * 100))), driver, scale)
         for driver in Driver
-        for scale in [.5, 1.5, 2.0, 3.0]
+        for scale in [0.5, 1.5, 2.0, 3.0]
     ]
 
 
