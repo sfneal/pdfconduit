@@ -3,7 +3,6 @@ import unittest
 from tempfile import TemporaryDirectory
 from typing import Tuple, List
 
-from looptools import Timer
 from parameterized import parameterized
 
 from pdfconduit import Info, Merge

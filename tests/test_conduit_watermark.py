@@ -3,7 +3,6 @@ import unittest
 from tempfile import TemporaryDirectory
 from typing import Tuple, List
 
-from looptools import Timer
 from parameterized import parameterized
 
 from pdfconduit.conduit import Watermark
@@ -61,7 +60,7 @@ class TestWatermark(unittest.TestCase):
         self.assertPdfExists(added)
         self.assertPdfHasResources(added)
 
-    @Timer.decorator
+    
     def test_conduit_watermark_label(self):
         """Apply a watermark label to a PDF file."""
         label = os.path.basename(self.pdf_path)

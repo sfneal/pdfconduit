@@ -1,8 +1,6 @@
 import os
 import unittest
 
-from looptools import Timer
-
 from pdfconduit.convert import PDF2IMG
 from tests import *
 
@@ -17,7 +15,7 @@ class TestPdf2Img(unittest.TestCase):
         if os.path.exists(self.img):
             os.remove(self.img)
 
-    @Timer.decorator
+    
     def test_pdf2img(self):
         """Convert a PDF file to a png image."""
         img = PDF2IMG(self.pdf_path).save()
