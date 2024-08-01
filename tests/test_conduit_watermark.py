@@ -1,6 +1,7 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory
+from typing import Tuple, List
 
 from looptools import Timer
 from parameterized import parameterized
@@ -11,7 +12,7 @@ from pdfconduit.utils import Info
 from tests import *
 
 
-def watermark_params():
+def watermark_params() -> List[Tuple[str, str, bool, bool]]:
     return [
         # name, method, flatten, underneath
         ('pdfrw', 'pdfrw', False, False),
