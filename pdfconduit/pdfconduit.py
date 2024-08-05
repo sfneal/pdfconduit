@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
@@ -72,7 +73,22 @@ class Conduit:
         self._reader: PdfReader = pypdf_reader(self._pdf_file, self._decrypt_pw)
         self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
 
+        self.output = None
+        self._output_dir = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is not None:
+            raise exc_val
+        self.write()
+        return True
+
     def write(self):
+        # Set default output in case none was set
+        self._set_default_output('modified')
+
         # Add metadata
         # Format the current date and time for the metadata
         utc_time = "-05'00'"  # UTC time optional
@@ -106,7 +122,13 @@ class Conduit:
         return self
 
     def set_output_suffix(self, suffix: str) -> Self:
-        self.set_output(add_suffix(self._path, suffix))
+        return self.set_output(add_suffix(
+            os.path.join(self._output_dir, os.path.basename(self._path)) if self._output_dir is not None else self._path,
+            suffix
+        ))
+
+    def set_output_directory(self, directory: str) -> Self:
+        self._output_dir = directory
         return self
 
     def _set_default_output(self, suffix: str) -> None:
