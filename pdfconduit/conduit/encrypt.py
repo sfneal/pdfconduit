@@ -13,8 +13,29 @@ class Algorithms(Enum):
     RC4_40: str = "RC4-40"
     RC4_128: str = "RC4-128"
     AES_128: str = "AES-128"
-    AES_256: str = "AES_256"
+    AES_256: str = "AES-256"
     AES_256_r5: str = "AES-256-R5"
+
+    @property
+    def bit_length(self):
+        if "40" in self.value:
+            return 40
+        elif "128" in self.value:
+            return 128
+        elif "256" in self.value:
+            return 256
+
+    @property
+    def is_40bit(self) -> bool:
+        return self.bit_length == 40
+
+    @property
+    def is_128bit(self) -> bool:
+        return self.bit_length == 128
+
+    @property
+    def is_256bit(self) -> bool:
+        return self.bit_length == 256
 
 
 class Encrypt:

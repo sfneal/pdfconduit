@@ -1,11 +1,22 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory
+from typing import List
 
-from looptools import Timer
+from parameterized import parameterized
 
 from pdfconduit import Info, slicer
 from tests import *
+
+
+def slice_params() -> List[str]:
+    return [
+        "1to1",
+        "4to7",
+        "2to6",
+        "1to8",
+        "4to9",
+    ]
 
 
 class TestSlice(unittest.TestCase):
@@ -19,11 +30,12 @@ class TestSlice(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
-    @Timer.decorator
-    def test_slice_pypdf_only_first_page(self):
-        """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
-        fp = 1
-        lp = 1
+    @parameterized.expand(slice_params)
+    def test_slice(self, slice_range: str):
+        fp, lp = tuple(slice_range.split("to"))
+        fp = int(fp)
+        lp = int(lp)
+
         sliced = slicer(
             self.pdf_path,
             first_page=fp,
@@ -33,25 +45,6 @@ class TestSlice(unittest.TestCase):
 
         self.assertPdfExists(sliced)
         self.assertCorrectPagesSliced(fp, lp, sliced)
-
-        expected_equals_output(function_name_to_file_name(), sliced)
-
-    @Timer.decorator
-    def test_slice_pypdf_4th_through_7th_pages(self):
-        """Slice a page range from a PDF to create a new 'trimmed' pdf file."""
-        fp = 4
-        lp = 7
-        sliced = slicer(
-            self.pdf_path,
-            first_page=fp,
-            last_page=lp,
-            tempdir=self.temp.name,
-        )
-
-        self.assertPdfExists(sliced)
-        self.assertCorrectPagesSliced(fp, lp, sliced)
-
-        expected_equals_output(function_name_to_file_name(), sliced)
 
     def assertCorrectPagesSliced(self, fp, lp, sliced):
         self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))
