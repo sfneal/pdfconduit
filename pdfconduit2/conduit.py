@@ -192,4 +192,5 @@ class Conduit:
         return Info(self._writer)
 
     def watermark(self):
+        # todo: add method
         pass
