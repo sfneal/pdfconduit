@@ -1,3 +1,4 @@
+import os
 import unittest
 from tempfile import TemporaryDirectory
 
@@ -18,4 +19,13 @@ class PdfconduitTestCase(unittest.TestCase):
         self.conduit = Conduit(self.pdf_path).set_output_directory(self.temp.name)
 
     def tearDown(self):
-        self.temp.cleanup()
+        # self.temp.cleanup()
+        pass
+
+    def assertPdfExists(self, pdf):
+        self.assertTrue(os.path.exists(pdf))
+        self.assertTrue(os.path.isfile(pdf))
+
+    def assertPdfDoesntExists(self, pdf):
+        self.assertFalse(os.path.exists(pdf))
+        self.assertFalse(os.path.isfile(pdf))

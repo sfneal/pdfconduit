@@ -158,7 +158,7 @@ class Conduit:
 
     def rotate(self, degrees: int) -> Self:
         self._set_default_output('rotated')
-        for page in self._reader.pages:
+        for page in self._writer.pages:
             page.rotate(degrees)
         return self
 
