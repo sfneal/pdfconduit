@@ -34,8 +34,6 @@ class TestRotate(PdfconduitTestCase):
     def test_can_rotate(self, rotation: int):
         self.conduit.rotate(rotation).set_output_suffix("rotated_{}".format(rotation)).write()
 
-        print(self.conduit.output)
-
         self.assertPdfExists(self.conduit.output)
         self.assertPdfRotation(self.conduit.output, rotation)
 
