@@ -19,8 +19,7 @@ class PdfconduitTestCase(unittest.TestCase):
         self.conduit = Conduit(self.pdf_path).set_output_directory(self.temp.name)
 
     def tearDown(self):
-        # self.temp.cleanup()
-        pass
+        self.temp.cleanup()
 
     def assertPdfExists(self, pdf):
         self.assertTrue(os.path.exists(pdf))
