@@ -7,7 +7,7 @@ from typing import Optional, Self, Any, Annotated
 from pypdf import PdfWriter, PdfReader
 from pypdf.constants import UserAccessPermissions
 
-from pdfconduit import Info, Flatten
+from pdfconduit import Info, Flatten, Rotate
 from pdfconduit.conduit.encrypt import Algorithms
 from pdfconduit.utils import pypdf_reader, add_suffix
 
@@ -62,20 +62,20 @@ class ImageQualityRange:
 class Conduit:
     _metadata: dict[str, Any] = {}
 
-    output: Optional[str]
+    output: Optional[str] = None
+    _output_dir: Optional[str] = None
+    _closed: bool = False
+
+    _pdf_file = None
+    _reader: PdfReader
+    _writer: PdfWriter
 
     def __init__(self, path: str, decrypt_pw: Optional[str] = None) -> None:
         self._path = path
         self._decrypt_pw = decrypt_pw
 
         # Open the file & instantiate a PDF reader
-        self._pdf_file = open(self._path, 'rb')
-        self._reader: PdfReader = pypdf_reader(self._pdf_file, self._decrypt_pw)
-        self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
-
-        self.output = None
-        self._output_dir = None
-        self._closed = False
+        self._open_and_read()
 
     def __enter__(self):
         return self
@@ -85,6 +85,12 @@ class Conduit:
             raise exc_val
         self.write()
         return True
+
+    def _open_and_read(self) -> Self:
+        self._pdf_file = open(self._path, 'rb')
+        self._reader: PdfReader = pypdf_reader(self._pdf_file, self._decrypt_pw)
+        self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
+        return self
 
     def write(self):
         # Set default output in case none was set
@@ -161,6 +167,13 @@ class Conduit:
         for page in self._writer.pages:
             page.rotate(degrees)
         return self
+
+    def rotate_exact(self, degrees: int) -> Self:
+        if degrees % 90 == 0:
+            return self.rotate(degrees)
+
+        self._path = Rotate(self._path, degrees).use_pdfrw().rotate()
+        return self._open_and_read()
 
     def slice(self, start: int, end: int) -> Self:
         self._set_default_output('sliced')
