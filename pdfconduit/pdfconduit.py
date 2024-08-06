@@ -75,6 +75,7 @@ class Conduit:
 
         self.output = None
         self._output_dir = None
+        self._closed = False
 
     def __enter__(self):
         return self
@@ -110,6 +111,8 @@ class Conduit:
             self._writer.write(output_pdf)
 
         self._writer.close()
+
+        self._closed = True
 
         return self.output
 
@@ -211,7 +214,7 @@ class Conduit:
 
     @property
     def info(self) -> Info:
-        return Info(self._writer)
+        return Info(self._writer if not self._closed else self.output)
 
     def watermark(self):
         # todo: add method
