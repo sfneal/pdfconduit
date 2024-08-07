@@ -7,10 +7,9 @@ from tests.pdfconduit import PdfconduitTestCase
 
 
 def scale_params() -> List[Tuple[float, bool]]:
-    scales = [0.5, 1.5, 2.0, 3.0]
-    accelerate = [True, False]
-
-    return [(scale, accel) for scale in scales for accel in accelerate]
+    return [(scale, accel)
+            for scale in [0.5, 1.5, 2.0, 3.0]
+            for accel in [True, False]]
 
 
 def scale_name_func(testcase_func, param_num, param):
