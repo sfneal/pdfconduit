@@ -2,12 +2,12 @@ import os
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Optional, Self, Any, Annotated
+from typing import Optional, Self, Any, Annotated, Tuple
 
 from pypdf import PdfWriter, PdfReader
 from pypdf.constants import UserAccessPermissions
 
-from pdfconduit import Info, Flatten, Rotate
+from pdfconduit import Info, Flatten, Rotate, Upscale
 from pdfconduit.conduit.encrypt import Algorithms
 from pdfconduit.utils import pypdf_reader, add_suffix
 
@@ -184,8 +184,14 @@ class Conduit:
         self._writer = writer
         return self
 
-    def scale(self, scale: float) -> Self:
+    def scale(self, scale: float, margins: Tuple[int, int] = (0, 0), accelerate: bool = False) -> Self:
         self._set_default_output('scaled')
+
+        if accelerate or margins != (0, 0):
+            x, y = margins
+            self._path = Upscale(self._path, margin_x=x, margin_y=y, scale=scale).use_pdfrw().upscale()
+            return self._open_and_read()
+
         width, height = self.info.size
         width, height = (width * scale, height * scale)
         for page in self._writer.pages:
