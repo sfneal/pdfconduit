@@ -27,8 +27,6 @@ class TestScale(PdfconduitTestCase):
 
         self.conduit.scale(scale, accelerate=accelerate).set_output_suffix(suffix).write()
 
-        print(self.conduit.output)
-
         self.assertPdfExists(self.conduit.output)
         self.assertPdfScaled(scale, self.conduit.output)
 
