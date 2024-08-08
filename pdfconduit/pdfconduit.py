@@ -189,7 +189,7 @@ class Conduit:
 
         if accelerate or margins != (0, 0):
             x, y = margins
-            self._path = Upscale(self._path, margin_x=x, margin_y=y, scale=scale).use_pdfrw().upscale()
+            self._path = Upscale(self._path, margin_x=x, margin_y=y, scale=scale, tempdir=self._output_dir).use_pdfrw().upscale()
             return self._open_and_read()
 
         width, height = self.info.size
