@@ -76,3 +76,8 @@ class Info:
     def permissions(self) -> Permissions:
         """Retrieve user access permissions."""
         return Permissions(self.pdf)
+
+    @property
+    def images_count(self) -> int:
+        return sum([len(page.images) for page in self.pdf.pages])
+
