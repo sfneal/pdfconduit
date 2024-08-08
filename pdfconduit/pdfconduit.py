@@ -2,7 +2,7 @@ import os
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Optional, Self, Any, Annotated, Tuple
+from typing import Optional, Self, Any, Annotated, Tuple, List
 
 from pypdf import PdfWriter, PdfReader
 from pypdf.constants import UserAccessPermissions
@@ -51,6 +51,10 @@ class Compression(Enum):
     @classmethod
     def from_level(cls, level):
         return cls(level)
+
+    @classmethod
+    def all(cls) -> List[Self]:
+        return list(map(lambda c: c, cls))
 
 
 @dataclass
@@ -228,7 +232,7 @@ class Conduit:
         return self
 
     def compress(self, compression: Compression = Compression.DEFAULT) -> Self:
-        self._set_default_output('compress')
+        self._set_default_output('compress_{}'.format(compression.value))
         for page in self._writer.pages:
             page.compress_content_streams(compression.value)
         return self
