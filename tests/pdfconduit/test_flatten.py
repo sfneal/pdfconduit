@@ -1,3 +1,4 @@
+import os.path
 from typing import Tuple, List
 
 from parameterized import parameterized
@@ -16,7 +17,7 @@ def flatten_params() -> List[str]:
 
 
 def flatten_name_func(testcase_func, param_num, param):
-    return "{}_{}".format(testcase_func.__name__, str(param.args[0]))
+    return "{}_{}".format(testcase_func.__name__, os.path.basename(str(param.args[0])))
 
 
 class TestFlatten(PdfconduitTestCase):
