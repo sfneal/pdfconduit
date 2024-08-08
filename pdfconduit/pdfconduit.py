@@ -198,8 +198,10 @@ class Conduit:
             page.scale_to(width, height)
         return self
 
-    def flatten(self) -> str:
-        return Flatten(self._path, suffix='flattened').save()
+    def flatten(self) -> Self:
+        # todo: re-write Flatten & other convert classes
+        self._path = Flatten(self._path, suffix='flattened').save()
+        return self._open_and_read()
 
     def minify(self) -> Self:
         # remove duplication (images or pages) from a PDF
