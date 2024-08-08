@@ -200,7 +200,7 @@ class Conduit:
 
     def flatten(self) -> Self:
         # todo: re-write Flatten & other convert classes
-        self._path = Flatten(self._path, suffix='flattened').save()
+        self._path = Flatten(self._path, suffix='flattened', tempdir=self._output_dir).save()
         return self._open_and_read()
 
     def minify(self) -> Self:
