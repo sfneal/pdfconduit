@@ -26,14 +26,5 @@ class TestFlatten(PdfconduitTestCase):
         self.conduit = Conduit(pdf_path).set_output_directory(self.temp.name)
         self.conduit.flatten().write()
 
-        info_og = Info(pdf_path)
-        info_flat = Info(self.conduit.output)
-
         self.assertPdfExists(self.conduit.output)
-
-        # Assert there are the same number of pages in the 'original' and 'flattened' pdf
-        self.assertEqual(info_og.pages, info_flat.pages)
-
-        # Confirm that PDF page sizes have not increased
-        self.assertTrue(abs(info_og.size[0] / info_flat.size[0]) <= 1)
-        self.assertTrue(abs(info_og.size[1] / info_flat.size[1]) <= 1)
+        self.assertPdfPagesEqual(pdf_path, self.conduit.output)

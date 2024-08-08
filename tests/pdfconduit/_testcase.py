@@ -2,7 +2,7 @@ import os
 import unittest
 from tempfile import TemporaryDirectory
 
-from pdfconduit import Conduit
+from pdfconduit import Conduit, Info
 from tests import pdf_path
 
 
@@ -28,3 +28,10 @@ class PdfconduitTestCase(unittest.TestCase):
     def assertPdfDoesntExists(self, pdf):
         self.assertFalse(os.path.exists(pdf))
         self.assertFalse(os.path.isfile(pdf))
+
+    def assertPdfPagesEqual(self, original: str, modified: str):
+        info_og = Info(original)
+        info_modified = Info(modified)
+        self.assertEqual(info_og.pages, info_modified.pages)
+        self.assertTrue(abs(info_og.size[0] / info_modified.size[0]) <= 1)
+        self.assertTrue(abs(info_og.size[1] / info_modified.size[1]) <= 1)
