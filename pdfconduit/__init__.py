@@ -15,5 +15,5 @@ __all__ = [
     "Upscale",
     "slicer",
     "Info",
-    "Conduit"
+    "Conduit",
 ]

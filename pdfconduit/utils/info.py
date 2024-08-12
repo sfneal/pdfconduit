@@ -8,8 +8,14 @@ from pdfconduit.utils.read import pypdf_reader
 
 
 class Info:
-    def __init__(self, pdf: Union[str, PdfReader, PdfWriter], password: Optional[str] = None):
-        self.pdf = pdf if isinstance(pdf, (PdfReader, PdfWriter)) else pypdf_reader(pdf, password)
+    def __init__(
+        self, pdf: Union[str, PdfReader, PdfWriter], password: Optional[str] = None
+    ):
+        self.pdf = (
+            pdf
+            if isinstance(pdf, (PdfReader, PdfWriter))
+            else pypdf_reader(pdf, password)
+        )
 
     @staticmethod
     def _resolved_objects(pdf: PdfReader, xobject: str) -> int:
@@ -80,4 +86,3 @@ class Info:
     @property
     def images_count(self) -> int:
         return sum([len(page.images) for page in self.pdf.pages])
-

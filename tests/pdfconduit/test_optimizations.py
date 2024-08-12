@@ -10,29 +10,38 @@ from tests.pdfconduit import PdfconduitTestCase
 
 
 def optimization_params() -> List[str]:
-    return list(map(lambda filename: test_data_path(filename), [
-        'article.pdf',
-        'charts.pdf',
-        'document.pdf',
-        'workbook.pdf',
-    ]))
+    return list(
+        map(
+            lambda filename: test_data_path(filename),
+            [
+                "article.pdf",
+                "charts.pdf",
+                "document.pdf",
+                "workbook.pdf",
+            ],
+        )
+    )
 
 
 def optimizations_name_func(testcase_func, param_num, param):
-    return "{}_{}".format(testcase_func.__name__, os.path.basename(str(param.args[0])).replace(' ', '_'))
+    return "{}_{}".format(
+        testcase_func.__name__, os.path.basename(str(param.args[0])).replace(" ", "_")
+    )
 
 
 def compress_params() -> List[Tuple[str, Compression]]:
-    return [(filepath, level)
-            for filepath in optimization_params()[0:3]
-            for level in Compression.all()]
+    return [
+        (filepath, level)
+        for filepath in optimization_params()[0:3]
+        for level in Compression.all()
+    ]
 
 
 def compress_name_func(testcase_func, param_num, param):
     return "{}_{}_level_{}".format(
         testcase_func.__name__,
-        os.path.basename(str(param.args[0])).replace(' ', '_'),
-        param.args[1].value
+        os.path.basename(str(param.args[0])).replace(" ", "_"),
+        param.args[1].value,
     )
 
 
@@ -65,8 +74,8 @@ class TestOptimizations(PdfconduitTestCase):
 
     @parameterized.expand(optimization_params, name_func=optimizations_name_func)
     def test_reduce_image_quality(self, pdf_path: str):
-        if pdf_path.endswith('workbook.pdf'):
-            self.skipTest('workbook.pdf cannot be reduced quality')
+        if pdf_path.endswith("workbook.pdf"):
+            self.skipTest("workbook.pdf cannot be reduced quality")
         self.conduit = Conduit(pdf_path).set_output_directory(self.temp.name)
         self.conduit.reduce_image_quality(50).write()
 

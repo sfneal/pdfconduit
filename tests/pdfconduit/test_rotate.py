@@ -18,7 +18,9 @@ def rotate_params() -> List[int]:
 
 
 def rotate_exact_params() -> List[int]:
-    return list(map(lambda rotation: rotation + random.randrange(10, 80), rotate_params()))
+    return list(
+        map(lambda rotation: rotation + random.randrange(10, 80), rotate_params())
+    )
 
 
 def rotate_name_func(testcase_func, param_num, param):
@@ -32,14 +34,18 @@ def rotate_name_func(testcase_func, param_num, param):
 class TestRotate(PdfconduitTestCase):
     @parameterized.expand(rotate_params, name_func=rotate_name_func)
     def test_can_rotate(self, rotation: int):
-        self.conduit.rotate(rotation).set_output_suffix("rotated_{}".format(rotation)).write()
+        self.conduit.rotate(rotation).set_output_suffix(
+            "rotated_{}".format(rotation)
+        ).write()
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfRotation(self.conduit.output, rotation)
 
     @parameterized.expand(rotate_exact_params, name_func=rotate_name_func)
     def test_can_rotate_exact(self, rotation: int):
-        self.conduit.rotate_exact(rotation).set_output_suffix("rotated_{}".format(rotation)).write()
+        self.conduit.rotate_exact(rotation).set_output_suffix(
+            "rotated_{}".format(rotation)
+        ).write()
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfRotation(self.conduit.output, rotation)

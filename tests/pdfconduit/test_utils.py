@@ -11,22 +11,27 @@ from tests.pdfconduit import PdfconduitTestCase
 
 
 def unencrypted_pdf_params() -> List[str]:
-    return list(map(lambda filename: test_data_path(filename), [
-        'article.pdf',
-        'manual.pdf',
-        'workbook.pdf'
-    ]))
+    return list(
+        map(
+            lambda filename: test_data_path(filename),
+            ["article.pdf", "manual.pdf", "workbook.pdf"],
+        )
+    )
 
 
 def encrypted_pdf_params() -> List[str]:
-    return list(map(lambda filepath: add_suffix(filepath, 'encrypted'), unencrypted_pdf_params()))
+    return list(
+        map(
+            lambda filepath: add_suffix(filepath, "encrypted"), unencrypted_pdf_params()
+        )
+    )
 
 
 def pages_params() -> List[Tuple[str, int]]:
     return [
-        (test_data_path('article.pdf'), 1),
-        (test_data_path('manual.pdf'), 82),
-        (test_data_path('workbook.pdf'), 128),
+        (test_data_path("article.pdf"), 1),
+        (test_data_path("manual.pdf"), 82),
+        (test_data_path("workbook.pdf"), 128),
     ]
 
 
@@ -34,15 +39,17 @@ def dimensions_params() -> List[Tuple[str, float, float]]:
     default_w = 595.276
     default_h = 841.89
     return [
-        (test_data_path('article.pdf'), default_w, default_h),
-        (test_data_path('manual.pdf'), default_w, default_h),
-        (test_data_path('workbook.pdf'), default_w, default_h),
-        (test_data_path('con docs.pdf'), 2592.0, 1728.0),
+        (test_data_path("article.pdf"), default_w, default_h),
+        (test_data_path("manual.pdf"), default_w, default_h),
+        (test_data_path("workbook.pdf"), default_w, default_h),
+        (test_data_path("con docs.pdf"), 2592.0, 1728.0),
     ]
 
 
 def info_name_func(testcase_func, param_num, param):
-    return "{}-{}".format(testcase_func.__name__, os.path.basename(str(param.args[0])).replace(' ', '_'))
+    return "{}-{}".format(
+        testcase_func.__name__, os.path.basename(str(param.args[0])).replace(" ", "_")
+    )
 
 
 class TestInfo(PdfconduitTestCase):
@@ -139,7 +146,9 @@ class TestInfo(PdfconduitTestCase):
         self.assertEqual(info.security, {})
 
     @parameterized.expand(dimensions_params, name_func=info_name_func)
-    def test_dimensions(self, filepath: str, expected_width: float, expected_height: float):
+    def test_dimensions(
+        self, filepath: str, expected_width: float, expected_height: float
+    ):
         info = self._get_info(filepath)
 
         self.assertIsInstance(info.dimensions, dict)
@@ -162,7 +171,9 @@ class TestInfo(PdfconduitTestCase):
         self.assertEqual(info.size[1], expected_height)
 
     @parameterized.expand(dimensions_params, name_func=info_name_func)
-    def test_size_and_dimensions_are_equal(self, filepath: str, expected_width: float, expected_height: float):
+    def test_size_and_dimensions_are_equal(
+        self, filepath: str, expected_width: float, expected_height: float
+    ):
         info = self._get_info(filepath)
         self.assertEqual(info.size[0], info.dimensions["w"])
         self.assertEqual(info.size[1], info.dimensions["h"])
@@ -183,28 +194,34 @@ class TestInfo(PdfconduitTestCase):
         return Info(filepath, password=password)
 
 
-def get_expected_output(filepath: str, suffix: str = 'modified', sep: str = '_') -> str:
+def get_expected_output(filepath: str, suffix: str = "modified", sep: str = "_") -> str:
     return os.path.join(
         os.path.dirname(filepath),
-        os.path.basename(filepath).replace('.pdf', '') + sep + suffix + '.pdf'
+        os.path.basename(filepath).replace(".pdf", "") + sep + suffix + ".pdf",
     )
 
 
 def path_params() -> List[Tuple[str, str, str]]:
-    return [(get_expected_output(path, suffix), path, suffix)
-            for path in unencrypted_pdf_params()
-            for suffix in ['modified', 'new', 'old', 'backup', 'changed']]
+    return [
+        (get_expected_output(path, suffix), path, suffix)
+        for path in unencrypted_pdf_params()
+        for suffix in ["modified", "new", "old", "backup", "changed"]
+    ]
 
 
 def path_params_with_sep() -> List[Tuple[str, str, str, str]]:
-    return [(get_expected_output(path, suffix, sep), path, suffix, sep)
-            for path in unencrypted_pdf_params()
-            for suffix in ['modified', 'new', 'old', 'backup', 'changed']
-            for sep in ['_', '-']]
+    return [
+        (get_expected_output(path, suffix, sep), path, suffix, sep)
+        for path in unencrypted_pdf_params()
+        for suffix in ["modified", "new", "old", "backup", "changed"]
+        for sep in ["_", "-"]
+    ]
 
 
 def path_name_func(testcase_func, param_num, param):
-    return "{}-{}".format(testcase_func.__name__, os.path.basename(str(param.args[0])).replace(' ', '_'))
+    return "{}-{}".format(
+        testcase_func.__name__, os.path.basename(str(param.args[0])).replace(" ", "_")
+    )
 
 
 class TestPath(PdfconduitTestCase):
@@ -216,15 +233,19 @@ class TestPath(PdfconduitTestCase):
         self.assertEqual(with_suffix, expected)
 
     @parameterized.expand(path_params_with_sep, name_func=info_name_func)
-    def test_add_suffix_suffix_sep(self, expected: str, filepath: str, suffix: str, sep: str):
+    def test_add_suffix_suffix_sep(
+        self, expected: str, filepath: str, suffix: str, sep: str
+    ):
         with_suffix = add_suffix(filepath, suffix, sep)
 
         self.assertIsInstance(with_suffix, str)
         self.assertEqual(with_suffix, expected)
 
     @parameterized.expand(path_params_with_sep, name_func=info_name_func)
-    def test_add_suffix_suffix_sep_ext(self, expected: str, filepath: str, suffix: str, sep: str):
+    def test_add_suffix_suffix_sep_ext(
+        self, expected: str, filepath: str, suffix: str, sep: str
+    ):
         with_suffix = add_suffix(filepath, suffix, sep, "zip")
 
         self.assertIsInstance(with_suffix, str)
-        self.assertEqual(with_suffix, expected.replace('.pdf', '.zip'))
+        self.assertEqual(with_suffix, expected.replace(".pdf", ".zip"))

@@ -23,7 +23,9 @@ class Encryption:
 
     def __post_init__(self):
         if self.allow_printing and self.allow_commenting:
-            self.permissions = UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
+            self.permissions = (
+                UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
+            )
         elif self.allow_printing:
             self.permissions = UserAccessPermissions.PRINT
         elif self.allow_commenting:
@@ -91,14 +93,14 @@ class Conduit:
         return True
 
     def _open_and_read(self) -> Self:
-        self._pdf_file = open(self._path, 'rb')
+        self._pdf_file = open(self._path, "rb")
         self._reader: PdfReader = pypdf_reader(self._pdf_file, self._decrypt_pw)
         self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
         return self
 
     def write(self):
         # Set default output in case none was set
-        self._set_default_output('modified')
+        self._set_default_output("modified")
 
         # Add metadata
         # Format the current date and time for the metadata
@@ -135,10 +137,16 @@ class Conduit:
         return self
 
     def set_output_suffix(self, suffix: str) -> Self:
-        return self.set_output(add_suffix(
-            os.path.join(self._output_dir, os.path.basename(self._path)) if self._output_dir is not None else self._path,
-            suffix
-        ))
+        return self.set_output(
+            add_suffix(
+                (
+                    os.path.join(self._output_dir, os.path.basename(self._path))
+                    if self._output_dir is not None
+                    else self._path
+                ),
+                suffix,
+            )
+        )
 
     def set_output_directory(self, directory: str) -> Self:
         self._output_dir = directory
@@ -149,17 +157,17 @@ class Conduit:
             self.set_output_suffix(suffix)
 
     def encrypt(self, encrypter: Encryption) -> Self:
-        self._set_default_output('encrypted')
+        self._set_default_output("encrypted")
         self._writer.encrypt(
             user_password=encrypter.user_pw,
             owner_password=encrypter.owner_pw,
             permissions_flag=encrypter.permissions,
-            algorithm=encrypter.algo.value
+            algorithm=encrypter.algo.value,
         )
         return self
 
     def merge(self, pdf: str, position: Optional[int] = None) -> Self:
-        self._set_default_output('merged')
+        self._set_default_output("merged")
         if position is None:
             self._writer.append(pdf)
         else:
@@ -167,7 +175,7 @@ class Conduit:
         return self
 
     def rotate(self, degrees: int) -> Self:
-        self._set_default_output('rotated')
+        self._set_default_output("rotated")
         for page in self._writer.pages:
             page.rotate(degrees)
         return self
@@ -180,7 +188,7 @@ class Conduit:
         return self._open_and_read()
 
     def slice(self, start: int, end: int) -> Self:
-        self._set_default_output('sliced')
+        self._set_default_output("sliced")
         start = start - 1  # Reindex page selections for simple user input
         writer = PdfWriter()
         for page_num in list(range(self._writer.get_num_pages()))[start:end]:
@@ -188,12 +196,24 @@ class Conduit:
         self._writer = writer
         return self
 
-    def scale(self, scale: float, margins: Tuple[int, int] = (0, 0), accelerate: bool = False) -> Self:
-        self._set_default_output('scaled')
+    def scale(
+        self, scale: float, margins: Tuple[int, int] = (0, 0), accelerate: bool = False
+    ) -> Self:
+        self._set_default_output("scaled")
 
         if accelerate or margins != (0, 0):
             x, y = margins
-            self._path = Upscale(self._path, margin_x=x, margin_y=y, scale=scale, tempdir=self._output_dir).use_pdfrw().upscale()
+            self._path = (
+                Upscale(
+                    self._path,
+                    margin_x=x,
+                    margin_y=y,
+                    scale=scale,
+                    tempdir=self._output_dir,
+                )
+                .use_pdfrw()
+                .upscale()
+            )
             return self._open_and_read()
 
         width, height = self.info.size
@@ -204,12 +224,14 @@ class Conduit:
 
     def flatten(self) -> Self:
         # todo: re-write Flatten & other convert classes
-        self._path = Flatten(self._path, suffix='flattened', tempdir=self._output_dir).save()
+        self._path = Flatten(
+            self._path, suffix="flattened", tempdir=self._output_dir
+        ).save()
         return self._open_and_read()
 
     def minify(self) -> Self:
         # remove duplication (images or pages) from a PDF
-        self._set_default_output('minified')
+        self._set_default_output("minified")
         writer = PdfWriter()
         for page in self._writer.pages:
             writer.add_page(page)
@@ -220,19 +242,19 @@ class Conduit:
         return self.minify()
 
     def remove_images(self) -> Self:
-        self._set_default_output('noimages')
+        self._set_default_output("noimages")
         self._writer.remove_images()
         return self
 
     def reduce_image_quality(self, quality: Annotated[int, ImageQualityRange]) -> Self:
-        self._set_default_output('reduced')
+        self._set_default_output("reduced")
         for page in self._writer.pages:
             for img in page.images:
                 img.replace(img.image, quality=quality)
         return self
 
     def compress(self, compression: Compression = Compression.DEFAULT) -> Self:
-        self._set_default_output('compress_{}'.format(compression.value))
+        self._set_default_output("compress_{}".format(compression.value))
         for page in self._writer.pages:
             page.compress_content_streams(compression.value)
         return self

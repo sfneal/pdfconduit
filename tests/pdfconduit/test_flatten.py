@@ -9,11 +9,16 @@ from tests.pdfconduit import PdfconduitTestCase
 
 
 def flatten_params() -> List[str]:
-    return list(map(lambda filename: test_data_path(filename), [
-        'article.pdf',
-        'charts.pdf',
-        'document.pdf',
-    ]))
+    return list(
+        map(
+            lambda filename: test_data_path(filename),
+            [
+                "article.pdf",
+                "charts.pdf",
+                "document.pdf",
+            ],
+        )
+    )
 
 
 def flatten_name_func(testcase_func, param_num, param):
