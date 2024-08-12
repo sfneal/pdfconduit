@@ -2,7 +2,11 @@ import os
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Optional, Self, Any, Annotated, Tuple, List
+from typing import Optional, Any, Annotated, Tuple, List
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
 
 from pypdf import PdfWriter, PdfReader
 from pypdf.constants import UserAccessPermissions
