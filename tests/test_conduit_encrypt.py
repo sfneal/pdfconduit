@@ -8,7 +8,7 @@ from parameterized import parameterized
 from pdfconduit.conduit import Encrypt
 from pdfconduit.conduit.encrypt import Algorithms
 from pdfconduit.utils import Info
-from tests import *
+from tests.pdfconduit import EncryptionTestCase
 
 
 def encryption_algo_params() -> List[Tuple[str, Algorithms, int]]:
@@ -21,14 +21,7 @@ def encryption_algo_params() -> List[Tuple[str, Algorithms, int]]:
     ]
 
 
-class TestEncrypt(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        # Encryption passwords
-        cls.owner_pw = "foo"
-        cls.user_pw = "baz"
-        cls.pdf_path = pdf_path
-
+class TestEncrypt(EncryptionTestCase):
     def setUp(self):
         self.temp = NamedTemporaryFile(suffix=".pdf", delete=False)
 
@@ -175,81 +168,6 @@ class TestEncrypt(unittest.TestCase):
         self.assertEqual(metadata["/Producer"], "pdfconduit")
         self.assertEqual(metadata["/Creator"], "pdfconduit")
         self.assertEqual(metadata["/Author"], "Stephen Neal")
-
-    def _getPdfSecurity(self, encrypted):
-        return Info(encrypted.output, self.user_pw).security
-
-    def assertPdfExists(self, encrypted):
-        # Assert that pdf file exists
-        self.assertTrue(os.path.exists(encrypted.output))
-
-    def assertEncrypted(self, pdf):
-        self.assertTrue(Info(pdf.output, self.user_pw).encrypted)
-
-    def assert40BitEncryption(self, security):
-        if "/Length" in security:
-            self.assertEqual(security["/Length"], 40)
-
-        # Assert standard security handler revision is 2
-        self.assertEqual(security["/R"], 2)
-
-    def assert128BitEncryption(self, security, security_handler_revision: int = 4):
-        self.assertTrue("/Length" in security)
-        self.assertIsInstance(security["/Length"], int)
-        self.assertEqual(security["/Length"], 128)
-
-        self.assertEqual(security["/Filter"], "/Standard")
-
-        # Assert standard security handler revision is 3
-        self.assertEqual(security["/R"], security_handler_revision)
-
-        if security_handler_revision == 4:
-            self.assertTrue("/CF" in security)
-            self.assertEqual(security["/CF"]["/StdCF"]["/CFM"], "/AESV2")
-        else:
-            self.assertFalse("/CF" in security)
-
-    def assert256BitEncryption(self, security, security_handler_revision: int = 5):
-        self.assertTrue("/Length" in security)
-        self.assertIsInstance(security["/Length"], int)
-        self.assertEqual(security["/Length"], 256)
-
-        self.assertEqual(security["/Filter"], "/Standard")
-
-        # Assert standard security handler revision is 3
-        self.assertEqual(security["/R"], security_handler_revision)
-        self.assertEqual(security["/V"], 5)
-
-        self.assertTrue("/CF" in security)
-        self.assertEqual(security["/CF"]["/StdCF"]["/CFM"], "/AESV3")
-
-    def assertSecurityValue(self, security, expected):
-        self.assertTrue("/P" in security)
-        self.assertEqual(security["/P"], expected)
-
-    def assertPermissions(
-        self,
-        pdf,
-        can_print=False,
-        can_modify=False,
-        can_copy=False,
-        can_annotate=False,
-        can_fill_forms=False,
-        can_change_accessability=False,
-        can_assemble=False,
-        can_print_high_quality=False,
-    ):
-        permissions = Info(pdf.output, self.user_pw).permissions
-        self.assertEqual(permissions.can_print(), can_print)
-        self.assertEqual(permissions.can_modify(), can_modify)
-        self.assertEqual(permissions.can_copy(), can_copy)
-        self.assertEqual(permissions.can_annotate(), can_annotate)
-        self.assertEqual(permissions.can_fill_forms(), can_fill_forms)
-        self.assertEqual(
-            permissions.can_change_accessability(), can_change_accessability
-        )
-        self.assertEqual(permissions.can_assemble(), can_assemble)
-        self.assertEqual(permissions.can_print_high_quality(), can_print_high_quality)
 
 
 if __name__ == "__main__":
