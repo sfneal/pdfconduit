@@ -15,7 +15,7 @@ class PdfconduitTestCase(unittest.TestCase):
         cls.pdf_path = pdf_path
 
     def setUp(self):
-        self.temp = TemporaryDirectory(delete=False)
+        self.temp = TemporaryDirectory()
         self.conduit = Conduit(self.pdf_path).set_output_directory(self.temp.name)
 
     def tearDown(self):
