@@ -41,7 +41,7 @@ class Algorithms(Enum):
 class Encrypt:
     def __init__(
         self,
-        pdf: Union[str | PdfReader],
+        pdf: Union[str, PdfReader],
         user_pw: str,
         owner_pw: Optional[str] = None,
         output: Optional[str] = None,
