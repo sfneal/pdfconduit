@@ -2,12 +2,12 @@ import os
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Optional, Any, Annotated, Tuple, List
+from typing import Optional, Any, Tuple, List, Dict
 
 try:
-    from typing import Self
+    from typing import Self, Annotated
 except ImportError:
-    from typing_extensions import Self
+    from typing_extensions import Self, Annotated
 
 from pypdf import PdfWriter, PdfReader
 from pypdf.constants import UserAccessPermissions
@@ -71,7 +71,7 @@ class ImageQualityRange:
 
 
 class Conduit:
-    _metadata: dict[str, Any] = {}
+    _metadata: Dict[str, Any] = {}
 
     output: Optional[str] = None
     _output_dir: Optional[str] = None
@@ -117,7 +117,8 @@ class Conduit:
             "/Author": "pdfconduit",
             "/ModDate": time,
         }
-        self._writer.add_metadata(default_metadata | self._metadata)
+        default_metadata.update(self._metadata)
+        self._writer.add_metadata(default_metadata)
 
         # Close the PDF reader & file reader
         self._reader.close()
@@ -133,7 +134,7 @@ class Conduit:
 
         return self.output
 
-    def set_metadata(self, metadata: dict[str, Any]) -> Self:
+    def set_metadata(self, metadata: Dict[str, Any]) -> Self:
         self._metadata = metadata
         return self
 
