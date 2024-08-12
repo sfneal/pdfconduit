@@ -68,35 +68,3 @@ class TestUsage(PdfconduitTestCase):
         self.conduit.set_output_suffix('changed')
         output = add_suffix(self.pdf_path, 'changed')
         self.assertEqual(output, self.conduit.output)
-
-    # def test_can_encrypt_pdf(self):
-    #     pass
-    #
-    # def test_can_merge_pdf(self):
-    #     pass
-    #
-    # def test_can_rotate_pdf(self):
-    #     pass
-    #
-    # def test_can_scale_pdf(self):
-    #     pass
-    #
-    # def test_can_flatten_pdf(self):
-    #     pass
-    #
-    # def test_can_remove_duplications_from_pdf(self):
-    #     pass
-    #
-    # def test_can_remove_images_from_pdf(self):
-    #     pass
-    #
-    # def test_can_reduce_image_quality_of_pdf(self):
-    #     pass
-    #
-    # def test_can_compress_pdf(self):
-    #     pass
-    #
-    # def test_can_get_pdf_info(self):
-    #     pass
-
-
