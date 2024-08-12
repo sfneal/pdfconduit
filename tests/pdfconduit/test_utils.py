@@ -181,3 +181,50 @@ class TestInfo(PdfconduitTestCase):
     @staticmethod
     def _get_info(filepath: str, password: Optional[str] = None):
         return Info(filepath, password=password)
+
+
+def get_expected_output(filepath: str, suffix: str = 'modified', sep: str = '_') -> str:
+    return os.path.join(
+        os.path.dirname(filepath),
+        os.path.basename(filepath).replace('.pdf', '') + sep + suffix + '.pdf'
+    )
+
+
+def path_params() -> List[Tuple[str, str, str]]:
+    return [(get_expected_output(path, suffix), path, suffix)
+            for path in unencrypted_pdf_params()
+            for suffix in ['modified', 'new', 'old', 'backup', 'changed']]
+
+
+def path_params_with_sep() -> List[Tuple[str, str, str, str]]:
+    return [(get_expected_output(path, suffix, sep), path, suffix, sep)
+            for path in unencrypted_pdf_params()
+            for suffix in ['modified', 'new', 'old', 'backup', 'changed']
+            for sep in ['_', '-']]
+
+
+def path_name_func(testcase_func, param_num, param):
+    return "{}-{}".format(testcase_func.__name__, os.path.basename(str(param.args[0])).replace(' ', '_'))
+
+
+class TestPath(PdfconduitTestCase):
+    @parameterized.expand(path_params, name_func=info_name_func)
+    def test_add_suffix(self, expected: str, filepath: str, suffix: str):
+        with_suffix = add_suffix(filepath, suffix)
+
+        self.assertIsInstance(with_suffix, str)
+        self.assertEqual(with_suffix, expected)
+
+    @parameterized.expand(path_params_with_sep, name_func=info_name_func)
+    def test_add_suffix_suffix_sep(self, expected: str, filepath: str, suffix: str, sep: str):
+        with_suffix = add_suffix(filepath, suffix, sep)
+
+        self.assertIsInstance(with_suffix, str)
+        self.assertEqual(with_suffix, expected)
+
+    @parameterized.expand(path_params_with_sep, name_func=info_name_func)
+    def test_add_suffix_suffix_sep_ext(self, expected: str, filepath: str, suffix: str, sep: str):
+        with_suffix = add_suffix(filepath, suffix, sep, "zip")
+
+        self.assertIsInstance(with_suffix, str)
+        self.assertEqual(with_suffix, expected.replace('.pdf', '.zip'))
