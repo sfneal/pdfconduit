@@ -7,7 +7,7 @@ from pdfconduit import Info, Conduit
 from pdfconduit.pdfconduit import Compression, Encryption
 from pdfconduit.utils import add_suffix
 from tests import test_data_path
-from tests.pdfconduit import PdfconduitTestCase
+from tests import PdfconduitTestCase
 
 
 def unencrypted_pdf_params() -> List[str]:

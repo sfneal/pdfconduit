@@ -6,7 +6,7 @@ from pypdf import PdfReader, PdfWriter
 from pdfconduit import Conduit
 from pdfconduit.utils import add_suffix
 from tests import *
-from tests.pdfconduit import PdfconduitTestCase
+from tests import PdfconduitTestCase
 
 
 class TestUsage(PdfconduitTestCase):

@@ -3,7 +3,7 @@ from typing import List
 from parameterized import parameterized
 
 from pdfconduit import Info
-from tests.pdfconduit import PdfconduitTestCase
+from tests import PdfconduitTestCase
 
 
 def slice_params() -> List[str]:

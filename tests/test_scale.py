@@ -3,7 +3,7 @@ from typing import Tuple, List
 from parameterized import parameterized
 
 from pdfconduit import Info
-from tests.pdfconduit import PdfconduitTestCase
+from tests import PdfconduitTestCase
 
 
 def scale_params() -> List[Tuple[float, bool]]:

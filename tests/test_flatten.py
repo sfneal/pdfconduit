@@ -5,7 +5,7 @@ from parameterized import parameterized
 
 from pdfconduit import Info, Conduit
 from tests import test_data_path
-from tests.pdfconduit import PdfconduitTestCase
+from tests import PdfconduitTestCase
 
 
 def flatten_params() -> List[str]:

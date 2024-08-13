@@ -5,7 +5,7 @@ from parameterized import parameterized
 
 from pdfconduit import Info
 from pdfconduit.pdfconduit import Encryption, Algorithms
-from tests.pdfconduit import PdfconduitTestCase
+from tests import PdfconduitTestCase
 
 
 def encryption_name_func(testcase_func, param_num, param):

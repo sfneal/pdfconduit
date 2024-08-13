@@ -5,8 +5,8 @@ from typing import Iterable, List
 from parameterized import parameterized
 
 from pdfconduit import Conduit, Info
-from tests.pdfconduit import PdfconduitTestCase
-from .. import test_data_path
+from tests import PdfconduitTestCase
+from tests import test_data_path
 
 
 def rotate_params() -> List[int]:

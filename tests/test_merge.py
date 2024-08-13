@@ -4,8 +4,8 @@ from typing import Iterable
 from parameterized import parameterized
 
 from pdfconduit import Conduit, Info
-from tests.pdfconduit import PdfconduitTestCase
-from .. import test_data_path
+from tests import PdfconduitTestCase
+from tests import test_data_path
 
 
 def merge_params():
