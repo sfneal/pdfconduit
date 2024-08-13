@@ -1,6 +1,6 @@
 # Write two (2) PDFs to a destination file
 from pathlib import Path
-from pdfconduit.utils.typing import Union
+from typing import Union
 
 from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
 from pypdf._utils import StrByteType

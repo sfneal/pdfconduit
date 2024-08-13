@@ -1,5 +1,5 @@
 import os
-from pdfconduit.utils.typing import List
+from typing import List
 
 from PyBundle import bundle_dir, resource_path
 

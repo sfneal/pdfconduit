@@ -1,7 +1,7 @@
 # Dynamically generate watermark pdf file
 import io
 from tempfile import NamedTemporaryFile, mkdtemp
-from pdfconduit.utils.typing import Tuple, Optional
+from typing import Tuple, Optional
 
 from PillowImage import img_adjust
 from PyBundle import resource_path

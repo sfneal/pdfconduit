@@ -1,6 +1,6 @@
 # Add a watermark PDF file to another PDF file
 from tempfile import NamedTemporaryFile
-from pdfconduit.utils.typing import Optional, Tuple
+from typing import Optional, Tuple
 
 from PyBundle import resource_path
 from pdfrw import PdfReader, PdfWriter, PageMerge

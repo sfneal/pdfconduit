@@ -2,7 +2,7 @@
 import os
 from io import BytesIO
 from tempfile import NamedTemporaryFile
-from pdfconduit.utils.typing import Optional, List
+from typing import Optional, List
 
 import fitz
 from PIL import Image

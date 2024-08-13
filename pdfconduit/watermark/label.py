@@ -1,4 +1,4 @@
-from pdfconduit.utils.typing import Optional
+from typing import Optional
 
 from pdfconduit.watermark.watermark import Watermark
 

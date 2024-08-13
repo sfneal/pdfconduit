@@ -1,5 +1,5 @@
 from datetime import datetime
-from pdfconduit.utils.typing import Optional, Union, Tuple
+from typing import Optional, Union, Tuple
 
 from PillowImage import PillowImage
 

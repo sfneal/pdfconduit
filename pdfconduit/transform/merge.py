@@ -1,6 +1,6 @@
 # Merge PDF documents
 import os
-from pdfconduit.utils.typing import Union, Optional, List
+from typing import Union, Optional, List
 
 from pdfrw import (
     PdfReader as PdfrwReader,

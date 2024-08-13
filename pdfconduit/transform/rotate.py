@@ -1,7 +1,7 @@
 # Rotate a pdf file
 import os
 from tempfile import NamedTemporaryFile
-from pdfconduit.utils.typing import Optional
+from typing import Optional
 
 from pdfrw import (
     PdfReader as PdfrwReader,

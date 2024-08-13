@@ -1,5 +1,5 @@
 # Extract images from a PDF
-from pdfconduit.utils.typing import Optional
+from typing import Optional
 
 from PIL import Image
 

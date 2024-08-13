@@ -2,7 +2,7 @@
 import os
 import shutil
 from tempfile import TemporaryDirectory
-from pdfconduit.utils.typing import Optional
+from typing import Optional
 
 from looptools import Timer
 
