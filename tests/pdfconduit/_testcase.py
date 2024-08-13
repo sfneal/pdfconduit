@@ -40,7 +40,7 @@ class PdfconduitTestCase(unittest.TestCase):
             data = cls.timings
 
         with open(json_path, 'w') as json_file:
-            json.dump(data, json_file, indent=2)
+            json.dump(data, json_file, indent=2, sort_keys=True)
 
     def assertPdfExists(self, pdf):
         self.assertTrue(os.path.exists(pdf))
