@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional
+from pdfconduit.utils.typing import Optional
 
 from pypdf.constants import UserAccessPermissions
 

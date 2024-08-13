@@ -1,6 +1,6 @@
 import os.path
 import random
-from typing import Iterable, List
+from pdfconduit.utils.typing import Iterable, List
 
 from parameterized import parameterized
 

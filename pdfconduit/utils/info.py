@@ -1,5 +1,5 @@
 # Retrieve information about a PDF document
-from typing import Optional, List, Dict, Tuple, Union
+from pdfconduit.utils.typing import Optional, List, Dict, Tuple, Union
 
 from pypdf import PdfReader, DocumentInformation, PageObject, PdfWriter
 

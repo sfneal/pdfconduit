@@ -1,4 +1,4 @@
-from typing import Dict
+from pdfconduit.utils.typing import Dict
 
 from pypdf import PdfReader
 

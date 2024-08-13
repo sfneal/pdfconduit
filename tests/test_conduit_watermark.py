@@ -1,7 +1,7 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory
-from typing import Tuple, List
+from pdfconduit.utils.typing import Tuple, List
 
 from parameterized import parameterized
 

@@ -1,7 +1,7 @@
 from typing import Optional, Any, Tuple, Dict, Union, List, Iterable
 
 try:
-    from typing import Self, Annotated
+    from pdfconduit.utils.typing import Self, Annotated
 except ImportError:
     from typing_extensions import Self, Annotated
 

@@ -1,5 +1,5 @@
 import os
-from typing import Tuple, List
+from pdfconduit.utils.typing import Tuple, List
 
 from parameterized import parameterized
 

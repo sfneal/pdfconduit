@@ -1,4 +1,4 @@
-from typing import List
+from pdfconduit.utils.typing import List
 
 from parameterized import parameterized
 

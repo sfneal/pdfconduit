@@ -1,7 +1,7 @@
 # Slice PDF to remove unwanted pages
 import os
 from tempfile import NamedTemporaryFile
-from typing import Optional
+from pdfconduit.utils.typing import Optional
 
 from pypdf import (
     PdfReader as pypdfReader,

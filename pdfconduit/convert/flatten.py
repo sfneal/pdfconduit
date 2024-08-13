@@ -1,7 +1,7 @@
 # Create flat PDF by converting each input PDF page to a PNG
 import os
 from tempfile import TemporaryDirectory
-from typing import Optional, List
+from pdfconduit.utils.typing import Optional, List
 
 from pdfconduit.convert.img2pdf import IMG2PDF
 from pdfconduit.convert.pdf2img import PDF2IMG

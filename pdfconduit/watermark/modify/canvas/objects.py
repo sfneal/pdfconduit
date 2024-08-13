@@ -1,4 +1,4 @@
-from typing import Optional
+from pdfconduit.utils.typing import Optional
 
 from pdfconduit.watermark.modify import LETTER
 

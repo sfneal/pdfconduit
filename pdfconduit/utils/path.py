@@ -2,7 +2,7 @@
 import os
 import sys
 from pathlib import Path
-from typing import Optional
+from pdfconduit.utils.typing import Optional
 
 if "pathlib" in sys.modules:
 
