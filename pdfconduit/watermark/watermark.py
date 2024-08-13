@@ -267,9 +267,18 @@ class Watermark:
             else:
                 self.receipt.add("Permissions", "Allow ALL")
 
-        encrypter = Encryption(user_pw=user_pw, owner_pw=owner_pw, allow_printing=allow_printing,
-                               allow_commenting=allow_commenting)
-        p = Conduit(document).set_output(add_suffix(self.document_og, "secured")).encrypt(encrypter).write()
+        encrypter = Encryption(
+            user_pw=user_pw,
+            owner_pw=owner_pw,
+            allow_printing=allow_printing,
+            allow_commenting=allow_commenting,
+        )
+        p = (
+            Conduit(document)
+            .set_output(add_suffix(self.document_og, "secured"))
+            .encrypt(encrypter)
+            .write()
+        )
 
         if self.use_receipt:
             self.receipt.add("Secured PDF", os.path.basename(p))
