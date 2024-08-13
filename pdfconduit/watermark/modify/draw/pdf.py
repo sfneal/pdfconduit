@@ -8,9 +8,9 @@ from PyBundle import resource_path
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen.canvas import Canvas
 
+from pdfconduit.utils import write_pdf
 from pdfconduit.watermark.modify import LETTER
 from pdfconduit.watermark.modify.canvas import CanvasStr, CanvasImg, CanvasObjects
-from pdfconduit.utils import write_pdf
 
 
 def text_width(string: str, font_name: str = "Vera", font_size: int = 40) -> float:
