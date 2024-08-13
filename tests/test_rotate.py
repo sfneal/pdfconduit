@@ -1,12 +1,10 @@
-import os.path
 import random
-from typing import Iterable, List
+from typing import List
 
 from parameterized import parameterized
 
-from pdfconduit import Conduit, Info
+from pdfconduit import Info
 from tests import PdfconduitTestCase
-from tests import test_data_path
 
 
 def rotate_params() -> List[int]:

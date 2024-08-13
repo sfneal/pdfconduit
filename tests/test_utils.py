@@ -3,12 +3,10 @@ from typing import Tuple, List, Optional
 
 from parameterized import parameterized
 
-from pdfconduit import Info, Conduit
-from pdfconduit.compression import Compression
-from pdfconduit.encryption import Encryption
+from pdfconduit import Info
 from pdfconduit.utils import add_suffix
-from tests import test_data_path
 from tests import PdfconduitTestCase
+from tests import test_data_path
 
 
 def unencrypted_pdf_params() -> List[str]:
