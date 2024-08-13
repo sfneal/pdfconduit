@@ -4,7 +4,8 @@ from typing import Tuple, List, Optional
 from parameterized import parameterized
 
 from pdfconduit import Info, Conduit
-from pdfconduit.pdfconduit import Compression, Encryption
+from pdfconduit.compression import Compression
+from pdfconduit.encryption import Encryption
 from pdfconduit.utils import add_suffix
 from tests import test_data_path
 from tests import PdfconduitTestCase
