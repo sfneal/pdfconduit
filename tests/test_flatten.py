@@ -1,11 +1,11 @@
 import os.path
-from typing import Tuple, List
+from typing import List
 
 from parameterized import parameterized
 
-from pdfconduit import Info, Conduit
-from tests import test_data_path
+from pdfconduit import Conduit
 from tests import PdfconduitTestCase
+from tests import test_data_path
 
 
 def flatten_params() -> List[str]:

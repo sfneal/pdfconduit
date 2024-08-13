@@ -1,9 +1,9 @@
 import os.path
-from pdfconduit.utils.typing import List, Iterable
 
 from parameterized import parameterized
 
 from pdfconduit import Conduit, Info
+from pdfconduit.utils.typing import List, Iterable
 from tests import PdfconduitTestCase
 from tests import test_data_path
 

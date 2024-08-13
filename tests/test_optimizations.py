@@ -5,8 +5,8 @@ from parameterized import parameterized
 
 from pdfconduit import Info, Conduit
 from pdfconduit.compression import Compression
-from tests import test_data_path
 from tests import PdfconduitTestCase
+from tests import test_data_path
 
 
 def optimization_params() -> List[str]:
