@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pypdf import PdfWriter, PdfReader
 
-from pdfconduit import Merge
+from pdfconduit.transform import Merge
 from pdfconduit.compression import Compression, ImageQualityRange
 from pdfconduit.convert import Flatten
 from pdfconduit.encryption import Encryption
