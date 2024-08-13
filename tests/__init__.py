@@ -67,4 +67,5 @@ __all__ = [
     "function_name_to_file_name",
     "copy_pdf_to_output_directory",
     "expected_equals_output",
+    "get_output_filepath"
 ]
