@@ -7,10 +7,10 @@ from typing import Optional
 from looptools import Timer
 
 from pdfconduit.conduit.encrypt import Encrypt
-from pdfconduit.conduit.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
-from pdfconduit.conduit.watermark.add import WatermarkAdd
-from pdfconduit.modify.canvas import CanvasConstructor
-from pdfconduit.modify.draw import WatermarkDraw
+from pdfconduit.watermark.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
+from pdfconduit.watermark.add import WatermarkAdd
+from pdfconduit.watermark.modify.canvas import CanvasConstructor
+from pdfconduit.watermark.modify.draw import WatermarkDraw
 from pdfconduit.utils import add_suffix, open_window, Receipt, Info
 
 

@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pdfconduit.modify import LETTER
+from pdfconduit.watermark.modify import LETTER
 
 
 class CanvasStr:

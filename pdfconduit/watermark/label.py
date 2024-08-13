@@ -1,9 +1,10 @@
 from typing import Optional
 
-from pdfconduit.conduit.watermark import Watermark
-from pdfconduit.modify.canvas import CanvasObjects, CanvasStr
-from pdfconduit.modify.draw import WatermarkDraw
+from pdfconduit.watermark.watermark import Watermark
+
 from pdfconduit.utils import Info, add_suffix
+from pdfconduit.watermark.modify.canvas import CanvasObjects, CanvasStr
+from pdfconduit.watermark.modify.draw import WatermarkDraw
 
 
 def mean(numbers):

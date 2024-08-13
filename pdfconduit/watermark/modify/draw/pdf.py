@@ -8,8 +8,8 @@ from PyBundle import resource_path
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen.canvas import Canvas
 
-from pdfconduit.modify import LETTER
-from pdfconduit.modify.canvas import CanvasStr, CanvasImg, CanvasObjects
+from pdfconduit.watermark.modify import LETTER
+from pdfconduit.watermark.modify.canvas import CanvasStr, CanvasImg, CanvasObjects
 from pdfconduit.utils import write_pdf
 
 
