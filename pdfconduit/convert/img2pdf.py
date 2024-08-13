@@ -5,9 +5,9 @@ from typing import Optional, List, Union
 
 from PIL import Image
 
+from pdfconduit.transform.merge import Merge
 from pdfconduit.watermark.modify.canvas import CanvasImg, CanvasObjects
 from pdfconduit.watermark.modify.draw import WatermarkDraw
-from pdfconduit.transform.merge import Merge
 
 
 class IMG2PDF:

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+
 from pdfconduit.utils.typing import List, Self
 
 
