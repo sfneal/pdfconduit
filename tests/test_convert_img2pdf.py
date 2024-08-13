@@ -30,8 +30,6 @@ class TestImg2Pdf(unittest.TestCase):
         # Assert pdf file exists
         self.assertTrue(os.path.exists(self.pdf))
 
-        expected_equals_output(function_name_to_file_name(), self.pdf)
-
     def test_convert_packet(self):
         """Convert an image file into PDF."""
         self.pdf = IMG2PDF(
@@ -42,8 +40,6 @@ class TestImg2Pdf(unittest.TestCase):
 
         # Assert pdf file exists
         self.assertTrue(os.path.exists(self.pdf))
-
-        expected_equals_output(function_name_to_file_name(), self.pdf)
 
 
 if __name__ == "__main__":

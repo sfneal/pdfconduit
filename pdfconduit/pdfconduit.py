@@ -1,73 +1,15 @@
 import os
-from dataclasses import dataclass
 from datetime import datetime
-from enum import Enum
-from typing import Optional, Any, Tuple, List, Dict
-
-try:
-    from typing import Self, Annotated
-except ImportError:
-    from typing_extensions import Self, Annotated
 
 from pypdf import PdfWriter, PdfReader
-from pypdf.constants import UserAccessPermissions
 
-from pdfconduit import Info, Flatten, Rotate, Upscale
-from pdfconduit.conduit.encrypt import Algorithms
-from pdfconduit.utils import pypdf_reader, add_suffix
-
-
-@dataclass
-class Encryption:
-    user_pw: str
-    owner_pw: Optional[str]
-    allow_printing: bool = True
-    allow_commenting: bool = False
-    algo: Algorithms = Algorithms.AES_256_r5
-    permissions: UserAccessPermissions = UserAccessPermissions
-
-    def __post_init__(self):
-        if self.allow_printing and self.allow_commenting:
-            self.permissions = (
-                UserAccessPermissions.PRINT | UserAccessPermissions.MODIFY
-            )
-        elif self.allow_printing:
-            self.permissions = UserAccessPermissions.PRINT
-        elif self.allow_commenting:
-            self.permissions = UserAccessPermissions.MODIFY
-        else:
-            self.permissions = UserAccessPermissions.R2
-
-
-class Compression(Enum):
-    DEFAULT: int = -1
-    NONE: int = 0
-    BEST_SPEED: int = 1
-    BEST_COMPRESSION: int = 9
-    LEVEL_0: int = 0
-    LEVEL_1: int = 1
-    LEVEL_2: int = 2
-    LEVEL_3: int = 3
-    LEVEL_4: int = 4
-    LEVEL_5: int = 5
-    LEVEL_6: int = 6
-    LEVEL_7: int = 7
-    LEVEL_8: int = 8
-    LEVEL_9: int = 9
-
-    @classmethod
-    def from_level(cls, level):
-        return cls(level)
-
-    @classmethod
-    def all(cls) -> List[Self]:
-        return list(map(lambda c: c, cls))
-
-
-@dataclass
-class ImageQualityRange:
-    min: int = 1
-    max: int = 99
+from pdfconduit import Merge
+from pdfconduit.compression import Compression, ImageQualityRange
+from pdfconduit.convert import Flatten
+from pdfconduit.encryption import Encryption
+from pdfconduit.transform import Rotate, Upscale
+from pdfconduit.utils import Info, pypdf_reader, add_suffix
+from pdfconduit.utils.typing import Optional, Any, Tuple, Dict, Self, Annotated
 
 
 class Conduit:
@@ -129,6 +71,7 @@ class Conduit:
             self._writer.write(output_pdf)
 
         self._writer.close()
+        self._pdf_file.close()
 
         self._closed = True
 
@@ -179,6 +122,13 @@ class Conduit:
         else:
             self._writer.merge(position, pdf)
         return self
+
+    def merge_fast(self, pdfs: list) -> Self:
+        self._set_default_output("merged")
+        self._path = (
+            Merge([self._path] + pdfs, output_dir=self._output_dir).use_pdfrw().merge()
+        )
+        return self._open_and_read()
 
     def rotate(self, degrees: int) -> Self:
         self._set_default_output("rotated")
