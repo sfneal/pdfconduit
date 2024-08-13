@@ -1,7 +1,8 @@
 import os
 import unittest
 
-from pdfconduit import Info, Flatten
+from pdfconduit import Info
+from pdfconduit.convert import Flatten
 from tests import *
 
 

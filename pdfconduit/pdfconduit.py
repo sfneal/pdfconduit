@@ -12,7 +12,8 @@ except ImportError:
 from pypdf import PdfWriter, PdfReader
 from pypdf.constants import UserAccessPermissions
 
-from pdfconduit import Info, Flatten, Rotate, Upscale
+from pdfconduit import Info, Rotate, Upscale
+from pdfconduit.convert import Flatten
 from pdfconduit.conduit.encrypt import Algorithms
 from pdfconduit.utils import pypdf_reader, add_suffix
 

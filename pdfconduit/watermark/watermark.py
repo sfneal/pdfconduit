@@ -6,12 +6,12 @@ from typing import Optional
 
 from looptools import Timer
 
-from pdfconduit.conduit.encrypt import Encrypt
-from pdfconduit.watermark.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
+from pdfconduit.pdfconduit import Conduit, Encryption
+from pdfconduit.utils import add_suffix, open_window, Receipt, Info
 from pdfconduit.watermark.add import WatermarkAdd
+from pdfconduit.watermark.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
 from pdfconduit.watermark.modify.canvas import CanvasConstructor
 from pdfconduit.watermark.modify.draw import WatermarkDraw
-from pdfconduit.utils import add_suffix, open_window, Receipt, Info
 
 
 class Watermark:
@@ -265,15 +265,11 @@ class Watermark:
                 self.receipt.add("Permissions", "Allow printing")
             else:
                 self.receipt.add("Permissions", "Allow ALL")
-        p = Encrypt(
-            document,
-            user_pw,
-            owner_pw,
-            output=add_suffix(self.document_og, "secured"),
-            bit128=encrypt_128,
-            allow_printing=allow_printing,
-            allow_commenting=allow_commenting,
-        ).encrypt()
+
+        encrypter = Encryption(user_pw=user_pw, owner_pw=owner_pw, allow_printing=allow_printing,
+                               allow_commenting=allow_commenting)
+        p = Conduit(document).set_output(add_suffix(self.document_og, "secured")).encrypt(encrypter).write()
+
         if self.use_receipt:
             self.receipt.add("Secured PDF", os.path.basename(p))
         return p
