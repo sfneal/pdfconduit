@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Self
+from pdfconduit.utils.typing import List, Self
 
 
 class Compression(Enum):

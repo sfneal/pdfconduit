@@ -1,5 +1,5 @@
 import os.path
-from typing import Iterable
+from pdfconduit.utils.typing import List, Iterable
 
 from parameterized import parameterized
 
@@ -59,7 +59,7 @@ class TestMerge(PdfconduitTestCase):
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, conduit.info.pages)
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
-    def test_can_merge_pdfs_fast(self, main_pdf: str, pdfs_to_merge: list[str]):
+    def test_can_merge_pdfs_fast(self, main_pdf: str, pdfs_to_merge: List[str]):
         self.pdf_path = main_pdf
         self.conduit = Conduit(main_pdf).set_output_directory(self.temp.name)
 
