@@ -1,10 +1,7 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 
-try:
-    from typing import Self, Union
-except ImportError:
-    from typing_extensions import Self
+from pdfconduit.utils.typing import Self
 
 
 class Driver(Enum):

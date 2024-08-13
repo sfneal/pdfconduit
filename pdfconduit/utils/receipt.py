@@ -1,11 +1,7 @@
 import os
 from datetime import datetime
-from typing import Any
 
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from pdfconduit.utils.typing import Self, Any
 
 
 class Receipt:

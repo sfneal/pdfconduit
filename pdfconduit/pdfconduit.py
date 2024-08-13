@@ -1,20 +1,15 @@
 import os
 from datetime import datetime
-from typing import Optional, Any, Tuple, Dict
-
-try:
-    from typing import Self, Annotated
-except ImportError:
-    from typing_extensions import Self, Annotated
 
 from pypdf import PdfWriter, PdfReader
 
 from pdfconduit import Merge
 from pdfconduit.compression import Compression, ImageQualityRange
+from pdfconduit.convert import Flatten
 from pdfconduit.encryption import Encryption
 from pdfconduit.transform import Rotate, Upscale
-from pdfconduit.convert import Flatten
 from pdfconduit.utils import Info, pypdf_reader, add_suffix
+from pdfconduit.utils.typing import Optional, Any, Tuple, Dict, Self, Annotated
 
 
 class Conduit:
