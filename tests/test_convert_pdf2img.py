@@ -26,5 +26,6 @@ class TestPdf2Img(unittest.TestCase):
         self.assertTrue(img[0].endswith(".png"))
         self.img = img[0]
 
+
 if __name__ == "__main__":
     unittest.main()

@@ -16,7 +16,6 @@ def slice_params() -> List[str]:
     ]
 
 
-
 class TestSlice(PdfconduitTestCase):
     @parameterized.expand(slice_params)
     def test_slice(self, slice_range: str):
@@ -24,7 +23,9 @@ class TestSlice(PdfconduitTestCase):
         fp = int(fp)
         lp = int(lp)
 
-        self.conduit.set_output_suffix("sliced_{}".format(slice_range)).slice(fp, lp).write()
+        self.conduit.set_output_suffix("sliced_{}".format(slice_range)).slice(
+            fp, lp
+        ).write()
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectPagesSliced(fp, lp, self.conduit.output)

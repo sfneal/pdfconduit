@@ -125,7 +125,9 @@ class Conduit:
 
     def merge_fast(self, pdfs: list) -> Self:
         self._set_default_output("merged")
-        self._path = Merge([self._path] + pdfs, output_dir=self._output_dir).use_pdfrw().merge()
+        self._path = (
+            Merge([self._path] + pdfs, output_dir=self._output_dir).use_pdfrw().merge()
+        )
         return self._open_and_read()
 
     def rotate(self, degrees: int) -> Self:
@@ -150,7 +152,9 @@ class Conduit:
         self._writer = writer
         return self
 
-    def scale(self, scale: float, margins: Tuple[int, int] = (0, 0), accelerate: bool = False) -> Self:
+    def scale(
+        self, scale: float, margins: Tuple[int, int] = (0, 0), accelerate: bool = False
+    ) -> Self:
         self._set_default_output("scaled")
 
         if accelerate or margins != (0, 0):

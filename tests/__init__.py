@@ -86,17 +86,17 @@ class PdfconduitTestCase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        json_path = test_data_path('timings.json')
+        json_path = test_data_path("timings.json")
 
         if os.path.isfile(json_path):
-            with open(json_path, 'r') as json_file:
+            with open(json_path, "r") as json_file:
                 data = json.load(json_file)
 
             data.update(cls.timings)
         else:
             data = cls.timings
 
-        with open(json_path, 'w') as json_file:
+        with open(json_path, "w") as json_file:
             json.dump(data, json_file, indent=2, sort_keys=True)
 
     def assertPdfExists(self, pdf):
@@ -145,5 +145,5 @@ __all__ = [
     "copy_pdf_to_output_directory",
     "expected_equals_output",
     "get_output_filepath",
-    "PdfconduitTestCase"
+    "PdfconduitTestCase",
 ]
