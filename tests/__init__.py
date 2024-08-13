@@ -86,7 +86,7 @@ class PdfconduitTestCase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        json_path = get_output_filepath('timings.json')
+        json_path = test_data_path('timings.json')
 
         if os.path.isfile(json_path):
             with open(json_path, 'r') as json_file:
