@@ -11,7 +11,7 @@ def scale_params() -> List[Tuple[float, bool]]:
 
 
 def scale_name_func(testcase_func, param_num, param):
-    name = "{}.{}x".format(testcase_func.__name__, str(param.args[0]).replace('.', ','))
+    name = "{}.{}x".format(testcase_func.__name__, str(param.args[0]).replace(".", ","))
     return name + "_accelerate" if param.args[1] else name
 
 

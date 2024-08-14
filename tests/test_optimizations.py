@@ -24,9 +24,7 @@ def optimization_params() -> List[str]:
 
 
 def optimizations_name_func(testcase_func, param_num, param):
-    return "{}.{}".format(
-        testcase_func.__name__, get_clean_pdf_name(param.args[0])
-    )
+    return "{}.{}".format(testcase_func.__name__, get_clean_pdf_name(param.args[0]))
 
 
 def compress_params() -> List[Tuple[str, Compression]]:

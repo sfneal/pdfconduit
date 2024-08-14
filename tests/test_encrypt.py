@@ -9,7 +9,7 @@ from tests import PdfconduitTestCase
 
 
 def encryption_name_func(testcase_func, param_num, param):
-    name = ''
+    name = ""
     if not param.args[0].allow_printing and not param.args[0].allow_commenting:
         name += "_none"
     if param.args[0].allow_printing:

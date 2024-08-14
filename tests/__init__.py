@@ -59,7 +59,7 @@ def expected_equals_output(test_function, output_filepath):
 
 
 def get_clean_pdf_name(path) -> str:
-    return os.path.basename(str(path)).replace('.', ',')
+    return os.path.basename(str(path)).replace(".", ",")
 
 
 # Example usage
@@ -150,5 +150,5 @@ __all__ = [
     "expected_equals_output",
     "get_output_filepath",
     "PdfconduitTestCase",
-    "get_clean_pdf_name"
+    "get_clean_pdf_name",
 ]
