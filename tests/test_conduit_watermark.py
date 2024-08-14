@@ -12,17 +12,21 @@ from tests import *
 def watermark_params() -> List[Tuple[str, str, bool, bool]]:
     return [
         # name, method, flatten, underneath
-        ("pdfrw", "pdfrw", False, False),
-        ("pdfrw_underneath", "pdfrw", False, True),
-        ("pdfrw_overlay", "pdfrw", False, False),
-        ("pdfrw_flattened", "pdfrw", True, False),
-        ("pdfrw_flattened_underneath", "pdfrw", True, True),
-        ("pypdf", "pypdf", False, False),
-        ("pypdf_underneath", "pypdf", False, True),
-        ("pypdf_overlay", "pypdf", False, False),
-        ("pypdf_flattened", "pypdf", True, False),
-        ("pypdf_flattened_underneath", "pypdf", True, True),
+        ("basic", "pdfrw", False, False),
+        ("underneath", "pdfrw", False, True),
+        ("overlay", "pdfrw", False, False),
+        ("flattened", "pdfrw", True, False),
+        ("flattened_underneath", "pdfrw", True, True),
+        ("basic", "pypdf", False, False),
+        ("underneath", "pypdf", False, True),
+        ("overlay", "pypdf", False, False),
+        ("flattened", "pypdf", True, False),
+        ("flattened_underneath", "pypdf", True, True),
     ]
+
+
+def encryption_name_func(testcase_func, param_num, param):
+    return "{}.{}.{}".format(testcase_func.__name__, param.args[0], param.args[1])
 
 
 class TestWatermark(unittest.TestCase):
@@ -42,7 +46,7 @@ class TestWatermark(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
-    @parameterized.expand(watermark_params)
+    @parameterized.expand(watermark_params, name_func=encryption_name_func)
     def test_watermark(
         self, name: str, method: str, flatten: bool = False, underneath: bool = False
     ):
