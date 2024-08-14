@@ -47,7 +47,7 @@ class TestWatermark(unittest.TestCase):
         self, name: str, method: str, flatten: bool = False, underneath: bool = False
     ):
         watermarker = Watermark(
-            self.pdf_path, use_receipt=False, tempdir=self.temp.name
+            self.pdf_path, use_receipt=True, tempdir=self.temp.name
         )
         watermark = watermarker.draw(
             text1=self.address,
