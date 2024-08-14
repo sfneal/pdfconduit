@@ -71,7 +71,6 @@ class Conduit:
             self._writer.write(output_pdf)
 
         self._writer.close()
-        self._pdf_file.close()
 
         self._closed = True
 
