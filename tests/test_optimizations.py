@@ -5,7 +5,7 @@ from parameterized import parameterized
 
 from pdfconduit import Info, Pdfconduit
 from pdfconduit.settings import Compression
-from tests import PdfconduitTestCase
+from tests import PdfconduitTestCase, get_clean_pdf_name
 from tests import test_data_path
 
 
@@ -24,7 +24,7 @@ def optimization_params() -> List[str]:
 
 
 def optimizations_name_func(testcase_func, param_num, param):
-    return "{}_{}".format(
+    return "{}.{}".format(
         testcase_func.__name__, os.path.basename(str(param.args[0])).replace(" ", "_")
     )
 
@@ -38,9 +38,9 @@ def compress_params() -> List[Tuple[str, Compression]]:
 
 
 def compress_name_func(testcase_func, param_num, param):
-    return "{}_{}_level_{}".format(
+    return "{}.{}.level_{}".format(
         testcase_func.__name__,
-        os.path.basename(str(param.args[0])).replace(" ", "_"),
+        get_clean_pdf_name(param.args[0]),
         param.args[1].value,
     )
 

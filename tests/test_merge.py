@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 from pdfconduit import Pdfconduit, Info
 from pdfconduit.utils.typing import List, Iterable
-from tests import PdfconduitTestCase
+from tests import PdfconduitTestCase, get_clean_pdf_name
 from tests import test_data_path
 
 
@@ -23,11 +23,10 @@ def merge_params():
 
 
 def merge_name_func(testcase_func, param_num, param):
-    return "{}_{}_{}_{}".format(
+    return "{}.{}_{}".format(
         testcase_func.__name__,
         param_num,
-        os.path.basename(param.args[0]),
-        len(param.args[1]),
+        get_clean_pdf_name(param.args[0]),
     )
 
 

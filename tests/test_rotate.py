@@ -22,9 +22,8 @@ def rotate_exact_params() -> List[int]:
 
 
 def rotate_name_func(testcase_func, param_num, param):
-    return "{}_{}".format(
+    return "{}.{}".format(
         testcase_func.__name__,
-        param_num,
         param.args[0],
     )
 

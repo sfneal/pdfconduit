@@ -58,6 +58,10 @@ def expected_equals_output(test_function, output_filepath):
     return files_are_equal(get_output_filepath(test_function), output_filepath)
 
 
+def get_clean_pdf_name(path) -> str:
+    return os.path.basename(str(path)).replace('.pdf', ',')
+
+
 # Example usage
 # Save outputs to tests/output directory
 # copy_pdf_to_output_directory({pdfoutput}, function_name_to_file_name())
@@ -146,4 +150,5 @@ __all__ = [
     "expected_equals_output",
     "get_output_filepath",
     "PdfconduitTestCase",
+    "get_clean_pdf_name"
 ]
