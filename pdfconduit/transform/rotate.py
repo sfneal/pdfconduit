@@ -76,20 +76,3 @@ class Rotate(PdfDriver):
             writer.write(fp)
 
         return self.outfn
-
-
-def rotate(
-    file_name: str,
-    rotation: int,
-    suffix: str = "rotated",
-    tempdir: Optional[str] = None,
-    method: str = "pdfrw",
-):
-    """Rotate PDF by increments of 90 degrees."""
-    # todo: remove use of function or clean this up
-    rotater = Rotate(file_name, rotation, suffix, tempdir)
-    if method == "pdfrw":
-        rotater.use_pdfrw()
-    else:
-        rotater.use_pypdf()
-    return rotater.rotate()

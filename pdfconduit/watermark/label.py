@@ -65,7 +65,6 @@ class Label(WatermarkDraw):
             self.document,
             tempdir=self.dir,
             use_receipt=False,
-            open_file=False,
             remove_temps=True,
         )
         labeled = wm.add(watermark=self.watermark, output=self.output)

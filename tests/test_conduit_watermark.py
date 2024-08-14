@@ -5,9 +5,7 @@ from typing import Tuple, List
 
 from parameterized import parameterized
 
-from pdfconduit.utils import Info
-from pdfconduit.watermark.label import Label
-from pdfconduit.watermark.watermark import Watermark
+from pdfconduit import Info, Label, Watermark
 from tests import *
 
 
@@ -48,9 +46,7 @@ class TestWatermark(unittest.TestCase):
     def test_watermark(
         self, name: str, method: str, flatten: bool = False, underneath: bool = False
     ):
-        watermarker = Watermark(
-            self.pdf_path, use_receipt=False, open_file=False, tempdir=self.temp.name
-        )
+        watermarker = Watermark(self.pdf_path, use_receipt=True, tempdir=self.temp.name)
         watermark = watermarker.draw(
             text1=self.address,
             text2=str(self.town + ", " + self.state),

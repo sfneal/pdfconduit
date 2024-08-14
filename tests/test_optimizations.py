@@ -4,7 +4,7 @@ from typing import Tuple, List
 from parameterized import parameterized
 
 from pdfconduit import Info, Conduit
-from pdfconduit.compression import Compression
+from pdfconduit.settings import Compression
 from tests import PdfconduitTestCase
 from tests import test_data_path
 

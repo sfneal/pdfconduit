@@ -6,9 +6,9 @@ from typing import Optional
 
 from looptools import Timer
 
-from pdfconduit.encryption import Encryption
+from pdfconduit.settings import Encryption
 from pdfconduit.pdfconduit import Conduit
-from pdfconduit.utils import add_suffix, open_window, Receipt, Info
+from pdfconduit.utils import add_suffix, Info
 from pdfconduit.watermark.add import WatermarkAdd
 from pdfconduit.watermark.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
 from pdfconduit.watermark.modify.canvas import CanvasConstructor
@@ -21,9 +21,7 @@ class Watermark:
         document: str,
         remove_temps: bool = True,
         move_temps: Optional[bool] = None,
-        open_file: bool = False,
         tempdir: Optional[str] = None,
-        receipt: Optional[bool] = None,
         use_receipt: bool = True,
     ):
         """
@@ -51,7 +49,6 @@ class Watermark:
         self.watermark = None
         self.remove_temps = remove_temps
         self.move_temps = move_temps
-        self.open_file = open_file
 
         if not tempdir:
             self._temp = TemporaryDirectory()
@@ -62,29 +59,17 @@ class Watermark:
         else:
             self.tempdir = tempdir
 
-        self.use_receipt = use_receipt
-        if use_receipt:
-            if isinstance(receipt, Receipt):
-                self.receipt = receipt
-            else:
-                self.receipt = Receipt(use_receipt).set_dst(document)
-
     def __str__(self) -> str:
         return str(self.document)
 
     def cleanup(self) -> str:
         runtime = self.time.end
-        if self.use_receipt:
-            self.receipt.add("~run time~", runtime)
-            self.receipt.dump()
         if self.move_temps:
             if os.path.isdir(self.move_temps):
                 shutil.move(self.tempdir, self.move_temps)
         if self.remove_temps:
             if os.path.isdir(self.tempdir):
                 shutil.rmtree(self.tempdir)
-        else:
-            open_window(self.tempdir)
         return self.document
 
     def draw(
@@ -128,15 +113,6 @@ class Watermark:
         im_path = os.path.join(IMAGE_DIRECTORY, image)
         if os.path.isfile(im_path):
             image = im_path
-
-        # Add to receipt
-        if self.use_receipt:
-            self.receipt.add("Text1", text1)
-            self.receipt.add("Text2", text2)
-            self.receipt.add("Image", os.path.basename(image))
-            self.receipt.add("WM Opacity", str(int(opacity * 100)) + "%")
-            self.receipt.add("WM Compression", compress)
-            self.receipt.add("WM Flattening", flatten)
 
         co = CanvasConstructor(
             text1,
@@ -197,8 +173,6 @@ class Watermark:
         :return: str
             Watermarked PDF Document full path
         """
-        if self.use_receipt:
-            self.receipt.add("WM Placement", "Overlay")
         if not watermark:
             watermark = self.watermark
         if not document:
@@ -218,10 +192,6 @@ class Watermark:
             watermarker.use_pypdf()
         self.document = watermarker.add()
 
-        if self.use_receipt:
-            self.receipt.add("Watermarked PDF", os.path.basename(self.document))
-        if self.open_file:
-            open_window(self.document)
         return self.document
 
     def encrypt(
@@ -255,17 +225,6 @@ class Watermark:
             Encrypted PDF full path
         """
         document = self.document if document is None else document
-        if self.use_receipt:
-            self.receipt.add("User pw", user_pw)
-            self.receipt.add("Owner pw", owner_pw)
-            if encrypt_128:
-                self.receipt.add("Encryption key size", "128")
-            else:
-                self.receipt.add("Encryption key size", "40")
-            if allow_printing:
-                self.receipt.add("Permissions", "Allow printing")
-            else:
-                self.receipt.add("Permissions", "Allow ALL")
 
         encrypter = Encryption(
             user_pw=user_pw,
@@ -280,6 +239,4 @@ class Watermark:
             .write()
         )
 
-        if self.use_receipt:
-            self.receipt.add("Secured PDF", os.path.basename(p))
         return p

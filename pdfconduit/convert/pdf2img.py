@@ -93,20 +93,3 @@ class PDF2IMG:
                 image.save(output)
         self.doc.close()
         return saved
-
-
-def pdf2img(
-    file_name: str,
-    output: Optional[str] = None,
-    tempdir: Optional[str] = None,
-    ext: str = "png",
-    alpha: bool = False,
-):
-    """Wrapper function for PDF2IMG class"""
-    return PDF2IMG(
-        file_name=file_name,
-        output=output,
-        tempdir=tempdir,
-        ext=ext,
-        alpha=alpha,
-    ).save()
