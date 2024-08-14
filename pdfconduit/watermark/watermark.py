@@ -9,7 +9,6 @@ from looptools import Timer
 from pdfconduit.settings import Encryption
 from pdfconduit.pdfconduit import Conduit
 from pdfconduit.utils import add_suffix, Info
-from pdfconduit.utils.view import open_window
 from pdfconduit.utils.receipt import Receipt
 from pdfconduit.watermark.add import WatermarkAdd
 from pdfconduit.watermark.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
@@ -23,7 +22,6 @@ class Watermark:
         document: str,
         remove_temps: bool = True,
         move_temps: Optional[bool] = None,
-        open_file: bool = False,
         tempdir: Optional[str] = None,
         receipt: Optional[bool] = None,
         use_receipt: bool = True,
@@ -53,7 +51,6 @@ class Watermark:
         self.watermark = None
         self.remove_temps = remove_temps
         self.move_temps = move_temps
-        self.open_file = open_file
 
         if not tempdir:
             self._temp = TemporaryDirectory()
@@ -85,8 +82,6 @@ class Watermark:
         if self.remove_temps:
             if os.path.isdir(self.tempdir):
                 shutil.rmtree(self.tempdir)
-        else:
-            open_window(self.tempdir)
         return self.document
 
     def draw(
@@ -222,8 +217,6 @@ class Watermark:
 
         if self.use_receipt:
             self.receipt.add("Watermarked PDF", os.path.basename(self.document))
-        if self.open_file:
-            open_window(self.document)
         return self.document
 
     def encrypt(
