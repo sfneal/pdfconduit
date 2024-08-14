@@ -2,7 +2,7 @@ import os.path
 
 from parameterized import parameterized
 
-from pdfconduit import Conduit, Info
+from pdfconduit import Pdfconduit, Info
 from pdfconduit.utils.typing import List, Iterable
 from tests import PdfconduitTestCase
 from tests import test_data_path
@@ -35,7 +35,7 @@ class TestMerge(PdfconduitTestCase):
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_pdfs(self, main_pdf: str, pdfs_to_merge: Iterable[str]):
         self.pdf_path = main_pdf
-        self.conduit = Conduit(main_pdf).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(main_pdf).set_output_directory(self.temp.name)
 
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
@@ -50,7 +50,7 @@ class TestMerge(PdfconduitTestCase):
         self, main_pdf: str, pdfs_to_merge: Iterable[str]
     ):
         self.pdf_path = main_pdf
-        with Conduit(self.pdf_path) as conduit:
+        with Pdfconduit(self.pdf_path) as conduit:
             conduit.set_output_directory(self.temp.name)
             for pdf in pdfs_to_merge:
                 conduit.merge(pdf)
@@ -61,7 +61,7 @@ class TestMerge(PdfconduitTestCase):
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_pdfs_fast(self, main_pdf: str, pdfs_to_merge: List[str]):
         self.pdf_path = main_pdf
-        self.conduit = Conduit(main_pdf).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(main_pdf).set_output_directory(self.temp.name)
 
         self.conduit.merge_fast(pdfs_to_merge)
 

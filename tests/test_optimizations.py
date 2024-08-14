@@ -3,7 +3,7 @@ from typing import Tuple, List
 
 from parameterized import parameterized
 
-from pdfconduit import Info, Conduit
+from pdfconduit import Info, Pdfconduit
 from pdfconduit.settings import Compression
 from tests import PdfconduitTestCase
 from tests import test_data_path
@@ -48,7 +48,7 @@ def compress_name_func(testcase_func, param_num, param):
 class TestOptimizations(PdfconduitTestCase):
     @parameterized.expand(optimization_params, name_func=optimizations_name_func)
     def test_minify(self, pdf_path: str):
-        self.conduit = Conduit(pdf_path).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(pdf_path).set_output_directory(self.temp.name)
         self.conduit.minify().write()
 
         self.assertPdfExists(self.conduit.output)
@@ -57,7 +57,7 @@ class TestOptimizations(PdfconduitTestCase):
 
     @parameterized.expand(optimization_params, name_func=optimizations_name_func)
     def test_remove_duplication(self, pdf_path: str):
-        self.conduit = Conduit(pdf_path).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(pdf_path).set_output_directory(self.temp.name)
         self.conduit.remove_duplication().write()
 
         self.assertPdfExists(self.conduit.output)
@@ -66,7 +66,7 @@ class TestOptimizations(PdfconduitTestCase):
 
     @parameterized.expand(optimization_params, name_func=optimizations_name_func)
     def test_remove_images(self, pdf_path: str):
-        self.conduit = Conduit(pdf_path).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(pdf_path).set_output_directory(self.temp.name)
         self.conduit.remove_images().write()
 
         self.assertPdfExists(self.conduit.output)
@@ -76,7 +76,7 @@ class TestOptimizations(PdfconduitTestCase):
     def test_reduce_image_quality(self, pdf_path: str):
         if pdf_path.endswith("workbook.pdf"):
             self.skipTest("workbook.pdf cannot be reduced quality")
-        self.conduit = Conduit(pdf_path).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(pdf_path).set_output_directory(self.temp.name)
         self.conduit.reduce_image_quality(50).write()
 
         self.assertPdfExists(self.conduit.output)
@@ -85,7 +85,7 @@ class TestOptimizations(PdfconduitTestCase):
 
     @parameterized.expand(compress_params, name_func=compress_name_func)
     def test_compress(self, pdf_path: str, compression: Compression):
-        self.conduit = Conduit(pdf_path).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(pdf_path).set_output_directory(self.temp.name)
         self.conduit.compress(compression).write()
 
         self.assertPdfExists(self.conduit.output)
