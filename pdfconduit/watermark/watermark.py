@@ -8,7 +8,9 @@ from looptools import Timer
 
 from pdfconduit.settings import Encryption
 from pdfconduit.pdfconduit import Conduit
-from pdfconduit.utils import add_suffix, open_window, Receipt, Info
+from pdfconduit.utils import add_suffix, Info
+from pdfconduit.utils.view import open_window
+from pdfconduit.utils.receipt import Receipt
 from pdfconduit.watermark.add import WatermarkAdd
 from pdfconduit.watermark.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
 from pdfconduit.watermark.modify.canvas import CanvasConstructor
