@@ -5,9 +5,7 @@ from typing import Tuple, List
 
 from parameterized import parameterized
 
-from pdfconduit.utils import Info
-from pdfconduit.watermark.label import Label
-from pdfconduit.watermark.watermark import Watermark
+from pdfconduit import Info, Label, Watermark
 from tests import *
 
 
