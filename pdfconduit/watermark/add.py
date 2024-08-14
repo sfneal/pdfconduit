@@ -88,7 +88,11 @@ class WatermarkAdd(PdfDriver):
         if pdf_file["w"] <= letter_size["w"] or pdf_file["h"] <= letter_size["h"]:
             scale = float(letter_size["w"] / pdf_file["w"])
             # todo: add use of upscale class instead of function
-            pdf_file["upscaled"] = Upscale(pdf_file["path"], scale=scale, tempdir=self.tempdir).use(self._driver).upscale()
+            pdf_file["upscaled"] = (
+                Upscale(pdf_file["path"], scale=scale, tempdir=self.tempdir)
+                .use(self._driver)
+                .upscale()
+            )
             self.document_reader = pypdf_reader(pdf_file["upscaled"])
         return pdf_file
 
@@ -106,7 +110,11 @@ class WatermarkAdd(PdfDriver):
             and document["orientation"] == "portrait"
         ):
             self.rotate = 90
-            watermark_file["rotated"] = Rotate(watermark, self.rotate, tempdir=self.tempdir).use(self._driver).rotate()
+            watermark_file["rotated"] = (
+                Rotate(watermark, self.rotate, tempdir=self.tempdir)
+                .use(self._driver)
+                .rotate()
+            )
 
         # Set watermark file to be used for upscaling
         try:
@@ -123,7 +131,11 @@ class WatermarkAdd(PdfDriver):
             if watermark_file["h"] * scale > document["h"]:
                 scale = float(document["h"] / watermark_file["h"])
 
-            watermark_file["upscaled"] = Upscale(wtrmrk, scale=scale, tempdir=self.tempdir).use(self._driver).upscale()
+            watermark_file["upscaled"] = (
+                Upscale(wtrmrk, scale=scale, tempdir=self.tempdir)
+                .use(self._driver)
+                .upscale()
+            )
         self.scale = scale
         return watermark_file
 

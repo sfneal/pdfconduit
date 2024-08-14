@@ -33,7 +33,9 @@ class Flatten:
         self.directory = os.path.dirname(file_name)
 
         if scale and scale != 0 and scale != 1.0:
-            self.file_name = Upscale(file_name, scale=scale, tempdir=self.tempdir).upscale()
+            self.file_name = Upscale(
+                file_name, scale=scale, tempdir=self.tempdir
+            ).upscale()
         else:
             self.file_name = self._file_name
 
