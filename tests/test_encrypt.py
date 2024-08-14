@@ -9,24 +9,24 @@ from tests import PdfconduitTestCase
 
 
 def encryption_name_func(testcase_func, param_num, param):
-    name = "{}_{}".format(testcase_func.__name__, param.args[0])
-    if not param.args[1].allow_printing and not param.args[1].allow_commenting:
+    name = ""
+    if not param.args[0].allow_printing and not param.args[0].allow_commenting:
         name += "_none"
-    if param.args[1].allow_printing:
+    if param.args[0].allow_printing:
         name += "_printing"
-    if param.args[1].allow_commenting:
+    if param.args[0].allow_commenting:
         name += "_commenting"
-    return name
+    return "{}.{}.{}".format(testcase_func.__name__, param.args[0].algo.value, name[1:])
 
 
-def encryption_params() -> List[Tuple[str, Encryption, int]]:
+def encryption_params() -> List[Tuple[Encryption, int]]:
     algos = [
         # (name, algo, expected_security_handler)
-        ("RC4-40", Algorithms.RC4_40, 2),
-        ("RC4-128", Algorithms.RC4_128, 3),
-        ("AES-128", Algorithms.AES_128, 4),
-        ("AES-256", Algorithms.AES_256, 6),
-        ("AES-256-R5", Algorithms.AES_256_r5, 5),
+        (Algorithms.RC4_40, 2),
+        (Algorithms.RC4_128, 3),
+        (Algorithms.AES_128, 4),
+        (Algorithms.AES_256, 6),
+        (Algorithms.AES_256_r5, 5),
     ]
 
     permissions = [
@@ -38,11 +38,10 @@ def encryption_params() -> List[Tuple[str, Encryption, int]]:
 
     params = []
     for algo in algos:
-        name, algorithm, expected_security_handler = algo
+        algorithm, expected_security_handler = algo
         for permission in permissions:
             params.append(
                 (
-                    name,
                     Encryption(
                         user_pw="baz",
                         owner_pw="foo",
@@ -136,7 +135,7 @@ class EncryptionTestCase(PdfconduitTestCase):
 class TestEncryption(EncryptionTestCase):
     @parameterized.expand(encryption_params, name_func=encryption_name_func)
     def test_can_encrypt_pdf(
-        self, name: str, encryption: Encryption, expected_security_handler: int
+        self, encryption: Encryption, expected_security_handler: int
     ):
         self.conduit.encrypt(encryption).write()
 

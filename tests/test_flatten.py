@@ -1,10 +1,9 @@
-import os.path
 from typing import List
 
 from parameterized import parameterized
 
 from pdfconduit import Pdfconduit
-from tests import PdfconduitTestCase
+from tests import PdfconduitTestCase, get_clean_pdf_name
 from tests import test_data_path
 
 
@@ -22,7 +21,7 @@ def flatten_params() -> List[str]:
 
 
 def flatten_name_func(testcase_func, param_num, param):
-    return "{}_{}".format(testcase_func.__name__, os.path.basename(str(param.args[0])))
+    return "{}.{}".format(testcase_func.__name__, get_clean_pdf_name(param.args[0]))
 
 
 class TestFlatten(PdfconduitTestCase):

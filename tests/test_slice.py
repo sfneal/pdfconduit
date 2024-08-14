@@ -16,8 +16,15 @@ def slice_params() -> List[str]:
     ]
 
 
+def slice_name_func(testcase_func, param_num, param):
+    return "{}.{}".format(
+        testcase_func.__name__,
+        param.args[0],
+    )
+
+
 class TestSlice(PdfconduitTestCase):
-    @parameterized.expand(slice_params)
+    @parameterized.expand(slice_params, name_func=slice_name_func)
     def test_slice(self, slice_range: str):
         fp, lp = tuple(slice_range.split("to"))
         fp = int(fp)

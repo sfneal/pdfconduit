@@ -5,7 +5,7 @@ from parameterized import parameterized
 
 from pdfconduit import Info
 from pdfconduit.utils import add_suffix
-from tests import PdfconduitTestCase
+from tests import PdfconduitTestCase, get_clean_pdf_name
 from tests import test_data_path
 
 
@@ -46,8 +46,8 @@ def dimensions_params() -> List[Tuple[str, float, float]]:
 
 
 def info_name_func(testcase_func, param_num, param):
-    return "{}-{}".format(
-        testcase_func.__name__, os.path.basename(str(param.args[0])).replace(" ", "_")
+    return "{}.{}".format(
+        testcase_func.__name__, get_clean_pdf_name(param.args[0]).replace(" ", "_")
     )
 
 
