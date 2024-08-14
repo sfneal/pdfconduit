@@ -11,7 +11,7 @@ from pdfconduit.utils import Info, pypdf_reader, add_suffix
 from pdfconduit.utils.typing import Optional, Any, Tuple, Dict, Self, Annotated
 
 
-class Conduit:
+class Pdfconduit:
     _metadata: Dict[str, Any] = {}
 
     output: Optional[str] = None

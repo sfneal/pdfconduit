@@ -7,7 +7,7 @@ from decimal import Decimal
 from tempfile import TemporaryDirectory
 from time import time
 
-from pdfconduit import Conduit, Info
+from pdfconduit import Pdfconduit, Info
 
 test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 # pdf_name = 'plan_l.pdf'
@@ -77,7 +77,7 @@ class PdfconduitTestCase(unittest.TestCase):
 
     def setUp(self):
         self.temp = TemporaryDirectory()
-        self.conduit = Conduit(self.pdf_path).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(self.pdf_path).set_output_directory(self.temp.name)
         self.timer = Timer()
 
     def tearDown(self):

@@ -6,8 +6,8 @@ from typing import Optional
 
 from looptools import Timer
 
+from pdfconduit.pdfconduit import Pdfconduit
 from pdfconduit.settings import Encryption
-from pdfconduit.pdfconduit import Conduit
 from pdfconduit.utils import add_suffix, Info
 from pdfconduit.watermark.add import WatermarkAdd
 from pdfconduit.watermark.lib import IMAGE_DEFAULT, IMAGE_DIRECTORY
@@ -233,7 +233,7 @@ class Watermark:
             allow_commenting=allow_commenting,
         )
         p = (
-            Conduit(document)
+            Pdfconduit(document)
             .set_output(add_suffix(self.document_og, "secured"))
             .encrypt(encrypter)
             .write()

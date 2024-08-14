@@ -3,7 +3,7 @@ from io import BufferedReader
 
 from pypdf import PdfReader, PdfWriter
 
-from pdfconduit import Conduit
+from pdfconduit import Pdfconduit
 from pdfconduit.utils import add_suffix
 from tests import *
 from tests import PdfconduitTestCase
@@ -11,7 +11,7 @@ from tests import PdfconduitTestCase
 
 class TestUsage(PdfconduitTestCase):
     def test_can_use_context_manager(self):
-        with Conduit(self.pdf_path) as conduit:
+        with Pdfconduit(self.pdf_path) as conduit:
             conduit.set_output_directory(self.temp.name)
 
             self.assertIsInstance(conduit._pdf_file, BufferedReader)
@@ -23,13 +23,13 @@ class TestUsage(PdfconduitTestCase):
         self.assertTrue(os.path.exists(conduit.output))
 
     def test_can_read_unencrypted_pdf(self):
-        conduit = Conduit(self.pdf_path)
+        conduit = Pdfconduit(self.pdf_path)
 
         self.assertIsInstance(conduit._pdf_file, BufferedReader)
         self.assertIsInstance(conduit._reader, PdfReader)
 
     def test_can_read_encrypted_pdf(self):
-        conduit = Conduit(test_data_path("encrypted.pdf"), self.user_pw)
+        conduit = Pdfconduit(test_data_path("encrypted.pdf"), self.user_pw)
 
         self.assertIsInstance(conduit._pdf_file, BufferedReader)
         self.assertIsInstance(conduit._reader, PdfReader)
@@ -62,7 +62,7 @@ class TestUsage(PdfconduitTestCase):
         self.assertEqual(os.path.dirname(self.conduit.output), self.temp.name)
 
     def test_can_set_output_suffix(self):
-        self.conduit = Conduit(self.pdf_path)
+        self.conduit = Pdfconduit(self.pdf_path)
         self.conduit.set_output_suffix("changed")
         output = add_suffix(self.pdf_path, "changed")
         self.assertEqual(output, self.conduit.output)
