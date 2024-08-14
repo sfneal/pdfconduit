@@ -25,7 +25,7 @@ def optimization_params() -> List[str]:
 
 def optimizations_name_func(testcase_func, param_num, param):
     return "{}.{}".format(
-        testcase_func.__name__, os.path.basename(str(param.args[0])).replace(" ", "_")
+        testcase_func.__name__, get_clean_pdf_name(param.args[0])
     )
 
 

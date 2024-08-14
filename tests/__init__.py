@@ -59,7 +59,7 @@ def expected_equals_output(test_function, output_filepath):
 
 
 def get_clean_pdf_name(path) -> str:
-    return os.path.basename(str(path)).replace('.pdf', ',')
+    return os.path.basename(str(path)).replace('.', ',')
 
 
 # Example usage
