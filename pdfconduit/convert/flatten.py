@@ -5,7 +5,7 @@ from typing import Optional, List
 
 from pdfconduit.convert.img2pdf import IMG2PDF
 from pdfconduit.convert.pdf2img import PDF2IMG
-from pdfconduit.transform.upscale import upscale
+from pdfconduit.transform.upscale import Upscale
 from pdfconduit.utils.path import add_suffix
 
 
@@ -33,7 +33,7 @@ class Flatten:
         self.directory = os.path.dirname(file_name)
 
         if scale and scale != 0 and scale != 1.0:
-            self.file_name = upscale(file_name, scale=scale, tempdir=self.tempdir)
+            self.file_name = Upscale(file_name, scale=scale, tempdir=self.tempdir).upscale()
         else:
             self.file_name = self._file_name
 

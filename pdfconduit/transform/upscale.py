@@ -102,20 +102,3 @@ class Upscale(PdfDriver):
             writer.write(fp)
 
         return self.output
-
-
-def upscale(
-    file_name: str,
-    margin_x: int = 0,
-    margin_y: int = 0,
-    scale: float = 1.5,
-    suffix: str = "scaled",
-    tempdir: Optional[str] = None,
-    method: str = "pdfrw",
-):
-    upscaler = Upscale(file_name, margin_x, margin_y, scale, suffix, tempdir)
-    if method == "pdfrw":
-        upscaler.use_pdfrw()
-    else:
-        upscaler.use_pypdf()
-    return upscaler.upscale()

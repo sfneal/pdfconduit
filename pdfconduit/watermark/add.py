@@ -7,8 +7,7 @@ from pdfrw import PdfReader, PdfWriter, PageMerge
 from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
 from reportlab.lib.pagesizes import letter
 
-from pdfconduit.transform.rotate import rotate
-from pdfconduit.transform.upscale import upscale
+from pdfconduit.transform import Rotate, Upscale
 from pdfconduit.utils import add_suffix, Info, pypdf_reader
 from pdfconduit.utils.driver import PdfDriver
 
@@ -89,9 +88,7 @@ class WatermarkAdd(PdfDriver):
         if pdf_file["w"] <= letter_size["w"] or pdf_file["h"] <= letter_size["h"]:
             scale = float(letter_size["w"] / pdf_file["w"])
             # todo: add use of upscale class instead of function
-            pdf_file["upscaled"] = upscale(
-                pdf_file["path"], scale=scale, tempdir=self.tempdir
-            )
+            pdf_file["upscaled"] = Upscale(pdf_file["path"], scale=scale, tempdir=self.tempdir).use(self._driver).upscale()
             self.document_reader = pypdf_reader(pdf_file["upscaled"])
         return pdf_file
 
@@ -109,9 +106,7 @@ class WatermarkAdd(PdfDriver):
             and document["orientation"] == "portrait"
         ):
             self.rotate = 90
-            watermark_file["rotated"] = rotate(
-                watermark, self.rotate, tempdir=self.tempdir, method=self._driver.value
-            )
+            watermark_file["rotated"] = Rotate(watermark, self.rotate, tempdir=self.tempdir).use(self._driver).rotate()
 
         # Set watermark file to be used for upscaling
         try:
@@ -128,9 +123,7 @@ class WatermarkAdd(PdfDriver):
             if watermark_file["h"] * scale > document["h"]:
                 scale = float(document["h"] / watermark_file["h"])
 
-            watermark_file["upscaled"] = upscale(
-                wtrmrk, scale=scale, tempdir=self.tempdir, method=self._driver.value
-            )
+            watermark_file["upscaled"] = Upscale(wtrmrk, scale=scale, tempdir=self.tempdir).use(self._driver).upscale()
         self.scale = scale
         return watermark_file
 
