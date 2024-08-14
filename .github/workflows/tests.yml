@@ -37,3 +37,6 @@ jobs:
 
       - name: Run tests
         run: green -vvv
+
+      - name: Display test results
+        run: python tests/view_timings.py

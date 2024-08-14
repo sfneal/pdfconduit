@@ -1,17 +1,8 @@
-from pdfconduit.conduit import Encrypt, Watermark
-from pdfconduit.convert import IMG2PDF, PDF2IMG, Flatten
-from pdfconduit.transform import Merge, Rotate, Upscale, slicer
+# todo: cleanup imports
+from pdfconduit.pdfconduit import Pdfconduit
+from pdfconduit.transform import Merge, Rotate, Upscale
 from pdfconduit.utils import Info
+from pdfconduit.watermark.label import Label
+from pdfconduit.watermark.watermark import Watermark
 
-__all__ = [
-    "Encrypt",
-    "Watermark",
-    "IMG2PDF",
-    "PDF2IMG",
-    "Flatten",
-    "Merge",
-    "Rotate",
-    "Upscale",
-    "slicer",
-    "Info",
-]
+__all__ = [Merge, Rotate, Upscale, Info, Pdfconduit, Watermark, Label]

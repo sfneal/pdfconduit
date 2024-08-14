@@ -5,9 +5,9 @@ from typing import Optional, List, Union
 
 from PIL import Image
 
-from pdfconduit.modify.canvas import CanvasImg, CanvasObjects
-from pdfconduit.modify.draw import WatermarkDraw
 from pdfconduit.transform.merge import Merge
+from pdfconduit.watermark.modify.canvas import CanvasImg, CanvasObjects
+from pdfconduit.watermark.modify.draw import WatermarkDraw
 
 
 class IMG2PDF:
@@ -77,12 +77,3 @@ class IMG2PDF:
         m = Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir)
         self.cleanup(clean_temp)
         return m.merge()
-
-
-def img2pdf(
-    imgs: List[str],
-    output_name: str = "merged_imgs",
-    destination: Optional[str] = None,
-    tempdir: Optional[str] = None,
-):
-    return IMG2PDF(imgs, destination, tempdir).save(output_name)
