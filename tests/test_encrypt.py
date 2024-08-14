@@ -4,7 +4,7 @@ from typing import List, Tuple
 from parameterized import parameterized
 
 from pdfconduit import Info
-from pdfconduit.encryption import Algorithms, Encryption
+from pdfconduit.settings import Algorithms, Encryption
 from tests import PdfconduitTestCase
 
 

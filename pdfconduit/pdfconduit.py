@@ -3,10 +3,9 @@ from datetime import datetime
 
 from pypdf import PdfWriter, PdfReader
 
-from pdfconduit.transform import Merge
-from pdfconduit.compression import Compression, ImageQualityRange
 from pdfconduit.convert import Flatten
-from pdfconduit.encryption import Encryption
+from pdfconduit.settings import Compression, ImageQualityRange, Encryption
+from pdfconduit.transform import Merge
 from pdfconduit.transform import Rotate, Upscale
 from pdfconduit.utils import Info, pypdf_reader, add_suffix
 from pdfconduit.utils.typing import Optional, Any, Tuple, Dict, Self, Annotated
