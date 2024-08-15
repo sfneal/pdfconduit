@@ -142,6 +142,9 @@ class PdfconduitTestCase(unittest.TestCase):
         self.assertEqual(info.size, tuple([i * scale for i in Info(original).size]))
         # self.assertEqual(info.pages, Info(original).pages)
 
+    def assertFileSizeDecreased(self, original: str, modified: str):
+        self.assertLess(os.path.getsize(modified), os.path.getsize(original))
+
 
 class Timer:
     def __init__(self, decimal_places=2):
