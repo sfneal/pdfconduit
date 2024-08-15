@@ -35,7 +35,4 @@ class TestSlice(PdfconduitTestCase):
         ).write()
 
         self.assertPdfExists(self.conduit.output)
-        self.assertCorrectPagesSliced(fp, lp, self.conduit.output)
-
-    def assertCorrectPagesSliced(self, fp, lp, sliced):
-        self.assertEqual(Info(sliced).pages, len(range(fp, lp + 1)))
+        self.assertCorrectPagesSliced(fp, lp, self.conduit)

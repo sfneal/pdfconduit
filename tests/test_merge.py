@@ -68,15 +68,3 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
-
-    def assertPdfExists(self, path: str) -> None:
-        self.assertTrue(os.path.exists(path))
-
-    def assertCorrectNumPages(
-        self, main_pdf: str, pdfs_to_merge: Iterable[str], expected_pages: int
-    ) -> None:
-        # Assert sum of pages in original pdf files equals sum of pages in merged pdf
-        self.assertEqual(
-            sum([Info(pdf).pages for pdf in pdfs_to_merge]) + Info(main_pdf).pages,
-            expected_pages,
-        )

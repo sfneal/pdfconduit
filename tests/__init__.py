@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 from time import time
 
 from pdfconduit import Pdfconduit, Info
+from pdfconduit.utils.typing import Iterable
 
 test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 # pdf_name = 'plan_l.pdf'
@@ -117,6 +118,29 @@ class PdfconduitTestCase(unittest.TestCase):
         self.assertEqual(info_og.pages, info_modified.pages)
         self.assertTrue(abs(info_og.size[0] / info_modified.size[0]) <= 1)
         self.assertTrue(abs(info_og.size[1] / info_modified.size[1]) <= 1)
+
+    def assertCorrectNumPages(
+        self, main_pdf: str, pdfs_to_merge: Iterable[str], expected_pages: int
+    ) -> None:
+        # Assert sum of pages in original pdf files equals sum of pages in merged pdf
+        self.assertEqual(
+            sum([Info(pdf).pages for pdf in pdfs_to_merge]) + Info(main_pdf).pages,
+            expected_pages,
+        )
+
+    def assertPdfRotation(self, rotated, rotation):
+        info = rotated.info if isinstance(rotated, Pdfconduit) else rotated
+        self.assertEqual(info.rotate, rotation)
+
+    def assertCorrectPagesSliced(self, fp, lp, sliced):
+        info = sliced.info if isinstance(sliced, Pdfconduit) else sliced
+        self.assertEqual(info.pages, len(range(fp, lp + 1)))
+
+    def assertPdfScaled(self, scale, scaled, original = None):
+        original = self.pdf_path if original is None else original
+        info = scaled.info if isinstance(scaled, Pdfconduit) else scaled
+        self.assertEqual(info.size, tuple([i * scale for i in Info(original).size]))
+        # self.assertEqual(info.pages, Info(original).pages)
 
 
 class Timer:
