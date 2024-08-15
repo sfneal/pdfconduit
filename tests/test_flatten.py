@@ -32,3 +32,4 @@ class TestFlatten(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfPagesEqual(pdf_path, self.conduit.output)
+        # todo: improve assertions

@@ -59,10 +59,6 @@ class EncryptionTestCase(PdfconduitTestCase):
     def _getPdfSecurity(self, encrypted):
         return Info(encrypted.output, self.user_pw).security
 
-    def assertPdfExists(self, encrypted):
-        # Assert that pdf file exists
-        self.assertTrue(os.path.exists(encrypted.output))
-
     def assertEncrypted(self, pdf):
         self.assertTrue(Info(pdf.output, self.user_pw).encrypted)
 
@@ -141,7 +137,7 @@ class TestEncryption(EncryptionTestCase):
 
         security = self._getPdfSecurity(self.conduit)
 
-        self.assertPdfExists(self.conduit)
+        self.assertPdfExists(self.conduit.output)
         self.assertEncrypted(self.conduit)
         if encryption.algo.bit_length == 40:
             self.assert40BitEncryption(security)
@@ -164,7 +160,7 @@ class TestEncryption(EncryptionTestCase):
 
         security = self._getPdfSecurity(self.conduit)
 
-        self.assertPdfExists(self.conduit)
+        self.assertPdfExists(self.conduit.output)
         self.assertEncrypted(self.conduit)
         self.assert128BitEncryption(security, 3)
         self.assertSecurityValue(security, 4)

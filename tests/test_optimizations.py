@@ -90,6 +90,3 @@ class TestOptimizations(PdfconduitTestCase):
         self.assertEqual(Info(pdf_path).images_count, self.conduit.info.images_count)
         # todo: fix compression increasing size, maybe newer pdfs?
         # self.assertFileSizeDecreased(pdf_path, self.conduit.output)
-
-    def assertFileSizeDecreased(self, original: str, modified: str):
-        self.assertLess(os.path.getsize(modified), os.path.getsize(original))
