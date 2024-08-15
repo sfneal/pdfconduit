@@ -9,12 +9,17 @@ from tests.test_merge import merge_name_func
 
 
 def stack_params() -> List[str]:
-    return list(map(lambda filename: test_data_path(filename), [
-        "article.pdf",
-        "charts.pdf",
-        "document.pdf",
-        # "workbook.pdf",
-    ]))
+    return list(
+        map(
+            lambda filename: test_data_path(filename),
+            [
+                "article.pdf",
+                "charts.pdf",
+                "document.pdf",
+                # "workbook.pdf",
+            ],
+        )
+    )
 
 
 def stack_name_func(testcase_func, param_num, param):
@@ -36,15 +41,16 @@ def merge_params():
     ]
 
 
-ENCRYPTOR = Encryption(
-    user_pw='baz',
-    owner_pw='foo'
-)
+ENCRYPTOR = Encryption(user_pw="baz", owner_pw="foo")
 
 
 class TestStacks(EncryptionTestCase):
     def createConduit(self, path: str, suffix: str):
-        return Pdfconduit(path).set_output_directory(self.temp.name).set_output_suffix(suffix)
+        return (
+            Pdfconduit(path)
+            .set_output_directory(self.temp.name)
+            .set_output_suffix(suffix)
+        )
 
     def assertEncryption(self, conduit: Pdfconduit):
         security = self._getPdfSecurity(conduit)
@@ -59,7 +65,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_and_encrypt(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_encrypted')
+        self.conduit = self.createConduit(path, "merged_encrypted")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
 
@@ -73,7 +79,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_fast_and_encrypt(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_fast_encrypted')
+        self.conduit = self.createConduit(path, "merged_fast_encrypted")
         self.conduit.merge_fast(list(pdfs_to_merge))
 
         self.assertCorrectNumPages(path, pdfs_to_merge, self.conduit.info.pages)
@@ -86,7 +92,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_and_rotate(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_rotated')
+        self.conduit = self.createConduit(path, "merged_rotated")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
         self.conduit.rotate(90)
@@ -97,8 +103,10 @@ class TestStacks(EncryptionTestCase):
         self.assertPdfRotation(self.conduit, 90)
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
-    def test_can_merge_rotate_and_encrypt(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_rotated_encrypted')
+    def test_can_merge_rotate_and_encrypt(
+        self, path: str, pdfs_to_merge: Iterable[str]
+    ):
+        self.conduit = self.createConduit(path, "merged_rotated_encrypted")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
 
@@ -116,7 +124,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(stack_params, name_func=stack_name_func)
     def test_can_rotate_and_encrypt(self, path: str):
-        self.conduit = self.createConduit(path, 'rotated_encrypted')
+        self.conduit = self.createConduit(path, "rotated_encrypted")
         self.conduit.rotate(90)
 
         self.assertPdfRotation(self.conduit, 90)
@@ -127,10 +135,9 @@ class TestStacks(EncryptionTestCase):
         self.assertPdfExists(self.conduit.output)
         self.assertEncryption(self.conduit)
 
-
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_and_slice(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_sliced')
+        self.conduit = self.createConduit(path, "merged_sliced")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
         self.conduit.slice(2, 5)
@@ -141,7 +148,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_slice_and_encrypt(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_sliced_encrypted')
+        self.conduit = self.createConduit(path, "merged_sliced_encrypted")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
 
@@ -159,7 +166,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_and_scale(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_scaled')
+        self.conduit = self.createConduit(path, "merged_scaled")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
         self.conduit.scale(2.0)
@@ -171,7 +178,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_scale_and_encrypt(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_scaled_encrypted')
+        self.conduit = self.createConduit(path, "merged_scaled_encrypted")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
 
@@ -189,7 +196,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(stack_params, name_func=stack_name_func)
     def test_can_scale_and_flatten(self, path: str):
-        self.conduit = self.createConduit(path, 'scaled_flattened')
+        self.conduit = self.createConduit(path, "scaled_flattened")
         self.conduit.scale(2.0)
         self.conduit.flatten()
 
@@ -199,7 +206,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_and_flatten(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_flattened')
+        self.conduit = self.createConduit(path, "merged_flattened")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
         self.conduit.flatten()
@@ -208,8 +215,10 @@ class TestStacks(EncryptionTestCase):
         self.assertCorrectNumPages(path, pdfs_to_merge, self.conduit.info.pages)
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
-    def test_can_merge_and_remove_duplication(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_noimages')
+    def test_can_merge_and_remove_duplication(
+        self, path: str, pdfs_to_merge: Iterable[str]
+    ):
+        self.conduit = self.createConduit(path, "merged_noimages")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
         self.conduit.remove_images()
@@ -222,7 +231,7 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(stack_params, name_func=stack_name_func)
     def test_can_scale_and_compress(self, path: str):
-        self.conduit = self.createConduit(path, 'scaled_compressed')
+        self.conduit = self.createConduit(path, "scaled_compressed")
         self.conduit.scale(2.0)
         self.conduit.compress()
         self.conduit.write()
@@ -233,21 +242,25 @@ class TestStacks(EncryptionTestCase):
 
     @parameterized.expand(stack_params, name_func=stack_name_func)
     def test_can_scale_and_reduce_image_quality(self, path: str):
-        self.conduit = self.createConduit(path, 'scaled_reduced_image_quality')
+        self.conduit = self.createConduit(path, "scaled_reduced_image_quality")
         self.conduit.scale(2.0)
         self.conduit.reduce_image_quality(50)
         self.conduit.write()
 
         self.assertPdfExists(self.conduit.output)
         self.assertEqual(Info(path).images_count, self.conduit.info.images_count)
-        if path.endswith('document.pdf'):
-            print('Skipping document.pdf because it yields the same size')
+        if path.endswith("document.pdf"):
+            print("Skipping document.pdf because it yields the same size")
             return
-        self.assertFileSizeDecreased(self.createConduit(path, 'scaled').scale(2.0).write(), self.conduit.output)
+        self.assertFileSizeDecreased(
+            self.createConduit(path, "scaled").scale(2.0).write(), self.conduit.output
+        )
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
-    def test_can_merge_scale_flatten_and_encrypt(self, path: str, pdfs_to_merge: Iterable[str]):
-        self.conduit = self.createConduit(path, 'merged_scaled_flattened_encrypted')
+    def test_can_merge_scale_flatten_and_encrypt(
+        self, path: str, pdfs_to_merge: Iterable[str]
+    ):
+        self.conduit = self.createConduit(path, "merged_scaled_flattened_encrypted")
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
 

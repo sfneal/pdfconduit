@@ -136,7 +136,7 @@ class PdfconduitTestCase(unittest.TestCase):
         info = sliced.info if isinstance(sliced, Pdfconduit) else sliced
         self.assertEqual(info.pages, len(range(fp, lp + 1)))
 
-    def assertPdfScaled(self, scale, scaled, original = None):
+    def assertPdfScaled(self, scale, scaled, original=None):
         original = self.pdf_path if original is None else original
         info = scaled.info if isinstance(scaled, Pdfconduit) else scaled
         self.assertEqual(info.size, tuple([i * scale for i in Info(original).size]))

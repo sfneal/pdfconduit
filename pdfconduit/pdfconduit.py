@@ -182,7 +182,9 @@ class Pdfconduit:
         # todo: fix issue with flattened pdf output path
         if not self._closed:
             self.write()
-        self._path = Flatten(self._path, suffix="flattened", tempdir=self._output_dir).save()
+        self._path = Flatten(
+            self._path, suffix="flattened", tempdir=self._output_dir
+        ).save()
         return self._open_and_read()
 
     def minify(self) -> Self:
