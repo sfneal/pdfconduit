@@ -114,6 +114,7 @@ class Pdfconduit:
         return self
 
     def merge(self, pdf: str, position: Optional[int] = None) -> Self:
+        # todo: allow for iterable of pdfs
         self._set_default_output("merged")
         if position is None:
             self._writer.append(pdf)
@@ -178,9 +179,10 @@ class Pdfconduit:
 
     def flatten(self) -> Self:
         # todo: re-write Flatten & other convert classes
-        self._path = Flatten(
-            self._path, suffix="flattened", tempdir=self._output_dir
-        ).save()
+        # todo: fix issue with flattened pdf output path
+        if not self._closed:
+            self.write()
+        self._path = Flatten(self._path, suffix="flattened", tempdir=self._output_dir).save()
         return self._open_and_read()
 
     def minify(self) -> Self:
