@@ -23,7 +23,9 @@ class BaseConduit(ABC):
     _reader: PdfReader
     _writer: PdfWriter
 
-    def __init__(self, pdf: Union[str, BytesIO], decrypt_pw: Optional[str] = None) -> None:
+    def __init__(
+        self, pdf: Union[str, BytesIO], decrypt_pw: Optional[str] = None
+    ) -> None:
         self._decrypt_pw = decrypt_pw
 
         if isinstance(pdf, BytesIO):
@@ -120,6 +122,9 @@ class BaseConduit(ABC):
     def _set_default_output(self, suffix: str) -> None:
         if self.output is None:
             if self._path is None:
-                warn("Unable to set a default output path when reading from PDF stream.", UserWarning)
+                warn(
+                    "Unable to set a default output path when reading from PDF stream.",
+                    UserWarning,
+                )
                 return
             self.set_output_suffix(suffix)

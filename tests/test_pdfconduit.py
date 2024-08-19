@@ -83,7 +83,7 @@ class TestUsage(PdfconduitTestCase):
         with open(self.pdf_path, "rb") as fh:
             bytes_stream = BytesIO(fh.read())
 
-        output = os.path.join(self.temp.name, 'streamed.pdf')
+        output = os.path.join(self.temp.name, "streamed.pdf")
         conduit = Pdfconduit(bytes_stream).set_output(output)
 
         self.assertIsNone(conduit._pdf_file)
@@ -98,7 +98,7 @@ class TestUsage(PdfconduitTestCase):
         with open(self.pdf_path, "rb") as fh:
             bytes_stream = BytesIO(fh.read())
 
-        output = os.path.join(self.temp.name, 'streamed.pdf')
+        output = os.path.join(self.temp.name, "streamed.pdf")
         conduit = Pdfconduit(bytes_stream)
 
         self.assertIsNone(conduit._pdf_file)
