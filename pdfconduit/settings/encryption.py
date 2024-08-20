@@ -33,6 +33,10 @@ class Algorithms(Enum):
     def is_256bit(self) -> bool:
         return self.bit_length == 256
 
+    @classmethod
+    def from_algo(cls, algo: str):
+        return cls(algo)
+
 
 @dataclass
 class Encryption:
