@@ -1,1 +1,1 @@
-include pdfconduit/conduit/lib/img/*
+include pdfconduit/watermark/lib/img/*
