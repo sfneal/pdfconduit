@@ -135,11 +135,7 @@ class BaseConduit(ABC):
     def set_output_temp(
         self, tempdir: Optional[TemporaryDirectory] = None, suffix: str = ""
     ) -> Self:
-        self._tempdir = (
-            tempdir
-            if tempdir
-            else TemporaryDirectory(prefix="pdfconduit_")
-        )
+        self._tempdir = tempdir if tempdir else TemporaryDirectory(prefix="pdfconduit_")
         self._tempfile = NamedTemporaryFile(
             suffix="_" + suffix.replace("_", "") + ".pdf",
             dir=self._tempdir.name,
