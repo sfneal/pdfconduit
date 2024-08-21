@@ -1,4 +1,5 @@
 import os
+from tempfile import TemporaryDirectory, NamedTemporaryFile
 from warnings import warn
 from abc import ABC
 from datetime import datetime
@@ -22,6 +23,9 @@ class BaseConduit(ABC):
     _pdf_file = None
     _reader: PdfReader
     _writer: PdfWriter
+
+    _tempdir: Optional[TemporaryDirectory] = None
+    _tempfile: Optional[NamedTemporaryFile] = None
 
     def __init__(
         self, pdf: Union[str, BytesIO], decrypt_pw: Optional[str] = None
@@ -82,14 +86,23 @@ class BaseConduit(ABC):
             raise OutputException
 
         # Write the PDF to the output file
-        with open(self.output, "wb") as output_pdf:
-            self._writer.write(output_pdf)
+        if self._tempdir is not None:
+            self._writer.write(self.output)
+            self._tempfile.close()
+        else:
+            with open(self.output, "wb") as output_pdf:
+                self._writer.write(output_pdf)
 
         self._writer.close()
 
         self._closed = True
 
         return self.output
+
+    def cleanup(self) -> Self:
+        if self._tempdir is not None:
+            self._tempdir.cleanup()
+        return self
 
     def write_to_stream(self):
         # todo: implement
@@ -119,12 +132,28 @@ class BaseConduit(ABC):
         self._output_dir = directory
         return self
 
+    def set_output_temp(
+        self, tempdir: Optional[TemporaryDirectory] = None, suffix: str = ""
+    ) -> Self:
+        self._tempdir = tempdir if tempdir else TemporaryDirectory(prefix="pdfconduit_")
+        self._tempfile = NamedTemporaryFile(
+            suffix="_" + suffix.replace("_", "") + ".pdf",
+            dir=self._tempdir.name,
+            delete=False,
+        )
+        return self.set_output(self._tempfile.name)
+
     def _set_default_output(self, suffix: str) -> None:
         if self.output is None:
             if self._path is None:
                 warn(
-                    "Unable to set a default output path when reading from PDF stream.",
+                    """
+                    Saving PDFs to a temporary directory because an original file directory cannot be determined
+                    (likely because we're reading from a stream).  Add a call to `conduit.cleanup() after PDF
+                    processing to delete the created temporary directory.
+                    """,
                     UserWarning,
                 )
+                self.set_output_temp(suffix=suffix)
                 return
             self.set_output_suffix(suffix)
