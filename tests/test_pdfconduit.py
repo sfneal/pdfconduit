@@ -94,11 +94,10 @@ class TestUsage(PdfconduitTestCase):
 
         self.assertPdfExists(output)
 
-    def test_cant_write_stream_to_file_without_output(self):
+    def test_can_write_stream_to_file_without_output(self):
         with open(self.pdf_path, "rb") as fh:
             bytes_stream = BytesIO(fh.read())
 
-        output = os.path.join(self.temp.name, "streamed.pdf")
         conduit = Pdfconduit(bytes_stream)
 
         self.assertIsNone(conduit._pdf_file)
@@ -108,17 +107,13 @@ class TestUsage(PdfconduitTestCase):
         with warnings.catch_warnings(record=True) as w:
             warnings.simplefilter("always")
 
-            with self.assertRaises(OutputException) as context:
-                conduit.write()
+            conduit.write()
 
-            self.assertPdfDoesntExists(output)
-            self.assertTrue(
-                "Unable to determine PDF output path." in str(context.exception.message)
-            )
+            self.assertPdfExists(conduit.output)
 
             assert len(w) == 1
             assert issubclass(w[-1].category, UserWarning)
-            assert "Unable to set a default output path" in str(w[-1].message)
+            assert "Saving PDFs to a temporary directory because" in str(w[-1].message)
 
     def test_can_set_temp_output(self):
         self.conduit = Pdfconduit(self.pdf_path)
