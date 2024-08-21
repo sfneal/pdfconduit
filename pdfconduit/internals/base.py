@@ -1,4 +1,5 @@
 import os
+from tempfile import TemporaryDirectory, NamedTemporaryFile
 from warnings import warn
 from abc import ABC
 from datetime import datetime
@@ -22,6 +23,8 @@ class BaseConduit(ABC):
     _pdf_file = None
     _reader: PdfReader
     _writer: PdfWriter
+
+    _tempdir: Optional[TemporaryDirectory] = None
 
     def __init__(
         self, pdf: Union[str, BytesIO], decrypt_pw: Optional[str] = None
@@ -91,6 +94,11 @@ class BaseConduit(ABC):
 
         return self.output
 
+    def cleanup(self) -> Self:
+        if self._tempdir is not None:
+            self._tempdir.cleanup()
+        return self
+
     def write_to_stream(self):
         # todo: implement
         pass
@@ -118,6 +126,12 @@ class BaseConduit(ABC):
     def set_output_directory(self, directory: str) -> Self:
         self._output_dir = directory
         return self
+
+    def set_output_temp(self, tempdir: Optional[TemporaryDirectory] = None) -> Self:
+        self._tempdir = tempdir if tempdir else TemporaryDirectory(prefix='pdfconduit_', delete=False)
+        return self.set_output(
+            NamedTemporaryFile(suffix='.pdf', dir=self._tempdir.name, delete=False, delete_on_close=False).name
+        )
 
     def _set_default_output(self, suffix: str) -> None:
         if self.output is None:

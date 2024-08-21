@@ -119,3 +119,12 @@ class TestUsage(PdfconduitTestCase):
             assert len(w) == 1
             assert issubclass(w[-1].category, UserWarning)
             assert "Unable to set a default output path" in str(w[-1].message)
+
+    def test_can_set_temp_output(self):
+        self.conduit = Pdfconduit(self.pdf_path)
+        self.conduit.set_output_temp()
+        self.conduit.write()
+        self.assertPdfExists(self.conduit.output)
+
+        self.conduit.cleanup()
+        self.assertPdfDoesntExists(self.conduit.output)
