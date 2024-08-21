@@ -1,11 +1,11 @@
 import os
 import warnings
 from io import BufferedReader, BytesIO
+from typing import Optional
 
 from pypdf import PdfReader, PdfWriter
 
 from pdfconduit import Pdfconduit
-from pdfconduit.internals.base import OutputException
 from pdfconduit.utils import add_suffix
 from tests import *
 from tests import PdfconduitTestCase
@@ -70,21 +70,15 @@ class TestUsage(PdfconduitTestCase):
         self.assertEqual(output, self.conduit.output)
 
     def test_can_read_from_stream(self):
-        with open(self.pdf_path, "rb") as fh:
-            bytes_stream = BytesIO(fh.read())
-
-        conduit = Pdfconduit(bytes_stream)
+        conduit = Pdfconduit(self._get_pdf_byte_stream())
 
         self.assertIsNone(conduit._pdf_file)
         self.assertIsInstance(conduit._reader, PdfReader)
         self.assertIsInstance(conduit._writer, PdfWriter)
 
     def test_can_read_from_stream_and_write_to_file(self):
-        with open(self.pdf_path, "rb") as fh:
-            bytes_stream = BytesIO(fh.read())
-
         output = os.path.join(self.temp.name, "streamed.pdf")
-        conduit = Pdfconduit(bytes_stream).set_output(output)
+        conduit = Pdfconduit(self._get_pdf_byte_stream()).set_output(output)
 
         self.assertIsNone(conduit._pdf_file)
         self.assertIsInstance(conduit._reader, PdfReader)
@@ -95,10 +89,7 @@ class TestUsage(PdfconduitTestCase):
         self.assertPdfExists(output)
 
     def test_can_write_stream_to_file_without_output(self):
-        with open(self.pdf_path, "rb") as fh:
-            bytes_stream = BytesIO(fh.read())
-
-        conduit = Pdfconduit(bytes_stream)
+        conduit = Pdfconduit(self._get_pdf_byte_stream())
 
         self.assertIsNone(conduit._pdf_file)
         self.assertIsInstance(conduit._reader, PdfReader)
@@ -123,3 +114,7 @@ class TestUsage(PdfconduitTestCase):
 
         self.conduit.cleanup()
         self.assertPdfDoesntExists(self.conduit.output)
+
+    def _get_pdf_byte_stream(self, path: Optional[str] = None) -> BytesIO:
+        with open(path if path else self.pdf_path, "rb") as fh:
+            return BytesIO(fh.read())
