@@ -5,7 +5,7 @@ from pypdf import PdfWriter
 from pdfconduit.convert import Flatten
 from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, ImageQualityRange, Encryption
-from pdfconduit.transform import Merge
+from pdfconduit.transform import Merge2
 from pdfconduit.transform import Rotate, Upscale
 from pdfconduit.utils import Info
 from pdfconduit.utils.typing import Optional, Tuple, Self, Annotated
@@ -33,9 +33,8 @@ class Pdfconduit(BaseConduit):
 
     def merge_fast(self, pdfs: list) -> Self:
         self._set_default_output("merged")
-        self._path = (
-            Merge([self._path] + pdfs, output_dir=self._output_dir).use_pdfrw().merge()
-        )
+        pdf_objects = [self._stream if self._stream is not None else self._path] + pdfs
+        self._path = (Merge2(pdf_objects, output=self.output).use_pdfrw().merge())
         return self._open_and_read()
 
     def rotate(self, degrees: int) -> Self:
