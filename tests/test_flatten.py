@@ -36,7 +36,9 @@ class TestFlatten(PdfconduitTestCase):
 
     @parameterized.expand(flatten_params, name_func=flatten_name_func)
     def test_flatten_from_stram(self, pdf_path: str):
-        self.conduit = Pdfconduit(self._get_pdf_byte_stream(pdf_path)).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(
+            self._get_pdf_byte_stream(pdf_path)
+        ).set_output_directory(self.temp.name)
         self.conduit.flatten().write()
 
         self.assertPdfExists(self.conduit.output)

@@ -34,12 +34,12 @@ class Rotate(PdfDriver):
             self.tempdir = tempdir
 
             if tempdir:
-                with NamedTemporaryFile(suffix=".pdf", dir=tempdir, delete=False) as temp:
+                with NamedTemporaryFile(
+                    suffix=".pdf", dir=tempdir, delete=False
+                ) as temp:
                     self.outfn = temp.name
             elif suffix:
-                self.outfn = os.path.join(
-                    os.path.dirname(pdf), add_suffix(pdf, suffix)
-                )
+                self.outfn = os.path.join(os.path.dirname(pdf), add_suffix(pdf, suffix))
             else:
                 self.outfn = NamedTemporaryFile(suffix=".pdf").name
 
