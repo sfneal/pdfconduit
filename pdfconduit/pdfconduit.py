@@ -1,3 +1,5 @@
+from tempfile import TemporaryFile, NamedTemporaryFile
+
 from pypdf import PdfWriter
 
 from pypdf import PdfWriter
@@ -5,7 +7,7 @@ from pypdf import PdfWriter
 from pdfconduit.convert import Flatten
 from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, ImageQualityRange, Encryption
-from pdfconduit.transform import Merge
+from pdfconduit.transform import Merge2
 from pdfconduit.transform import Rotate, Upscale
 from pdfconduit.utils import Info
 from pdfconduit.utils.typing import Optional, Tuple, Self, Annotated
@@ -33,9 +35,8 @@ class Pdfconduit(BaseConduit):
 
     def merge_fast(self, pdfs: list) -> Self:
         self._set_default_output("merged")
-        self._path = (
-            Merge([self._path] + pdfs, output_dir=self._output_dir).use_pdfrw().merge()
-        )
+        pdf_objects = [self._stream if self._stream is not None else self._path] + pdfs
+        self._path = Merge2(pdf_objects, output=self.output).use_pdfrw().merge()
         return self._open_and_read()
 
     def rotate(self, degrees: int) -> Self:
@@ -48,7 +49,16 @@ class Pdfconduit(BaseConduit):
         if degrees % 90 == 0:
             return self.rotate(degrees)
 
-        self._path = Rotate(self._path, degrees).use_pdfrw().rotate()
+        self._set_default_output("rotated")
+        self._path = (
+            Rotate(
+                self._stream if self._stream is not None else self._path,
+                degrees,
+                output=self.output,
+            )
+            .use_pdfrw()
+            .rotate()
+        )
         return self._open_and_read()
 
     def slice(self, start: int, end: int) -> Self:
@@ -89,11 +99,22 @@ class Pdfconduit(BaseConduit):
     def flatten(self) -> Self:
         # todo: re-write Flatten & other convert classes
         # todo: fix issue with flattened pdf output path
+        if not self._path and self._stream:
+            temp = NamedTemporaryFile(suffix=".pdf")
+            temp.write(self._stream.getvalue())
+            path = temp.name
+        else:
+            temp = None
+            path = self._path
+
         if not self._closed:
             self.write()
-        self._path = Flatten(
-            self._path, suffix="flattened", tempdir=self._output_dir
-        ).save()
+
+        self._path = Flatten(path, suffix="flattened", tempdir=self._output_dir).save()
+
+        if temp is not None:
+            temp.close()
+
         return self._open_and_read()
 
     def minify(self) -> Self:

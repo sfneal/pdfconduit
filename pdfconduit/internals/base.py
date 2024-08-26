@@ -21,6 +21,7 @@ class BaseConduit(ABC):
     _closed: bool = False
 
     _pdf_file = None
+    _stream: BytesIO = None
     _reader: PdfReader
     _writer: PdfWriter
 
@@ -55,7 +56,8 @@ class BaseConduit(ABC):
         return self
 
     def _read_stream(self, stream: BytesIO) -> Self:
-        self._reader = PdfReader(stream)
+        self._stream = stream
+        self._reader = PdfReader(self._stream)
         self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
         return self
 
@@ -80,6 +82,8 @@ class BaseConduit(ABC):
         self._reader.close()
         if self._pdf_file is not None:
             self._pdf_file.close()
+        if self._stream is not None:
+            self._stream.close()
 
         # Confirm output path is set
         if self.output is None:

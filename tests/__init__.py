@@ -4,8 +4,10 @@ import os
 import shutil
 import unittest
 from decimal import Decimal
+from io import BytesIO
 from tempfile import TemporaryDirectory
 from time import time
+from typing import Optional
 
 from pdfconduit import Pdfconduit, Info
 from pdfconduit.utils.typing import Iterable
@@ -144,6 +146,10 @@ class PdfconduitTestCase(unittest.TestCase):
 
     def assertFileSizeDecreased(self, original: str, modified: str):
         self.assertLess(os.path.getsize(modified), os.path.getsize(original))
+
+    def _get_pdf_byte_stream(self, path: Optional[str] = None) -> BytesIO:
+        with open(path if path else self.pdf_path, "rb") as fh:
+            return BytesIO(fh.read())
 
 
 class Timer:
