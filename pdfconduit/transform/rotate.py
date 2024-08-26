@@ -1,7 +1,8 @@
 # Rotate a pdf file
 import os
+from io import BytesIO
 from tempfile import NamedTemporaryFile
-from typing import Optional
+from typing import Optional, Union
 
 from pdfrw import (
     PdfReader as PdfrwReader,
@@ -17,25 +18,30 @@ class Rotate(PdfDriver):
 
     def __init__(
         self,
-        file_name: str,
+        pdf: Union[str, BytesIO],
         rotation: int,
         suffix: str = "rotated",
         tempdir: Optional[str] = None,
+        output: Optional[str] = None,
     ):
-        self.file_name = file_name
+        self.pdf_object = pdf
         self.rotation = rotation
         self.suffix = suffix
-        self.tempdir = tempdir
 
-        if tempdir:
-            with NamedTemporaryFile(suffix=".pdf", dir=tempdir, delete=False) as temp:
-                self.outfn = temp.name
-        elif suffix:
-            self.outfn = os.path.join(
-                os.path.dirname(file_name), add_suffix(file_name, suffix)
-            )
+        if output:
+            self.outfn = output
         else:
-            self.outfn = NamedTemporaryFile(suffix=".pdf").name
+            self.tempdir = tempdir
+
+            if tempdir:
+                with NamedTemporaryFile(suffix=".pdf", dir=tempdir, delete=False) as temp:
+                    self.outfn = temp.name
+            elif suffix:
+                self.outfn = os.path.join(
+                    os.path.dirname(pdf), add_suffix(pdf, suffix)
+                )
+            else:
+                self.outfn = NamedTemporaryFile(suffix=".pdf").name
 
     def __str__(self) -> str:
         return self.file
@@ -48,7 +54,11 @@ class Rotate(PdfDriver):
         return str(self.outfn)
 
     def pdfrw(self) -> str:
-        trailer = PdfrwReader(self.file_name)
+        if isinstance(self.pdf_object, BytesIO):
+            trailer = PdfrwReader(fdata=self.pdf_object.getvalue())
+        else:
+            trailer = PdfrwReader(fname=self.pdf_object)
+
         pages = trailer.pages
 
         ranges = [[1, len(pages)]]
@@ -66,7 +76,7 @@ class Rotate(PdfDriver):
         return self.outfn
 
     def pypdf(self) -> str:
-        reader = PypdfReader(self.file_name)
+        reader = PypdfReader(self.pdf_object)
         writer = PypdfWriter()
 
         for page_num in range(1, reader.get_num_pages()):

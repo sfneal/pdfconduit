@@ -47,7 +47,8 @@ class Pdfconduit(BaseConduit):
         if degrees % 90 == 0:
             return self.rotate(degrees)
 
-        self._path = Rotate(self._path, degrees).use_pdfrw().rotate()
+        self._set_default_output("rotated")
+        self._path = Rotate(self._stream if self._stream is not None else self._path, degrees, output=self.output).use_pdfrw().rotate()
         return self._open_and_read()
 
     def slice(self, start: int, end: int) -> Self:
