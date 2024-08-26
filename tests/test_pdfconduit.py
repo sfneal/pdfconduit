@@ -1,7 +1,6 @@
 import os
 import warnings
-from io import BufferedReader, BytesIO
-from typing import Optional
+from io import BufferedReader
 
 from pypdf import PdfReader, PdfWriter
 
@@ -114,7 +113,3 @@ class TestUsage(PdfconduitTestCase):
 
         self.conduit.cleanup()
         self.assertPdfDoesntExists(self.conduit.output)
-
-    def _get_pdf_byte_stream(self, path: Optional[str] = None) -> BytesIO:
-        with open(path if path else self.pdf_path, "rb") as fh:
-            return BytesIO(fh.read())

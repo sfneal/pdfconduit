@@ -68,3 +68,15 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
+
+    @parameterized.expand(merge_params, name_func=merge_name_func)
+    def test_can_merge_pdfs_fast_from_stream(self, main_pdf: str, pdfs_to_merge: List[str]):
+        self.pdf_path = main_pdf
+        self.conduit = Pdfconduit(self._get_pdf_byte_stream(self.pdf_path)).set_output_directory(self.temp.name)
+
+        self.conduit.merge_fast(pdfs_to_merge)
+
+        self.conduit.write()
+
+        self.assertPdfExists(self.conduit.output)
+        self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)

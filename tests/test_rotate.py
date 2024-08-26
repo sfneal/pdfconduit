@@ -3,7 +3,7 @@ from typing import List
 
 from parameterized import parameterized
 
-from pdfconduit import Info
+from pdfconduit import Info, Pdfconduit
 from tests import PdfconduitTestCase
 
 
@@ -56,3 +56,13 @@ class TestRotate(PdfconduitTestCase):
         self.assertTrue(
             "Rotation angle must be a multiple of 90" in str(context.exception)
         )
+
+    @parameterized.expand(rotate_exact_params, name_func=rotate_name_func)
+    def test_can_rotate_exact_from_stream(self, rotation: int):
+        self.conduit = Pdfconduit(self._get_pdf_byte_stream(self.pdf_path)).set_output_directory(self.temp.name)
+        self.conduit.rotate_exact(rotation).set_output_suffix(
+            "rotated_{}".format(rotation)
+        ).write()
+
+        self.assertPdfExists(self.conduit.output)
+        self.assertPdfRotation(self.conduit, rotation)
