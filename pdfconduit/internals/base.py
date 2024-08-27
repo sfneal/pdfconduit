@@ -1,15 +1,15 @@
 import os
-from tempfile import TemporaryDirectory, NamedTemporaryFile
-from warnings import warn
 from abc import ABC
 from datetime import datetime
 from io import BytesIO
+from tempfile import TemporaryDirectory, NamedTemporaryFile
+from warnings import warn
 
 from pypdf import PdfWriter, PdfReader
 
 from pdfconduit.internals.exceptions import OutputException
 from pdfconduit.utils import pypdf_reader, add_suffix
-from pdfconduit.utils.typing import Optional, Any, Dict, Self, Union
+from pdfconduit.utils.typing import Optional, Any, Dict, Self, PdfObject
 
 
 class BaseConduit(ABC):
@@ -29,7 +29,7 @@ class BaseConduit(ABC):
     _tempfile: Optional[NamedTemporaryFile] = None
 
     def __init__(
-        self, pdf: Union[str, BytesIO], decrypt_pw: Optional[str] = None
+        self, pdf: PdfObject, decrypt_pw: Optional[str] = None
     ) -> None:
         self._decrypt_pw = decrypt_pw
 
@@ -109,7 +109,7 @@ class BaseConduit(ABC):
         return self
 
     @property
-    def pdf_object(self) -> Union[str, BytesIO]:
+    def pdf_object(self) -> PdfObject:
         return self._stream if self._stream is not None else self._path
 
     def write_to_stream(self):

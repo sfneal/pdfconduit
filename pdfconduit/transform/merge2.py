@@ -1,6 +1,5 @@
 # Merge PDF documents
 from io import BytesIO
-from typing import Union, Iterable
 
 from pdfrw import (
     PdfReader as PdfrwReader,
@@ -10,10 +9,11 @@ from pdfrw import (
 from pypdf import PdfWriter as PyPdfWriter
 
 from pdfconduit.utils.driver import PdfDriver
+from pdfconduit.utils.typing import PdfObjects
 
 
 class Merge2(PdfDriver):
-    def __init__(self, pdfs: Iterable[Union[str, BytesIO]], output: str):
+    def __init__(self, pdfs: PdfObjects, output: str):
         self._pdfs = pdfs
         self._output = output
 
