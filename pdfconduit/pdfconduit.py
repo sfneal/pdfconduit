@@ -98,21 +98,10 @@ class Pdfconduit(BaseConduit):
     def flatten(self) -> Self:
         # todo: re-write Flatten & other convert classes
         # todo: fix issue with flattened pdf output path
-        if not self._path and self._stream:
-            temp = NamedTemporaryFile(suffix=".pdf")
-            temp.write(self._stream.getvalue())
-            path = temp.name
-        else:
-            temp = None
-            path = self._path
-
         if not self._closed:
             self.write()
 
-        self._path = Flatten(path, suffix="flattened", tempdir=self._output_dir).save()
-
-        if temp is not None:
-            temp.close()
+        self._path = Flatten(self.output, suffix="flattened", tempdir=self._output_dir).save()
 
         return self._open_and_read()
 
