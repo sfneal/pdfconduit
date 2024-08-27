@@ -15,11 +15,13 @@ class DimensionsDict(TypedDict):
     w: float
     h: float
 
+
 SizeTuple = Tuple[float, float]
 
 Metadata = Optional[DocumentInformation]
 
 Resources = List[PageObject]
+
 
 class InfoAllDict(TypedDict):
     encrypted: bool
@@ -32,5 +34,11 @@ class InfoAllDict(TypedDict):
     images_count: int
 
 
-
-__all__ = ['SecurityDict', 'DimensionsDict', 'SizeTuple', 'Metadata', 'Resources', 'InfoAllDict']
+__all__ = [
+    "SecurityDict",
+    "DimensionsDict",
+    "SizeTuple",
+    "Metadata",
+    "Resources",
+    "InfoAllDict",
+]
