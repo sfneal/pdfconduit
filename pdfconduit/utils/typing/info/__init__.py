@@ -1,8 +1,9 @@
-from typing import Optional, List, Tuple, TypedDict
+from typing import Optional, List, Tuple
 
 from pypdf import DocumentInformation, PageObject
 
 from pdfconduit.utils._permissions import Permissions
+from pdfconduit.utils.typing import TypedDict
 
 
 class SecurityDict(TypedDict):
