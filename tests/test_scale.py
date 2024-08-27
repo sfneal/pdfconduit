@@ -2,7 +2,7 @@ from typing import Tuple, List
 
 from parameterized import parameterized
 
-from pdfconduit import Info
+from pdfconduit import Info, Pdfconduit
 from tests import PdfconduitTestCase
 
 
@@ -25,6 +25,19 @@ class TestScale(PdfconduitTestCase):
         self.conduit.scale(scale, accelerate=accelerate).set_output_suffix(
             suffix
         ).write()
+
+        self.assertPdfExists(self.conduit.output)
+        self.assertPdfScaled(scale, self.conduit.output)
+
+    @parameterized.expand(scale_params, name_func=scale_name_func)
+    def test_scale_from_stream(self, scale: float, accelerate: bool):
+        suffix = "scaled_{}x".format(scale)
+        if accelerate:
+            suffix += "_accelerated"
+
+        self.conduit = Pdfconduit(self._get_pdf_byte_stream(self.pdf_path)).set_output_temp(self.temp)
+
+        self.conduit.scale(scale, accelerate=accelerate).write()
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfScaled(scale, self.conduit.output)
