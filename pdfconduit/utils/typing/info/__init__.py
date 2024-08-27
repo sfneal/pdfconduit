@@ -1,6 +1,8 @@
-from typing import Optional, List, Dict, Tuple, TypedDict
+from typing import Optional, List, Tuple, TypedDict
 
 from pypdf import DocumentInformation, PageObject
+
+from pdfconduit.utils._permissions import Permissions
 
 
 class SecurityDict(TypedDict):
@@ -23,10 +25,9 @@ class InfoAllDict(TypedDict):
     pages: int
     metadata: Metadata
     security: SecurityDict
-    dimensions: DimensionsDict
     size: SizeTuple
     rotate: int
-    permissions: Dict[str, bool]
+    permissions: Optional[Permissions]
     images_count: int
 
 

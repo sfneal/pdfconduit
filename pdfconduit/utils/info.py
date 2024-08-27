@@ -80,10 +80,23 @@ class Info:
         return self._resolved_objects(self.pdf, "/Rotate")
 
     @property
-    def permissions(self) -> Permissions:
+    def permissions(self) -> Optional[Permissions]:
         """Retrieve user access permissions."""
-        return Permissions(self.pdf)
+        return Permissions(self.pdf) if self.encrypted else None
 
     @property
     def images_count(self) -> int:
         return sum([len(page.images) for page in self.pdf.pages])
+
+    @property
+    def all(self) -> InfoAllDict:
+        return {
+            'encrypted': self.encrypted,
+            'pages': self.pages,
+            'metadata': self.metadata,
+            'security': self.security,
+            'size': self.size,
+            'rotate': self.rotate,
+            'permissions': self.permissions,
+            'images_count': self.images_count,
+        }
