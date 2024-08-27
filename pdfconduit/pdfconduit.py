@@ -1,6 +1,4 @@
-from tempfile import TemporaryFile, NamedTemporaryFile
-
-from pypdf import PdfWriter
+from tempfile import NamedTemporaryFile
 
 from pypdf import PdfWriter
 
@@ -8,7 +6,7 @@ from pdfconduit.convert import Flatten
 from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, ImageQualityRange, Encryption
 from pdfconduit.transform import Merge2, Scale
-from pdfconduit.transform import Rotate, Upscale
+from pdfconduit.transform import Rotate
 from pdfconduit.utils import Info
 from pdfconduit.utils.typing import Optional, Tuple, Self, Annotated
 

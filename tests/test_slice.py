@@ -2,7 +2,6 @@ from typing import List
 
 from parameterized import parameterized
 
-from pdfconduit import Info
 from tests import PdfconduitTestCase
 
 
