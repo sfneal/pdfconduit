@@ -5,6 +5,7 @@ from parameterized import parameterized
 
 from pdfconduit import Info
 from pdfconduit.utils import add_suffix
+from pdfconduit.utils.typing.info import InfoAllDict
 from tests import PdfconduitTestCase, get_clean_pdf_name
 from tests import test_data_path
 
@@ -187,6 +188,13 @@ class TestInfo(PdfconduitTestCase):
 
         self.assertIsInstance(info.rotate, int)
         self.assertEqual(info.rotate, 90)
+
+    @parameterized.expand(unencrypted_pdf_params, name_func=info_name_func)
+    def test_get_all_info(self, filepath: str):
+        info = self._get_info(filepath)
+        info_all = info.all
+
+        self.assertIsInstance(info_all, dict)
 
     @staticmethod
     def _get_info(filepath: str, password: Optional[str] = None):
