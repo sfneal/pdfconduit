@@ -108,6 +108,10 @@ class BaseConduit(ABC):
             self._tempdir.cleanup()
         return self
 
+    @property
+    def pdf_object(self) -> Union[str, BytesIO]:
+        return self._stream if self._stream is not None else self._path
+
     def write_to_stream(self):
         # todo: implement
         pass

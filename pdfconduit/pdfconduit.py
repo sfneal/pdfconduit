@@ -36,7 +36,7 @@ class Pdfconduit(BaseConduit):
     def merge_fast(self, pdfs: list) -> Self:
         self._set_default_output("merged")
         # todo: extract method for stream or path
-        pdf_objects = [self._stream if self._stream is not None else self._path] + pdfs
+        pdf_objects = [self.pdf_object] + pdfs
         self._path = Merge2(pdf_objects, output=self.output).use_pdfrw().merge()
         return self._open_and_read()
 
@@ -53,7 +53,7 @@ class Pdfconduit(BaseConduit):
         self._set_default_output("rotated")
         self._path = (
             Rotate(
-                self._stream if self._stream is not None else self._path,
+                self.pdf_object,
                 degrees,
                 output=self.output,
             )
@@ -80,7 +80,7 @@ class Pdfconduit(BaseConduit):
             x, y = margins
             self._path = (
                 Scale(
-                    self._stream if self._stream is not None else self._path,
+                    self.pdf_object,
                     output=self.output,
                     scale=scale,
                     margin_x=x,
