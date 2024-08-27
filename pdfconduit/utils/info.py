@@ -1,10 +1,11 @@
 # Retrieve information about a PDF document
-from typing import Optional, List, Dict, Tuple, Union
+from typing import Union, Optional
 
-from pypdf import PdfReader, DocumentInformation, PageObject, PdfWriter
+from pypdf import PdfReader, PdfWriter
 
 from pdfconduit.utils._permissions import Permissions
 from pdfconduit.utils.read import pypdf_reader
+from pdfconduit.utils.typing.info import *
 
 
 class Info:
@@ -38,24 +39,24 @@ class Info:
         return self.pdf.get_num_pages()
 
     @property
-    def metadata(self) -> Optional[DocumentInformation]:
+    def metadata(self) -> Metadata:
         """Retrieve PDF metadata"""
         return self.pdf.metadata
 
-    def resources(self) -> List[PageObject]:
+    def resources(self) -> Resources:
         """Retrieve contents of each page of PDF"""
         # todo: refactor to generator?
         return [self.pdf.get_page(i) for i in range(self.pdf.get_num_pages())]
 
     @property
-    def security(self) -> Dict[str, int]:
+    def security(self) -> SecurityDict:
         """Print security object information for a pdf document"""
         return {
             k: v for i in self.pdf.resolved_objects.items() for k, v in i[1].items()
         }
 
     @property
-    def dimensions(self) -> Dict[str, float]:
+    def dimensions(self) -> DimensionsDict:
         """Get width and height of a PDF"""
         # todo: add page parameter?
         # todo: add height & width methods?
@@ -64,7 +65,7 @@ class Info:
         return {"w": float(size[2]), "h": float(size[3])}
 
     @property
-    def size(self) -> Tuple[float, float]:
+    def size(self) -> SizeTuple:
         """Get width and height of a PDF"""
         size = self.pdf.get_page(0).mediabox
 
@@ -79,10 +80,23 @@ class Info:
         return self._resolved_objects(self.pdf, "/Rotate")
 
     @property
-    def permissions(self) -> Permissions:
+    def permissions(self) -> Optional[Permissions]:
         """Retrieve user access permissions."""
-        return Permissions(self.pdf)
+        return Permissions(self.pdf) if self.encrypted else None
 
     @property
     def images_count(self) -> int:
         return sum([len(page.images) for page in self.pdf.pages])
+
+    @property
+    def all(self) -> InfoAllDict:
+        return {
+            "encrypted": self.encrypted,
+            "pages": self.pages,
+            "metadata": self.metadata,
+            "security": self.security,
+            "size": self.size,
+            "rotate": self.rotate,
+            "permissions": self.permissions,
+            "images_count": self.images_count,
+        }
