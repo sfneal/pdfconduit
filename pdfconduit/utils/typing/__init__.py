@@ -10,4 +10,16 @@ PdfObject = Union[str, BytesIO]
 PdfObjects = Iterable[PdfObject]
 
 
-__all__ = [Optional, Any, Tuple, Dict, Self, Annotated, Union, List, Iterable, PdfObject, PdfObjects]
+__all__ = [
+    Optional,
+    Any,
+    Tuple,
+    Dict,
+    Self,
+    Annotated,
+    Union,
+    List,
+    Iterable,
+    PdfObject,
+    PdfObjects,
+]

@@ -28,9 +28,7 @@ class BaseConduit(ABC):
     _tempdir: Optional[TemporaryDirectory] = None
     _tempfile: Optional[NamedTemporaryFile] = None
 
-    def __init__(
-        self, pdf: PdfObject, decrypt_pw: Optional[str] = None
-    ) -> None:
+    def __init__(self, pdf: PdfObject, decrypt_pw: Optional[str] = None) -> None:
         self._decrypt_pw = decrypt_pw
 
         if isinstance(pdf, BytesIO):
