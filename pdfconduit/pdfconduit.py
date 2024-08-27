@@ -7,7 +7,7 @@ from pypdf import PdfWriter
 from pdfconduit.convert import Flatten
 from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, ImageQualityRange, Encryption
-from pdfconduit.transform import Merge2
+from pdfconduit.transform import Merge2, Scale
 from pdfconduit.transform import Rotate, Upscale
 from pdfconduit.utils import Info
 from pdfconduit.utils.typing import Optional, Tuple, Self, Annotated
@@ -35,6 +35,7 @@ class Pdfconduit(BaseConduit):
 
     def merge_fast(self, pdfs: list) -> Self:
         self._set_default_output("merged")
+        # todo: extract method for stream or path
         pdf_objects = [self._stream if self._stream is not None else self._path] + pdfs
         self._path = Merge2(pdf_objects, output=self.output).use_pdfrw().merge()
         return self._open_and_read()
@@ -78,15 +79,15 @@ class Pdfconduit(BaseConduit):
         if accelerate or margins != (0, 0):
             x, y = margins
             self._path = (
-                Upscale(
-                    self._path,
+                Scale(
+                    self._stream if self._stream is not None else self._path,
+                    output=self.output,
+                    scale=scale,
                     margin_x=x,
                     margin_y=y,
-                    scale=scale,
-                    tempdir=self._output_dir,
                 )
                 .use_pdfrw()
-                .upscale()
+                .execute()
             )
             return self._open_and_read()
 
