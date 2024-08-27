@@ -91,12 +91,12 @@ class Info:
     @property
     def all(self) -> InfoAllDict:
         return {
-            'encrypted': self.encrypted,
-            'pages': self.pages,
-            'metadata': self.metadata,
-            'security': self.security,
-            'size': self.size,
-            'rotate': self.rotate,
-            'permissions': self.permissions,
-            'images_count': self.images_count,
+            "encrypted": self.encrypted,
+            "pages": self.pages,
+            "metadata": self.metadata,
+            "security": self.security,
+            "size": self.size,
+            "rotate": self.rotate,
+            "permissions": self.permissions,
+            "images_count": self.images_count,
         }
