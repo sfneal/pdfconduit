@@ -6,7 +6,7 @@ from pdfrw import (
     PdfReader as pdfrwReader,
     PdfWriter as pdfrwWriter,
     PageMerge as pdfrwPageMerge,
-    IndirectPdfDict as pdfrwIndirectPdfDict
+    IndirectPdfDict as pdfrwIndirectPdfDict,
 )
 from pypdf import (
     PdfReader as pypdfReader,
@@ -18,7 +18,14 @@ from pdfconduit.utils.info import Info
 
 
 class Scale(PdfDriver):
-    def __init__(self, pdf: Union[str, BytesIO], output: str, scale: float = 1.5, margin_x: int = 0, margin_y: int = 0):
+    def __init__(
+        self,
+        pdf: Union[str, BytesIO],
+        output: str,
+        scale: float = 1.5,
+        margin_x: int = 0,
+        margin_y: int = 0,
+    ):
         self._pdf = pdf
         self._output = output
         self._margin_x = margin_x

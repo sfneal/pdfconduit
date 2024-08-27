@@ -35,7 +35,9 @@ class TestScale(PdfconduitTestCase):
         if accelerate:
             suffix += "_accelerated"
 
-        self.conduit = Pdfconduit(self._get_pdf_byte_stream(self.pdf_path)).set_output_temp(self.temp)
+        self.conduit = Pdfconduit(
+            self._get_pdf_byte_stream(self.pdf_path)
+        ).set_output_temp(self.temp)
 
         self.conduit.scale(scale, accelerate=accelerate).write()
 
