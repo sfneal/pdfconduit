@@ -1,4 +1,3 @@
-import os
 from typing import Tuple, List
 
 from parameterized import parameterized

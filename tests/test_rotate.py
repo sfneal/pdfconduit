@@ -3,7 +3,7 @@ from typing import List
 
 from parameterized import parameterized
 
-from pdfconduit import Info, Pdfconduit
+from pdfconduit import Pdfconduit
 from tests import PdfconduitTestCase
 
 

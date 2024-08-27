@@ -1,6 +1,5 @@
 # Upscale a PDF file
 from io import BytesIO
-from typing import Union
 
 from pdfrw import (
     PdfReader as pdfrwReader,
@@ -15,12 +14,13 @@ from pypdf import (
 
 from pdfconduit.utils.driver import PdfDriver
 from pdfconduit.utils.info import Info
+from pdfconduit.utils.typing import PdfObject
 
 
 class Scale(PdfDriver):
     def __init__(
         self,
-        pdf: Union[str, BytesIO],
+        pdf: PdfObject,
         output: str,
         scale: float = 1.5,
         margin_x: int = 0,

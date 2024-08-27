@@ -2,7 +2,7 @@
 import os
 from io import BytesIO
 from tempfile import NamedTemporaryFile
-from typing import Optional, Union
+from typing import Optional
 
 from pdfrw import (
     PdfReader as PdfrwReader,
@@ -12,13 +12,14 @@ from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
 
 from pdfconduit.utils.driver import PdfDriver
 from pdfconduit.utils.path import add_suffix
+from pdfconduit.utils.typing import PdfObject
 
 
 class Rotate(PdfDriver):
 
     def __init__(
         self,
-        pdf: Union[str, BytesIO],
+        pdf: PdfObject,
         rotation: int,
         suffix: str = "rotated",
         tempdir: Optional[str] = None,

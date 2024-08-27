@@ -1,7 +1,7 @@
 from parameterized import parameterized
 
 from pdfconduit import Pdfconduit, Info
-from pdfconduit.settings import Encryption, Compression
+from pdfconduit.settings import Encryption
 from pdfconduit.utils.typing import List, Iterable
 from tests import *
 from tests.test_encrypt import EncryptionTestCase

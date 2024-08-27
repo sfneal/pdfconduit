@@ -1,8 +1,6 @@
-import os.path
-
 from parameterized import parameterized
 
-from pdfconduit import Pdfconduit, Info
+from pdfconduit import Pdfconduit
 from pdfconduit.utils.typing import List, Iterable
 from tests import PdfconduitTestCase, get_clean_pdf_name
 from tests import test_data_path
