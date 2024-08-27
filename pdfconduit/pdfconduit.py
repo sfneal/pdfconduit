@@ -101,7 +101,9 @@ class Pdfconduit(BaseConduit):
         if not self._closed:
             self.write()
 
-        self._path = Flatten(self.output, suffix="flattened", tempdir=self._output_dir).save()
+        self._path = Flatten(
+            self.output, suffix="flattened", tempdir=self._output_dir
+        ).save()
 
         return self._open_and_read()
 
