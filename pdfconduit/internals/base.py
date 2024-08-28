@@ -55,7 +55,7 @@ class BaseConduit(ABC):
 
     def _read_stream(self, stream: BytesIO) -> Self:
         self._stream = stream
-        self._reader = PdfReader(self._stream)
+        self._reader = PdfReader(self._stream, password=self._decrypt_pw)
         self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
         return self
 
