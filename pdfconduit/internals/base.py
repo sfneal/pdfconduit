@@ -23,20 +23,20 @@ class BaseConduit(ABC):
     _pdf_file = None
     _stream: BytesIO = None
     _reader: PdfReader
-    _writer: PdfWriter
+    _writer: PdfWriter = None
 
     _tempdir: Optional[TemporaryDirectory] = None
     _tempfile: Optional[NamedTemporaryFile] = None
 
-    def __init__(self, pdf: PdfObject, decrypt_pw: Optional[str] = None) -> None:
+    def __init__(self, pdf: PdfObject, decrypt_pw: Optional[str] = None, with_writer: bool = True) -> None:
         self._decrypt_pw = decrypt_pw
 
         if isinstance(pdf, BytesIO):
-            self._read_stream(pdf)
+            self._read_stream(pdf, with_writer)
         else:
             # Open the file & instantiate a PDF reader
             self._path = pdf
-            self._open_and_read()
+            self._open_and_read(with_writer)
 
     def __enter__(self):
         return self
@@ -47,16 +47,18 @@ class BaseConduit(ABC):
         self.write()
         return True
 
-    def _open_and_read(self) -> Self:
+    def _open_and_read(self, with_writer: bool = True) -> Self:
         self._pdf_file = open(self._path, "rb")
         self._reader: PdfReader = pypdf_reader(self._pdf_file, self._decrypt_pw)
-        self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
+        if with_writer:
+            self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
         return self
 
-    def _read_stream(self, stream: BytesIO) -> Self:
+    def _read_stream(self, stream: BytesIO, with_writer: bool = True) -> Self:
         self._stream = stream
         self._reader = PdfReader(self._stream, password=self._decrypt_pw)
-        self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
+        if with_writer:
+            self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
         return self
 
     def write(self):

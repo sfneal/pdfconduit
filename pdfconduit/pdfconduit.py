@@ -1,5 +1,3 @@
-from tempfile import NamedTemporaryFile
-
 from pypdf import PdfWriter
 
 from pdfconduit.convert import Flatten
@@ -139,7 +137,13 @@ class Pdfconduit(BaseConduit):
 
     @property
     def info(self) -> Info:
-        return Info(self._writer if not self._closed else self.output)
+        if self._closed:
+            pdf = self.output
+        elif self._writer:
+            pdf = self._writer
+        else:
+            pdf = self._reader
+        return Info(pdf)
 
     def watermark(self):
         # todo: add method
