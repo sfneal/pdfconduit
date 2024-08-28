@@ -3,7 +3,7 @@ from typing import Tuple, List, Optional
 
 from parameterized import parameterized
 
-from pdfconduit import Info
+from pdfconduit import Info, Pdfconduit
 from pdfconduit.utils import add_suffix
 from pdfconduit.utils.typing.info import InfoAllDict
 from tests import PdfconduitTestCase, get_clean_pdf_name
@@ -190,11 +190,32 @@ class TestInfo(PdfconduitTestCase):
         self.assertEqual(info.rotate, 90)
 
     @parameterized.expand(unencrypted_pdf_params, name_func=info_name_func)
-    def test_get_all_info(self, filepath: str):
+    def test_get_all_info_unencrypted(self, filepath: str):
         info = self._get_info(filepath)
         info_all = info.all
 
         self.assertIsInstance(info_all, dict)
+
+    @parameterized.expand(encrypted_pdf_params, name_func=info_name_func)
+    def test_get_all_info_encrypted(self, filepath: str):
+        info = self._get_info(filepath, "baz")
+        info_all = info.all
+
+        self.assertIsInstance(info_all, dict)
+
+    @parameterized.expand(unencrypted_pdf_params, name_func=info_name_func)
+    def test_get_all_info_unencrypted_from_stream(self, filepath: str):
+        conduit = Pdfconduit(self._get_pdf_byte_stream(filepath))
+        info = conduit.info.all
+
+        self.assertIsInstance(info, dict)
+
+    @parameterized.expand(encrypted_pdf_params, name_func=info_name_func)
+    def test_get_all_info_encrypted_from_stream(self, filepath: str):
+        conduit = Pdfconduit(self._get_pdf_byte_stream(filepath), "baz")
+        info = conduit.info.all
+
+        self.assertIsInstance(info, dict)
 
     @staticmethod
     def _get_info(filepath: str, password: Optional[str] = None):
