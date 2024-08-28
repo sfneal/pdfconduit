@@ -27,7 +27,6 @@ class InfoAllDict(TypedDict):
     encrypted: bool
     pages: int
     metadata: Metadata
-    security: SecurityDict
     size: SizeTuple
     rotate: int
     permissions: Optional[Permissions]

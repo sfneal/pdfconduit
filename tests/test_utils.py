@@ -5,7 +5,6 @@ from parameterized import parameterized
 
 from pdfconduit import Info, Pdfconduit
 from pdfconduit.utils import add_suffix
-from pdfconduit.utils.typing.info import InfoAllDict
 from tests import PdfconduitTestCase, get_clean_pdf_name
 from tests import test_data_path
 
