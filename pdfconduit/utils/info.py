@@ -97,7 +97,6 @@ class Info:
             "encrypted": self.encrypted,
             "pages": self.pages,
             "metadata": self.metadata,
-            "security": self.security,
             "size": self.size,
             "rotate": self.rotate,
             "permissions": self.permissions,
