@@ -49,11 +49,14 @@ class Info:
         return [self.pdf.get_page(i) for i in range(self.pdf.get_num_pages())]
 
     @property
-    def security(self) -> SecurityDict:
+    def security(self) -> Optional[SecurityDict]:
         """Print security object information for a pdf document"""
-        return {
-            k: v for i in self.pdf.resolved_objects.items() for k, v in i[1].items()
-        }
+        try:
+            return {
+                k: v for i in self.pdf.resolved_objects.items() for k, v in i[1].items()
+            }
+        except AttributeError:
+            return None
 
     @property
     def dimensions(self) -> DimensionsDict:
