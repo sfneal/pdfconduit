@@ -218,8 +218,8 @@ class TestInfo(PdfconduitTestCase):
         self.assertIsInstance(info, dict)
 
     @staticmethod
-    def _get_info(filepath: str, password: Optional[str] = None):
-        return Info(filepath, password=password)
+    def _get_info(filepath: str, password: Optional[str] = None) -> Info:
+        return Pdfconduit(filepath, password, with_writer=False).info
 
 
 def get_expected_output(filepath: str, suffix: str = "modified", sep: str = "_") -> str:
