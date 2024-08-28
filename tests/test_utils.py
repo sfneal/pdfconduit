@@ -198,7 +198,7 @@ class TestInfo(PdfconduitTestCase):
 
     @parameterized.expand(encrypted_pdf_params, name_func=info_name_func)
     def test_get_all_info_encrypted(self, filepath: str):
-        info = self._get_info(filepath, 'baz')
+        info = self._get_info(filepath, "baz")
         info_all = info.all
 
         self.assertIsInstance(info_all, dict)
@@ -212,7 +212,7 @@ class TestInfo(PdfconduitTestCase):
 
     @parameterized.expand(encrypted_pdf_params, name_func=info_name_func)
     def test_get_all_info_encrypted_from_stream(self, filepath: str):
-        conduit = Pdfconduit(self._get_pdf_byte_stream(filepath), 'baz')
+        conduit = Pdfconduit(self._get_pdf_byte_stream(filepath), "baz")
         info = conduit.info.all
 
         self.assertIsInstance(info, dict)
