@@ -6,7 +6,7 @@ from pdfconduit.settings import Compression, Encryption
 from pdfconduit.transform import Merge2, Scale
 from pdfconduit.transform import Rotate
 from pdfconduit.utils import Info
-from pdfconduit.utils.typing import Optional, Tuple, Self, ImageQuality
+from pdfconduit.utils.typing import Optional, Tuple, Self, ImageQuality, ScaleMargins
 
 
 class Pdfconduit(BaseConduit):
@@ -68,7 +68,7 @@ class Pdfconduit(BaseConduit):
         return self
 
     def scale(
-        self, scale: float, margins: Tuple[int, int] = (0, 0), accelerate: bool = False
+        self, scale: float, margins: ScaleMargins = (0, 0), accelerate: bool = False
     ) -> Self:
         self._set_default_output("scaled")
 
