@@ -26,5 +26,3 @@ class Compression(Enum):
     @classmethod
     def all(cls) -> List[Self]:
         return list(map(lambda c: c, cls))
-
-

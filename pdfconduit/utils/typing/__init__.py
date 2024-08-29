@@ -11,10 +11,12 @@ except ImportError:
 PdfObject = Union[str, BytesIO]
 PdfObjects = Iterable[PdfObject]
 
+
 @dataclass
 class _ImageQualityRange:
     min: int = 1
     max: int = 99
+
 
 ImageQuality = Annotated[int, _ImageQualityRange]
 
@@ -35,5 +37,5 @@ __all__ = [
     PdfObject,
     PdfObjects,
     ImageQuality,
-    ScaleMargins
+    ScaleMargins,
 ]
