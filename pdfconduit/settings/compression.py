@@ -1,7 +1,6 @@
-from dataclasses import dataclass
 from enum import Enum
 
-from pdfconduit.utils.typing import List, Self, Annotated
+from pdfconduit.utils.typing import List, Self
 
 
 class Compression(Enum):
@@ -29,10 +28,3 @@ class Compression(Enum):
         return list(map(lambda c: c, cls))
 
 
-@dataclass
-class _ImageQualityRange:
-    min: int = 1
-    max: int = 99
-
-
-ImageQuality = Annotated[int, _ImageQualityRange]
