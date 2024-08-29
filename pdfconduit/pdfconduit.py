@@ -2,7 +2,7 @@ from pypdf import PdfWriter
 
 from pdfconduit.convert import Flatten
 from pdfconduit.internals import BaseConduit
-from pdfconduit.settings import Compression, ImageQualityRange, Encryption
+from pdfconduit.settings import Compression, ImageQuality, Encryption
 from pdfconduit.transform import Merge2, Scale
 from pdfconduit.transform import Rotate
 from pdfconduit.utils import Info
@@ -122,7 +122,7 @@ class Pdfconduit(BaseConduit):
         self._writer.remove_images()
         return self
 
-    def reduce_image_quality(self, quality: Annotated[int, ImageQualityRange]) -> Self:
+    def reduce_image_quality(self, quality: ImageQuality) -> Self:
         self._set_default_output("reduced")
         for page in self._writer.pages:
             for img in page.images:
