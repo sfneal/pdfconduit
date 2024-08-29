@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from enum import Enum
 
 from pdfconduit.utils.typing import List, Self
@@ -27,9 +26,3 @@ class Compression(Enum):
     @classmethod
     def all(cls) -> List[Self]:
         return list(map(lambda c: c, cls))
-
-
-@dataclass
-class ImageQualityRange:
-    min: int = 1
-    max: int = 99
