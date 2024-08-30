@@ -12,7 +12,7 @@ jobs:
         os: [ ubuntu-latest ]
         python-version: [ "3.12" ]
 
-    name: Optimize Imports
+    name: Optimize Imports & Reformat Code
 
     steps:
       - uses: actions/checkout@v4
@@ -29,11 +29,8 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Install pdfconduit package
-        run: python -m pip install -e .
-
-      - name: Install code style fixer dependencies
-        run: python -m pip install -r requirements-imports.txt
+      - name: Install code import optimizer dependencies
+        run: python -m pip install -r requirements/imports.txt
 
       - name: Run Import Optimizers
         run: |
@@ -46,41 +43,12 @@ jobs:
           status_options: '--untracked-files=no'
           file_pattern: '*.py'
 
-  style:
-    needs: optimize-imports
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.12"]
-
-    name: Code Style
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-#          cache: 'pip'
-
-      - name: Upgrade package installers
-        run: python -m pip install --upgrade pip setuptools wheel
-
-      - name: Install dependencies
-        run: python -m pip install -r requirements.txt
-
-      - name: Install pdfconduit package
-        run: python -m pip install -e .
-
       - name: Install code style fixer dependencies
-        run: python -m pip install -r requirements-style.txt
+        run: python -m pip install -r requirements/style.txt
 
       - name: Run Code Style Fixer
         run: |
-          black pdfconduit
+          black app
           black tests
 
       - uses: stefanzweifel/git-auto-commit-action@v5
