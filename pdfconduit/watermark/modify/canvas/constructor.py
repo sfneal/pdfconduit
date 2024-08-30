@@ -1,13 +1,11 @@
 from datetime import datetime
-from typing import Optional, Union, Tuple
+from typing import Optional, Tuple, Union
 
 from PillowImage import PillowImage
 
-from pdfconduit.watermark.modify.canvas.objects import (
-    CanvasObjects,
-    CanvasStr,
-    CanvasImg,
-)
+from pdfconduit.watermark.modify.canvas.objects import (CanvasImg,
+                                                        CanvasObjects,
+                                                        CanvasStr)
 
 
 class CanvasConstructor:

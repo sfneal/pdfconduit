@@ -1,11 +1,10 @@
-from typing import Tuple, List
+from typing import List, Tuple
 
 from parameterized import parameterized
 
 from pdfconduit import Info, Pdfconduit
 from pdfconduit.settings import Compression
-from tests import PdfconduitTestCase, get_clean_pdf_name
-from tests import test_data_path
+from tests import PdfconduitTestCase, get_clean_pdf_name, test_data_path
 
 
 def optimization_params() -> List[str]:

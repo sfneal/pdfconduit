@@ -2,13 +2,14 @@
 from tempfile import NamedTemporaryFile
 from typing import Optional, Tuple
 
+from pdfrw import PageMerge, PdfReader, PdfWriter
 from PyBundle import resource_path
-from pdfrw import PdfReader, PdfWriter, PageMerge
-from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
+from pypdf import PdfReader as PypdfReader
+from pypdf import PdfWriter as PypdfWriter
 from reportlab.lib.pagesizes import letter
 
 from pdfconduit.transform import Rotate, Upscale
-from pdfconduit.utils import add_suffix, Info, pypdf_reader
+from pdfconduit.utils import Info, add_suffix, pypdf_reader
 from pdfconduit.utils.driver import PdfDriver
 
 
