@@ -46,6 +46,7 @@ jobs:
           status_options: '--untracked-files=no'
 
   optimize-imports:
+    needs: style
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
