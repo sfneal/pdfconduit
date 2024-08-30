@@ -1,18 +1,13 @@
 # Retrieve information about a PDF document
-from typing import Union, Optional
+from typing import Optional, Union
 
 from pypdf import PdfReader, PdfWriter
 
 from pdfconduit.utils._permissions import Permissions
 from pdfconduit.utils.read import pypdf_reader
-from pdfconduit.utils.typing.info import (
-    SecurityDict,
-    DimensionsDict,
-    SizeTuple,
-    Metadata,
-    Resources,
-    InfoAllDict,
-)
+from pdfconduit.utils.typing.info import (DimensionsDict, InfoAllDict,
+                                          Metadata, Resources, SecurityDict,
+                                          SizeTuple)
 
 
 class Info:

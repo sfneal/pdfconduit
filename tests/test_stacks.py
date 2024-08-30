@@ -1,8 +1,8 @@
 from parameterized import parameterized
 
-from pdfconduit import Pdfconduit, Info
+from pdfconduit import Info, Pdfconduit
 from pdfconduit.settings import Encryption
-from pdfconduit.utils.typing import List, Iterable
+from pdfconduit.utils.typing import Iterable, List
 from tests import *
 from tests.test_encrypt import EncryptionTestCase
 from tests.test_merge import merge_name_func

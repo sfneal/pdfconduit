@@ -1,5 +1,6 @@
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 long_description = """
 A Pure-Python library built as a PDF toolkit.  Prepare documents for distribution.

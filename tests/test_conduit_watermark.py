@@ -1,7 +1,7 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory
-from typing import Tuple, List
+from typing import List, Tuple
 
 from parameterized import parameterized
 

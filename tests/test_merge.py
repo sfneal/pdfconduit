@@ -1,9 +1,8 @@
 from parameterized import parameterized
 
 from pdfconduit import Pdfconduit
-from pdfconduit.utils.typing import List, Iterable
-from tests import PdfconduitTestCase, get_clean_pdf_name
-from tests import test_data_path
+from pdfconduit.utils.typing import Iterable, List
+from tests import PdfconduitTestCase, get_clean_pdf_name, test_data_path
 
 
 def merge_params():
