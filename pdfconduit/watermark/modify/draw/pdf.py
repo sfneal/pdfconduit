@@ -1,7 +1,7 @@
 # Dynamically generate watermark pdf file
 import io
 from tempfile import NamedTemporaryFile, mkdtemp
-from typing import Tuple, Optional
+from typing import Optional, Tuple
 
 from PillowImage import img_adjust
 from PyBundle import resource_path
@@ -10,7 +10,8 @@ from reportlab.pdfgen.canvas import Canvas
 
 from pdfconduit.utils.write import write_pdf
 from pdfconduit.watermark.modify import LETTER
-from pdfconduit.watermark.modify.canvas import CanvasStr, CanvasImg, CanvasObjects
+from pdfconduit.watermark.modify.canvas import (CanvasImg, CanvasObjects,
+                                                CanvasStr)
 
 
 def text_width(string: str, font_name: str = "Vera", font_size: int = 40) -> float:

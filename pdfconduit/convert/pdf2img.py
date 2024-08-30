@@ -2,7 +2,7 @@
 import os
 from io import BytesIO
 from tempfile import NamedTemporaryFile
-from typing import Optional, List
+from typing import List, Optional
 
 import fitz
 from PIL import Image

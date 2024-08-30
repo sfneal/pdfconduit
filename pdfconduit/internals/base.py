@@ -2,14 +2,14 @@ import os
 from abc import ABC
 from datetime import datetime
 from io import BytesIO
-from tempfile import TemporaryDirectory, NamedTemporaryFile
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 from warnings import warn
 
-from pypdf import PdfWriter, PdfReader
+from pypdf import PdfReader, PdfWriter
 
 from pdfconduit.internals.exceptions import OutputException
-from pdfconduit.utils import pypdf_reader, add_suffix
-from pdfconduit.utils.typing import Optional, Any, Dict, Self, PdfObject
+from pdfconduit.utils import add_suffix, pypdf_reader
+from pdfconduit.utils.typing import Any, Dict, Optional, PdfObject, Self
 
 
 class BaseConduit(ABC):

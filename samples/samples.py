@@ -2,11 +2,11 @@
 import os
 
 from pdfconduit.conduit import Watermark
-from pdfconduit.watermark.lib import available_images
-from pdfconduit.watermark.label import Label
 from pdfconduit.convert import Flatten
-from pdfconduit.transform import slicer, upscale, Merge
+from pdfconduit.transform import Merge, slicer, upscale
 from pdfconduit.utils import Info
+from pdfconduit.watermark.label import Label
+from pdfconduit.watermark.lib import available_images
 from tests import pdf_path
 
 

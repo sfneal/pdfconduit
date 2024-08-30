@@ -1,7 +1,7 @@
 # Convert a PNG image file to a PDF
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Optional, List, Union
+from typing import List, Optional, Union
 
 from PIL import Image
 
