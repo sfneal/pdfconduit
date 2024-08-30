@@ -56,9 +56,13 @@ class TestMerge(PdfconduitTestCase):
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, conduit.info.pages)
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
-    def test_can_merge_pdfs_from_stream(self, main_pdf: str, pdfs_to_merge: Iterable[str]):
+    def test_can_merge_pdfs_from_stream(
+        self, main_pdf: str, pdfs_to_merge: Iterable[str]
+    ):
         self.pdf_path = main_pdf
-        self.conduit = Pdfconduit(self._get_pdf_byte_stream(self.pdf_path)).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(
+            self._get_pdf_byte_stream(self.pdf_path)
+        ).set_output_directory(self.temp.name)
 
         for pdf in pdfs_to_merge:
             self.conduit.merge(pdf)
@@ -69,9 +73,13 @@ class TestMerge(PdfconduitTestCase):
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
-    def test_can_merge_pdfs_from_stream_with_streams(self, main_pdf: str, pdfs_to_merge: Iterable[str]):
+    def test_can_merge_pdfs_from_stream_with_streams(
+        self, main_pdf: str, pdfs_to_merge: Iterable[str]
+    ):
         self.pdf_path = main_pdf
-        self.conduit = Pdfconduit(self._get_pdf_byte_stream(self.pdf_path)).set_output_directory(self.temp.name)
+        self.conduit = Pdfconduit(
+            self._get_pdf_byte_stream(self.pdf_path)
+        ).set_output_directory(self.temp.name)
 
         for pdf in pdfs_to_merge:
             self.conduit.merge(self._get_pdf_byte_stream(pdf))
