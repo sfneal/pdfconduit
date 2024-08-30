@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 from time import time
 from typing import Optional
 
-from pdfconduit import Pdfconduit, Info
+from pdfconduit import Info, Pdfconduit
 from pdfconduit.utils.typing import Iterable
 
 test_data_dir = os.path.join(os.path.dirname(__file__), "data")

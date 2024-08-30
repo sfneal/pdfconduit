@@ -1,16 +1,12 @@
 # Upscale a PDF file
 from io import BytesIO
 
-from pdfrw import (
-    PdfReader as pdfrwReader,
-    PdfWriter as pdfrwWriter,
-    PageMerge as pdfrwPageMerge,
-    IndirectPdfDict as pdfrwIndirectPdfDict,
-)
-from pypdf import (
-    PdfReader as pypdfReader,
-    PdfWriter as pypdfWriter,
-)
+from pdfrw import IndirectPdfDict as pdfrwIndirectPdfDict
+from pdfrw import PageMerge as pdfrwPageMerge
+from pdfrw import PdfReader as pdfrwReader
+from pdfrw import PdfWriter as pdfrwWriter
+from pypdf import PdfReader as pypdfReader
+from pypdf import PdfWriter as pypdfWriter
 
 from pdfconduit.utils.driver import PdfDriver
 from pdfconduit.utils.info import Info
