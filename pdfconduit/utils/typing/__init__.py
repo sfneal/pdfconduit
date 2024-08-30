@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from io import BytesIO
-from typing import Optional, Any, Tuple, Dict, Union, List, Iterable
+from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
 
 try:
-    from typing import Self, Annotated, TypedDict
+    from typing import Annotated, Self, TypedDict
 except ImportError:
-    from typing_extensions import Self, Annotated, TypedDict
+    from typing_extensions import Annotated, Self, TypedDict
 
 
 PdfObject = Union[str, BytesIO]

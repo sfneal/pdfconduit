@@ -1,11 +1,9 @@
 # Merge PDF documents
 from io import BytesIO
 
-from pdfrw import (
-    PdfReader as PdfrwReader,
-    PdfWriter as PdfrwWriter,
-    IndirectPdfDict as PdfrwIndirectPdfDict,
-)
+from pdfrw import IndirectPdfDict as PdfrwIndirectPdfDict
+from pdfrw import PdfReader as PdfrwReader
+from pdfrw import PdfWriter as PdfrwWriter
 from pypdf import PdfWriter as PyPdfWriter
 
 from pdfconduit.utils.driver import PdfDriver

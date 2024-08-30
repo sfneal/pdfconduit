@@ -1,12 +1,11 @@
 import os
-from typing import Tuple, List, Optional
+from typing import List, Optional, Tuple
 
 from parameterized import parameterized
 
 from pdfconduit import Info, Pdfconduit
 from pdfconduit.utils import add_suffix
-from tests import PdfconduitTestCase, get_clean_pdf_name
-from tests import test_data_path
+from tests import PdfconduitTestCase, get_clean_pdf_name, test_data_path
 
 
 def unencrypted_pdf_params() -> List[str]:

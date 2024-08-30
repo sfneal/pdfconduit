@@ -2,7 +2,8 @@
 from pathlib import Path
 from typing import Union
 
-from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
+from pypdf import PdfReader as PypdfReader
+from pypdf import PdfWriter as PypdfWriter
 from pypdf._utils import StrByteType
 
 

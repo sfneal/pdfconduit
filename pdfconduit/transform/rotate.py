@@ -4,11 +4,10 @@ from io import BytesIO
 from tempfile import NamedTemporaryFile
 from typing import Optional
 
-from pdfrw import (
-    PdfReader as PdfrwReader,
-    PdfWriter as PdfrwWriter,
-)
-from pypdf import PdfReader as PypdfReader, PdfWriter as PypdfWriter
+from pdfrw import PdfReader as PdfrwReader
+from pdfrw import PdfWriter as PdfrwWriter
+from pypdf import PdfReader as PypdfReader
+from pypdf import PdfWriter as PypdfWriter
 
 from pdfconduit.utils.driver import PdfDriver
 from pdfconduit.utils.path import add_suffix

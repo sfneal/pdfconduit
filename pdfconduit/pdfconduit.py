@@ -3,17 +3,10 @@ from pypdf import PdfWriter
 from pdfconduit.convert import Flatten
 from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, Encryption
-from pdfconduit.transform import Merge2, Scale
-from pdfconduit.transform import Rotate
+from pdfconduit.transform import Merge2, Rotate, Scale
 from pdfconduit.utils import Info
-from pdfconduit.utils.typing import (
-    Optional,
-    Self,
-    ImageQuality,
-    ScaleMargins,
-    PdfObject,
-    PdfObjects,
-)
+from pdfconduit.utils.typing import (ImageQuality, Optional, PdfObject,
+                                     PdfObjects, ScaleMargins, Self)
 
 
 class Pdfconduit(BaseConduit):
