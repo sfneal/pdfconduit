@@ -6,7 +6,14 @@ from pdfconduit.settings import Compression, Encryption
 from pdfconduit.transform import Merge2, Scale
 from pdfconduit.transform import Rotate
 from pdfconduit.utils import Info
-from pdfconduit.utils.typing import Optional, Tuple, Self, ImageQuality, ScaleMargins
+from pdfconduit.utils.typing import (
+    Optional,
+    Self,
+    ImageQuality,
+    ScaleMargins,
+    PdfObject,
+    PdfObjects,
+)
 
 
 class Pdfconduit(BaseConduit):
@@ -20,7 +27,7 @@ class Pdfconduit(BaseConduit):
         )
         return self
 
-    def merge(self, pdf: str, position: Optional[int] = None) -> Self:
+    def merge(self, pdf: PdfObject, position: Optional[int] = None) -> Self:
         # todo: allow for iterable of pdfs
         self._set_default_output("merged")
         if position is None:
@@ -29,10 +36,10 @@ class Pdfconduit(BaseConduit):
             self._writer.merge(position, pdf)
         return self
 
-    def merge_fast(self, pdfs: list) -> Self:
+    def merge_fast(self, pdfs: PdfObjects) -> Self:
         self._set_default_output("merged")
         # todo: extract method for stream or path
-        pdf_objects = [self.pdf_object] + pdfs
+        pdf_objects = [self.pdf_object] + list(pdfs)
         self._path = Merge2(pdf_objects, output=self.output).use_pdfrw().merge()
         return self._open_and_read()
 
