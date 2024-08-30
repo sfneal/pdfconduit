@@ -89,6 +89,7 @@ jobs:
           file_pattern: '*.py'
 
   post-tests:
+    needs: optimize-imports
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
