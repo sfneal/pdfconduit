@@ -32,6 +32,7 @@ class PDF2IMG:
         if isinstance(self._pdf, BytesIO):
             self._tempfile = NamedTemporaryFile(suffix=self._ext, dir=self._directory, delete=False)
             self._filename = self._tempfile.name
+            self._directory = os.path.dirname(self._filename)
             self._doc = fitz.open(stream=self._pdf)
         else:
             self._filename = os.path.basename(self._pdf)
