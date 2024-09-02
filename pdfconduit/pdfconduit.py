@@ -117,8 +117,9 @@ class Pdfconduit(BaseConduit):
         ext: ImageExtension = ImageExtension.PNG,
         alpha: bool = False,
     ):
-        converted = PDF2IMG(self.pdf_object, ext=ext, alpha=alpha).convert()
+        converted = PDF2IMG(self.pdf_object, output=self._tempdir, ext=ext, alpha=alpha).convert()
         self._close()
+        # todo: fix issues with temp files not cleaning up
         return converted
 
     def minify(self) -> Self:
