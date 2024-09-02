@@ -6,6 +6,10 @@ on:
 jobs:
   optimize-imports:
     runs-on: ${{ matrix.os }}
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -16,6 +20,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
