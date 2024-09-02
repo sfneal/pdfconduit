@@ -11,5 +11,5 @@ PyMuPDFb==1.24.9; python_version >= "3.8"
 pypdf==4.3.1
 reportlab==4.2.2
 tqdm==4.66.5
--r requirements-crypto.txt
--r requirements-testing.txt
+-r requirements/crypto.txt
+-r requirements/testing.txt
