@@ -17,14 +17,16 @@ class TestPdf2Img(unittest.TestCase):
 
     def test_pdf2img(self):
         """Convert a PDF file to a png image."""
-        img = PDF2IMG(self.pdf_path).save()
+        images = PDF2IMG(self.pdf_path).convert()
 
         # Assert img file exists
-        self.assertTrue(os.path.exists(img[0]))
+        self.assertTrue(os.path.exists(images[0]))
 
         # Assert img file is correct file type
-        self.assertTrue(img[0].endswith(".png"))
-        self.img = img[0]
+        self.assertTrue(images[0].endswith(".png"))
+        self.img = images[0]
+
+    #todo: add from stream test
 
 
 if __name__ == "__main__":
