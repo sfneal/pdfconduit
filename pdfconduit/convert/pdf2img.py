@@ -7,7 +7,12 @@ from typing import List, Optional
 
 import fitz
 from PIL import Image
-from pymupdf import Document as PyMupdfDocument
+
+try:
+    from pymupdf import Document as PyMupdfDocument
+except ImportError:
+    from fitz import Document as PyMupdfDocument
+
 
 from pdfconduit.utils.path import add_suffix
 from pdfconduit.utils.typing import PdfObject
