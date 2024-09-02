@@ -1,5 +1,6 @@
 # Convert each page of PDF to images
 import os
+from enum import Enum
 from io import BytesIO
 from tempfile import NamedTemporaryFile
 from typing import List, Optional
@@ -7,50 +8,87 @@ from typing import List, Optional
 import fitz
 from PIL import Image
 
+try:
+    from pymupdf import DisplayList
+    from pymupdf import Document as PyMupdfDocument
+except ImportError:
+    from fitz import Document as PyMupdfDocument, DisplayList
+
 from pdfconduit.utils.path import add_suffix
+from pdfconduit.utils.typing import PdfObject
+
+
+class ImageExtension(Enum):
+    PNG: str = "png"
+    JPG: str = "jpg"
 
 
 class PDF2IMG:
+    _filename: str = None
+    _tempfile: Optional[NamedTemporaryFile] = None
+    _doc: PyMupdfDocument
+
     def __init__(
         self,
-        file_name: str,
+        pdf: PdfObject,
         output: Optional[str] = None,
-        tempdir: Optional[str] = None,
-        ext: str = ".png",
+        ext: ImageExtension = ImageExtension.PNG,
         alpha: bool = False,
     ):
-        """Convert each page of a PDF file into a PNG image"""
-        self.file_name = file_name
-        self.output = output
-        self.tempdir = tempdir
-        self.ext = ext
-        self.alpha = alpha
+        self._pdf = pdf
+        self._directory = output
+        self._ext = ext.value
+        self._alpha = alpha
 
-        self.doc = fitz.open(self.file_name)
-        self.output_dir = os.path.dirname(file_name) if tempdir is None else tempdir
+        if isinstance(self._pdf, BytesIO):
+            self._tempfile = NamedTemporaryFile(
+                suffix=self._ext, dir=self._directory, delete=False
+            )
+            self._filename = self._tempfile.name
+            self._directory = os.path.dirname(self._filename)
+            self._doc = fitz.open(stream=self._pdf)
+        else:
+            self._filename = os.path.basename(self._pdf)
+            self._directory = os.path.dirname(self._pdf)
+            self._doc = fitz.open(filename=self._pdf)
 
-        # storage for page display lists
-        self.dlist_tab = [None] * len(self.doc)
-        self._page_data = None
-
-    @property
-    def pdf_data(self) -> List[bytes]:
-        if not self._page_data:
-            self._page_data = self._get_pdf_data()
-        return self._page_data
+    def convert(self):
+        saved = []
+        for index, image in enumerate(self._get_pdf_data()):
+            output = os.path.join(
+                self._directory,
+                add_suffix(self._filename, str(index + 1), ext=self._ext),
+            )
+            with Image.open(BytesIO(image)) as pillow:
+                pillow.save(output)
+            saved.append(output)
+        self._doc.close()
+        if self._tempfile:
+            self._tempfile.close()
+        return saved
 
     def _get_pdf_data(self) -> List[bytes]:
-        return [self._get_page_data(cur_page) for cur_page in range(len(self.doc))]
+        return FitzPdfToImage(self._doc, self._alpha).convert()
+
+
+class FitzPdfToImage:
+    def __init__(self, doc: PyMupdfDocument, alpha: bool = False):
+        self._doc = doc
+        self._dlist_tab = [None] * len(doc)
+        self._alpha = alpha
+
+    def convert(self) -> List[bytes]:
+        return [self._get_page_data(cur_page) for cur_page in range(len(self._doc))]
 
     def _get_page_data(self, pno, zoom=0) -> bytes:
         """
         Return a PNG image for a document page number. If zoom is other than 0, one of
         the 4 page quadrants are zoomed-in instead and the corresponding clip returned.
         """
-        dlist = self.dlist_tab[pno]  # get display list
+        dlist: Optional[DisplayList] = self._dlist_tab[pno]  # get display list
         if not dlist:  # create if not yet there
-            self.dlist_tab[pno] = self.doc[pno].get_displaylist()
-            dlist = self.dlist_tab[pno]
+            self._dlist_tab[pno] = self._doc[pno].get_displaylist()
+            dlist = self._dlist_tab[pno]
         r = dlist.rect  # page rectangle
         mp = r.tl + (r.br - r.tl) * 0.5  # rect middle point
         mt = r.tl + (r.tr - r.tl) * 0.5  # middle of top edge
@@ -67,29 +105,7 @@ class PDF2IMG:
         elif zoom == 3:  # bot-left
             clip = fitz.Rect(ml, mb)
         if zoom == 0:  # total page
-            pix = dlist.get_pixmap(alpha=self.alpha)
+            pix = dlist.get_pixmap(alpha=self._alpha)
         else:
-            pix = dlist.get_pixmap(alpha=self.alpha, matrix=mat, clip=clip)
+            pix = dlist.get_pixmap(alpha=self._alpha, matrix=mat, clip=clip)
         return pix.tobytes()  # return the PNG image
-
-    def _get_output(self, index: int) -> str:
-        if self.output:
-            return self.output
-        elif not self.tempdir:
-            output_file = add_suffix(self.file_name, str(index + 1), ext=self.ext)
-            return os.path.join(self.output_dir, output_file)
-        else:
-            with NamedTemporaryFile(
-                suffix=self.ext, dir=self.tempdir, delete=True
-            ) as temp:
-                return temp.name
-
-    def save(self) -> List[str]:
-        saved = []
-        for i, img in enumerate(self.pdf_data):
-            output = self._get_output(i)
-            saved.append(output)
-            with Image.open(BytesIO(img)) as image:
-                image.save(output)
-        self.doc.close()
-        return saved

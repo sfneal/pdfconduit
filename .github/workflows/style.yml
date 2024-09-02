@@ -6,6 +6,8 @@ on:
 jobs:
   optimize-imports:
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -30,7 +32,7 @@ jobs:
         run: python -m pip install -r requirements.txt
 
       - name: Install code import optimizer dependencies
-        run: python -m pip install -r requirements/imports.txt
+        run: python -m pip install -r requirements-imports.txt
 
       - name: Run Import Optimizers
         run: |
@@ -44,11 +46,11 @@ jobs:
           file_pattern: '*.py'
 
       - name: Install code style fixer dependencies
-        run: python -m pip install -r requirements/style.txt
+        run: python -m pip install -r requirements-style.txt
 
       - name: Run Code Style Fixer
         run: |
-          black app
+          black pdfconduit
           black tests
 
       - uses: stefanzweifel/git-auto-commit-action@v5
