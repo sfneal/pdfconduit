@@ -48,7 +48,7 @@ jobs:
 
       - name: Run Code Style Fixer
         run: |
-          black app
+          black pdfconduit
           black tests
 
       - uses: stefanzweifel/git-auto-commit-action@v5
