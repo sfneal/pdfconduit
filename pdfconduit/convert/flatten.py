@@ -46,7 +46,7 @@ class Flatten:
         return str(self.pdf)
 
     def get_imgs(self) -> List[str]:
-        self.imgs = PDF2IMG(self.file_name, tempdir=self.tempdir).save()
+        self.imgs = PDF2IMG(self.file_name, output=self.tempdir).convert()
         return self.imgs
 
     def save(self, remove_temps: bool = True) -> str:
