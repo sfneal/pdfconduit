@@ -9,10 +9,10 @@ import fitz
 from PIL import Image
 
 try:
-    from pymupdf import Document as PyMupdfDocument, DisplayList
+    from pymupdf import DisplayList
+    from pymupdf import Document as PyMupdfDocument
 except ImportError:
     from fitz import Document as PyMupdfDocument, DisplayList
-
 
 from pdfconduit.utils.path import add_suffix
 from pdfconduit.utils.typing import PdfObject
