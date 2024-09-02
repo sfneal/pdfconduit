@@ -49,6 +49,8 @@ jobs:
           status_options: '--untracked-files=no'
           file_pattern: '*.py'
           repository: /home/runner/work/pdfconduit/pdfconduit
+          skip_fetch: true
+          skip_checkout: true
 
       - name: Install code style fixer dependencies
         run: python -m pip install -r requirements/style.txt
@@ -63,3 +65,5 @@ jobs:
           commit_message: REFORMAT code style (via black)
           status_options: '--untracked-files=no'
           repository: /home/runner/work/pdfconduit/pdfconduit
+          skip_fetch: true
+          skip_checkout: true
