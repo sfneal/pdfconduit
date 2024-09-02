@@ -43,6 +43,14 @@ jobs:
           isort .
           autoflake --in-place --remove-unused-variables --remove-all-unused-imports .
 
+      - name: "Run if changes have been detected"
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        run: echo "Changes!"
+
+      - name: "Run if no changes have been detected"
+        if: steps.auto-commit-action.outputs.changes_detected == 'false'
+        run: echo "No Changes!"
+
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: OPTIMIZE imports (via isort & autoflake)
@@ -56,6 +64,14 @@ jobs:
         run: |
           black pdfconduit
           black tests
+
+      - name: "Run if changes have been detected"
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        run: echo "Changes!"
+
+      - name: "Run if no changes have been detected"
+        if: steps.auto-commit-action.outputs.changes_detected == 'false'
+        run: echo "No Changes!"
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
