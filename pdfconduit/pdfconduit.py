@@ -1,6 +1,6 @@
 from pypdf import PdfWriter
 
-from pdfconduit.convert import Flatten, PDF2IMG
+from pdfconduit.convert import PDF2IMG, Flatten
 from pdfconduit.convert.pdf2img import ImageExtension
 from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, Encryption
@@ -112,7 +112,12 @@ class Pdfconduit(BaseConduit):
 
         return self._open_and_read()
 
-    def to_images(self, ext: ImageExtension = ImageExtension.PNG, alpha: bool = False, output: Optional[str] = None):
+    def to_images(
+        self,
+        ext: ImageExtension = ImageExtension.PNG,
+        alpha: bool = False,
+        output: Optional[str] = None,
+    ):
         return PDF2IMG(self.pdf_object, ext=ext, alpha=alpha).convert()
 
     def minify(self) -> Self:
