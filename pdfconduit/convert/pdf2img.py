@@ -23,14 +23,22 @@ class PDF2IMG:
     _tempfile: Optional[NamedTemporaryFile] = None
     _doc: PyMupdfDocument
 
-    def __init__(self, pdf: PdfObject, output: Optional[str] = None, ext: ImageExtension = ImageExtension.PNG, alpha: bool = False):
+    def __init__(
+        self,
+        pdf: PdfObject,
+        output: Optional[str] = None,
+        ext: ImageExtension = ImageExtension.PNG,
+        alpha: bool = False,
+    ):
         self._pdf = pdf
         self._directory = output
         self._ext = ext.value
         self._alpha = alpha
 
         if isinstance(self._pdf, BytesIO):
-            self._tempfile = NamedTemporaryFile(suffix=self._ext, dir=self._directory, delete=False)
+            self._tempfile = NamedTemporaryFile(
+                suffix=self._ext, dir=self._directory, delete=False
+            )
             self._filename = self._tempfile.name
             self._directory = os.path.dirname(self._filename)
             self._doc = fitz.open(stream=self._pdf)
@@ -42,7 +50,10 @@ class PDF2IMG:
     def convert(self):
         saved = []
         for index, image in enumerate(self._get_pdf_data()):
-            output = os.path.join(self._directory, add_suffix(self._filename, str(index + 1), ext=self._ext))
+            output = os.path.join(
+                self._directory,
+                add_suffix(self._filename, str(index + 1), ext=self._ext),
+            )
             with Image.open(BytesIO(image)) as pillow:
                 pillow.save(output)
             saved.append(output)

@@ -27,7 +27,6 @@ def convert_pdf2img_name_func(testcase_func, param_num, param):
     return "{}.{}".format(testcase_func.__name__, get_clean_pdf_name(param.args[0]))
 
 
-
 class TestPdf2Img(PdfconduitTestCase):
     @parameterized.expand(convert_pdf2img_params, name_func=convert_pdf2img_name_func)
     def test_convert_pdf_to_images(self, pdf: str):
@@ -64,7 +63,9 @@ class TestPdf2Img(PdfconduitTestCase):
 
     @parameterized.expand(convert_pdf2img_params, name_func=convert_pdf2img_name_func)
     def test_convert_pdf_to_images_jpg_from_stream(self, pdf: str):
-        images = PDF2IMG(self._get_pdf_byte_stream(pdf), ext=ImageExtension.JPG).convert()
+        images = PDF2IMG(
+            self._get_pdf_byte_stream(pdf), ext=ImageExtension.JPG
+        ).convert()
 
         for image in images:
             # Assert img file exists
@@ -72,6 +73,7 @@ class TestPdf2Img(PdfconduitTestCase):
 
             # Assert img file is correct file type
             self.assertTrue(image.endswith(".jpg"))
+
 
 if __name__ == "__main__":
     unittest.main()
