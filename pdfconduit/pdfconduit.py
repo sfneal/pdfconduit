@@ -116,9 +116,10 @@ class Pdfconduit(BaseConduit):
         self,
         ext: ImageExtension = ImageExtension.PNG,
         alpha: bool = False,
-        output: Optional[str] = None,
     ):
-        return PDF2IMG(self.pdf_object, ext=ext, alpha=alpha).convert()
+        converted = PDF2IMG(self.pdf_object, ext=ext, alpha=alpha).convert()
+        self._close()
+        return converted
 
     def minify(self) -> Self:
         # remove duplication (images or pages) from a PDF

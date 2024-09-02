@@ -63,6 +63,26 @@ class BaseConduit(ABC):
             self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
         return self
 
+    def _close_readers(self) -> Self:
+        self._reader.close()
+        if self._pdf_file is not None:
+            self._pdf_file.close()
+        if self._stream is not None:
+            self._stream.close()
+        return self
+
+    def _close_writers(self) -> Self:
+        if self._tempdir is not None:
+            self._tempfile.close()
+        self._writer.close()
+        return self
+
+    def _close(self) -> Self:
+        self._close_readers()
+        self._close_writers()
+        self._closed = True
+        return self
+
     def write(self):
         # Set default output in case none was set
         self._set_default_output("modified")
@@ -81,11 +101,7 @@ class BaseConduit(ABC):
         self._writer.add_metadata(default_metadata)
 
         # Close the PDF reader & file reader
-        self._reader.close()
-        if self._pdf_file is not None:
-            self._pdf_file.close()
-        if self._stream is not None:
-            self._stream.close()
+        self._close_readers()
 
         # Confirm output path is set
         if self.output is None:
@@ -94,12 +110,11 @@ class BaseConduit(ABC):
         # Write the PDF to the output file
         if self._tempdir is not None:
             self._writer.write(self.output)
-            self._tempfile.close()
         else:
             with open(self.output, "wb") as output_pdf:
                 self._writer.write(output_pdf)
 
-        self._writer.close()
+        self._close_writers()
 
         self._closed = True
 
