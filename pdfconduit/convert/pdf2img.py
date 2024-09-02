@@ -9,9 +9,9 @@ import fitz
 from PIL import Image
 
 try:
-    from pymupdf import Document as PyMupdfDocument
+    from pymupdf import Document as PyMupdfDocument, DisplayList
 except ImportError:
-    from fitz import Document as PyMupdfDocument
+    from fitz import Document as PyMupdfDocument, DisplayList
 
 
 from pdfconduit.utils.path import add_suffix
@@ -85,7 +85,7 @@ class FitzPdfToImage:
         Return a PNG image for a document page number. If zoom is other than 0, one of
         the 4 page quadrants are zoomed-in instead and the corresponding clip returned.
         """
-        dlist = self._dlist_tab[pno]  # get display list
+        dlist: Optional[DisplayList] = self._dlist_tab[pno]  # get display list
         if not dlist:  # create if not yet there
             self._dlist_tab[pno] = self._doc[pno].get_displaylist()
             dlist = self._dlist_tab[pno]
