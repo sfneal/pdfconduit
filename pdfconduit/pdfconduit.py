@@ -6,8 +6,14 @@ from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, Encryption
 from pdfconduit.transform import Merge2, Rotate, Scale
 from pdfconduit.utils import Info
-from pdfconduit.utils.typing import (ImageQuality, Optional, PdfObject,
-                                     PdfObjects, ScaleMargins, Self)
+from pdfconduit.utils.typing import (
+    ImageQuality,
+    Optional,
+    PdfObject,
+    PdfObjects,
+    ScaleMargins,
+    Self,
+)
 
 
 class Pdfconduit(BaseConduit):
@@ -115,7 +121,9 @@ class Pdfconduit(BaseConduit):
         if not output:
             self.set_output_temp()
             output = self._tempdir.name
-        converted = PDF2IMG(self.pdf_object, output=output, ext=ext, alpha=alpha).convert()
+        converted = PDF2IMG(
+            self.pdf_object, output=output, ext=ext, alpha=alpha
+        ).convert()
         self._close()
         # todo: fix issues with temp files not cleaning up
         return converted
