@@ -6,8 +6,14 @@ from pdfconduit.internals import BaseConduit
 from pdfconduit.settings import Compression, Encryption
 from pdfconduit.transform import Merge2, Rotate, Scale
 from pdfconduit.utils import Info
-from pdfconduit.utils.typing import (ImageQuality, Optional, PdfObject,
-                                     PdfObjects, ScaleMargins, Self)
+from pdfconduit.utils.typing import (
+    ImageQuality,
+    Optional,
+    PdfObject,
+    PdfObjects,
+    ScaleMargins,
+    Self,
+)
 
 
 class Pdfconduit(BaseConduit):

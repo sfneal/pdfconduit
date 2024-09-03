@@ -10,8 +10,7 @@ from reportlab.pdfgen.canvas import Canvas
 
 from pdfconduit.utils.write import write_pdf
 from pdfconduit.watermark.modify import LETTER
-from pdfconduit.watermark.modify.canvas import (CanvasImg, CanvasObjects,
-                                                CanvasStr)
+from pdfconduit.watermark.modify.canvas import CanvasImg, CanvasObjects, CanvasStr
 
 
 def text_width(string: str, font_name: str = "Vera", font_size: int = 40) -> float:
