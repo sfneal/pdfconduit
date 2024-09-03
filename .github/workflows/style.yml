@@ -33,15 +33,11 @@ jobs:
 
       - name: Install code style & import optimizer dependencies
         run: |
-          python -m pip install -r requirements-imports.txt
-          python -m pip install -r requirements-style.txt
+          python -m pip install -r requirements/imports.txt
+          python -m pip install -r requirements/style.txt
 
       - name: Run Import Optimizers & Code Style Fixer
-        run: |
-          isort .
-          autoflake --in-place --remove-unused-variables --remove-all-unused-imports .
-          black pdfconduit
-          black tests
+        run: sh .github/scripts/optimize.sh
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
