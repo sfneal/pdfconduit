@@ -114,10 +114,14 @@ class Pdfconduit(BaseConduit):
 
     def to_images(
         self,
+        output: Optional[str] = None,
         ext: ImageExtension = ImageExtension.PNG,
         alpha: bool = False,
     ):
-        converted = PDF2IMG(self.pdf_object, output=self._tempdir, ext=ext, alpha=alpha).convert()
+        if not output:
+            self.set_output_temp()
+            output = self._tempdir.name
+        converted = PDF2IMG(self.pdf_object, output=output, ext=ext, alpha=alpha).convert()
         self._close()
         # todo: fix issues with temp files not cleaning up
         return converted
