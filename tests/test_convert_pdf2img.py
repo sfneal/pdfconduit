@@ -17,14 +17,8 @@ def params() -> List[Tuple[str, ImageExtension, bool]]:
         "document.pdf",
         "plan_p.pdf",
     ]
-    extensions = [
-        ImageExtension.PNG,
-        ImageExtension.JPG
-    ]
-    from_stream = [
-        True,
-        False
-    ]
+    extensions = [ImageExtension.PNG, ImageExtension.JPG]
+    from_stream = [True, False]
 
     return [
         (test_data_path(file), extension, use_stream)
@@ -45,8 +39,12 @@ def name_func(testcase_func, param_num, param):
 
 class TestPdf2Img(PdfconduitTestCase):
     @parameterized.expand(params, name_func=name_func)
-    def test_convert_pdf_to_images_pdf2img(self, pdf: str, ext: ImageExtension, from_stream: bool):
-        pdf2img = PDF2IMG(self._get_pdf(pdf, from_stream), output=self.temp.name, ext=ext)
+    def test_convert_pdf_to_images_pdf2img(
+        self, pdf: str, ext: ImageExtension, from_stream: bool
+    ):
+        pdf2img = PDF2IMG(
+            self._get_pdf(pdf, from_stream), output=self.temp.name, ext=ext
+        )
         images = pdf2img.convert()
 
         for image in images:
@@ -54,11 +52,15 @@ class TestPdf2Img(PdfconduitTestCase):
             self.assertTrue(os.path.exists(image))
 
             # Assert img file is correct file type
-            self.assertTrue(image.endswith('.' + ext.value))
+            self.assertTrue(image.endswith("." + ext.value))
 
     @parameterized.expand(params, name_func=name_func)
-    def test_convert_pdf_to_images_pdfconduit(self, pdf: str, ext: ImageExtension, from_stream: bool):
-        self.conduit = Pdfconduit(self._get_pdf(pdf, from_stream)).set_output_temp(self.temp)
+    def test_convert_pdf_to_images_pdfconduit(
+        self, pdf: str, ext: ImageExtension, from_stream: bool
+    ):
+        self.conduit = Pdfconduit(self._get_pdf(pdf, from_stream)).set_output_temp(
+            self.temp
+        )
         images = self.conduit.to_images(ext=ext)
 
         for image in images:
@@ -66,10 +68,12 @@ class TestPdf2Img(PdfconduitTestCase):
             self.assertTrue(os.path.exists(image))
 
             # Assert img file is correct file type
-            self.assertTrue(image.endswith('.' + ext.value))
+            self.assertTrue(image.endswith("." + ext.value))
 
     @parameterized.expand(params, name_func=name_func)
-    def test_convert_pdf_to_images_pdfconduit_without_setting_directory(self, pdf: str, ext: ImageExtension, from_stream: bool):
+    def test_convert_pdf_to_images_pdfconduit_without_setting_directory(
+        self, pdf: str, ext: ImageExtension, from_stream: bool
+    ):
         self.conduit = Pdfconduit(self._get_pdf(pdf, from_stream))
         images = self.conduit.to_images(ext=ext)
 
@@ -78,11 +82,13 @@ class TestPdf2Img(PdfconduitTestCase):
             self.assertTrue(os.path.exists(image))
 
             # Assert img file is correct file type
-            self.assertTrue(image.endswith('.' + ext.value))
+            self.assertTrue(image.endswith("." + ext.value))
 
     def test_cant_convert_pdf_to_images_without_dir(self):
         with self.assertRaises(TypeError) as context:
-            pdf2img = PDF2IMG(self._get_pdf(self.pdf_path, False), ext=ImageExtension.PNG)
+            pdf2img = PDF2IMG(
+                self._get_pdf(self.pdf_path, False), ext=ImageExtension.PNG
+            )
 
         self.assertTrue(
             "missing 1 required positional argument: 'output'" in str(context.exception)
