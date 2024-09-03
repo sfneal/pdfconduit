@@ -74,7 +74,8 @@ class BaseConduit(ABC):
     def _close_writers(self) -> Self:
         if self._tempdir is not None:
             self._tempfile.close()
-        self._writer.close()
+        if self._writer is not None:
+            self._writer.close()
         return self
 
     def _close(self) -> Self:
