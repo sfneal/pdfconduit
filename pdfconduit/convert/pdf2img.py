@@ -39,7 +39,7 @@ class PDF2IMG:
         self._alpha = alpha
 
         if isinstance(self._pdf, BytesIO):
-            self._filename = 'pdf2img'
+            self._filename = "pdf2img"
             self._doc = fitz.open(stream=self._pdf)
         else:
             self._filename = os.path.basename(self._pdf)
