@@ -43,7 +43,6 @@ jobs:
         with:
           commit_message: OPTIMIZE imports (via isort & autoflake)
           status_options: '--untracked-files=no'
-          file_pattern: '*.py'
 
       - name: Install code style fixer dependencies
         run: python -m pip install -r requirements-style.txt
