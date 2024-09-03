@@ -3,11 +3,9 @@ from typing import Optional, Tuple, Union
 
 from PillowImage import PillowImage
 
-from pdfconduit.watermark.modify.canvas.objects import (
-    CanvasImg,
-    CanvasObjects,
-    CanvasStr,
-)
+from pdfconduit.watermark.modify.canvas.objects import (CanvasImg,
+                                                        CanvasObjects,
+                                                        CanvasStr)
 
 
 class CanvasConstructor:
