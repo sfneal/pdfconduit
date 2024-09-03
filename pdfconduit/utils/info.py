@@ -5,14 +5,9 @@ from pypdf import PdfReader, PdfWriter
 
 from pdfconduit.utils._permissions import Permissions
 from pdfconduit.utils.read import pypdf_reader
-from pdfconduit.utils.typing.info import (
-    DimensionsDict,
-    InfoAllDict,
-    Metadata,
-    Resources,
-    SecurityDict,
-    SizeTuple,
-)
+from pdfconduit.utils.typing.info import (DimensionsDict, InfoAllDict,
+                                          Metadata, Resources, SecurityDict,
+                                          SizeTuple)
 
 
 class Info:
