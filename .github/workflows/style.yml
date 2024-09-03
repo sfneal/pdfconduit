@@ -31,29 +31,19 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Install code import optimizer dependencies
-        run: python -m pip install -r requirements-imports.txt
+      - name: Install code style & import optimizer dependencies
+        run: |
+          python -m pip install -r requirements-imports.txt
+          python -m pip install -r requirements-style.txt
 
-      - name: Run Import Optimizers
+      - name: Run Import Optimizers & Code Style Fixer
         run: |
           isort .
           autoflake --in-place --remove-unused-variables --remove-all-unused-imports .
-
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: OPTIMIZE imports (via isort & autoflake)
-          status_options: '--untracked-files=no'
-          file_pattern: '*.py'
-
-      - name: Install code style fixer dependencies
-        run: python -m pip install -r requirements-style.txt
-
-      - name: Run Code Style Fixer
-        run: |
           black pdfconduit
           black tests
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: REFORMAT code style (via black)
+          commit_message: REFORMAT code style & optimize imports (via black, isort & autoflake)
           status_options: '--untracked-files=no'

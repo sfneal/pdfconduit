@@ -2,7 +2,6 @@
 import os
 from enum import Enum
 from io import BytesIO
-from tempfile import NamedTemporaryFile
 from typing import List, Optional
 
 import fitz
@@ -25,13 +24,12 @@ class ImageExtension(Enum):
 
 class PDF2IMG:
     _filename: str = None
-    _tempfile: Optional[NamedTemporaryFile] = None
     _doc: PyMupdfDocument
 
     def __init__(
         self,
         pdf: PdfObject,
-        output: Optional[str] = None,
+        output: str,
         ext: ImageExtension = ImageExtension.PNG,
         alpha: bool = False,
     ):
@@ -41,15 +39,10 @@ class PDF2IMG:
         self._alpha = alpha
 
         if isinstance(self._pdf, BytesIO):
-            self._tempfile = NamedTemporaryFile(
-                suffix=self._ext, dir=self._directory, delete=False
-            )
-            self._filename = self._tempfile.name
-            self._directory = os.path.dirname(self._filename)
+            self._filename = "pdf2img"
             self._doc = fitz.open(stream=self._pdf)
         else:
             self._filename = os.path.basename(self._pdf)
-            self._directory = os.path.dirname(self._pdf)
             self._doc = fitz.open(filename=self._pdf)
 
     def convert(self):
@@ -63,8 +56,6 @@ class PDF2IMG:
                 pillow.save(output)
             saved.append(output)
         self._doc.close()
-        if self._tempfile:
-            self._tempfile.close()
         return saved
 
     def _get_pdf_data(self) -> List[bytes]:

@@ -114,11 +114,19 @@ class Pdfconduit(BaseConduit):
 
     def to_images(
         self,
+        output: Optional[str] = None,
         ext: ImageExtension = ImageExtension.PNG,
         alpha: bool = False,
-        output: Optional[str] = None,
     ):
-        return PDF2IMG(self.pdf_object, ext=ext, alpha=alpha).convert()
+        if not output:
+            self.set_output_temp()
+            output = self._tempdir.name
+        converted = PDF2IMG(
+            self.pdf_object, output=output, ext=ext, alpha=alpha
+        ).convert()
+        self._close()
+        # todo: fix issues with temp files not cleaning up
+        return converted
 
     def minify(self) -> Self:
         # remove duplication (images or pages) from a PDF
