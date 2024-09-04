@@ -63,7 +63,7 @@ class Watermark:
         return str(self.document)
 
     def cleanup(self) -> str:
-        runtime = self.time.end
+        self.time.end
         if self.move_temps:
             if os.path.isdir(self.move_temps):
                 shutil.move(self.tempdir, self.move_temps)
