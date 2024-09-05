@@ -148,10 +148,10 @@ class PdfconduitTestCase(unittest.TestCase):
         self.assertLess(os.path.getsize(modified), os.path.getsize(original))
 
     def assertSuffixIsCorrect(self, output: str, expected_suffix: str):
-        self.assertTrue('_' in output)
+        self.assertTrue("_" in output)
         self.assertTrue(expected_suffix in output)
-        self.assertTrue('.pdf' in output)
-        self.assertTrue(output.endswith('_{}.pdf'.format(expected_suffix)))
+        self.assertTrue(".pdf" in output)
+        self.assertTrue(output.endswith("_{}.pdf".format(expected_suffix)))
 
     def _get_pdf_byte_stream(self, path: Optional[str] = None) -> BytesIO:
         with open(path if path else self.pdf_path, "rb") as fh:

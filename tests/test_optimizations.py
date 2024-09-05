@@ -50,7 +50,7 @@ class TestOptimizations(PdfconduitTestCase):
         self.assertPdfExists(self.conduit.output)
         self.assertFileSizeDecreased(pdf_path, self.conduit.output)
         self.assertPdfPagesEqual(pdf_path, self.conduit.output)
-        self.assertSuffixIsCorrect(self.conduit.output, 'minified')
+        self.assertSuffixIsCorrect(self.conduit.output, "minified")
 
     @parameterized.expand(optimization_params, name_func=optimizations_name_func)
     def test_remove_duplication(self, pdf_path: str):
@@ -60,7 +60,7 @@ class TestOptimizations(PdfconduitTestCase):
         self.assertPdfExists(self.conduit.output)
         self.assertFileSizeDecreased(pdf_path, self.conduit.output)
         self.assertPdfPagesEqual(pdf_path, self.conduit.output)
-        self.assertSuffixIsCorrect(self.conduit.output, 'minified')
+        self.assertSuffixIsCorrect(self.conduit.output, "minified")
 
     @parameterized.expand(optimization_params, name_func=optimizations_name_func)
     def test_remove_images(self, pdf_path: str):
@@ -69,7 +69,7 @@ class TestOptimizations(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertEqual(0, self.conduit.info.images_count)
-        self.assertSuffixIsCorrect(self.conduit.output, 'noimages')
+        self.assertSuffixIsCorrect(self.conduit.output, "noimages")
 
     @parameterized.expand(optimization_params, name_func=optimizations_name_func)
     def test_reduce_image_quality(self, pdf_path: str):
@@ -81,7 +81,7 @@ class TestOptimizations(PdfconduitTestCase):
         self.assertPdfExists(self.conduit.output)
         self.assertEqual(Info(pdf_path).images_count, self.conduit.info.images_count)
         self.assertFileSizeDecreased(pdf_path, self.conduit.output)
-        self.assertSuffixIsCorrect(self.conduit.output, 'reduced')
+        self.assertSuffixIsCorrect(self.conduit.output, "reduced")
 
     @parameterized.expand(compress_params, name_func=compress_name_func)
     def test_compress(self, pdf_path: str, compression: Compression):
@@ -92,4 +92,6 @@ class TestOptimizations(PdfconduitTestCase):
         self.assertEqual(Info(pdf_path).images_count, self.conduit.info.images_count)
         # todo: fix compression increasing size, maybe newer pdfs?
         # self.assertFileSizeDecreased(pdf_path, self.conduit.output)
-        self.assertSuffixIsCorrect(self.conduit.output, 'compress_{}'.format(compression.value))
+        self.assertSuffixIsCorrect(
+            self.conduit.output, "compress_{}".format(compression.value)
+        )
