@@ -152,6 +152,8 @@ class TestEncryption(EncryptionTestCase):
             can_modify=encryption.allow_commenting,
         )
 
+        self.assertSuffixIsCorrect(self.conduit.output, 'encrypted')
+
     def test_password_byte_string(self):
         self.conduit.encrypt(
             Encryption(user_pw="baz", owner_pw="foo", algo=Algorithms.RC4_128)
