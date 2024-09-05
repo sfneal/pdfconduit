@@ -15,6 +15,7 @@ from pdfconduit.utils.typing import Any, Dict, Optional, PdfObject, Self
 class BaseConduit(ABC):
     _path: Optional[str] = None
     _metadata: Dict[str, Any] = {}
+    _suffix: Optional[str] = None
 
     output: Optional[str] = None
     _output_dir: Optional[str] = None
@@ -74,8 +75,7 @@ class BaseConduit(ABC):
     def _close_writers(self) -> Self:
         if self._tempdir is not None:
             self._tempfile.close()
-        if self._writer is not None:
-            self._writer.close()
+        self._writer.close()
         return self
 
     def _close(self) -> Self:
@@ -143,6 +143,7 @@ class BaseConduit(ABC):
         return self
 
     def set_output_suffix(self, suffix: str) -> Self:
+        self._suffix = suffix
         return self.set_output(
             add_suffix(
                 (
@@ -150,7 +151,7 @@ class BaseConduit(ABC):
                     if self._output_dir is not None
                     else self._path
                 ),
-                suffix,
+                self._suffix,
             )
         )
 
@@ -158,16 +159,19 @@ class BaseConduit(ABC):
         self._output_dir = directory
         return self
 
-    def set_output_temp(
-        self, tempdir: Optional[TemporaryDirectory] = None, suffix: str = ""
-    ) -> Self:
+    def set_output_temp(self, tempdir: Optional[TemporaryDirectory] = None, suffix: str = "") -> Self:
+        self._suffix = suffix.replace("_", "")
         self._tempdir = tempdir if tempdir else TemporaryDirectory(prefix="pdfconduit_")
         self._tempfile = NamedTemporaryFile(
-            suffix="_" + suffix.replace("_", "") + ".pdf",
+            suffix="_" + self._suffix + ".pdf",
             dir=self._tempdir.name,
             delete=False,
         )
         return self.set_output(self._tempfile.name)
+
+    @property
+    def suffix(self) -> Optional[str]:
+        return self._suffix
 
     def _set_default_output(self, suffix: str) -> None:
         if self.output is None:
