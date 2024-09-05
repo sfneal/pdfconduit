@@ -6,7 +6,7 @@ from typing import Optional
 
 from looptools import Timer
 
-from pdfconduit.pdfconduit import Pdfconduit
+from pdfconduit.main import Pdfconduit
 from pdfconduit.settings import Encryption
 from pdfconduit.utils import Info, add_suffix
 from pdfconduit.watermark.add import WatermarkAdd

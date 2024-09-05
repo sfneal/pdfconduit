@@ -1,5 +1,5 @@
 # todo: cleanup imports
-from pdfconduit.pdfconduit import Pdfconduit
+from pdfconduit.main import Pdfconduit
 from pdfconduit.transform import Merge, Rotate, Upscale
 from pdfconduit.utils import Info
 from pdfconduit.watermark.label import Label
