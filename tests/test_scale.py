@@ -28,6 +28,7 @@ class TestScale(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfScaled(scale, self.conduit.output)
+        self.assertSuffixIsCorrect(self.conduit.output, suffix)
 
     @parameterized.expand(scale_params, name_func=scale_name_func)
     def test_scale_from_stream(self, scale: float, accelerate: bool):

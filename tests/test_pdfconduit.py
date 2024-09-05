@@ -24,16 +24,16 @@ class TestUsage(PdfconduitTestCase):
         self.assertTrue(os.path.exists(conduit.output))
 
     def test_can_read_unencrypted_pdf(self):
-        conduit = Pdfconduit(self.pdf_path)
+        self.conduit = Pdfconduit(self.pdf_path)
 
-        self.assertIsInstance(conduit._pdf_file, BufferedReader)
-        self.assertIsInstance(conduit._reader, PdfReader)
+        self.assertIsInstance(self.conduit._pdf_file, BufferedReader)
+        self.assertIsInstance(self.conduit._reader, PdfReader)
 
     def test_can_read_encrypted_pdf(self):
-        conduit = Pdfconduit(test_data_path("encrypted.pdf"), self.user_pw)
+        self.conduit = Pdfconduit(test_data_path("encrypted.pdf"), self.user_pw)
 
-        self.assertIsInstance(conduit._pdf_file, BufferedReader)
-        self.assertIsInstance(conduit._reader, PdfReader)
+        self.assertIsInstance(self.conduit._pdf_file, BufferedReader)
+        self.assertIsInstance(self.conduit._reader, PdfReader)
 
     def test_can_set_default_metadata(self):
         original = self.conduit.info.metadata
@@ -69,37 +69,37 @@ class TestUsage(PdfconduitTestCase):
         self.assertEqual(output, self.conduit.output)
 
     def test_can_read_from_stream(self):
-        conduit = Pdfconduit(self._get_pdf_byte_stream())
+        self.conduit = Pdfconduit(self._get_pdf_byte_stream())
 
-        self.assertIsNone(conduit._pdf_file)
-        self.assertIsInstance(conduit._reader, PdfReader)
-        self.assertIsInstance(conduit._writer, PdfWriter)
+        self.assertIsNone(self.conduit._pdf_file)
+        self.assertIsInstance(self.conduit._reader, PdfReader)
+        self.assertIsInstance(self.conduit._writer, PdfWriter)
 
     def test_can_read_from_stream_and_write_to_file(self):
         output = os.path.join(self.temp.name, "streamed.pdf")
-        conduit = Pdfconduit(self._get_pdf_byte_stream()).set_output(output)
+        self.conduit = Pdfconduit(self._get_pdf_byte_stream()).set_output(output)
 
-        self.assertIsNone(conduit._pdf_file)
-        self.assertIsInstance(conduit._reader, PdfReader)
-        self.assertIsInstance(conduit._writer, PdfWriter)
+        self.assertIsNone(self.conduit._pdf_file)
+        self.assertIsInstance(self.conduit._reader, PdfReader)
+        self.assertIsInstance(self.conduit._writer, PdfWriter)
 
-        conduit.write()
+        self.conduit.write()
 
         self.assertPdfExists(output)
 
     def test_can_write_stream_to_file_without_output(self):
-        conduit = Pdfconduit(self._get_pdf_byte_stream())
+        self.conduit = Pdfconduit(self._get_pdf_byte_stream())
 
-        self.assertIsNone(conduit._pdf_file)
-        self.assertIsInstance(conduit._reader, PdfReader)
-        self.assertIsInstance(conduit._writer, PdfWriter)
+        self.assertIsNone(self.conduit._pdf_file)
+        self.assertIsInstance(self.conduit._reader, PdfReader)
+        self.assertIsInstance(self.conduit._writer, PdfWriter)
 
         with warnings.catch_warnings(record=True) as w:
             warnings.simplefilter("always")
 
-            conduit.write()
+            self.conduit.write()
 
-            self.assertPdfExists(conduit.output)
+            self.assertPdfExists(self.conduit.output)
 
             assert len(w) == 1
             assert issubclass(w[-1].category, UserWarning)

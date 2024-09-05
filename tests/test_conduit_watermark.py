@@ -25,7 +25,7 @@ def watermark_params() -> List[Tuple[str, str, bool, bool]]:
     ]
 
 
-def encryption_name_func(testcase_func, param_num, param):
+def watermark_name_func(testcase_func, param_num, param):
     return "{}.{}.{}".format(testcase_func.__name__, param.args[0], param.args[1])
 
 
@@ -46,7 +46,7 @@ class TestWatermark(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
-    @parameterized.expand(watermark_params, name_func=encryption_name_func)
+    @parameterized.expand(watermark_params, name_func=watermark_name_func)
     def test_watermark(
         self, name: str, method: str, flatten: bool = False, underneath: bool = False
     ):

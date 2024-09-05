@@ -53,6 +53,7 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, conduit.info.pages)
+        self.assertSuffixIsCorrect(conduit.output, "merged")
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_pdfs_from_stream(
@@ -70,6 +71,7 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
+        self.assertSuffixIsCorrect(self.conduit.output, "merged")
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_pdfs_from_stream_with_streams(
@@ -87,6 +89,7 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
+        self.assertSuffixIsCorrect(self.conduit.output, "merged")
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_pdfs_fast(self, main_pdf: str, pdfs_to_merge: List[str]):
@@ -99,6 +102,7 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
+        self.assertSuffixIsCorrect(self.conduit.output, "merged")
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_pdfs_fast_from_stream(
@@ -115,3 +119,4 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
+        self.assertSuffixIsCorrect(self.conduit.output, "merged")

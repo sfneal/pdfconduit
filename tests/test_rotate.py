@@ -37,6 +37,7 @@ class TestRotate(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfRotation(self.conduit, rotation)
+        self.assertSuffixIsCorrect(self.conduit.output, "rotated_{}".format(rotation))
 
     @parameterized.expand(rotate_exact_params, name_func=rotate_name_func)
     def test_can_rotate_exact(self, rotation: int):
@@ -46,6 +47,7 @@ class TestRotate(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfRotation(self.conduit, rotation)
+        self.assertSuffixIsCorrect(self.conduit.output, "rotated_{}".format(rotation))
 
     @parameterized.expand(rotate_exact_params, name_func=rotate_name_func)
     def test_cannot_rotate(self, rotation: int):
@@ -68,3 +70,4 @@ class TestRotate(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertPdfRotation(self.conduit, rotation)
+        self.assertSuffixIsCorrect(self.conduit.output, "rotated_{}".format(rotation))
