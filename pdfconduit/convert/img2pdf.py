@@ -7,17 +7,16 @@ from typing import List, Optional, Union
 from PIL import Image
 
 from pdfconduit.transform import Merge2
-from pdfconduit.transform.merge import Merge
 from pdfconduit.watermark.modify.canvas import CanvasImg, CanvasObjects
 from pdfconduit.watermark.modify.draw import WatermarkDraw
 
 
 class IMG2PDF:
     def __init__(
-            self,
-            images: Union[str, List[str]],
-            output: Optional[str] = None,
-            tempdir: Optional[TemporaryDirectory] = None,
+        self,
+        images: Union[str, List[str]],
+        output: Optional[str] = None,
+        tempdir: Optional[TemporaryDirectory] = None,
     ):
         """Convert each image into a PDF page and merge all pages to one PDF file"""
         self.images = images if isinstance(images, list) else [images]
@@ -39,6 +38,11 @@ class IMG2PDF:
             co = CanvasObjects()
             co.add(CanvasImg(image, 1.0, w=width, h=height, mask=None))
 
-            return WatermarkDraw(co, tempdir=self._tempdir.name, pagesize=(width, height)).write(
-                os.path.join(self._tempdir.name, os.path.basename(image.replace(Path(image).suffix, ".pdf")))
+            return WatermarkDraw(
+                co, tempdir=self._tempdir.name, pagesize=(width, height)
+            ).write(
+                os.path.join(
+                    self._tempdir.name,
+                    os.path.basename(image.replace(Path(image).suffix, ".pdf")),
+                )
             )

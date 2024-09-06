@@ -91,7 +91,8 @@ class TestPdf2Img(PdfconduitTestCase):
             )
 
         self.assertTrue(
-            "missing 1 required positional argument: 'output_directory'" in str(context.exception)
+            "missing 1 required positional argument: 'output_directory'"
+            in str(context.exception)
         )
 
     def _get_pdf(self, pdf: str, from_stream: bool):

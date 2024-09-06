@@ -1,6 +1,6 @@
 import os
 import unittest
-from tempfile import TemporaryDirectory, NamedTemporaryFile
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 from pdfconduit import Info
 from pdfconduit.convert import IMG2PDF
@@ -20,7 +20,7 @@ class TestImg2Pdf(unittest.TestCase):
         self.tempdir.cleanup()
 
     def test_convert(self):
-        with NamedTemporaryFile(suffix='.pdf', dir=self.tempdir.name) as tempfile:
+        with NamedTemporaryFile(suffix=".pdf", dir=self.tempdir.name) as tempfile:
             ip = IMG2PDF(self.img_path, output=tempfile.name, tempdir=self.tempdir)
             self.pdf = ip.convert()
 
@@ -30,8 +30,12 @@ class TestImg2Pdf(unittest.TestCase):
         ip.cleanup()
 
     def test_convert_packet(self):
-        with NamedTemporaryFile(suffix='.pdf', dir=self.tempdir.name) as tempfile:
-            ip = IMG2PDF([self.img_path, self.img_path, self.img_path], output=tempfile.name, tempdir=self.tempdir)
+        with NamedTemporaryFile(suffix=".pdf", dir=self.tempdir.name) as tempfile:
+            ip = IMG2PDF(
+                [self.img_path, self.img_path, self.img_path],
+                output=tempfile.name,
+                tempdir=self.tempdir,
+            )
             self.pdf = ip.convert()
 
             # Assert pdf file exists
