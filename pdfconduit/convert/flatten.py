@@ -52,11 +52,10 @@ class Flatten:
     def save(self, remove_temps: bool = True) -> str:
         if self.imgs is None:
             self.get_imgs()
-        i2p = IMG2PDF(self.imgs, self.directory, self.tempdir)
-        self.pdf = i2p.save(
-            clean_temp=False, output_name=add_suffix(self._file_name, self.suffix)
-        )
-        self.cleanup(remove_temps)
+        i2p = IMG2PDF(self.imgs, add_suffix(self._file_name, self.suffix), self._temp)
+        self.pdf = i2p.convert()
+        if remove_temps:
+            self.cleanup(remove_temps)
         return self.pdf
 
     def cleanup(self, clean_temp: bool = True) -> None:
