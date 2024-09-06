@@ -29,12 +29,12 @@ class PDF2IMG:
     def __init__(
         self,
         pdf: PdfObject,
-        output: str,
+        output_directory: str,
         ext: ImageExtension = ImageExtension.PNG,
         alpha: bool = False,
     ):
         self._pdf = pdf
-        self._directory = output
+        self._directory = output_directory
         self._ext = ext.value
         self._alpha = alpha
 
@@ -45,7 +45,7 @@ class PDF2IMG:
             self._filename = os.path.basename(self._pdf)
             self._doc = fitz.open(filename=self._pdf)
 
-    def convert(self):
+    def convert(self) -> list:
         saved = []
         for index, image in enumerate(self._get_pdf_data()):
             output = os.path.join(

@@ -27,6 +27,7 @@ class Flatten:
             self._temp = tempdir
             self.tempdir = self._temp.name
         else:
+            self._temp = None
             self.tempdir = tempdir
 
         self.suffix = suffix
@@ -46,19 +47,18 @@ class Flatten:
         return str(self.pdf)
 
     def get_imgs(self) -> List[str]:
-        self.imgs = PDF2IMG(self.file_name, output=self.tempdir).convert()
+        self.imgs = PDF2IMG(self.file_name, output_directory=self.tempdir).convert()
         return self.imgs
 
     def save(self, remove_temps: bool = True) -> str:
         if self.imgs is None:
             self.get_imgs()
-        i2p = IMG2PDF(self.imgs, self.directory, self.tempdir)
-        self.pdf = i2p.save(
-            clean_temp=False, output_name=add_suffix(self._file_name, self.suffix)
-        )
-        self.cleanup(remove_temps)
+        i2p = IMG2PDF(self.imgs, add_suffix(self._file_name, self.suffix), self._temp)
+        self.pdf = i2p.convert()
+        if remove_temps:
+            self.cleanup(remove_temps)
         return self.pdf
 
     def cleanup(self, clean_temp: bool = True) -> None:
-        if clean_temp and hasattr(self, "_temp"):
+        if clean_temp and self._temp:
             self._temp.cleanup()

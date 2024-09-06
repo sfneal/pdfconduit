@@ -43,7 +43,7 @@ class TestPdf2Img(PdfconduitTestCase):
         self, pdf: str, ext: ImageExtension, from_stream: bool
     ):
         pdf2img = PDF2IMG(
-            self._get_pdf(pdf, from_stream), output=self.temp.name, ext=ext
+            self._get_pdf(pdf, from_stream), output_directory=self.temp.name, ext=ext
         )
         images = pdf2img.convert()
 
@@ -91,7 +91,8 @@ class TestPdf2Img(PdfconduitTestCase):
             )
 
         self.assertTrue(
-            "missing 1 required positional argument: 'output'" in str(context.exception)
+            "missing 1 required positional argument: 'output_directory'"
+            in str(context.exception)
         )
 
     def _get_pdf(self, pdf: str, from_stream: bool):

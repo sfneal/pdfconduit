@@ -1,11 +1,12 @@
 # Convert a PNG image file to a PDF
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import List, Optional, Union
 
 from PIL import Image
 
-from pdfconduit.transform.merge import Merge
+from pdfconduit.transform import Merge2
 from pdfconduit.watermark.modify.canvas import CanvasImg, CanvasObjects
 from pdfconduit.watermark.modify.draw import WatermarkDraw
 
@@ -13,40 +14,24 @@ from pdfconduit.watermark.modify.draw import WatermarkDraw
 class IMG2PDF:
     def __init__(
         self,
-        imgs: Optional[List[str]] = None,
-        destination: Optional[str] = None,
-        tempdir: Optional[Union[str, TemporaryDirectory]] = None,
+        images: Union[str, List[str]],
+        output: Optional[str] = None,
+        tempdir: Optional[TemporaryDirectory] = None,
     ):
         """Convert each image into a PDF page and merge all pages to one PDF file"""
-        self.imgs = imgs
-        self.output_dir = destination
-        if not tempdir:
-            self._temp = TemporaryDirectory()
-            self.tempdir = self._temp.name
-        elif isinstance(tempdir, TemporaryDirectory):
-            self._temp = tempdir
-            self.tempdir = self._temp.name
-        else:
-            self.tempdir = tempdir
+        self.images = images if isinstance(images, list) else [images]
+        self.output = output
+        self._tempdir = tempdir or TemporaryDirectory()
 
-        self._pdf_pages = None
+    def convert(self, cleanup_temp: bool = True) -> str:
+        pdfs = [self._convert_image_to_pdf(image) for image in self.images]
+        merged = Merge2(pdfs, output=self.output).merge()
+        return merged
 
-    @property
-    def pdf_pages(self) -> List[str]:
-        if not self._pdf_pages:
-            self._pdf_pages = self.img2pdf()
-        return self._pdf_pages
+    def cleanup(self) -> None:
+        self._tempdir.cleanup()
 
-    def cleanup(self, clean_temp: bool = True) -> None:
-        if clean_temp and hasattr(self, "_temp"):
-            self._temp.cleanup()
-
-    def _image_loop(self) -> List[str]:
-        """Retrieve an iterable of images either with, or without a progress bar."""
-        return self.imgs
-
-    def _convert(self, image, output: Optional[str] = None) -> str:
-        """Private method for converting a single PNG image to a PDF."""
+    def _convert_image_to_pdf(self, image: str) -> str:
         with Image.open(image) as im:
             width, height = im.size
 
@@ -54,26 +39,10 @@ class IMG2PDF:
             co.add(CanvasImg(image, 1.0, w=width, h=height, mask=None))
 
             return WatermarkDraw(
-                co, tempdir=self.tempdir, pagesize=(width, height)
-            ).write(output)
-
-    def convert(self, image: str, output: Optional[str] = None):
-        """
-        Convert an image to a PDF.
-
-        :param image: Image file path
-        :param output: Output name, same as image name with .pdf extension by default
-        :return: PDF file path
-        """
-        return self._convert(
-            image, image.replace(Path(image).suffix, ".pdf") if not output else output
-        )
-
-    def img2pdf(self) -> List[str]:
-        """Convert a list of images into a PDF files."""
-        return [self._convert(image) for image in self._image_loop()]
-
-    def save(self, output_name: str = "merged imgs", clean_temp: bool = True) -> str:
-        m = Merge(self.pdf_pages, output_name=output_name, output_dir=self.output_dir)
-        self.cleanup(clean_temp)
-        return m.merge()
+                co, tempdir=self._tempdir.name, pagesize=(width, height)
+            ).write(
+                os.path.join(
+                    self._tempdir.name,
+                    os.path.basename(image.replace(Path(image).suffix, ".pdf")),
+                )
+            )
