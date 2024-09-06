@@ -122,7 +122,7 @@ class Pdfconduit(BaseConduit):
             self.set_output_temp()
             output = self._tempdir.name
         converted = PDF2IMG(
-            self.pdf_object, output=output, ext=ext, alpha=alpha
+            self.pdf_object, output_directory=output, ext=ext, alpha=alpha
         ).convert()
         self._close()
         # todo: fix issues with temp files not cleaning up

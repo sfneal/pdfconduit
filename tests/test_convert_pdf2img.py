@@ -43,7 +43,7 @@ class TestPdf2Img(PdfconduitTestCase):
         self, pdf: str, ext: ImageExtension, from_stream: bool
     ):
         pdf2img = PDF2IMG(
-            self._get_pdf(pdf, from_stream), output=self.temp.name, ext=ext
+            self._get_pdf(pdf, from_stream), output_directory=self.temp.name, ext=ext
         )
         images = pdf2img.convert()
 
