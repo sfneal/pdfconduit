@@ -1,7 +1,8 @@
 import os
 import unittest
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, NamedTemporaryFile
 
+from pdfconduit import Info
 from pdfconduit.convert import IMG2PDF
 from tests import *
 
@@ -11,35 +12,32 @@ class TestImg2Pdf(unittest.TestCase):
     def setUpClass(cls):
         cls.img_path = img_path
         cls.pdf = None
-        cls.tempdir = TemporaryDirectory()
 
-    @classmethod
-    def tearDownClass(cls):
-        if hasattr(cls, "tempdir"):
-            cls.tempdir.cleanup()
+    def setUp(self):
+        self.tempdir = TemporaryDirectory()
 
     def tearDown(self):
-        if os.path.exists(self.pdf):
-            os.remove(self.pdf)
+        self.tempdir.cleanup()
 
     def test_convert(self):
-        """Convert an image file into PDF."""
-        ip = IMG2PDF(tempdir=self.tempdir)
-        self.pdf = ip.convert(self.img_path)
+        with NamedTemporaryFile(suffix='.pdf', dir=self.tempdir.name) as tempfile:
+            ip = IMG2PDF(self.img_path, output=tempfile.name, tempdir=self.tempdir)
+            self.pdf = ip.convert()
 
-        # Assert pdf file exists
-        self.assertTrue(os.path.exists(self.pdf))
+            # Assert pdf file exists
+            self.assertTrue(os.path.exists(self.pdf))
+            self.assertEqual(1, Info(self.pdf).pages)
+        ip.cleanup()
 
     def test_convert_packet(self):
-        """Convert an image file into PDF."""
-        self.pdf = IMG2PDF(
-            [self.img_path, self.img_path, self.img_path],
-            destination=test_data_dir,
-            tempdir=self.tempdir,
-        ).save(clean_temp=False)
+        with NamedTemporaryFile(suffix='.pdf', dir=self.tempdir.name) as tempfile:
+            ip = IMG2PDF([self.img_path, self.img_path, self.img_path], output=tempfile.name, tempdir=self.tempdir)
+            self.pdf = ip.convert()
 
-        # Assert pdf file exists
-        self.assertTrue(os.path.exists(self.pdf))
+            # Assert pdf file exists
+            self.assertTrue(os.path.exists(self.pdf))
+            self.assertEqual(3, Info(self.pdf).pages)
+        ip.cleanup()
 
 
 if __name__ == "__main__":
