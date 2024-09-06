@@ -27,6 +27,7 @@ class Flatten:
             self._temp = tempdir
             self.tempdir = self._temp.name
         else:
+            self._temp = None
             self.tempdir = tempdir
 
         self.suffix = suffix
@@ -59,5 +60,5 @@ class Flatten:
         return self.pdf
 
     def cleanup(self, clean_temp: bool = True) -> None:
-        if clean_temp and hasattr(self, "_temp"):
+        if clean_temp and self._temp:
             self._temp.cleanup()
