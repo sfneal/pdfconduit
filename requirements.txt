@@ -7,7 +7,7 @@ PillowImage==1.2.0
 PyBundle==1.0.6
 PyMuPDF==1.24.10
 PyMuPDFb==1.24.10
-pypdf==5.0.0
+pypdf==5.0.1
 reportlab==4.2.4
 tqdm==4.66.5
 -r requirements-crypto.txt
