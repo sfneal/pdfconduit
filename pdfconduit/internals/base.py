@@ -54,14 +54,14 @@ class BaseConduit(ABC):
         self._pdf_file = open(self._path, "rb")
         self._reader: PdfReader = pypdf_reader(self._pdf_file, self._decrypt_pw)
         if with_writer:
-            self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
+            self._clone_writer()
         return self
 
     def _read_stream(self, stream: BytesIO, with_writer: bool = True) -> Self:
         self._stream = stream
         self._reader = PdfReader(self._stream, password=self._decrypt_pw)
         if with_writer:
-            self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
+            self._clone_writer()
         return self
 
     def _close_readers(self) -> Self:
@@ -76,6 +76,10 @@ class BaseConduit(ABC):
         if self._tempdir is not None:
             self._tempfile.close()
         self._writer.close()
+        return self
+
+    def _clone_writer(self) -> Self:
+        self._writer: PdfWriter = PdfWriter(clone_from=self._reader)
         return self
 
     def _close(self) -> Self:
