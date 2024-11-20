@@ -2,8 +2,8 @@ from typing import List
 
 from parameterized import parameterized
 
-from pdfconduit import Pdfconduit, Info
-from tests import PdfconduitTestCase, test_data_path, get_clean_pdf_name
+from pdfconduit import Info, Pdfconduit
+from tests import PdfconduitTestCase, get_clean_pdf_name, test_data_path
 
 
 def decrypt_params() -> List[str]:
@@ -30,7 +30,11 @@ class TestDecrypt(PdfconduitTestCase):
     @parameterized.expand(decrypt_params, name_func=decrypt_name_func)
     def test_can_decrypt(self, path: str):
         self.assertTrue(Info(path).encrypted)
-        self.conduit = Pdfconduit(path, 'foo').set_output_directory(self.temp.name).set_output_suffix('decrypted')
+        self.conduit = (
+            Pdfconduit(path, "foo")
+            .set_output_directory(self.temp.name)
+            .set_output_suffix("decrypted")
+        )
         self.conduit.write()
 
         self.assertPdfExists(self.conduit.output)
