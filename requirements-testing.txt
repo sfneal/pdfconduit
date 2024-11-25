@@ -1,6 +1,6 @@
 colorama==0.4.6
 coverage==7.6.1; python_version<="3.8"
-coverage==7.6.7; python_version>="3.9"
+coverage==7.6.8; python_version>="3.9"
 green==4.0.2
 lxml==5.3.0
 parameterized==0.9.0
