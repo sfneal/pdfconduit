@@ -3,7 +3,7 @@ looptools==1.2.4
 pdfrw==0.4
 Pillow==9.5.0; python_version <= "3.8"
 pillow==11.1.0; python_version >= "3.9"
-PillowImage==1.2.1
+PillowImage==1.2.2
 PyBundle==1.0.6
 PyMuPDF==1.24.11; python_version <= "3.8"
 PyMuPDF==1.25.1; python_version >= "3.9"
