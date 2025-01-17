@@ -31,7 +31,7 @@ setup(
     install_requires=[
         'looptools',
         'pdfrw>=0.4',
-        'PyMuPDF>=1.17.7,<=1.25.1',
+        'PyMuPDF>=1.17.7,<=1.25.2',
         'pypdf[crypto]>=4.2.0',
         'PillowImage>=1.2.0',
         'PyBundle>=1.0.6',
