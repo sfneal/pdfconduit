@@ -40,6 +40,7 @@ class TestMerge(PdfconduitTestCase):
 
         self.assertPdfExists(self.conduit.output)
         self.assertCorrectNumPages(main_pdf, pdfs_to_merge, self.conduit.info.pages)
+        self.assertEqual(self.conduit.info.pages, self.conduit.output_pages)
 
     @parameterized.expand(merge_params, name_func=merge_name_func)
     def test_can_merge_pdfs_using_context(

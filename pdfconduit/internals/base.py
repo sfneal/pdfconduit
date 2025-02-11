@@ -8,7 +8,7 @@ from warnings import warn
 from pypdf import PdfReader, PdfWriter
 
 from pdfconduit.internals.exceptions import OutputException
-from pdfconduit.utils import add_suffix, pypdf_reader
+from pdfconduit.utils import Info, add_suffix, pypdf_reader
 from pdfconduit.utils.typing import Any, Dict, Optional, PdfObject, Self
 
 
@@ -28,6 +28,8 @@ class BaseConduit(ABC):
 
     _tempdir: Optional[TemporaryDirectory] = None
     _tempfile: Optional[NamedTemporaryFile] = None
+
+    _output_pages: Optional[int] = None
 
     def __init__(
         self, pdf: PdfObject, decrypt_pw: Optional[str] = None, with_writer: bool = True
@@ -104,6 +106,9 @@ class BaseConduit(ABC):
         }
         default_metadata.update(self._metadata)
         self._writer.add_metadata(default_metadata)
+
+        # Count total number of pages in the output file
+        self._output_pages = Info(self._writer).pages
 
         # Close the PDF reader & file reader
         self._close_readers()
@@ -193,3 +198,7 @@ class BaseConduit(ABC):
                 self.set_output_temp(suffix=suffix)
                 return
             self.set_output_suffix(suffix)
+
+    @property
+    def output_pages(self) -> Optional[int]:
+        return self._output_pages
