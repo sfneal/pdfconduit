@@ -7,9 +7,8 @@ from warnings import warn
 
 from pypdf import PdfReader, PdfWriter
 
-from pdfconduit.utils import Info
 from pdfconduit.internals.exceptions import OutputException
-from pdfconduit.utils import add_suffix, pypdf_reader
+from pdfconduit.utils import Info, add_suffix, pypdf_reader
 from pdfconduit.utils.typing import Any, Dict, Optional, PdfObject, Self
 
 
