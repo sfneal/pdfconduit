@@ -1,6 +1,6 @@
 black==25.1.0
 click==8.1.8
 mypy-extensions==1.0.0
-packaging==24.2
+packaging==25.0
 pathspec==0.12.1
 platformdirs==4.3.7
