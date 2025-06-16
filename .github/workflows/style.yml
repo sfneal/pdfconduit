@@ -39,7 +39,7 @@ jobs:
       - name: Run Import Optimizers & Code Style Fixer
         run: sh .github/scripts/optimize.sh
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: REFORMAT code style & optimize imports (via black, isort & autoflake)
           status_options: '--untracked-files=no'
